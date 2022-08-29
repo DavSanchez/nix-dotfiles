@@ -4,4 +4,5 @@ I'm trying to replace my current `dotfiles` configuration by basing it in Nix an
 
 ## Influences
 
-- `github:sherubthakur/dotfiles`.
+- `github:sherubthakur/dotfiles`
+- `github:tars0x9752/home`

@@ -60,9 +60,11 @@
             ./modules/fonts.nix
             ./modules/git
             ./modules/nvim
-            ./modules/development
+            ./modules/dev
             ./modules/system
+            ./modules/starship
             ./modules/zsh
+            ./modules/wezterm
           ];
         };
 
