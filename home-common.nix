@@ -1,4 +1,4 @@
-{ lib, nix-doom-emacs, nur, ... }:
+{ lib, nur, ... }:
 {
   # NOTE: Here we are injecting colorscheme so that it is passed down all the imports
   _module.args = {
