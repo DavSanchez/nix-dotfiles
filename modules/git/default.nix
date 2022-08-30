@@ -5,8 +5,8 @@ let
   DEFAULT_BRANCH = "master";
   DEVELOP_BRANCH = "develop";
   DEVELOP_BRANCH_ABBREV = "dev";
-  PROTECTED_BRANCHE_LIST = [ DEFAULT_BRANCH DEVELOP_BRANCH DEVELOP_BRANCH_ABBREV ];
-  PROTECTED_BRANCHES_STR = concatStringsSep "|" PROTECTED_BRANCHE_LIST;
+  PROTECTED_BRANCHES_LIST = [ DEFAULT_BRANCH DEVELOP_BRANCH DEVELOP_BRANCH_ABBREV ];
+  PROTECTED_BRANCHES_STR = concatStringsSep "|" PROTECTED_BRANCHES_LIST;
 in
 {
   home.packages = with pkgs; [
@@ -140,7 +140,7 @@ in
     g:pull.${branchname}() {
       git pull origin ${branchname}
     }
-    '') PROTECTED_BRANCHE_LIST)}
+    '') PROTECTED_BRANCHES_LIST)}
     # ------ log ------
     g:log() {
       git log "$@"
@@ -272,7 +272,7 @@ in
         git rebase origin/${branchname}
       fi
     }
-    '') PROTECTED_BRANCHE_LIST)}
+    '') PROTECTED_BRANCHES_LIST)}
     # ------ handy fns ------
     g() {
       echo "run g:status.mini"
@@ -299,7 +299,7 @@ in
       g:switch ${branchname}
       g:pull.${branchname}
     }
-    '') PROTECTED_BRANCHE_LIST)}
+    '') PROTECTED_BRANCHES_LIST)}
     g@d() {
       echo "run g:diff"
       g:diff
