@@ -1,4 +1,8 @@
 {
+  simple = {
+    path = ./simple;
+    description = "A simple template";
+  };
   c = {
     description = "C/C++ environment (clang)";
     path = ./c;
