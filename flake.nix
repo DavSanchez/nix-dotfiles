@@ -12,90 +12,31 @@
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # nixpkgs-firefox-darwin = {
-    #   url = "github:bandithedoge/nixpkgs-firefox-darwin";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
     nur = {
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # taffybar = {
-    #   url = "github:sherubthakur/taffybar";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-    # Applying the configuration happens from the .dotfiles directory so the
-    # relative path is defined accordingly. This has potential of causing issues.
-    # vim-plugins = {
-    #   url = "path:./modules/nvim/plugins";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-    devshell.url = "github:numtide/devshell";
     flake-utils.url = "github:numtide/flake-utils";
+    devshell.url = "github:numtide/devshell";
   };
 
   outputs = { self, nur, nixpkgs, home-manager, flake-utils, devshell, darwin, ... }:
     let
+      system = "aarch64-darwin"; # This shouldn't be top level ??
       pkgs = import nixpkgs {
+        inherit system;
         overlays = [ devshell.overlay ];
       };
-      home-common = { lib, ... }:
-        {
-          # NOTE: Here we are injecting colorscheme so that it is passed down all the imports
-          _module.args = {
-            colorscheme = import ./colorschemes/tokyonight.nix;
-          };
 
-          nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ ];
-
-          nixpkgs.overlays = [
-            nur.overlay
-            # taffybar.overlay
-            # vim-plugins.overlay
-          ];
-
-          programs.home-manager.enable = true;
-          home.stateVersion = "22.05";
-
-          imports = [
-            ./modules/aws
-            ./modules/dev
-            ./modules/direnv
-            ./modules/git
-            ./modules/nu
-            ./modules/nvim
-            ./modules/starship
-            # ./modules/system
-            ./modules/zsh
-
-            ./modules/app.nix
-            ./modules/cli.nix
-            ./modules/font.nix
-            ./modules/tmux.nix
-            ./modules/wezterm.nix
-          ];
-        };
-
-      home-macbook = {
-        # nixpkgs.overlays = [
-        #   nixpkgs-firefox-darwin.overlay
-        # ];
-        home.homeDirectory = "/Users/david";
-        home.username = "david";
-        imports = [
-          ./modules/nu/default-mac.nix
-          # ./modules/tmux
-          # ./modules/mac-symlink-applications.nix
-        ];
-        xdg.configFile."nix/nix.conf".text = ''
-          experimental-features = nix-command flakes ca-references
-        '';
-      };
+      home-common = ./home-common.nix;
+      home-macbook = ./home-macbook.nix;
 
       #  Other systems
       # home-mac-mini = { };
     in
     {
+      formatter.${system} = pkgs.nixpkgs-fmt;
+
       # NixOS systems
       # nixosConfiguration.nixos = nixpkgs.lib.nixosSystem {
       #   system = "x86_64-linux";
@@ -129,7 +70,7 @@
         # };
       };
     } //
-    # currently my home configs support only x86_64-linux.
+    # currently my home configs support only aarch64-darwin.
     # So eachDefaultSystem doesn't mean much, but it's harmless as it is & I want to remember flake-utils is a thing, so I'll leave it here.
     flake-utils.lib.eachDefaultSystem
       (system:
@@ -140,7 +81,6 @@
           # https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-develop.html
           # https://github.com/numtide/devshell
 
-          formatter.${system} = pkgs.nixpkgs-fmt;
           devShells.default = pkgs.devshell.mkShell
             {
               devshell.motd = ''
