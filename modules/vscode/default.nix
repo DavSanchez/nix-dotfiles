@@ -1,5 +1,5 @@
 { pkgs, ... }:
 
 {
-  home.packages = pkgs.vscode;
+  home.packages = [ pkgs.vscode ];
 }

@@ -25,12 +25,38 @@
       url = "path:./modules/nvim/plugins";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
   };
 
   outputs = { self, nur, vim-plugins, nixpkgs, home-manager, flake-utils, devshell, darwin, ... }:
     let
-      home-common = import ./home-common.nix;
-      home-mbp = import ./home-mbp.nix;
+      home-common = {
+        # NOTE: Here we are injecting colorscheme so that it is passed down all the imports
+        _module.args = {
+          colorscheme = import ./colorschemes/tokyonight.nix;
+        };
+        nixpkgs.overlays = [
+          nur.overlay
+          vim-plugins.overlay
+        ];
+        # Allow all unfree packages
+        nixpkgs.config.allowUnfreePredicate = (pkg: true);
+        programs.home-manager.enable = true;
+        home.stateVersion = "22.05";
+        imports = [
+          ./home-common.nix
+        ];
+      };
+      home-mbp = {
+        home.homeDirectory = "/Users/david";
+        home.username = "david";
+        xdg.configFile."nix/nix.conf".text = ''
+          experimental-features = nix-command flakes ca-references
+        '';
+        imports = [
+          ./home-mbp.nix
+        ];
+      };
     in
     {
       # NixOS systems
@@ -60,6 +86,7 @@
         # "david@nixos" = { };
       };
 
-      templates = import ./templates;
+      templates = import
+        ./templates;
     };
 }
