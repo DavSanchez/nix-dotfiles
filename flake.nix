@@ -36,14 +36,14 @@
       # NixOS systems
       # nixosConfiguration.nixos = nixpkgs.lib.nixosSystem {
       #   system = "x86_64-linux";
-      #   modules = [ ./system/configuration.nix ];
+      #   modules = [ ./system/nixos/onfiguration.nix ];
       # };
 
       # macOS systems using nix-darwin
       # darwinConfigurations."Davids-Mac" = darwin.lib.darwinSystem {
       #   pkgs = nixpkgs.legacyPackages."aarch64-darwin";
       #   modules = [
-      #     ./modules/homebrew.nix
+      #     ./system/mbp/configuration.nix
       #   ];
       # };
 
