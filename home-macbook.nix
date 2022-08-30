@@ -14,5 +14,4 @@
     experimental-features = nix-command flakes ca-references
   '';
 
-  formatter."aarch64-darwin" = nixpkgs.nixpkgs-fmt; # Needed here ??
 }

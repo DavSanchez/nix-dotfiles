@@ -35,6 +35,10 @@
       # home-mac-mini = { };
     in
     {
+      formatter = {
+        "aarch64-darwin" = nixpkgs.nixpkgs-fmt;
+      };
+
       # NixOS systems
       # nixosConfiguration.nixos = nixpkgs.lib.nixosSystem {
       #   system = "x86_64-linux";
