@@ -3,7 +3,7 @@
 {
   fonts.fontconfig.enable = true;
 
-  home.pakages = with pkgs; [
+  home.packages = with pkgs; [
     (nerdfonts.override { fonts = [ "FiraCode" ]; })
     fira-code
   ];

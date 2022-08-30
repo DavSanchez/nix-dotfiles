@@ -1,13 +1,14 @@
-{ lib, nur, ... }:
+{ lib, ... }:
 {
   # NOTE: Here we are injecting colorscheme so that it is passed down all the imports
   _module.args = {
     colorscheme = import ./colorschemes/tokyonight.nix;
   };
 
-  nixpkgs.overlays = [
-    nur.overlay
-  ];
+  # NUR
+  # nixpkgs.overlays = [
+  #   nur.overlay
+  # ];
 
   # Allow all unfree packages
   nixpkgs.config.allowUnfreePredicate = (pkg: true);
@@ -29,7 +30,7 @@
 
     ./modules/app.nix
     ./modules/cli.nix
-    ./modules/font.nix
+    ./modules/fonts.nix
     ./modules/tmux.nix
     ./modules/wezterm.nix
   ];
