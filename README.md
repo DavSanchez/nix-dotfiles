@@ -8,4 +8,5 @@ I'm trying to replace my current `dotfiles` configuration by basing it in Nix an
 
 - `github:sherubthakur/dotfiles`
 - `github:tars0x9752/home`
+- `Misterio77/nix-config`
 - `nix-community/todomvc-nix`
