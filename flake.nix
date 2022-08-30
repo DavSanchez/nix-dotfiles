@@ -19,9 +19,15 @@
     # nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
     devshell.url = "github:numtide/devshell";
     flake-utils.url = "github:numtide/flake-utils";
+    # Applying the configuration happens from the .dotfiles directory so the
+    # relative path is defined accordingly. This has potential of causing issues.
+    vim-plugins = {
+      url = "path:./modules/nvim/plugins";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nur, nixpkgs, home-manager, flake-utils, devshell, darwin, ... }:
+  outputs = { self, nur, vim-plugins, nixpkgs, home-manager, flake-utils, devshell, darwin, ... }:
     let
       system = "aarch64-darwin";
       pkgs = import nixpkgs
@@ -30,7 +36,7 @@
           overlays = [ devshell.overlay ];
         };
       home-common = ./home-common.nix;
-      home-macbook = ./home-macbook.nix;
+      home-mbp = ./home-mbp.nix;
     in
     {
       # NixOS systems
@@ -40,7 +46,7 @@
       # };
 
       # macOS systems using nix-darwin
-      # darwinConfigurations."Davids-Macbook-Pro" = darwin.lib.darwinSystem {
+      # darwinConfigurations."Davids-Mac" = darwin.lib.darwinSystem {
       #   pkgs = nixpkgs.legacyPackages."aarch64-darwin";
       #   modules = [
       #     ./modules/homebrew.nix
@@ -53,7 +59,7 @@
           # inherit pkgs;
           modules = [
             home-common
-            home-macbook
+            home-mbp
           ];
           # extraSpecialArgs = { };
         };
