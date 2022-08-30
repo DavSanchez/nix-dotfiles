@@ -21,7 +21,7 @@
     ./modules/direnv
     ./modules/emacs
     ./modules/git
-    ./modules/nu
+    # ./modules/nu # Per-system
     ./modules/nvim
     ./modules/starship
     ./modules/vscode
