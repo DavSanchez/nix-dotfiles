@@ -16,11 +16,8 @@
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
     devshell.url = "github:numtide/devshell";
     flake-utils.url = "github:numtide/flake-utils";
-    # Applying the configuration happens from the .dotfiles directory so the
-    # relative path is defined accordingly. This has potential of causing issues.
     # nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
   };
 
