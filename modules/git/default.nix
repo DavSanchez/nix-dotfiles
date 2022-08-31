@@ -27,8 +27,8 @@ in
           commit-decoration-style = "bold yellow box ul";
           file-style = "bold yellow";
           file-decoration-style = "none";
-          delta.navigate = true;
         };
+        delta.navigate = true;
       };
     };
 

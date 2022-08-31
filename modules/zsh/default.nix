@@ -18,28 +18,30 @@
         "terraform"
         "nomad"
         "vault"
-        {
-          name = "zsh-nix-shell";
-          file = "nix-shell.plugin.zsh";
-          src = pkgs.fetchFromGitHub {
-            owner = "chisui";
-            repo = "zsh-nix-shell";
-            rev = "v0.5.0";
-            sha256 = "0za4aiwwrlawnia4f29msk822rj9bgcygw6a8a6iikiwzjjz0g91";
-          };
-        }
-        {
-          name = "nix-zsh-completions";
-          file = "nix-zsh-completions.plugin.zsh";
-          src = pkgs.fetchFromGitHub {
-            owner = "spwhitt";
-            repo = "nix-zsh-completions";
-            rev = "v0.4.4";
-            # sha256 = "0za4aiwwrlawnia4f29msk822rj9bgcygw6a8a6iikiwzjjz0g91";
-          };
-        }
       ];
     };
+    plugins = [
+      {
+        name = "zsh-nix-shell";
+        file = "nix-shell.plugin.zsh";
+        src = pkgs.fetchFromGitHub {
+          owner = "chisui";
+          repo = "zsh-nix-shell";
+          rev = "v0.5.0";
+          sha256 = "0za4aiwwrlawnia4f29msk822rj9bgcygw6a8a6iikiwzjjz0g91";
+        };
+      }
+      {
+        name = "nix-zsh-completions";
+        file = "nix-zsh-completions.plugin.zsh";
+        src = pkgs.fetchFromGitHub {
+          owner = "spwhitt";
+          repo = "nix-zsh-completions";
+          rev = "v0.4.4";
+          # sha256 = "0za4aiwwrlawnia4f29msk822rj9bgcygw6a8a6iikiwzjjz0g91";
+        };
+      }
+    ];
 
     initExtraBeforeCompInit = ''
       ${builtins.readFile ./session_variables.zsh}
