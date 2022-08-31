@@ -50,6 +50,10 @@
     dua
     fd
 
+    # signature, passwords...
+    gnupg
+    pass
+
     # system info
     bottom
     neofetch
