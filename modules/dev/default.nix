@@ -11,8 +11,9 @@
     podman
     colima
     minikube
-    nixops
-    nixops-with-plugins
+    # nixops
+    # nixops-dns
+    nixops_unstable
 
 
     # go
