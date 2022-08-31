@@ -8,10 +8,9 @@
     clojure
 
     # docker
-    # docker
-    # pandoc
-    # colima
-    # minikube
+    podman
+    colima
+    minikube
 
     # go
     go

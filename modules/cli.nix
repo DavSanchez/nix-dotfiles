@@ -12,10 +12,10 @@
     # utils
     coreutils
     binutils
-    pciutils
+    # pciutils
     gawk
-    arandr
-    bashmount
+    # arandr
+    # bashmount
     dig
     # docker-compose
     dua
@@ -38,7 +38,7 @@
     protobuf
 
     # Moar colors
-    starship
+    # starship
     zsh-syntax-highlighting
 
     # Searching/Movement helpers and other replacements
@@ -62,8 +62,6 @@
     zbar
     graphviz
     ffmpeg
-
-    minikube
   ];
 
   programs.fzf = {

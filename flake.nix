@@ -86,7 +86,6 @@
         # "david@nixos" = { };
       };
 
-      templates = import
-        ./templates;
+      templates = import ./templates;
     };
 }
