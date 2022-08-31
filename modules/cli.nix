@@ -2,7 +2,7 @@
 
 {
   home.packages = with pkgs; [
-    # nix
+    # # nix
     rnix-lsp
     nixpkgs-fmt
     nix-prefetch-git
@@ -12,12 +12,11 @@
     # utils
     coreutils
     binutils
-    # pciutils
+    # # pciutils
     gawk
-    # arandr
-    # bashmount
-    dig
-    # docker-compose
+    # # arandr
+    # # bashmount
+    # # docker-compose
     dua
     fx
     gnumake
@@ -28,39 +27,40 @@
     curl
     wget
     xh
-    # ngrok
-    # openvpn
+    # # ngrok
+    # # openvpn
     tokei
-    # unrar
-    # unzip
-    # wireshark
+    # # unrar
+    # # unzip
+    # # wireshark
     figlet
     protobuf
 
-    # Moar colors
-    # starship
+    # # Moar colors
+    # # starship
     zsh-syntax-highlighting
 
     # Searching/Movement helpers and other replacements
+    # # zoxide # See below
+    # # bat # See below
     ripgrep
-    # zoxide # See below
-    # bat # See below
     broot
     lsd
     dua
     fd
+    dogdns
 
-    # signature, passwords...
+    # # signature, passwords...
     gnupg
     pass
 
-    # system info
+    # # system info
     bottom
     neofetch
 
-    # media
+    # # media
     feh
-    tty-clock
+    # tty-clock
     imagemagick
     qrencode
     zbar
