@@ -13,7 +13,7 @@
     ./modules/vscode
     ./modules/zsh
 
-    ./modules/app.nix
+    # ./modules/app.nix
     ./modules/cli.nix
     ./modules/fonts.nix
     ./modules/tmux.nix
