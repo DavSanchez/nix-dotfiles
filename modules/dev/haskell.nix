@@ -1,12 +1,12 @@
 { pkgs, ... }:
 
 {
-  home.packages = with pkgs; [
+  home.packages = with pkgs.haskellPackages; [
     # Haskell
     cabal2nix
     ghc
     haskell-language-server
-    # hoogle
+    hoogle
     cabal-install
     stack
   ];
