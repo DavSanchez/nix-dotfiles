@@ -66,7 +66,7 @@
       # };
 
       homeConfigurations = {
-        "david@mbp" = home-manager.lib.homeManagerConfiguration {
+        david-mbp = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages."aarch64-darwin";
           # inherit pkgs;
           modules = [
