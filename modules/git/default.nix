@@ -48,7 +48,7 @@ in
   programs.gh = {
     enable = true;
     enableGitCredentialHelper = true;
-    # settings.git_protocol = "ssh";
+    settings.git_protocol = "ssh";
   };
 
   # programs.gpg.enable = pkgs.stdenv.isLinux;
