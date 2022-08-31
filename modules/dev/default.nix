@@ -7,10 +7,13 @@
     # Clojure
     clojure
 
-    # docker
+    # DevOps
     podman
     colima
     minikube
+    nixops
+    nixops-with-plugins
+
 
     # go
     go
