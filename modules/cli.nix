@@ -11,8 +11,8 @@
 
     # utils
     coreutils
-    binutils
-    # # pciutils
+    # binutils
+    # pciutils
     gawk
     # # arandr
     # # bashmount
