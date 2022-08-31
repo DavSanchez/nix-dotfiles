@@ -21,14 +21,10 @@
     flake-utils.url = "github:numtide/flake-utils";
     # Applying the configuration happens from the .dotfiles directory so the
     # relative path is defined accordingly. This has potential of causing issues.
-    vim-plugins = {
-      url = "path:./modules/nvim/plugins";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     # nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
   };
 
-  outputs = { self, nur, vim-plugins, nixpkgs, home-manager, flake-utils, devshell, darwin, ... }:
+  outputs = { self, nur, nixpkgs, home-manager, flake-utils, devshell, darwin, ... }:
     let
       home-common = {
         # NOTE: Here we are injecting colorscheme so that it is passed down all the imports
@@ -37,7 +33,6 @@
         };
         nixpkgs.overlays = [
           nur.overlay
-          vim-plugins.overlay
         ];
         # Allow all unfree packages
         nixpkgs.config.allowUnfreePredicate = (pkg: true);
