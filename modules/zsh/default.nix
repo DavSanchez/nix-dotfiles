@@ -37,8 +37,8 @@
         src = pkgs.fetchFromGitHub {
           owner = "spwhitt";
           repo = "nix-zsh-completions";
-          rev = "v0.4.4";
-          # sha256 = "0za4aiwwrlawnia4f29msk822rj9bgcygw6a8a6iikiwzjjz0g91";
+          rev = "0.4.4";
+          sha256 = "Djs1oOnzeVAUMrZObNLZ8/5zD7DjW3YK42SWpD2FPNk=";
         };
       }
     ];
@@ -53,5 +53,22 @@
       eval "$(zoxide init zsh)"
       eval "$(starship init zsh)"
     '';
+
+    # https://knezevic.ch/posts/zsh-completion-for-tools-installed-via-home-manager/
+    # initExtra = ''
+    #   fpath=(${config.xdg.configHome}/zsh/plugins/zsh-completions/src \
+    #          ${config.xdg.configHome}/zsh/plugins/nix-zsh-completions \
+    #          ${config.xdg.configHome}/zsh/vendor-completions \
+    #          $fpath)
+    # '';
   };
+
+  # xdg.configFile."zsh/vendor-completions".source = with pkgs;
+  #   runCommandNoCC "vendored-zsh-completions" {} ''
+  #     mkdir -p $out
+  #     ${fd}/bin/fd -t f '^_[^.]+$' \
+  #       ${lib.escapeShellArgs home.packages} \
+  #       --exec ${ripgrep}/bin/rg -0l '^#compdef' {} \
+  #       | xargs -0 cp -t $out/
+  #   '';
 }
