@@ -23,32 +23,8 @@
 
   outputs = { self, nur, nixpkgs, home-manager, flake-utils, devshell, darwin, ... }:
     let
-      home-common = {
-        # NOTE: Here we are injecting colorscheme so that it is passed down all the imports
-        _module.args = {
-          colorscheme = import ./colorschemes/tokyonight.nix;
-        };
-        nixpkgs.overlays = [
-          nur.overlay
-        ];
-        # Allow all unfree packages
-        nixpkgs.config.allowUnfreePredicate = (pkg: true);
-        programs.home-manager.enable = true;
-        home.stateVersion = "22.05";
-        imports = [
-          ./home-common.nix
-        ];
-      };
-      home-mbp = {
-        home.homeDirectory = "/Users/david";
-        home.username = "david";
-        xdg.configFile."nix/nix.conf".text = ''
-          experimental-features = nix-command flakes
-        '';
-        imports = [
-          ./home-mbp.nix
-        ];
-      };
+      home-common = import ./home-common.nix { inherit nur; };
+      home-mbp = import ./home-mbp.nix;
     in
     {
       # NixOS systems
