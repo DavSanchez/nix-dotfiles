@@ -3,6 +3,7 @@
 {
   imports = [
     ./modules/nu/default-mac.nix
-    # ./modules/mac-symlink-applications.nix
+    ./modules/mac-symlink-apps.nix
+    ./modules/iterm2.nix
   ];
 }
