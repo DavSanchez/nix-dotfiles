@@ -1,0 +1,121 @@
+{
+  "files.autoSave": "afterDelay",
+  "terminal.external.osxExec": "WezTerm.app",
+  "editor.wordWrap": "on",
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "git.autofetch": true,
+  "latex-workshop.linting.chktex.enabled": true,
+  "latex-workshop.view.pdf.viewer": "tab",
+  "latex-workshop.latex.tools": [
+    {
+      "name": "latexmk",
+      "command": "latexmk",
+      "args": [
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "--shell-escape",
+        "-file-line-error",
+        "-pdf",
+        "%DOC%"
+      ]
+    }
+  ],
+  "latex-workshop.latex.clean.fileTypes": [
+    "*.aux",
+    "*.bbl",
+    "*.blg",
+    "*.idx",
+    "*.ind",
+    "*.lof",
+    "*.lot",
+    "*.out",
+    "*.toc",
+    "*.acn",
+    "*.acr",
+    "*.alg",
+    "*.glg",
+    "*.glo",
+    "*.gls",
+    "*.ist",
+    "*.fls",
+    "*.log",
+    "*.fdb_latexmk",
+    "*.run.xml",
+    "*.synctex.gz",
+    "_minted-*",
+    "*.bcf"
+  ],
+  "terminal.integrated.fontFamily": "'FiraCode Nerd Font Mono'",
+  "breadcrumbs.enabled": true,
+  "editor.renderControlCharacters": false,
+  "latex-workshop.latex.autoClean.run": "onBuilt",
+  "workbench.iconTheme": "vscode-icons",
+  "verilog.linting.linter": "verilator",
+  "editor.suggestSelection": "first",
+  "editor.tabSize": 2,
+  "platformio-ide.activateOnlyOnPlatformIOProject": true,
+  "editor.fontFamily": "'FiraCode Nerd Font', Menlo, Monaco, 'Courier New', monospace",
+  "editor.fontLigatures": true,
+  "discord.silent": true,
+  "[haskell]": {
+    "editor.defaultFormatter": "haskell.haskell"
+  },
+  "python.languageServer": "Pylance",
+  "go.lintTool": "golangci-lint",
+  "files.associations": {
+    "*.tidal": "haskell"
+  },
+  "tidalcycles.sounds.paths": [
+    "/Users/david/Library/Application Support/SuperCollider/downloaded-quarks/Dirt-Samples"
+  ],
+  "diffEditor.ignoreTrimWhitespace": false,
+  "redhat.telemetry.enabled": false,
+  "files.exclude": {
+    "**/.classpath": true,
+    "**/.project": true,
+    "**/.settings": true,
+    "**/.factorypath": true
+  },
+  "editor.inlineSuggest.enabled": true,
+  "editor.cursorSmoothCaretAnimation": true,
+  "editor.minimap.renderCharacters": false,
+  "editor.renderWhitespace": "all",
+  "editor.accessibilitySupport": "off",
+  "go.toolsManagement.autoUpdate": true,
+  "terminal.integrated.scrollback": 5000,
+  "editor.bracketPairColorization.enabled": true,
+  "editor.rulers": [
+    {
+      "column": 100,
+      // "color": "#3E59A1" // Tokyo Night theme
+      // "color": "#bd93f9" // Dracula theme
+      // "color": "#0466D6" // GitHub Dark
+      "color": "#808080"
+    }
+  ],
+  "files.watcherExclude": {
+    "**/.bloop": true,
+    "**/.metals": true,
+    "**/.ammonite": true
+  },
+  // "terminal.integrated.macOptionIsMeta": true,
+  "nix.enableLanguageServer": true,
+  "svelte.enable-ts-plugin": true,
+  "workbench.colorTheme": "Noctis Minimus",
+  "[svelte]": {
+    "editor.defaultFormatter": "svelte.svelte-vscode"
+  },
+  "calva.paredit.defaultKeyMap": "strict",
+  "git.mergeEditor": true,
+  "window.commandCenter": true,
+  "terminal.integrated.shellIntegration.enabled": true,
+  "clangd.checkUpdates": true,
+  "hexeditor.columnWidth": 16,
+  "hexeditor.showDecodedText": true,
+  "hexeditor.defaultEndianness": "little",
+  "hexeditor.inspectorType": "aside",
+  "haskell.plugin.eval.config.exception": true,
+  "haskell.manageHLS": "GHCup",
+  "editor.experimental.stickyScroll.enabled": true
+}
