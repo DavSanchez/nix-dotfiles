@@ -20,5 +20,5 @@
     ];
     #haskell.enable = true;
     userSettings = lib.importJSON ./settings.json;
-    };
+  };
 }
