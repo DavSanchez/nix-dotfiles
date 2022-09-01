@@ -20,7 +20,7 @@
     ./modules/emacs
     ./modules/git
     # ./modules/nu # Per-system
-    ./modules/nvim
+    ./modules/neovim
     ./modules/starship
     ./modules/vscode
     ./modules/zsh

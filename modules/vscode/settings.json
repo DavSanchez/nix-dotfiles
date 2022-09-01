@@ -88,9 +88,6 @@
   "editor.rulers": [
     {
       "column": 100,
-      // "color": "#3E59A1" // Tokyo Night theme
-      // "color": "#bd93f9" // Dracula theme
-      // "color": "#0466D6" // GitHub Dark
       "color": "#808080"
     }
   ],
@@ -99,7 +96,7 @@
     "**/.metals": true,
     "**/.ammonite": true
   },
-  // "terminal.integrated.macOptionIsMeta": true,
+  "terminal.integrated.macOptionIsMeta": true,
   "nix.enableLanguageServer": true,
   "svelte.enable-ts-plugin": true,
   "workbench.colorTheme": "Noctis Minimus",

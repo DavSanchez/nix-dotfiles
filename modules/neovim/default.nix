@@ -15,19 +15,10 @@
         nmap <silent> <space>r <Plug>(coc-references)
         nmap <silent> <space>n <Plug>(coc-rename)
         nmap <silent> <space>f <Plug>(coc-format)
-
         function! CheckBackspace() abort
           let col = col('.') - 1
           return !col || getline('.')[col - 1]  =~# '\s'
         endfunction
-
-        " Use <Tab> and <S-Tab> to navigate the completion list
-        inoremap <silent><expr> <TAB>
-              \ pumvisible() ? "\<C-n>" :
-              \ CheckBackspace() ? "\<TAB>" :
-              \ coc#refresh()
-        inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
         let g:coc_user_config = {
           \"suggest.completionItemKindLabels": {
             \"class": "\uf0e8",
@@ -62,17 +53,40 @@
       settings = {
         "languageserver" = {
           # https://gitlab.com/jD91mZM2/nix-lsp
-          "nix" = {
-            "command" = "rnix-lsp";
-            "filetypes" = [
+          nix = {
+            command = "rnix-lsp";
+            filetypes = [
               "nix"
             ];
+          };
+          terraform = {
+            command = "terraform-lsp";
+            filetypes = [
+              "terraform"
+              "tf"
+            ];
+            # initializationOptions = { };
+            # settings = { };
+          };
+          haskell = {
+            command = "haskell-language-server-wrapper";
+            args = [ "--lsp" ];
+            rootPatterns = [
+              "*.cabal"
+              "stack.yaml"
+              "cabal.project"
+              "package.yaml"
+              "hie.yaml"
+            ];
+            filetypes = [ "haskell" "lhaskell" ];
           };
         };
       };
     };
 
     plugins = with pkgs.vimPlugins; [
+      vim-which-key # vimscripts
+      vim-haskellConcealPlus
       vim-nix
       lualine-nvim
       nvim-web-devicons
@@ -120,7 +134,6 @@
         inactive_winbar = {}
       }
       END
-
       " --- visual ---
       colorscheme ayu-mirage
       set background=dark
@@ -131,13 +144,11 @@
       set showmatch
       set matchtime=3
       set list
-
       highlight Normal ctermbg=none guibg=NONE
       highlight NonText ctermbg=none guibg=NONE
       highlight LineNr ctermbg=none guibg=NONE
       highlight Folded ctermbg=none guibg=NONE
       highlight EndOfBuffer ctermbg=none guibg=NONE
-
       " --- grep ---
       set ignorecase
       set smartcase
@@ -145,20 +156,17 @@
       set hlsearch
       set incsearch
       set inccommand=split
-
       " --- indent ---
       set smartindent
       set expandtab
       set tabstop=2
       set softtabstop=2
       set shiftwidth=2
-
       " --- auto complete ---
       set completeopt=noinsert,menuone,noselect
       set wildmode=list:longest
       set infercase
       set wildmenu
-
       " --- other ---
       set mouse=a
       set clipboard+=unnamedplus
@@ -166,17 +174,14 @@
       set hidden
       set textwidth=0
       set encoding=utf-8
-
       " --- keymap ---
       " jj as esc
       inoremap <silent> jj <Esc>
-
       " Find files using Telescope command-line sugar.
       nnoremap <leader>ff <cmd>Telescope find_files<cr>
       nnoremap <leader>fg <cmd>Telescope live_grep<cr>
       nnoremap <leader>fb <cmd>Telescope buffers<cr>
       nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-
       nnoremap <space>t :NERDTreeToggle<cr>
     '';
   };
