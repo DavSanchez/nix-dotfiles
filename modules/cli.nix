@@ -33,7 +33,7 @@
     tokei
     # unrar
     # unzip
-    # wireshark
+    termshark
     figlet
     protobuf
     tealdeer
