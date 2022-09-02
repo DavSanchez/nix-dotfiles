@@ -96,8 +96,8 @@
                 help = "Install home-manager itself and apply the home configuration";
                 command = ''
                   export HOME_MANAGER_BACKUP_EXT=old
-                  nix build '.#homeConfigurations.david-mbp.activationPackage'
-                  ./result/activate
+                  nix build --no-link '.#homeConfigurations.david-mbp.activationPackage'
+                  "$(nix path-info '.#homeConfigurations.david-mbp.activationPackage')"/activate
                   direnv allow
                 '';
               }
