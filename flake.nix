@@ -124,7 +124,7 @@
                 category = "Home";
                 help = "Switch home-manager to apply home config changes";
                 command = ''
-                  home-manager switch --flake '.#david' -b bck --impure
+                  home-manager switch --flake '.#david-mbp' -b bck --impure
                 '';
               }
               {
@@ -132,7 +132,7 @@
                 category = "Home";
                 help = "Update things";
                 command = ''
-                  home-manager switch --flake '.#david' -b bck --impure --recreate-lock-file
+                  home-manager switch --flake '.#david-mbp' -b bck --impure --recreate-lock-file
                 '';
               }
               {
