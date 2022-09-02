@@ -47,11 +47,45 @@
       ${builtins.readFile ./session_variables.zsh}
       ${if pkgs.stdenv.isDarwin then builtins.readFile ./session_variables.mac.zsh else ""}
       ${builtins.readFile ./functions.zsh}
+
+      # Nix
+      if [[ -f '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]]; then
+        source '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+        #export NIX_PATH="$HOME/.nix-defexpr"
+      fi
+
       bindkey -M vicmd 'k' history-beginning-search-backward
       bindkey -M vicmd 'j' history-beginning-search-forward
       eval "$(direnv hook zsh)"
       eval "$(zoxide init zsh)"
       eval "$(starship init zsh)"
+      set -o emacs
+    '';
+
+    envExtra = ''
+      [[ -o login ]] && export PATH='/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin'
+      . "$HOME/.cargo/env"
+    '';
+
+    initExtra = ''
+      eval $(/opt/homebrew/bin/brew shellenv)
+
+      export EDITOR=nvim
+
+      # Add .NET Core SDK tools
+      export PATH="$PATH:/Users/david/.dotnet/tools"
+
+      # >>> coursier install directory >>>
+      export PATH="$PATH:/Users/david/Library/Application Support/Coursier/bin"
+      # <<< coursier install directory <<<
+
+      # Homebrew
+      # Homebrew sbin
+      export PATH="$(brew --prefix)/sbin:$PATH"
+      # Homebrew completions
+      FPATH="$(brew --prefix)/share/zsh/site-functions:$FPATH"
+      # Haskell for ARM needs to have LLVM available (At least for the moment)
+      export PATH="$(brew --prefix llvm)/bin:${"'\${PATH}'"}"
     '';
 
     # https://knezevic.ch/posts/zsh-completion-for-tools-installed-via-home-manager/
