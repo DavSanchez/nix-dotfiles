@@ -14,15 +14,11 @@
     # nixops
     # nixops-dns
     nixops_unstable
-
-
-    # go
-    go
-    # golangci-lint
   ];
 
   imports = [
     ./haskell.nix
     ./rust.nix
+    ./go.nix
   ];
 }

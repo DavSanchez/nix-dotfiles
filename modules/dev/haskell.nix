@@ -1,7 +1,8 @@
 { pkgs, ... }:
 
 {
-  home.packages = with pkgs.haskellPackages; [
+  home = {
+    packages = with pkgs.haskellPackages; [
     # Haskell
     cabal2nix
     ghc
@@ -13,8 +14,9 @@
 
   # hoogle ghci integration
   # example> :hoogle <$>
-  home.file.".ghci".text = ''
+  file.".ghci".text = ''
     :def hoogle \x -> return $ ":!hoogle \"" ++ x ++ "\""
     :def doc \x -> return $ ":!hoogle --info \"" ++ x ++ "\""
   '';
+  }
 }
