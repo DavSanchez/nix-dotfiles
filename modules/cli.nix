@@ -37,7 +37,7 @@
     figlet
     protobuf
     tealdeer
-    telnet
+    inetutils
 
     # # Moar colors
     # # starship
