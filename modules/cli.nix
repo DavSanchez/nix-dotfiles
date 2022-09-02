@@ -14,9 +14,9 @@
     # binutils
     # pciutils
     gawk
-    # # arandr
-    # # bashmount
-    # # docker-compose
+    # arandr
+    # bashmount
+    # docker-compose
     dua
     fx
     gnumake
@@ -28,24 +28,24 @@
     curl
     wget
     xh
-    # # ngrok
-    # # openvpn
+    # ngrok
+    # openvpn
     tokei
-    # # unrar
-    # # unzip
-    # # wireshark
+    # unrar
+    # unzip
+    # wireshark
     figlet
     protobuf
     tealdeer
     inetutils
 
-    # # Moar colors
-    # # starship
-    zsh-syntax-highlighting
+    # Moar colors
+    # starship
+    # zsh-syntax-highlighting
 
     # Searching/Movement helpers and other replacements
-    # # zoxide # See below
-    # # bat # See below
+    # zoxide # See below
+    # bat # See below
     ripgrep
     broot
     lsd
@@ -57,11 +57,10 @@
 
     pass
 
-    # # system info
-    zenith
+    # system info
     neofetch
 
-    # # media
+    # media
     feh
     imagemagick
     qrencode

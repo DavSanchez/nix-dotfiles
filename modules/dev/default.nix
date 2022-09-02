@@ -19,7 +19,7 @@
     colima
     minikube
     kubectl
-    helm
+    kubernetes-helm
     k9s
     kompose
     terraform
