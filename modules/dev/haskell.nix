@@ -18,5 +18,5 @@
     :def hoogle \x -> return $ ":!hoogle \"" ++ x ++ "\""
     :def doc \x -> return $ ":!hoogle --info \"" ++ x ++ "\""
   '';
-  }
+  };
 }
