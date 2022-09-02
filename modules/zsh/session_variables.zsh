@@ -18,9 +18,6 @@ export EDITOR="nvim"
 export LC_ALL="en_US.UTF-8"
 export LANG="en_US.UTF-8"
 
-# $(brew --prefix)/bin is mac specific and where brew installs stuff. As we are
-# making use of brew as fallback so we need to add it
-export PATH="$HOME/.local/bin:$HOME/.nix-profile/bin:$(brew --prefix)/bin:$PATH"
 # Add python site-packages to path
 export NIX_PATH="$HOME/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH"
 export FPATH=~/.nix-profile/share/zsh/site-functions:$FPATH

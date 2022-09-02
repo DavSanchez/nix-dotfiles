@@ -70,15 +70,6 @@
     profileExtra = ''
       eval $(/opt/homebrew/bin/brew shellenv)
 
-      export EDITOR=nvim
-
-      # Add .NET Core SDK tools
-      export PATH="$PATH:/Users/david/.dotnet/tools"
-
-      # >>> coursier install directory >>>
-      export PATH="$PATH:/Users/david/Library/Application Support/Coursier/bin"
-      # <<< coursier install directory <<<
-
       # Homebrew
       # Homebrew sbin
       export PATH="$(brew --prefix)/sbin:$PATH"
