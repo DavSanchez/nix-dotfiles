@@ -1,5 +1,13 @@
 { pkgs, ... }:
+let
+  inherit (pkgs.vscode-utils) buildVscodeMarketplaceExtension;
 
+  # Helper function to cut down on boilerplate
+  extension = { publisher, name, version, sha256 }:
+    buildVscodeMarketplaceExtension {
+      mktplcRef = { inherit name publisher sha256 version; };
+    };
+in
 {
   programs.vscode = {
     extensions = with pkgs.vscode-extensions; [
@@ -17,14 +25,11 @@
       # liviuschera.noctis
       # aaron-bond.better-comments
       # # * This creates a derivation for a VSCode Marketplace extension (useful!)
-      # (buildVscodeMarketplaceExtension {
-      #   mktplcRef = {
-      #     name = "markdown-preview-github-styles";
-      #     publisher = "bierner";
-      #     version = "0.1.6";
-      #     sha256 = "sha256-POIrekEkrYVj7MU9ZXToLIV0pl2X8PUBOQuuB4Mykt4=";
-      #   };
-      #   meta = { license = lib.licenses.mit; };
+      # (extension {
+      #   publisher = "BazelBuild";
+      #   name = "vscode-bazel";
+      #   version = "0.5.0";
+      #   sha256 = "sha256-JJQSwU3B5C2exENdNsWEcxFSgWHnImYas4t/KLsgTj4=";
       # })
     ];
   };
