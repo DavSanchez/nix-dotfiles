@@ -16,12 +16,16 @@
 
     # DevOps
     podman
-    colima
+    podman-tui
+    podman-compose
     minikube
     kubectl
     kubernetes-helm
     k9s
-    kompose
+    # kubeval # FIXME fails to build on mac for some reason
+    kubescape
+    kube-score
+    # kompose # FIXME fails to build on mac for some reason
     terraform
     awscli2
     # terraform-rover
