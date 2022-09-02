@@ -50,8 +50,6 @@
     fd
     dogdns
 
-    # # signature, passwords...
-    gnupg
     pass
 
     # # system info
@@ -60,7 +58,6 @@
 
     # # media
     feh
-    # tty-clock
     imagemagick
     qrencode
     zbar
@@ -86,4 +83,8 @@
   programs.zellij = {
     enable = true;
   };
+
+  # signature, passwords...
+  programs.gpg.enable = true;
+  programs.password-store.enable = true;
 }
