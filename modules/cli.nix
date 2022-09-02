@@ -2,7 +2,7 @@
 
 {
   home.packages = with pkgs; [
-    # # nix
+    # nix
     rnix-lsp
     nixpkgs-fmt
     nix-prefetch-git
@@ -24,6 +24,7 @@
     hexyl
     jo
     jq
+    fq
     curl
     wget
     xh
@@ -35,6 +36,8 @@
     # # wireshark
     figlet
     protobuf
+    tealdeer
+    telnet
 
     # # Moar colors
     # # starship
@@ -49,11 +52,13 @@
     dua
     fd
     dogdns
+    procs
+    sd
 
     pass
 
     # # system info
-    bottom
+    zenith
     neofetch
 
     # # media
@@ -63,6 +68,7 @@
     zbar
     graphviz
     ffmpeg
+    yt-dlp
   ];
 
   programs.fzf = {
@@ -87,4 +93,11 @@
   # signature, passwords...
   programs.gpg.enable = true;
   programs.password-store.enable = true;
+
+  programs.broot = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+
+  programs.bottom.enable = true;
 }

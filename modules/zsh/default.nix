@@ -67,7 +67,7 @@
       . "$HOME/.cargo/env"
     '';
 
-    initExtra = ''
+    profileExtra = ''
       eval $(/opt/homebrew/bin/brew shellenv)
 
       export EDITOR=nvim
