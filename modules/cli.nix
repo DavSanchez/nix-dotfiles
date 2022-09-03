@@ -8,6 +8,7 @@
     nix-prefetch-git
     nix-prefetch-github
     nix-du
+    nix-output-monitor
 
     # utils
     coreutils
