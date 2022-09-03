@@ -8,9 +8,7 @@ let
       mktplcRef = { inherit name publisher sha256 version; };
     };
 in
-{
-  programs.vscode = {
-    extensions = with pkgs.vscode-extensions; [
+with pkgs.vscode-extensions; [
       # pinage404.nix-extension-pack
       rust-lang.rust-analyzer
       bungcip.better-toml
@@ -31,6 +29,4 @@ in
       #   version = "0.5.0";
       #   sha256 = "sha256-JJQSwU3B5C2exENdNsWEcxFSgWHnImYas4t/KLsgTj4=";
       # })
-    ];
-  };
-}
+    ]
