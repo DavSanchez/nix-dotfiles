@@ -76,7 +76,7 @@
       # Homebrew completions
       FPATH="$(brew --prefix)/share/zsh/site-functions:$FPATH"
       # Haskell for ARM needs to have LLVM available (At least for the moment)
-      export PATH="$(brew --prefix llvm)/bin:${"'\${PATH}'"}"
+      export PATH="$(brew --prefix llvm)/bin:${"\${PATH}"}"
     '';
 
     # https://knezevic.ch/posts/zsh-completion-for-tools-installed-via-home-manager/
