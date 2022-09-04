@@ -24,7 +24,7 @@
   outputs = { self, nur, nixpkgs, home-manager, flake-utils, devshell, darwin, ... }:
     let
       home-common = import ./home-common.nix { inherit nur; };
-      home-mbp = import ./home-mbp.nix;
+      home-mac = import ./home-mac.nix;
     in
     {
       # formatter = {
@@ -49,7 +49,7 @@
           pkgs = nixpkgs.legacyPackages."aarch64-darwin";
           modules = [
             home-common
-            home-mbp
+            home-mac
           ];
           # extraSpecialArgs = { };
         };
