@@ -10,6 +10,9 @@ let
 in
 {
   home.packages = with pkgs; [
+    bfg-repo-cleaner
+    lazygit
+    git-quick-stats
     git-crypt
   ];
   programs.git = {
@@ -50,6 +53,8 @@ in
     enableGitCredentialHelper = true;
     settings.git_protocol = "ssh";
   };
+
+  programs.gitui.enable = true;
 
   # programs.gpg.enable = pkgs.stdenv.isLinux;
   # services.gpg-agent.enable = pkgs.stdenv.isLinux;

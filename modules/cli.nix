@@ -15,6 +15,7 @@
     # binutils
     # pciutils
     gawk
+    less
     # arandr
     # bashmount
     # docker-compose
@@ -26,9 +27,13 @@
     jo
     jq
     fq
+    dasel
     curl
     wget
     xh
+    wrk
+    mtr
+    grpcurl
     # ngrok
     # openvpn
     tokei
@@ -38,6 +43,7 @@
     figlet
     protobuf
     tealdeer
+    navi
     inetutils
 
     # Moar colors
@@ -55,8 +61,16 @@
     dogdns
     procs
     sd
+    rm-improved
+    gping
+    bandwhich
+    grex
+    hyperfine
 
-    pass
+    pandoc
+    vale
+    eva
+    chezmoi
 
     # system info
     neofetch
@@ -67,6 +81,7 @@
     qrencode
     zbar
     graphviz
+    xdot
     ffmpeg
     yt-dlp
   ];

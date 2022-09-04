@@ -7,9 +7,13 @@
     # C
     gcc
     llvm
+    cling
+    cmake
+    # conan
 
     # Clojure
     clojure
+    leiningen
 
     # .NET
     dotnet-sdk
@@ -18,6 +22,7 @@
     podman
     podman-tui
     podman-compose
+    lazydocker
     minikube
     kubectl
     kubernetes-helm
@@ -26,7 +31,9 @@
     kubescape
     kube-score
     # kompose # FIXME fails to build on mac for some reason
+    ctop
     terraform
+    terrascan
     awscli2
     # terraform-rover
     # nixops
@@ -35,6 +42,17 @@
 
     kcat
     apacheKafka
+
+    yosys
+    verilator
+    zig
+
+    exercism
+
+    bazelisk
+    bazel-buildtools
+
+    unison-ucm
   ];
 
   imports = [

@@ -25,7 +25,7 @@
     ./modules/vscode # Extensions ?? System-level for helper?
     ./modules/zsh
 
-    # ./modules/app.nix
+    ./modules/app.nix
     ./modules/cli.nix
     ./modules/fonts.nix
     ./modules/tmux.nix

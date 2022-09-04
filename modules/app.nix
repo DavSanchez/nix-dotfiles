@@ -1,6 +1,15 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
-    vlc
+    # handbrake
+    # logseq
+    # gqrx
+    # vlc
+    # transmission
+    # yacreader
+    # zotero
+    # insomnia
+    # sonic-pi
+    # mtr-gui
   ];
 }
