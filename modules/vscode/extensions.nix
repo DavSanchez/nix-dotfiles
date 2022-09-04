@@ -22,7 +22,7 @@ with pkgs.vscode-extensions; [
       dhall.vscode-dhall-lsp-server
       eamodio.gitlens
       esbenp.prettier-vscode
-      golang.go@
+      golang.go
       # gvekony.systemverilog-1800-2012@1.0.27
       hashicorp.terraform
       haskell.haskell
