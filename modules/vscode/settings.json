@@ -113,5 +113,6 @@
   "window.commandCenter": true,
   "workbench.colorTheme": "Noctis Minimus",
   "workbench.iconTheme": "vscode-icons",
-  "editor.stickyScroll.enabled": true
+  "editor.stickyScroll.enabled": true,
+  "haskell.manageHLS": "PATH"
 }
