@@ -22,12 +22,12 @@
     # ./modules/nu # Per-system
     ./modules/neovim
     ./modules/starship
-    # ./modules/vscode # Extensions ??
+    ./modules/vscode # Extensions ?? System-level for helper?
     ./modules/zsh
 
     # ./modules/app.nix
     ./modules/cli.nix
-    # ./modules/fonts.nix
+    ./modules/fonts.nix
     ./modules/tmux.nix
     ./modules/wezterm.nix
   ];

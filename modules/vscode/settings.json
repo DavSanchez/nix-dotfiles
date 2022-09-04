@@ -9,7 +9,6 @@
   "calva.paredit.defaultKeyMap": "strict",
   "clangd.checkUpdates": true,
   "diffEditor.ignoreTrimWhitespace": false,
-  "discord.silent": true,
   "editor.accessibilitySupport": "off",
   "editor.bracketPairColorization.enabled": true,
   "editor.cursorSmoothCaretAnimation": true,
@@ -106,13 +105,10 @@
   "terminal.integrated.macOptionIsMeta": true,
   "terminal.integrated.scrollback": 5000,
   "terminal.integrated.shellIntegration.enabled": true,
-  "tidalcycles.sounds.paths": [
-    "/Users/david/Library/Application Support/SuperCollider/downloaded-quarks/Dirt-Samples"
-  ],
   "verilog.linting.linter": "verilator",
   "window.commandCenter": true,
   "workbench.colorTheme": "Noctis Minimus",
   "workbench.iconTheme": "vscode-icons",
   "editor.stickyScroll.enabled": true,
-  "haskell.manageHLS": "PATH"
+  "terraform.codelens.referenceCount": true
 }

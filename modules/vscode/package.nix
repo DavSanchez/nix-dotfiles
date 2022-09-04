@@ -48,7 +48,7 @@ in
     programs.vscode = {
       enable = true;
       extensions = import ./extensions.nix { inherit pkgs; };
-      package = pkgs.vscode;
+      package = pkgs.vscodium;
       userSettings = lib.importJSON ./settings.json;
     };
   };
