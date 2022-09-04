@@ -1,5 +1,6 @@
 { pkgs, ... }:
 
+# Method for nix-doom-emacs (does not work)
 let
   doom-emacs = pkgs.callPackage
     (builtins.fetchTarball {
