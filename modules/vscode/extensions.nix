@@ -16,7 +16,7 @@ with pkgs.vscode-extensions; [
       christian-kohler.path-intellisense
       # CoenraadS.disableligatures@0.0.10
       # cschlosser.doxdocgen@1.4.0
-      DavidAnson.vscode-markdownlint
+      davidanson.vscode-markdownlint
       dbaeumer.vscode-eslint
       dhall.dhall-lang
       dhall.vscode-dhall-lsp-server
