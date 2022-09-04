@@ -22,7 +22,7 @@
     # ./modules/nu # Per-system
     ./modules/neovim
     ./modules/starship
-    ./modules/vscode
+    # ./modules/vscode # Extensions ??
     ./modules/zsh
 
     # ./modules/app.nix
