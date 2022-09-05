@@ -7,10 +7,9 @@
     experimental-features = nix-command flakes
   '';
 
-  home.packages = with pkgs; [
-    mas
-    iterm2
-  ];
+  # home.packages = with pkgs; [
+  #   iterm2
+  # ];
 
   imports = [
     ./modules/app-mac.nix

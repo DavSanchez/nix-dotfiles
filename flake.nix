@@ -37,16 +37,19 @@
       # };
 
       # macOS systems using nix-darwin
-      # darwinConfigurations."Davids-Mac" = darwin.lib.darwinSystem {
-      #   pkgs = nixpkgs.legacyPackages."aarch64-darwin";
-      #   modules = [
-      #     ./system/mbp/configuration.nix
-      #   ];
-      # };
+      darwinConfigurations = {
+        "Davids-MacBook-Pro" = darwin.lib.darwinSystem {
+          system = "aarch64-darwin";
+          modules = [
+            ./system/mbp/darwin-configuration.nix
+          ];
+        };
+      };
 
       homeConfigurations = {
         david-mbp = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages."aarch64-darwin";
+          system = "aarch64-darwin";
           modules = [
             home-common
             home-mac
@@ -120,11 +123,20 @@
                 '';
               }
               {
-                name = "dev:switch";
+                name = "dev:home_switch_mbp";
                 category = "Home";
                 help = "Switch home-manager to apply home config changes";
                 command = ''
                   home-manager switch --flake '.#david-mbp' -b bck --impure
+                '';
+              }
+              {
+                name = "dev:system_switch_mbp";
+                category = "Darwin";
+                help = "Switch darwin to rebuild and apply `darwin-configuration.nix` changes";
+                command = ''
+                  nix build '.#darwinConfigurations.Davids-MacBook-Pro.system' -b bck --impure
+                  ./result/sw/bin/darwin-rebuild switch --flake .
                 '';
               }
               {

@@ -1,0 +1,12 @@
+# This should be added to the end of /etc/zshrc if it disappears after a macOS upgrade.
+# See:
+#   - https://discourse.nixos.org/t/nix-commands-missing-after-macos-12-1-version-upgrade/16679/8
+#   - https://github.com/NixOS/nix/issues/3616
+#   $ cat .bashrc.nix-nix-darwin | sudo tee -a /etc/bashrc > /dev/null
+# Nix
+if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+  . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+fi
+# End Nix
+
+if test -e /etc/static/bashrc; then . /etc/static/bashrc; fi

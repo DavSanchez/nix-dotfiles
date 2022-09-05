@@ -53,6 +53,7 @@
     bazel-buildtools
 
     unison-ucm
+    python3
   ];
 
   imports = [
