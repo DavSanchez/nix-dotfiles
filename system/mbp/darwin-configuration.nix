@@ -28,6 +28,8 @@
     global.noLock = true;
 
     taps = [
+      "homebrew/cask"
+      "homebrew/cask-versions"
       "railwaycat/emacsmacport"
     ];
     casks = [

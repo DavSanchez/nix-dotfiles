@@ -49,7 +49,6 @@
       homeConfigurations = {
         david-mbp = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages."aarch64-darwin";
-          system = "aarch64-darwin";
           modules = [
             home-common
             home-mac
@@ -123,20 +122,11 @@
                 '';
               }
               {
-                name = "dev:home_switch_mbp";
+                name = "dev:switch_mbp";
                 category = "Home";
                 help = "Switch home-manager to apply home config changes";
                 command = ''
                   home-manager switch --flake '.#david-mbp' -b bck --impure
-                '';
-              }
-              {
-                name = "dev:system_switch_mbp";
-                category = "Darwin";
-                help = "Switch darwin to rebuild and apply `darwin-configuration.nix` changes";
-                command = ''
-                  nix build '.#darwinConfigurations.Davids-MacBook-Pro.system' -b bck --impure
-                  ./result/sw/bin/darwin-rebuild switch --flake .
                 '';
               }
               {
@@ -162,6 +152,17 @@
                 help = "Update the flake lock file only";
                 command = ''
                   nix flake update
+                '';
+              }
+
+              # --- Darwin ---
+              {
+                name = "dev:darwin_switch_mbp";
+                category = "Darwin";
+                help = "Switch darwin to rebuild and apply `darwin-configuration.nix` changes";
+                command = ''
+                  nix build ".#darwinConfigurations.Davids-MacBook-Pro.system"
+                  ./result/sw/bin/darwin-rebuild switch --flake ".#Davids-MacBook-Pro"
                 '';
               }
 
