@@ -102,7 +102,6 @@
   "svelte.enable-ts-plugin": true,
   "terminal.external.osxExec": "WezTerm.app",
   "terminal.integrated.fontFamily": "'FiraCode Nerd Font Mono'",
-  "terminal.integrated.macOptionIsMeta": true,
   "terminal.integrated.scrollback": 5000,
   "terminal.integrated.shellIntegration.enabled": true,
   "verilog.linting.linter": "verilator",
