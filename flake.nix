@@ -22,10 +22,7 @@
   };
 
   outputs = { self, nur, nixpkgs, home-manager, flake-utils, devshell, darwin, ... }:
-    let
-      home-common = import ./home-common.nix { inherit nur; };
-      home-mac = import ./home-mac.nix;
-    in
+
     {
       # formatter = {
       #   "aarch64-darwin" = nixpkgs.legacyPackages."aarch64-darwin".nixpkgs-fmt;
@@ -42,20 +39,22 @@
           system = "aarch64-darwin";
           modules = [
             ./system/mbp/darwin-configuration.nix
+            home-manager.darwinModules.home-manager
+            {
+              nixpkgs = {
+                overlays = [
+                  nur.overlay
+                ];
+                config.allowUnfreePredicate = (pkg: true);
+              };
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                users.david = import ./home.nix;
+              };
+            }
           ];
         };
-      };
-
-      homeConfigurations = {
-        david-mbp = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages."aarch64-darwin";
-          modules = [
-            home-common
-            home-mac
-          ];
-          # extraSpecialArgs = { };
-        };
-        # "david@nixos" = { };
       };
 
       templates = import ./templates;

@@ -4,12 +4,14 @@
   home = {
     packages = with pkgs.haskellPackages; [
       # Haskell
-      cabal2nix
       ghc
+      cabal-install
+      cabal2nix
       haskell-language-server
       hoogle
-      cabal-install
       stack
+      hpack
+      implicit-hie
     ];
 
     # hoogle ghci integration

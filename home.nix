@@ -1,17 +1,18 @@
-{ nur, ... }:
+{ ... }:
 
 {
+  programs.home-manager.enable = true;
+  home.stateVersion = "22.05";
   # NOTE: Here we are injecting colorscheme so that it is passed down all the imports
   _module.args = {
     colorscheme = import ./colorschemes/tokyonight.nix;
   };
-  nixpkgs.overlays = [
-    nur.overlay
-  ];
-  # Allow all unfree packages
-  nixpkgs.config.allowUnfreePredicate = (pkg: true);
-  programs.home-manager.enable = true;
-  home.stateVersion = "22.05";
+
+  # home.homeDirectory = "/Users/david";
+  # home.username = "david";
+  xdg.configFile."nix/nix.conf".text = ''
+    experimental-features = nix-command flakes
+  '';
 
   imports = [
     ./modules/aws
@@ -30,5 +31,10 @@
     ./modules/fonts.nix
     ./modules/tmux.nix
     ./modules/wezterm.nix
+  ] ++ lib.optionals stdenv.isDarwin [
+    ./modules/app-mac.nix
+    ./modules/nu/default-mac.nix
+    ./modules/mac-symlink-apps.nix
+    ./modules/dev/colima.nix
   ];
 }
