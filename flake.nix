@@ -22,7 +22,9 @@
   };
 
   outputs = { self, nur, nixpkgs, home-manager, flake-utils, devshell, darwin, ... }:
-
+    let
+      home-mac = import ./home-mac.nix;
+    in
     {
       # formatter = {
       #   "aarch64-darwin" = nixpkgs.legacyPackages."aarch64-darwin".nixpkgs-fmt;
@@ -53,7 +55,7 @@
                 users.david = import ./home.nix;
                 # Optionally, use home-manager.extraSpecialArgs to pass
                 # arguments to home.nix
-                extraSpecialArgs = import ./home-mac.nix;
+                extraSpecialArgs = { inherit home-mac; };
               };
             }
           ];
@@ -78,7 +80,7 @@
           # https://github.com/numtide/devshell
           devShells.default = pkgs.devshell.mkShell {
             devshell.motd = ''
-              {bold}{14}🔨 My home conigs 🔨{reset}
+              {bold}{14}🔨 My home configs 🔨{reset}
               $(type -p menu &>/dev/null && menu)
             '';
 
