@@ -27,15 +27,6 @@
       home-mac = import ./home-mac.nix;
     in
     {
-      # formatter = {
-      #   "aarch64-darwin" = nixpkgs.legacyPackages."aarch64-darwin".nixpkgs-fmt;
-      # };
-      # NixOS systems
-      # nixosConfiguration.nixos = nixpkgs.lib.nixosSystem {
-      #   system = "x86_64-linux";
-      #   modules = [ ./system/nixos/onfiguration.nix ];
-      # };
-
       # macOS systems using nix-darwin
       darwinConfigurations = {
         "Davids-MacBook-Pro" = darwin.lib.darwinSystem {
