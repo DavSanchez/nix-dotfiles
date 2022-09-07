@@ -51,6 +51,9 @@
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 users.david = import ./home.nix;
+                # Optionally, use home-manager.extraSpecialArgs to pass
+                # arguments to home.nix
+                extraSpecialArgs = import ./home-mac.nix;
               };
             }
           ];

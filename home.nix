@@ -31,10 +31,5 @@
     ./modules/fonts.nix
     ./modules/tmux.nix
     ./modules/wezterm.nix
-  ] ++ lib.optionals stdenv.isDarwin [
-    ./modules/app-mac.nix
-    ./modules/nu/default-mac.nix
-    ./modules/mac-symlink-apps.nix
-    ./modules/dev/colima.nix
   ];
 }
