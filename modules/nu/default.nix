@@ -1,15 +1,18 @@
+{ pkgs, ... }:
+
 {
   programs.nushell = {
     enable = true;
   };
-  home.file = {
-    "Library/Application Support/nushell/env.nu".source =
-      lib.optional std.isDarwin ./env.nu;
-    "Library/Application Support/nushell/config.nu".source =
-      lib.optional std.isDarwin ./config.nu;
-    ".config/nushell/env.nu".source =
-      lib.optional std.isLinux ./env.nu;
-    ".config/nushell/config.nu".source =
-      lib.optional std.isLinux ./config.nu;
-  };
+  home.file = { }
+    // pkgs.lib.optionalAttrs pkgs.stdenv.isDarwin
+    {
+      "Library/Application Support/nushell/env.nu".source = ./env.nu;
+      "Library/Application Support/nushell/config.nu".source = ./config.nu;
+    }
+    // pkgs.lib.optionalAttrs pkgs.stdenv.isLinux
+    {
+      ".config/nushell/env.nu".source = ./env.nu;
+      ".config/nushell/config.nu".source = ./config.nu;
+    };
 }

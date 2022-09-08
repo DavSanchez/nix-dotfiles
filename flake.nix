@@ -22,9 +22,6 @@
   };
 
   outputs = { self, nur, nixpkgs, home-manager, flake-utils, devshell, darwin, ... }:
-    let
-      home-mac = import ./home-mac.nix;
-    in
     {
       # formatter = {
       #   "aarch64-darwin" = nixpkgs.legacyPackages."aarch64-darwin".nixpkgs-fmt;
@@ -55,7 +52,7 @@
                 users.david = import ./home.nix;
                 # Optionally, use home-manager.extraSpecialArgs to pass
                 # arguments to home.nix
-                extraSpecialArgs = { inherit home-mac; };
+                # extraSpecialArgs = { };
               };
             }
           ];
