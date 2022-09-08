@@ -12,16 +12,16 @@
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nur = {
-      url = "github:nix-community/NUR";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     devshell.url = "github:numtide/devshell";
     flake-utils.url = "github:numtide/flake-utils";
+    # nur = {
+    #   url = "github:nix-community/NUR";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
     # nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
   };
 
-  outputs = { self, nur, nixpkgs, home-manager, flake-utils, devshell, darwin, ... }:
+  outputs = { self, nixpkgs, home-manager, flake-utils, devshell, darwin, ... }:
     {
       # macOS systems using nix-darwin
       darwinConfigurations = {
@@ -31,12 +31,7 @@
             ./system/mbp/darwin-configuration.nix
             home-manager.darwinModules.home-manager
             {
-              nixpkgs = {
-                overlays = [
-                  nur.overlay
-                ];
-                config.allowUnfreePredicate = (pkg: true);
-              };
+              nixpkgs.config.allowUnfreePredicate = (pkg: true);
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
