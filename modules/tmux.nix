@@ -19,9 +19,6 @@ in
     customPaneNavigationAndResize = true;
     escapeTime = 0;
     historyLimit = 30000;
-    enableMouse = true;
-    enableFzf = true;
-    iTerm2 = true;
     extraConfig = ''
       # Default termtype. If the rcfile sets $TERM, that overrides this value.
       set -g terminal-overrides ',xterm-256color:Tc'
