@@ -165,7 +165,7 @@
     };
 
     pandoc.enable = true;
-    yt-dlp.enable = true;
+    # yt-dlp.enable = true;
 
     # TUI IRC client written in Rust.
     tiny = {
