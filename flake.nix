@@ -23,15 +23,6 @@
 
   outputs = { self, nur, nixpkgs, home-manager, flake-utils, devshell, darwin, ... }:
     {
-      # formatter = {
-      #   "aarch64-darwin" = nixpkgs.legacyPackages."aarch64-darwin".nixpkgs-fmt;
-      # };
-      # NixOS systems
-      # nixosConfiguration.nixos = nixpkgs.lib.nixosSystem {
-      #   system = "x86_64-linux";
-      #   modules = [ ./system/nixos/onfiguration.nix ];
-      # };
-
       # macOS systems using nix-darwin
       darwinConfigurations = {
         "Davids-MacBook-Pro" = darwin.lib.darwinSystem {
@@ -99,8 +90,8 @@
                 help = "Install home-manager itself and apply the home configuration";
                 command = ''
                   export HOME_MANAGER_BACKUP_EXT=old
-                  nix build --no-link '.#homeConfigurations.david-mbp.activationPackage'
-                  "$(nix path-info '.#homeConfigurations.david-mbp.activationPackage')"/activate
+                  nix build --no-link '.#homeConfigurations.<user>.activationPackage'
+                  "$(nix path-info '.#homeConfigurations.<user>.activationPackage')"/activate
                   direnv allow
                 '';
               }
@@ -122,22 +113,22 @@
                   home-manager generations
                 '';
               }
-              {
-                name = "dev:switch_mbp";
-                category = "Home";
-                help = "Switch home-manager to apply home config changes";
-                command = ''
-                  home-manager switch --flake '.#david-mbp' -b bck --impure
-                '';
-              }
-              {
-                name = "dev:update";
-                category = "Home";
-                help = "Update things";
-                command = ''
-                  home-manager switch --flake '.#david-mbp' -b bck --impure --recreate-lock-file
-                '';
-              }
+              # {
+              #   name = "dev:switch_mbp";
+              #   category = "Home";
+              #   help = "Switch home-manager to apply home config changes";
+              #   command = ''
+              #     home-manager switch --flake '.#david-mbp' -b bck --impure
+              #   '';
+              # }
+              # {
+              #   name = "dev:update";
+              #   category = "Home";
+              #   help = "Update things";
+              #   command = ''
+              #     home-manager switch --flake '.#david-mbp' -b bck --impure --recreate-lock-file
+              #   '';
+              # }
               {
                 name = "dev:update-nixpkgs";
                 category = "Home";
@@ -158,7 +149,7 @@
 
               # --- Darwin ---
               {
-                name = "dev:darwin_switch_mbp";
+                name = "dev:switch_mbp";
                 category = "Darwin";
                 help = "Switch darwin to rebuild and apply `darwin-configuration.nix` changes";
                 command = ''

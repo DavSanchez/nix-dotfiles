@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 {
   programs.zsh = {
     enable = true;
@@ -6,6 +6,7 @@
     defaultKeymap = "viins";
     enableAutosuggestions = true;
     enableSyntaxHighlighting = true;
+    autocd = true;
     shellAliases = import ./aliases.nix;
     history.extended = true;
     oh-my-zsh = {
@@ -14,10 +15,23 @@
         "git"
         "vi-mode"
         "web-search"
+        "bazel"
+        "docker"
         "aws"
         "terraform"
         "nomad"
-        "vault"
+        "helm"
+        "kubectl"
+        "fd"
+        "ripgrep"
+        "torrent"
+        "vscode"
+        "urltools"
+        "golang"
+        "rust"
+        "pass"
+      ] ++ lib.optionals pkgs.stdenv.isDarwin [
+        "macos"
       ];
     };
     plugins = [
@@ -50,17 +64,13 @@
 
       bindkey -M vicmd 'k' history-beginning-search-backward
       bindkey -M vicmd 'j' history-beginning-search-forward
-      eval "$(direnv hook zsh)"
-      eval "$(zoxide init zsh)"
-      eval "$(starship init zsh)"
+
+      [[ $TERM_PROGRAM != "vscode" ]] && eval "$(zellij setup --generate-auto-start zsh)"
+
       set -o emacs
-      [[ !(-v $ZELLIJ) ]] && zellij
     '';
 
-    envExtra = ''
-      # [[ -o login ]] && export PATH='/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin'
-      . "$HOME/.cargo/env"
-    '';
+    # envExtra = '''';
 
     profileExtra = ''
       eval $(/opt/homebrew/bin/brew shellenv)
