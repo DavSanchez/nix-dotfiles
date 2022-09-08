@@ -20,7 +20,7 @@
     ./modules/direnv
     # ./modules/emacs # Doom emacs (does not really work)
     ./modules/git
-    # ./modules/nu # Per-system
+    ./modules/nu
     ./modules/neovim
     ./modules/starship
     ./modules/vscode # Extensions ?? System-level for helper?
