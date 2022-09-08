@@ -54,11 +54,14 @@
 
     unison-ucm
     python3
+  ] ++ lib.optionals stdenv.isDarwin [
+    colima
   ];
 
   imports = [
     ./haskell.nix
     ./rust.nix
     ./go.nix
+    # ./java.nix
   ];
 }
