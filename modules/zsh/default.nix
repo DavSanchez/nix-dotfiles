@@ -32,6 +32,7 @@
         "pass"
       ] ++ lib.optionals pkgs.stdenv.isDarwin [
         "macos"
+        "brew"
       ];
     };
     plugins = [
