@@ -43,7 +43,6 @@
     autoUpdate = true;
     cleanup = "zap";
     global.brewfile = true;
-    global.noLock = true;
     onActivation.cleanup = "zap";
 
     taps = [
