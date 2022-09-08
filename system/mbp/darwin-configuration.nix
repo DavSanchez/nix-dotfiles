@@ -40,9 +40,10 @@
 
   homebrew = {
     enable = true;
-    autoUpdate = true;
     cleanup = "zap";
     global.brewfile = true;
+    onActivation.autoUpdate = true;
+    # onActivation.upgrade = true; # This defaults to false so calls are idempotent.
     onActivation.cleanup = "zap";
 
     taps = [
