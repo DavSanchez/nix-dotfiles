@@ -43,6 +43,21 @@
             }
           ];
         };
+        "Davids-Mac-Mini" = darwin.lib.darwinSystem {
+          system = "aarch64-darwin";
+          modules = [
+            ./system/mini/darwin-configuration.nix
+            home-manager.darwinModules.home-manager
+            {
+              nixpkgs.config.allowUnfreePredicate = (pkg: true);
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                users.david = import ./home.nix;
+              };
+            }
+          ];
+        };
       };
 
       templates = import ./templates;
@@ -150,6 +165,16 @@
                 command = ''
                   nix build ".#darwinConfigurations.Davids-MacBook-Pro.system"
                   ./result/sw/bin/darwin-rebuild switch --flake ".#Davids-MacBook-Pro"
+                '';
+              }
+
+              {
+                name = "dev:switch_mini";
+                category = "Darwin";
+                help = "Switch darwin to rebuild and apply `darwin-configuration.nix` changes";
+                command = ''
+                  nix build ".#darwinConfigurations.Davids-Mac-Mini.system"
+                  ./result/sw/bin/darwin-rebuild switch --flake ".#Davids-Mac-Mini"
                 '';
               }
 
