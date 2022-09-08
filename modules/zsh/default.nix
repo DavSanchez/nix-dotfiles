@@ -54,6 +54,7 @@
       eval "$(zoxide init zsh)"
       eval "$(starship init zsh)"
       set -o emacs
+      [[ !(-v $ZELLIJ) ]] && zellij
     '';
 
     envExtra = ''
