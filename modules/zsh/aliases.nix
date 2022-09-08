@@ -6,7 +6,7 @@
   top = "btm";
   htop = "btm";
   ytop = "btm";
-  cat = "bat";
+  cat = "bat --plain";
 
   # docker-compose;
   dc = "docker-compose";
