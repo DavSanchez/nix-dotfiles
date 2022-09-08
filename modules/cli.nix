@@ -134,6 +134,11 @@
       };
     };
 
+    nix-index = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+
     # TUI IRC client written in Rust.
     tiny = {
       enable = true;
