@@ -135,7 +135,7 @@
                 help = "Update nixpkgs only";
                 command = ''
                   nix flake lock --update-input nixpkgs
-                  dev:switch
+                  # dev:switch
                 '';
               }
               {
