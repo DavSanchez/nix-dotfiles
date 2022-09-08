@@ -15,7 +15,6 @@
     # binutils
     # pciutils
     gawk
-    less
     # arandr
     # bashmount
     # docker-compose
@@ -25,7 +24,6 @@
     gnused
     hexyl
     jo
-    jq
     fq
     dasel
     curl
@@ -42,7 +40,6 @@
     termshark
     figlet
     protobuf
-    navi
     inetutils
 
     # Moar colors
@@ -53,8 +50,6 @@
     # zoxide # See below
     # bat # See below
     ripgrep
-    broot
-    lsd
     dua
     fd
     dogdns
@@ -66,7 +61,6 @@
     grex
     hyperfine
 
-    pandoc
     vale
     eva
     chezmoi
@@ -82,18 +76,31 @@
     graphviz
     xdot
     ffmpeg
-    yt-dlp
 
     home-manager # Only the CLI
 
   ] ++ lib.optionals pkgs.stdenv.isDarwin [
     m-cli
+  ] ++ lib.optionals pkgs.stdenv.isLinux [
+
   ];
 
   programs = {
+    lsd = {
+      enable = true;
+      enableAliases = true;
+    };
+
     fzf = {
       enable = true;
       enableZshIntegration = true;
+      changeDirWidgetCommand = "fd --type d";
+      changeDirWidgetOptions = [ "--preview 'tree -C {} | head 200'" ];
+      defaultCommand = "fd --type f";
+      defaultOptions = [ "--height 40%" "--border" ];
+      fileWidgetCommand = "fd --type f";
+      fileWidgetOptions = [ "--preview 'head {}'" ];
+      historyWidgetOptions = [ "--sort" "--exact" ];
     };
 
     bat = {
@@ -106,9 +113,22 @@
       enableZshIntegration = true;
     };
 
-    zellij = {
+    zellij.enable = true;
+
+    jq = {
       enable = true;
+      colors = {
+        null = "1;30";
+        false = "0;31";
+        true = "0;32";
+        numbers = "0;36";
+        strings = "0;33";
+        arrays = "1;35";
+        objects = "1;37";
+      };
     };
+
+    less.enable = true;
 
     # signature, passwords...
     gpg.enable = true;
@@ -134,10 +154,18 @@
       };
     };
 
+    navi = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+
     nix-index = {
       enable = true;
       enableZshIntegration = true;
     };
+
+    pandoc.enable = true;
+    yt-dlp.enable = true;
 
     # TUI IRC client written in Rust.
     tiny = {
