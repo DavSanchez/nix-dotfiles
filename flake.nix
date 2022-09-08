@@ -22,10 +22,6 @@
   };
 
   outputs = { self, nur, nixpkgs, home-manager, flake-utils, devshell, darwin, ... }:
-    let
-      home-common = import ./home-common.nix { inherit nur; };
-      home-mac = import ./home-mac.nix;
-    in
     {
       # macOS systems using nix-darwin
       darwinConfigurations = {
@@ -33,20 +29,25 @@
           system = "aarch64-darwin";
           modules = [
             ./system/mbp/darwin-configuration.nix
+            home-manager.darwinModules.home-manager
+            {
+              nixpkgs = {
+                overlays = [
+                  nur.overlay
+                ];
+                config.allowUnfreePredicate = (pkg: true);
+              };
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                users.david = import ./home.nix;
+                # Optionally, use home-manager.extraSpecialArgs to pass
+                # arguments to home.nix
+                # extraSpecialArgs = { };
+              };
+            }
           ];
         };
-      };
-
-      homeConfigurations = {
-        david-mbp = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages."aarch64-darwin";
-          modules = [
-            home-common
-            home-mac
-          ];
-          # extraSpecialArgs = { };
-        };
-        # "david@nixos" = { };
       };
 
       templates = import ./templates;
@@ -67,7 +68,7 @@
           # https://github.com/numtide/devshell
           devShells.default = pkgs.devshell.mkShell {
             devshell.motd = ''
-              {bold}{14}🔨 My home conigs 🔨{reset}
+              {bold}{14}🔨 My home configs 🔨{reset}
               $(type -p menu &>/dev/null && menu)
             '';
 
@@ -89,8 +90,8 @@
                 help = "Install home-manager itself and apply the home configuration";
                 command = ''
                   export HOME_MANAGER_BACKUP_EXT=old
-                  nix build --no-link '.#homeConfigurations.david-mbp.activationPackage'
-                  "$(nix path-info '.#homeConfigurations.david-mbp.activationPackage')"/activate
+                  nix build --no-link '.#homeConfigurations.<user>.activationPackage'
+                  "$(nix path-info '.#homeConfigurations.<user>.activationPackage')"/activate
                   direnv allow
                 '';
               }
@@ -112,22 +113,22 @@
                   home-manager generations
                 '';
               }
-              {
-                name = "dev:switch_mbp";
-                category = "Home";
-                help = "Switch home-manager to apply home config changes";
-                command = ''
-                  home-manager switch --flake '.#david-mbp' -b bck --impure
-                '';
-              }
-              {
-                name = "dev:update";
-                category = "Home";
-                help = "Update things";
-                command = ''
-                  home-manager switch --flake '.#david-mbp' -b bck --impure --recreate-lock-file
-                '';
-              }
+              # {
+              #   name = "dev:switch_mbp";
+              #   category = "Home";
+              #   help = "Switch home-manager to apply home config changes";
+              #   command = ''
+              #     home-manager switch --flake '.#david-mbp' -b bck --impure
+              #   '';
+              # }
+              # {
+              #   name = "dev:update";
+              #   category = "Home";
+              #   help = "Update things";
+              #   command = ''
+              #     home-manager switch --flake '.#david-mbp' -b bck --impure --recreate-lock-file
+              #   '';
+              # }
               {
                 name = "dev:update-nixpkgs";
                 category = "Home";
@@ -148,7 +149,7 @@
 
               # --- Darwin ---
               {
-                name = "dev:darwin_switch_mbp";
+                name = "dev:switch_mbp";
                 category = "Darwin";
                 help = "Switch darwin to rebuild and apply `darwin-configuration.nix` changes";
                 command = ''

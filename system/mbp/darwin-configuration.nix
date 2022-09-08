@@ -29,6 +29,8 @@
   programs.zsh.enable = true; # default shell on catalina
   # programs.fish.enable = true;
 
+  fonts.fontDir.enable = true;
+
   users = {
     users.david = {
       name = "david";
@@ -86,7 +88,7 @@
       "terraform-rover"
     ];
     masApps = {
-      "AdGuard for Safari" = 1440147259;
+      "AdGuard for Safari" = 1440147259; # Sometimes crashes and aborts!
       "Amphetamine" = 937984704;
       "GarageBand" = 682658836;
       "Gemini 2" = 1090488118;

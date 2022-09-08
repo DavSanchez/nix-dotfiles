@@ -1,4 +1,4 @@
-{ colorscheme, pkgs, ... }:
+{ colorscheme, lib, pkgs, ... }:
 
 {
   home.packages = with pkgs; [
@@ -42,7 +42,6 @@
     termshark
     figlet
     protobuf
-    tealdeer
     navi
     inetutils
 
@@ -84,35 +83,82 @@
     xdot
     ffmpeg
     yt-dlp
+
+    home-manager # Only the CLI
+
+  ] ++ lib.optionals pkgs.stdenv.isDarwin [
+    m-cli
   ];
 
-  programs.fzf = {
-    enable = true;
-    enableZshIntegration = true;
+  programs = {
+    fzf = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+
+    bat = {
+      enable = true;
+      config.theme = colorscheme.bat-theme-name;
+    };
+
+    zoxide = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+
+    zellij = {
+      enable = true;
+    };
+
+    # signature, passwords...
+    gpg.enable = true;
+    password-store.enable = true;
+
+    broot = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+
+    bottom.enable = true;
+
+    tealdeer = {
+      enable = true;
+      settings = {
+        display = {
+          compact = false;
+          use_pager = true;
+        };
+        updates = {
+          auto_update = false;
+        };
+      };
+    };
+
+    nix-index = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+
+    # TUI IRC client written in Rust.
+    tiny = {
+      enable = true;
+      settings = {
+        servers = [
+          {
+            addr = "irc.libera.chat";
+            port = 6697;
+            tls = true;
+            realname = "David Sánchez";
+            nicks = [ "DavSanchez" ];
+          }
+        ];
+        defaults = {
+          realname = "David Sánchez";
+          nicks = [ "DavSanchez" ];
+          join = [ ];
+          tls = true;
+        };
+      };
+    };
   };
-
-  programs.bat = {
-    enable = true;
-    config.theme = colorscheme.bat-theme-name;
-  };
-
-  programs.zoxide = {
-    enable = true;
-    enableZshIntegration = true;
-  };
-
-  programs.zellij = {
-    enable = true;
-  };
-
-  # signature, passwords...
-  programs.gpg.enable = true;
-  programs.password-store.enable = true;
-
-  programs.broot = {
-    enable = true;
-    enableZshIntegration = true;
-  };
-
-  programs.bottom.enable = true;
 }

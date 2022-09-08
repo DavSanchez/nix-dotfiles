@@ -1,17 +1,18 @@
-{ nur, ... }:
+{ config, pkgs, lib, ... }:
 
 {
+  programs.home-manager.enable = true;
+  home.stateVersion = "22.05";
   # NOTE: Here we are injecting colorscheme so that it is passed down all the imports
   _module.args = {
     colorscheme = import ./colorschemes/tokyonight.nix;
   };
-  nixpkgs.overlays = [
-    nur.overlay
-  ];
-  # Allow all unfree packages
-  nixpkgs.config.allowUnfreePredicate = (pkg: true);
-  programs.home-manager.enable = true;
-  home.stateVersion = "22.05";
+
+  # home.homeDirectory = "/Users/david";
+  # home.username = "david";
+  xdg.configFile."nix/nix.conf".text = ''
+    experimental-features = nix-command flakes
+  '';
 
   imports = [
     ./modules/aws
@@ -19,7 +20,7 @@
     ./modules/direnv
     # ./modules/emacs # Doom emacs (does not really work)
     ./modules/git
-    # ./modules/nu # Per-system
+    ./modules/nu
     ./modules/neovim
     ./modules/starship
     ./modules/vscode # Extensions ?? System-level for helper?
