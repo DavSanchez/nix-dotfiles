@@ -11,14 +11,14 @@ in
 {
   home.packages = with pkgs; [
     bfg-repo-cleaner
-    lazygit
     git-quick-stats
     git-crypt
+    lazygit
   ];
   programs.git = {
     enable = true;
     userName = "David Sánchez";
-    userEmail = "david.sanchez.lt@gmail.com";
+    userEmail = "davsanchez8@proton.me";
 
     includes = [{ path = "~/.config/git/localconf"; }];
 
@@ -26,9 +26,12 @@ in
       enable = true;
       options = {
         features = "side-by-side line-numbers decorations";
+        whitespace-error-style = "22 reverse";
+        navigate = true;
+        line-numbers = true;
         decorations = {
           commit-decoration-style = "bold yellow box ul";
-          file-style = "bold yellow";
+          file-style = "bold yellow ul";
           file-decoration-style = "none";
         };
         delta.navigate = true;
@@ -40,6 +43,7 @@ in
       branch.sort = "-committerdate";
       core.editor = "nvim";
       pull.ff = "only";
+      pull.rebase = false;
 
       # NOTE: Required so that `go get` can fetch private repos
       # NOTE: cargo breaks if this is present in the config
