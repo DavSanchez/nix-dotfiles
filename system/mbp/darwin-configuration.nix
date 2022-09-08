@@ -42,7 +42,7 @@
     enable = true;
     global.brewfile = true;
     onActivation.autoUpdate = true;
-    # onActivation.upgrade = true; # This defaults to false so calls are idempotent.
+    onActivation.upgrade = true; # This defaults to false so calls are idempotent.
     onActivation.cleanup = "zap";
 
     taps = [
