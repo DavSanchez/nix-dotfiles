@@ -40,7 +40,6 @@
 
   homebrew = {
     enable = true;
-    cleanup = "zap";
     global.brewfile = true;
     onActivation.autoUpdate = true;
     # onActivation.upgrade = true; # This defaults to false so calls are idempotent.
