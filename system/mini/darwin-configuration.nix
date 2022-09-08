@@ -9,6 +9,7 @@
   '' + lib.optionalString (pkgs.system == "aarch64-darwin") ''
     extra-platforms = x86_64-darwin aarch64-darwin
   '';
+  nix.settings.trusted-users = [ "root" "david" ];
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
@@ -68,8 +69,10 @@
       "logseq"
       "mactex-no-gui"
       "openra"
+      "plex-media-server"
       "protonmail-bridge"
       "protonvpn"
+      "remarkable"
       "sonic-pi"
       "steam"
       "synthesia"
