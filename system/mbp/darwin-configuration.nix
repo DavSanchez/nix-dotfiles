@@ -44,6 +44,7 @@
     cleanup = "zap";
     global.brewfile = true;
     global.noLock = true;
+    onActivation.cleanup = "zap";
 
     taps = [
       "homebrew/cask"
@@ -86,6 +87,14 @@
     brews = [
       "conan"
       "terraform-rover"
+      {
+        name = "railwaycat/emacsmacport/emacs-mac";
+        args = [
+          "with-emacs-big-sur-icon"
+          "with-starter"
+          "with-native-comp"
+        ];
+      }
     ];
     masApps = {
       "AdGuard for Safari" = 1440147259; # Sometimes crashes and aborts!
@@ -106,9 +115,7 @@
       "WhatsApp" = 1147396723;
       "Xcode" = 497799835;
     };
-    extraConfig = ''
-      brew "railwaycat/emacsmacport/emacs-mac", args: ["with-emacs-big-sur-icon", "with-starter", "with-native-comp"]
-    '';
+    # extraConfig = '' '';
     # whalebrews = [ ];
   };
 
