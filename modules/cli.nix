@@ -69,7 +69,6 @@
     neofetch
 
     # media
-    feh
     imagemagick
     qrencode
     zbar
@@ -78,6 +77,8 @@
     ffmpeg
 
     home-manager # Only the CLI
+
+    gomuks # Matrix client
 
   ] ++ lib.optionals pkgs.stdenv.isDarwin [
     m-cli
@@ -166,6 +167,7 @@
 
     pandoc.enable = true;
     yt-dlp.enable = true;
+    feh.enable = true;
 
     # TUI IRC client written in Rust.
     tiny = {
