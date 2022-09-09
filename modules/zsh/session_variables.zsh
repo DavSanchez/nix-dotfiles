@@ -10,7 +10,7 @@ export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 
 export KEYTIMEOUT=1
 
-export DOTFILES=~/.dotfiles
+export DOTFILES=~/.config/nixpkgs
 
 # export ZSH=~/.oh-my-zsh
 export NVIM_TUI_ENABLE_TRUE_COLOR=1
