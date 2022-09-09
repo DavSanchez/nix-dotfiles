@@ -89,6 +89,7 @@
     brews = [
       "conan"
       "terraform-rover"
+      "whalebrew"
       {
         name = "railwaycat/emacsmacport/emacs-mac";
         args = [
