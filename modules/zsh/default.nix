@@ -3,7 +3,7 @@
   programs.zsh = {
     enable = true;
     enableCompletion = true;
-    defaultKeymap = "viins";
+    defaultKeymap = "emacs";
     enableAutosuggestions = true;
     enableSyntaxHighlighting = true;
     autocd = true;
@@ -63,6 +63,16 @@
           sha256 = "Djs1oOnzeVAUMrZObNLZ8/5zD7DjW3YK42SWpD2FPNk=";
         };
       }
+      {
+        name = "zsh-abbr";
+        file = "zsh-abbr.plugin.zsh";
+        src = pkgs.fetchFromGitHub {
+          owner = "olets";
+          repo = "zsh-abbr";
+          rev = "v4.8.0";
+          sha256 = "diitszKbu530zXbJx4xmfOjLsITE9ucmWdsz9VTXsKg=";
+        };
+      }
     ];
 
     initExtraBeforeCompInit = ''
@@ -74,15 +84,13 @@
       bindkey -M vicmd 'j' history-beginning-search-forward
 
       [[ $TERM_PROGRAM != "vscode" ]] && eval "$(zellij setup --generate-auto-start zsh)"
-
-      set -o emacs
     '';
 
-    # envExtra = '''';
+    # envExtra = '' '';
 
     profileExtra = ''
       eval $(/opt/homebrew/bin/brew shellenv)
-
+      
       # Homebrew
       # Homebrew sbin
       export PATH="$(brew --prefix)/sbin:$PATH"
