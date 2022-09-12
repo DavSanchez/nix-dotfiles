@@ -77,7 +77,7 @@
       "synthesia"
       "tor-browser"
       "transmission"
-      "visual-studio-code"
+      # "visual-studio-code" # replaced by VSCodium
       "vlc"
       "vmware-fusion-tech-preview"
       "warp"
