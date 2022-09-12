@@ -44,6 +44,7 @@
 
     kcat
     apacheKafka
+    kaf
     # confluent-platform
 
     yosys
