@@ -60,7 +60,7 @@ in
       {
         enable = true;
         extensions = builtins.map getExtension exts.extensions;
-        package = pkgs.vscodium;
+        package = pkgs.vscodium; # vscodium.fhs for complex extensions?
         userSettings = lib.importJSON ./settings.json;
       };
   };
