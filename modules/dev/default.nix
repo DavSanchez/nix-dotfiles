@@ -42,6 +42,7 @@
 
     kcat
     apacheKafka
+    # confluent-platform
 
     yosys
     verilator
