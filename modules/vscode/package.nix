@@ -49,7 +49,8 @@ in
     programs.vscode =
       let
         # Helper function to cut down on boilerplate
-        # Extension list generation: https://nixos.wiki/wiki/VSCodium
+        # Extension issues and other documentation:
+        # https://nixos.wiki/wiki/VSCodium
         inherit (pkgs.vscode-utils) buildVscodeMarketplaceExtension;
         getExtension = { publisher, name, version, sha256 }:
           buildVscodeMarketplaceExtension {
