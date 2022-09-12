@@ -15,6 +15,8 @@
     clojure
     leiningen
 
+    elixir
+
     # .NET
     dotnet-sdk
 
