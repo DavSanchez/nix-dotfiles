@@ -19,6 +19,7 @@ let
       "${config.xdg.configHome}";
 
   userFilePath = "${sysDir}/${configDir}/User/settings.json";
+
 in
 {
   options.modules.home.editors.vscode = {
@@ -45,12 +46,23 @@ in
       };
     };
 
-    programs.vscode = {
-      enable = true;
-      extensions = import ./extensions.nix { inherit pkgs; };
-      package = pkgs.vscodium;
-      userSettings = lib.importJSON ./settings.json;
-    };
+    programs.vscode =
+      let
+        # Helper function to cut down on boilerplate
+        # Extension list generation: https://nixos.wiki/wiki/VSCodium
+        inherit (pkgs.vscode-utils) buildVscodeMarketplaceExtension;
+        getExtension = { publisher, name, version, sha256 }:
+          buildVscodeMarketplaceExtension {
+            mktplcRef = { inherit name publisher sha256 version; };
+          };
+        exts = import ./extensions.nix;
+      in
+      {
+        enable = true;
+        extensions = builtins.map getExtension exts.extensions;
+        package = pkgs.vscodium;
+        userSettings = lib.importJSON ./settings.json;
+      };
   };
 }
 
