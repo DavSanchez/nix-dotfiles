@@ -78,24 +78,6 @@
     sha256 = "11axaxi06j0hb9xv35azqy4fys15pllg67gk3sqsc3s66q4qzk6w";
   }
   {
-    name = "vsc-community-material-theme";
-    publisher = "Equinusocio";
-    version = "1.4.4";
-    sha256 = "005l4pr9x3v6x8450jn0dh7klv0pv7gv7si955r7b4kh19r4hz9y";
-  }
-  {
-    name = "vsc-material-theme";
-    publisher = "Equinusocio";
-    version = "33.5.0";
-    sha256 = "1pr98mx7hji8jlm6ppac693ivbcpybh043w2z8sa3f49v7pksnrf";
-  }
-  {
-    name = "vsc-material-theme-icons";
-    publisher = "equinusocio";
-    version = "2.3.1";
-    sha256 = "1djm4k3hcn4aq63d4mxs2n4ffq5x1qr82q6gxwi5pmabrb0hrb30";
-  }
-  {
     name = "prettier-vscode";
     publisher = "esbenp";
     version = "9.8.0";
@@ -117,7 +99,7 @@
     name = "terraform";
     publisher = "hashicorp";
     version = "2.24.2";
-    sha256 = "sha256-UivM8VRxyXRsxlu2pdjEF0I2kZZIxWt0Hsm1t5o6AGo=";
+    sha256 = "0rcx5cfbm2xq8sarxvh01n3jcy0jr10d2ahpgk0jinjczflpcysj";
   }
   {
     name = "haskell";
@@ -279,13 +261,13 @@
     name = "vscode-yaml";
     publisher = "redhat";
     version = "1.10.20220805";
-    sha256 = "sha256-BZHU9FrFqsO09fllMF3+vszrGnPrfQmhVgpcNQhPv/w=";
+    sha256 = "02r71m4fdkcg5j4lk3lk2w1j80a43v0zf71qwjiylsmxklndnrwv";
   }
   {
     name = "rust-analyzer";
     publisher = "rust-lang";
     version = "0.4.1202";
-    sha256 = "sha256-w6eC+UuVo9YOB3Yz4+Dr+vQd4SsN6dboo1tYOdY3540=";
+    sha256 = "1mmkdx5j3i0ld3v16b39j9zj13zk9lx8h62wr5r83ak8yywc16zn";
   }
   {
     name = "scala";
