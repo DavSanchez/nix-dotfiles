@@ -68,6 +68,7 @@
     watson
 
     home-manager # Only for the CLI
+    nix # Nix itself
 
     ## Socials
     gomuks # Matrix client
