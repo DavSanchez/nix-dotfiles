@@ -94,7 +94,7 @@
       name = "terraform";
       publisher = "hashicorp";
       version = "2.24.2";
-      sha256 = "0rcx5cfbm2xq8sarxvh01n3jcy0jr10d2ahpgk0jinjczflpcysj";
+      sha256 = "sha256-ipPjLkWWk28SIhESWYAJin7bcSJMNEezoZOAjjxQKDQ=";
     }
     {
       name = "haskell";
@@ -244,13 +244,13 @@
       name = "vscode-yaml";
       publisher = "redhat";
       version = "1.10.20220805";
-      sha256 = "02r71m4fdkcg5j4lk3lk2w1j80a43v0zf71qwjiylsmxklndnrwv";
+      sha256 = "sha256-BZHU9FrFqsO09fllMF3+vszrGnPrfQmhVgpcNQhPv/w=";
     }
     {
       name = "rust-analyzer";
       publisher = "rust-lang";
       version = "0.4.1202";
-      sha256 = "1mmkdx5j3i0ld3v16b39j9zj13zk9lx8h62wr5r83ak8yywc16zn";
+      sha256 = "sha256-w6eC+UuVo9YOB3Yz4+Dr+vQd4SsN6dboo1tYOdY3540=";
     }
     {
       name = "scala";
