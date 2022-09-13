@@ -26,6 +26,7 @@
       "column": 100
     }
   ],
+  "editor.stickyScroll.enabled": true,
   "editor.suggestSelection": "first",
   "editor.tabSize": 2,
   "editor.wordWrap": "on",
@@ -104,10 +105,10 @@
   "terminal.integrated.fontFamily": "'FiraCode Nerd Font Mono'",
   "terminal.integrated.scrollback": 5000,
   "terminal.integrated.shellIntegration.enabled": true,
+  "terraform.codelens.referenceCount": true,
   "verilog.linting.linter": "verilator",
   "window.commandCenter": true,
-  "workbench.colorTheme": "Noctis Minimus",
-  "workbench.iconTheme": "vscode-icons",
-  "editor.stickyScroll.enabled": true,
-  "terraform.codelens.referenceCount": true
+  "workbench.colorTheme": "Material Theme High Contrast",
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.productIconTheme": "material-product-icons"
 }
