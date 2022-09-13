@@ -64,6 +64,9 @@
     xdot
     ffmpeg
 
+    ## Organization/management
+    watson
+
     home-manager # Only for the CLI
 
     ## Socials
