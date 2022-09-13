@@ -2,7 +2,7 @@
 
 ## [![built with nix](https://builtwithnix.org/badge.svg)](https://builtwithnix.org)
 
-I'm trying to replace my current `dotfiles` configuration by basing it in Nix and ripping off several other `dotfiles` repos. **Not working yet!**
+I'm trying to replace my current `dotfiles` configuration by basing it in Nix and shamelessly ripping off several other `dotfiles` repos.
 
 ## Influences
 
