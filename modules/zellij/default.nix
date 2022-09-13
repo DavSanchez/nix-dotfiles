@@ -5,6 +5,6 @@
     settings = { };
   };
 
-  xdg.configFile."layouts".source = ./layouts;
+  xdg.configFile."zellij/layouts".source = ./layouts;
   # xdg.configFile."layouts".recursive = true;
 }
