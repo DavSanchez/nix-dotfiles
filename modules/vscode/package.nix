@@ -48,19 +48,13 @@ in
 
     programs.vscode =
       let
-        # Helper function to cut down on boilerplate
         # Extension issues and other documentation:
         # https://nixos.wiki/wiki/VSCodium
-        inherit (pkgs.vscode-utils) buildVscodeMarketplaceExtension;
-        getExtension = { publisher, name, version, sha256 }:
-          buildVscodeMarketplaceExtension {
-            mktplcRef = { inherit name publisher sha256 version; };
-          };
-        exts = import ./extensions.nix;
+        e = import ./extensions.nix;
       in
       {
         enable = true;
-        extensions = builtins.map getExtension exts.extensions;
+        extensions = pkgs.vscode-utils.extensionsFromVscodeMarketplace e.extensions;
         package = pkgs.vscodium; # vscodium.fhs for complex extensions?
         userSettings = lib.importJSON ./settings.json;
       };
