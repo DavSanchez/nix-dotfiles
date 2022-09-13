@@ -9,6 +9,7 @@
     ./haskell
     ./java.nix
     ./kafka.nix
+    ./purescript.nix
     ./rust.nix
   ];
 
@@ -16,10 +17,9 @@
   home.packages = with pkgs; [
     ## Shell
     shellcheck
-    ## .NET
-    # dotnet-sdk
-    ## Other
+    ## Other Languages
     elixir
+    # dotnet-sdk
     python3
     unison-ucm
     zig
@@ -28,5 +28,8 @@
     ## Bazel
     bazelisk
     bazel-buildtools
+    ## Other
+    gnumake
+    protobuf
   ];
 }

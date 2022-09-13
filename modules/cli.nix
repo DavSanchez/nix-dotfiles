@@ -2,7 +2,7 @@
 
 {
   home.packages = with pkgs; [
-    # nix
+    ## Nix
     rnix-lsp
     nixpkgs-fmt
     nix-prefetch-git
@@ -10,45 +10,31 @@
     nix-du
     nix-output-monitor
 
-    # utils
+    ## Utils
     coreutils
     # binutils
     # pciutils
+
+    ## Data visualzation/manipulation
     gawk
-    # arandr
-    # bashmount
-    # docker-compose
-    dua
-    fx
-    gnumake
     gnused
+    fx
     hexyl
     jo
     fq
     dasel
+
+    ## Networking
     curl
     wget
     xh
     wrk
     mtr
     grpcurl
-    # ngrok
-    # openvpn
-    tokei
-    # unrar
-    # unzip
     termshark
-    figlet
-    protobuf
     inetutils
 
-    # Moar colors
-    # starship
-    # zsh-syntax-highlighting
-
     # Searching/Movement helpers and other replacements
-    # zoxide # See below
-    # bat # See below
     ripgrep
     dua
     fd
@@ -60,24 +46,27 @@
     bandwhich
     grex
     hyperfine
+    tokei
 
+    ## Other
     vale
     eva
     chezmoi
 
-    # system info
+    # System info
     neofetch
 
-    # media
+    ## Media
     imagemagick
     qrencode
-    zbar
+    zbar # Barcode reading
     graphviz
     xdot
     ffmpeg
 
-    home-manager # Only the CLI
+    home-manager # Only for the CLI
 
+    ## Socials
     gomuks # Matrix client
 
   ] ++ lib.optionals pkgs.stdenv.isDarwin [

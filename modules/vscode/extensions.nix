@@ -270,18 +270,6 @@
     sha256 = "1mmkdx5j3i0ld3v16b39j9zj13zk9lx8h62wr5r83ak8yywc16zn";
   }
   {
-    name = "scala";
-    publisher = "scala-lang";
-    version = "0.5.6";
-    sha256 = "004zc3id5jk8hk6q27g4p36prvnlqdsgda0gd6xvs4gamhywhb3s";
-  }
-  {
-    name = "metals";
-    publisher = "scalameta";
-    version = "1.19.9";
-    sha256 = "0jkj5bn7cyv9bgc14kmzncybkm4zi3dsfrkxg7vqak5my1jnypdr";
-  }
-  {
     name = "errorlens";
     publisher = "usernamehw";
     version = "3.6.0";
@@ -292,12 +280,6 @@
     publisher = "valentjn";
     version = "13.1.0";
     sha256 = "15qm97i9l65v3x0zxl1895ilazz2jk2wmizbj7kmds613jz7d46c";
-  }
-  {
-    name = "vscode-icons";
-    publisher = "vscode-icons-team";
-    version = "11.17.0";
-    sha256 = "1jd9q29pi6m6fng7653hfj7iy8db2lpcc1ql16lhhq1w0yf3z4ar";
   }
   {
     name = "wavetrace";

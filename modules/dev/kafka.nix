@@ -1,10 +1,10 @@
-{ ... }:
+{ pkgs, ... }:
 {
   home.packages = with pkgs; [
     apacheKafka
     kcat
     kaf
-    kaskade
+    # kaskade
     # confluent-platform
   ];
 }
