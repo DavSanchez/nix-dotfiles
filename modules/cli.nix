@@ -82,8 +82,6 @@
 
   ] ++ lib.optionals pkgs.stdenv.isDarwin [
     m-cli
-  ] ++ lib.optionals pkgs.stdenv.isLinux [
-
   ];
 
   programs = {
@@ -106,15 +104,13 @@
 
     bat = {
       enable = true;
-      config.theme = colorscheme.bat-theme-name;
+      # config.theme = colorscheme.bat-theme-name;
     };
 
     zoxide = {
       enable = true;
       enableZshIntegration = true;
     };
-
-    zellij.enable = true;
 
     jq = {
       enable = true;

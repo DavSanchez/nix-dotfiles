@@ -82,8 +82,6 @@
 
       bindkey -M vicmd 'k' history-beginning-search-backward
       bindkey -M vicmd 'j' history-beginning-search-forward
-
-      # [[ $TERM_PROGRAM != "vscode" ]] && eval "$(zellij setup --generate-auto-start zsh)"
     '';
 
     # envExtra = '' '';
@@ -101,6 +99,8 @@
     '';
 
     # https://knezevic.ch/posts/zsh-completion-for-tools-installed-via-home-manager/
-    # initExtra = '' '';
+    initExtra = ''
+      [[ $TERM_PROGRAM != "vscode" ]] && eval "$(zellij setup --generate-auto-start zsh)"
+    '';
   };
 }

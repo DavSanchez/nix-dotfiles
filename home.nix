@@ -29,6 +29,7 @@
     ./modules/app.nix
     ./modules/cli.nix
     ./modules/fonts.nix
+    ./modules/zellij.nix
     ./modules/tmux.nix
     ./modules/wezterm.nix
   ];

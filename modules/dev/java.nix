@@ -4,5 +4,9 @@
   home.packages = with pkgs; [
     maven
     # gradle
+
+    ## Clojure
+    clojure
+    leiningen
   ];
 }
