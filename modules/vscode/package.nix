@@ -80,8 +80,8 @@ in
           justusadam.language-haskell
           llvm-vs-code-extensions.vscode-clangd
           ms-azuretools.vscode-docker
-          ms-python.python
-          ms-python.vscode-pylance
+          # ms-python.python # FIXME Failing to build
+          # ms-python.vscode-pylance # FIXME Failing to build
           ms-vscode-remote.remote-ssh
           pkief.material-icon-theme
           pkief.material-product-icons
