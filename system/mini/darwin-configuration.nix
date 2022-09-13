@@ -88,6 +88,7 @@
     ];
     brews = [
       "conan"
+      "gcc" # FIXME: Needed by emacs-mac
       "terraform-rover"
       "whalebrew"
       {
