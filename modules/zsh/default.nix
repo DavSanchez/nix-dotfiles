@@ -100,7 +100,7 @@
 
     # https://knezevic.ch/posts/zsh-completion-for-tools-installed-via-home-manager/
     initExtra = ''
-      [[ $TERM_PROGRAM != "vscode" ]] && ZELLIJ_AUTO_EXIT=true eval "$(zellij setup --generate-auto-start zsh)"
+      [[ $TERM_PROGRAM != "vscode" ]] && eval "$(zellij setup --generate-auto-start zsh)"
     '';
   };
 }
