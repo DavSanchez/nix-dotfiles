@@ -108,7 +108,7 @@
   "terraform.codelens.referenceCount": true,
   "verilog.linting.linter": "verilator",
   "window.commandCenter": true,
-  "workbench.colorTheme": "Material Theme High Contrast",
   "workbench.iconTheme": "material-icon-theme",
-  "workbench.productIconTheme": "material-product-icons"
+  "workbench.productIconTheme": "material-product-icons",
+  "workbench.colorTheme": "GitHub Dark Default"
 }
