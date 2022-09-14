@@ -69,6 +69,7 @@ in
         esbenp.prettier-vscode
         github.github-vscode-theme
         golang.go
+        gruntfuggly.todo-tree
         haskell.haskell
         jakebecker.elixir-ls
         james-yu.latex-workshop
@@ -115,12 +116,6 @@ in
           publisher = "cschlosser";
           version = "1.4.0";
           sha256 = "1d95znf2vsdzv9jqiigh9zm62dp4m9jz3qcfaxn0n0pvalbiyw92";
-        }
-        {
-          name = "vscode-todo-plus";
-          publisher = "fabiospampinato";
-          version = "4.18.4";
-          sha256 = "0fsavcj5k6ksdfcsnrhr7ybnd5fxljljggavmjkjcr8gamw8r8km";
         }
         {
           name = "nix-develop";
