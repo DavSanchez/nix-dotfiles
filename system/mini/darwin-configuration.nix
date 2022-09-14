@@ -88,8 +88,7 @@
     ];
     brews = [
       "conan"
-      "gcc" # FIXME: Needed by emacs-mac
-      "terraform-rover"
+      # "terraform-rover"
       "whalebrew"
       {
         name = "railwaycat/emacsmacport/emacs-mac";
