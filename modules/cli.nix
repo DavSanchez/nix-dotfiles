@@ -139,7 +139,7 @@
           use_pager = true;
         };
         updates = {
-          auto_update = false;
+          auto_update = true;
         };
       };
     };
