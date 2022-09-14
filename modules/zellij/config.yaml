@@ -2,4 +2,4 @@
 ui:
   pane_frames:
     rounded_corners: true
-# no_pane_frames: true
+# pane_frames: false
