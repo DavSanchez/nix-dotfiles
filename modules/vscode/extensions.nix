@@ -84,12 +84,6 @@
     sha256 = "1rkjzmcvmjzd7l6bi05ymr1sibps3c6lzxhbmjp0zpzv02wl9jgv";
   }
   {
-    name = "vscode-todo-plus";
-    publisher = "fabiospampinato";
-    version = "4.18.4";
-    sha256 = "0fsavcj5k6ksdfcsnrhr7ybnd5fxljljggavmjkjcr8gamw8r8km";
-  }
-  {
     name = "github-vscode-theme";
     publisher = "GitHub";
     version = "6.3.2";
@@ -100,6 +94,12 @@
     publisher = "golang";
     version = "0.35.2";
     sha256 = "1nkf96wsnlaimganx0kn4lhdajpnps5rsm8dhyh0j8vdlw3wl0v1";
+  }
+  {
+    name = "todo-tree";
+    publisher = "Gruntfuggly";
+    version = "0.0.215";
+    sha256 = "0lyaijsvi1gqidpn8mnnfc0qsnd7an8qg5p2m7l24c767gllkbsq";
   }
   {
     name = "terraform";
