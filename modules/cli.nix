@@ -73,6 +73,9 @@
     ## Socials
     gomuks # Matrix client
 
+    ## Security
+    oath-toolkit
+
   ] ++ lib.optionals pkgs.stdenv.isDarwin [
     m-cli
   ];
