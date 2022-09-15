@@ -79,6 +79,7 @@ in
         ms-azuretools.vscode-docker
         # ms-python.python # FIXME Failing to build
         # ms-python.vscode-pylance # FIXME Failing to build
+        ms-toolsai.jupyter
         ms-vscode-remote.remote-ssh
         pkief.material-icon-theme
         pkief.material-product-icons
