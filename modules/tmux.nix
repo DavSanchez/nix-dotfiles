@@ -14,6 +14,7 @@ in
       # ZSH_TMUX_FIXTERM_WITH_256COLOR = "xterm-256color";
       ZSH_TMUX_CONFIG = "$HOME/.config/tmux/tmux.conf";
       ZSH_TMUX_AUTOCONNECT = false;
+      ZSH_TMUX_AUTOQUIT = false;
     };
   };
   programs.tmux = {
@@ -23,7 +24,7 @@ in
     clock24 = true;
     # keyMode = "vi";
     secureSocket = false;
-    # shortcut = "a";
+    shortcut = "a";
     customPaneNavigationAndResize = true;
     escapeTime = 0;
     historyLimit = 30000;
@@ -43,7 +44,7 @@ in
       vim-tmux-navigator
     ];
 
-    # tmuxinator.enable = true;
-    # tmuxp.enable = true;
+    tmuxinator.enable = true;
+    tmuxp.enable = true;
   };
 }
