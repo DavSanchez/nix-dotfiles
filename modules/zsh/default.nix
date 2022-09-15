@@ -37,7 +37,7 @@
         "golang"
         "rust"
         "pass"
-        # "tmux"
+        "tmux"
       ] ++ lib.optionals pkgs.stdenv.isDarwin [
         "macos"
         "brew"
