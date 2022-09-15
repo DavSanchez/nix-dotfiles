@@ -51,7 +51,7 @@
     ## Other
     vale
     eva
-    chezmoi
+    # chezmoi
 
     # System info
     neofetch
