@@ -48,7 +48,7 @@
     taps = [
       "homebrew/cask"
       "homebrew/cask-versions"
-      "railwaycat/emacsmacport"
+      # "railwaycat/emacsmacport"
     ];
     casks = [
       "adobe-acrobat-reader"
@@ -88,16 +88,16 @@
     ];
     brews = [
       "conan"
-      # "terraform-rover"
       "whalebrew"
-      {
-        name = "railwaycat/emacsmacport/emacs-mac";
-        args = [
-          "with-emacs-big-sur-icon"
-          "with-starter"
-          "with-native-comp"
-        ];
-      }
+      # "terraform-rover"
+      # {
+      #   name = "railwaycat/emacsmacport/emacs-mac";
+      #   args = [
+      #     "with-emacs-big-sur-icon"
+      #     "with-starter"
+      #     "with-native-comp"
+      #   ];
+      # }
     ];
     masApps = {
       "AdGuard for Safari" = 1440147259; # Sometimes crashes and aborts!

@@ -23,8 +23,8 @@
     ./modules/nu
     ./modules/neovim
     ./modules/starship
-    ./modules/vscode # Extensions ?? System-level for helper?
-    ./modules/zellij
+    # ./modules/vscode
+    # ./modules/zellij # Not using it (for now). Using tmux.
     ./modules/zsh
 
     ./modules/app.nix
