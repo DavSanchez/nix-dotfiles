@@ -209,15 +209,15 @@
       neovim-ayu
 
       # coc
-      coc-json
-      coc-yaml
-      coc-html
-      coc-tsserver
-      coc-eslint
+      # coc-json
+      # coc-yaml
+      # coc-html
+      # coc-tsserver
+      # coc-eslint
       # coc-pairs # or auto-pairs
-      coc-prettier
-      coc-python
-      coc-rust-analyzer
+      # coc-prettier
+      # coc-python
+      # coc-rust-analyzer
     ];
 
     extraPackages = with pkgs;
@@ -259,7 +259,7 @@
         sumneko-lua-language-server
 
         # Make
-        cmake-language-server
+        # cmake-language-server
 
         # Markdown
         nodePackages.markdownlint-cli
@@ -272,7 +272,7 @@
         statix
 
         # python
-        python3Packages.isort
+        # python3Packages.isort
         nodePackages.pyright
         black
         python3Packages.flake8
