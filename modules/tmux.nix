@@ -43,5 +43,6 @@ in
     ];
 
     # tmuxinator.enable = true;
+    # tmuxp.enable = true;
   };
 }
