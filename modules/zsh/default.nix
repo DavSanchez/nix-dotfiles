@@ -9,9 +9,6 @@
     autocd = true;
     shellAliases = import ./aliases.nix;
     history.extended = true;
-    localVariables = {
-      ZSH_TMUX_AUTOSTART = true;
-    };
     oh-my-zsh = {
       enable = true;
       plugins = [
@@ -40,6 +37,7 @@
         "golang"
         "rust"
         "pass"
+        # "tmux"
       ] ++ lib.optionals pkgs.stdenv.isDarwin [
         "macos"
         "brew"

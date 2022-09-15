@@ -8,14 +8,21 @@ let
   };
 in
 {
+  programs.zsh = {
+    localVariables = {
+      ZSH_TMUX_AUTOSTART = true;
+      # ZSH_TMUX_FIXTERM_WITH_256COLOR = "xterm-256color";
+      # ZSH_TMUX_CONFIG = "$HOME/.config/tmux/tmux.conf";
+    };
+  };
   programs.tmux = {
     terminal = "xterm-256color";
     enable = true;
     baseIndex = 1;
     clock24 = true;
-    keyMode = "vi";
+    # keyMode = "vi";
     secureSocket = false;
-    shortcut = "a";
+    # shortcut = "a";
     customPaneNavigationAndResize = true;
     escapeTime = 0;
     historyLimit = 30000;
@@ -34,5 +41,7 @@ in
     plugins = with pkgs.tmuxPlugins; [
       vim-tmux-navigator
     ];
+
+    # tmuxinator.enable = true;
   };
 }
