@@ -18,7 +18,7 @@
     ./modules/aws
     ./modules/dev
     ./modules/direnv
-    # ./modules/emacs # Doom emacs (does not really work)
+    # ./modules/emacs # Doom emacs (testing)
     ./modules/git
     ./modules/nu
     ./modules/neovim
