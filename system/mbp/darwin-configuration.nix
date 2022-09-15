@@ -48,7 +48,6 @@
     taps = [
       "homebrew/cask"
       "homebrew/cask-versions"
-      "railwaycat/emacsmacport"
     ];
     casks = [
       "adobe-acrobat-reader"
@@ -75,7 +74,6 @@
       "synthesia"
       "tor-browser"
       "transmission"
-      # "visual-studio-code" # replaced by VSCodium
       "vlc"
       "vmware-fusion-tech-preview"
       "warp"
@@ -86,19 +84,11 @@
     ];
     brews = [
       "conan"
-      # "terraform-rover"
       "whalebrew"
-      {
-        name = "railwaycat/emacsmacport/emacs-mac";
-        args = [
-          "with-emacs-big-sur-icon"
-          "with-starter"
-          "with-native-comp"
-        ];
-      }
+      # "terraform-rover"
     ];
     masApps = {
-      "AdGuard for Safari" = 1440147259; # Sometimes crashes and aborts!
+      "AdGuard for Safari" = 1440147259;
       "Amphetamine" = 937984704;
       "GarageBand" = 682658836;
       "Gemini 2" = 1090488118;
