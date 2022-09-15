@@ -5,85 +5,6 @@
     enable = true;
     vimAlias = true;
 
-    coc = {
-      enable = true;
-
-      pluginConfig = ''
-        nmap <silent> <space><space> :<C-u>call CocAction('doHover')<cr>
-        " go back from definition is C-O
-        nmap <silent> <space>d <Plug>(coc-definition)
-        nmap <silent> <space>r <Plug>(coc-references)
-        nmap <silent> <space>n <Plug>(coc-rename)
-        nmap <silent> <space>f <Plug>(coc-format)
-        function! CheckBackspace() abort
-          let col = col('.') - 1
-          return !col || getline('.')[col - 1]  =~# '\s'
-        endfunction
-        let g:coc_user_config = {
-          \"suggest.completionItemKindLabels": {
-            \"class": "\uf0e8",
-            \"color": "\ue22b",
-            \"constant": "\uf8ff",
-            \"default": "\uf29c",
-            \"enum": "\uf435",
-            \"enumMember": "\uf02b",
-            \"event": "\ufacd",
-            \"field": "\uf93d",
-            \"file": "\uf471",
-            \"folder": "\uf115",
-            \"function": "\uf794",
-            \"interface": "\ufa52",
-            \"keyword": "\uf893",
-            \"method": "\uf6a6",
-            \"operator": "\uf915",
-            \"property": "\ufab6",
-            \"reference": "\uf87a",
-            \"snippet": "\uf64d",
-            \"struct": "\ufb44",
-            \"text": "\ue612",
-            \"typeParameter": "\uf278",
-            \"unit": "\uf475",
-            \"value": "\uf8a3",
-            \"variable": "\uf71b"
-          \}
-        \}
-      '';
-
-      # $XDG_CONFIG_HOME/nvim/coc-settings.json
-      settings = {
-        "languageserver" = {
-          # https://gitlab.com/jD91mZM2/nix-lsp
-          nix = {
-            command = "rnix-lsp";
-            filetypes = [
-              "nix"
-            ];
-          };
-          terraform = {
-            command = "terraform-lsp";
-            filetypes = [
-              "terraform"
-              "tf"
-            ];
-            # initializationOptions = { };
-            # settings = { };
-          };
-          haskell = {
-            command = "haskell-language-server-wrapper";
-            args = [ "--lsp" ];
-            rootPatterns = [
-              "*.cabal"
-              "stack.yaml"
-              "cabal.project"
-              "package.yaml"
-              "hie.yaml"
-            ];
-            filetypes = [ "haskell" "lhaskell" ];
-          };
-        };
-      };
-    };
-
     plugins = with pkgs.vimPlugins; [
       # Appearance
       bufferline-nvim
@@ -207,17 +128,6 @@
       telescope-nvim
       nerdtree
       neovim-ayu
-
-      # coc
-      # coc-json
-      # coc-yaml
-      # coc-html
-      # coc-tsserver
-      # coc-eslint
-      # coc-pairs # or auto-pairs
-      # coc-prettier
-      # coc-python
-      # coc-rust-analyzer
     ];
 
     extraPackages = with pkgs;
@@ -236,7 +146,7 @@
         elmPackages.elm-test
         elmPackages.elm-format
 
-        # grammer
+        # grammar
         vale
 
         # Git
