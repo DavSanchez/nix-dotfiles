@@ -13,6 +13,7 @@ in
       ZSH_TMUX_AUTOSTART = true;
       # ZSH_TMUX_FIXTERM_WITH_256COLOR = "xterm-256color";
       ZSH_TMUX_CONFIG = "$HOME/.config/tmux/tmux.conf";
+      ZSH_TMUX_AUTOCONNECT = false;
     };
   };
   programs.tmux = {
