@@ -65,16 +65,6 @@
           sha256 = "Djs1oOnzeVAUMrZObNLZ8/5zD7DjW3YK42SWpD2FPNk=";
         };
       }
-      {
-        name = "zsh-abbr";
-        file = "zsh-abbr.plugin.zsh";
-        src = pkgs.fetchFromGitHub {
-          owner = "olets";
-          repo = "zsh-abbr";
-          rev = "v4.8.0";
-          sha256 = "diitszKbu530zXbJx4xmfOjLsITE9ucmWdsz9VTXsKg=";
-        };
-      }
     ];
 
     initExtraBeforeCompInit = ''
