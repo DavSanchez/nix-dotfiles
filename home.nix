@@ -23,7 +23,7 @@
     ./modules/nu
     ./modules/neovim
     ./modules/starship
-    # ./modules/vscode
+    ./modules/vscode
     # ./modules/zellij # Not using it (for now). Using tmux.
     ./modules/zsh
 
