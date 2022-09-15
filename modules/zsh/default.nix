@@ -9,6 +9,9 @@
     autocd = true;
     shellAliases = import ./aliases.nix;
     history.extended = true;
+    localVariables = {
+      ZSH_TMUX_AUTOSTART = true;
+    };
     oh-my-zsh = {
       enable = true;
       plugins = [
@@ -99,8 +102,8 @@
     '';
 
     # https://knezevic.ch/posts/zsh-completion-for-tools-installed-via-home-manager/
-    initExtra = ''
-      # [[ $TERM_PROGRAM != "vscode" ]] && eval "$(zellij setup --generate-auto-start zsh)"
-    '';
+    # initExtra = ''
+    #   [[ $TERM_PROGRAM != "vscode" ]] && eval "$(zellij setup --generate-auto-start zsh)"
+    # '';
   };
 }
