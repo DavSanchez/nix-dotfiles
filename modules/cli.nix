@@ -67,7 +67,7 @@
     ## Organization/management
     watson
 
-    home-manager # Only for the CLI
+    # home-manager # CLI (disabled, clashes with topgrade)
     nix # Nix itself
 
     ## Socials
