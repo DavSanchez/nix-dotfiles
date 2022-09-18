@@ -20,13 +20,13 @@ in
   programs.tmux = {
     terminal = "xterm-256color";
     enable = true;
-    baseIndex = 1;
+    # baseIndex = 1;
     clock24 = true;
     # keyMode = "vi";
-    secureSocket = false;
+    # customPaneNavigationAndResize = true; # For vi mode
+    # secureSocket = false;
     shortcut = "a";
-    customPaneNavigationAndResize = true;
-    escapeTime = 0;
+    # escapeTime = 0;
     historyLimit = 30000;
     extraConfig = ''
       # Default termtype. If the rcfile sets $TERM, that overrides this value.
