@@ -68,6 +68,7 @@
       "openra"
       "protonmail-bridge"
       "protonvpn"
+      "raycast"
       "remarkable"
       "sonic-pi"
       "steam"
