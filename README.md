@@ -2,11 +2,27 @@
 
 ## [![built with nix](https://builtwithnix.org/badge.svg)](https://builtwithnix.org)
 
+[![NixOS Unstable](https://img.shields.io/badge/NixOS-unstable-blue.svg?style=flat-square&logo=NixOS&logoColor=white)](https://nixos.org)
+
+> **Hey,** you. You're finally awake. You were trying to configure your OS
+> declaratively, right? Walked right into that NixOS ambush, same as us, and those
+> dotfiles over there.
+
 I'm trying to replace my current `dotfiles` configuration by basing it in Nix and shamelessly ripping off several other `dotfiles` repos.
+
+> **Disclaimer:** _This is a
+> private configuration and an ongoing experiment to feel out NixOS. I make no
+> guarantees that it will work out of the box for anyone but myself. It may also
+> change drastically and without warning.
+>
+> Until I can bend spoons with my nix-fu, please don't treat me like an
+> authority or expert in the NixOS space. Seek help on [the NixOS
+> discourse](https://discourse.nixos.org) instead.
 
 ## Influences
 
 - [`github:sherubthakur/dotfiles`](https://github.com/sherubthakur/dotfiles)
+- [`hlissner/dotfiles`](https://github.com/hlissner/dotfiles)
 - `github:tars0x9752/home`
 - `Misterio77/nix-config`
 - `nix-community/todomvc-nix`
