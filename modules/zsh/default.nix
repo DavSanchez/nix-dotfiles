@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
 {
-  home.packages = [
+  home.packages = with pkgs; [
     # nix-zsh-completions # Already enabled by enableCompletion
     zsh-nix-shell
     zsh-autopair
