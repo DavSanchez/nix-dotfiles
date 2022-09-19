@@ -182,9 +182,9 @@
         };
       };
     };
-    # topgrade = {
-    #   enable = true;
-    #   # settings = { };
-    # };
+    topgrade = {
+      enable = true;
+      # settings = { };
+    };
   };
 }
