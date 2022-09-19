@@ -28,6 +28,7 @@ in
     shortcut = "a";
     # escapeTime = 0;
     historyLimit = 30000;
+    # https://yuanwang.ca/posts/tmux-nix.html
     extraConfig = ''
       # Default termtype. If the rcfile sets $TERM, that overrides this value.
       set -g terminal-overrides ',xterm-256color:Tc'
