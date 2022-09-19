@@ -23,7 +23,7 @@ in {
     # keyMode = "vi";
     # customPaneNavigationAndResize = true; # For vi mode
     # secureSocket = false;
-    shortcut = "a";
+    # shortcut = "a"; # Clashes with emacs keyMode
     # escapeTime = 0;
     historyLimit = 30000;
     extraConfig = ''
@@ -32,8 +32,6 @@ in {
       # Create splits and vertical splits
       bind-key v split-window -h -p 50 -c "#{pane_current_path}"
       bind-key s split-window -p 50 -c "#{pane_current_path}"
-      # Send the prefix key to the program running in the current pane
-      bind a send-prefix
       # Also use mouse
       setw -g mouse on
       # Hack to add onedark theme
