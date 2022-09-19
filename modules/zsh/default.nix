@@ -1,9 +1,10 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }: {
-  home.packages = with pkgs; [ ];
+  home.packages = with pkgs; [];
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -50,13 +51,16 @@
           "brew"
         ];
     };
-    plugins = [ ];
+    plugins = [];
     zplug = {
       enable = true;
       plugins = [
-        { name = "chisui/zsh-nix-shell"; }
-        { name = "MichaelAquilina/zsh-you-should-use"; }
-        { name = "hlissner/zsh-autopair"; tags = [ defer:2 ]; }
+        {name = "chisui/zsh-nix-shell";}
+        {name = "MichaelAquilina/zsh-you-should-use";}
+        {
+          name = "hlissner/zsh-autopair";
+          tags = ["defer:2"];
+        }
       ];
     };
 
@@ -76,7 +80,8 @@
     # envExtra = '' '';
 
     profileExtra =
-      if pkgs.stdenv.isDarwin then ''
+      if pkgs.stdenv.isDarwin
+      then ''
         eval $(/opt/homebrew/bin/brew shellenv)
 
         # Homebrew
@@ -86,7 +91,8 @@
         FPATH="$(brew --prefix)/share/zsh/site-functions:$FPATH"
         # Haskell for ARM needs to have LLVM available (At least for the moment)
         export PATH="$(brew --prefix llvm)/bin:${"\${PATH}"}"
-      '' else '''';
+      ''
+      else '''';
 
     # https://knezevic.ch/posts/zsh-completion-for-tools-installed-via-home-manager/
     # initExtra = ''
