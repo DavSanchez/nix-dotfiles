@@ -24,9 +24,11 @@
 
       ## AWS
       awscli2
+      ssm-session-manager-plugin
 
       ## Terraform
       terraform
+      terraformer
       terrascan
       # terraform-rover
 
