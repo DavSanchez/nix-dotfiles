@@ -28,7 +28,6 @@ in
     shortcut = "a";
     # escapeTime = 0;
     historyLimit = 30000;
-    # https://yuanwang.ca/posts/tmux-nix.html
     extraConfig = ''
       # Default termtype. If the rcfile sets $TERM, that overrides this value.
       set -g terminal-overrides ',xterm-256color:Tc'
@@ -37,9 +36,9 @@ in
       bind-key s split-window -p 50 -c "#{pane_current_path}"
       # Also use mouse
       setw -g mouse on
-      set -g status-right ' #{?client_prefix,#[reverse]<Prefix>#[noreverse] ,}"#{=21:pane_title}" %H:%M %d-%b-%y'
       # Hack to add onedark theme
       run-shell ${github-tmux-onedark-src}/tmux-onedark-theme.tmux
+      # Pssible additional info: https://yuanwang.ca/posts/tmux-nix.html
     '';
 
     plugins = with pkgs.tmuxPlugins; [
