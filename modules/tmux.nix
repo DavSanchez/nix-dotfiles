@@ -36,6 +36,13 @@ in
       bind-key s split-window -p 50 -c "#{pane_current_path}"
       # Also use mouse
       setw -g mouse on
+
+      bind-key Tab display-menu -T "#[align=centre]Sessions" "Switch" . 'choose-session -Zw' Last l "switch-client -l" ${tmuxMenuSeperator} \
+        "Open Main Workspace" m "display-popup -E \" td ${cfg.mainWorkspaceDir} \"" "Open Sec Workspace" s "display-popup -E \" td ${cfg.secondaryWorkspaceDir} \""   ${tmuxMenuSeperator} \
+        "Kill Current Session" k "run-shell 'tmux switch-client -n \; tmux kill-session -t #{session_name}'"  "Kill Other Sessions" o "display-popup -E \"tkill \"" ${tmuxMenuSeperator} \
+        Random r "run-shell 'tat random'" Neovim e "run-shell 'tnvim'" ${tmuxMenuSeperator} \
+        Exit q detach"
+
       # Hack to add onedark theme
       run-shell ${github-tmux-onedark-src}/tmux-onedark-theme.tmux
     '';
