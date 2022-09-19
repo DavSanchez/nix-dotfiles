@@ -6,10 +6,6 @@
 }: {
   programs.home-manager.enable = true;
   home.stateVersion = "22.05";
-  # NOTE: Here we are injecting colorscheme so that it is passed down all the imports
-  _module.args = {
-    colorscheme = import ./colorschemes/tokyonight.nix;
-  };
 
   # home.homeDirectory = "/Users/david";
   # home.username = "david";
