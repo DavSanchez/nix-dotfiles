@@ -2,9 +2,9 @@
 {
   home.packages = with pkgs; [
     # nix-zsh-completions # Already enabled by enableCompletion
+    # zsh-completions # Clashing with tmuxinator (permissions)
     zsh-nix-shell
     zsh-autopair
-    zsh-completions
     zsh-you-should-use
   ];
   programs.zsh = {
