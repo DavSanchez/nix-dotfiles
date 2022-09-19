@@ -1,5 +1,4 @@
 {
-  colorscheme,
   lib,
   pkgs,
   ...
@@ -107,7 +106,10 @@
 
     bat = {
       enable = true;
-      # config.theme = colorscheme.bat-theme-name;
+      config = {
+        theme = "TwoDark";
+        pager = "less -FR --mouse";
+      };
     };
 
     zoxide = {
