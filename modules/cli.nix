@@ -13,6 +13,9 @@
       nix-prefetch-github
       nix-du
       nix-output-monitor
+      nix-update
+      nix-diff
+      nox
 
       ## Utils
       coreutils

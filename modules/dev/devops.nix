@@ -31,9 +31,9 @@
       # terraform-rover
 
       ## NixOps
-      nixops_unstable
-      # nixops
+      nixops
       # nixops-dns
+      morph
     ]
     ++ lib.optionals pkgs.stdenv.isDarwin [
       ## Container runtimes on macOS
