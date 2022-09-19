@@ -1,9 +1,11 @@
-{ lib, pkgs, ... }:
-
 {
+  lib,
+  pkgs,
+  ...
+}: {
   programs.zellij = {
     enable = true;
-    # settings = { 
+    # settings = {
     #   ui.pane_frames.rounded_corners = true;
     #     no_pane_frames = true;
     # };

@@ -1,36 +1,41 @@
-{ config, lib, pkgs, ... }:
-
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 lib.mkMerge [
   {
-    home.packages = with pkgs; [
-      element-desktop
-      # handbrake
-      # logseq
-      # gqrx
-      # vlc
-      # transmission
-      # yacreader
-      # zotero
-      # insomnia
-      # sonic-pi
-      # mtr-gui
-    ] ++ lib.optionals pkgs.stdenv.isDarwin [
-      iterm2
-    ];
+    home.packages = with pkgs;
+      [
+        element-desktop
+        # handbrake
+        # logseq
+        # gqrx
+        # vlc
+        # transmission
+        # yacreader
+        # zotero
+        # insomnia
+        # sonic-pi
+        # mtr-gui
+      ]
+      ++ lib.optionals pkgs.stdenv.isDarwin [
+        iterm2
+      ];
   }
   {
     # Symlink macos applications. This does not happen by default.
     # https://github.com/nix-community/home-manager/issues/1341
     home.activation = lib.mkIf pkgs.stdenv.isDarwin {
-      copyApplications =
-        let
-          apps = pkgs.buildEnv {
-            name = "home-manager-applications";
-            paths = config.home.packages;
-            pathsToLink = "/Applications";
-          };
-        in
-        lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      copyApplications = let
+        apps = pkgs.buildEnv {
+          name = "home-manager-applications";
+          paths = config.home.packages;
+          pathsToLink = "/Applications";
+        };
+      in
+        lib.hm.dag.entryAfter ["writeBoundary"] ''
           baseDir="$HOME/Applications/Home Manager Apps"
           if [ -d "$baseDir" ]; then
             rm -rf "$baseDir"

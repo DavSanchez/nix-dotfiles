@@ -1,84 +1,88 @@
-{ colorscheme, lib, pkgs, ... }:
-
 {
-  home.packages = with pkgs; [
-    ## Nix
-    rnix-lsp
-    nixpkgs-fmt
-    nix-prefetch-git
-    nix-prefetch-github
-    nix-du
-    nix-output-monitor
+  colorscheme,
+  lib,
+  pkgs,
+  ...
+}: {
+  home.packages = with pkgs;
+    [
+      ## Nix
+      rnix-lsp
+      nixpkgs-fmt
+      nix-prefetch-git
+      nix-prefetch-github
+      nix-du
+      nix-output-monitor
 
-    ## Utils
-    coreutils
-    # binutils
-    # pciutils
+      ## Utils
+      coreutils
+      # binutils
+      # pciutils
 
-    ## Data visualzation/manipulation
-    gawk
-    gnused
-    fx
-    hexyl
-    jo
-    fq
-    dasel
+      ## Data visualzation/manipulation
+      gawk
+      gnused
+      fx
+      hexyl
+      jo
+      fq
+      dasel
 
-    ## Networking
-    curl
-    wget
-    xh
-    wrk
-    mtr
-    grpcurl
-    termshark
-    inetutils
+      ## Networking
+      curl
+      wget
+      xh
+      wrk
+      mtr
+      grpcurl
+      termshark
+      inetutils
 
-    # Searching/Movement helpers and other replacements
-    ripgrep
-    dua
-    fd
-    dogdns
-    procs
-    sd
-    rm-improved
-    gping
-    bandwhich
-    grex
-    hyperfine
-    tokei
+      # Searching/Movement helpers and other replacements
+      ripgrep
+      dua
+      fd
+      dogdns
+      procs
+      sd
+      rm-improved
+      gping
+      bandwhich
+      grex
+      hyperfine
+      tokei
 
-    ## Other
-    vale
-    eva
-    # chezmoi
+      ## Other
+      vale
+      eva
+      # chezmoi
 
-    # System info
-    neofetch
+      # System info
+      neofetch
 
-    ## Media
-    imagemagick
-    qrencode
-    zbar # Barcode reading
-    graphviz
-    xdot
-    ffmpeg
+      ## Media
+      imagemagick
+      qrencode
+      zbar # Barcode reading
+      graphviz
+      xdot
+      ffmpeg
 
-    ## Organization/management
-    watson
+      ## Organization/management
+      watson
 
-    # home-manager # CLI (disabled, clashes with topgrade)
-    nix # Nix itself
+      # home-manager # CLI (disabled, clashes with topgrade)
+      nix # Nix itself
 
-    ## Socials
-    gomuks # Matrix client
+      ## Socials
+      gomuks # Matrix client
 
-    ## Security
-    oath-toolkit
-
-  ] ++ lib.optionals pkgs.stdenv.isDarwin [
-    m-cli
-  ];
+      ## Security
+      oath-toolkit
+    ]
+    ++ lib.optionals pkgs.stdenv.isDarwin [
+      m-cli
+    ];
 
   programs = {
     lsd = {
@@ -90,12 +94,12 @@
       enable = true;
       enableZshIntegration = true;
       changeDirWidgetCommand = "fd --type d";
-      changeDirWidgetOptions = [ "--preview 'tree -C {} | head 200'" ];
+      changeDirWidgetOptions = ["--preview 'tree -C {} | head 200'"];
       defaultCommand = "fd --type f";
-      defaultOptions = [ "--height 40%" "--border" ];
+      defaultOptions = ["--height 40%" "--border"];
       fileWidgetCommand = "fd --type f";
-      fileWidgetOptions = [ "--preview 'head {}'" ];
-      historyWidgetOptions = [ "--sort" "--exact" ];
+      fileWidgetOptions = ["--preview 'head {}'"];
+      historyWidgetOptions = ["--sort" "--exact"];
     };
 
     bat = {
@@ -171,13 +175,13 @@
             port = 6697;
             tls = true;
             realname = "David Sánchez";
-            nicks = [ "DavSanchez" ];
+            nicks = ["DavSanchez"];
           }
         ];
         defaults = {
           realname = "David Sánchez";
-          nicks = [ "DavSanchez" ];
-          join = [ ];
+          nicks = ["DavSanchez"];
+          join = [];
           tls = true;
         };
       };

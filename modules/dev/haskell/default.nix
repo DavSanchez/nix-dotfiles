@@ -1,6 +1,8 @@
-{ lib, pkgs, ... }:
-
 {
+  lib,
+  pkgs,
+  ...
+}: {
   home = {
     packages = with pkgs.haskellPackages; [
       # Haskell
@@ -23,7 +25,7 @@
   };
 
   # https://docs.haskellstack.org/en/stable/yaml_configuration/#non-project-specific-config
-  home.file.".stack/config.yaml".text = lib.generators.toYAML { } {
+  home.file.".stack/config.yaml".text = lib.generators.toYAML {} {
     system-ghc = true;
     install-ghc = false;
     templates = {

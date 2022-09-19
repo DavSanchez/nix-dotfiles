@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   ## Main features
   imports = [
     ./c-cpp.nix

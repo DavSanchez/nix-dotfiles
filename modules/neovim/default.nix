@@ -1,6 +1,8 @@
-{ pkgs, config, ... }:
-
 {
+  pkgs,
+  config,
+  ...
+}: {
   programs.neovim = {
     enable = true;
     vimAlias = true;
@@ -54,34 +56,35 @@
       rust-tools-nvim
 
       # Progrmming: Treesitter
-      (nvim-treesitter.withPlugins (plugins: with plugins; [
-        tree-sitter-bash
-        tree-sitter-c
-        tree-sitter-css
-        tree-sitter-dockerfile
-        tree-sitter-elm
-        tree-sitter-go
-        tree-sitter-haskell
-        tree-sitter-hcl
-        tree-sitter-html
-        tree-sitter-java
-        tree-sitter-javascript
-        tree-sitter-json
-        tree-sitter-latex
-        tree-sitter-lua
-        tree-sitter-markdown
-        tree-sitter-markdown-inline
-        tree-sitter-nix
-        tree-sitter-python
-        tree-sitter-regex
-        tree-sitter-ruby
-        tree-sitter-rust
-        tree-sitter-scss
-        tree-sitter-toml
-        tree-sitter-tsx
-        tree-sitter-typescript
-        tree-sitter-yaml
-      ]))
+      (nvim-treesitter.withPlugins (plugins:
+        with plugins; [
+          tree-sitter-bash
+          tree-sitter-c
+          tree-sitter-css
+          tree-sitter-dockerfile
+          tree-sitter-elm
+          tree-sitter-go
+          tree-sitter-haskell
+          tree-sitter-hcl
+          tree-sitter-html
+          tree-sitter-java
+          tree-sitter-javascript
+          tree-sitter-json
+          tree-sitter-latex
+          tree-sitter-lua
+          tree-sitter-markdown
+          tree-sitter-markdown-inline
+          tree-sitter-nix
+          tree-sitter-python
+          tree-sitter-regex
+          tree-sitter-ruby
+          tree-sitter-rust
+          tree-sitter-scss
+          tree-sitter-toml
+          tree-sitter-tsx
+          tree-sitter-typescript
+          tree-sitter-yaml
+        ]))
       # nvim-nu # custom plugin
       nvim-treesitter-refactor
       nvim-treesitter-textobjects
@@ -213,18 +216,22 @@
         # general purpose / multiple langs
         efm-langserver
         nodePackages.prettier
-      ] ++ (if pkgs.stdenv.isLinux then [
-        # Grammer
-        # Not available on mac using brew to install it
-        ltex-ls
-      ] else [
-
-      ]);
+      ]
+      ++ (
+        if pkgs.stdenv.isLinux
+        then [
+          # Grammer
+          # Not available on mac using brew to install it
+          ltex-ls
+        ]
+        else [
+        ]
+      );
 
     extraConfig = ''
       " --- lualine ---
       set laststatus=0
-      
+
       lua << END
       require('lualine').setup {
         options = { theme  = 'ayu_mirage' },

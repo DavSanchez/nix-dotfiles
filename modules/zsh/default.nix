@@ -1,5 +1,9 @@
-{ config, lib, pkgs, ... }:
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   home.packages = with pkgs; [
     # nix-zsh-completions # Already enabled by enableCompletion
     # zsh-completions # Clashing with tmuxinator (permissions)
@@ -18,44 +22,50 @@
     history.extended = true;
     oh-my-zsh = {
       enable = true;
-      plugins = [
-        "git"
-        "vi-mode"
-        "web-search"
-        "bazel"
-        "docker"
-        "aws"
-        "terraform"
-        "nomad"
-        "helm"
-        "kubectl"
-        "fd"
-        "ripgrep"
-        "torrent"
-        "gh"
-        "git-extras"
-        "gitfast"
-        "github"
-        "gitignore"
-        "git-lfs"
-        # "git-prompt"
-        "vscode"
-        "urltools"
-        "golang"
-        "rust"
-        "pass"
-        "otp"
-        "tmux"
-      ] ++ lib.optionals pkgs.stdenv.isDarwin [
-        "macos"
-        "brew"
-      ];
+      plugins =
+        [
+          "git"
+          "vi-mode"
+          "web-search"
+          "bazel"
+          "docker"
+          "aws"
+          "terraform"
+          "nomad"
+          "helm"
+          "kubectl"
+          "fd"
+          "ripgrep"
+          "torrent"
+          "gh"
+          "git-extras"
+          "gitfast"
+          "github"
+          "gitignore"
+          "git-lfs"
+          # "git-prompt"
+          "vscode"
+          "urltools"
+          "golang"
+          "rust"
+          "pass"
+          "otp"
+          "tmux"
+        ]
+        ++ lib.optionals pkgs.stdenv.isDarwin [
+          "macos"
+          "brew"
+        ];
     };
-    plugins = [ ];
+    plugins = [];
 
     initExtraBeforeCompInit = ''
       ${builtins.readFile ./session_variables.zsh}
-      ${if pkgs.stdenv.isDarwin then builtins.readFile ./session_variables.mac.zsh else ""}
+      ${
+        if pkgs.stdenv.isDarwin
+        then builtins.readFile ./session_variables.mac.zsh
+        else ""
+      }
       ${builtins.readFile ./functions.zsh}
 
       bindkey -M vicmd 'k' history-beginning-search-backward
@@ -66,7 +76,7 @@
 
     profileExtra = ''
       eval $(/opt/homebrew/bin/brew shellenv)
-      
+
       # Homebrew
       # Homebrew sbin
       export PATH="$(brew --prefix)/sbin:$PATH"

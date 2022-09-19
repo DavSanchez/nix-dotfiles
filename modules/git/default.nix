@@ -1,14 +1,11 @@
-{ pkgs, ... }:
-
-with builtins;
-let
+{pkgs, ...}:
+with builtins; let
   DEFAULT_BRANCH = "master";
   DEVELOP_BRANCH = "develop";
   DEVELOP_BRANCH_ABBREV = "dev";
-  PROTECTED_BRANCHES_LIST = [ DEFAULT_BRANCH DEVELOP_BRANCH DEVELOP_BRANCH_ABBREV ];
+  PROTECTED_BRANCHES_LIST = [DEFAULT_BRANCH DEVELOP_BRANCH DEVELOP_BRANCH_ABBREV];
   PROTECTED_BRANCHES_STR = concatStringsSep "|" PROTECTED_BRANCHES_LIST;
-in
-{
+in {
   home.packages = with pkgs; [
     bfg-repo-cleaner
     git-quick-stats
@@ -20,7 +17,7 @@ in
     userName = "David Sánchez";
     userEmail = "davsanchez8@proton.me";
 
-    includes = [{ path = "~/.config/git/localconf"; }];
+    includes = [{path = "~/.config/git/localconf";}];
 
     delta = {
       enable = true;
@@ -146,10 +143,11 @@ in
       git pull "$@"
     }
     ${concatStringsSep "\n" (map (branchname: ''
-    g:pull.${branchname}() {
-      git pull origin ${branchname}
-    }
-    '') PROTECTED_BRANCHES_LIST)}
+        g:pull.${branchname}() {
+          git pull origin ${branchname}
+        }
+      '')
+      PROTECTED_BRANCHES_LIST)}
     # ------ log ------
     g:log() {
       git log "$@"
@@ -270,18 +268,19 @@ in
       git branch -D $(git branch | rg --invert-match "\*|${PROTECTED_BRANCHES_STR}")
     }
     ${concatStringsSep "\n" (map (branchname: ''
-    # 現在のブランチに ${branchname} を rebase する
-    g:rebase-${branchname}() {
-      local currentbranch=$(git branch --show-current)
-      if [[ "$currentbranch" == "${branchname}" ]]; then
-        echo "Invalid operation. you are in ${branchname} branch."
-        false
-      else
-        git fetch origin
-        git rebase origin/${branchname}
-      fi
-    }
-    '') PROTECTED_BRANCHES_LIST)}
+        # 現在のブランチに ${branchname} を rebase する
+        g:rebase-${branchname}() {
+          local currentbranch=$(git branch --show-current)
+          if [[ "$currentbranch" == "${branchname}" ]]; then
+            echo "Invalid operation. you are in ${branchname} branch."
+            false
+          else
+            git fetch origin
+            git rebase origin/${branchname}
+          fi
+        }
+      '')
+      PROTECTED_BRANCHES_LIST)}
     # ------ handy fns ------
     g() {
       echo "run g:status.mini"
@@ -303,12 +302,13 @@ in
       g:fetch.prune
     }
     ${concatStringsSep "\n" (map (branchname: ''
-    g@${branchname}() {
-      g:fetch.prune
-      g:switch ${branchname}
-      g:pull.${branchname}
-    }
-    '') PROTECTED_BRANCHES_LIST)}
+        g@${branchname}() {
+          g:fetch.prune
+          g:switch ${branchname}
+          g:pull.${branchname}
+        }
+      '')
+      PROTECTED_BRANCHES_LIST)}
     g@d() {
       echo "run g:diff"
       g:diff

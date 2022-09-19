@@ -1,13 +1,11 @@
-{ pkgs, ... }:
-let
+{pkgs, ...}: let
   github-tmux-onedark-src = pkgs.fetchFromGitHub {
     owner = "odedlaz";
     repo = "tmux-onedark-theme";
     rev = "3607ef889a47dd3b4b31f66cda7f36da6f81b85c";
     sha256 = "19jljshwp2p83b634cd1mw69091x42jj0dg40ipw61qy6642h2m5";
   };
-in
-{
+in {
   programs.zsh = {
     localVariables = {
       ZSH_TMUX_AUTOSTART = true;

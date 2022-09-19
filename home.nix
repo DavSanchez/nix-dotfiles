@@ -1,6 +1,9 @@
-{ config, pkgs, lib, ... }:
-
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   programs.home-manager.enable = true;
   home.stateVersion = "22.05";
   # NOTE: Here we are injecting colorscheme so that it is passed down all the imports

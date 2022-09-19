@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   home.packages = with pkgs; [
     wezterm
   ];
@@ -9,7 +7,7 @@
     enable = true;
     extraConfig = ''
       local wezterm = require 'wezterm'
-    
+
       return {
         font_size = 14,
         color_scheme = 'Synthwave (Gogh)', -- Argonaut, Chalk, TokyoNightStorm (Gogh)...
@@ -18,5 +16,4 @@
       }
     '';
   };
-
 }
