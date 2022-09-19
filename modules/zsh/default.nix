@@ -1,16 +1,9 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
+{ config
+, lib
+, pkgs
+, ...
 }: {
-  home.packages = with pkgs; [
-    # nix-zsh-completions # Already enabled by enableCompletion
-    # zsh-completions # Clashing with tmuxinator (permissions)
-    zsh-nix-shell
-    zsh-autopair
-    zsh-you-should-use
-  ];
+  home.packages = with pkgs; [ ];
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -57,7 +50,15 @@
           "brew"
         ];
     };
-    plugins = [];
+    plugins = [ ];
+    zplug = {
+      enable = true;
+      plugins = [
+        { name = "chisui/zsh-nix-shell"; }
+        { name = "MichaelAquilina/zsh-you-should-use"; }
+        { name = "hlissner/zsh-autopair"; tags = [ defer:2 ]; }
+      ];
+    };
 
     initExtraBeforeCompInit = ''
       ${builtins.readFile ./session_variables.zsh}
@@ -74,17 +75,18 @@
 
     # envExtra = '' '';
 
-    profileExtra = ''
-      eval $(/opt/homebrew/bin/brew shellenv)
+    profileExtra =
+      if pkgs.stdenv.isDarwin then ''
+        eval $(/opt/homebrew/bin/brew shellenv)
 
-      # Homebrew
-      # Homebrew sbin
-      export PATH="$(brew --prefix)/sbin:$PATH"
-      # Homebrew completions
-      FPATH="$(brew --prefix)/share/zsh/site-functions:$FPATH"
-      # Haskell for ARM needs to have LLVM available (At least for the moment)
-      export PATH="$(brew --prefix llvm)/bin:${"\${PATH}"}"
-    '';
+        # Homebrew
+        # Homebrew sbin
+        export PATH="$(brew --prefix)/sbin:$PATH"
+        # Homebrew completions
+        FPATH="$(brew --prefix)/share/zsh/site-functions:$FPATH"
+        # Haskell for ARM needs to have LLVM available (At least for the moment)
+        export PATH="$(brew --prefix llvm)/bin:${"\${PATH}"}"
+      '' else '''';
 
     # https://knezevic.ch/posts/zsh-completion-for-tools-installed-via-home-manager/
     # initExtra = ''
