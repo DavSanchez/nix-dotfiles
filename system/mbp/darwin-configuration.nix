@@ -95,6 +95,7 @@
     brews = [
       "conan"
       "whalebrew"
+      "pam-reattach" # https://github.com/fabianishere/pam_reattach
       # "terraform-rover"
     ];
     masApps = {
