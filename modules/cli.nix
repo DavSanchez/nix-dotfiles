@@ -7,7 +7,7 @@
     [
       ## Nix
       rnix-lsp
-      nixpkgs-fmt
+      alejandra
       nix-prefetch-git
       nix-prefetch-github
       nix-du
@@ -102,6 +102,8 @@
       fileWidgetCommand = "fd --type f";
       fileWidgetOptions = ["--preview 'head {}'"];
       historyWidgetOptions = ["--sort" "--exact"];
+      tmux.enableShellIntegration = true;
+      tmux.shellIntegrationOptions = ["-d 40%"];
     };
 
     bat = {
