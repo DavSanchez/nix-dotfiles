@@ -33,7 +33,7 @@
       # terraform-rover
 
       ## NixOps
-      nixops
+      # nixops
       # nixops-dns
       morph
     ]
