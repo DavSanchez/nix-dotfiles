@@ -15,6 +15,7 @@
       nix-update
       nix-diff
       nox
+      comma
 
       ## Utils
       coreutils
@@ -159,11 +160,6 @@
     };
 
     navi = {
-      enable = true;
-      enableZshIntegration = true;
-    };
-
-    nix-index = {
       enable = true;
       enableZshIntegration = true;
     };
