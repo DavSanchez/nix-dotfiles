@@ -22,7 +22,7 @@ with lib; let
   # should be deleted when the option is disabled.
   mkSudoTouchIdAuthScript = isEnabled: let
     file = "/etc/pam.d/sudo";
-    option = "security.pam.enableSudoTouchIdAuth";
+    option = "security.pam.enableSudoTouchIdAuthWithReattach";
     sed = "${pkgs.gnused}/bin/sed";
   in ''
     ${
@@ -64,7 +64,7 @@ in {
     system.activationScripts.extraActivation.text = ''
       # PAM settings
       echo >&2 "setting up pam..."
-      ${mkSudoTouchIdAuthScript cfg.enableSudoTouchIdAuth}
+      ${mkSudoTouchIdAuthScript cfg.enableSudoTouchIdAuthWithReattach}
     '';
   };
 }
