@@ -3,7 +3,7 @@
 
   inputs = {
     # Package sets
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-21.11-darwin";
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-22.05-darwin";
     nixpkgs-unstable.url = github:NixOS/nixpkgs/nixpkgs-unstable;
 
     # Environment/system management
@@ -185,7 +185,7 @@
               category = "Home";
               help = "Update nixpkgs only";
               command = ''
-                nix flake lock --update-input nixpkgs
+                nix flake lock --update-input nixpkgs nixpkgs-unstable
                 # dev:switch
               '';
             }
