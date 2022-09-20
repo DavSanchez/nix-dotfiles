@@ -16,6 +16,7 @@
       nix-diff
       nox
       comma
+      cachix
 
       ## Utils
       coreutils
