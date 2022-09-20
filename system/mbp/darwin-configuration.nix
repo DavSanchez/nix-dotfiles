@@ -4,8 +4,6 @@
 }: {
   # Enable sudo authentication with Touch ID
   security.pam.enableSudoTouchIdAuth = true;
-  imports = [ ../touchIDReattach ];
-  security.pam.enableSudoTouchIdAuthWithReattach = true;
 
   # Enable experimental nix command and flakes
   # nix.package = pkgs.nixUnstable;
