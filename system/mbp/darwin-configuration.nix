@@ -3,6 +3,10 @@
   lib,
   ...
 }: {
+  # Enable sudo authentication with Touch ID
+  imports = [../../touchID];
+  security.pam.enableSudoTouchIdAuthWithReattach = true;
+
   # Enable experimental nix command and flakes
   # nix.package = pkgs.nixUnstable;
   nix.extraOptions =
@@ -34,9 +38,6 @@
     nix-index.enable = true;
     # fish.enable = true;
   };
-
-  # Enable sudo authentication with Touch ID
-  security.pam.enableSudoTouchIdAuth = true;
 
   fonts.fontDir.enable = true;
 
