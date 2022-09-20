@@ -4,8 +4,6 @@
       ZSH_TMUX_AUTOSTART = true;
       # ZSH_TMUX_FIXTERM_WITH_256COLOR = "xterm-256color";
       ZSH_TMUX_CONFIG = "$HOME/.config/tmux/tmux.conf";
-      ZSH_TMUX_AUTOCONNECT = false;
-      ZSH_TMUX_AUTOQUIT = false;
     };
   };
   programs.tmux = {
@@ -32,6 +30,17 @@
     plugins = with pkgs.tmuxPlugins; [
       vim-tmux-navigator
       onedark-theme
+      {
+        plugin = resurrect;
+        extraConfig = "set -g @resurrect-strategy-nvim 'session'";
+      }
+      {
+        plugin = continuum;
+        extraConfig = ''
+          set -g @continuum-restore 'on'
+          set -g @continuum-save-interval '60' # minutes
+        '';
+      }
     ];
 
     tmuxinator.enable = true;
