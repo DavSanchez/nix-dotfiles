@@ -1,3 +1,4 @@
+# source: https://github.com/DylanRJohnston/nixos/blob/main/packages/pam_reattach.nix
 {
   fetchgit,
   stdenv,
