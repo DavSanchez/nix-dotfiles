@@ -1,11 +1,12 @@
-{
-  pkgs,
-  lib,
-  ...
+{ pkgs
+, lib
+, ...
 }: {
   # Enable sudo authentication with Touch ID
-  imports = [./../touchID/touchID.nix];
+  imports = [ ../touchID ];
+  security.pam.enableSudoTouchIdAuth = true;
   security.pam.enableSudoTouchIdAuthWithReattach = true;
+
 
   # Enable experimental nix command and flakes
   # nix.package = pkgs.nixUnstable;

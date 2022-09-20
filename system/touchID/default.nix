@@ -31,8 +31,7 @@ with lib; let
         # Enable sudo Touch ID authentication, if not already enabled
         if ! grep '${option}' ${file} > /dev/null; then
           ${sed} -i '2i\
-        auth       optional       ${pam_reattach}/lib/pam/pam_reattach.so # nix-darwin: ${option}\
-        auth       sufficient     pam_tid.so # nix-darwin: ${option}
+        auth       optional       ${pam_reattach}/lib/pam/pam_reattach.so # nix-darwin: ${option}
           ' ${file}
         fi
       ''
@@ -52,7 +51,6 @@ in {
       When enabled, this option adds the following line to /etc/pam.d/sudo:
 
           auth       optional       ${pam_reattach}/lib/pam/pam_reattach.so
-          auth       sufficient     pam_tid.so
 
       (Note that macOS resets this file when doing a system update. As such, sudo
       authentication with Touch ID won't work after a system update until the nix-darwin
@@ -63,7 +61,7 @@ in {
   config = {
     system.activationScripts.extraActivation.text = ''
       # PAM settings
-      echo >&2 "setting up pam..."
+      echo >&2 "setting up pam (with reattach)..."
       ${mkSudoTouchIdAuthScript cfg.enableSudoTouchIdAuthWithReattach}
     '';
   };
