@@ -29,8 +29,14 @@
   # nix.package = pkgs.nix;
 
   # Create /etc/zshrc that loads the nix-darwin environment.
-  programs.zsh.enable = true; # default shell on catalina
-  # programs.fish.enable = true;
+  programs = {
+    zsh.enable = true; # default shell on catalina
+    nix-index.enable = true;
+    # fish.enable = true;
+  };
+
+  # Enable Enable sudo authentication with Touch ID
+  security.pam.enableSudoTouchIdAuth = true;
 
   fonts.fontDir.enable = true;
 
