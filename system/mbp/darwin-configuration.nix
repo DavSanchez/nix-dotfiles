@@ -1,6 +1,7 @@
-{ pkgs
-, lib
-, ...
+{
+  pkgs,
+  lib,
+  ...
 }: {
   # Enable sudo authentication with Touch ID
   security.pam.enableSudoTouchIdAuth = true;
