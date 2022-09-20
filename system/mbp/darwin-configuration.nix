@@ -35,7 +35,7 @@
     # fish.enable = true;
   };
 
-  # Enable Enable sudo authentication with Touch ID
+  # Enable sudo authentication with Touch ID
   security.pam.enableSudoTouchIdAuth = true;
 
   fonts.fontDir.enable = true;
