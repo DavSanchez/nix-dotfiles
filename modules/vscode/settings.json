@@ -108,7 +108,8 @@
   "terraform.codelens.referenceCount": true,
   "verilog.linting.linter": "verilator",
   "window.commandCenter": true,
+  "workbench.colorTheme": "GitHub Dark Default",
   "workbench.iconTheme": "material-icon-theme",
   "workbench.productIconTheme": "material-product-icons",
-  "workbench.colorTheme": "GitHub Dark Default"
+  "nix.formatterPath": "alejandra"
 }
