@@ -30,6 +30,7 @@
     plugins = with pkgs.tmuxPlugins; [
       vim-tmux-navigator
       onedark-theme
+      logging
       {
         plugin = resurrect;
         extraConfig = "set -g @resurrect-strategy-nvim 'session'";
