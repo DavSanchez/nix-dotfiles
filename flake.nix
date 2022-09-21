@@ -182,7 +182,7 @@
             category = "Home";
             help = "Update nixpkgs only";
             command = ''
-              nix flake lock --update-input nixpkgs nixpkgs-unstable
+              nix flake lock --update-input nixpkgs
               # dev:switch
             '';
           }
