@@ -7,5 +7,6 @@
     ## Clojure
     clojure
     leiningen
+    joker
   ];
 }
