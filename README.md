@@ -41,11 +41,9 @@ Running `nix-store --optimise` can get a lot of `skipping suspicious writable fi
 
 Usually accompanied by the message "An update is ready to install. Visual Studio Code is trying to add a new helper tool".
 
-This is usually caused due to VSCod{e,ium} residing in a different path than `/Applications`. To fix, according to https://github.com/Microsoft/vscode/issues/7426#issuecomment-277737150:
+This is usually caused due to VSCod{e,ium} residing in a different path than `/Applications`. To fix, according to <https://github.com/Microsoft/vscode/issues/7426#issuecomment-277737150>:
 
 ```console
-$ sudo chown $USER ~/Library/Caches/com.vscodium.ShipIt/* # or com.microsoft.VSCode.ShipIt/*
-$ xattr -dr com.apple.quarantine ~/Applications/Home Manager Apps/VSCodium.app
+sudo chown $USER ~/Library/Caches/com.vscodium.ShipIt/* # or com.microsoft.VSCode.ShipIt/*
+xattr -dr com.apple.quarantine ~/Applications/Home Manager Apps/VSCodium.app
 ```
-
-
