@@ -87,6 +87,7 @@ in {
           ms-vscode-remote.remote-ssh
           pkief.material-icon-theme
           pkief.material-product-icons
+          timonwong.shellcheck
           usernamehw.errorlens
           valentjn.vscode-ltex
           zxh404.vscode-proto3
