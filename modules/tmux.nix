@@ -1,21 +1,21 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   programs.zsh = {
     localVariables = {
       ZSH_TMUX_AUTOSTART = true;
-      # ZSH_TMUX_FIXTERM_WITH_256COLOR = "xterm-256color";
       ZSH_TMUX_CONFIG = "$HOME/.config/tmux/tmux.conf";
     };
   };
   programs.tmux = {
-    terminal = "xterm-256color";
     enable = true;
-    # baseIndex = 1;
+    terminal = "xterm-256color";
+    baseIndex = 1;
     clock24 = true;
+
+    # For vi mode
     # keyMode = "vi";
     # customPaneNavigationAndResize = true; # For vi mode
-    # secureSocket = false;
-    # shortcut = "a"; # Clashes with emacs keyMode
     # escapeTime = 0;
+
     historyLimit = 30000;
     extraConfig = ''
       # Default termtype. If the rcfile sets $TERM, that overrides this value.
@@ -31,6 +31,8 @@
       vim-tmux-navigator
       onedark-theme
       logging
+      prefix-highlight
+      sidebar
       {
         plugin = resurrect;
         extraConfig = "set -g @resurrect-strategy-nvim 'session'";
