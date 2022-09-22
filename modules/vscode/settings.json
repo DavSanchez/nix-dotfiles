@@ -111,5 +111,9 @@
   "workbench.colorTheme": "GitHub Dark Default",
   "workbench.iconTheme": "material-icon-theme",
   "workbench.productIconTheme": "material-product-icons",
-  "nix.formatterPath": "alejandra"
+  "nix.formatterPath": "alejandra",
+  "terminal.integrated.macOptionIsMeta": true,
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }

@@ -83,6 +83,7 @@ in {
           # ms-python.python # FIXME Failing to build
           ms-python.vscode-pylance
           ms-toolsai.jupyter
+          ms-toolsai.jupyter-renderers
           ms-vscode-remote.remote-ssh
           pkief.material-icon-theme
           pkief.material-product-icons
