@@ -5,6 +5,8 @@
     llvm
     cling
     cmake
+    # build2
     # conan
+    # platformio
   ];
 }
