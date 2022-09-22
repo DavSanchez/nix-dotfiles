@@ -8,7 +8,7 @@
     ./haskell
     ./java.nix
     ./kafka.nix
-    # ./purescript.nix
+    ./purescript.nix
     ./rust.nix
   ];
 
