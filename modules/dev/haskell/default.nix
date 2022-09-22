@@ -5,7 +5,6 @@
 }: {
   home = {
     packages = with pkgs.haskellPackages; [
-      # Haskell
       ghc
       cabal-install
       cabal2nix
