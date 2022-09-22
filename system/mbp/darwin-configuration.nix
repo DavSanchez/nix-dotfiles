@@ -56,6 +56,7 @@
 
     taps = [
       "homebrew/cask"
+      "homebrew/cask-drivers"
       "homebrew/cask-versions"
     ];
     casks = [
@@ -77,6 +78,7 @@
       "openra"
       "protonmail-bridge"
       "protonvpn"
+      "qflipper"
       "raycast"
       "remarkable"
       "sonic-pi"

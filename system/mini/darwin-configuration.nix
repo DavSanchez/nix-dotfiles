@@ -1,7 +1,6 @@
-{
-  pkgs,
-  lib,
-  ...
+{ pkgs
+, lib
+, ...
 }: {
   # Enable experimental nix command and flakes
   # nix.package = pkgs.nixUnstable;
@@ -53,6 +52,7 @@
 
     taps = [
       "homebrew/cask"
+      "homebrew/cask-drivers"
       "homebrew/cask-versions"
     ];
     casks = [
@@ -76,6 +76,7 @@
       "plex-media-server"
       "protonmail-bridge"
       "protonvpn"
+      "qflipper"
       "raycast"
       "remarkable"
       "sonic-pi"
