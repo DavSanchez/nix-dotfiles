@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   programs.zsh = {
     localVariables = {
       ZSH_TMUX_AUTOSTART = true;
