@@ -1,7 +1,6 @@
-{
-  lib,
-  pkgs,
-  ...
+{ lib
+, pkgs
+, ...
 }: {
   ## Main features
   imports = [
@@ -19,11 +18,10 @@
   ## Other packages
   home.packages = with pkgs;
     [
-      ## Shell
-      shellcheck
       ## Other Languages
-      elixir
       # dotnet-sdk
+      # rPackages.rlang
+      elixir
       python3
       unison-ucm
       zig
