@@ -72,9 +72,6 @@
       xdot
       ffmpeg
 
-      ## Organization/management
-      watson
-
       # home-manager # CLI (disabled, clashes with topgrade)
       nix # Nix itself
 
@@ -193,6 +190,11 @@
     topgrade = {
       enable = true;
       # settings = { };
+    };
+
+    watson = {
+      enable = true;
+      enableZshIntegration = true;
     };
   };
 }
