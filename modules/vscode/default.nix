@@ -1,6 +1,7 @@
-{ lib
-, pkgs
-, ...
+{
+  lib,
+  pkgs,
+  ...
 }:
 # VSCode expects writable settings.json
 # https://github.com/nix-community/home-manager/issues/1800
