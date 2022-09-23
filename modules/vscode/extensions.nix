@@ -180,10 +180,28 @@
     sha256 = "02sp5sv1sapynq4xx04b9z86jz2vmcsma1cpkbd05k2cw5g999lk";
   }
   {
+    name = "python";
+    publisher = "ms-python";
+    version = "2022.15.12631011";
+    sha256 = "04zhvgkpbjfjbdxflkrsi874ldlijs295phvp8f1zprxg8qd5f8a";
+  }
+  {
+    name = "vscode-pylance";
+    publisher = "ms-python";
+    version = "2022.9.31";
+    sha256 = "0wckigj2n943xxx5x8aw822zvwf2xc7ydv8l4fs08cmjsmxfk5m2";
+  }
+  {
     name = "jupyter";
     publisher = "ms-toolsai";
-    version = "2022.9.1002661205";
-    sha256 = "0x3651ljgzpy0c43l5zqvjk8pkya985s2flqszkzq2pb8n5r8pkd";
+    version = "2022.9.1002671058";
+    sha256 = "0qpf2kbwxwvc3qi0gfz4rl1gf69pai3a5g5mpdv5kxnnbx7lwx6g";
+  }
+  {
+    name = "jupyter-renderers";
+    publisher = "ms-toolsai";
+    version = "1.0.9";
+    sha256 = "1hpxxgnga4yss7nsy1nff6nnngfvzakz4nn6jgrhv0f61ragrg2r";
   }
   {
     name = "remote-containers";
@@ -260,8 +278,14 @@
   {
     name = "rust-analyzer";
     publisher = "rust-lang";
-    version = "0.4.1215";
-    sha256 = "16m21nwnv6f9zmjzrybnsrxnrs32ywqwf2fbidmp6skmh7i3x54j";
+    version = "0.4.1217";
+    sha256 = "0xf04bwwh5yx7g5b3jc5gbh4rs6bij75l1msj1jai903qkppy4iv";
+  }
+  {
+    name = "shellcheck";
+    publisher = "timonwong";
+    version = "0.23.0";
+    sha256 = "190xi23kad95bbh8cwk5asnncfdaqi9574hv87ja5lpy53my1v8d";
   }
   {
     name = "errorlens";
