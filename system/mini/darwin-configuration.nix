@@ -81,6 +81,7 @@
       "raycast"
       "remarkable"
       "sonic-pi"
+      "stats"
       "steam"
       "synthesia"
       "tor-browser"
@@ -104,7 +105,6 @@
       "GarageBand" = 682658836;
       "Gemini 2" = 1090488118;
       "iMovie" = 408981434;
-      "iStat Menus" = 1319778037;
       "Keynote" = 409183694;
       "Logic Pro" = 634148309;
       "MainStage" = 634159523;
