@@ -1,7 +1,6 @@
-{
-  lib,
-  pkgs,
-  ...
+{ lib
+, pkgs
+, ...
 }:
 # VSCode expects writable settings.json
 # https://github.com/nix-community/home-manager/issues/1800
@@ -40,7 +39,7 @@
         llvm-vs-code-extensions.vscode-clangd
         matklad.rust-analyzer
         ms-azuretools.vscode-docker
-        # ms-python.python # FIXME Failing to build
+        # ms-python.python # FIXME Failing to build, added below
         ms-python.vscode-pylance
         ms-toolsai.jupyter
         ms-toolsai.jupyter-renderers
@@ -101,6 +100,12 @@
           publisher = "mkhl";
           version = "0.6.1";
           sha256 = "1d60hqww1innch277yd3va2snpsp19c7w4v0rxz2jvzvgykfmx77";
+        }
+        {
+          name = "python";
+          publisher = "ms-python";
+          version = "2022.15.12631011";
+          sha256 = "04zhvgkpbjfjbdxflkrsi874ldlijs295phvp8f1zprxg8qd5f8a";
         }
         {
           name = "vscode-postgresql";
