@@ -62,6 +62,7 @@
         with plugins; [
           tree-sitter-bash
           tree-sitter-c
+          tree-sitter-clojure
           tree-sitter-css
           tree-sitter-dockerfile
           tree-sitter-elm
@@ -79,7 +80,7 @@
           tree-sitter-nix
           tree-sitter-python
           tree-sitter-regex
-          tree-sitter-ruby
+          # tree-sitter-ruby
           tree-sitter-rust
           tree-sitter-scss
           tree-sitter-toml
@@ -94,6 +95,8 @@
 
       # Programming: Language support
       crates-nvim
+      conjure
+      vimtex
       # nvim-yuck # custom plugin
 
       ## Programming: Autocompletion setup
