@@ -3,6 +3,9 @@
   lib,
   ...
 }: {
+  # Enable sudo authentication with Touch ID
+  security.pam.enableSudoTouchIdAuth = true;
+
   # Enable experimental nix command and flakes
   # nix.package = pkgs.nixUnstable;
   nix.extraOptions =
@@ -80,6 +83,7 @@
       "qflipper"
       "raycast"
       "remarkable"
+      "secretive"
       "sonic-pi"
       "stats"
       "steam"
@@ -97,6 +101,7 @@
     brews = [
       "conan"
       "whalebrew"
+      "pam-reattach" # https://github.com/fabianishere/pam_reattach
       # "terraform-rover"
     ];
     masApps = {

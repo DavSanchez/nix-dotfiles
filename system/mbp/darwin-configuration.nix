@@ -81,6 +81,7 @@
       "qflipper"
       "raycast"
       "remarkable"
+      "secretive"
       "sonic-pi"
       "stats"
       "steam"
