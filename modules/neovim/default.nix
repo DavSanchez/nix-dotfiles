@@ -63,8 +63,10 @@
           tree-sitter-bash
           tree-sitter-c
           tree-sitter-clojure
+          tree-sitter-cpp
           tree-sitter-css
           tree-sitter-dockerfile
+          tree-sitter-elixir
           tree-sitter-elm
           tree-sitter-go
           tree-sitter-haskell
@@ -79,14 +81,19 @@
           tree-sitter-markdown-inline
           tree-sitter-nix
           tree-sitter-python
+          tree-sitter-r
           tree-sitter-regex
           # tree-sitter-ruby
           tree-sitter-rust
           tree-sitter-scss
+          tree-sitter-sql
+          tree-sitter-supercollider
           tree-sitter-toml
           tree-sitter-tsx
           tree-sitter-typescript
+          tree-sitter-verilog
           tree-sitter-yaml
+          tree-sitter-zig
         ]))
       # nvim-nu # custom plugin
       nvim-treesitter-refactor
@@ -97,6 +104,7 @@
       crates-nvim
       conjure
       vimtex
+      purescript-vim
       # nvim-yuck # custom plugin
 
       ## Programming: Autocompletion setup
