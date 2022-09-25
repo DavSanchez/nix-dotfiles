@@ -22,6 +22,9 @@ lib.mkMerge [
       ]
       ++ lib.optionals pkgs.stdenv.isDarwin [
         iterm2
+      ]
+      ++ lib.optionals pkgs.stdenv.isLinux [
+        zathura
       ];
   }
   {
