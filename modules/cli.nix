@@ -41,6 +41,7 @@
       grpcurl
       termshark
       inetutils
+      nmap
 
       # Searching/Movement helpers and other replacements
       ripgrep
