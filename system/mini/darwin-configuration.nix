@@ -77,6 +77,7 @@
       "logseq"
       "mactex-no-gui"
       "openra"
+      "orion"
       "plex-media-server"
       "protonmail-bridge"
       "protonvpn"

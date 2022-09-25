@@ -76,6 +76,7 @@
       "logseq"
       "mactex-no-gui"
       "openra"
+      "orion"
       "protonmail-bridge"
       "protonvpn"
       "qflipper"
