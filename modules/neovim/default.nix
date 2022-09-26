@@ -1,7 +1,6 @@
-{
-  pkgs,
-  config,
-  ...
+{ pkgs
+, config
+, ...
 }: {
   programs.neovim = {
     enable = true;
@@ -241,86 +240,91 @@
         ]
       );
 
-    extraConfig = ''
-      " --- lualine ---
-      set laststatus=0
-
-      lua << END
-      require('lualine').setup {
-        options = { theme  = 'ayu_mirage' },
-        sections = {
-          lualine_a = {'mode'},
-          lualine_b = {'branch'},
-          lualine_c = {'filename'},
-          lualine_x = {'encoding'},
-          lualine_y = {'fileformat'},
-          lualine_z = {'filetype'}
-        },
-        inactive_sections = {
-          lualine_a = {},
-          lualine_b = {},
-          lualine_c = {},
-          lualine_x = {},
-          lualine_y = {},
-          lualine_z = {}
-        },
-        tabline = {},
-        winbar = {},
-        inactive_winbar = {}
-      }
-      END
-      " --- visual ---
-      colorscheme ayu-mirage
-      set background=dark
-      set termguicolors
-      set number
-      set noruler
-      set wrap
-      set showmatch
-      set matchtime=3
-      set list
-      highlight Normal ctermbg=none guibg=NONE
-      highlight NonText ctermbg=none guibg=NONE
-      highlight LineNr ctermbg=none guibg=NONE
-      highlight Folded ctermbg=none guibg=NONE
-      highlight EndOfBuffer ctermbg=none guibg=NONE
-      " --- grep ---
-      set ignorecase
-      set smartcase
-      set wrapscan
-      set hlsearch
-      set incsearch
-      set inccommand=split
-      " --- indent ---
-      set smartindent
-      set expandtab
-      set tabstop=2
-      set softtabstop=2
-      set shiftwidth=2
-      " --- auto complete ---
-      set completeopt=noinsert,menuone,noselect
-      set wildmode=list:longest
-      set infercase
-      set wildmenu
-      " --- other ---
-      set mouse=a
-      set clipboard+=unnamedplus
-      set backspace=indent,eol,start
-      set hidden
-      set textwidth=0
-      set encoding=utf-8
-      " --- keymap ---
-      " jj as esc
-      inoremap <silent> jj <Esc>
-      " Find files using Telescope command-line sugar.
-      nnoremap <leader>ff <cmd>Telescope find_files<cr>
-      nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-      nnoremap <leader>fb <cmd>Telescope buffers<cr>
-      nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-      nnoremap <space>t :NERDTreeToggle<cr>
-    '';
+    # extraConfig = '''';
   };
 
   home.file.".vale.ini".source = ./vale.ini;
   home.file.".markdownlintrc".source = ./markdown_lint.json;
+  xdg.configFile."nvim/init.vim".text = ''
+    " --- lualine ---
+    set laststatus=0
+
+    lua << END
+    require('lualine').setup {
+      options = { theme  = 'ayu_mirage' },
+      sections = {
+        lualine_a = {'mode'},
+        lualine_b = {'branch'},
+        lualine_c = {'filename'},
+        lualine_x = {'encoding'},
+        lualine_y = {'fileformat'},
+        lualine_z = {'filetype'}
+      },
+      inactive_sections = {
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = {},
+        lualine_x = {},
+        lualine_y = {},
+        lualine_z = {}
+      },
+      tabline = {},
+      winbar = {},
+      inactive_winbar = {}
+    }
+    END
+    " --- visual ---
+    colorscheme ayu-mirage
+    set background=dark
+    set termguicolors
+    set number
+    set noruler
+    set wrap
+    set showmatch
+    set matchtime=3
+    set list
+    highlight Normal ctermbg=none guibg=NONE
+    highlight NonText ctermbg=none guibg=NONE
+    highlight LineNr ctermbg=none guibg=NONE
+    highlight Folded ctermbg=none guibg=NONE
+    highlight EndOfBuffer ctermbg=none guibg=NONE
+    " --- grep ---
+    set ignorecase
+    set smartcase
+    set wrapscan
+    set hlsearch
+    set incsearch
+    set inccommand=split
+    " --- indent ---
+    set smartindent
+    set expandtab
+    set tabstop=2
+    set softtabstop=2
+    set shiftwidth=2
+    " --- auto complete ---
+    set completeopt=noinsert,menuone,noselect
+    set wildmode=list:longest
+    set infercase
+    set wildmenu
+    " --- other ---
+    set mouse=a
+    set clipboard+=unnamedplus
+    set backspace=indent,eol,start
+    set hidden
+    set textwidth=0
+    set encoding=utf-8
+    " --- keymap ---
+    " jj as esc
+    inoremap <silent> jj <Esc>
+    " Find files using Telescope command-line sugar.
+    nnoremap <leader>ff <cmd>Telescope find_files<cr>
+    nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+    nnoremap <leader>fb <cmd>Telescope buffers<cr>
+    nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+    nnoremap <space>t :NERDTreeToggle<cr>
+  '';
+  # xdg.configFile."nvim" = {
+  #   source = pkgs.callPackage ./nvchad.nix { };
+  #   recursive = true;
+  # };
 }
