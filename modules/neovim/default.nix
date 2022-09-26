@@ -323,8 +323,4 @@
     nnoremap <leader>fh <cmd>Telescope help_tags<cr>
     nnoremap <space>t :NERDTreeToggle<cr>
   '';
-  # xdg.configFile."nvim" = {
-  #   source = pkgs.callPackage ./nvchad.nix { };
-  #   recursive = true;
-  # };
 }
