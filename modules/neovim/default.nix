@@ -82,7 +82,7 @@
           tree-sitter-python
           tree-sitter-r
           tree-sitter-regex
-          # tree-sitter-ruby
+          tree-sitter-ruby
           tree-sitter-rust
           tree-sitter-scss
           tree-sitter-sql
@@ -197,7 +197,7 @@
         statix
 
         # python
-        # python3Packages.isort
+        python3Packages.isort
         nodePackages.pyright
         black
         python3Packages.flake8
