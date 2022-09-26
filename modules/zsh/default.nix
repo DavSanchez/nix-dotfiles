@@ -41,6 +41,7 @@
           "pass"
           "ripgrep"
           "rust"
+          "ssh-agent"
           "terraform"
           "tmux"
           "torrent"
