@@ -196,6 +196,9 @@
         deadnix
         statix
 
+        # Purescript
+        nodePackages.purescript-language-server
+
         # python
         python3Packages.isort
         nodePackages.pyright
