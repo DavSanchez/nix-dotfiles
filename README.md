@@ -22,10 +22,11 @@ I'm trying to replace my current `dotfiles` configuration by basing it in Nix an
 ## Influences
 
 - [`github:sherubthakur/dotfiles`](https://github.com/sherubthakur/dotfiles)
-- [`hlissner/dotfiles`](https://github.com/hlissner/dotfiles)
-- `github:tars0x9752/home`
-- `Misterio77/nix-config`
-- `nix-community/todomvc-nix`
+- [`github:hlissner/dotfiles`](https://github.com/hlissner/dotfiles)
+- [`github:dustinlyons/nixos-config`](https://github.com/dustinlyons/nixos-config)
+- [`github:tars0x9752/home`](https://github.com/tars0x9752/home)
+- [`github:Misterio77/nix-config`](https://github.com/Misterio77/nix-config)
+- [`github:nix-community/todomvc-nix`](https://github.com/nix-community/todomvc-nix)
 
 ## Issues
 
