@@ -31,6 +31,7 @@
       jo
       fq
       dasel
+      difftastic
 
       ## Networking
       curl
