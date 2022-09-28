@@ -48,6 +48,7 @@
         pkief.material-icon-theme
         pkief.material-product-icons
         redhat.vscode-yaml
+        tiehuis.zig
         timonwong.shellcheck
         usernamehw.errorlens
         valentjn.vscode-ltex
