@@ -88,7 +88,7 @@
       bindkey -M vicmd 'j' history-beginning-search-forward
 
       # ssh-agent (oh-my-zsh plugin) settings should be added before OMZ is sourced
-      # lazy loading
+      # lazy load (https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/ssh-agent#lazy)
       zstyle :omz:plugins:ssh-agent lazy yes
     '';
 
