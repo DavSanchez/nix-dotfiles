@@ -86,6 +86,10 @@
 
       bindkey -M vicmd 'k' history-beginning-search-backward
       bindkey -M vicmd 'j' history-beginning-search-forward
+
+      # ssh-agent (oh-my-zsh plugin) settings should be added before OMZ is sourced
+      # lazy loading
+      zstyle :omz:plugins:ssh-agent lazy yes
     '';
 
     # envExtra = '' '';
