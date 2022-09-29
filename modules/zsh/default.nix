@@ -20,21 +20,27 @@
         [
           "aws"
           "bazel"
+          "cp"
           "docker"
+          "docker-compose"
           "fd"
           "gh"
           "git"
+          "git-auto-fetch"
           "git-extras"
           "gitfast"
           "github"
           "gitignore"
           "git-lfs"
           # "git-prompt"
+          "globalias"
           "golang"
           "gpg-agent"
           "helm"
           "kubectl"
           "lein"
+          "minikube"
+          "mix"
           "nmap"
           "nomad"
           "otp"
@@ -45,6 +51,7 @@
           "terraform"
           "tmux"
           "torrent"
+          "transfer"
           "urltools"
           "vi-mode"
           "vscode"
@@ -52,7 +59,9 @@
         ]
         ++ lib.optionals pkgs.stdenv.isDarwin [
           "brew"
+          "iterm2"
           "macos"
+          "xcode"
         ];
     };
     zplug = {

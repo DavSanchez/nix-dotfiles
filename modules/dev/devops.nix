@@ -30,6 +30,7 @@
       terraform
       terraformer
       terrascan
+      # terragrunt
       # terraform-rover
 
       ## NixOps
