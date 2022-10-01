@@ -32,7 +32,6 @@
           "gitignore"
           "git-lfs"
           # "git-prompt"
-          "globalias"
           "golang"
           "gpg-agent"
           "helm"
