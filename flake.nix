@@ -149,6 +149,16 @@
             '';
           }
 
+          # --- Flake ---
+          {
+            name = "dev:update";
+            category = "Flake";
+            help = "Update the flake lock file only";
+            command = ''
+              nix flake update
+            '';
+          }
+
           # --- Home Environment ---
           {
             name = "dev:ls-pkg";
@@ -164,39 +174,6 @@
             help = "List all home environment generations";
             command = ''
               home-manager generations
-            '';
-          }
-          # {
-          #   name = "dev:switch_mbp";
-          #   category = "Home";
-          #   help = "Switch home-manager to apply home config changes";
-          #   command = ''
-          #     home-manager switch --flake '.#david-mbp' -b bck --impure
-          #   '';
-          # }
-          # {
-          #   name = "dev:update";
-          #   category = "Home";
-          #   help = "Update things";
-          #   command = ''
-          #     home-manager switch --flake '.#david-mbp' -b bck --impure --recreate-lock-file
-          #   '';
-          # }
-          {
-            name = "dev:update-nixpkgs";
-            category = "Home";
-            help = "Update nixpkgs only";
-            command = ''
-              nix flake lock --update-input nixpkgs
-              # dev:switch
-            '';
-          }
-          {
-            name = "dev:update-lock-only";
-            category = "Home";
-            help = "Update the flake lock file only";
-            command = ''
-              nix flake update
             '';
           }
 
