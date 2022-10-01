@@ -1,10 +1,9 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
+{ config
+, lib
+, pkgs
+, ...
 }: {
-  home.packages = with pkgs; [];
+  home.packages = with pkgs; [ ];
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -67,8 +66,8 @@
     zplug = {
       enable = true;
       plugins = [
-        {name = "chisui/zsh-nix-shell";}
-        {name = "MichaelAquilina/zsh-you-should-use";}
+        { name = "chisui/zsh-nix-shell"; }
+        { name = "MichaelAquilina/zsh-you-should-use"; }
       ];
     };
     plugins = [
@@ -103,12 +102,11 @@
 
     # envExtra = '' '';
 
-    profileExtra =
-      if pkgs.stdenv.isDarwin
+    profileExtra = ''
+      ${if pkgs.stdenv.isDarwin
       then ''
-        eval $(/opt/homebrew/bin/brew shellenv)
-
         # Homebrew
+        eval $(/opt/homebrew/bin/brew shellenv)
         # Homebrew sbin
         export PATH="$(brew --prefix)/sbin:$PATH"
         # Homebrew completions
@@ -116,11 +114,12 @@
         # Haskell for ARM needs to have LLVM available (At least for the moment)
         export PATH="$(brew --prefix llvm)/bin:${"\${PATH}"}"
       ''
-      else '''';
+      else ''''}
+    '';
 
-    # https://knezevic.ch/posts/zsh-completion-for-tools-installed-via-home-manager/
-    # initExtra = ''
-    #   [[ $TERM_PROGRAM != "vscode" ]] && eval "$(zellij setup --generate-auto-start zsh)"
-    # '';
+    initExtra = ''
+      # Do not add command to history if prepended by space
+      setopt HIST_IGNORE_SPACE
+    '';
   };
 }
