@@ -75,8 +75,9 @@
       "little-snitch"
       "logseq"
       "mactex-no-gui"
+      "openemu"
       "openra"
-      "orion"
+      # "orion" # Alternative WebKit browser
       "protonmail-bridge"
       "protonvpn"
       "qflipper"
