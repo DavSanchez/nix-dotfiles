@@ -29,10 +29,13 @@
 
     plugins = with pkgs.tmuxPlugins; [
       vim-tmux-navigator
-      onedark-theme
+      # onedark-theme
+      nord # theme
       logging
       prefix-highlight
       sidebar
+      better-mouse-mode
+      fingers
       {
         plugin = resurrect;
         extraConfig = "set -g @resurrect-strategy-nvim 'session'";
