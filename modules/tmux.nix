@@ -29,8 +29,7 @@
 
     plugins = with pkgs.tmuxPlugins; [
       vim-tmux-navigator
-      # onedark-theme
-      nord # theme
+      onedark-theme # other themes: nord, gruvbox...
       logging
       prefix-highlight
       sidebar
