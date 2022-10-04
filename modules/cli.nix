@@ -17,11 +17,12 @@
       nox
       comma
       cachix
+      niv
 
       ## Utils
       coreutils
-      # binutils
-      # pciutils
+      binutils
+      pciutils
 
       ## Data visualzation/manipulation
       gawk
@@ -198,6 +199,12 @@
     watson = {
       enable = true;
       enableZshIntegration = true;
+    };
+
+    taskwarrior = {
+      enable = true;
+      # colorTheme = null;
+      # config = {};
     };
   };
 }
