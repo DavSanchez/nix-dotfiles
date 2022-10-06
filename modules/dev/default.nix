@@ -35,6 +35,7 @@
       gnumake
       protobuf
       gdb
+      just # project-specific commands
     ]
     ++ lib.optionals pkgs.stdenv.isLinux [
       rr
