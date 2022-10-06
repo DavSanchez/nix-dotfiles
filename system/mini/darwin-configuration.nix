@@ -64,6 +64,7 @@
       "amethyst"
       "brave-browser"
       "dash"
+      "diffusionbee" # Let's have some fun!
       "discord"
       "disk-inventory-x"
       "firefox-developer-edition"
