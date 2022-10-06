@@ -18,11 +18,12 @@
       comma
       cachix
       niv
+      nix # Nix itself
 
       ## Utils
       coreutils
-      binutils
-      pciutils
+      # binutils
+      # pciutils
 
       ## Data visualzation/manipulation
       gawk
@@ -75,8 +76,6 @@
       xdot
       ffmpeg
 
-      # home-manager # CLI (disabled, clashes with topgrade)
-      nix # Nix itself
 
       ## Socials
       gomuks # Matrix client
