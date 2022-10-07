@@ -76,7 +76,6 @@
       xdot
       ffmpeg
 
-
       ## Socials
       gomuks # Matrix client
 
@@ -189,7 +188,7 @@
         };
       };
     };
-    
+
     topgrade = {
       enable = true;
       # settings = { };
