@@ -35,7 +35,7 @@
       gnumake
       protobuf
       gdb
-      lldb
+      # lldb # broken
       just # project-specific commands
     ]
     ++ lib.optionals pkgs.stdenv.isLinux [
