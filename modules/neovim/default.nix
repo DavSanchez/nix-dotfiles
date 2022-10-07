@@ -170,8 +170,8 @@
         # Go
         gopls
 
-        # Haskell
-        haskellPackages.haskell-language-server
+        # Haskell (HLS already available in my system)
+        # haskellPackages.haskell-language-server
 
         # HTML/CSS/JS
         nodePackages.vscode-langservers-extracted
