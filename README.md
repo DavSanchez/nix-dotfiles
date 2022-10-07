@@ -46,5 +46,5 @@ This is usually caused due to VSCod{e,ium} residing in a different path than `/A
 
 ```console
 sudo chown $USER ~/Library/Caches/com.vscodium.ShipIt/* # or com.microsoft.VSCode.ShipIt/*
-xattr -dr com.apple.quarantine "~/Applications/Home Manager Apps/VSCodium.app"
+xattr -dr com.apple.quarantine ~/Applications/Home\ Manager\ Apps/VSCodium.app # Or Visual\ Studio\ Code.app
 ```
