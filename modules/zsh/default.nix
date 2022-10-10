@@ -106,6 +106,10 @@
       ${
         if pkgs.stdenv.isDarwin
         then ''
+          # Use path_helper
+          if [ -x /usr/libexec/path_helper ]; then
+            eval `/usr/libexec/path_helper -s`
+          fi
           # Homebrew
           eval $(/opt/homebrew/bin/brew shellenv)
           # Homebrew sbin
