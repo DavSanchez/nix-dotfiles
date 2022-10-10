@@ -18,7 +18,6 @@
       comma
       cachix
       niv
-      nix # Nix itself
 
       ## Utils
       coreutils
