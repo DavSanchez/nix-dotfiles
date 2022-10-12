@@ -75,7 +75,6 @@
       "insomnia"
       "little-snitch"
       "logseq"
-      # "mactex-no-gui"
       "openemu"
       "openra"
       # "orion" # Alternative WebKit browser
@@ -92,7 +91,6 @@
       "tor-browser"
       "transmission"
       "vlc"
-      "vmware-fusion-tech-preview"
       "warp"
       "wireshark"
       "xld"
