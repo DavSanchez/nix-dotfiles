@@ -80,6 +80,9 @@
 
       ## Security
       oath-toolkit
+
+      ## Typesetting
+      texlive.combined.scheme-small
     ]
     ++ lib.optionals pkgs.stdenv.isDarwin [
       m-cli
