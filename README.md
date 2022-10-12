@@ -28,6 +28,10 @@ I'm trying to replace my current `dotfiles` configuration by basing it in Nix an
 - [`github:Misterio77/nix-config`](https://github.com/Misterio77/nix-config)
 - [`github:nix-community/todomvc-nix`](https://github.com/nix-community/todomvc-nix)
 
+## Further reading
+
+- [Getting started with Nix Flakes and devshell](https://yuanwang.ca/posts/getting-started-with-flakes.html)
+
 ## Issues
 
 ### cannot link '/nix/store/.tmp-link-XX-XXXX' to '/nix/store/.links/XXXXX': File exists
