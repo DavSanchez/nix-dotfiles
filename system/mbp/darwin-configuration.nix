@@ -75,7 +75,7 @@
       "insomnia"
       "little-snitch"
       "logseq"
-      "mactex-no-gui"
+      # "mactex-no-gui"
       "openemu"
       "openra"
       # "orion" # Alternative WebKit browser
