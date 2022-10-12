@@ -82,7 +82,7 @@
       oath-toolkit
 
       ## Typesetting
-      texlive.combined.scheme-small
+      texlive.combined.scheme-full
     ]
     ++ lib.optionals pkgs.stdenv.isDarwin [
       m-cli
