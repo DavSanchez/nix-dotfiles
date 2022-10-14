@@ -115,5 +115,8 @@
   "terminal.integrated.macOptionIsMeta": true,
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "workbench.editorAssociations": {
+    "*.pdf": "latex-workshop-pdf-hook"
   }
 }
