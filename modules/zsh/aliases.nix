@@ -6,6 +6,9 @@
   ytop = "btm";
   # cat = "bat --plain";
 
+  # Edit dotfiles with VSCod{e,ium}
+  dotfiles_vsc = "$VSCODE $DOTFILES";
+
   # docker-compose;
   # dc = "docker-compose";
   # dcu = "docker-compose up --build";
