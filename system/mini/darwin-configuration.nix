@@ -67,7 +67,7 @@
       "diffusionbee" # Let's have some fun!
       "discord"
       "disk-inventory-x"
-      "firefox-developer-edition"
+      "firefox"
       "gqrx"
       "handbrake"
       "imhex"
