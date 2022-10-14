@@ -73,6 +73,7 @@
       "imhex"
       "inso"
       "insomnia"
+      "krita"
       "libreoffice"
       "little-snitch"
       "logseq"

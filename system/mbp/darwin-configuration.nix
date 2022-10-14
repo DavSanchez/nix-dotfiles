@@ -73,6 +73,7 @@
       "imhex"
       "inso"
       "insomnia"
+      "krita"
       "little-snitch"
       "logseq"
       "openemu"
