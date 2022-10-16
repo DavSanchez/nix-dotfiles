@@ -42,6 +42,10 @@ Running `nix-store --optimise` can get a lot of `skipping suspicious writable fi
 
 **Try `nix-collect-garbage --max-freed 10m`.**
 
+Also, this issue seems to happen randomly, each time with a different derivation failing, and if you try enough times it can eventually go away. If you want to automate this to assure you end up actually switching your system:
+
+**Try running `until <switch_command>; do sleep 1; done`**
+
 ### VSCodium won't update
 
 Usually accompanied by the message "An update is ready to install. Visual Studio Code is trying to add a new helper tool".
