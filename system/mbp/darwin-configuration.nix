@@ -85,6 +85,7 @@
       "raycast"
       "remarkable"
       "secretive"
+      # "shortcat" # Manipulate macOS masterfully, minus the mouse
       "sonic-pi"
       "stats"
       "steam"
