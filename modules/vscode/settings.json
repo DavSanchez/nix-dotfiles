@@ -46,7 +46,6 @@
     "**/.metals": true
   },
   "git.autofetch": true,
-  "git.mergeEditor": true,
   "go.lintTool": "golangci-lint",
   "go.toolsManagement.autoUpdate": true,
   "haskell.plugin.eval.config.exception": true,
