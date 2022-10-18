@@ -38,6 +38,10 @@
     # fish.enable = true;
   };
 
+  services = {
+    karabiner-elements.enable = true;
+  };
+
   fonts.fontDir.enable = true;
 
   users = {
