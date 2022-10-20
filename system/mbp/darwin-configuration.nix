@@ -101,6 +101,7 @@
       "zotero"
     ];
     brews = [
+      "bash"
       "conan"
       "whalebrew"
       "pam-reattach" # https://github.com/fabianishere/pam_reattach
