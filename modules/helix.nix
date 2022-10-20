@@ -2,7 +2,7 @@
   programs.helix = {
     enable = true;
     settings = {
-      lsp.display-messages = true;
+      editor.lsp.display-messages = true;
       theme = "base16";
       # keys.normal = {
       #   space.space = "file_picker";
