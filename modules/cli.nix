@@ -84,7 +84,7 @@
       ## Typesetting (with pygments for minted, pygmentex...)
       texlive.combined.scheme-full
       python310Packages.pygments
-      haskellPackages.pandoc-crossref
+      # haskellPackages.pandoc-crossref
     ]
     ++ lib.optionals pkgs.stdenv.isDarwin [
       m-cli

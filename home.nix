@@ -15,7 +15,6 @@
 
   imports = [
     ./modules/aws
-    ./modules/bash
     ./modules/dev
     ./modules/direnv
     ./modules/emacs # Doom emacs (testing)
