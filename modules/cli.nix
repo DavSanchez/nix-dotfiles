@@ -14,6 +14,7 @@
       nix-output-monitor
       nix-update
       nix-diff
+      statix
       nox
       comma
       cachix
