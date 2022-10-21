@@ -41,11 +41,6 @@ in {
       core.editor = "nvim";
       pull.ff = "only";
       pull.rebase = false;
-
-      # NOTE: Required so that `go get` can fetch private repos
-      # NOTE: cargo breaks if this is present in the config
-      # So you have choose between rust or go (Or find a solution for this)
-      # url."ssh://git@github.com/".insteadOf = "https://github.com/";
     };
   };
 
