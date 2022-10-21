@@ -48,9 +48,8 @@
           final: prev: (optionalAttrs (prev.stdenv.system == "aarch64-darwin") {
             inherit
               (final.pkgs-x86)
-              idris2
-              niv
-              purescript
+              # Add packages not available in aarch64-darwin:
+              # idris2
               ;
           })
         );
