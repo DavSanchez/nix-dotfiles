@@ -23,9 +23,18 @@
       # dotnet-sdk
       # rPackages.rlang
       elixir
+      elixir_ls # Langserver
+
       python3
+
       unison-ucm
+
       zig
+      zls # Langserver
+
+      taplo # Langserver
+      nodePackages.yaml-language-server # Langserver
+
       ## Learning
       exercism
       ## Bazel
