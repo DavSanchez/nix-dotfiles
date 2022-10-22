@@ -82,9 +82,12 @@
       }
     ];
 
-    initExtraBeforeCompInit = ''${builtins.readFile ./session_variables.zsh}''
-      + lib.optionalString pkgs.stdenv.isDarwin (builtins.readFile ./session_variables.mac.zsh)
-      + ''
+    initExtraBeforeCompInit = ''
+      ${builtins.readFile ./session_variables.zsh}
+    ''
+    + lib.optionalString pkgs.stdenv.isDarwin (builtins.readFile ./session_variables.mac.zsh)
+    + ''
+
       ${builtins.readFile ./functions.zsh}
 
       bindkey -M vicmd 'k' history-beginning-search-backward
