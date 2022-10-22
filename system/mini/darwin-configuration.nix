@@ -68,7 +68,7 @@
       "adobe-acrobat-reader"
       "amethyst"
       "brave-browser"
-      "dash"
+      # "dash" # Haven't used it
       "diffusionbee" # Let's have some fun!
       "discord"
       "disk-inventory-x"
