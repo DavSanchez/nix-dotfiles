@@ -1,10 +1,9 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
+{ config
+, lib
+, pkgs
+, ...
 }: {
-  home.packages = with pkgs; [];
+  home.packages = with pkgs; [ ];
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -66,8 +65,8 @@
     zplug = {
       enable = true;
       plugins = [
-        {name = "chisui/zsh-nix-shell";}
-        {name = "MichaelAquilina/zsh-you-should-use";}
+        { name = "chisui/zsh-nix-shell"; }
+        { name = "MichaelAquilina/zsh-you-should-use"; }
       ];
     };
     plugins = [
@@ -83,13 +82,9 @@
       }
     ];
 
-    initExtraBeforeCompInit = ''
-      ${builtins.readFile ./session_variables.zsh}
-      ${
-        if pkgs.stdenv.isDarwin
-        then builtins.readFile ./session_variables.mac.zsh
-        else ""
-      }
+    initExtraBeforeCompInit = ''${builtins.readFile ./session_variables.zsh}''
+      + lib.optionalString pkgs.stdenv.isDarwin (builtins.readFile ./session_variables.mac.zsh)
+      + ''
       ${builtins.readFile ./functions.zsh}
 
       bindkey -M vicmd 'k' history-beginning-search-backward
@@ -102,25 +97,20 @@
 
     # envExtra = '' '';
 
-    profileExtra = ''
-      ${
-        if pkgs.stdenv.isDarwin
-        then ''
-          # Use path_helper
-          if [ -x /usr/libexec/path_helper ]; then
-            eval `/usr/libexec/path_helper -s`
-          fi
-          # Homebrew
-          eval $(/opt/homebrew/bin/brew shellenv)
-          # Homebrew sbin
-          export PATH="$(brew --prefix)/sbin:$PATH"
-          # Homebrew completions
-          FPATH="$(brew --prefix)/share/zsh/site-functions:$FPATH"
-          # Haskell for ARM needs to have LLVM available (At least for the moment)
-          export PATH="$(brew --prefix llvm)/bin:${"\${PATH}"}"
-        ''
-        else ''''
-      }
+    profileExtra = ''''
+      + lib.optionalString pkgs.stdenv.isDarwin ''
+      # Use path_helper
+      if [ -x /usr/libexec/path_helper ]; then
+        eval `/usr/libexec/path_helper -s`
+      fi
+      # Homebrew
+      eval $(/opt/homebrew/bin/brew shellenv)
+      # Homebrew sbin
+      export PATH="$(brew --prefix)/sbin:$PATH"
+      # Homebrew completions
+      FPATH="$(brew --prefix)/share/zsh/site-functions:$FPATH"
+      # Haskell for ARM needs to have LLVM available (At least for the moment)
+      export PATH="$(brew --prefix llvm)/bin:${"\${PATH}"}"
     '';
 
     initExtra = ''
