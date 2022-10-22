@@ -1,4 +1,3 @@
-
 # export SSL_CERT_FILE=~/.nix-profile/etc/ssl/certs/ca-bundle.crt
 
 # $(brew --prefix)/bin is mac specific and where brew installs stuff. As we are

@@ -8,7 +8,11 @@
 
   # Enable experimental nix command and flakes
   # nix.package = pkgs.nixUnstable;
-  nix.extraOptions =
+  nix = {
+    settings = {
+      trusted-users = [ "root" "david" ]; # "@admin"
+    };
+    extraOptions =
     ''
       auto-optimise-store = true
       experimental-features = nix-command flakes
@@ -16,6 +20,7 @@
     + lib.optionalString (pkgs.system == "aarch64-darwin") ''
       extra-platforms = x86_64-darwin aarch64-darwin
     '';
+  };
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
