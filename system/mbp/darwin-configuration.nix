@@ -87,7 +87,7 @@
       "protonmail-bridge"
       "protonvpn"
       "qflipper"
-      "raycast"
+      # "raycast" # I don't find it useful at the moment
       "remarkable"
       "secretive"
       # "shortcat" # Manipulate macOS masterfully, minus the mouse
