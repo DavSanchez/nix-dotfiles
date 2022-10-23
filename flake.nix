@@ -3,11 +3,11 @@
 
   inputs = {
     # Package sets
-    nixos-2205.url = "github:nixos/nixpkgs/nixos-22.05";
-    nixos-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-2205-darwin.url = "github:nixos/nixpkgs/nixpkgs-22.05-darwin";
+    # nixos-2205.url = "github:nixos/nixpkgs/nixos-22.05";
+    # nixos-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    # nixpkgs-2205-darwin.url = "github:nixos/nixpkgs/nixpkgs-22.05-darwin";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    master.url = "github:nixos/nixpkgs/master";
+    # master.url = "github:nixos/nixpkgs/master";
 
     # Environment/system management
     home-manager = {
