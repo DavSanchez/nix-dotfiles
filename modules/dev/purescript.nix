@@ -3,9 +3,9 @@
     haskellPackages.purescript
     spago
     pscid
-    nodePackages.purescript-language-server
+    nodePackages.purescript-language-server # Langserver
 
     dhall
-    dhall-lsp-server
+    dhall-lsp-server # Langserver
   ];
 }

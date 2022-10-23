@@ -2,7 +2,7 @@
   home = {
     packages = with pkgs; [
       rustup
-      rust-analyzer
+      rust-analyzer # Langserver
     ];
   };
 }

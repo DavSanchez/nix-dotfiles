@@ -14,11 +14,11 @@
 in {
   home = {
     packages = with pkgs; [
-      hls # My own overlay
+      hls # My own overlay # Langserver
       ghc
       cabal-install
       cabal2nix
-      # haskell-language-server
+      # haskell-language-server # Langserver
       stack
       hpack
       haskellPackages.hoogle

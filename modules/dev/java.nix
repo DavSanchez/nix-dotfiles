@@ -6,7 +6,8 @@
 
     ## Clojure
     clojure
-    leiningen
-    joker
+    clojure-lsp # Langserver
+    # leiningen
+    # joker
   ];
 }

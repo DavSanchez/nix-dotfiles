@@ -6,6 +6,14 @@
   # Enable sudo authentication with Touch ID
   security.pam.enableSudoTouchIdAuth = true;
 
+  system.defaults.dock.autohide = true;
+  system.defaults.dock.mru-spaces = false;
+  system.defaults.dock.orientation = "left";
+  system.defaults.dock.showhidden = true;
+  system.defaults.finder.AppleShowAllExtensions = true;
+  system.keyboard.enableKeyMapping = true;
+  system.keyboard.remapCapsLockToControl = true;
+
   # Enable experimental nix command and flakes
   # nix.package = pkgs.nixUnstable;
   nix = {
@@ -68,7 +76,7 @@
       "adobe-acrobat-reader"
       "amethyst"
       "brave-browser"
-      "dash"
+      # "dash" # Haven't used it
       "diffusionbee" # Let's have some fun!
       "discord"
       "disk-inventory-x"
@@ -89,7 +97,7 @@
       "protonmail-bridge"
       "protonvpn"
       "qflipper"
-      "raycast"
+      # "raycast" # I do not find it that useful at the moment
       "remarkable"
       "secretive"
       # "shortcat" # Manipulate macOS masterfully, minus the mouse

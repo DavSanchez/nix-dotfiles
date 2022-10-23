@@ -28,6 +28,7 @@
 
       ## Terraform
       terraform
+      terraform-ls # Langserver
       terraformer
       terrascan
       # terragrunt
