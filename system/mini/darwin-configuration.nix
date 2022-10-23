@@ -6,6 +6,14 @@
   # Enable sudo authentication with Touch ID
   security.pam.enableSudoTouchIdAuth = true;
 
+  system.defaults.dock.autohide = true;
+  system.defaults.dock.mru-spaces = false;
+  system.defaults.dock.orientation = "left";
+  system.defaults.dock.showhidden = true;
+  system.defaults.finder.AppleShowAllExtensions = true;
+  system.keyboard.enableKeyMapping = true;
+  system.keyboard.remapCapsLockToControl = true;
+
   # Enable experimental nix command and flakes
   # nix.package = pkgs.nixUnstable;
   nix = {
