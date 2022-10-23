@@ -14,7 +14,7 @@
     # For vi mode
     # keyMode = "vi";
     # customPaneNavigationAndResize = true; # For vi mode
-    # escapeTime = 0;
+    escapeTime = 0; # We do not use ESC for any tmux keybindings
 
     historyLimit = 30000;
     extraConfig = ''
