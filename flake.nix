@@ -26,15 +26,15 @@
 
   outputs = {
     self,
+    nixpkgs-unstable,
     home-manager,
     flake-utils,
     devshell,
     darwin,
     ...
   } @ inputs: let
-    nixpkgs = inputs.nixpkgs-unstable;
     inherit (darwin.lib) darwinSystem;
-    inherit (nixpkgs.lib) attrValues makeOverridable optionalAttrs singleton;
+    inherit (nixpkgs-unstable.lib) attrValues makeOverridable optionalAttrs singleton;
 
     # Configuration for `nixpkgs`
     nixpkgsConfig = {
@@ -96,7 +96,7 @@
         apple-silicon = final: prev:
           optionalAttrs (prev.stdenv.system == "aarch64-darwin") {
             # Add access to x86 packages system is running Apple Silicon
-            pkgs-x86 = import nixpkgs {
+            pkgs-x86 = import nixpkgs-unstable {
               system = "x86_64-darwin";
               inherit (nixpkgsConfig) config;
             };
@@ -107,7 +107,7 @@
     }
     // flake-utils.lib.eachDefaultSystem
     (system: let
-      pkgs = import nixpkgs {
+      pkgs = import nixpkgs-unstable {
         inherit system;
         overlays = [devshell.overlay];
       };
