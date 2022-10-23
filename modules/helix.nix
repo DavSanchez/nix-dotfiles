@@ -9,7 +9,7 @@ _: {
           left = ["mode" "spinner"];
         };
       };
-      theme = "onedarker";
+      # theme = "onedarker";
       # keys.normal = {
       #   space.space = "file_picker";
       #   space.w = ":w";
