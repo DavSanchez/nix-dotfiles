@@ -9,10 +9,14 @@
   system.defaults.dock.autohide = true;
   system.defaults.dock.mru-spaces = false;
   system.defaults.dock.orientation = "left";
-  system.defaults.dock.showhidden = true;
+  # system.defaults.dock.showhidden = true;
   system.defaults.finder.AppleShowAllExtensions = true;
-  system.keyboard.enableKeyMapping = true;
-  system.keyboard.remapCapsLockToControl = true;
+  system.defaults.finder.AppleShowAllFiles = true;
+  system.defaults.finder.ShowPathBar = true;
+  system.defaults.finder.ShowStatusBar = true;
+  # system.keyboard.enableKeyMapping = true;
+  # system.keyboard.remapCapsLockToControl = true;
+  system.defaults.magicmouse.MouseButtonMode = "TwoButton";
 
   # Enable experimental nix command and flakes
   # nix.package = pkgs.nixUnstable;
