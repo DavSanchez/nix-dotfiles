@@ -1,9 +1,10 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }: {
-  home.packages = with pkgs; [ ];
+  home.packages = with pkgs; [];
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -65,8 +66,8 @@
     zplug = {
       enable = true;
       plugins = [
-        { name = "chisui/zsh-nix-shell"; }
-        { name = "MichaelAquilina/zsh-you-should-use"; }
+        {name = "chisui/zsh-nix-shell";}
+        {name = "MichaelAquilina/zsh-you-should-use";}
       ];
     };
     plugins = [
@@ -82,39 +83,41 @@
       }
     ];
 
-    initExtraBeforeCompInit = ''
-      ${builtins.readFile ./session_variables.zsh}
-    ''
-    + lib.optionalString pkgs.stdenv.isDarwin (builtins.readFile ./session_variables.mac.zsh)
-    + ''
+    initExtraBeforeCompInit =
+      ''
+        ${builtins.readFile ./session_variables.zsh}
+      ''
+      + lib.optionalString pkgs.stdenv.isDarwin (builtins.readFile ./session_variables.mac.zsh)
+      + ''
 
-      ${builtins.readFile ./functions.zsh}
+        ${builtins.readFile ./functions.zsh}
 
-      bindkey -M vicmd 'k' history-beginning-search-backward
-      bindkey -M vicmd 'j' history-beginning-search-forward
+        bindkey -M vicmd 'k' history-beginning-search-backward
+        bindkey -M vicmd 'j' history-beginning-search-forward
 
-      # ssh-agent (oh-my-zsh plugin) settings should be added before OMZ is sourced
-      # lazy load (https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/ssh-agent#lazy)
-      zstyle :omz:plugins:ssh-agent lazy yes
-    '';
+        # ssh-agent (oh-my-zsh plugin) settings should be added before OMZ is sourced
+        # lazy load (https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/ssh-agent#lazy)
+        zstyle :omz:plugins:ssh-agent lazy yes
+      '';
 
     # envExtra = '' '';
 
-    profileExtra = ''''
+    profileExtra =
+      ''''
       + lib.optionalString pkgs.stdenv.isDarwin ''
-      # Use path_helper
-      if [ -x /usr/libexec/path_helper ]; then
-        eval `/usr/libexec/path_helper -s`
-      fi
-      # Homebrew
-      eval $(/opt/homebrew/bin/brew shellenv)
-      # Homebrew sbin
-      export PATH="$(brew --prefix)/sbin:$PATH"
-      # Homebrew completions
-      FPATH="$(brew --prefix)/share/zsh/site-functions:$FPATH"
-      # Haskell for ARM needs to have LLVM available (Not needed now?)
-      # export PATH="$(brew --prefix llvm)/bin:${"\${PATH}"}"
-    '';
+        # Use path_helper
+        if [ -x /usr/libexec/path_helper ]; then
+          eval `/usr/libexec/path_helper -s`
+        fi
+        # Homebrew
+        eval $(/opt/homebrew/bin/brew shellenv)
+        # Homebrew sbin
+        export PATH="$(brew --prefix)/sbin:$PATH"
+        # Homebrew completions
+        FPATH="$(brew --prefix)/share/zsh/site-functions:$FPATH"
+        # Haskell for ARM needs to have LLVM available (Not needed now?)
+        # export PATH="$(brew --prefix llvm)/bin:${"\${PATH}"}"
+      '';
 
     initExtra = ''
       # Do not add command to history if prepended by space

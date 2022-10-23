@@ -3,7 +3,7 @@
   pkgs,
   ...
 }: let
-   inherit (pkgs.haskell.lib) disableCabalFlag;
+  inherit (pkgs.haskell.lib) disableCabalFlag;
   hlsWithoutOrmolus = pkgs.haskellPackages.haskell-language-server.override {
     # supportedGhcVersions = [ "924" ];
     hls-fourmolu-plugin = null;
