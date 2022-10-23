@@ -22,7 +22,7 @@
   # nix.package = pkgs.nixUnstable;
   nix = {
     settings = {
-      trusted-users = [ "root" "david" ]; # "@admin"
+      trusted-users = [ "root" "david" ]; # For groups prepend @: "@admin"
     };
     extraOptions =
     ''
