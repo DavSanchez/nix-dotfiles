@@ -11,7 +11,7 @@
   system.defaults.dock.orientation = "left";
   # system.defaults.dock.showhidden = true;
   system.defaults.finder.AppleShowAllExtensions = true;
-  system.defaults.finder.AppleShowAllFiles = true;
+  # system.defaults.finder.AppleShowAllFiles = true;
   system.defaults.finder.ShowPathbar = true;
   system.defaults.finder.ShowStatusBar = true;
   # system.keyboard.enableKeyMapping = true;
