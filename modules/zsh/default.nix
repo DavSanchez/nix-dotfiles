@@ -112,8 +112,8 @@
       export PATH="$(brew --prefix)/sbin:$PATH"
       # Homebrew completions
       FPATH="$(brew --prefix)/share/zsh/site-functions:$FPATH"
-      # Haskell for ARM needs to have LLVM available (At least for the moment)
-      export PATH="$(brew --prefix llvm)/bin:${"\${PATH}"}"
+      # Haskell for ARM needs to have LLVM available (Not needed now?)
+      # export PATH="$(brew --prefix llvm)/bin:${"\${PATH}"}"
     '';
 
     initExtra = ''
