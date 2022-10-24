@@ -6,9 +6,6 @@ _: {
         line-number = "relative";
         lsp.display-messages = true;
         color-modes = true;
-        statusline = {
-          left = ["mode" "spinner"];
-        };
       };
       theme = "catppuccin_mocha";
       # keys.normal = {
