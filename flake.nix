@@ -154,7 +154,7 @@
             category = "Flake";
             help = "Update the flake lock file only";
             command = ''
-              nix flake lock
+              nix flake update
             '';
           }
 
