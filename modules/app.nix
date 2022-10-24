@@ -9,6 +9,7 @@ lib.mkMerge [
     home.packages = with pkgs;
       [
         element-desktop
+        lapce
         # handbrake
         # logseq
         # gqrx
