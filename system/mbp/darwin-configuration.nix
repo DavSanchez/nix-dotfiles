@@ -55,7 +55,7 @@
     # fish.enable = true;
   };
 
-  fonts.fontDir.enable = true;
+  # fonts.fontDir.enable = true; # Ventura makes this segfault ?
 
   users = {
     users.david = {
