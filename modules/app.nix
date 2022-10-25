@@ -22,11 +22,21 @@ lib.mkMerge [
         # mtr-gui
       ]
       ++ lib.optionals pkgs.stdenv.isDarwin [
-        iterm2
+        # iterm2
       ]
       ++ lib.optionals pkgs.stdenv.isLinux [
         zathura
       ];
+
+    programs.alacritty = {
+      enable = true;
+      settings = {
+        shell = {
+          # Runs bash by default since zsh is configured to enter tmux automatically
+          program = "/bin/bash";
+        };
+      };
+    };
   }
   {
     # Symlink macos applications. This does not happen by default.
