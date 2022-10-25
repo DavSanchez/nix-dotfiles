@@ -34,6 +34,7 @@ lib.mkMerge [
         shell = {
           # Runs bash by default since zsh is configured to enter tmux automatically
           program = "/bin/bash";
+          args = ["--login"];
         };
       };
     };
