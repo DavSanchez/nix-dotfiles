@@ -117,5 +117,6 @@
   },
   "workbench.editorAssociations": {
     "*.pdf": "latex-workshop-pdf-hook"
-  }
+  },
+  "haskell.manageHLS": "PATH"
 }
