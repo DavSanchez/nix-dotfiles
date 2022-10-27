@@ -28,13 +28,21 @@ lib.mkMerge [
         zathura
       ];
 
-    programs.alacritty = {
-      enable = true;
-      settings = {
-        shell = {
-          # Runs bash by default since zsh is configured to enter tmux automatically
-          program = "/bin/bash";
-          args = ["--login"];
+    programs = {
+      kitty = {
+        enable = true;
+      };
+      alacritty = {
+        enable = true;
+        settings = {
+          shell = {
+            # Runs bash by default since zsh is configured to enter tmux automatically
+            program = "/bin/bash";
+            args = [
+              "--login"
+              "--interactive"
+            ];
+          };
         };
       };
     };
