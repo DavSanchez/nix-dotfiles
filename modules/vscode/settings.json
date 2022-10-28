@@ -111,7 +111,6 @@
   "workbench.iconTheme": "material-icon-theme",
   "workbench.productIconTheme": "material-product-icons",
   "nix.formatterPath": "alejandra",
-  "terminal.integrated.macOptionIsMeta": true,
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
