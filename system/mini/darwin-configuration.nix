@@ -79,6 +79,7 @@
     casks = [
       "adobe-acrobat-reader"
       "amethyst"
+      "authy"
       "brave-browser"
       # "dash" # Haven't used it
       "diffusionbee" # Let's have some fun!
