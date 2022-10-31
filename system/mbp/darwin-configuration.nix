@@ -86,6 +86,7 @@
       "discord"
       "disk-inventory-x"
       "firefox"
+      "ghidra"
       "gqrx"
       "handbrake"
       "imhex"
