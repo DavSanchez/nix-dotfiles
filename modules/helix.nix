@@ -5,6 +5,7 @@ _: {
       editor = {
         line-number = "relative";
         lsp.display-messages = true;
+        true-color = true;
         color-modes = true;
       };
       theme = "catppuccin_mocha";
