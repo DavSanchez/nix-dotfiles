@@ -1,7 +1,6 @@
-{
-  lib,
-  pkgs,
-  ...
+{ lib
+, pkgs
+, ...
 }:
 # VSCode expects writable settings.json
 # https://github.com/nix-community/home-manager/issues/1800
@@ -88,8 +87,8 @@
         {
           name = "better-cpp-syntax";
           publisher = "jeff-hykin";
-          version = "1.15.19";
-          sha256 = "13v1lqqfvgkf5nm89b39hci65fnz4j89ngkg9p103l1p1fhncr41";
+          version = "1.16.3";
+          sha256 = "1fdchrm3i7qlhqnyi2icgcmi4b0kr27bp0mgys7iyswfqh3nfji7";
         }
         {
           name = "vscode-kafka";
