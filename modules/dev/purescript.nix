@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
-    haskellPackages.purescript
+    purescript
     spago
     pscid
     nodePackages.purescript-language-server # Langserver
