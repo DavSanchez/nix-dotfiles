@@ -1,5 +1,6 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
+    # https://discourse.purescript.org/t/recommended-tooling-for-purescript-in-2022/3206
     purescript
     spago
     
