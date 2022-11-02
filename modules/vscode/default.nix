@@ -27,7 +27,7 @@
         dhall.dhall-lang
         dhall.vscode-dhall-lsp-server
         eamodio.gitlens
-        esbenp.prettier-vscode
+        # esbenp.prettier-vscode
         github.github-vscode-theme
         golang.go
         gruntfuggly.todo-tree
