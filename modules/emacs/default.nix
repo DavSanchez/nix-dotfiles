@@ -5,7 +5,7 @@ let
     pkgs.callPackage
     (builtins.fetchTarball {
       url = "https://github.com/nix-community/nix-doom-emacs/archive/master.tar.gz";
-      sha256 = "sha256:056dfbpvrpdgbd5b5m7pnq8f4k0r7srw3p98cs3nd65rkai3fx2k";
+      sha256 = "sha256:03w6nkyc72j4rszh1iyqb5p3n28w661bgc7dix6i5aygkf3sn86b";
     })
     {
       doomPrivateDir = ./doom.d; # Directory containing your config.el init.el
