@@ -48,7 +48,7 @@
       }
     ];
 
-    tmuxinator.enable = true;
-    tmuxp.enable = true;
+    # tmuxinator.enable = true;
+    # tmuxp.enable = true;
   };
 }

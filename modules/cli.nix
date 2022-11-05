@@ -108,8 +108,8 @@
       fileWidgetCommand = "fd --type f";
       fileWidgetOptions = ["--preview 'head {}'"];
       historyWidgetOptions = ["--sort" "--exact"];
-      tmux.enableShellIntegration = true;
-      tmux.shellIntegrationOptions = ["-d 40%"];
+      # tmux.enableShellIntegration = true;
+      # tmux.shellIntegrationOptions = ["-d 40%"];
     };
 
     bat = {
