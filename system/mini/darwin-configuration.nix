@@ -141,6 +141,7 @@
       "Numbers" = 409203825;
       "Pages" = 409201541;
       "Reeder" = 1529448980;
+      "Spring for Twitter" = 1508706541;
       "The Unarchiver" = 425424353;
       "UTM" = 1538878817;
       "WhatsApp" = 1147396723;
