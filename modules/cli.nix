@@ -80,7 +80,7 @@
       gomuks # Matrix client
 
       ## Security
-      oath-toolkit
+      # oath-toolkit
 
       ## Typesetting (with pygments for minted, pygmentex...)
       texlive.combined.scheme-full
