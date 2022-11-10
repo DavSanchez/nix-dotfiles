@@ -20,6 +20,7 @@
         arrterian.nix-env-selector
         betterthantomorrow.calva
         bungcip.better-toml
+        catppuccin.catppuccin-vsc
         christian-kohler.path-intellisense
         davidanson.vscode-markdownlint
         dbaeumer.vscode-eslint
@@ -34,6 +35,7 @@
         haskell.haskell
         jakebecker.elixir-ls
         james-yu.latex-workshop
+        jdinhlife.gruvbox
         jnoortheen.nix-ide
         justusadam.language-haskell
         llvm-vs-code-extensions.vscode-clangd
