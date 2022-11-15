@@ -37,7 +37,7 @@
     package = pkgs.nixUnstable;
     gc = {
       automatic = true;
-      dates = "weekly";
+      interval = { Day = 7; };
     };
 
     # Add each flake input as a registry
