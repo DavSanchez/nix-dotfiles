@@ -2,6 +2,7 @@
   pkgs,
   config,
   lib,
+  inputs,
   ...
 }: {
   # Enable sudo authentication with Touch ID
