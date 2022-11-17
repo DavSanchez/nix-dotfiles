@@ -21,43 +21,44 @@
 
     devshell.url = "github:numtide/devshell";
     flake-utils.url = "github:numtide/flake-utils";
-    # nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
+    nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
   };
 
-  outputs = {
-    self,
-    nixpkgs-unstable,
-    home-manager,
-    flake-utils,
-    devshell,
-    darwin,
-    ...
-  } @ inputs: let
-    inherit (darwin.lib) darwinSystem;
-    inherit (nixpkgs-unstable.lib) attrValues makeOverridable optionalAttrs singleton;
+  outputs =
+    { self
+    , nixpkgs-unstable
+    , home-manager
+    , flake-utils
+    , devshell
+    , darwin
+    , ...
+    } @ inputs:
+    let
+      inherit (darwin.lib) darwinSystem;
+      inherit (nixpkgs-unstable.lib) attrValues makeOverridable optionalAttrs singleton;
 
-    # Configuration for `nixpkgs`
-    nixpkgsConfig = {
-      config = {allowUnfree = true;};
-      overlays =
-        attrValues self.overlays
-        ++ singleton (
-          # Sub in x86 version of packages that don't build on Apple Silicon yet
-          final: prev: (optionalAttrs (prev.stdenv.system == "aarch64-darwin") {
-            inherit
-              (final.pkgs-x86)
-              # Add packages not available in aarch64-darwin:
-              
-              purescript
-              # idris2
-              
-              zig
-              zls
-              ;
-          })
-        );
-    };
-  in
+      # Configuration for `nixpkgs`
+      nixpkgsConfig = {
+        config = { allowUnfree = true; };
+        overlays =
+          attrValues self.overlays
+          ++ singleton (
+            # Sub in x86 version of packages that don't build on Apple Silicon yet
+            final: prev: (optionalAttrs (prev.stdenv.system == "aarch64-darwin") {
+              inherit
+                (final.pkgs-x86)
+                # Add packages not available in aarch64-darwin:
+
+                purescript
+                # idris2
+
+                zig
+                zls
+                ;
+            })
+          );
+      };
+    in
     {
       # macOS systems using nix-darwin
       darwinConfigurations = {
@@ -74,7 +75,7 @@
                 users.david = import ./home.nix;
                 # Optionally, use home-manager.extraSpecialArgs to pass
                 # arguments to home.nix
-                # extraSpecialArgs = { };
+                extraSpecialArgs = { inherit (inputs) nix-doom-emacs; };
               };
             }
           ];
@@ -90,6 +91,7 @@
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 users.david = import ./home.nix;
+                extraSpecialArgs = { inherit (inputs) nix-doom-emacs; };
               };
             }
           ];
@@ -111,139 +113,141 @@
       templates = import ./templates;
     }
     // flake-utils.lib.eachDefaultSystem
-    (system: let
-      pkgs = import nixpkgs-unstable {
-        inherit system;
-        overlays = [devshell.overlay];
-      };
-    in {
-      formatter = pkgs.alejandra;
-      # Trying devShells and devshell as a better alternative to Makefile.
-      # https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-develop.html
-      # https://github.com/numtide/devshell
-      devShells.default = pkgs.devshell.mkShell {
-        devshell.motd = ''
-          {bold}{14}🔨 My home configs 🔨{reset}
-          $(type -p menu &>/dev/null && menu)
-        '';
+      (system:
+      let
+        pkgs = import nixpkgs-unstable {
+          inherit system;
+          overlays = [ devshell.overlay ];
+        };
+      in
+      {
+        formatter = pkgs.alejandra;
+        # Trying devShells and devshell as a better alternative to Makefile.
+        # https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-develop.html
+        # https://github.com/numtide/devshell
+        devShells.default = pkgs.devshell.mkShell {
+          devshell.motd = ''
+            {bold}{14}🔨 My home configs 🔨{reset}
+            $(type -p menu &>/dev/null && menu)
+          '';
 
-        commands = [
-          # # --- Fun ---
-          # {
-          #   name = "dev:hello";
-          #   category = "Fun";
-          #   help = "Print a nice hello world";
-          #   command = ''
-          #     nix run '.#figlet' -- -f isometric1 -c "Hello World"
-          #   '';
-          # }
+          commands = [
+            # # --- Fun ---
+            # {
+            #   name = "dev:hello";
+            #   category = "Fun";
+            #   help = "Print a nice hello world";
+            #   command = ''
+            #     nix run '.#figlet' -- -f isometric1 -c "Hello World"
+            #   '';
+            # }
 
-          # --- Initial Setup ---
-          {
-            name = "dev:install";
-            category = "Initial Setup";
-            help = "Install home-manager itself and apply the home configuration";
-            command = ''
-              export HOME_MANAGER_BACKUP_EXT=old
-              nix build --no-link '.#homeConfigurations.<user>.activationPackage'
-              "$(nix path-info '.#homeConfigurations.<user>.activationPackage')"/activate
-              direnv allow
-            '';
-          }
+            # --- Initial Setup ---
+            {
+              name = "dev:install";
+              category = "Initial Setup";
+              help = "Install home-manager itself and apply the home configuration";
+              command = ''
+                export HOME_MANAGER_BACKUP_EXT=old
+                nix build --no-link '.#homeConfigurations.<user>.activationPackage'
+                "$(nix path-info '.#homeConfigurations.<user>.activationPackage')"/activate
+                direnv allow
+              '';
+            }
 
-          # --- Flake ---
-          {
-            name = "dev:update";
-            category = "Flake";
-            help = "Update the flake lock file only";
-            command = ''
-              nix flake update
-            '';
-          }
+            # --- Flake ---
+            {
+              name = "dev:update";
+              category = "Flake";
+              help = "Update the flake lock file only";
+              command = ''
+                nix flake update
+              '';
+            }
 
-          # --- Home Environment ---
-          {
-            name = "dev:ls-pkg";
-            category = "Home";
-            help = "List all packages installed in home-manager-path";
-            command = ''
-              home-manager packages
-            '';
-          }
-          {
-            name = "dev:ls-gen";
-            category = "Home";
-            help = "List all home environment generations";
-            command = ''
-              home-manager generations
-            '';
-          }
+            # --- Home Environment ---
+            {
+              name = "dev:ls-pkg";
+              category = "Home";
+              help = "List all packages installed in home-manager-path";
+              command = ''
+                home-manager packages
+              '';
+            }
+            {
+              name = "dev:ls-gen";
+              category = "Home";
+              help = "List all home environment generations";
+              command = ''
+                home-manager generations
+              '';
+            }
 
-          # --- Darwin ---
-          {
-            name = "dev:switch_mbp";
-            category = "Darwin";
-            help = "Switch darwin to rebuild and apply `darwin-configuration.nix` changes";
-            command = ''
-              nix build ".#darwinConfigurations.Davids-MacBook-Pro.system"
-              ./result/sw/bin/darwin-rebuild switch --flake ".#Davids-MacBook-Pro"
-            '';
-          }
+            # --- Darwin ---
+            {
+              name = "dev:switch_mbp";
+              category = "Darwin";
+              help = "Switch darwin to rebuild and apply `darwin-configuration.nix` changes";
+              command = ''
+                nix build ".#darwinConfigurations.Davids-MacBook-Pro.system"
+                ./result/sw/bin/darwin-rebuild switch --flake ".#Davids-MacBook-Pro"
+              '';
+            }
 
-          {
-            name = "dev:switch_mini";
-            category = "Darwin";
-            help = "Switch darwin to rebuild and apply `darwin-configuration.nix` changes";
-            command = ''
-              nix build ".#darwinConfigurations.Davids-Mac-Mini.system"
-              ./result/sw/bin/darwin-rebuild switch --flake ".#Davids-Mac-Mini"
-            '';
-          }
+            {
+              name = "dev:switch_mini";
+              category = "Darwin";
+              help = "Switch darwin to rebuild and apply `darwin-configuration.nix` changes";
+              command = ''
+                nix build ".#darwinConfigurations.Davids-Mac-Mini.system"
+                ./result/sw/bin/darwin-rebuild switch --flake ".#Davids-Mac-Mini"
+              '';
+            }
 
-          # # --- NixOS ---
-          # {
-          #   name = "dev:os-switch";
-          #   category = "NixOS";
-          #   help = "Switch nixos to rebuild and apply `configuration.nix` changes";
-          #   command = ''
-          #     sudo nixos-rebuild switch --flake '.#nixos' --impure
-          #   '';
-          # }
+            # # --- NixOS ---
+            # {
+            #   name = "dev:os-switch";
+            #   category = "NixOS";
+            #   help = "Switch nixos to rebuild and apply `configuration.nix` changes";
+            #   command = ''
+            #     sudo nixos-rebuild switch --flake '.#nixos' --impure
+            #   '';
+            # }
 
-          # --- Utility ---
-          {
-            name = "dev:fmt";
-            category = "Utility";
-            help = "Format nix files";
-            command = ''
-              nix fmt
-            '';
-          }
-          {
-            name = "dev:gc";
-            category = "Utility";
-            help = "Garbage collection";
-            command = ''
-              sudo nix-collect-garbage
-            '';
-          }
-          {
-            name = "dev:gc-stale";
-            category = "Utility";
-            help = ''Perform garbage collection and delete all generations older than 5 days'';
-            command = ''
-              sudo nix-collect-garbage -d --delete-older-than 5d
-            '';
-          }
-          {
-            name = "dev:gc-all";
-            category = "Utility";
-            help = ''Perform garbage collection and delete all old generations'';
-            command = ''
-              sudo nix-collect-garbage -d
-            '';
-          }
-        ];
-      };
-    });
+            # --- Utility ---
+            {
+              name = "dev:fmt";
+              category = "Utility";
+              help = "Format nix files";
+              command = ''
+                nix fmt
+              '';
+            }
+            {
+              name = "dev:gc";
+              category = "Utility";
+              help = "Garbage collection";
+              command = ''
+                sudo nix-collect-garbage
+              '';
+            }
+            {
+              name = "dev:gc-stale";
+              category = "Utility";
+              help = ''Perform garbage collection and delete all generations older than 5 days'';
+              command = ''
+                sudo nix-collect-garbage -d --delete-older-than 5d
+              '';
+            }
+            {
+              name = "dev:gc-all";
+              category = "Utility";
+              help = ''Perform garbage collection and delete all old generations'';
+              command = ''
+                sudo nix-collect-garbage -d
+              '';
+            }
+          ];
+        };
+      });
 }
