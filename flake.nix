@@ -48,12 +48,10 @@
               inherit
                 (final.pkgs-x86)
                 # Add packages not available in aarch64-darwin:
-
                 purescript
                 # idris2
-
-                zig
-                zls
+                # zig
+                # zls
                 ;
             })
           );
