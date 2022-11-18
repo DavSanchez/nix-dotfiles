@@ -60,25 +60,16 @@
           "xcode"
         ];
     };
+
     zplug = {
       enable = true;
       plugins = [
         {name = "chisui/zsh-nix-shell";}
         {name = "MichaelAquilina/zsh-you-should-use";}
+        {name = "wfxr/formarks";}
+        {name = "hlissner/zsh-autopair"; tags = ["defer:2"];}
       ];
     };
-    plugins = [
-      {
-        name = "zsh-autopair";
-        src = pkgs.fetchFromGitHub {
-          owner = "hlissner";
-          repo = "zsh-autopair";
-          rev = "v1.0";
-          sha256 = "1h0vm2dgrmb8i2pvsgis3lshc5b0ad846836m62y8h3rdb3zmpy1";
-        };
-        file = "autopair.zsh";
-      }
-    ];
 
     initExtraBeforeCompInit =
       ''
@@ -94,7 +85,7 @@
 
         # ssh-agent (oh-my-zsh plugin) settings should be added before OMZ is sourced
         # lazy load (https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/ssh-agent#lazy)
-        zstyle :omz:plugins:ssh-agent lazy yes
+        # zstyle :omz:plugins:ssh-agent lazy yes
       '';
 
     # envExtra = '' '';
