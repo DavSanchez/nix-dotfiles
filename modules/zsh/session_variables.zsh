@@ -23,3 +23,5 @@ export NIX_PATH="$HOME/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH"
 export FPATH=~/.nix-profile/share/zsh/site-functions:$FPATH
 
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+
+export PATH="$HOME/.local/bin:$PATH"
