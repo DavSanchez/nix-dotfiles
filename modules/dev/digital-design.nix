@@ -2,7 +2,7 @@
   home.packages = with pkgs; [
     yosys
     verilator
-    verible
+    # verible
     # veridian ??
     # clash # Check possibilities
   ];
