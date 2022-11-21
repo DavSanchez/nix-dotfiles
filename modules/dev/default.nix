@@ -34,6 +34,9 @@
 
       taplo # Langserver
       nodePackages.yaml-language-server # Langserver
+      
+      elmPackages.elm
+      elmPackages.elm-language-server
 
       ## Learning
       exercism
