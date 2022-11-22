@@ -2,27 +2,19 @@
   lib,
   pkgs,
   ...
-}: let
-  inherit (pkgs.haskell.lib) disableCabalFlag;
-  hlsWithoutOrmolus = pkgs.haskellPackages.haskell-language-server.override {
-    # supportedGhcVersions = [ "924" ];
-    hls-fourmolu-plugin = null;
-    hls-ormolu-plugin = null;
-  };
-  withoutFourmoluF = disableCabalFlag hlsWithoutOrmolus "fourmolu";
-  hls = disableCabalFlag withoutFourmoluF "ormolu";
-in {
+}: {
   home = {
     packages = with pkgs; [
-      hls # My own overlay # Langserver
-      ghc
-      cabal-install
-      cabal2nix
-      # haskell-language-server # Langserver
+      haskellPackages.ghc
+      
+      haskellPackages.cabal-install
       stack
-      hpack
-      haskellPackages.hoogle
+      
+      haskellPackages.haskell-language-server # Langserver
       haskellPackages.implicit-hie
+      
+      haskellPackages.hoogle
+      haskellPackages.hpack
     ];
 
     # hoogle ghci integration
