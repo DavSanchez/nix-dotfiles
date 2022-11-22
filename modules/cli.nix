@@ -50,6 +50,11 @@
       ripgrep
       dua
       fd
+      bat-extras.prettybat
+      bat-extras.batman
+      bat-extras.batgrep
+      bat-extras.batdiff
+      bat-extras.batwatch
       dogdns
       procs
       sd
@@ -106,17 +111,17 @@
       defaultCommand = "fd --type f";
       defaultOptions = ["--height 40%" "--border"];
       fileWidgetCommand = "fd --type f";
-      fileWidgetOptions = ["--preview 'head {}'"];
+      fileWidgetOptions = ["--preview 'bat --color=always --style=numbers --line-range=:500 {}'"];
       historyWidgetOptions = ["--sort" "--exact"];
-      # tmux.enableShellIntegration = true;
-      # tmux.shellIntegrationOptions = ["-d 40%"];
+      tmux.enableShellIntegration = true;
+      tmux.shellIntegrationOptions = ["-d 40%"];
     };
 
     bat = {
       enable = true;
       config = {
         theme = "TwoDark";
-        pager = "less -FR --mouse";
+        # pager = "less -FR --mouse";
       };
     };
 
@@ -155,7 +160,7 @@
       enable = true;
       settings = {
         display = {
-          compact = false;
+          compact = true;
           use_pager = true;
         };
         updates = {
