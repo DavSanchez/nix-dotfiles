@@ -10,7 +10,7 @@ export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 
 export KEYTIMEOUT=1
 
-export DOTFILES=~/.dotfiles
+export DOTFILES="$HOME/.dotfiles"
 
 # export ZSH=~/.oh-my-zsh
 export NVIM_TUI_ENABLE_TRUE_COLOR=1
@@ -20,7 +20,7 @@ export LANG="en_US.UTF-8"
 
 # Add python site-packages to path
 export NIX_PATH="$HOME/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH"
-export FPATH=~/.nix-profile/share/zsh/site-functions:$FPATH
+export FPATH="$HOME/.nix-profile/share/zsh/site-functions:$FPATH"
 
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
