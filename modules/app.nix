@@ -32,23 +32,5 @@
         shell = "/bin/bash --login";
       };
     };
-
-    qutebrowser = {
-      enable = true;
-      loadAutoconfig = true;
-      settings = {
-        tabs = {
-          show = "multiple";
-          position = "left";
-        };
-        fonts = {
-          default_family = config.fontProfiles.regular.family;
-          default_size = "12pt";
-        };
-      };
-      extraConfig = ''
-        c.tabs.padding = {"bottom": 10, "left": 10, "right": 10, "top": 10}
-      '';
-    };
   };
 }
