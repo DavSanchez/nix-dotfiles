@@ -8,6 +8,7 @@
     [
       element-desktop
       lapce
+      qutebrowser
       # handbrake
       # logseq
       # gqrx
