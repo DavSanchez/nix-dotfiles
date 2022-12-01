@@ -1,7 +1,7 @@
-{ nix-doom-emacs, ... }:
+{ inputs, ... }:
 {
   imports = [
-    nix-doom-emacs.hmModule
+    inputs.nix-doom-emacs.hmModule
   ];
 
   programs.doom-emacs = {

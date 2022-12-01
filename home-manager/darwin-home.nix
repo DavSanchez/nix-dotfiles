@@ -16,8 +16,8 @@
     ./modules/direnv
     ./modules/emacs # Doom emacs (testing)
     ./modules/git
-    ./modules/nu
     ./modules/neovim
+    ./modules/nu
     ./modules/starship
     ./modules/vscode
     # ./modules/zellij # Not using it (for now). Using tmux.
