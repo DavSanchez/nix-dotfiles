@@ -29,10 +29,10 @@ I'm trying to replace my current `dotfiles` configuration by basing it in Nix an
   - If you don't have home-manager installed, try `nix shell nixpkgs#home-manager`.
   - When activate for the first time, use:
 
-  ```console
-  nix build --no-link <flake-uri>#homeConfigurations.username@hostname.activationPackage
-  "$(nix path-info <flake-uri>#homeConfigurations.jdoe.activationPackage)"/activate
-  ```
+    ```console
+    nix build --no-link .#homeConfigurations.username@hostname.activationPackage
+    "$(nix path-info .#homeConfigurations.username@hostname.activationPackage)"/activate
+    ```
 
 And that's it, really! You're ready to have fun with your configurations using the latest and greatest nix3 flake-enabled command UX.
 
