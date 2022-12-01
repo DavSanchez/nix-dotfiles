@@ -32,7 +32,7 @@
       zig
       zls # Langserver
 
-      taplo # Langserver
+      taplo # TOML Langserver
       nodePackages.yaml-language-server # Langserver
       
       elmPackages.elm
