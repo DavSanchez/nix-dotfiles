@@ -94,7 +94,7 @@
           extraSpecialArgs = { inherit inputs outputs; };
           modules = [
             # > Our main home-manager configuration file <
-            ./home-manager/home.nix
+            ./home-manager/darwin-home.nix
           ];
         };
         "david@mini" = home-manager.lib.homeManagerConfiguration {
@@ -102,7 +102,7 @@
           extraSpecialArgs = { inherit inputs outputs; };
           modules = [
             # > Our main home-manager configuration file <
-            ./home-manager/home.nix
+            ./home-manager/darwin-home.nix
           ];
         };
       };
