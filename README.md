@@ -19,8 +19,26 @@ I'm trying to replace my current `dotfiles` configuration by basing it in Nix an
 > authority or expert in the NixOS space. Seek help on [the NixOS
 > discourse](https://discourse.nixos.org) instead.
 
+## Usage
+
+- Run `sudo nixos-rebuild switch --flake .#hostname` to apply your system configuration.
+  - If you're still on a live installation medium, run `nixos-install --flake .#hostname` instead, and reboot.
+- Run `darwin-rebuild switch --flake .#username@hostname` to apply your home configuration.
+  - If you don't have nix-darwin installed, try `nix build .#darwinConfigurations.hostname.system` or see [here](https://github.com/LnL7/nix-darwin) for installation.
+- Run `home-manager switch --flake .#username@hostname` to apply your home configuration.
+  - If you don't have home-manager installed, try `nix shell nixpkgs#home-manager`.
+  - When activate for the first time, use:
+
+  ```console
+  nix build --no-link <flake-uri>#homeConfigurations.username@hostname.activationPackage
+  "$(nix path-info <flake-uri>#homeConfigurations.jdoe.activationPackage)"/activate
+  ```
+
+And that's it, really! You're ready to have fun with your configurations using the latest and greatest nix3 flake-enabled command UX.
+
 ## Influences
 
+- [`github:misterio77/nix-starter-configs`](https://github.com/Misterio77/nix-starter-configs)
 - [`github:sherubthakur/dotfiles`](https://github.com/sherubthakur/dotfiles)
 - [`github:hlissner/dotfiles`](https://github.com/hlissner/dotfiles)
 - [`github:dustinlyons/nixos-config`](https://github.com/dustinlyons/nixos-config)
