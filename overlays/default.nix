@@ -16,14 +16,6 @@
       # example = prev.example.overrideAttrs (oldAttrs: rec {
       # ...
       # });
-      # apple-silicon = prev.optionalAttrs (prev.stdenv.system == "aarch64-darwin") {
-      #   # Add access to x86 packages system is running Apple Silicon
-      #   pkgs-x86 = import inputs.nixpkgs-unstable {
-      #     system = "x86_64-darwin";
-      #     # inherit (nixpkgsConfig) config;
-      #   };
-      # };
-
       purescript = mkDarwinX86 "purescript";
     };
 }
