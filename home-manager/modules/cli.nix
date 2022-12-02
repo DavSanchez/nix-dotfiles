@@ -153,6 +153,10 @@
       enable = true;
       enableZshIntegration = true;
     };
+    
+    lf = {
+      enable = true;
+    };
 
     bottom.enable = true;
 
