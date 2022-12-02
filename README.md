@@ -27,7 +27,7 @@ I'm trying to replace my current `dotfiles` configuration by basing it in Nix an
   - If you don't have nix-darwin installed, try `nix build .#darwinConfigurations.hostname.system` or see [here](https://github.com/LnL7/nix-darwin) for installation.
 - Run `home-manager switch --flake .#username@hostname` to apply your home configuration.
   - If you don't have home-manager installed, try `nix shell nixpkgs#home-manager`.
-  - When activate for the first time, use:
+  - When using for the first time, if the above does not work, try activating it directly:
 
     ```console
     nix build --no-link .#homeConfigurations.username@hostname.activationPackage
