@@ -20,7 +20,6 @@
     extraConfig = ''
       # Default termtype. If the rcfile sets $TERM, that overrides this value.
       set -g terminal-overrides ',xterm-256color:Tc'
-      set -g default-terminal "xterm-256color" # FIXME: Insisting on this fixes colors in helix?
       # Create splits and vertical splits
       bind-key v split-window -h -p 50 -c "#{pane_current_path}"
       bind-key s split-window -p 50 -c "#{pane_current_path}"
