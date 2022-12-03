@@ -64,6 +64,7 @@
       grex
       hyperfine
       tokei
+      tre-command
 
       ## Other
       vale
