@@ -1,5 +1,5 @@
 # This file defines overlays
-{
+rec {
   # This one brings our custom packages from the 'pkgs' directory
   additions = final: _prev: import ../pkgs { pkgs = final; };
 
@@ -12,13 +12,13 @@
         system = "x86_64-darwin";
         config.allowUnfree = true;
       }).pkgs;
-      mkDarwinX86 = pkgname:
-        prev.lib.optionalAttrs (prev.stdenv.system == "aarch64-darwin") x86DarwinPkgs.${pkgname};
     in
     {
       # example = prev.example.overrideAttrs (oldAttrs: rec {
       # ...
       # });
-      purescript = mkDarwinX86 "purescript";
+    } // prev.lib.optionalAttrs (prev.stdenv.system == "aarch64-darwin") {
+      purescript = x86DarwinPkgs.purescript;
+      kcctl = (additions x86DarwinPkgs null).kcctl;
     };
 }
