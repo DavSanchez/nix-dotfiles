@@ -8,8 +8,9 @@
 stdenv.mkDerivation rec {
   name = "kcctl";
   version = "1.0.0.alpha5";
-
-  baseURL = "https://github.com/kcctl/kcctl/releases/download/v${builtins.replaceStrings ["a"] ["A"] version}/${name}-${version}";
+  
+  uppercaseVersion = "1.0.0.Alpha5";
+  baseURL = "https://github.com/kcctl/kcctl/releases/download/v${uppercaseVersion}/${name}-${uppercaseVersion}";
 
   meta = with lib; {
     description = "A modern and intuitive command line client for Kafka Connect";

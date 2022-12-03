@@ -4,5 +4,7 @@
 { pkgs ? (import ../nixpkgs.nix) { } }: {
   # example = pkgs.callPackage ./example { };
   kcctl = pkgs.callPackage ./kcctl.nix { };
-  cotp = pkgs.callPackage ./cotp.nix { };
+  cotp = pkgs.callPackage ./cotp.nix { 
+    inherit (pkgs.darwin.apple_sdk.frameworks) AppKit;
+  };
 }
