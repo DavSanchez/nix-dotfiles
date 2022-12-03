@@ -8,7 +8,10 @@
   # https://nixos.wiki/wiki/Overlays
   modifications = final: prev:
     let
-      x86DarwinPkgs = (import ../nixpkgs.nix { system = "x86_64-darwin"; }).pkgs;
+      x86DarwinPkgs = (import ../nixpkgs.nix { 
+        system = "x86_64-darwin";
+        config.allowUnfree = true;
+      }).pkgs;
       mkDarwinX86 = pkgname:
         prev.lib.optionalAttrs (prev.stdenv.system == "aarch64-darwin") x86DarwinPkgs.${pkgname};
     in
