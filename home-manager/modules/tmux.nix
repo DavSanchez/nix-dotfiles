@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   programs.zsh = {
     localVariables = {
-      ZSH_TMUX_AUTOSTART = false;
+      # ZSH_TMUX_AUTOSTART = true;
       ZSH_TMUX_CONFIG = "$HOME/.config/tmux/tmux.conf";
     };
   };
