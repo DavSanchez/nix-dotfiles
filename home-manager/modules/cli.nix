@@ -92,6 +92,8 @@
       python310Packages.pygments
 
       haskellPackages.pandoc-crossref
+      
+      cotp
     ]
     ++ lib.optionals pkgs.stdenv.isDarwin [
       m-cli

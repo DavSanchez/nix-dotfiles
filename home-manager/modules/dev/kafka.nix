@@ -3,7 +3,7 @@
     apacheKafka
     kcat
     kaf
-    # kcctl
+    kcctl
     # kaskade
     # confluent-platform
   ];
