@@ -22,8 +22,8 @@
 
       ## Utils
       coreutils
-      # binutils
-      # pciutils
+      binutils
+      pciutils
 
       ## Data visualzation/manipulation
       gawk
@@ -95,6 +95,8 @@
       haskellPackages.pandoc-crossref
       
       cotp
+      
+      w3m
     ]
     ++ lib.optionals pkgs.stdenv.isDarwin [
       m-cli
