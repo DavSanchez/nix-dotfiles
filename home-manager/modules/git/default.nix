@@ -10,7 +10,6 @@ in {
     bfg-repo-cleaner
     git-quick-stats
     git-crypt
-    lazygit
   ];
   programs.git = {
     enable = true;
