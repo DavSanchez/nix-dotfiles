@@ -43,11 +43,12 @@
         llvm-vs-code-extensions.vscode-clangd
         matklad.rust-analyzer
         ms-azuretools.vscode-docker
-        # ms-python.python # FIXME Failing to build, added below
+        ms-python.python
         ms-python.vscode-pylance
         ms-toolsai.jupyter
         ms-toolsai.jupyter-renderers
         ms-vscode-remote.remote-ssh
+        ms-vscode.hexeditor
         pkief.material-icon-theme
         pkief.material-product-icons
         redhat.vscode-yaml
@@ -107,12 +108,6 @@
           sha256 = "1d60hqww1innch277yd3va2snpsp19c7w4v0rxz2jvzvgykfmx77";
         }
         {
-          name = "python";
-          publisher = "ms-python";
-          version = "2022.15.12631011";
-          sha256 = "04zhvgkpbjfjbdxflkrsi874ldlijs295phvp8f1zprxg8qd5f8a";
-        }
-        {
           name = "vscode-postgresql";
           publisher = "ms-ossdata";
           version = "0.3.0";
@@ -129,12 +124,6 @@
           publisher = "ms-vscode-remote";
           version = "0.80.0";
           sha256 = "0zgrd2909xpr3416cji0ha3yl6gl2ry2f38bvx4lsjfmgik0ic6s";
-        }
-        {
-          name = "hexeditor";
-          publisher = "ms-vscode";
-          version = "1.9.8";
-          sha256 = "063n4plhbjm6l5gip6j158n6hgydiccq1f8rc1pgsbfjn3d4612y";
         }
         {
           name = "veriloghdl";
