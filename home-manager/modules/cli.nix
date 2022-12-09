@@ -22,8 +22,8 @@
 
       ## Utils
       coreutils
-      binutils
-      pciutils
+      # binutils # Clashes with GCC
+      # pciutils
 
       ## Data visualzation/manipulation
       gawk
