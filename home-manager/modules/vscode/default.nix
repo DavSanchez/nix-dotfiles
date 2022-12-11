@@ -42,6 +42,7 @@
         justusadam.language-haskell
         llvm-vs-code-extensions.vscode-clangd
         matklad.rust-analyzer
+        mkhl.direnv
         ms-azuretools.vscode-docker
         ms-python.python
         ms-python.vscode-pylance
@@ -68,8 +69,8 @@
         {
           name = "vscode-bazel";
           publisher = "BazelBuild";
-          version = "0.5.0";
-          sha256 = "0gjf42xjhzwbncd6c8p7c60m44bkhk2kcpa3qjg2vr619p0i5514";
+          version = "0.7.0";
+          sha256 = "sha256-/a34MMsHy7zmGrVAtjMWKmulwS+lip3J1YugkACMmxc=";
         }
         {
           name = "disableligatures";
@@ -92,20 +93,14 @@
         {
           name = "better-cpp-syntax";
           publisher = "jeff-hykin";
-          version = "1.16.3";
-          sha256 = "1fdchrm3i7qlhqnyi2icgcmi4b0kr27bp0mgys7iyswfqh3nfji7";
+          version = "1.17.1";
+          sha256 = "sha256-/4NuQ/Rc7YgVEPL9J8E5XdloVlQXYFdkRPaTr9/dov8=";
         }
         {
           name = "vscode-kafka";
           publisher = "jeppeandersen";
           version = "0.15.0";
           sha256 = "1qf4a4d0wngyjdwdsbi8viska8i7gb56d1bc8cwa1ws07lz439gp";
-        }
-        {
-          name = "direnv";
-          publisher = "mkhl";
-          version = "0.6.1";
-          sha256 = "1d60hqww1innch277yd3va2snpsp19c7w4v0rxz2jvzvgykfmx77";
         }
         {
           name = "vscode-postgresql";
@@ -116,26 +111,20 @@
         {
           name = "remote-containers";
           publisher = "ms-vscode-remote";
-          version = "0.252.0";
-          sha256 = "1yrjfxccvg7j64l47ixzc7r1234r7nqk0j3500a8ihfi6qi7cxx5";
-        }
-        {
-          name = "remote-ssh-edit";
-          publisher = "ms-vscode-remote";
-          version = "0.80.0";
-          sha256 = "0zgrd2909xpr3416cji0ha3yl6gl2ry2f38bvx4lsjfmgik0ic6s";
+          version = "0.267.0";
+          sha256 = "sha256-glnDdEsvlmcux+ZO9uyhBZHCey6ge6+nQ1GCXSvqLoM=";
         }
         {
           name = "veriloghdl";
           publisher = "mshr-h";
-          version = "1.5.4";
-          sha256 = "1i8qcfx5v4d30gkyy00a4d8l6ss828va6lp69h9i1ynrgqzl85av";
+          version = "1.5.12";
+          sha256 = "sha256-D7Z3D2SBucBmtDbIEqst/2tGu1wtBFHMspU+wMyQJZE=";
         }
         {
           name = "ide-purescript";
           publisher = "nwolverson";
-          version = "0.25.12";
-          sha256 = "1f9064w18wwp3iy8ciajad8vlshnzyhnqy8h516k0j5bflz781mn";
+          version = "0.26.1";
+          sha256 = "sha256-ccTuoDSZKf1WsTRX2TxXeHy4eRuOXsAc7rvNZ2b56MU=";
         }
         {
           name = "language-purescript";
@@ -146,8 +135,8 @@
         {
           name = "nix-extension-pack";
           publisher = "pinage404";
-          version = "2.0.0";
-          sha256 = "176fl2p5ybifi3w4pcvs9z45mbzh60li84kwysqpn4zz1dpfdgbp";
+          version = "3.0.0";
+          sha256 = "sha256-cWXd6AlyxBroZF+cXZzzWZbYPDuOqwCZIK67cEP5sNk=";
         }
         {
           name = "wavetrace";
