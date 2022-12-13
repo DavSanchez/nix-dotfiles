@@ -19,8 +19,9 @@
       k9s
       kubescape
       kube-score
-      # kubeval # FIXME fails to build on mac for some reason
-      # kompose # FIXME fails to build on mac for some reason
+      kubeval
+      kompose
+      stern
 
       ## AWS
       awscli2
