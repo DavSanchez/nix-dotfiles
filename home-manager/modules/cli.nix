@@ -69,6 +69,7 @@
       ## Other
       vale
       eva
+      rmlint # Extremely fast tool to remove duplicates and other lint from your filesystem
       # chezmoi
 
       # System info
