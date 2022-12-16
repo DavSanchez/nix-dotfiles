@@ -7,7 +7,6 @@
     [
       element-desktop
       lapce   # Code editor similar to VSCode
-      czkawka # Multi functional app to find duplicates, empty folders, similar images etc
       # handbrake
       # logseq
       # gqrx
@@ -24,6 +23,7 @@
     ]
     ++ lib.optionals pkgs.stdenv.isLinux [
       zathura
+      czkawka # Multi functional app to find duplicates, empty folders, similar images etc
     ];
 
   programs = {
