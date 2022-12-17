@@ -10,6 +10,8 @@ in {
     bfg-repo-cleaner
     git-quick-stats
     git-crypt
+
+    sapling
   ];
   programs.git = {
     enable = true;
