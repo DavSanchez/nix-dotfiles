@@ -27,6 +27,8 @@
       awscli2
       ssm-session-manager-plugin
 
+      localstack
+
       ## Terraform
       terraform
       terraform-ls # Langserver
