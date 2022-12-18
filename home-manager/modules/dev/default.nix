@@ -29,8 +29,8 @@
 
       unison-ucm
 
-      zig
-      zls # Langserver
+      # zig
+      # zls # Langserver
 
       taplo # TOML Langserver
       nodePackages.yaml-language-server # Langserver
