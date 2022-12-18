@@ -9,7 +9,7 @@
 {
   programs.vscode = {
     enable = true;
-    package = pkgs.vscodium; # vscodium.fhs for complex extensions?
+    # package = pkgs.vscodium; # vscodium.fhs for complex extensions?
     userSettings = lib.importJSON ./settings.json;
     mutableExtensionsDir = true;
     # Extension issues and other documentation:
@@ -30,6 +30,7 @@
         eamodio.gitlens
         elmtooling.elm-ls-vscode
         # esbenp.prettier-vscode
+        github.copilot
         github.github-vscode-theme
         golang.go
         gruntfuggly.todo-tree
