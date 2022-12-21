@@ -7,6 +7,7 @@ _: {
         lsp.display-messages = true;
         true-color = true;
         color-modes = true;
+        # whitespace.render = "all";
       };
       theme = "catppuccin_mocha";
       # keys.normal = {
