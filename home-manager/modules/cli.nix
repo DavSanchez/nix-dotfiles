@@ -15,10 +15,10 @@
       nix-update
       nix-diff
       statix
-      nox
+      # nox
       comma
       cachix
-      niv
+      # niv
 
       ## Utils
       coreutils
