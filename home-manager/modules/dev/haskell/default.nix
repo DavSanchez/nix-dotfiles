@@ -33,7 +33,7 @@
       scm-init = "git";
       params = {
         author-name = "David Sánchez"; # config.programs.git.userName;
-        author-email = "davsanchez8@proton.me"; # config.programs.git.userEmail;
+        author-email = "davidslt@pm.me"; # config.programs.git.userEmail;
         github-username = "DavSanchez";
       };
     };
