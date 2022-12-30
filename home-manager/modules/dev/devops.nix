@@ -6,11 +6,7 @@
   home.packages = with pkgs;
     [
       ## Containers
-      podman
-      podman-tui
-      podman-compose
-      lazydocker
-      ctop
+      ctop # Docker only?
 
       ## K8s
       minikube
@@ -45,5 +41,9 @@
     ++ lib.optionals pkgs.stdenv.isDarwin [
       ## Container runtimes on macOS
       colima
+    ] ++ lib.optionals pkgs.stdenv.isLinux [
+      podman
+      podman-tui
+      podman-compose
     ];
 }
