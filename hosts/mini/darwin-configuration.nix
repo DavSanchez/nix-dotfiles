@@ -125,6 +125,7 @@
       "diffusionbee" # Let's have some fun!
       "discord"
       "disk-inventory-x"
+      "finch"
       "firefox"
       "ghidra"
       "gqrx"
