@@ -163,6 +163,7 @@
     brews = [
       "bash"
       "conan"
+      "ghcup"  # While Haskell for aarch64-darwin stabilizes in unstable
       "whalebrew"
       "pam-reattach" # https://github.com/fabianishere/pam_reattach
       # "terraform-rover"

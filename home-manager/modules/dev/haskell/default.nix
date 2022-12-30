@@ -4,17 +4,19 @@
   ...
 }: {
   home = {
-    packages = with pkgs; [
-      haskellPackages.ghc
+    packages = with pkgs.haskellPackages; [
+     # Handled via Homebrew + ghcup in macOS until behavior is stabilized 
+    ] ++ lib.optionals pkgs.stdenv.isLinux [
+      ghc
       
-      haskellPackages.cabal-install
+      cabal-install
       stack
       
-      haskellPackages.haskell-language-server # Langserver
-      haskellPackages.implicit-hie
+      haskell-language-server # Langserver
+      implicit-hie
       
-      haskellPackages.hoogle
-      haskellPackages.hpack
+      hoogle
+      hpack
     ];
 
     # hoogle ghci integration
