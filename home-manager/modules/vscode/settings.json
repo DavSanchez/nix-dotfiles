@@ -2,6 +2,9 @@
   "[haskell]": {
     "editor.defaultFormatter": "haskell.haskell"
   },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
   "[svelte]": {
     "editor.defaultFormatter": "svelte.svelte-vscode"
   },
@@ -48,6 +51,7 @@
   "git.autofetch": true,
   "go.lintTool": "golangci-lint",
   "go.toolsManagement.autoUpdate": true,
+  "haskell.manageHLS": "PATH",
   "haskell.plugin.eval.config.exception": true,
   "hexeditor.columnWidth": 16,
   "hexeditor.defaultEndianness": "little",
@@ -96,6 +100,7 @@
   "latex-workshop.linting.chktex.enabled": true,
   "latex-workshop.view.pdf.viewer": "tab",
   "nix.enableLanguageServer": true,
+  "nix.formatterPath": "alejandra",
   "platformio-ide.activateOnlyOnPlatformIOProject": true,
   "python.languageServer": "Pylance",
   "redhat.telemetry.enabled": false,
@@ -107,16 +112,13 @@
   "terraform.codelens.referenceCount": true,
   "verilog.linting.linter": "verilator",
   "window.commandCenter": true,
-  "workbench.colorTheme": "GitHub Dark Default",
-  "workbench.iconTheme": "material-icon-theme",
-  "workbench.productIconTheme": "material-product-icons",
-  "nix.formatterPath": "alejandra",
-  "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
+  "workbench.colorTheme": "Catppuccin Mocha",
   "workbench.editorAssociations": {
     "*.pdf": "latex-workshop-pdf-hook"
   },
-  "workbench.colorTheme": "Catppuccin Mocha",
-  "haskell.manageHLS": "PATH"
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.productIconTheme": "material-product-icons",
+  "[python]": {
+    "editor.formatOnType": true
+  }
 }
