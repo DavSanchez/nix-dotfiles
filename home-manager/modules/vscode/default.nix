@@ -50,7 +50,10 @@
         ms-toolsai.jupyter
         ms-toolsai.jupyter-renderers
         ms-vscode-remote.remote-ssh
+        ms-vscode.cmake-tools
         ms-vscode.hexeditor
+        ms-vscode.makefile-tools
+        ms-vscode.theme-tomorrowkit
         pkief.material-icon-theme
         pkief.material-product-icons
         redhat.vscode-yaml
@@ -80,22 +83,10 @@
           sha256 = "090wg4lin4y06nhg45p9mjsqwfa21bdgafj57swh5z6fpv3pqxx2";
         }
         {
-          name = "doxdocgen";
-          publisher = "cschlosser";
-          version = "1.4.0";
-          sha256 = "1d95znf2vsdzv9jqiigh9zm62dp4m9jz3qcfaxn0n0pvalbiyw92";
-        }
-        {
           name = "nix-develop";
           publisher = "jamesottaway";
           version = "0.0.1";
           sha256 = "0dgkd3z0kxpaa2m01k0xqqsj9f01j4bac5sx8c3jhg19pg9zvl4m";
-        }
-        {
-          name = "better-cpp-syntax";
-          publisher = "jeff-hykin";
-          version = "1.17.1";
-          sha256 = "sha256-/4NuQ/Rc7YgVEPL9J8E5XdloVlQXYFdkRPaTr9/dov8=";
         }
         {
           name = "vscode-kafka";
@@ -108,6 +99,12 @@
           publisher = "ms-ossdata";
           version = "0.3.0";
           sha256 = "02sp5sv1sapynq4xx04b9z86jz2vmcsma1cpkbd05k2cw5g999lk";
+        }
+        {
+          name = "cpptools-themes";
+          publisher = "ms-vscode";
+          version = "2.0.0";
+          sha256 = "sha256-YWA5UsA+cgvI66uB9d9smwghmsqf3vZPFNpSCK+DJxc=";
         }
         {
           name = "remote-containers";
