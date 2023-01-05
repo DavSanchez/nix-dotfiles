@@ -7,4 +7,6 @@
   cotp = pkgs.callPackage ./cotp.nix { 
     inherit (pkgs.darwin.apple_sdk.frameworks) AppKit;
   };
+  confluent-platform-latest = pkgs.callPackage ./confluent-platform.nix { };
+  confluent-cli-latest = pkgs.callPackage ./confluent-cli.nix { };
 }
