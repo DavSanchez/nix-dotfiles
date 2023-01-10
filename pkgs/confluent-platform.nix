@@ -7,7 +7,7 @@
 , ps
 , gnused
 }:
-
+# See https://github.com/krisajenkins/confluent-niv
 stdenv.mkDerivation rec {
   pname = "confluent-platform";
   version = "7.3.1";

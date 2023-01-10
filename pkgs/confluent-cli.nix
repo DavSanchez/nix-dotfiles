@@ -1,5 +1,5 @@
 { pkgs, lib }:
-
+# See https://github.com/krisajenkins/confluent-niv
 pkgs.stdenv.mkDerivation rec {
   name = "confluent-cli";
   version = "2.37.0";
