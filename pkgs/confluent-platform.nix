@@ -25,8 +25,8 @@ stdenv.mkDerivation rec {
   installPhase = ''
     HUB_COMPONENTS_DIR=$out/share/confluent-hub-components
 	mkdir -p $HUB_COMPONENTS_DIR
-    bin/confluent-hub install --no-prompt --component-dir $HUB_COMPONENTS_DIR confluentinc/kafka-connect-aws-lambda:1.1.2
-    bin/confluent-hub install --no-prompt --component-dir $HUB_COMPONENTS_DIR jcustenborder/kafka-connect-spooldir:2.0.62
+    #bin/confluent-hub install --no-prompt --component-dir $HUB_COMPONENTS_DIR confluentinc/kafka-connect-aws-lambda:1.1.2
+    #bin/confluent-hub install --no-prompt --component-dir $HUB_COMPONENTS_DIR jcustenborder/kafka-connect-spooldir:2.0.62
 
     mkdir -p $out
     cp -R * $out
