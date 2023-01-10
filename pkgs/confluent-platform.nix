@@ -14,7 +14,7 @@ stdenv.mkDerivation rec {
 
   src = fetchurl {
     url = "http://packages.confluent.io/archive/${lib.versions.majorMinor version}/confluent-${version}.tar.gz";
-    sha256 = lib.fakeSha256;
+    sha256 = "sha256-I5mDhD1mGoCV6AMaot2vdV19js5Dl7zMi7cPKyLbqA4=";
   };
 
   nativeBuildInputs = [ makeWrapper ];
