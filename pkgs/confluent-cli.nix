@@ -1,49 +1,17 @@
-{ stdenv, autoPatchelfHook, fetchurl, lib }:
+{ pkgs, lib }:
 
-stdenv.mkDerivation rec {
-  pname = "confluent-cli";
+pkgs.stdenv.mkDerivation rec {
+  name = "confluent-cli";
   version = "2.37.0";
+  src = pkgs.fetchurl {
+    url = "https://s3-us-west-2.amazonaws.com/confluent.cloud/confluent-cli/archives/${version}/confluent_v${version}_darwin_arm64.tar.gz";
+    sha256 = lib.fakeSha256;
+  };
 
-  # To get the latest version:
-  # curl -L https://cnfl.io/cli | sh -s -- -l | grep -v latest | sort -V | tail -n1
-  src = fetchurl (if stdenv.hostPlatform.isDarwin then {
-      if stdenv.hostPlatform.isx86_64 then {
-        url = "https://s3-us-west-2.amazonaws.com/confluent.cloud/confluent-cli/archives/${version}/confluent_v${version}_darwin_amd64.tar.gz";
-        sha256 = lib.fakeSha256;
-      } else {
-        url = "https://s3-us-west-2.amazonaws.com/confluent.cloud/confluent-cli/archives/${version}/confluent_v${version}_darwin_arm64.tar.gz";
-        sha256 = lib.fakeSha256;
-      }
-    } else {
-      url = "https://s3-us-west-2.amazonaws.com/confluent.cloud/confluent-cli/archives/${version}/confluent_v${version}_linux_amd64.tar.gz";
-      sha256 = lib.fakeSha256;
-    });
-
-  nativeBuildInputs = lib.optionals stdenv.hostPlatform.isLinux [ autoPatchelfHook ];
-
-  dontStrip = stdenv.isDarwin;
+  dontFixup = true;
 
   installPhase = ''
-    mkdir -p $out/{bin,share/doc/confluent-cli}
-    cp confluent $out/bin/
-    cp LICENSE $out/share/doc/confluent-cli/
-    cp -r legal $out/share/doc/confluent-cli/
+    mkdir -p $out/bin/
+    install -m755 -D confluent $out/bin/
   '';
-
-  meta = with lib; {
-    description = "Confluent CLI";
-    homepage = "https://docs.confluent.io/confluent-cli/current/overview.html";
-    sourceProvenance = with sourceTypes; [ binaryNativeCode ];
-    license = licenses.unfree;
-    maintainers = with maintainers; [ rguevara84 davsanchez ];
-
-    # TODO: There's support for i686 systems but I do not have any such system
-    # to build it locally on, it's also unfree so I cannot rely on ofborg to
-    # build it. Get the list of supported system by looking at the list of
-    # files in the S3 bucket:
-    #
-    #   https://s3-us-west-2.amazonaws.com/confluent.cloud?prefix=confluent-cli/archives/1.25.0/&delimiter=/%27
-    platforms = [ "x86_64-linux" "x86_64-darwin" "aarch64-darwin" ];
-  };
 }
-

@@ -4,5 +4,8 @@
     kaf
     kcctl
     # kaskade
+    confluent-cli
+    confluent-platform
+    avro-tools
   ];
 }
