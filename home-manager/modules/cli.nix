@@ -10,7 +10,7 @@
       alejandra
       nix-prefetch-git
       nix-prefetch-github
-      nix-du
+      # nix-du # Build failing
       nix-output-monitor
       nix-update
       nix-diff
