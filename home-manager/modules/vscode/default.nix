@@ -86,7 +86,7 @@
           name = "copilot-labs";
           publisher = "GitHub";
           version = "0.7.632";
-          sha256 = lib.fakeSha256;
+          sha256 = "sha256-1sMC0xPWseIRXXVsMrisN3A4br36S9pp9hYzsSjanKM=";
         }
         {
           name = "nix-develop";
