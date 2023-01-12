@@ -46,8 +46,8 @@
       ## Other
       gnumake
       protobuf
-      gdb
-      # lldb # broken
+      gdb # Using Rosetta
+      lldb
       just # project-specific commands
     ]
     ++ lib.optionals pkgs.stdenv.isLinux [
