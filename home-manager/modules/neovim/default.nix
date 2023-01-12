@@ -144,6 +144,9 @@
       telescope-nvim
       nerdtree
       neovim-ayu
+
+      # GitHub Copilot
+      copilot-vim
     ];
 
     extraPackages = with pkgs;

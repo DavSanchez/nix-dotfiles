@@ -83,6 +83,12 @@
           sha256 = "090wg4lin4y06nhg45p9mjsqwfa21bdgafj57swh5z6fpv3pqxx2";
         }
         {
+          name = "copilot-labs";
+          publisher = "GitHub";
+          version = "0.7.632";
+          sha256 = lib.fakeSha256;
+        }
+        {
           name = "nix-develop";
           publisher = "jamesottaway";
           version = "0.0.1";
