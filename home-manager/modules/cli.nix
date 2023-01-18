@@ -55,7 +55,7 @@
       bat-extras.batgrep
       bat-extras.batdiff
       bat-extras.batwatch
-      dogdns
+      q # Replacing dogdns
       procs
       sd
       rm-improved
