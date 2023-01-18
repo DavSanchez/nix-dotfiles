@@ -28,7 +28,7 @@
 
   programs = {
     kitty = {
-      enable = true;
+      enable = false;
       settings = {
         # shell = "/bin/bash --login";
         font_family = "JetBrainsMono Nerd Font";

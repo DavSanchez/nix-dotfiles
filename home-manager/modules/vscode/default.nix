@@ -45,8 +45,9 @@
         matklad.rust-analyzer
         mkhl.direnv
         ms-azuretools.vscode-docker
-        ms-python.python
-        ms-python.vscode-pylance
+        # ms-python.python # Temporarily
+        # ms-python.vscode-pylance
+        # ms-pyright.pyright
         ms-toolsai.jupyter
         ms-toolsai.jupyter-renderers
         ms-vscode-remote.remote-ssh

@@ -23,7 +23,7 @@
       awscli2
       ssm-session-manager-plugin
 
-      localstack
+      # localstack # Temporarily
 
       ## Terraform
       terraform
