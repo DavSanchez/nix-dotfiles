@@ -133,6 +133,7 @@
       "imhex"
       "inso"
       "insomnia"
+      "keybase"
       "krita"
       "little-snitch"
       "logseq"
