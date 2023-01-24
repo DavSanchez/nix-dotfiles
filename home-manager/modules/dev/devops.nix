@@ -36,7 +36,8 @@
       ## NixOps
       # nixops
       # nixops-dns
-      morph
+      # morph
+      colmena
     ]
     ++ lib.optionals pkgs.stdenv.isDarwin [
       ## Container runtimes on macOS
