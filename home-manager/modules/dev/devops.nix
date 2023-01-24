@@ -46,5 +46,7 @@
       podman
       podman-tui
       podman-compose
+
+      nixops_unstable
     ];
 }
