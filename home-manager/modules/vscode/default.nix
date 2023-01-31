@@ -10,7 +10,7 @@
     enable = true;
     # package = pkgs.vscodium; # vscodium.fhs for complex extensions?
     userSettings = lib.importJSON (
-      if stdenv.isDarwin
+      if pkgs.stdenv.isDarwin
       then ./settings-darwin.json
       else ./settings.json
     );
