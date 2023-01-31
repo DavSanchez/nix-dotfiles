@@ -1,7 +1,6 @@
-{
-  lib,
-  pkgs,
-  ...
+{ lib
+, pkgs
+, ...
 }:
 # VSCode expects writable settings.json
 # https://github.com/nix-community/home-manager/issues/1800
@@ -10,7 +9,11 @@
   programs.vscode = {
     enable = true;
     # package = pkgs.vscodium; # vscodium.fhs for complex extensions?
-    userSettings = lib.importJSON ./settings.json;
+    userSettings = lib.importJSON (
+      if stdenv.isDarwin
+      then ./settings-darwin.json
+      else ./settings.json
+    );
     mutableExtensionsDir = true;
     # Extension issues and other documentation:
     # https://nixos.wiki/wiki/VSCodium
