@@ -11,7 +11,7 @@
     ./go.nix
     ./haskell
     ./java.nix
-    ./kafka.nix
+    # ./kafka.nix
     ./purescript.nix
     ./rust.nix
   ];
