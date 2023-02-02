@@ -120,6 +120,5 @@
   "[python]": {
     "editor.formatOnType": true
   },
-  "haskell.manageHLS": "GHCup",
-  "terminal.integrated.macOptionIsMeta": true
+  "haskell.manageHLS": "GHCup"
 }
