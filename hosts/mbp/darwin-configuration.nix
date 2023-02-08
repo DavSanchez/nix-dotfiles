@@ -95,6 +95,10 @@
     zsh.enable = true; # default shell on Catalina+
     nix-index.enable = true;
     # fish.enable = true;
+    bash = {
+      enable = true;
+      enableCompletion = true;
+    };
   };
 
   users.users = {
@@ -161,9 +165,9 @@
       "zotero"
     ];
     brews = [
-      "bash"
+      # "bash"
       "conan"
-      "ghcup"  # While Haskell for aarch64-darwin stabilizes in unstable
+      "ghcup"  # While Haskell for aarch64-darwin stabilizes in unstable (yeah I know)
       "whalebrew"
       "pam-reattach" # https://github.com/fabianishere/pam_reattach
       # "terraform-rover"
@@ -172,7 +176,6 @@
       "AdGuard for Safari" = 1440147259;
       "Amphetamine" = 937984704;
       "GarageBand" = 682658836;
-      "Gemini 2" = 1090488118;
       "iMovie" = 408981434;
       "Keynote" = 409183694;
       "Logic Pro" = 634148309;
