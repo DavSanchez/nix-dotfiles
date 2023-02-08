@@ -252,19 +252,11 @@
         "utils": "utils"
       },
       "locked": {
-<<<<<<< HEAD
-        "lastModified": 1675247113,
-        "narHash": "sha256-+YcXjfCP4hNu8A68b/UoXFCTDwKLuLV+x/7dQnM5U/o=",
-        "owner": "nix-community",
-        "repo": "home-manager",
-        "rev": "782cb855b2f23c485011a196c593e2d7e4fce746",
-=======
         "lastModified": 1675855108,
         "narHash": "sha256-KSiF7aTXTLlocFjMj+61USedaaiscD1ek6f/anFqr3Q=",
         "owner": "nix-community",
         "repo": "home-manager",
         "rev": "e631d78ddfbf808fd1cfc4d79039a1b3acda5bed",
->>>>>>> e750de3 (Update flake inputs)
         "type": "github"
       },
       "original": {
@@ -382,19 +374,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-<<<<<<< HEAD
-        "lastModified": 1675183161,
-        "narHash": "sha256-Zq8sNgAxDckpn7tJo7V1afRSk2eoVbu3OjI1QklGLNg=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "e1e1b192c1a5aab2960bf0a0bd53a2e8124fa18e",
-=======
         "lastModified": 1675763311,
         "narHash": "sha256-bz0Q2H3mxsF1CUfk26Sl9Uzi8/HFjGFD/moZHz1HebU=",
         "owner": "nixos",
         "repo": "nixpkgs",
         "rev": "fab09085df1b60d6a0870c8a89ce26d5a4a708c2",
->>>>>>> e750de3 (Update flake inputs)
         "type": "github"
       },
       "original": {
