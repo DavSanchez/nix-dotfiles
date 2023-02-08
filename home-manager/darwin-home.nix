@@ -22,7 +22,9 @@
     ./modules/vscode
     # ./modules/zellij # Not using it (for now). Using tmux.
     ./modules/zsh
-
+    ./modules/bash
+    ./modules/fish
+    
     ./modules/app.nix
     ./modules/cli.nix
     ./modules/fonts.nix
