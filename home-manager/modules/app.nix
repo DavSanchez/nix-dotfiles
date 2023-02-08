@@ -6,7 +6,8 @@
   home.packages = with pkgs;
     [
       element-desktop
-      lapce   # Code editor similar to VSCode
+      sniffnet
+      # lapce
       # handbrake
       # logseq
       # gqrx
