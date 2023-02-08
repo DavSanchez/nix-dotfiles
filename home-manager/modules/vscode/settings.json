@@ -5,6 +5,9 @@
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "[python]": {
+    "editor.formatOnType": true
+  },
   "[svelte]": {
     "editor.defaultFormatter": "svelte.svelte-vscode"
   },
@@ -14,7 +17,7 @@
   "diffEditor.ignoreTrimWhitespace": false,
   "editor.accessibilitySupport": "off",
   "editor.bracketPairColorization.enabled": true,
-  "editor.cursorSmoothCaretAnimation": true,
+  "editor.cursorSmoothCaretAnimation": "on",
   "editor.fontFamily": "'FiraCode Nerd Font', Menlo, Monaco, 'Courier New', monospace",
   "editor.fontLigatures": true,
   "editor.formatOnPaste": true,
@@ -117,8 +120,5 @@
     "*.pdf": "latex-workshop-pdf-hook"
   },
   "workbench.iconTheme": "material-icon-theme",
-  "workbench.productIconTheme": "material-product-icons",
-  "[python]": {
-    "editor.formatOnType": true
-  }
+  "workbench.productIconTheme": "material-product-icons"
 }
