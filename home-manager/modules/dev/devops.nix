@@ -40,7 +40,7 @@
       colmena
 
       # Monitoring
-      netdata
+      # netdata # broken
     ]
     ++ lib.optionals pkgs.stdenv.isDarwin [
       ## Container runtimes on macOS
