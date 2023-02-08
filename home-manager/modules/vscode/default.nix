@@ -35,6 +35,7 @@
         # esbenp.prettier-vscode
         github.copilot
         github.github-vscode-theme
+        github.vscode-pull-request-github
         golang.go
         gruntfuggly.todo-tree
         hashicorp.terraform
@@ -129,18 +130,18 @@
           version = "1.5.12";
           sha256 = "sha256-D7Z3D2SBucBmtDbIEqst/2tGu1wtBFHMspU+wMyQJZE=";
         }
-        {
-          name = "ide-purescript";
-          publisher = "nwolverson";
-          version = "0.26.1";
-          sha256 = "sha256-ccTuoDSZKf1WsTRX2TxXeHy4eRuOXsAc7rvNZ2b56MU=";
-        }
-        {
-          name = "language-purescript";
-          publisher = "nwolverson";
-          version = "0.2.8";
-          sha256 = "1nhzvjwxld53mlaflf8idyjj18r1dzdys9ygy86095g7gc4b1qys";
-        }
+        # {
+        #   name = "ide-purescript";
+        #   publisher = "nwolverson";
+        #   version = "0.26.1";
+        #   sha256 = "sha256-ccTuoDSZKf1WsTRX2TxXeHy4eRuOXsAc7rvNZ2b56MU=";
+        # }
+        # {
+        #   name = "language-purescript";
+        #   publisher = "nwolverson";
+        #   version = "0.2.8";
+        #   sha256 = "1nhzvjwxld53mlaflf8idyjj18r1dzdys9ygy86095g7gc4b1qys";
+        # }
         {
           name = "nix-extension-pack";
           publisher = "pinage404";
