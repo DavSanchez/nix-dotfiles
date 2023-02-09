@@ -112,6 +112,8 @@
     fzf = {
       enable = true;
       enableZshIntegration = true;
+      enableBashIntegration = true;
+      enableFishIntegration = true;
       changeDirWidgetCommand = "fd --type d";
       changeDirWidgetOptions = ["--preview 'tree -C {} | head 200'"];
       defaultCommand = "fd --type f";
@@ -134,6 +136,8 @@
     zoxide = {
       enable = true;
       enableZshIntegration = true;
+      enableBashIntegration = true;
+      enableFishIntegration = true;
     };
 
     jq = {
@@ -158,6 +162,8 @@
     broot = {
       enable = true;
       enableZshIntegration = true;
+      enableBashIntegration = true;
+      enableFishIntegration = true;
     };
     
     lf = {
@@ -182,8 +188,17 @@
     navi = {
       enable = true;
       enableZshIntegration = true;
+      enableBashIntegration = true;
+      enableFishIntegration = true;
     };
 
+    atuin = {
+      enable = true;
+      enableZshIntegration = true;
+      enableBashIntegration = true;
+      enableFishIntegration = true;
+    };
+    
     pandoc.enable = true;
     yt-dlp.enable = true;
     feh.enable = true;
@@ -218,6 +233,8 @@
     watson = {
       enable = true;
       enableZshIntegration = true;
+      enableBashIntegration = true;
+      enableFishIntegration = true;
     };
 
     taskwarrior = {
