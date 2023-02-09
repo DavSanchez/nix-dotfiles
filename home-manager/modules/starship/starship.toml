@@ -4,7 +4,7 @@
 format = """
 [>>-](bright-black) $all\
 $fill\
-$time\
+$shell$shlvl$time\
 $line_break\
 [>>-](bright-black) $character
 """
@@ -27,3 +27,10 @@ disabled = false
 disabled = false
 format = '[  $time ](fg:blue bold)'
 time_format = "%F %R"
+
+[shell]
+style = 'cyan bold'
+disabled = false
+
+[shlvl]
+disabled = false
