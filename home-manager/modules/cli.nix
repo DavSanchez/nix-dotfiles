@@ -170,6 +170,11 @@
       enable = true;
     };
 
+    nnn = {
+      enable = true;
+      # package = pkgs.nnn.override ({ withNerdIcons = true; });
+    };
+
     bottom.enable = true;
 
     tealdeer = {
@@ -202,6 +207,18 @@
     pandoc.enable = true;
     yt-dlp.enable = true;
     feh.enable = true;
+
+    nix-index = {
+      enable = true;
+      enableZshIntegration = true;
+      enableBashIntegration = true;
+      enableFishIntegration = true;
+    };
+
+    noti = {
+      enable = true;
+      # settings = { };
+    };
 
     # TUI IRC client written in Rust.
     tiny = {
