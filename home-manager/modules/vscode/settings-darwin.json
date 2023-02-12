@@ -120,5 +120,6 @@
     "*.pdf": "latex-workshop-pdf-hook"
   },
   "workbench.iconTheme": "material-icon-theme",
-  "workbench.productIconTheme": "material-product-icons"
+  "workbench.productIconTheme": "material-product-icons",
+  "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|--|{-|^|^[ \\t]*(-|\\d+.))\\s*($TAGS)"
 }
