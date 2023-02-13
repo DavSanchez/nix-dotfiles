@@ -31,7 +31,6 @@
         dhall.dhall-lang
         dhall.vscode-dhall-lsp-server
         eamodio.gitlens
-        elmtooling.elm-ls-vscode
         # esbenp.prettier-vscode
         github.copilot
         github.github-vscode-theme
