@@ -18,7 +18,6 @@
       plugins =
         [
           "aws"
-          "bazel"
           "cp"
           "docker"
           "docker-compose"
@@ -34,7 +33,6 @@
           "golang"
           "helm"
           "kubectl"
-          "lein"
           "minikube"
           "mix"
           "nmap"

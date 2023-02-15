@@ -76,12 +76,6 @@
           sha256 = "15w1ixvp6vn9ng6mmcmv9ch0ngx8m85i1yabxdfn6zx3ypq802c5";
         }
         {
-          name = "vscode-bazel";
-          publisher = "BazelBuild";
-          version = "0.7.0";
-          sha256 = "sha256-/a34MMsHy7zmGrVAtjMWKmulwS+lip3J1YugkACMmxc=";
-        }
-        {
           name = "disableligatures";
           publisher = "CoenraadS";
           version = "0.0.10";

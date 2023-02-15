@@ -37,9 +37,7 @@
       
       ## Learning
       exercism
-      ## Bazel
-      bazelisk
-      bazel-buildtools
+  
       ## Other
       gnumake
       protobuf
