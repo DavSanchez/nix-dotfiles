@@ -18,7 +18,6 @@ rec {
       # ...
       # });
     } // prev.lib.optionalAttrs (prev.stdenv.system == "aarch64-darwin") {
-      purescript = x86DarwinPkgs.purescript;
       kcctl = (additions x86DarwinPkgs null).kcctl;
       gdb = x86DarwinPkgs.gdb;
     };

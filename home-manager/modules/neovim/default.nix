@@ -104,7 +104,7 @@
       crates-nvim
       conjure
       vimtex
-      purescript-vim
+      # purescript-vim
       # nvim-yuck # custom plugin
 
       ## Programming: Autocompletion setup
@@ -160,10 +160,10 @@
         hadolint
 
         # elm
-        elmPackages.elm-language-server
-        elmPackages.elm
-        elmPackages.elm-test
-        elmPackages.elm-format
+        # elmPackages.elm-language-server
+        # elmPackages.elm
+        # elmPackages.elm-test
+        # elmPackages.elm-format
 
         # grammar
         vale
@@ -201,7 +201,7 @@
         statix
 
         # Purescript
-        nodePackages.purescript-language-server
+        # nodePackages.purescript-language-server
 
         # python
         python3Packages.isort
