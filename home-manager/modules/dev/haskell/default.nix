@@ -13,7 +13,8 @@
 
       haskell-language-server # Langserver
       implicit-hie
-
+      ghcid
+      
       hoogle
       hpack
     ];
