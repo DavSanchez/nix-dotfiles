@@ -115,9 +115,7 @@
     onActivation.cleanup = "zap";
 
     taps = [
-      "homebrew/cask"
-      "homebrew/cask-drivers"
-      "homebrew/cask-versions"
+      "homebrew/cask-drivers" # for qFlipper
     ];
     casks = [
       "adobe-acrobat-reader"
@@ -183,6 +181,7 @@
       "Numbers" = 409203825;
       "Pages" = 409201541;
       "Reeder" = 1529448980;
+      "Shazam" = 897118787;
       "The Unarchiver" = 425424353;
       "UTM" = 1538878817;
       "WhatsApp" = 1147396723;
