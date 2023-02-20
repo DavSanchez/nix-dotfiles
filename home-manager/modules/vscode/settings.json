@@ -121,5 +121,5 @@
   },
   "workbench.iconTheme": "material-icon-theme",
   "workbench.productIconTheme": "material-product-icons",
-  "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|--|{-|^|^[ \\t]*(-|\\d+.))\\s*($TAGS)"
+  "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|--|\\{-|^|^[ \\t]*(-|\\d+.))\\s*($TAGS)"
 }
