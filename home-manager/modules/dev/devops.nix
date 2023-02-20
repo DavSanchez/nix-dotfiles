@@ -18,6 +18,7 @@
       kubeval
       kompose
       stern
+      kubeshark
 
       ## AWS
       awscli2
