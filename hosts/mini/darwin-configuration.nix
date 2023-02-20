@@ -171,7 +171,7 @@
       # "terraform-rover"
     ];
     masApps = {
-      "AdGuard for Safari" = 1440147259;
+      "1Blocker" = 1365531024;
       "Amphetamine" = 937984704;
       "GarageBand" = 682658836;
       "iMovie" = 408981434;
