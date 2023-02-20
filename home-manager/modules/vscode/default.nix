@@ -44,6 +44,7 @@
         matklad.rust-analyzer
         mkhl.direnv
         ms-azuretools.vscode-docker
+        ms-kubernetes-tools.vscode-kubernetes-tools
         ms-python.python
         ms-python.vscode-pylance
         # ms-pyright.pyright
