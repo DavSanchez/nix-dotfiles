@@ -9,11 +9,7 @@
   programs.vscode = {
     enable = true;
     # package = pkgs.vscodium; # vscodium.fhs for complex extensions?
-    userSettings = lib.importJSON (
-      if pkgs.stdenv.isDarwin
-      then ./settings-darwin.json
-      else ./settings.json
-    );
+    userSettings = lib.importJSON ./settings.json;
     mutableExtensionsDir = true;
     # Extension issues and other documentation:
     # https://nixos.wiki/wiki/VSCodium
