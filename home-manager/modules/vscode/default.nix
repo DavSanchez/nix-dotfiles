@@ -145,6 +145,12 @@
           sha256 = "sha256-cWXd6AlyxBroZF+cXZzzWZbYPDuOqwCZIK67cEP5sNk=";
         }
         {
+          name = "vscode-icons";
+          publisher = "vscode-icons-team";
+          version = "12.2.0";
+          sha256 = lib.fakeSha256;
+        }
+        {
           name = "wavetrace";
           publisher = "wavetrace";
           version = "1.1.2";
