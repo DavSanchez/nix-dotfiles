@@ -34,6 +34,9 @@
 
       taplo # TOML Langserver
       nodePackages.yaml-language-server # Langserver
+
+      dhall
+      dhall-lsp-server
       
       ## Learning
       exercism

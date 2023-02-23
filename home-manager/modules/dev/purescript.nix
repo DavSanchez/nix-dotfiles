@@ -13,7 +13,7 @@
 
     pscid
 
-    dhall
-    dhall-lsp-server # Langserver
+    # dhall
+    # dhall-lsp-server # Langserver
   ];
 }
