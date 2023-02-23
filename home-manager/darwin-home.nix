@@ -73,5 +73,5 @@
   programs.git.enable = true;
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  home.stateVersion = "22.05";
+  home.stateVersion = "22.11";
 }
