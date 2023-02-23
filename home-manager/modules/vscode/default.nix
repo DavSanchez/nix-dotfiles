@@ -30,7 +30,7 @@
         # esbenp.prettier-vscode
         github.copilot
         github.github-vscode-theme
-        github.vscode-pull-request-github
+        # github.vscode-pull-request-github
         golang.go
         gruntfuggly.todo-tree
         hashicorp.terraform
@@ -76,7 +76,13 @@
           name = "aws-toolkit-vscode";
           publisher = "amazonwebservices";
           version = "1.63.0";
-          sha256 = lib.fakeSha256;
+          sha256 = "sha256-bNSnM+4MhWyH2ntsrnfXZD9jI9jVi6KKXoYyNwC5hqM=";
+        }
+        {
+          name = "codestream";
+          publisher = "CodeStream";
+          version = "14.15.0";
+          sha256 = "sha256-YCB2Emz9QWtXAJf5z2mnXOVtd6tUgSY/xX386HF72d0=";
         }
         {
           name = "disableligatures";
@@ -148,7 +154,7 @@
           name = "vscode-icons";
           publisher = "vscode-icons-team";
           version = "12.2.0";
-          sha256 = lib.fakeSha256;
+          sha256 = "sha256-PxM+20mkj7DpcdFuExUFN5wldfs7Qmas3CnZpEFeRYs=";
         }
         {
           name = "wavetrace";
