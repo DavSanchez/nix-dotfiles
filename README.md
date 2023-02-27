@@ -8,9 +8,9 @@
 > declaratively, right? Walked right into that NixOS ambush, same as us, and those
 > dotfiles over there.
 
-I'm trying to replace my current `dotfiles` configuration by basing it in Nix and shamelessly ripping off several other `dotfiles` repos.
+These are my current Nix-based `dotfiles` configurations (and shamelessly ripping off several other `dotfiles` repos).
 
-> **Disclaimer:** _This is a
+> **Disclaimer:** This is a
 > private configuration and an ongoing experiment to feel out NixOS. I make no
 > guarantees that it will work out of the box for anyone but myself. It may also
 > change drastically and without warning.
