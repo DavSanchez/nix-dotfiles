@@ -17,17 +17,17 @@ rec {
   # https://nixos.wiki/wiki/Overlays
   modifications = final: prev:
     let
-      x86DarwinPkgs = (import ../nixpkgs.nix { 
+      x86Darwin = import inputs.nixpkgs { 
         system = "x86_64-darwin";
         config.allowUnfree = true;
-      }).pkgs;
+      };
     in
     {
       # example = prev.example.overrideAttrs (oldAttrs: rec {
       # ...
       # });
     } // prev.lib.optionalAttrs (prev.stdenv.system == "aarch64-darwin") {
-      kcctl = (additions x86DarwinPkgs null).kcctl;
-      gdb = x86DarwinPkgs.gdb;
+      kcctl = (additions x86Darwin.pkgs null).kcctl;
+      gdb = x86Darwin.pkgs.gdb;
     };
 }
