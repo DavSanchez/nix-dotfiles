@@ -39,7 +39,7 @@ in {
     extraConfig = {
       init.defaultBranch = DEFAULT_BRANCH;
       branch.sort = "-committerdate";
-      core.editor = "nvim";
+      core.editor = "hx";
       pull.ff = "only";
       pull.rebase = false;
     };
