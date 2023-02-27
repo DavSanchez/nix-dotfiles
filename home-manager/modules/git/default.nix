@@ -16,7 +16,7 @@ in {
   programs.git = {
     enable = true;
     userName = "David Sánchez";
-    userEmail = "davidslt@pm.me";
+    userEmail = "davidslt+git@pm.me";
 
     includes = [{path = "~/.config/git/localconf";}];
 
