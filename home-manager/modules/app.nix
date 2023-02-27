@@ -26,15 +26,4 @@
       zathura
       czkawka # Multi functional app to find duplicates, empty folders, similar images etc
     ];
-
-  programs = {
-    kitty = {
-      enable = false;
-      settings = {
-        # shell = "/bin/bash --login";
-        font_family = "JetBrainsMono Nerd Font";
-        font_size = 14;
-      };
-    };
-  };
 }

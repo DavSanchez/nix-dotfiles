@@ -57,7 +57,7 @@
     package = pkgs.nixUnstable;
 
     settings = {
-      trusted-users = [ "root" "david" ]; # For groups prepend @: "@admin"
+      trusted-users = [ "root" "davidsanchez" ]; # For groups prepend @: "@admin"
 
       # Enable flakes and new 'nix' command
       experimental-features = "nix-command flakes";
@@ -103,8 +103,8 @@
 
   users.users = {
     david = {
-      name = "david";
-      home = "/Users/david";
+      name = "davidsanchez";
+      home = "/Users/davidsanchez";
     };
   };
 
@@ -115,80 +115,33 @@
     onActivation.upgrade = true; # This defaults to false so calls are idempotent.
     onActivation.cleanup = "zap";
 
-    taps = [
-      "homebrew/cask-drivers"
-    ];
+    taps = [ ];
     casks = [
-      "adobe-acrobat-reader"
       "amethyst"
-      "authy"
       "brave-browser"
-      # "dash" # Haven't used it
-      "diffusionbee" # Let's have some fun!
-      "discord"
       "disk-inventory-x"
+      "docker"
       "finch"
       "firefox"
-      "ghidra"
-      "gqrx"
-      "handbrake"
       "imhex"
-      "inso"
       "insomnia"
-      "krita"
-      "libreoffice"
-      "little-snitch"
       "logseq"
-      "openemu"
-      "openra"
-      # "orion" # Alternative WebKit browser
-      "plex-media-server"
-      "protonmail-bridge"
-      "protonvpn"
-      "qflipper"
       "raycast"
-      "remarkable"
-      "secretive"
-      # "shortcat" # Manipulate macOS masterfully, minus the mouse
-      "sonic-pi"
       "stats"
-      "steam"
-      "synthesia"
-      "tor-browser"
-      "transmission"
-      "vlc"
-      "warp"
       "wireshark"
-      "xld"
-      "xquartz" # X11 applications on macOS
-      "yacreader"
-      "zotero"
     ];
     brews = [
-      "conan"
-      "ghcup"
+      "ghcup"  # While Haskell for aarch64-darwin stabilizes in unstable (yeah I know)
       "whalebrew"
-      "pam-reattach" # https://github.com/fabianishere/pam_reattach
-      # "terraform-rover"
+      "pam-reattach"
     ];
     masApps = {
       "1Blocker" = 1365531024;
       "Amphetamine" = 937984704;
-      "GarageBand" = 682658836;
       "Hush" = 1544743900;
-      "iMovie" = 408981434;
-      "Keynote" = 409183694;
-      "Logic Pro" = 634148309;
-      "MainStage" = 634159523;
       "Microsoft Remote Desktop" = 1295203466;
-      "Numbers" = 409203825;
-      "Pages" = 409201541;
-      "Reeder" = 1529448980;
-      "Shazam" = 897118787;
       "The Unarchiver" = 425424353;
       "UTM" = 1538878817;
-      "WhatsApp" = 1147396723;
-      "Xcode" = 497799835;
     };
     # extraConfig = '' '';
     # whalebrews = [ ];
@@ -196,12 +149,11 @@
 
   ## Other configs
   # Enable sudo authentication with Touch ID
-  security.pam.enableSudoTouchIdAuth = true;
+  # security.pam.enableSudoTouchIdAuth = true;
 
   system.defaults.dock.autohide = true;
   system.defaults.dock.mru-spaces = false;
-  system.defaults.dock.orientation = "bottom";
-  # system.defaults.dock.showhidden = true;
+  system.defaults.dock.orientation = "left";
   system.defaults.finder.AppleShowAllExtensions = true;
   # system.defaults.finder.AppleShowAllFiles = true;
   system.defaults.finder.ShowPathbar = true;

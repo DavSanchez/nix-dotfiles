@@ -10,13 +10,12 @@ in {
     bfg-repo-cleaner
     git-quick-stats
     git-crypt
-
-    sapling
   ];
+
   programs.git = {
     enable = true;
     userName = "David Sánchez";
-    userEmail = "davidslt+git@pm.me";
+    userEmail = "davidsanchez@newrelic.com";
 
     includes = [{path = "~/.config/git/localconf";}];
 

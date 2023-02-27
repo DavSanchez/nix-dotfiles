@@ -12,20 +12,17 @@
 
     # You can also split up your configuration and import pieces of it here:
     ./modules/aws
-    ./modules/dev
+    ./modules/dev/default-newr.nix
     ./modules/direnv
-    ./modules/emacs # Doom emacs (testing)
-    ./modules/git
+    ./modules/git/default-newr.nix
     ./modules/neovim
     ./modules/nu
     ./modules/starship
     ./modules/vscode
-    # ./modules/zellij # Not using it (for now). Using tmux.
     ./modules/zsh
     ./modules/bash
     ./modules/fish
     
-    ./modules/app.nix
     ./modules/cli.nix
     ./modules/fonts.nix
     ./modules/helix.nix
@@ -61,8 +58,8 @@
   };
 
   home = {
-    username = "david";
-    homeDirectory = "/Users/david";
+    username = "davidsanchez";
+    homeDirectory = "/Users/davidsanchez";
   };
 
   # Add stuff for your user as you see fit:
