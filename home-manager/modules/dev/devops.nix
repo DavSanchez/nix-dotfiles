@@ -20,10 +20,6 @@
       stern
       kubeshark
 
-      ## AWS
-      awscli2
-      ssm-session-manager-plugin
-
       localstack
 
       ## Terraform
