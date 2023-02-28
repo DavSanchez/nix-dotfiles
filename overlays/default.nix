@@ -15,7 +15,7 @@ rec {
   };
 
   # When applied, the stable nixpkgs set (declared in the flake inputs) will
-  # be accessible through 'pkgs.stable' 
+  # be accessible through 'pkgs.x86Darwin' 
   x86-darwin-packages = _final: _prev: {
     x86Darwin = import inputs.nixpkgs { 
       system = "x86_64-darwin";
@@ -28,7 +28,7 @@ rec {
   # https://nixos.wiki/wiki/Overlays
   modifications = final: prev:
     let
-      x86DarwinPkgs = (x86-darwin-packages { inherit inputs; }).x86Darwin;
+      x86DarwinPkgs = (x86-darwin-packages final prev).x86Darwin;
     in
     {
       # example = prev.example.overrideAttrs (oldAttrs: rec {
