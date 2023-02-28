@@ -9,8 +9,12 @@
   programs.vscode = {
     enable = true;
     # package = pkgs.vscodium; # vscodium.fhs for complex extensions?
-    userSettings = lib.importJSON ./settings.json;
+    userSettings = import ./settings.nix;
+
+    enableExtensionUpdateCheck = true;
+    enableUpdateCheck = true;
     mutableExtensionsDir = true;
+
     # Extension issues and other documentation:
     # https://nixos.wiki/wiki/VSCodium
     extensions = with pkgs.vscode-extensions;
