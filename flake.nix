@@ -79,21 +79,21 @@
 
       # macOS systems using nix-darwin
       darwinConfigurations = {
-        "Davids-MacBook-Pro" = darwin.lib.darwinSystem {
+        "mbp" = darwin.lib.darwinSystem {
           system = "aarch64-darwin";
           specialArgs = { inherit inputs outputs; };
           modules = [
             ./hosts/mbp/darwin-configuration.nix
           ];
         };
-        "Davids-Mac-Mini" = darwin.lib.darwinSystem {
+        "mini" = darwin.lib.darwinSystem {
           system = "aarch64-darwin";
           specialArgs = { inherit inputs outputs; };
           modules = [
             ./hosts/mini/darwin-configuration.nix
           ];
         };
-        "V9X576T260" = darwin.lib.darwinSystem {
+        "newr" = darwin.lib.darwinSystem {
           system = "aarch64-darwin";
           specialArgs = { inherit inputs outputs; };
           modules = [

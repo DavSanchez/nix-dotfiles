@@ -91,6 +91,8 @@
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
 
+  networking.hostName = "V9X576T260";
+
   # Create /etc/zshrc that loads the nix-darwin environment.
   programs = {
     zsh.enable = true; # default shell on Catalina+
