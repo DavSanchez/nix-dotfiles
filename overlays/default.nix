@@ -1,4 +1,6 @@
 # This file defines overlays
+
+{ inputs, ...}:
 rec {
   # This one brings our custom packages from the 'pkgs' directory
   additions = final: _prev: import ../pkgs { pkgs = final; };
@@ -12,22 +14,28 @@ rec {
     };
   };
 
+  # When applied, the stable nixpkgs set (declared in the flake inputs) will
+  # be accessible through 'pkgs.stable' 
+  x86-darwin-packages = _final: _prev: {
+    x86Darwin = import inputs.nixpkgs { 
+      system = "x86_64-darwin";
+      config.allowUnfree = true;
+    };
+  };
+
   # This one contains whatever you want to overlay
   # You can change versions, add patches, set compilation flags, anything really.
   # https://nixos.wiki/wiki/Overlays
   modifications = final: prev:
     let
-      x86Darwin = import inputs.nixpkgs { 
-        system = "x86_64-darwin";
-        config.allowUnfree = true;
-      };
+      x86DarwinPkgs = (x86-darwin-packages { inherit inputs; }).x86Darwin;
     in
     {
       # example = prev.example.overrideAttrs (oldAttrs: rec {
       # ...
       # });
     } // prev.lib.optionalAttrs (prev.stdenv.system == "aarch64-darwin") {
-      kcctl = (additions x86Darwin.pkgs null).kcctl;
-      gdb = x86Darwin.pkgs.gdb;
+      kcctl = (additions x86DarwinPkgs null).kcctl;
+      gdb = x86DarwinPkgs.gdb;
     };
 }
