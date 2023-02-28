@@ -130,6 +130,7 @@
       "logseq"
       "raycast"
       "stats"
+      "utm"
       "wireshark"
     ];
     brews = [
@@ -143,7 +144,6 @@
       "Hush" = 1544743900;
       "Microsoft Remote Desktop" = 1295203466;
       "The Unarchiver" = 425424353;
-      "UTM" = 1538878817;
     };
     # extraConfig = '' '';
     # whalebrews = [ ];
