@@ -87,6 +87,7 @@
       gomuks # Matrix client
 
       ## Security
+      cotp
       # oath-toolkit
 
       ## Typesetting (with pygments for minted, pygmentex...)
@@ -95,9 +96,9 @@
 
       haskellPackages.pandoc-crossref
       
-      cotp
-      
       w3m
+      
+      jira-cli-go
     ]
     ++ lib.optionals pkgs.stdenv.isDarwin [
       m-cli
