@@ -1,7 +1,7 @@
 { pkgs, ... }: {
   programs = {
     kitty = {
-      enable = false;
+      enable = true;
       settings = {
         # shell = "/bin/bash --login";
         font_family = "JetBrainsMono Nerd Font";

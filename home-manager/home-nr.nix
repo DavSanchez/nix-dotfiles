@@ -12,9 +12,9 @@
 
     # You can also split up your configuration and import pieces of it here:
     ./modules/aws
-    ./modules/dev/default-newr.nix
+    ./modules/dev/default-nr.nix
     ./modules/direnv
-    ./modules/git/default-newr.nix
+    ./modules/git/default-nr.nix
     ./modules/neovim
     ./modules/nu
     ./modules/starship

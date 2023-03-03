@@ -93,7 +93,7 @@
             ./hosts/mini/darwin-configuration.nix
           ];
         };
-        "newr" = darwin.lib.darwinSystem {
+        "nr" = darwin.lib.darwinSystem {
           system = "aarch64-darwin";
           specialArgs = { inherit inputs outputs; };
           modules = [
@@ -108,7 +108,7 @@
           extraSpecialArgs = { inherit inputs outputs; };
           modules = [
             # > Our main home-manager configuration file <
-            ./home-manager/darwin-home.nix
+            ./home-manager/home-darwin.nix
           ];
         };
         "david@mini" = home-manager.lib.homeManagerConfiguration {
@@ -116,15 +116,15 @@
           extraSpecialArgs = { inherit inputs outputs; };
           modules = [
             # > Our main home-manager configuration file <
-            ./home-manager/darwin-home.nix
+            ./home-manager/home-darwin.nix
           ];
         };
-        "davidsanchez@newr" = home-manager.lib.homeManagerConfiguration {
+        "davidsanchez@nr" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.aarch64-darwin; # Home-manager requires 'pkgs' instance
           extraSpecialArgs = { inherit inputs outputs; };
           modules = [
             # > Our main home-manager configuration file <
-            ./home-manager/newr-home.nix
+            ./home-manager/home-nr.nix
           ];
         };
       };
