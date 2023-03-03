@@ -120,6 +120,7 @@
     taps = [ ];
     casks = [
       "amethyst"
+      "bartender"
       "brave-browser"
       "disk-inventory-x"
       "docker"

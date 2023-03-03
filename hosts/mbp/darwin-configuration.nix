@@ -125,6 +125,7 @@
       "adobe-acrobat-reader"
       "amethyst"
       "authy"
+      "bartender"
       "brave-browser"
       # "dash" # Haven't used it
       "diffusionbee" # Let's have some fun!
