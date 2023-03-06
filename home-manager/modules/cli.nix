@@ -49,6 +49,8 @@
       # Searching/Movement helpers and other replacements
       ripgrep
       dua
+      duf
+      du-dust
       fd
       bat-extras.prettybat
       bat-extras.batman
