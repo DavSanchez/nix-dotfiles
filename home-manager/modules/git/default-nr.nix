@@ -17,6 +17,8 @@ in {
     userName = "David Sánchez";
     userEmail = "davidsanchez@newrelic.com";
 
+    signing.key = "0049380F7629074C";
+
     includes = [{path = "~/.config/git/localconf";}];
 
     delta = {
@@ -39,8 +41,8 @@ in {
       init.defaultBranch = DEFAULT_BRANCH;
       branch.sort = "-committerdate";
       core.editor = "hx";
-      pull.ff = "only";
-      pull.rebase = false;
+      # pull.ff = "only";
+      # pull.rebase = false;
     };
   };
 
