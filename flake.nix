@@ -97,7 +97,7 @@
           system = "aarch64-darwin";
           specialArgs = { inherit inputs outputs; };
           modules = [
-            ./hosts/newr/darwin-configuration.nix
+            ./hosts/nr/darwin-configuration.nix
           ];
         };
       };
