@@ -17,7 +17,10 @@ in {
     userName = "David Sánchez";
     userEmail = "davidsanchez@newrelic.com";
 
-    signing.key = "0049380F7629074C";
+    signing = {
+      key = "0049380F7629074C";
+      signByDefault = true;
+    };
 
     includes = [{path = "~/.config/git/localconf";}];
 
