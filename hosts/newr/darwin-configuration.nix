@@ -129,6 +129,7 @@
       "imhex"
       "insomnia"
       "logseq"
+      "openvpn-connect"
       "raycast"
       "stats"
       "utm"
@@ -165,7 +166,7 @@
   # system.keyboard.remapCapsLockToControl = true;
   system.defaults.magicmouse.MouseButtonMode = "TwoButton";
 
-  # fonts.fontDir.enable = true; # Ventura makes this segfault ?
+  fonts.fontDir.enable = true;
 
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
