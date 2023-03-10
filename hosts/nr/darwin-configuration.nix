@@ -78,11 +78,18 @@
     };
   };
 
-  # List packages installed in system profile. To search by name, run:
-  # $ nix-env -qaP | grep wget
-  environment.systemPackages = [
-    pkgs.vim
-  ];
+  environment = {
+    shells = [
+      pkgs.bashInteractive
+      pkgs.zsh
+      # pkgs.fish
+    ];
+    # List packages installed in system profile. To search by name, run:
+    # $ nix-env -qaP | grep wget
+    systemPackages = [
+      pkgs.vim
+    ];
+  };
 
   # Use a custom configuration.nix location.
   # $ darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin/configuration.nix
@@ -107,6 +114,7 @@
     david = {
       name = "davidsanchez";
       home = "/Users/davidsanchez";
+      shell = pkgs.zsh;
     };
   };
 
@@ -136,7 +144,7 @@
       "wireshark"
     ];
     brews = [
-      "ghcup"  # While Haskell for aarch64-darwin stabilizes in unstable (yeah I know)
+      "ghcup" # While Haskell for aarch64-darwin stabilizes in unstable (yeah I know)
       "whalebrew"
       "pam-reattach"
     ];
