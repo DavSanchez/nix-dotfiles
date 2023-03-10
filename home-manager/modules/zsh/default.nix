@@ -36,7 +36,7 @@
           "minikube"
           "mix"
           "nmap"
-          "nomad"
+          # "nomad"
           "pass"
           "ripgrep"
           "rust"
