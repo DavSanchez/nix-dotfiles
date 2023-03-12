@@ -62,7 +62,6 @@
         pkief.material-icon-theme
         pkief.material-product-icons
         redhat.vscode-yaml
-        tiehuis.zig
         timonwong.shellcheck
         usernamehw.errorlens
         valentjn.vscode-ltex
@@ -165,6 +164,12 @@
           publisher = "wavetrace";
           version = "1.1.2";
           sha256 = "11k57vppx5i7i56kgp4b2r97g6fqmvm7x0mzf8zj5r42ipn070zg";
+        }
+        {
+          name = "vscode-zig";
+          publisher = "ziglang";
+          version = "0.3.1";
+          sha256 = lib.fakeSha256;
         }
       ];
   };
