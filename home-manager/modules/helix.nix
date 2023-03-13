@@ -8,6 +8,7 @@ _: {
         true-color = true;
         color-modes = true;
         # whitespace.render = "all";
+        indent-guides.render = true;
       };
       theme = "catppuccin_mocha";
       # keys.normal = {
