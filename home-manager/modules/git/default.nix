@@ -41,7 +41,13 @@ in {
       branch.sort = "-committerdate";
       core.editor = "hx";
       pull.ff = "only";
-      pull.rebase = false;
+      pull.rebase = true;
+    };
+
+    aliases = {
+      pushall = "!git remote | xargs -L1 git push --all";
+      graph = "log --decorate --oneline --graph";
+      add-nowhitespace = "!git diff -U0 -w --no-color | git apply --cached --ignore-whitespace --unidiff-zero -";
     };
   };
 
