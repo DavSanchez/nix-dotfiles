@@ -169,7 +169,7 @@
           name = "vscode-zig";
           publisher = "ziglang";
           version = "0.3.1";
-          sha256 = lib.fakeSha256;
+          sha256 = "sha256-c38c0XbKa6BUWEIJikbHT9otqe9GTnOr9l1D58OUYp4=";
         }
       ];
   };
