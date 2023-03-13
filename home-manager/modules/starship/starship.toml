@@ -34,3 +34,6 @@ disabled = false
 
 [shlvl]
 disabled = false
+
+[haskell]
+symbol = "\ue61f "
