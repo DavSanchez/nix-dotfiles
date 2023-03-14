@@ -108,7 +108,7 @@
   "todo-tree.regex.regex" = "(//|#|<!--|;|/\\*|--|\\{-|^|^[ \\t]*(-|\\d+.))\\s*($TAGS)";
   "verilog.linting.linter" = "verilator";
   "window.commandCenter" = true;
-  "workbench.colorTheme" = "Catppuccin Mocha";
+  "workbench.colorTheme" = "Lambda Black"; # previous: "Catppuccin Mocha";
   "workbench.editorAssociations" = {
     "*.pdf" = "latex-workshop-pdf-hook";
   };
