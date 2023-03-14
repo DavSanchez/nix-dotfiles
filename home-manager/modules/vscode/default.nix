@@ -100,6 +100,12 @@
           sha256 = "sha256-1sMC0xPWseIRXXVsMrisN3A4br36S9pp9hYzsSjanKM=";
         }
         {
+          name = "lambda-black";
+          publisher = "janw4ld";
+          version = "0.2.2";
+          sha256 = "09pc39calv9hrl57fa1c55dhirzqgbxi4s5s3lkkpbni6ph5kl0n";
+        }
+        {
           name = "nix-develop";
           publisher = "jamesottaway";
           version = "0.0.1";
