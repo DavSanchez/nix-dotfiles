@@ -21,6 +21,7 @@
       kubeshark
 
       localstack
+      ansible
 
       ## Terraform
       terraform
