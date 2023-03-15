@@ -111,7 +111,7 @@
   };
 
   users.users = {
-    david = {
+    davidsanchez = {
       name = "davidsanchez";
       home = "/Users/davidsanchez";
       shell = pkgs.zsh;
