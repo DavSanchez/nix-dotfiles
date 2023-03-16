@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  devenv,
   ...
 }: {
   ## Main features
@@ -32,6 +33,9 @@
       gdb # Using Rosetta
       lldb
       just # project-specific commands
+
+      # devenv
+      devenv
     ]
     ++ lib.optionals pkgs.stdenv.isLinux [
       rr

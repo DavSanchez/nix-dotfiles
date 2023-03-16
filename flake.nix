@@ -21,6 +21,7 @@
     # TODO: Add any other flake you might need
     hardware.url = "github:nixos/nixos-hardware";
     nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
+    devenv.url = "github:cachix/devenv/latest";
 
     # Shameless plug: looking for a way to nixify your themes and make
     # everything match nicely? Try nix-colors!
@@ -121,7 +122,10 @@
         };
         "davidsanchez@nr" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.aarch64-darwin; # Home-manager requires 'pkgs' instance
-          extraSpecialArgs = { inherit inputs outputs; };
+          extraSpecialArgs = { 
+            inherit inputs outputs;
+            devenv = inputs.devenv.packages.aarch64-darwin.devenv;
+          };
           modules = [
             # > Our main home-manager configuration file <
             ./home-manager/home-nr.nix
