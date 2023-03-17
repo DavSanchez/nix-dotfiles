@@ -6,7 +6,11 @@
   home.packages = with pkgs;
     [
       ## Containers
-      ctop # Docker only?
+      docker
+      docker-compose
+
+      act # GH Actions locally
+      ctop # Monitor containers
 
       ## K8s
       minikube
