@@ -4,8 +4,6 @@
 }: {
   home = {
     packages = with pkgs.haskellPackages; [
-      # Handled via Homebrew + ghcup in macOS until behavior is stabilized 
-    ] ++ lib.optionals pkgs.stdenv.isLinux [
       ghc
 
       cabal-install
