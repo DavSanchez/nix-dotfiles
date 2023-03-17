@@ -138,13 +138,14 @@
       "insomnia"
       "logseq"
       "openvpn-connect"
+      "parallels"
       "raycast"
       "stats"
       "utm"
       "wireshark"
     ];
     brews = [
-      "ghcup" # While Haskell for aarch64-darwin stabilizes in unstable (yeah I know)
+      "ghcup"
       "whalebrew"
       "pam-reattach"
     ];
