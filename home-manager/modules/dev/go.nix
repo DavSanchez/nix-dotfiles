@@ -8,5 +8,9 @@
     gopls # Langserver
     delve
     gotools
+    gomodifytags
+    impl
+    go-tools
+    gotests
   ];
 }
