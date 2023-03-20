@@ -1,8 +1,4 @@
-{
-  lib,
-  pkgs,
-  ...
-}: {
+_: {
   programs.zellij = {
     enable = true;
     # settings = {

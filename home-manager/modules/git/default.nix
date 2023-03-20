@@ -1,11 +1,5 @@
 {pkgs, ...}:
-with builtins; let
-  DEFAULT_BRANCH = "master";
-  DEVELOP_BRANCH = "develop";
-  DEVELOP_BRANCH_ABBREV = "dev";
-  PROTECTED_BRANCHES_LIST = [DEFAULT_BRANCH DEVELOP_BRANCH DEVELOP_BRANCH_ABBREV];
-  PROTECTED_BRANCHES_STR = concatStringsSep "|" PROTECTED_BRANCHES_LIST;
-in {
+{
   home.packages = with pkgs; [
     bfg-repo-cleaner
     git-quick-stats
@@ -37,7 +31,7 @@ in {
     };
 
     extraConfig = {
-      init.defaultBranch = DEFAULT_BRANCH;
+      init.defaultBranch = "master"; 
       branch.sort = "-committerdate";
       core.editor = "hx";
       pull.ff = "only";

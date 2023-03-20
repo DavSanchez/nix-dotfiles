@@ -1,5 +1,4 @@
-{ lib
-, pkgs
+{ pkgs
 , ...
 }:
 # VSCode expects writable settings.json

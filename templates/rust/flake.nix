@@ -20,8 +20,8 @@
         overlays = [self.overlays.default];
       });
   in {
-    overlays = rec {
-      default = final: prev: {
+    overlays = {
+      default = _final: prev: {
         foo-bar = prev.callPackage ./. {inherit naersk;};
       };
     };
