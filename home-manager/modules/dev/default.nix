@@ -10,9 +10,7 @@
     ./digital-design.nix
     ./go.nix
     ./haskell
-    ./java.nix
     # ./kafka.nix
-    # ./purescript.nix
     ./rust.nix
   ];
 
@@ -30,10 +28,8 @@
   
       ## Other
       gnumake
-      protobuf
-      rosetta.gdb # Using Rosetta
-      lldb
       just # project-specific commands
+      protobuf
     ]
     ++ lib.optionals pkgs.stdenv.isLinux [
       rr

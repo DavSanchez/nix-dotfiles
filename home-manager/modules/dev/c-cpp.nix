@@ -1,12 +1,16 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
-    ## C
     gcc
+    rosetta.gdb
+
     llvm
+    lldb
+
     cling
+    ccls
+    
+    # gnumake already defined in module top level
     cmake
-    # build2
-    # conan
     # platformio
   ];
 }

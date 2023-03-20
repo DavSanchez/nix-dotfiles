@@ -169,7 +169,6 @@
       "zotero"
     ];
     brews = [
-      "conan"
       "ghcup"
       "whalebrew"
       "pam-reattach" # https://github.com/fabianishere/pam_reattach
