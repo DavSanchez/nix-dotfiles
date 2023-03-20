@@ -40,6 +40,9 @@
       
       ## Learning
       exercism
+
+      # devenv.sh
+      devenv
   
       ## Other
       gnumake

@@ -41,15 +41,17 @@
       # Or overlays exported from other flakes:
       # neovim-nightly-overlay.overlays.default
 
-      # devenv.sh
-      (final: prev: { devenv = inputs.devenv.packages.${pkgs.system}.devenv; })
-
       # Or define it inline, for example:
       # (final: prev: {
       #   hi = final.hello.overrideAttrs (oldAttrs: {
       #     patches = [ ./change-hello-to-hi.patch ];
       #   });
       # })
+
+      # devenv.sh
+      (final: prev: { 
+        devenv = inputs.devenv.packages.${pkgs.system}.devenv;
+      })
     ];
     # Configure your nixpkgs instance
     config = {
