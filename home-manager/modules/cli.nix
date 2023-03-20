@@ -18,7 +18,8 @@
       # nox
       comma
       cachix
-      # niv
+      nurl
+      nix-init
 
       ## Utils
       coreutils
@@ -94,7 +95,7 @@
 
       ## Typesetting (with pygments for minted, pygmentex...)
       texlive.combined.scheme-full
-      python310Packages.pygments
+      python311Packages.pygments
 
       haskellPackages.pandoc-crossref
       
