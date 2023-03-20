@@ -17,10 +17,6 @@
   ## Other packages
   home.packages = with pkgs;
     [
-      ## Other Languages
-      elixir
-      elixir_ls # Langserver
-
       python3
 
       taplo # TOML Langserver
@@ -29,11 +25,11 @@
       ## Other
       gnumake
       protobuf
-      gdb # Using Rosetta
+      rosetta.gdb # Using Rosetta
       lldb
       just # project-specific commands
 
-      # devenv
+      # devenv.sh
       devenv
     ]
     ++ lib.optionals pkgs.stdenv.isLinux [

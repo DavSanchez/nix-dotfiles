@@ -19,35 +19,19 @@
   ## Other packages
   home.packages = with pkgs;
     [
-      ## Other Languages
-      # dotnet-sdk
-      # rPackages.rlang
-      elixir
-      elixir_ls # Langserver
-
-      python3
-
-      unison-ucm
-
-      zig
-      zls # Langserver
-
       taplo # TOML Langserver
       nodePackages.yaml-language-server # Langserver
 
-      dhall
-      dhall-lsp-server
-      
       ## Learning
       exercism
 
-      # devenv.sh
+      # devenv.sh, let's work with any language!
       devenv
   
       ## Other
       gnumake
       protobuf
-      gdb # Using Rosetta
+      rosetta.gdb # Using Rosetta
       lldb
       just # project-specific commands
     ]
