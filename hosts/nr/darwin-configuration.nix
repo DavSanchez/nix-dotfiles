@@ -136,6 +136,7 @@
       "firefox"
       "imhex"
       "insomnia"
+      "lastpass"
       "logseq"
       "openvpn-connect"
       "parallels"
