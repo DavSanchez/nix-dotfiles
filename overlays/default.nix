@@ -14,28 +14,19 @@ rec {
     };
   };
 
-  # When applied, the stable nixpkgs set (declared in the flake inputs) will
-  # be accessible through 'pkgs.x86Darwin' 
-  x86-darwin-packages = _final: _prev: {
-    x86Darwin = import inputs.nixpkgs { 
-      system = "x86_64-darwin";
-      config.allowUnfree = true;
-    };
+  rosetta-packages = final: _prev: {
+    rosetta =
+      if final.stdenv.isDarwin && final.stdenv.isAarch64
+      then final.pkgsx86_64Darwin
+      else final;
   };
 
   # This one contains whatever you want to overlay
   # You can change versions, add patches, set compilation flags, anything really.
   # https://nixos.wiki/wiki/Overlays
-  modifications = final: prev:
-    let
-      x86DarwinPkgs = (x86-darwin-packages final prev).x86Darwin;
-    in
-    {
-      # example = prev.example.overrideAttrs (oldAttrs: rec {
-      # ...
-      # });
-    } // prev.lib.optionalAttrs (prev.stdenv.system == "aarch64-darwin") {
-      kcctl = (additions x86DarwinPkgs null).kcctl;
-      gdb = x86DarwinPkgs.gdb;
-    };
+  modifications = final: prev: {
+    # example = prev.example.overrideAttrs (oldAttrs: rec {
+    # ...
+    # });
+  };
 }
