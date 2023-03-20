@@ -95,6 +95,7 @@
   "latex-workshop.linting.chktex.enabled" = true;
   "latex-workshop.view.pdf.viewer" = "tab";
   "nix.enableLanguageServer" = true;
+  "nix.serverPath" = "nil";
   "nix.formatterPath" = "alejandra";
   "platformio-ide.activateOnlyOnPlatformIOProject" = true;
   "python.languageServer" = "Pylance";

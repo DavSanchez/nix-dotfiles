@@ -6,20 +6,20 @@
   home.packages = with pkgs;
     [
       ## Nix
-      rnix-lsp
-      alejandra
-      nix-prefetch-git
-      nix-prefetch-github
-      # nix-du # Build failing
+      rnix-lsp   # Language server
+      nil        # Yet another language server
+      alejandra  # Formatter
       nix-output-monitor
       nix-update
       nix-diff
-      statix
-      # nox
-      comma
+      statix     # Lints and suggestions for Nix
+      comma      # Runs programs without installing them
       cachix
       nurl
-      nix-init
+      nix-init   # Nix derivation boilerplate
+      deadnix    # Scan Nix files for dead code
+      vulnix     # Vulnerability (CVE) scanner for Nix
+      
 
       ## Utils
       coreutils
