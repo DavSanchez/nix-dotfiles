@@ -41,6 +41,9 @@
       # Or overlays exported from other flakes:
       # neovim-nightly-overlay.overlays.default
 
+      # devenv.sh
+      (final: prev: { devenv = inputs.devenv.packages.${pkgs.system}.devenv; })
+
       # Or define it inline, for example:
       # (final: prev: {
       #   hi = final.hello.overrideAttrs (oldAttrs: {

@@ -122,10 +122,7 @@
         };
         "davidsanchez@nr" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.aarch64-darwin; # Home-manager requires 'pkgs' instance
-          extraSpecialArgs = { 
-            inherit inputs outputs;
-            devenv = inputs.devenv.packages.aarch64-darwin.devenv;
-          };
+          extraSpecialArgs = { inherit inputs outputs; };
           modules = [
             # > Our main home-manager configuration file <
             ./home-manager/home-nr.nix
