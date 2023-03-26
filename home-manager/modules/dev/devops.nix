@@ -7,7 +7,6 @@
     [
       ## Containers
       docker
-      docker-compose
 
       act # GH Actions locally
       ctop # Monitor containers
