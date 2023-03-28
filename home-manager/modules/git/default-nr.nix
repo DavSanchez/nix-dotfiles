@@ -44,7 +44,7 @@
     extraConfig = {
       init.defaultBranch = "master";
       branch.sort = "-committerdate";
-      core.editor = "hx";
+      # core.editor = "hx";
       pull.ff = "only";
       pull.rebase = true;
     };
