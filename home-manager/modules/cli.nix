@@ -36,7 +36,8 @@
       jo
       fq
       dasel
-      difftastic
+      difftastic # git integration enabled
+      delta
 
       ## Networking
       curl

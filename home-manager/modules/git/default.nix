@@ -15,7 +15,7 @@
     includes = [{path = "~/.config/git/localconf";}];
 
     delta = {
-      enable = true;
+      enable = false;
       options = {
         features = "side-by-side line-numbers decorations";
         whitespace-error-style = "22 reverse";
@@ -28,6 +28,13 @@
         };
         delta.navigate = true;
       };
+    };
+
+    difftastic = {
+      enable = true;
+      background = "dark";
+      color = "auto";
+      display = "side-by-side";
     };
 
     extraConfig = {
