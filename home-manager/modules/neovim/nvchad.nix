@@ -3,6 +3,7 @@
   ...
 }: 
 let
+  # Taken from https://github.com/azuwis/nix-config/blob/master/common/neovim/nvchad.nix
   nvChad = pkgs.vimUtils.buildVimPluginFrom2Nix {
     pname = "nvchad";
     version = "2.0";
