@@ -21,8 +21,7 @@
     plugins = with pkgs.vimPlugins; [
       vim-nix
       nvim-treesitter.withAllGrammars
+      copilot-vim
     ];
-    withNodeJs = false;
-    withRuby = false;
   };
 }
