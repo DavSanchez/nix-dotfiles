@@ -10,8 +10,8 @@ let
     src = pkgs.fetchFromGitHub {
       owner = "NvChad";
       repo = "NvChad";
-      rev = "bb87d70"; # v2.0
-      sha256 = "1pfpyvgqw8ip153sj3nsv8a0hd267iqm7fizb526w2xg0b221ib7";
+      rev = "c77c086"; # v2.0
+      sha256 = "sha256-3X10A9/poqfD43XlpwPA0nrf0WYZbsm0PymT5x1L7i0=";
     };
     meta.homepage = "https://github.com/NvChad/NvChad/";
   };
