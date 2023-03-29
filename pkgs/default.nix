@@ -4,5 +4,4 @@
 { pkgs ? (import ../nixpkgs.nix) { } }: {
   # example = pkgs.callPackage ./example { };
   kcctl = pkgs.callPackage ./kcctl.nix { };
-  nvchad = pkgs.callPackage ./nvchad.nix { };
 }
