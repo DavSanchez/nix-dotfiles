@@ -11,27 +11,27 @@
     # inputs.nix-colors.homeManagerModules.default
 
     # You can also split up your configuration and import pieces of it here:
-    ./modules/aws
-    ./modules/dev
-    ./modules/direnv
-    ./modules/emacs # Doom emacs (testing)
-    ./modules/git
-    ./modules/neovim
-    ./modules/nu
-    ./modules/starship
-    ./modules/vscode
-    # ./modules/zellij # Not using it (for now). Using tmux.
-    ./modules/zsh
-    ./modules/bash
-    ./modules/fish
+    ./features/aws
+    ./features/dev
+    ./features/direnv
+    ./features/emacs # Doom emacs (testing)
+    ./features/git
+    ./features/neovim
+    ./features/nu
+    ./features/starship
+    ./features/vscode
+    # ./features/zellij # Not using it (for now). Using tmux.
+    ./features/zsh
+    ./features/bash
+    ./features/fish
     
-    ./modules/app.nix
-    ./modules/cli.nix
-    ./modules/fonts.nix
-    ./modules/helix.nix
-    ./modules/tmux.nix
-    ./modules/wezterm.nix
-    ./modules/kitty.nix
+    ./features/app.nix
+    ./features/cli.nix
+    ./features/fonts.nix
+    ./features/helix.nix
+    ./features/tmux.nix
+    ./features/wezterm.nix
+    ./features/kitty.nix
   ];
 
   nixpkgs = {

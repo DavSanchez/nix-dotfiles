@@ -11,24 +11,24 @@
     # inputs.nix-colors.homeManagerModules.default
 
     # You can also split up your configuration and import pieces of it here:
-    ./modules/aws
-    ./modules/dev/default-nr.nix
-    ./modules/direnv
-    ./modules/git/default-nr.nix
-    ./modules/neovim
-    ./modules/nu
-    ./modules/starship
-    ./modules/vscode
-    ./modules/zsh
-    ./modules/bash
-    ./modules/fish
+    ./features/aws
+    ./features/dev/default-nr.nix
+    ./features/direnv
+    ./features/git/default-nr.nix
+    ./features/neovim
+    ./features/nu
+    ./features/starship
+    ./features/vscode
+    ./features/zsh
+    ./features/bash
+    ./features/fish
     
-    ./modules/cli.nix
-    ./modules/fonts.nix
-    ./modules/helix.nix
-    ./modules/tmux.nix
-    ./modules/wezterm.nix
-    ./modules/kitty.nix
+    ./features/cli.nix
+    ./features/fonts.nix
+    ./features/helix.nix
+    ./features/tmux.nix
+    ./features/wezterm.nix
+    ./features/kitty.nix
   ];
 
   nixpkgs = {
