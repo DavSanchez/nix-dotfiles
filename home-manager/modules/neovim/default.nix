@@ -14,13 +14,14 @@
     defaultEditor = true;
     extraPackages = with pkgs; [
       alejandra
-      nil
       lua-language-server
+      rnix-lsp
       stylua
+      (tree-sitter.withPlugins (_: tree-sitter.allGrammars))
     ];
     plugins = with pkgs.vimPlugins; [
       vim-nix
-      nvim-treesitter.withAllGrammars
+      # nvim-treesitter.withAllGrammars
       copilot-vim
     ];
   };
