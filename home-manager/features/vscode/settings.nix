@@ -146,4 +146,6 @@
     "!Split"
     "!Split sequence"
   ];
+  "vim.enableNeovim" = true; # programs.neovim.enable;
+  "vim.neovimUseConfigFile" = true; # programs.neovim.enable;
 }
