@@ -33,7 +33,7 @@
         # esbenp.prettier-vscode
         github.copilot
         # github.github-vscode-theme
-        # github.vscode-pull-request-github
+        github.vscode-pull-request-github
         golang.go
         gruntfuggly.todo-tree
         hashicorp.terraform
