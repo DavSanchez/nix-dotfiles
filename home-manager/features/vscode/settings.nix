@@ -98,7 +98,7 @@
   "nix.serverPath" = "nil";
   "nix.formatterPath" = "alejandra";
   "platformio-ide.activateOnlyOnPlatformIOProject" = true;
-  "python.languageServer" = "Pylance";
+  # "python.languageServer" = "Pylance";
   "redhat.telemetry.enabled" = false;
   "svelte.enable-ts-plugin" = true;
   "terminal.external.osxExec" = "WezTerm.app";
@@ -148,4 +148,5 @@
   ];
   "vim.enableNeovim" = true; # programs.neovim.enable;
   "vim.neovimUseConfigFile" = true; # programs.neovim.enable;
+  "codestream.serverUrl" = "https://api.codestream.com";
 }
