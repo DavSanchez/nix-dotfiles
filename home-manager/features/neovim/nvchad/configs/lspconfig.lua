@@ -9,7 +9,8 @@ local servers = {
   "cssls",
   "tsserver",
   "clangd",
-  -- "hls",
+  -- "hls", -- activated below
+  "bashls",
   "nil_ls",
   "rust_analyzer",
   "golangci_lint_ls",
