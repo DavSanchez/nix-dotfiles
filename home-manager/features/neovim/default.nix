@@ -14,10 +14,6 @@
     defaultEditor = true;
     extraPackages = with pkgs;
       [
-        # For installing plugins, etc
-        clang
-        nodejs
-        
         # Bash
         nodePackages.bash-language-server
         shellcheck
