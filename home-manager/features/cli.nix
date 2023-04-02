@@ -76,7 +76,6 @@
       vale
       eva
       rmlint # Extremely fast tool to remove duplicates and other lint from your filesystem
-      # chezmoi
 
       # System info
       neofetch
@@ -98,8 +97,8 @@
 
       ## Typesetting (with pygments for minted, pygmentex...)
       texlive.combined.scheme-full
+      typst
       python311Packages.pygments
-
       haskellPackages.pandoc-crossref
       
       w3m
@@ -136,7 +135,7 @@
       enable = true;
       config = {
         theme = "TwoDark";
-        # pager = "less -FR --mouse";
+        pager = "less -FR";
       };
     };
 
@@ -179,7 +178,7 @@
 
     nnn = {
       enable = true;
-      # package = pkgs.nnn.override ({ withNerdIcons = true; });
+      package = pkgs.nnn.override ({ withNerdIcons = true; });
     };
 
     bottom.enable = true;
