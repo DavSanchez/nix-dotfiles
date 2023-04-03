@@ -208,6 +208,10 @@
       enableZshIntegration = true;
       enableBashIntegration = true;
       enableFishIntegration = true;
+      # enableNuIntegration = true;
+      settings = {
+        inline_height = 40;
+      };
     };
     
     pandoc.enable = true;
