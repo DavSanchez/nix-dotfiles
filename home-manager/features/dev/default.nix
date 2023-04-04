@@ -10,6 +10,7 @@
     ./digital-design.nix
     ./go.nix
     ./haskell
+    ./java.nix
     # ./kafka.nix
     ./rust.nix
   ];
