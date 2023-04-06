@@ -139,7 +139,7 @@
       "lastpass"
       "logseq"
       "openvpn-connect"
-      "parallels"
+      #"parallels"
       "raycast"
       "stats"
       "utm"
