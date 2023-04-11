@@ -6,8 +6,8 @@ let
   nvChad = pkgs.fetchFromGitHub {
     owner = "NvChad";
     repo = "NvChad";
-    rev = "refs/heads/v2.0";
-    sha256 = "sha256-3X10A9/poqfD43XlpwPA0nrf0WYZbsm0PymT5x1L7i0=";
+    rev = "34bdca17d298c5762219649b238e8f1ca0689352";
+    hash = "sha256-qpmq74JI775oocqLU/I5KetWrGF1KhwZlFjIgIonZ/Q=";
   };
 in 
 {
