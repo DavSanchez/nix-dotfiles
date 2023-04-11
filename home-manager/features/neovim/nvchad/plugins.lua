@@ -49,6 +49,7 @@ local plugins = {
   {
     "github/copilot.vim",
     opts = overrides.copilot,
+    lazy = false, -- load during startup
   },
 
   -- To make a plugin not be loaded

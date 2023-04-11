@@ -92,11 +92,17 @@
           version = "0.0.10";
           sha256 = "090wg4lin4y06nhg45p9mjsqwfa21bdgafj57swh5z6fpv3pqxx2";
         }
+        # {
+        #   name = "copilot-labs";
+        #   publisher = "GitHub";
+        #   version = "0.7.632";
+        #   sha256 = "sha256-1sMC0xPWseIRXXVsMrisN3A4br36S9pp9hYzsSjanKM=";
+        # }
         {
-          name = "copilot-labs";
-          publisher = "GitHub";
-          version = "0.7.632";
-          sha256 = "sha256-1sMC0xPWseIRXXVsMrisN3A4br36S9pp9hYzsSjanKM=";
+          name = "dscodegpt";
+          publisher = "DanielSanMedium";
+          version = "2.1.5";
+          sha256 = "sha256-RaA8AuI1lbd2sQOCrlSSPgNw2gRGBsG2zMiBD3gIhEg=";
         }
         {
           name = "lambda-black";

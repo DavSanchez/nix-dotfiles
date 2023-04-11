@@ -20,6 +20,8 @@ in
       (nerdfonts.override {fonts = ["FiraCode" "Iosevka" "JetBrainsMono"];})
       fira-code-symbols
     ];
+    # Copilot plugin needs nodejs in PATH when using NvChad
+    withNodeJs = true;
   };
   xdg.configFile."nvim" = {
       source = nvChad;
