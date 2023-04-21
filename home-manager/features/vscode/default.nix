@@ -65,7 +65,7 @@
         usernamehw.errorlens
         valentjn.vscode-ltex
         vscodevim.vim
-        # zxh404.vscode-proto3
+        zxh404.vscode-proto3
       ]
       ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
         {
