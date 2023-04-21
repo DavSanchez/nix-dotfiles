@@ -79,16 +79,18 @@
   };
 
   environment = {
-    shells = [
-      pkgs.bashInteractive
-      pkgs.zsh
-      # pkgs.fish
-    ];
+    # shells = [
+    #   pkgs.bashInteractive
+    #   pkgs.zsh
+    #   # pkgs.fish
+    # ];
     # List packages installed in system profile. To search by name, run:
     # $ nix-env -qaP | grep wget
     systemPackages = [
       pkgs.vim
     ];
+
+    # variables.SHELL = "${pkgs.zsh}/bin/zsh";
   };
 
   # Use a custom configuration.nix location.
@@ -114,7 +116,7 @@
     davidsanchez = {
       name = "davidsanchez";
       home = "/Users/davidsanchez";
-      shell = pkgs.zsh;
+      # shell = pkgs.zsh;
     };
   };
 
