@@ -75,7 +75,14 @@
     nnn = {
       enable = true;
       package = pkgs.nnn.override {withNerdIcons = true;};
-      extraPackages = with pkgs; [ffmpegthumbnailer mediainfo sxiv];
+      extraPackages = with pkgs;
+        [
+          ffmpegthumbnailer
+          mediainfo
+        ]
+        ++ lib.optionals pkgs.stdenv.isLinux [
+          sxiv
+        ];
     };
 
     tealdeer = {
