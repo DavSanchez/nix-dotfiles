@@ -12,5 +12,6 @@
     impl
     go-tools
     gotests
+    golangci-lint
   ];
 }
