@@ -16,6 +16,8 @@
 
       hoogle
       hpack
+
+      cabal-fmt
     ];
 
     # hoogle ghci integration
