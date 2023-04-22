@@ -1,8 +1,8 @@
 {pkgs}: {
   "[haskell]"."editor.defaultFormatter" = "haskell.haskell";
-  "[jsonc]"."editor.defaultFormatter" = "esbenp.prettier-vscode";
-  "[python]"."editor.formatOnType" = true;
-  "[svelte]"."editor.defaultFormatter" = "svelte.svelte-vscode";
+  # "[jsonc]"."editor.defaultFormatter" = "esbenp.prettier-vscode";
+  # "[python]"."editor.formatOnType" = true;
+  # "[svelte]"."editor.defaultFormatter" = "svelte.svelte-vscode";
   "breadcrumbs.enabled" = true;
   "calva.paredit.defaultKeyMap" = "strict";
   "clangd.checkUpdates" = true;
@@ -45,7 +45,7 @@
     "**/.metals" = true;
   };
   "git.autofetch" = true;
-  "go.lintTool" = "${pkgs.golangci-lint}/bin/golangci-lint";
+  "go.lintTool" = "golangci-lint";
   "go.toolsManagement.autoUpdate" = true;
   "haskell.manageHLS" = "PATH";
   "haskell.plugin.eval.config.exception" = true;
