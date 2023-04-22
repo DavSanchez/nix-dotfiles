@@ -164,18 +164,15 @@
       "xld"
       "xquartz" # X11 applications on macOS
       "yacreader"
-      "zotero"
     ];
     brews = [
       "ghcup"
       "whalebrew"
       "pam-reattach" # https://github.com/fabianishere/pam_reattach
-      # "terraform-rover"
     ];
     masApps = {
       "1Blocker" = 1365531024;
       "Amphetamine" = 937984704;
-      "GarageBand" = 682658836;
       "Hush" = 1544743900;
       "iMovie" = 408981434;
       "Keynote" = 409183694;

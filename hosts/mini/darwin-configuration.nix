@@ -172,12 +172,10 @@
       "ghcup"
       "whalebrew"
       "pam-reattach" # https://github.com/fabianishere/pam_reattach
-      # "terraform-rover"
     ];
     masApps = {
       "1Blocker" = 1365531024;
       "Amphetamine" = 937984704;
-      "GarageBand" = 682658836;
       "Hush" = 1544743900;
       "iMovie" = 408981434;
       "Keynote" = 409183694;
@@ -187,7 +185,6 @@
       "Numbers" = 409203825;
       "Pages" = 409201541;
       "Reeder" = 1529448980;
-      "Shazam" = 897118787;
       "The Unarchiver" = 425424353;
       "UTM" = 1538878817;
       "WhatsApp" = 1147396723;
