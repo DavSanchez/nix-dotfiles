@@ -10,7 +10,6 @@
 
   programs = {
     pandoc.enable = true;
-
-    papis.enable = true;
+    # papis.enable = true;
   };
 }
