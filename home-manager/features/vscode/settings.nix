@@ -45,7 +45,7 @@
     "**/.metals" = true;
   };
   "git.autofetch" = true;
-  "go.lintTool" = "golangci-lint";
+  "go.lintTool" = "${pkgs.golangci-lint}/bin/golangci-lint";
   "go.toolsManagement.autoUpdate" = true;
   "haskell.manageHLS" = "PATH";
   "haskell.plugin.eval.config.exception" = true;
