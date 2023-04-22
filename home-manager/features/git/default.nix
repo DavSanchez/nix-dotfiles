@@ -1,5 +1,4 @@
-{pkgs, ...}:
-{
+{pkgs, ...}: {
   home.packages = with pkgs; [
     bfg-repo-cleaner
     git-quick-stats
@@ -38,7 +37,7 @@
     };
 
     extraConfig = {
-      init.defaultBranch = "master"; 
+      init.defaultBranch = "master";
       branch.sort = "-committerdate";
       # core.editor = "hx";
       pull.ff = "only";

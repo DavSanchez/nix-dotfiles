@@ -1,12 +1,12 @@
 # This is your system's configuration file.
 # Use this to configure your system environment (it replaces ~/.nixpkgs/darwin-configuration.nix)
-
-{ pkgs
-, config
-, lib
-, inputs
-, outputs
-, ...
+{
+  pkgs,
+  config,
+  lib,
+  inputs,
+  outputs,
+  ...
 }: {
   # You can import other nix-darwin modules here
   imports = [
@@ -48,7 +48,7 @@
   nix = {
     # This will add each flake input as a registry
     # To make nix3 commands consistent with your flake
-    registry = lib.mapAttrs (_: value: { flake = value; }) inputs;
+    registry = lib.mapAttrs (_: value: {flake = value;}) inputs;
 
     # This will additionally add your inputs to the system's legacy channels
     # Making legacy nix commands consistent as well, awesome!
@@ -57,7 +57,7 @@
     package = pkgs.nixUnstable;
 
     settings = {
-      trusted-users = [ "root" "davidsanchez" ]; # For groups prepend @: "@admin"
+      trusted-users = ["root" "davidsanchez"]; # For groups prepend @: "@admin"
 
       # Enable flakes and new 'nix' command
       experimental-features = "nix-command flakes";
@@ -74,7 +74,7 @@
       '';
     gc = {
       automatic = true;
-      interval = { Day = 7; };
+      interval = {Day = 7;};
     };
   };
 
@@ -127,7 +127,7 @@
     onActivation.upgrade = true; # This defaults to false so calls are idempotent.
     onActivation.cleanup = "zap";
 
-    taps = [ ];
+    taps = [];
     casks = [
       "amethyst"
       "bartender"

@@ -1,6 +1,7 @@
-{ lib
-, pkgs
-, ...
+{
+  lib,
+  pkgs,
+  ...
 }: {
   programs.zsh = {
     enable = true;
@@ -59,16 +60,19 @@
     zplug = {
       enable = true;
       plugins = [
-        { name = "chisui/zsh-nix-shell"; }
-        { name = "MichaelAquilina/zsh-you-should-use"; }
-        { name = "wfxr/formarks"; }
-        { name = "hlissner/zsh-autopair"; tags = [ "defer:2" ]; }
+        {name = "chisui/zsh-nix-shell";}
+        {name = "MichaelAquilina/zsh-you-should-use";}
+        {name = "wfxr/formarks";}
+        {
+          name = "hlissner/zsh-autopair";
+          tags = ["defer:2"];
+        }
       ];
     };
 
     initExtraBeforeCompInit = ''
       ${builtins.readFile ./session_variables.zsh}
-        
+
       ${lib.optionalString pkgs.stdenv.isDarwin (builtins.readFile ./session_variables.mac.zsh)}
 
       ${builtins.readFile ./functions.zsh}

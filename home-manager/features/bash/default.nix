@@ -1,5 +1,4 @@
-_:
-{
+_: {
   programs.bash = {
     enable = true;
     enableCompletion = true;

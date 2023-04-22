@@ -1,4 +1,4 @@
-{
+{pkgs}: {
   "[haskell]"."editor.defaultFormatter" = "haskell.haskell";
   "[jsonc]"."editor.defaultFormatter" = "esbenp.prettier-vscode";
   "[python]"."editor.formatOnType" = true;
@@ -6,6 +6,7 @@
   "breadcrumbs.enabled" = true;
   "calva.paredit.defaultKeyMap" = "strict";
   "clangd.checkUpdates" = true;
+  "codestream.serverUrl" = "https://api.codestream.com";
   "diffEditor.ignoreTrimWhitespace" = false;
   "editor.accessibilitySupport" = "off";
   "editor.bracketPairColorization.enabled" = true;
@@ -96,7 +97,7 @@
   "latex-workshop.view.pdf.viewer" = "tab";
   "nix.enableLanguageServer" = true;
   "nix.serverPath" = "nil";
-  "nix.formatterPath" = "alejandra";
+  "nix.formatterPath" = "${pkgs.alejandra}/bin/alejandra";
   "platformio-ide.activateOnlyOnPlatformIOProject" = true;
   # "python.languageServer" = "Pylance";
   "redhat.telemetry.enabled" = false;
@@ -115,7 +116,7 @@
   };
   "workbench.iconTheme" = "material-icon-theme";
   "workbench.productIconTheme" = "material-product-icons";
-  
+
   # This is introduced by the AWS extension to support CloudFormation YAML
   "yaml.customTags" = [
     "!And"
@@ -148,5 +149,4 @@
   ];
   "vim.enableNeovim" = true; # programs.neovim.enable;
   "vim.neovimUseConfigFile" = true; # programs.neovim.enable;
-  "codestream.serverUrl" = "https://api.codestream.com";
 }

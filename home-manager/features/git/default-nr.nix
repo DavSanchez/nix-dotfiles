@@ -1,5 +1,4 @@
-{pkgs, ...}:
-{
+{pkgs, ...}: {
   home.packages = with pkgs; [
     bfg-repo-cleaner
     git-quick-stats
@@ -48,7 +47,7 @@
       pull.ff = "only";
       pull.rebase = true;
     };
-    
+
     aliases = {
       pushall = "!git remote | xargs -L1 git push --all";
       graph = "log --decorate --oneline --graph";

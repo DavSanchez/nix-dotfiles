@@ -47,7 +47,8 @@
     ++ lib.optionals pkgs.stdenv.isDarwin [
       ## Container runtimes on macOS
       colima
-    ] ++ lib.optionals pkgs.stdenv.isLinux [
+    ]
+    ++ lib.optionals pkgs.stdenv.isLinux [
       podman
       podman-tui
       podman-compose

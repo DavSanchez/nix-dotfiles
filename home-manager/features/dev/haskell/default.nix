@@ -1,6 +1,7 @@
-{ lib
-, pkgs
-, ...
+{
+  lib,
+  pkgs,
+  ...
 }: {
   home = {
     packages = with pkgs.haskellPackages; [
@@ -12,7 +13,7 @@
       haskell-language-server # Langserver
       implicit-hie
       ghcid
-      
+
       hoogle
       hpack
     ];
@@ -24,7 +25,7 @@
       :def doc \x -> return $ ":!hoogle --info \"" ++ x ++ "\""
     '';
     # https://docs.haskellstack.org/en/stable/yaml_configuration/#non-project-specific-config
-    file.".stack/config.yaml".text = lib.generators.toYAML { } {
+    file.".stack/config.yaml".text = lib.generators.toYAML {} {
       system-ghc = true;
       install-ghc = false;
       templates = {

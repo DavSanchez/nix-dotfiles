@@ -1,7 +1,11 @@
 # This is your home-manager configuration file
 # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
-
-{ inputs, outputs, pkgs, ... }: {
+{
+  inputs,
+  outputs,
+  pkgs,
+  ...
+}: {
   # You can import other home-manager modules here
   imports = [
     # If you want to use modules your own flake exports (from modules/home-manager):
@@ -22,7 +26,7 @@
     ./features/zsh
     ./features/bash
     ./features/fish
-    
+
     ./features/cli.nix
     ./features/fonts.nix
     ./features/helix.nix
@@ -50,7 +54,7 @@
       # })
 
       # devenv.sh
-      (_final: _prev: { 
+      (_final: _prev: {
         inherit (inputs.devenv.packages.${pkgs.system}) devenv;
       })
     ];

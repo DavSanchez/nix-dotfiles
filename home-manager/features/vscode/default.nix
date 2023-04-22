@@ -1,6 +1,4 @@
-{ pkgs
-, ...
-}:
+{pkgs, ...}:
 # VSCode expects writable settings.json
 # https://github.com/nix-community/home-manager/issues/1800
 # We use a custom module for VSCode
@@ -8,7 +6,7 @@
   programs.vscode = {
     enable = true;
     # package = pkgs.vscodium; # vscodium.fhs for complex extensions?
-    userSettings = import ./settings.nix;
+    userSettings = import ./settings.nix {inherit pkgs;}; # Pass pkgs to reference paths
 
     enableExtensionUpdateCheck = true;
     enableUpdateCheck = true;

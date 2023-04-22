@@ -1,8 +1,4 @@
-{
-  pkgs,
-  ...
-}: 
-{
+{pkgs, ...}: {
   imports = [
     ./nvchad.nix
   ];
@@ -98,8 +94,8 @@
         # general purpose / multiple langs
         efm-langserver
         nodePackages.prettier
-
-      ] ++ (lib.optionals pkgs.stdenv.isLinux [
+      ]
+      ++ (lib.optionals pkgs.stdenv.isLinux [
         ltex-ls
       ]);
     plugins = with pkgs.vimPlugins; [

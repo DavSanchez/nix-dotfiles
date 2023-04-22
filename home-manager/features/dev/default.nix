@@ -26,7 +26,7 @@
 
       # devenv.sh, let's work with any language!
       devenv
-  
+
       ## Other
       gnumake
       just # project-specific commands
