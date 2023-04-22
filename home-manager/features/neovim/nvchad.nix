@@ -1,16 +1,11 @@
-{
-  pkgs,
-  ...
-}:
-let
+{pkgs, ...}: let
   nvChad = pkgs.fetchFromGitHub {
     owner = "NvChad";
     repo = "NvChad";
-    rev = "34bdca17d298c5762219649b238e8f1ca0689352";
-    hash = "sha256-qpmq74JI775oocqLU/I5KetWrGF1KhwZlFjIgIonZ/Q=";
+    rev = "7914da7cd34a23a7e23642162aca2ca3b4440da9";
+    hash = "sha256-7c2DmZe7olC7575syftoiF0DfmIVox9rPDgy0Qj/uV8=";
   };
-in 
-{
+in {
   programs.neovim = {
     extraPackages = with pkgs; [
       # NvChad prereqs
@@ -24,11 +19,11 @@ in
     withNodeJs = true;
   };
   xdg.configFile."nvim" = {
-      source = nvChad;
-      recursive = true;
+    source = nvChad;
+    recursive = true;
   };
   xdg.configFile."nvim/lua/custom" = {
-      source = ./nvchad;
-      recursive = true;
+    source = ./nvchad;
+    recursive = true;
   };
 }
