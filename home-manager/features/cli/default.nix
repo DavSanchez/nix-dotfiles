@@ -19,8 +19,8 @@
     [
       ## Utils
       coreutils
-      # binutils # Clashes with GCC
-      # pciutils
+      # binutils # Already included with GCC
+      pciutils
 
       w3m
 
