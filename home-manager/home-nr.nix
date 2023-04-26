@@ -16,6 +16,7 @@
 
     # You can also split up your configuration and import pieces of it here:
     ./features/aws
+    ./features/cli
     ./features/dev/default-nr.nix
     ./features/direnv
     ./features/git/default-nr.nix
@@ -27,7 +28,6 @@
     ./features/bash
     ./features/fish
 
-    ./features/cli.nix
     ./features/fonts.nix
     ./features/helix.nix
     ./features/tmux.nix
