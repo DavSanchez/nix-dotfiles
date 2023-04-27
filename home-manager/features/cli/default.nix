@@ -13,6 +13,7 @@
     ./social.nix
     ./system.nix
     ./terminal.nix
+    ./gh-copilot-cli.nix
   ];
 
   home.packages = with pkgs;
