@@ -15,6 +15,7 @@
     vulnix # Vulnerability (CVE) scanner for Nix
     nix-tree # Interactively browse a Nix store paths dependencies
     nix-du # Visualize gc-roots
+    nix-melt # Ranger for flake.lock
   ];
 
   programs = {
