@@ -16,6 +16,7 @@
     hyperfine
     tokei
     tre-command
+    erdtree # File-tree visualizer and disk usage analyzer
 
     ## Other
     eva
