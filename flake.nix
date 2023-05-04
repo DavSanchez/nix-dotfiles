@@ -60,6 +60,8 @@
       in
         import ./shell.nix {inherit pkgs;}
     );
+    # Formatter
+    formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
 
     # Your custom packages and modifications, exported as overlays
     overlays = import ./overlays {inherit inputs;};
