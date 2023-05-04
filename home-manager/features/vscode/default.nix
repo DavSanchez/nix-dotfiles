@@ -31,6 +31,7 @@
         # esbenp.prettier-vscode
         github.copilot
         # github.github-vscode-theme
+        github.vscode-github-actions
         github.vscode-pull-request-github
         golang.go
         gruntfuggly.todo-tree
