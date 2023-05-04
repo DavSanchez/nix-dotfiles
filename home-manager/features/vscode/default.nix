@@ -61,6 +61,7 @@
         redhat.vscode-yaml
         timonwong.shellcheck
         usernamehw.errorlens
+        # vadimcn.vscode-lldb # broken
         valentjn.vscode-ltex
         vscodevim.vim
         zxh404.vscode-proto3
