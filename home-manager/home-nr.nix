@@ -42,6 +42,7 @@
       outputs.overlays.additions
       outputs.overlays.modifications
       outputs.overlays.rosetta-packages
+      outputs.overlays.stable-packages
 
       # Or overlays exported from other flakes:
       # neovim-nightly-overlay.overlays.default
