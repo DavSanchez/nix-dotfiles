@@ -120,7 +120,7 @@
       "adobe-acrobat-reader"
       "amethyst"
       "authy"
-      # "bartender" # Screen makes this unnecessary
+      "bartender"
       "brave-browser"
       # "dash" # Haven't used it
       "diffusionbee" # Let's have some fun!
