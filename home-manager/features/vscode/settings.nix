@@ -97,7 +97,15 @@
   "latex-workshop.view.pdf.viewer" = "tab";
   "nix.enableLanguageServer" = true;
   "nix.serverPath" = "nil";
-  "nix.formatterPath" = "${pkgs.alejandra}/bin/alejandra";
+  "nix.serverSettings" = {
+    "nil" = {
+      "formatting" = {
+        "command" = [
+          "${pkgs.alejandra}/bin/alejandra"
+        ];
+      };
+    };
+  };
   "platformio-ide.activateOnlyOnPlatformIOProject" = true;
   # "python.languageServer" = "Pylance";
   "redhat.telemetry.enabled" = false;
