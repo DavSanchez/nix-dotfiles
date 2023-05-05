@@ -62,16 +62,11 @@
       # Enable flakes and new 'nix' command
       experimental-features = "nix-command flakes";
       # Deduplicate and optimize nix store
-      auto-optimise-store = true;
+      auto-optimise-store = false;
     };
-    extraOptions =
-      ''
-        auto-optimise-store = true
-        experimental-features = nix-command flakes
-      ''
-      + lib.optionalString (pkgs.system == "aarch64-darwin") ''
-        extra-platforms = x86_64-darwin aarch64-darwin
-      '';
+    extraOptions = lib.optionalString (pkgs.system == "aarch64-darwin") ''
+      extra-platforms = x86_64-darwin aarch64-darwin
+    '';
     gc = {
       automatic = true;
       interval = {Day = 7;};
