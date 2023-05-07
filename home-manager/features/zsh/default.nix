@@ -102,7 +102,7 @@
         # export PATH="$(brew --prefix llvm)/bin:${"\${PATH}"}"
       ''}
       # Prepend nix dirs to PATH so they take precendence
-      export PATH="$HOME/.nix-profile/bin/:/run/current-system/sw/bin/:/nix/var/nix/profiles/default/bin:$PATH"
+      export PATH="$HOME/.nix-profile/bin:/run/current-system/sw/bin:/nix/var/nix/profiles/default/bin:$PATH"
     '';
 
     initExtra = ''
