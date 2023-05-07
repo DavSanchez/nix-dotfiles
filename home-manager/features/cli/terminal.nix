@@ -44,7 +44,11 @@
       enable = true;
       config = {
         theme = "TwoDark";
-        # pager = "less -FR";
+        # add --mouse below to enable mouse inside tmux,
+        # but text selection will be disabled unless:
+        # - You press shift (not copy-mode)
+        # - Enter copy-mode with C-b + [
+        pager = "less --RAW-CONTROL-CHARS --quit-if-one-screen";
       };
       extraPackages = with pkgs.bat-extras; [
         prettybat
