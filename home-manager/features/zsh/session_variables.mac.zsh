@@ -6,4 +6,4 @@
 # export PATH="$HOME/.local/bin:$HOME/.nix-profile/bin:$(brew --prefix)/bin:$PATH"
 
 # Handling Haskell via Homebrew + GHCup in macOS until behavior is stabilized
-export PATH="$HOME/.cabal/bin:$HOME/.ghcup/bin:$PATH"
+# export PATH="$HOME/.cabal/bin:$HOME/.ghcup/bin:$PATH"

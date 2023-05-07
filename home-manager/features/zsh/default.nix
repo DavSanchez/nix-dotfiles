@@ -51,7 +51,6 @@
         ]
         ++ lib.optionals pkgs.stdenv.isDarwin [
           "brew"
-          "iterm2"
           "macos"
           "xcode"
         ];
@@ -102,6 +101,8 @@
         # Haskell for ARM needs to have LLVM available (Not needed now?)
         # export PATH="$(brew --prefix llvm)/bin:${"\${PATH}"}"
       ''}
+      # Prepend nix dirs to PATH so they take precendence
+      export PATH="$HOME/.nix-profile/bin/:/run/current-system/sw/bin/:/nix/var/nix/profiles/default/bin:$PATH"
     '';
 
     initExtra = ''

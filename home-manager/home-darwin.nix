@@ -36,6 +36,9 @@
     ./features/tmux.nix
     ./features/wezterm.nix
     ./features/kitty.nix
+
+    # Darwin specifics
+    # ./features/darwin.nix
   ];
 
   nixpkgs = {

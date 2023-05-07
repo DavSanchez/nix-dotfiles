@@ -6,11 +6,6 @@
     duf
     du-dust
     fd
-    bat-extras.prettybat
-    bat-extras.batman
-    bat-extras.batgrep
-    bat-extras.batdiff
-    bat-extras.batwatch
     sd
     rm-improved
     hyperfine
@@ -49,8 +44,15 @@
       enable = true;
       config = {
         theme = "TwoDark";
-        pager = "less -FR";
+        # pager = "less -FR";
       };
+      extraPackages = with pkgs.bat-extras; [
+        prettybat
+        batman
+        batgrep
+        batdiff
+        batwatch
+      ];
     };
 
     zoxide = {
