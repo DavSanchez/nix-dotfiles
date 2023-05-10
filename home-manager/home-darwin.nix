@@ -19,7 +19,7 @@
     ./features/cli
     ./features/dev
     ./features/direnv
-    ./features/emacs # Doom emacs (testing)
+    # ./features/emacs # Using nvim + nvchad
     ./features/git
     ./features/neovim
     ./features/nu

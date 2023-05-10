@@ -20,7 +20,7 @@
 
     # TODO: Add any other flake you might need
     hardware.url = "github:nixos/nixos-hardware";
-    nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
+    # nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
     devenv.url = "github:cachix/devenv/latest";
 
     # Shameless plug: looking for a way to nixify your themes and make
