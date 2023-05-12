@@ -22,7 +22,7 @@
     hardware.url = "github:nixos/nixos-hardware";
     # nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
     devenv.url = "github:cachix/devenv/latest";
-    inputs.vscode-server.url = "github:nix-community/nixos-vscode-server";
+    vscode-server.url = "github:nix-community/nixos-vscode-server";
 
     # Shameless plug: looking for a way to nixify your themes and make
     # everything match nicely? Try nix-colors!
