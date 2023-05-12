@@ -44,7 +44,7 @@
       "aarch64-darwin"
       "x86_64-darwin"
     ];
-  in rec {
+  in {
     # Your custom packages
     # Acessible through 'nix build', 'nix shell', etc
     packages = forAllSystems (
@@ -86,24 +86,23 @@
         ];
       };
     };
-
     # macOS systems using nix-darwin
     darwinConfigurations = {
-      "mbp" = darwin.lib.darwinSystem {
+      mbp = darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         specialArgs = {inherit inputs outputs;};
         modules = [
           ./hosts/mbp/darwin-configuration.nix
         ];
       };
-      "mini" = darwin.lib.darwinSystem {
+      mini = darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         specialArgs = {inherit inputs outputs;};
         modules = [
           ./hosts/mini/darwin-configuration.nix
         ];
       };
-      "nr" = darwin.lib.darwinSystem {
+      nr = darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         specialArgs = {inherit inputs outputs;};
         modules = [

@@ -77,10 +77,7 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILvM06bcMBkqNyadDKDGQXl4ztggBM1mgg5/CLqnqNvn"
     ];
     extraGroups = ["wheel"]; # Enable ‘sudo’ for the user.
-    packages = with pkgs; [
-      # firefox
-      # thunderbird
-    ];
+    packages = [];
   };
 
   # List packages installed in system profile. To search, run:
