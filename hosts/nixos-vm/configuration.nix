@@ -66,7 +66,7 @@
   i18n.defaultLocale = "en_US.UTF-8";
   console = {
     font = "Lat2-Terminus16";
-    keyMap = "es";
+    keyMap = lib.mkDefault "es";
     useXkbConfig = true; # use xkbOptions in tty.
   };
 
@@ -89,8 +89,10 @@
 
   services.openssh = {
     enable = true;
-    permitRootLogin = "no";
-    passwordAuthentication = false;
+    settings = {
+      permitRootLogin = "no";
+      passwordAuthentication = false;
+    };
   };
 
   # VSCode server for SSH access
