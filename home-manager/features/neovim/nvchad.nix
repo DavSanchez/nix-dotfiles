@@ -2,8 +2,8 @@
   nvChad = pkgs.fetchFromGitHub {
     owner = "NvChad";
     repo = "NvChad";
-    rev = "7914da7cd34a23a7e23642162aca2ca3b4440da9";
-    hash = "sha256-7c2DmZe7olC7575syftoiF0DfmIVox9rPDgy0Qj/uV8=";
+    rev = "699aeaa44203b62003da8aacd838a5bdac4c2d46";
+    hash = "sha256-LldvBSROu3/pWqHb8OPbrsD3m0JbZFPyCPUk6AQoIKo=";
   };
 in {
   programs.neovim = {
