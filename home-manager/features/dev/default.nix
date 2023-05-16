@@ -7,7 +7,7 @@
   imports = [
     ./c-cpp.nix
     ./devops.nix
-    ./digital-design.nix
+    # ./digital-design.nix
     ./go.nix
     ./haskell
     ./java.nix
