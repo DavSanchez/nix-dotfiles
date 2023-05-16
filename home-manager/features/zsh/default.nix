@@ -5,6 +5,7 @@
 }: {
   programs.zsh = {
     enable = true;
+    dotDir = ".config/zsh";
     enableCompletion = true;
     defaultKeymap = "emacs";
     enableAutosuggestions = true;
@@ -69,11 +70,21 @@
       ];
     };
 
+    sessionVariables =
+      {
+        KEYTIMEOUT = 1;
+        DOTFILES = "$HOME/.dotfiles";
+        NVIM_TUI_ENABLE_TRUE_COLOR = 1;
+        EDITOR = "nvim";
+        LC_ALL = "en_US.UTF-8";
+        LANG = "en_US.UTF-8";
+        NIX_PATH = "$HOME/.nix-defexpr/channels\${NIX_PATH:+:}$NIX_PATH";
+        FPATH = "$HOME/.nix-profile/share/zsh/site-functions:$FPATH";
+        ZSH_AUTOSUGGEST_STRATEGY = ["history" "completion"];
+      }
+      // lib.optionalString pkgs.stdenv.isDarwin {};
+
     initExtraBeforeCompInit = ''
-      ${builtins.readFile ./session_variables.zsh}
-
-      ${lib.optionalString pkgs.stdenv.isDarwin (builtins.readFile ./session_variables.mac.zsh)}
-
       ${builtins.readFile ./functions.zsh}
 
       bindkey -M vicmd 'k' history-beginning-search-backward
@@ -94,15 +105,20 @@
         fi
         # Homebrew
         eval $(/opt/homebrew/bin/brew shellenv)
-        # Homebrew sbin
-        export PATH="$(brew --prefix)/sbin:$PATH"
-        # Homebrew completions
-        FPATH="$(brew --prefix)/share/zsh/site-functions:$FPATH"
-        # Haskell for ARM needs to have LLVM available (Not needed now?)
-        # export PATH="$(brew --prefix llvm)/bin:${"\${PATH}"}"
       ''}
+
+      # Less variables (quoted inside sessionVariables so they don't work there)
+      export LESS = "-R";
+      export LESS_TERMCAP_mb = "$'\E[1;31m'"; # begin blink
+      export LESS_TERMCAP_md = "$'\E[1;36m'"; # begin bold
+      export LESS_TERMCAP_me = "$'\E[0m'"; # reset bold/blink
+      export LESS_TERMCAP_so = "$'\E[01;44;33m'"; # begin reverse video
+      export LESS_TERMCAP_se = "$'\E[0m'"; # reset reverse video
+      export LESS_TERMCAP_us = "$'\E[1;32m'"; # begin underline
+      export LESS_TERMCAP_ue = "$'\E[0m'"; # reset underline
+
       # Prepend nix dirs to PATH so they take precendence
-      export PATH="$HOME/.nix-profile/bin:/run/current-system/sw/bin:/nix/var/nix/profiles/default/bin:$PATH"
+      export PATH="$HOME/.local/bin:$HOME/.nix-profile/bin:/run/current-system/sw/bin:/nix/var/nix/profiles/default/bin:$PATH"
     '';
 
     initExtra = ''
