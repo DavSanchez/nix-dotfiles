@@ -74,18 +74,21 @@
   };
 
   environment = {
-    # shells = [
-    #   pkgs.bashInteractive
-    #   pkgs.zsh
-    #   # pkgs.fish
-    # ];
     # List packages installed in system profile. To search by name, run:
     # $ nix-env -qaP | grep wget
-    systemPackages = [
-      pkgs.vim
+    systemPackages = with pkgs; [
+      vim
     ];
-
-    # variables.SHELL = "${pkgs.zsh}/bin/zsh";
+    # shells = with pkgs; [
+    #   zsh
+    #   bashInteractive
+    # ];
+    systemPath = [
+      "${config.homebrew.brewPrefix}/sbin"
+    ];
+    variables = {
+      FPATH = "${(config.homebrew.brewPrefix)}/share/zsh/site-functions:$FPATH";
+    };
   };
 
   # Use a custom configuration.nix location.
@@ -99,8 +102,11 @@
 
   # Create /etc/zshrc that loads the nix-darwin environment.
   programs = {
-    zsh.enable = true; # default shell on Catalina+
-    # fish.enable = true;
+    zsh = {
+      enable = true; # default shell on Catalina+
+      enableFzfCompletion = true;
+      enableFzfGit = true;
+    }; # fish.enable = true;
     bash = {
       enable = true;
       enableCompletion = true;
@@ -111,7 +117,6 @@
     davidsanchez = {
       name = "davidsanchez";
       home = "/Users/davidsanchez";
-      # shell = pkgs.zsh;
     };
   };
 

@@ -74,11 +74,23 @@
     };
   };
 
-  # List packages installed in system profile. To search by name, run:
-  # $ nix-env -qaP | grep wget
-  environment.systemPackages = [
-    pkgs.vim
-  ];
+  environment = {
+    # List packages installed in system profile. To search by name, run:
+    # $ nix-env -qaP | grep wget
+    systemPackages = with pkgs; [
+      vim
+    ];
+    # shells = with pkgs; [
+    #   zsh
+    #   bashInteractive
+    # ];
+    systemPath = [
+      "${config.homebrew.brewPrefix}/sbin"
+    ];
+    variables = {
+      FPATH = "${(config.homebrew.brewPrefix)}/share/zsh/site-functions:$FPATH";
+    };
+  };
 
   # Use a custom configuration.nix location.
   # $ darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin/configuration.nix
@@ -91,7 +103,11 @@
 
   # Create /etc/zshrc that loads the nix-darwin environment.
   programs = {
-    zsh.enable = true; # default shell on Catalina+
+    zsh = {
+      enable = true; # default shell on Catalina+
+      enableFzfCompletion = true;
+      enableFzfGit = true;
+    };
     # fish.enable = true;
     bash = {
       enable = true;
