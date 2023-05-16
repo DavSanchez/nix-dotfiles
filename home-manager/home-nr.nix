@@ -24,6 +24,7 @@
     ./features/nu
     ./features/starship
     ./features/vscode
+    ./features/vscode/default-insiders.nix # Insiders build
     ./features/zsh
     ./features/bash
     ./features/fish
