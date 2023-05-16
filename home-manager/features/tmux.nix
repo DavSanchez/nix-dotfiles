@@ -10,6 +10,7 @@
     terminal = "xterm-256color";
     baseIndex = 1;
     clock24 = true;
+    mouse = true;
 
     # For vi mode
     # keyMode = "vi";
@@ -23,8 +24,6 @@
       # Create splits and vertical splits
       bind-key v split-window -h -p 50 -c "#{pane_current_path}"
       bind-key s split-window -p 50 -c "#{pane_current_path}"
-      # Also use mouse
-      setw -g mouse on
     '';
 
     plugins = with pkgs.tmuxPlugins; [
