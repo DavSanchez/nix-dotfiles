@@ -18,7 +18,7 @@ in {
           display_name = "YOUR_HOSTNAME";
         };
       '';
-      description = "Infrastructure Agent configuration. Refer to <https://docs.newrelic.com/docs/infrastructure/install-infrastructure-agent/configuration/infrastructure-agent-configuration-settings> for details on supported values.";
+      description = "Infrastructure Agent configuration. Will be placed in `/etc/newrelic-infra/newrelic-infra.yml`. Refer to <https://docs.newrelic.com/docs/infrastructure/install-infrastructure-agent/configuration/infrastructure-agent-configuration-settings> for details on supported values.";
     };
 
     logFile = lib.mkOption {
