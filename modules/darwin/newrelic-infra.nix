@@ -18,6 +18,18 @@ in {
       '';
       description = "Infrastructure Agent configuration. Refer to <https://docs.newrelic.com/docs/infrastructure/install-infrastructure-agent/configuration/infrastructure-agent-configuration-settings> for details on supported values.";
     };
+    
+    logFile = lib.mkOption {
+      type = lib.types.path;
+      default = "/var/log/newrelic-infra/newrelic-infra.log";
+      description = "Path to the log file";
+    };
+
+    errLogFile = lib.mkOption {
+      type = lib.types.path;
+      default = "/var/log/newrelic-infra/newrelic-infra.stderr.log";
+      description = "Path to the error log file";
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -25,6 +37,13 @@ in {
       # description = "New Relic Infrastructure Agent";
 
       command = "${pkgs.infrastructure-agent}/bin/newrelic-infra-service -config /etc/newrelic-infra/newrelic-infra.yml";
+
+      serviceConfig = {
+        Restart = "always";
+        StartInterval = 300;
+        StandardErrorPath = cfg.errLogFile;
+        StandardOutPath = cfg.logFile;
+      };
     };
 
     environment.etc."newrelic-infra/newrelic-infra.yml".source = yamlFormat.generate "newrelic-infra.yml" cfg.config;
