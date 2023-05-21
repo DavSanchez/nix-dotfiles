@@ -13,7 +13,16 @@
     inputs.vscode-server.nixosModule
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+
+    outputs.nixosModules.newrelic-infra
   ];
+
+  services.newrelic-infra = {
+    enable = true;
+    config = {
+      license_key = "YOUR_LICENSE_KEY";
+    };
+  };
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
