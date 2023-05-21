@@ -19,7 +19,15 @@
 
     # You can also split up your configuration and import pieces of it here:
     # ./users.nix
+    outputs.darwinModules.newrelic-infra
   ];
+
+  services.newrelic-infra = {
+    enable = false;
+    config = {
+      license_key = "REDACTED";
+    };
+  };
 
   nixpkgs = {
     # You can add overlays here
