@@ -26,7 +26,12 @@ buildGoModule rec {
     Security
   ];
 
-  ldflags = ["-s" "-w"];
+  ldflags = [
+    "-s"
+    "-w"
+    "-X main.buildVersion=${version}"
+    "-X main.gitCommit=${src.rev}"
+  ];
 
   CGO_ENABLED =
     if stdenv.isDarwin
