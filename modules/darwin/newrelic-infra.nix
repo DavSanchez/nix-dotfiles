@@ -39,8 +39,6 @@ in {
       command = "${pkgs.infrastructure-agent}/bin/newrelic-infra-service -config /etc/newrelic-infra/newrelic-infra.yml";
 
       serviceConfig = {
-        Restart = "always";
-        StartInterval = 300;
         StandardErrorPath = cfg.errLogFile;
         StandardOutPath = cfg.logFile;
       };
