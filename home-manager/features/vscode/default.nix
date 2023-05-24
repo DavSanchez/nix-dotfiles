@@ -55,7 +55,7 @@
         ms-vscode-remote.remote-ssh
         ms-vscode.cmake-tools
         ms-vscode.hexeditor
-        ms-vscode.makefile-tools
+        # ms-vscode.makefile-tools
         # ms-vscode.theme-tomorrowkit
         pkief.material-icon-theme
         pkief.material-product-icons
@@ -74,12 +74,12 @@
           version = "3.0.2";
           sha256 = "15w1ixvp6vn9ng6mmcmv9ch0ngx8m85i1yabxdfn6zx3ypq802c5";
         }
-        {
-          name = "codestream";
-          publisher = "CodeStream";
-          version = "14.15.0";
-          sha256 = "sha256-YCB2Emz9QWtXAJf5z2mnXOVtd6tUgSY/xX386HF72d0=";
-        }
+        # {
+        #   name = "codestream";
+        #   publisher = "CodeStream";
+        #   version = "14.15.0";
+        #   sha256 = "sha256-YCB2Emz9QWtXAJf5z2mnXOVtd6tUgSY/xX386HF72d0=";
+        # }
         {
           name = "disableligatures";
           publisher = "CoenraadS";
