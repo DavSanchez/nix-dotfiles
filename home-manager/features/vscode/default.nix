@@ -53,7 +53,7 @@
         # ms-toolsai.jupyter
         # ms-toolsai.jupyter-renderers
         ms-vscode-remote.remote-ssh
-        ms-vscode.cmake-tools
+        # ms-vscode.cmake-tools
         ms-vscode.hexeditor
         # ms-vscode.makefile-tools
         # ms-vscode.theme-tomorrowkit
