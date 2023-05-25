@@ -19,7 +19,14 @@
 
     # You can also split up your configuration and import pieces of it here:
     # ./users.nix
+
+    inputs.nixobs.darwinModules.newrelic-infra
   ];
+
+  services.newrelic-infra = {
+    enable = true;
+    config = import ./nr-infra-config.nix;
+  };
 
   nixpkgs = {
     # You can add overlays here
@@ -30,6 +37,7 @@
 
       # Or overlays exported from other flakes:
       # neovim-nightly-overlay.overlays.default
+      inputs.nixobs.overlays.default
 
       # Or define it inline, for example:
       # (final: prev: {

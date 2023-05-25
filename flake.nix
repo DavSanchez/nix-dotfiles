@@ -88,10 +88,16 @@
           ./hosts/nixos-vm/configuration.nix
         ];
       };
-      nr-nixos-vm = nixpkgs.lib.nixosSystem {
+      nr-nixos-vm-aarch64 = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [
-          ./hosts/nr-nixos-vm/configuration.nix
+          ./hosts/nr/nixos-vm-aarch64/configuration.nix
+        ];
+      };
+      nr-nixos-vm-x86_64 = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs outputs;};
+        modules = [
+          ./hosts/nr/nixos-vm-x86_64/configuration.nix
         ];
       };
     };
@@ -115,7 +121,7 @@
         system = "aarch64-darwin";
         specialArgs = {inherit inputs outputs;};
         modules = [
-          ./hosts/nr/darwin-configuration.nix
+          ./hosts/nr/main/darwin-configuration.nix
         ];
       };
     };
