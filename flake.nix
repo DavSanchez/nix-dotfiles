@@ -88,6 +88,12 @@
           ./hosts/nixos-vm/configuration.nix
         ];
       };
+      nr-nixos-vm = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs outputs;};
+        modules = [
+          ./hosts/nr-nixos-vm/configuration.nix
+        ];
+      };
     };
     # macOS systems using nix-darwin
     darwinConfigurations = {
