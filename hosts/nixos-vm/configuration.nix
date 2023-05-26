@@ -12,17 +12,15 @@
   imports = [
     inputs.vscode-server.nixosModule
     # Include the results of the hardware scan.
-    ./hardware-configuration.nix
+    # ./hardware-configuration.nix
 
-    outputs.nixosModules.newrelic-infra
+    # inputs.nixobs.nixosModules.newrelic-infra
   ];
 
-  services.newrelic-infra = {
-    enable = true;
-    config = {
-      license_key = "YOUR_LICENSE_KEY";
-    };
-  };
+  # services.newrelic-infra = {
+  #   enable = true;
+  #   config = ../../secrets/newrelic-infra-config.yml;
+  # };
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -38,6 +36,7 @@
 
       # Or overlays exported from other flakes:
       # neovim-nightly-overlay.overlays.default
+      # inputs.nixobs.overlays.default
 
       # Or define it inline, for example:
       # (final: prev: {
@@ -87,6 +86,7 @@
     ];
     extraGroups = ["wheel"]; # Enable ‘sudo’ for the user.
     packages = [];
+    hashedPassword = "$6$/3m0dysN66ghwR8n$Og1SszvXt7xI8euvDDWgv3PzOPo6kBRWdJ1366hkThXg3jqJ0S36VL9KMpfsRoWnhJGFoOzFyRGaKKiN0oFnz/";
   };
 
   # List packages installed in system profile. To search, run:

@@ -27,6 +27,9 @@
     nixobs.url = "github:DavSanchez/NixObs";
     nixobs.inputs.nixpkgs.follows = "nixpkgs";
 
+    nixos-generators.url = "github:nix-community/nixos-generators";
+    nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
+
     # Shameless plug: looking for a way to nixify your themes and make
     # everything match nicely? Try nix-colors!
     nix-colors.url = "github:misterio77/nix-colors";
@@ -50,12 +53,29 @@
   in {
     # Your custom packages
     # Acessible through 'nix build', 'nix shell', etc
-    packages = forAllSystems (
-      system: let
-        pkgs = nixpkgs.legacyPackages.${system};
-      in
-        import ./pkgs {inherit pkgs;}
-    );
+    packages =
+      forAllSystems (
+        system: let
+          pkgs = nixpkgs.legacyPackages.${system};
+        in
+          import ./pkgs {inherit pkgs;}
+      )
+      // {
+        aarch64-linux = {
+          createISO = inputs.nixos-generators.nixosGenerate {
+            system = "aarch64-linux";
+            modules = [
+              # you can include your own nixos configuration here, i.e.
+              ./hosts/nixos-vm/configuration.nix
+            ];
+            format = "iso";
+            specialArgs = {inherit inputs outputs;};
+            # you can also define your own custom formats
+            # customFormats = { "myFormat" = <myFormatModule>; ... };
+            # format = "myFormat";
+          };
+        };
+      };
     # Devshell for bootstrapping
     # Acessible through 'nix develop' or 'nix-shell' (legacy)
     devShells = forAllSystems (

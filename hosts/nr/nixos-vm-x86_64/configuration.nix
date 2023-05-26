@@ -14,7 +14,7 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
 
-    inputs.nixosModules.newrelic-infra
+    inputs.nixobs.nixosModules.newrelic-infra
   ];
 
   services.newrelic-infra = {
