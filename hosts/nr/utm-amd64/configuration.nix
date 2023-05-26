@@ -44,6 +44,10 @@
       #     patches = [ ./change-hello-to-hi.patch ];
       #   });
       # })
+      # devenv.sh
+      (_final: _prev: {
+        inherit (inputs.devenv.packages.${pkgs.system}) devenv;
+      })
     ];
     # Configure your nixpkgs instance
     config = {
