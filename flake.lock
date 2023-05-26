@@ -230,11 +230,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1684696114,
-        "narHash": "sha256-ln7zWKd4kCC0NYkiAlYy7LI58vA19aAuhYnniRKMABY=",
+        "lastModified": 1685099715,
+        "narHash": "sha256-D0wo7mm95ejVk70Begg9Tf2rDv9M5UphZ5BzEyCX9rA=",
         "owner": "DavSanchez",
         "repo": "NixObs",
-        "rev": "fc447dae74f671f56cbcba187c53749962bcc2a5",
+        "rev": "8e4cbfe45f2278b65883dd338f5a9676017837c7",
         "type": "github"
       },
       "original": {
