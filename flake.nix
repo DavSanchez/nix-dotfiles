@@ -50,6 +50,12 @@
       "aarch64-darwin"
       "x86_64-darwin"
     ];
+    hmModuleVMOpts = {
+      home-manager.useGlobalPkgs = true;
+      home-manager.useUserPackages = true;
+      home-manager.users.david = import ./home-manager/home-vm.nix;
+      home-manager.extraSpecialArgs = {inherit inputs outputs;};
+    };
   in {
     # Your custom packages
     # Acessible through 'nix build', 'nix shell', etc
@@ -68,12 +74,7 @@
               # you can include your own nixos configuration here, i.e.
               ./hosts/vm/configuration.nix
               home-manager.nixosModules.home-manager
-              {
-                home-manager.useGlobalPkgs = true;
-                home-manager.useUserPackages = true;
-                home-manager.users.david = import ./home-manager/home-vm.nix;
-                home-manager.extraSpecialArgs = {inherit inputs outputs;};
-              }
+              hmModuleVMOpts
             ];
             format = "iso";
             specialArgs = {inherit inputs outputs;};
@@ -115,11 +116,7 @@
         modules = [
           ./hosts/nr/utm-arm64/configuration.nix
           home-manager.nixosModules.home-manager
-          {
-            home-manager.useUserPackages = true;
-            home-manager.users.david = import ./home-manager/home-vm.nix;
-            home-manager.extraSpecialArgs = {inherit inputs outputs;};
-          }
+          hmModuleVMOpts
         ];
       };
       utm-x86_64 = nixpkgs.lib.nixosSystem {
@@ -127,11 +124,7 @@
         modules = [
           ./hosts/nr/utm-amd64/configuration.nix
           home-manager.nixosModules.home-manager
-          {
-            home-manager.useUserPackages = true;
-            home-manager.users.david = import ./home-manager/home-vm.nix;
-            home-manager.extraSpecialArgs = {inherit inputs outputs;};
-          }
+          hmModuleVMOpts
         ];
       };
     };
