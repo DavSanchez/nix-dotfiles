@@ -78,7 +78,7 @@
         EDITOR = "nvim";
         LC_ALL = "en_US.UTF-8";
         LANG = "en_US.UTF-8";
-        NIX_PATH = "$HOME/.nix-defexpr/channels\${NIX_PATH:+:}$NIX_PATH";
+        NIX_PATH = "$HOME/.nix-defexpr/channels\$\{NIX_PATH:+:\}$NIX_PATH";
         FPATH = "$HOME/.nix-profile/share/zsh/site-functions:$FPATH";
         ZSH_AUTOSUGGEST_STRATEGY = ["history" "completion"];
       }
