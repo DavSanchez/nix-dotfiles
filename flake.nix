@@ -62,11 +62,11 @@
       )
       // {
         aarch64-linux = {
-          createISO = inputs.nixos-generators.nixosGenerate {
+          iso = inputs.nixos-generators.nixosGenerate {
             system = "aarch64-linux";
             modules = [
               # you can include your own nixos configuration here, i.e.
-              ./hosts/nixos-vm/configuration.nix
+              ./hosts/vm/configuration.nix
             ];
             format = "iso";
             specialArgs = {inherit inputs outputs;};
@@ -76,6 +76,7 @@
           };
         };
       };
+
     # Devshell for bootstrapping
     # Acessible through 'nix develop' or 'nix-shell' (legacy)
     devShells = forAllSystems (
@@ -84,9 +85,9 @@
       in
         import ./shell.nix {inherit pkgs;}
     );
+
     # Formatter
     formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
-
     # Your custom packages and modifications, exported as overlays
     overlays = import ./overlays {inherit inputs;};
     # Reusable nixos modules you might want to export
@@ -102,22 +103,16 @@
     templates = import ./templates;
 
     nixosConfigurations = {
-      nixos-vm = nixpkgs.lib.nixosSystem {
+      utm-aarch64 = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [
-          ./hosts/nixos-vm/configuration.nix
+          ./hosts/nr/utm-arm64/configuration.nix
         ];
       };
-      nr-nixos-vm-aarch64 = nixpkgs.lib.nixosSystem {
+      utm-x86_64 = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [
-          ./hosts/nr/nixos-vm-aarch64/configuration.nix
-        ];
-      };
-      nr-nixos-vm-x86_64 = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        modules = [
-          ./hosts/nr/nixos-vm-x86_64/configuration.nix
+          ./hosts/nr/utm-amd64/configuration.nix
         ];
       };
     };
