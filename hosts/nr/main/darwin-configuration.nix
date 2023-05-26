@@ -25,7 +25,7 @@
 
   services.newrelic-infra = {
     enable = true;
-    config = import ./nr-infra-config.nix;
+    config = ../../../secrets/newrelic-infra-config.yml;
   };
 
   nixpkgs = {

@@ -19,9 +19,7 @@
 
   services.newrelic-infra = {
     enable = true;
-    config = {
-      license_key = "YOUR_LICENSE_KEY";
-    };
+    config = ../../../secrets/newrelic-infra-config.yml;
   };
 
   # Use the systemd-boot EFI boot loader.
