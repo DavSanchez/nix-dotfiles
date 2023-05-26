@@ -73,8 +73,7 @@
   i18n.defaultLocale = "en_US.UTF-8";
   console = {
     font = "Lat2-Terminus16";
-    keyMap = lib.mkDefault "es";
-    useXkbConfig = true; # use xkbOptions in tty.
+    keyMap = "es";
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
