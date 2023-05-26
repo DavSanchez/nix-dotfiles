@@ -51,7 +51,7 @@
       "x86_64-darwin"
     ];
     hmNixosVMConfig = {
-      home-manager.useGlobalPkgs = true;
+      # home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
       home-manager.users.david = import ./home-manager/home-vm.nix;
       home-manager.extraSpecialArgs = {inherit inputs outputs;};
