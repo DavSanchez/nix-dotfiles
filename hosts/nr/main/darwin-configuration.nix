@@ -149,14 +149,14 @@
       "lastpass"
       "logseq"
       "openvpn-connect"
-      #"parallels"
       "raycast"
       "stats"
-      "utm"
+      "utm"  # When tart is not enough
       "wireshark"
     ];
     brews = [
       "ghcup"
+      "tart" # VMs on Apple Silicon
       "whalebrew"
       "pam-reattach"
     ];
