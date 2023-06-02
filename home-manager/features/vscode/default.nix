@@ -32,7 +32,6 @@
         github.copilot
         # github.github-vscode-theme
         github.vscode-github-actions
-        github.vscode-pull-request-github
         golang.go
         gruntfuggly.todo-tree
         hashicorp.terraform
@@ -62,7 +61,7 @@
         redhat.vscode-yaml
         timonwong.shellcheck
         usernamehw.errorlens
-        # vadimcn.vscode-lldb # broken
+        vadimcn.vscode-lldb
         valentjn.vscode-ltex
         vscodevim.vim
         zxh404.vscode-proto3
