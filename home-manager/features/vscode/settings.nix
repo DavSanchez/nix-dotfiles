@@ -45,6 +45,7 @@
     "**/.metals" = true;
   };
   "git.autofetch" = true;
+  "git.defaultBranchName" = "master";
   "go.lintTool" = "golangci-lint";
   "go.toolsManagement.autoUpdate" = true;
   "haskell.manageHLS" = "PATH";
@@ -117,6 +118,8 @@
   "terraform.codelens.referenceCount" = true;
   "todo-tree.regex.regex" = "(//|#|<!--|;|/\\*|--|\\{-|^|^[ \\t]*(-|\\d+.))\\s*($TAGS)";
   "verilog.linting.linter" = "verilator";
+  "vim.enableNeovim" = true; # programs.neovim.enable;
+  "vim.neovimUseConfigFile" = true; # programs.neovim.enable;
   "window.commandCenter" = true;
   "workbench.colorTheme" = "Lambda Dark+"; # previous: "Catppuccin Mocha";
   "workbench.editorAssociations" = {
@@ -155,6 +158,4 @@
     "!Split"
     "!Split sequence"
   ];
-  "vim.enableNeovim" = true; # programs.neovim.enable;
-  "vim.neovimUseConfigFile" = true; # programs.neovim.enable;
 }
