@@ -13,7 +13,6 @@
     ./social.nix
     ./system.nix
     ./terminal.nix
-    ./gh-copilot-cli.nix
   ];
 
   home.packages = with pkgs;
@@ -25,7 +24,7 @@
 
       w3m
 
-      jira-cli-go
+      github-copilot-cli
     ]
     ++ lib.optionals pkgs.stdenv.isDarwin [
       m-cli

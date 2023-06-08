@@ -30,6 +30,7 @@
         eamodio.gitlens
         # esbenp.prettier-vscode
         github.copilot
+        github.copilot-chat
         # github.github-vscode-theme
         github.vscode-github-actions
         golang.go
