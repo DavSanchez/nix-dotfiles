@@ -6,7 +6,6 @@
   "breadcrumbs.enabled" = true;
   "calva.paredit.defaultKeyMap" = "strict";
   "clangd.checkUpdates" = true;
-  "codestream.serverUrl" = "https://api.codestream.com";
   "diffEditor.ignoreTrimWhitespace" = false;
   "editor.accessibilitySupport" = "off";
   "editor.bracketPairColorization.enabled" = true;
