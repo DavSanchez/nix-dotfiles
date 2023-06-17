@@ -27,9 +27,10 @@
       # devenv.sh, let's work with any language!
       devenv
 
+      idris2 # not in devenv yet!
+
       ## Other
       gnumake
-      just # project-specific commands
       protobuf
     ]
     ++ lib.optionals pkgs.stdenv.isLinux [
