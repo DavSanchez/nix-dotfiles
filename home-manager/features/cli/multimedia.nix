@@ -6,6 +6,9 @@
     zbar # Barcode reading
     xdot
     ffmpeg
+
+    # Download content from the internet
+    aria
   ];
 
   programs = {
