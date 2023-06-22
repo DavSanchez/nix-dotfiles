@@ -152,6 +152,7 @@
       "raycast"
       "stats"
       "utm"  # When tart is not enough
+      "warp"
       "wireshark"
     ];
     brews = [
