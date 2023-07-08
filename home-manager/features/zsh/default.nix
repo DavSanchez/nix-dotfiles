@@ -9,7 +9,7 @@
     enableCompletion = true;
     defaultKeymap = "emacs";
     enableAutosuggestions = true;
-    enableSyntaxHighlighting = true;
+    syntaxHighlighting.enable = true;
     autocd = true;
     shellAliases = import ./aliases.nix;
     history.extended = true;
