@@ -195,6 +195,7 @@
       "MainStage" = 634159523;
       "Microsoft Remote Desktop" = 1295203466;
       "Numbers" = 409203825;
+      "one sec" = 1532875441;
       "Pages" = 409201541;
       "Reeder" = 1529448980;
       "The Unarchiver" = 425424353;
