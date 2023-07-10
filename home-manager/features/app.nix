@@ -7,6 +7,7 @@
     [
       element-desktop
       sniffnet
+      contour
       # lapce
       # handbrake
       # logseq

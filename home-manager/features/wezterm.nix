@@ -1,10 +1,9 @@
-{pkgs, ...}: {
-  home.packages = with pkgs; [
-    wezterm
-  ];
+_: {
 
   programs.wezterm = {
     enable = true;
+    enableBashIntegration = true;
+    enableZshIntegration = true;
     extraConfig = ''
       local wezterm = require 'wezterm'
 
