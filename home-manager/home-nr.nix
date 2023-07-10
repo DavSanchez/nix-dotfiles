@@ -27,6 +27,7 @@
     ./features/zsh
     ./features/bash
     ./features/fish
+    ./features/zellij
 
     ./features/fonts.nix
     ./features/helix.nix

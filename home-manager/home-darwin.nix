@@ -25,7 +25,7 @@
     ./features/nu
     ./features/starship
     ./features/vscode
-    # ./features/zellij # Not using it (for now). Using tmux.
+    ./features/zellij
     ./features/zsh
     ./features/bash
     ./features/fish
