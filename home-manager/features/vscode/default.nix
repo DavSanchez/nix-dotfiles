@@ -62,7 +62,7 @@
         redhat.vscode-yaml
         timonwong.shellcheck
         usernamehw.errorlens
-        vadimcn.vscode-lldb
+        # vadimcn.vscode-lldb
         valentjn.vscode-ltex
         vscodevim.vim
         zxh404.vscode-proto3
