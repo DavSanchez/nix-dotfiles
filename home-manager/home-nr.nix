@@ -28,12 +28,11 @@
     ./features/bash
     ./features/fish
     ./features/zellij
+    ./features/terminals
 
     ./features/fonts.nix
     ./features/helix.nix
     ./features/tmux.nix
-    ./features/wezterm.nix
-    ./features/kitty.nix
 
     # Darwin specifics
     # ./features/darwin.nix
