@@ -1,5 +1,5 @@
-_: {
+{pkgs, ...}: {
   programs.foot = {
-    enable = true;
+    enable = pkgs.stdenv.isLinux;
   };
 }
