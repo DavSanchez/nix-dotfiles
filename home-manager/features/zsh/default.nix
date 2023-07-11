@@ -122,6 +122,9 @@
     initExtra = ''
       # Do not add command to history if prepended by space
       setopt HIST_IGNORE_SPACE
+
+      # Add aliases for github-copilot-cli (other shells?)
+      eval "$(${pkgs.github-copilot-cli}/bin/github-copilot-cli alias -- "$0")"
     '';
   };
 }
