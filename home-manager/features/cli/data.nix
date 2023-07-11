@@ -3,6 +3,7 @@
     ## Data visualzation/manipulation
     gawk
     gnused
+    findutils
     fx
     hexyl
     jo
