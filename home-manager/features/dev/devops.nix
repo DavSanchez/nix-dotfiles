@@ -7,6 +7,9 @@
     [
       ## Containers
       docker
+      podman
+      podman-compose
+      # podman-desktop
 
       act # GH Actions locally
       ctop # Monitor containers
@@ -37,6 +40,7 @@
 
       ## NixOps
       # nixops
+      nixops_unstable
       # nixops-dns
       # morph
       colmena
@@ -47,12 +51,5 @@
     ++ lib.optionals pkgs.stdenv.isDarwin [
       ## Container runtimes on macOS
       colima
-    ]
-    ++ lib.optionals pkgs.stdenv.isLinux [
-      podman
-      podman-tui
-      podman-compose
-
-      nixops_unstable
     ];
 }
