@@ -96,9 +96,13 @@
   # $ darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin/configuration.nix
   # environment.darwinConfig = "$HOME/.config/nixpkgs/darwin/configuration.nix";
 
-  # Auto upgrade nix package and the daemon service.
-  services.nix-daemon.enable = true;
-
+  services = {
+    nix-daemon.enable = true; # Auto upgrade nix package and the daemon service.
+    tailscale = {
+      enable = false; # Using App Store application for the moment
+      overrideLocalDns = false;
+    };
+  };
   networking.hostName = "Davids-MacBook-Pro";
 
   # Create /etc/zshrc that loads the nix-darwin environment.
@@ -195,6 +199,7 @@
       "Numbers" = 409203825;
       "one sec" = 1532875441;
       "Pages" = 409201541;
+      "Tailscale" = 1475387142;
       "Reeder" = 1529448980;
       "Shazam" = 897118787;
       "The Unarchiver" = 425424353;
