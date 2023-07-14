@@ -4,10 +4,9 @@ _: {
     enableBashIntegration = true;
     enableFishIntegration = true;
     enableZshIntegration = true;
-    # settings = {
-    #   ui.pane_frames.rounded_corners = true;
-    #     no_pane_frames = true;
-    # };
+    settings = {
+      ui.pane_frames.rounded_corners = false;
+    };
   };
   # xdg.configFile."zellij/layouts".source = ./layouts;
   # xdg.configFile."layouts".recursive = true;
