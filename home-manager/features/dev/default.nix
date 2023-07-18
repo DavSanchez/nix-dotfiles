@@ -28,10 +28,11 @@
       devenv
 
       idris2 # not in devenv yet!
+      agda # not in devenv yet!
 
       ## Other
       gnumake
-      protobuf
+      # protobuf
     ]
     ++ lib.optionals pkgs.stdenv.isLinux [
       rr
