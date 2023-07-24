@@ -20,7 +20,6 @@
         ## Clashing with complete list in ./extensions.nix, so case by case here
         arrterian.nix-env-selector
         betterthantomorrow.calva
-        bungcip.better-toml
         # catppuccin.catppuccin-vsc
         christian-kohler.path-intellisense
         davidanson.vscode-markdownlint
@@ -60,6 +59,7 @@
         pkief.material-icon-theme
         pkief.material-product-icons
         redhat.vscode-yaml
+        tamasfe.even-better-toml
         timonwong.shellcheck
         usernamehw.errorlens
         # vadimcn.vscode-lldb

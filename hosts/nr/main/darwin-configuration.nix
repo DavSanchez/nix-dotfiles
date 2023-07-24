@@ -23,10 +23,10 @@
     inputs.nixobs.darwinModules.newrelic-infra
   ];
 
-  services.newrelic-infra = {
-    enable = true;
-    config = ../../../secrets/newrelic-infra-config.yml;
-  };
+  # services.newrelic-infra = {
+  #   enable = true;
+  #   config = ../../../secrets/newrelic-infra-config.yml;
+  # };
 
   nixpkgs = {
     # You can add overlays here
@@ -137,6 +137,8 @@
 
     taps = [];
     casks = [
+      "1password"
+      "1password-cli"
       "amethyst"
       "bartender"
       "brave-browser"
@@ -146,7 +148,6 @@
       "firefox"
       "imhex"
       "insomnia"
-      "lastpass"
       "logseq"
       "openvpn-connect"
       "raycast"
@@ -163,6 +164,7 @@
     ];
     masApps = {
       "1Blocker" = 1365531024;
+      "1Password for Safari" = 1569813296;
       "Amphetamine" = 937984704;
       "Hush" = 1544743900;
       "Microsoft Remote Desktop" = 1295203466;
