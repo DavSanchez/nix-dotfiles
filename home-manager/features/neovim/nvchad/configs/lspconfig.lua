@@ -17,7 +17,7 @@ local servers = {
   "gopls",
   "yamlls",
   "taplo",
-  -- "idris2_lsp",
+  "idris2_lsp",
   -- "clojure_lsp",
   -- "elixirls",
   -- "gleam",
