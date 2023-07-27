@@ -126,9 +126,9 @@
 
     atuin = {
       enable = true;
-      enableZshIntegration = true;
-      enableBashIntegration = true;
-      enableFishIntegration = true;
+      # enableZshIntegration = true;
+      # enableBashIntegration = true;
+      # enableFishIntegration = true;
       # enableNuIntegration = true;
       settings = {
         inline_height = 40;
