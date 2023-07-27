@@ -109,6 +109,7 @@
   "platformio-ide.activateOnlyOnPlatformIOProject" = true;
   # "python.languageServer" = "Pylance";
   "redhat.telemetry.enabled" = false;
+  "rust-analyzer.check.command" = "clippy";
   "svelte.enable-ts-plugin" = true;
   "terminal.external.osxExec" = "WezTerm.app";
   "terminal.integrated.fontFamily" = "'FiraCode Nerd Font Mono'";
