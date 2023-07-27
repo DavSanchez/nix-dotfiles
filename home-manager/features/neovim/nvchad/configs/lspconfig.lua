@@ -11,7 +11,7 @@ local servers = {
   "clangd",
   -- "hls", -- activated below
   "bashls",
-  "nil_ls",
+  "nixd",
   "rust_analyzer",
   "golangci_lint_ls",
   "gopls",

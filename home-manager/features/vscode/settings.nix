@@ -96,9 +96,9 @@
   "latex-workshop.linting.chktex.enabled" = true;
   "latex-workshop.view.pdf.viewer" = "tab";
   "nix.enableLanguageServer" = true;
-  "nix.serverPath" = "nil";
+  "nix.serverPath" = "${pkgs.nixd}/bin/nixd";
   "nix.serverSettings" = {
-    "nil" = {
+    "nixd" = {
       "formatting" = {
         "command" = [
           "${pkgs.alejandra}/bin/alejandra"

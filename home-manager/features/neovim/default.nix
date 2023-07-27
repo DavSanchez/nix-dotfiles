@@ -55,8 +55,7 @@
         pandoc
 
         # Nix
-        rnix-lsp
-        nil
+        nixd
         deadnix
         statix
         # Purescript

@@ -1,7 +1,6 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
-    rnix-lsp # Language server
-    nil # Yet another language server
+    nixd # Language server
     alejandra # Formatter
     nix-output-monitor
     nix-update
