@@ -116,6 +116,7 @@
   "terminal.integrated.scrollback" = 5000;
   "terminal.integrated.shellIntegration.enabled" = true;
   "terraform.codelens.referenceCount" = true;
+  "todo-tree.general.showActivityBarBadge" = true;
   "todo-tree.regex.regex" = "(//|#|<!--|;|/\\*|--|\\{-|^|^[ \\t]*(-|\\d+.))\\s*($TAGS)";
   "verilog.linting.linter" = "verilator";
   "vim.enableNeovim" = true; # programs.neovim.enable;
