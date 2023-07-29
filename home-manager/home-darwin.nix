@@ -86,6 +86,9 @@
   programs.home-manager.enable = true;
   programs.git.enable = true;
 
+  # Amethyst configuration
+  home.file.".amethyst.yml".source = ./features/amethyst/amethyst.yml;
+
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   home.stateVersion = "22.11";
 }
