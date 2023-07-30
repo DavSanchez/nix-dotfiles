@@ -139,6 +139,7 @@
     casks = [
       "adobe-acrobat-reader"
       "amethyst"
+      "arc"
       "authy"
       "bartender"
       "brave-browser"
