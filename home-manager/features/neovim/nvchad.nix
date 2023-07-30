@@ -2,7 +2,7 @@
   nvChad = pkgs.fetchFromGitHub {
     owner = "NvChad";
     repo = "NvChad";
-    rev = "699aeaa44203b62003da8aacd838a5bdac4c2d46";
+    rev = "0e27cb4b44fbba69f8646d1f88555737d2b6aedf";
     hash = "sha256-LldvBSROu3/pWqHb8OPbrsD3m0JbZFPyCPUk6AQoIKo=";
   };
 in {
