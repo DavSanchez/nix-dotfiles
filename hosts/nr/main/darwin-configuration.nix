@@ -150,6 +150,7 @@
       "insomnia"
       "logseq"
       "openvpn-connect"
+      "parallels"
       "raycast"
       "stats"
       "utm"  # When tart is not enough
