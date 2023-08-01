@@ -19,7 +19,7 @@
     ./features/cli
     ./features/dev
     ./features/direnv
-    # ./features/emacs # Using nvim + nvchad
+    ./features/emacs
     ./features/git
     ./features/neovim
     ./features/nu

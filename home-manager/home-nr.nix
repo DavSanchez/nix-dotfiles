@@ -19,6 +19,7 @@
     ./features/cli
     ./features/dev/default-nr.nix
     ./features/direnv
+    ./features/emacs
     ./features/git/default-nr.nix
     ./features/neovim
     ./features/nu
