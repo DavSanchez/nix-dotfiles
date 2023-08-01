@@ -58,6 +58,8 @@
       #   });
       # })
 
+      inputs.nixd.overlays.default
+
       # devenv.sh
       (_final: _prev: {
         inherit (inputs.devenv.packages.${pkgs.system}) devenv;
