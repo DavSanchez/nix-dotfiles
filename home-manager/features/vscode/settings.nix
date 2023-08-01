@@ -100,9 +100,7 @@
   "nix.serverSettings" = {
     "nixd" = {
       "formatting" = {
-        "command" = [
-          "${pkgs.alejandra}/bin/alejandra"
-        ];
+        "command" = "${pkgs.alejandra}/bin/alejandra";
       };
     };
   };
@@ -112,7 +110,7 @@
   "rust-analyzer.check.command" = "clippy";
   "svelte.enable-ts-plugin" = true;
   "terminal.external.osxExec" = "WezTerm.app";
-  "terminal.integrated.fontFamily" = "'JetBrainsMono Nerd Font Propo'";
+  "terminal.integrated.fontFamily" = "'JetBrainsMono Nerd Font'";
   "terminal.integrated.scrollback" = 5000;
   "terminal.integrated.shellIntegration.enabled" = true;
   "terraform.codelens.referenceCount" = true;
