@@ -112,7 +112,7 @@
   "rust-analyzer.check.command" = "clippy";
   "svelte.enable-ts-plugin" = true;
   "terminal.external.osxExec" = "WezTerm.app";
-  "terminal.integrated.fontFamily" = "'FiraCode Nerd Font";
+  "terminal.integrated.fontFamily" = "'JetBrainsMono Nerd Font Propo'";
   "terminal.integrated.scrollback" = 5000;
   "terminal.integrated.shellIntegration.enabled" = true;
   "terraform.codelens.referenceCount" = true;
