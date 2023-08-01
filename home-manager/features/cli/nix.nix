@@ -18,6 +18,7 @@
 
     # Binary management
     patchelf
+  ] ++ lib.optionals pkgs.stdenv.isLinux [
     nix-ld
   ];
 
