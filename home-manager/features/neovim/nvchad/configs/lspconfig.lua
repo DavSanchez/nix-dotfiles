@@ -18,8 +18,8 @@ local servers = {
   "yamlls",
   "taplo",
   "idris2_lsp",
-  -- "clojure_lsp",
-  -- "elixirls",
+  "clojure_lsp",
+  "elixirls",
   -- "gleam",
   -- "unison"
 }
