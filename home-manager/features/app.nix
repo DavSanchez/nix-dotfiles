@@ -5,8 +5,8 @@
 }: {
   home.packages = with pkgs;
     [
-      element-desktop
-      sniffnet
+      # element-desktop
+      # sniffnet
       # contour # broken
       # lapce
       # handbrake
