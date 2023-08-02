@@ -57,16 +57,13 @@
         ];
     };
 
-    zplug = {
+    antidote = {
       enable = true;
       plugins = [
-        {name = "chisui/zsh-nix-shell";}
-        {name = "MichaelAquilina/zsh-you-should-use";}
-        {name = "wfxr/formarks";}
-        {
-          name = "hlissner/zsh-autopair";
-          tags = ["defer:2"];
-        }
+        "chisui/zsh-nix-shell"
+        "MichaelAquilina/zsh-you-should-use"
+        "wfxr/formarks"
+        "hlissner/zsh-autopair kind:defer"
       ];
     };
 
