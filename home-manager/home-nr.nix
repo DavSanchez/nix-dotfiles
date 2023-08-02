@@ -85,6 +85,9 @@
   home.packages = with pkgs; [
     jetbrains.goland
   ];
+  programs.zsh.cdpath = [
+    "/Users/davidsanchez/Developer/NR-Repos"
+  ];
 
   # Enable home-manager and git
   programs.home-manager.enable = true;
