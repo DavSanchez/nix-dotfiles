@@ -346,7 +346,7 @@
     },
     "hardware": {
       "locked": {
-        "lastModified": 1690704397,
+       "lastModified": 1690704397,
         "narHash": "sha256-sgIWjcz0e+x87xlKg324VtHgH55J5rIuFF0ZWRDvQoE=",
         "owner": "nixos",
         "repo": "nixos-hardware",
@@ -366,7 +366,7 @@
         ]
       },
       "locked": {
-        "lastModified": 1690910850,
+       "lastModified": 1690910850,
         "narHash": "sha256-diLPKIDpR9zubqGl0wPFKMNPV9QpT/eNkqUN2dSt19o=",
         "owner": "nix-community",
         "repo": "home-manager",
@@ -701,7 +701,7 @@
     },
     "nixpkgs_4": {
       "locked": {
-        "lastModified": 1690881714,
+       "lastModified": 1690881714,
         "narHash": "sha256-h/nXluEqdiQHs1oSgkOOWF+j8gcJMWhwnZ9PFabN6q0=",
         "owner": "nixos",
         "repo": "nixpkgs",
