@@ -57,16 +57,13 @@
         ];
     };
 
-    zplug = {
+    antidote = {
       enable = true;
       plugins = [
-        {name = "chisui/zsh-nix-shell";}
-        {name = "MichaelAquilina/zsh-you-should-use";}
-        {name = "wfxr/formarks";}
-        {
-          name = "hlissner/zsh-autopair";
-          tags = ["defer:2"];
-        }
+        "chisui/zsh-nix-shell"
+        "MichaelAquilina/zsh-you-should-use"
+        "wfxr/formarks"
+        "hlissner/zsh-autopair kind:defer"
       ];
     };
 
@@ -120,9 +117,6 @@
     '';
 
     initExtra = ''
-      # Do not add command to history if prepended by space
-      setopt HIST_IGNORE_SPACE
-
       # Add aliases for github-copilot-cli (other shells?)
       eval "$(${pkgs.github-copilot-cli}/bin/github-copilot-cli alias -- "$0")"
     '';
