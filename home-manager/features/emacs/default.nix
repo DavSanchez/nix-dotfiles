@@ -7,5 +7,5 @@
     enable = true;
     doomPrivateDir = ./doom.d;
   };
-  # services.emacs.enable = true;
+  services.emacs.enable = true;
 }
