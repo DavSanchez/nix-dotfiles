@@ -19,6 +19,7 @@
         ## Extensions present in nixpkgs
         ## Clashing with complete list in ./extensions.nix, so case by case here
         arrterian.nix-env-selector
+        bbenoist.nix
         betterthantomorrow.calva
         # catppuccin.catppuccin-vsc
         christian-kohler.path-intellisense
