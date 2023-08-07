@@ -1,11 +1,11 @@
-{inputs, ...}: {
+{inputs, pkgs, ...}: {
   imports = [
     inputs.nix-doom-emacs.hmModule
   ];
 
   programs.doom-emacs = {
-    enable = true;
+    enable = pkgs.stdenv.isLinux;
     doomPrivateDir = ./doom.d;
   };
-  services.emacs.enable = true;
+  services.emacs.enable = pkgs.stdenv.isLinux;
 }

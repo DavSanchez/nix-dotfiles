@@ -110,7 +110,7 @@
     # These are usually stuff you would upstream into home-manager
     homeManagerModules = import ./modules/home-manager;
 
-    templates = import ./templates;
+    # templates = import ./templates;
 
     nixosConfigurations = {
       utm-aarch64 = nixpkgs.lib.nixosSystem {
@@ -150,7 +150,7 @@
         system = "aarch64-darwin";
         specialArgs = {inherit inputs outputs;};
         modules = [
-          ./hosts/nr/main/darwin-configuration.nix
+          ./hosts/nr/darwin-configuration.nix
         ];
       };
     };
