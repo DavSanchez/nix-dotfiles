@@ -105,6 +105,12 @@
 
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
+  services.emacs = {
+    enable = true;
+    package = inputs.nix-doom-emacs.packages.${pkgs.system}.default.override {
+      doomPrivateDir = ../../home-manager/features/emacs/doom.d;
+    };
+  };
 
   networking.hostName = "V9X576T260";
 
