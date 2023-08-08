@@ -21,7 +21,7 @@
           "cp"
           "docker"
           "docker-compose"
-          "emacs"
+          # "emacs"
           "fd"
           "gh"
           "git"
