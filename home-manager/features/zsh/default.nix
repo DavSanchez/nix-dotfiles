@@ -19,6 +19,7 @@
         [
           "aws"
           "cp"
+          "emacs"
           "docker"
           "docker-compose"
           "fd"
