@@ -88,6 +88,9 @@
   programs.zsh.cdpath = [
     "/Users/davidsanchez/Developer/NR-Repos"
   ];
+  programs.zsh.shellAliases = {
+    sshCAOS = "ssh -i ~/.ssh/caos-dev-arm.cer";
+  };
 
   # Enable home-manager and git
   programs.home-manager.enable = true;
