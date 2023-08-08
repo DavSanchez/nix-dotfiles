@@ -19,9 +19,9 @@
         [
           "aws"
           "cp"
-          "emacs"
           "docker"
           "docker-compose"
+          # "emacs"
           "fd"
           "gh"
           "git"

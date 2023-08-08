@@ -4,7 +4,7 @@
   ];
 
   programs.doom-emacs = {
-    enable = pkgs.stdenv.isLinux;
+    enable = true;
     doomPrivateDir = ./doom.d;
   };
   services.emacs.enable = pkgs.stdenv.isLinux;
