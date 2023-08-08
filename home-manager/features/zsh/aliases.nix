@@ -53,4 +53,6 @@
 
   # Serve a folder
   servethis = "python3 -m http.server";
+
+  sshCAOS = "ssh -i ~/.ssh/caos-dev-arm.cer";
 }
