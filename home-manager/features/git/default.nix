@@ -85,7 +85,6 @@
       color.interactive.error = "red bold";
       color.interactive.option = "magenta bold";
       color.interactive.selected = "green bold";
-      color.interactive.prompt = "yellow";
     };
 
     aliases = {
