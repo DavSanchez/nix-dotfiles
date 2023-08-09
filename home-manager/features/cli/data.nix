@@ -9,7 +9,7 @@
     jo
     fq
     dasel
-    difftastic # git integration enabled
+    difftastic
     delta
     graphviz
     grex
