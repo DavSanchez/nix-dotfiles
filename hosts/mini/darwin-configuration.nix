@@ -102,12 +102,6 @@
       enable = false; # Using App Store application for the moment
       overrideLocalDns = false;
     };
-    emacs = {
-      enable = true;
-      package = inputs.nix-doom-emacs.packages.${pkgs.system}.default.override {
-        doomPrivateDir = ../../home-manager/features/emacs/doom.d;
-      };
-    };
   };
 
   networking.hostName = "Davids-Mac-Mini";
