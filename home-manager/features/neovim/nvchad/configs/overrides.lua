@@ -7,6 +7,8 @@ M.treesitter = {
     "html",
     "css",
     "javascript",
+    "typescript",
+    "tsx",
     "c",
     "markdown",
     "markdown_inline",
@@ -30,7 +32,22 @@ M.treesitter = {
 }
 
 M.mason = {
-  ensure_installed = {}, -- Nix will take care of this
+  ensure_installed = { -- Nix will take care of this
+    -- lua stuff
+    -- "lua-language-server",
+    -- "stylua",
+
+    -- -- web dev stuff
+    -- "css-lsp",
+    -- "html-lsp",
+    -- "typescript-language-server",
+    -- "deno",
+    -- "prettier",
+
+    -- -- c/cpp stuff
+    -- "clangd",
+    -- "clang-format",
+  },
 }
 
 -- git support in nvimtree
