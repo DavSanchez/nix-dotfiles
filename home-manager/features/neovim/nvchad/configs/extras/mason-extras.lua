@@ -40,11 +40,11 @@ local setup = function(_, opts)
       lspconfig.clangd.setup({
         cmd = {
           "clangd",
-          "--offset_encoding=utf-16", -- To match null-ls
+          "--offset-encoding=utf-16", -- To match null-ls
           --  With this, you can configure server with 
           --    - .clangd files
           --    - global clangd/config.yaml files
-          --  Read https://clangd.llvm.org/config for more information
+          --  Read the `--enable-config` option in `clangd --help` for more information
           "--enable-config",
         },
         on_attach = function(client, bufnr)

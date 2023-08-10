@@ -17,10 +17,10 @@
   };
   xdg.configFile."nvim" = {
     source = pkgs.fetchFromGitHub {
-      owner = "NvChad";
-      repo = "NvChad";
-      rev = "0e27cb4b44fbba69f8646d1f88555737d2b6aedf";
-      hash = "sha256-nEQ36jj5hHIpg+NYWeAEroHMI6mRdKCaWDbXXr/iRAE=";
+      owner = "nvchad";
+      repo = "nvchad";
+      rev = "d3d9aa251a9dd94881cdbc48c5852b3eaba969b8";
+      hash = "sha256-PJm2zYIcRSHoEGG5IC1EPRzjkR9oyPZfId251YV/kXE=";
     };
     recursive = true;
   };
