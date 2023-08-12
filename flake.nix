@@ -67,22 +67,8 @@
           import ./pkgs {inherit pkgs;}
       )
       // {
-        aarch64-linux = {
-          iso = inputs.nixos-generators.nixosGenerate {
-            system = "aarch64-linux";
-            modules = [
-              # you can include your own nixos configuration here, i.e.
-              ./hosts/vm/configuration.nix
-              home-manager.nixosModules.home-manager
-              hmModuleVMOpts
-            ];
-            format = "iso";
-            specialArgs = {inherit inputs outputs;};
-            # you can also define your own custom formats
-            # customFormats = { "myFormat" = <myFormatModule>; ... };
-            # format = "myFormat";
-          };
-        };
+        x86_64-linux.linuxVM = self.nixosConfigurations.linuxVM.config.system.build.vm;
+        aarch64-darwin.darwinVM = self.nixosConfigurations.darwinVM.config.system.build.vm;
       };
 
     # Devshell for bootstrapping
@@ -111,20 +97,21 @@
     templates = import ./templates;
 
     nixosConfigurations = {
-      utm-aarch64 = nixpkgs.lib.nixosSystem {
+      linuxVM = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
         specialArgs = {inherit inputs outputs;};
         modules = [
-          ./hosts/nr/utm-arm64/configuration.nix
-          home-manager.nixosModules.home-manager
-          hmModuleVMOpts
+          ./hosts/vm/configuration.nix
         ];
       };
-      utm-x86_64 = nixpkgs.lib.nixosSystem {
+      darwinVM = nixpkgs.lib.nixosSystem {
+        system = "aarch64-linux";
         specialArgs = {inherit inputs outputs;};
         modules = [
-          ./hosts/nr/utm-amd64/configuration.nix
-          home-manager.nixosModules.home-manager
-          hmModuleVMOpts
+          ./hosts/vm/configuration.nix
+          {
+            virtualisation.vmVariant.virtualisation.host.pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+          }
         ];
       };
     };
@@ -135,6 +122,7 @@
         specialArgs = {inherit inputs outputs;};
         modules = [
           ./hosts/mbp/darwin-configuration.nix
+          ./hosts/darwin-builder
         ];
       };
       mini = darwin.lib.darwinSystem {
@@ -149,6 +137,7 @@
         specialArgs = {inherit inputs outputs;};
         modules = [
           ./hosts/nr/darwin-configuration.nix
+          ./hosts/darwin-builder
         ];
       };
     };
