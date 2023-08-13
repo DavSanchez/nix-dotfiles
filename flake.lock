@@ -462,6 +462,26 @@
         "type": "github"
       }
     },
+    "nix-relic": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1685099715,
+        "narHash": "sha256-D0wo7mm95ejVk70Begg9Tf2rDv9M5UphZ5BzEyCX9rA=",
+        "owner": "DavSanchez",
+        "repo": "Nix-Relic",
+        "rev": "8e4cbfe45f2278b65883dd338f5a9676017837c7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "DavSanchez",
+        "repo": "Nix-Relic",
+        "type": "github"
+      }
+    },
     "nix-straight": {
       "flake": false,
       "locked": {
@@ -490,26 +510,6 @@
       "original": {
         "owner": "nix-community",
         "repo": "nixpkgs.lib",
-        "type": "github"
-      }
-    },
-    "nixobs": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1685099715,
-        "narHash": "sha256-D0wo7mm95ejVk70Begg9Tf2rDv9M5UphZ5BzEyCX9rA=",
-        "owner": "DavSanchez",
-        "repo": "NixObs",
-        "rev": "8e4cbfe45f2278b65883dd338f5a9676017837c7",
-        "type": "github"
-      },
-      "original": {
-        "owner": "DavSanchez",
-        "repo": "NixObs",
         "type": "github"
       }
     },
@@ -806,7 +806,7 @@
         "home-manager": "home-manager",
         "nix-colors": "nix-colors",
         "nix-doom-emacs": "nix-doom-emacs",
-        "nixobs": "nixobs",
+        "nix-relic": "nix-relic",
         "nixos-generators": "nixos-generators",
         "nixpkgs": "nixpkgs_3",
         "nixpkgs-stable": "nixpkgs-stable_2",

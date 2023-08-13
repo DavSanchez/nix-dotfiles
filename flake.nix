@@ -24,8 +24,8 @@
     devenv.url = "github:cachix/devenv/latest";
     vscode-server.url = "github:nix-community/nixos-vscode-server";
 
-    nixobs.url = "github:DavSanchez/NixObs";
-    nixobs.inputs.nixpkgs.follows = "nixpkgs";
+    nix-relic.url = "github:DavSanchez/Nix-Relic";
+    nix-relic.inputs.nixpkgs.follows = "nixpkgs";
 
     nixos-generators.url = "github:nix-community/nixos-generators";
     nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
