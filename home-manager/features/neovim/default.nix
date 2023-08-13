@@ -148,6 +148,7 @@
       # Progrmming: Treesitter
       (nvim-treesitter.withPlugins (plugins:
         with plugins; [
+          tree-sitter-agda
           tree-sitter-bash
           tree-sitter-c
           tree-sitter-clojure
@@ -156,10 +157,12 @@
           tree-sitter-dockerfile
           tree-sitter-elixir
           tree-sitter-elm
+          tree-sitter-gleam
           tree-sitter-go
           tree-sitter-haskell
           tree-sitter-hcl
           tree-sitter-html
+          # tree-sitter-idris2
           tree-sitter-java
           tree-sitter-javascript
           tree-sitter-json
@@ -180,6 +183,7 @@
           tree-sitter-tsx
           tree-sitter-typescript
           tree-sitter-verilog
+          tree-sitter-vim
           tree-sitter-yaml
           tree-sitter-zig
         ]))
