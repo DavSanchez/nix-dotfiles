@@ -59,5 +59,6 @@ in {
       StandardOutPath = "/var/log/darwin-builder.log";
       StandardErrorPath = "/var/log/darwin-builder.log";
     };
+    environment.NIX_SSL_CERT_FILE = "/etc/ssl/certs/ca-certificates.crt";
   };
 }
