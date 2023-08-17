@@ -110,6 +110,7 @@
   "redhat.telemetry.enabled" = false;
   "rust-analyzer.check.command" = "clippy";
   "svelte.enable-ts-plugin" = true;
+  "telemetry.telemetryLevel" = "error";
   "terminal.external.osxExec" = "WezTerm.app";
   "terminal.integrated.fontFamily" = "'JetBrainsMono Nerd Font'";
   "terminal.integrated.scrollback" = 5000;
