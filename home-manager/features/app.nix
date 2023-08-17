@@ -19,12 +19,12 @@
       # insomnia
       # sonic-pi
       # mtr-gui
+      czkawka # Multi functional app to find duplicates, empty folders, similar images etc
     ]
     ++ lib.optionals pkgs.stdenv.isDarwin [
       # iterm2
     ]
     ++ lib.optionals pkgs.stdenv.isLinux [
       zathura
-      czkawka # Multi functional app to find duplicates, empty folders, similar images etc
     ];
 }
