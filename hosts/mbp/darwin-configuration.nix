@@ -139,8 +139,6 @@
     casks = [
       "adobe-acrobat-reader"
       "amethyst"
-      "arc"
-      "authy"
       "bartender"
       "brave-browser"
       # "dash" # Haven't used it
@@ -148,25 +146,20 @@
       "disk-inventory-x"
       "finch"
       "firefox"
-      "ghidra"
       "gqrx"
       "handbrake"
       "imhex"
-      "inso"
-      "insomnia"
       "krita"
       "little-snitch"
       "logseq"
       "openemu"
       "openra"
-      # "orion" # Alternative WebKit browser
       "protonmail-bridge"
       "protonvpn"
       "qflipper"
       "raycast"
       "remarkable"
       "secretive"
-      # "shortcat" # Manipulate macOS masterfully, minus the mouse
       "sonic-pi"
       "stats"
       "steam"
@@ -184,8 +177,6 @@
     brews = [
       "ghcup"
       "tart"
-      "whalebrew"
-      "pam-reattach" # https://github.com/fabianishere/pam_reattach
     ];
     masApps = {
       "1Blocker" = 1365531024;

@@ -147,7 +147,6 @@
       "finch"
       "firefox"
       "imhex"
-      "insomnia"
       "logseq"
       "openvpn-connect"
       "parallels"
@@ -160,8 +159,6 @@
     brews = [
       "ghcup"
       "tart" # VMs on Apple Silicon
-      "whalebrew"
-      "pam-reattach"
     ];
     masApps = {
       "1Blocker" = 1365531024;
