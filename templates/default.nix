@@ -8,4 +8,9 @@
     path = ./go_precommit;
     description = "Go flake using pre-commit hooks";
   };
+
+  haskell_precommit = {
+    path = ./haskell_precommit;
+    description = "Haskell flake using pre-commit hooks";
+  };
 }
