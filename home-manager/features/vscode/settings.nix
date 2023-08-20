@@ -47,7 +47,7 @@
   "git.defaultBranchName" = "master";
   "go.lintTool" = "golangci-lint";
   "go.toolsManagement.autoUpdate" = true;
-  "haskell.formattingProvider" = "fourmolu";
+  # "haskell.formattingProvider" = "fourmolu";
   "haskell.manageHLS" = "PATH";
   "haskell.plugin.eval.config.exception" = true;
   "hexeditor.columnWidth" = 16;
