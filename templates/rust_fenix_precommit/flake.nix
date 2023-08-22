@@ -47,6 +47,12 @@
             rustfmt = rustPackages.rustfmt;
             clippy = rustPackages.clippy;
           };
+          settings = {
+            clippy = {
+              allFeatures = true;
+              # denyWarnings = true;
+            };
+          };
         };
       };
       devShells = {
