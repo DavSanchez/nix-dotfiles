@@ -11,13 +11,9 @@
       stack
 
       haskell-language-server # Langserver
-      implicit-hie
       ghcid
 
       hoogle
-      hpack
-
-      cabal-fmt
     ];
 
     # hoogle ghci integration
