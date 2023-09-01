@@ -27,7 +27,6 @@
       stern
       kubeshark
 
-      localstack
       ansible
 
       ## Terraform
