@@ -42,11 +42,7 @@
             tflint.enable = true;
             yamllint.enable = true;
           };
-          tools = {
-            cargo = rustPackages.cargo;
-            rustfmt = rustPackages.rustfmt;
-            clippy = rustPackages.clippy;
-          };
+          tools = {inherit (rustPackages) cargo clippy rustfmt;};
           settings = {
             clippy = {
               allFeatures = true;
