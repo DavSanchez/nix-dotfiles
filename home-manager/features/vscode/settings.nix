@@ -109,6 +109,9 @@
   # "python.languageServer" = "Pylance";
   "redhat.telemetry.enabled" = false;
   "rust-analyzer.check.command" = "clippy";
+  "search.exclude" = {
+    "**/.direnv" = true;
+  };
   "svelte.enable-ts-plugin" = true;
   "telemetry.telemetryLevel" = "error";
   "terminal.external.osxExec" = "WezTerm.app";
