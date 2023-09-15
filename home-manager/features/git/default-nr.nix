@@ -8,7 +8,7 @@
   programs.git = {
     enable = true;
     userName = "David Sánchez";
-    userEmail = "davidsanchez@newrelic.com";
+    userEmail = "davidslt+git@pm.me";
 
     signing = {
       key = "0049380F7629074C";
@@ -34,10 +34,18 @@
     };
 
     difftastic = {
-      enable = true;
+      enable = false;
       background = "dark";
       color = "auto";
       display = "side-by-side";
+    };
+
+    diff-so-fancy = {
+      enable = true;
+      pagerOpts = [
+        "--tabs=4"
+        "-RFX"
+      ];
     };
 
     extraConfig = {
@@ -46,6 +54,40 @@
       # core.editor = "hx";
       pull.ff = "only";
       pull.rebase = true;
+
+      pager.log = "diff-so-fancy | less --tabs=4 -RFX"; # delta
+      pager.reflog = "diff-so-fancy | less --tabs=4 -RFX"; # delta
+      pager.show = "diff-so-fancy | less --tabs=4 -RFX"; # delta
+      pager.blame = "diff-so-fancy | less --tabs=4 -RFX"; # delta
+
+      color.diff-highlight.oldNormal = "red bold";
+      color.diff-highlight.oldHighlight = "red bold 52";
+      color.diff-highlight.newNormal = "green bold";
+      color.diff-highlight.newHighlight = "green bold 22";
+
+      color.diff.meta = "yellow";
+      color.diff.frag = "magenta bold";
+      color.diff.commit = "yellow bold";
+      color.diff.old = "red bold";
+      color.diff.new = "green bold";
+      color.diff.whitespace = "red reverse";
+
+      color.status.added = "green bold";
+      color.status.changed = "red bold";
+      color.status.untracked = "magenta bold";
+
+      color.branch.current = "yellow bold";
+      color.branch.local = "yellow bold";
+      color.branch.remote = "green bold";
+
+      color.ui = "auto";
+
+      color.interactive.prompt = "yellow";
+      color.interactive.header = "cyan bold";
+      color.interactive.help = "cyan bold";
+      color.interactive.error = "red bold";
+      color.interactive.option = "magenta bold";
+      color.interactive.selected = "green bold";
     };
 
     aliases = {
