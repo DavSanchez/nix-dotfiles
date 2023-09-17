@@ -47,6 +47,7 @@
       "aarch64-darwin"
       "x86_64-darwin"
     ];
+    pkgsFor = forAllSystems (system: import nixpkgs {inherit system;});
     hmModuleVMOpts = {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
@@ -58,10 +59,7 @@
     # Acessible through 'nix build', 'nix shell', etc
     packages =
       forAllSystems (
-        system: let
-          pkgs = nixpkgs.legacyPackages.${system};
-        in
-          import ./pkgs {inherit pkgs;}
+        system: import ./pkgs {pkgs = pkgsFor.${system};}
       )
       // {
         x86_64-linux.linuxVM = self.nixosConfigurations.linuxVM.config.system.build.vm;
@@ -71,14 +69,11 @@
     # Devshell for bootstrapping
     # Acessible through 'nix develop' or 'nix-shell' (legacy)
     devShells = forAllSystems (
-      system: let
-        pkgs = nixpkgs.legacyPackages.${system};
-      in
-        import ./shell.nix {inherit pkgs;}
+      system: import ./shell.nix {pkgs = pkgsFor.${system};}
     );
 
     # Formatter
-    formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
+    formatter = forAllSystems (system: pkgsFor.${system}.alejandra);
     # Your custom packages and modifications, exported as overlays
     overlays = import ./overlays {inherit inputs;};
     # Reusable nixos modules you might want to export
