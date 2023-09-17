@@ -22,7 +22,7 @@
     fenix,
   }:
     flake-utils.lib.eachDefaultSystem (system: let
-      pkgs = nixpkgs.legacyPackages.${system};
+      pkgs = import nixpkgs {inherit system;};
       rustPackages = fenix.packages.${system}.stable;
     in {
       checks = {

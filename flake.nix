@@ -102,7 +102,7 @@
         modules = [
           ./hosts/vm/configuration.nix
           {
-            virtualisation.vmVariant.virtualisation.host.pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+            virtualisation.vmVariant.virtualisation.host.pkgs = pkgsFor.aarch64-darwin;
           }
         ];
       };
@@ -137,7 +137,7 @@
 
     homeConfigurations = {
       "david@mbp" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.aarch64-darwin; # Home-manager requires 'pkgs' instance
+        pkgs = pkgsFor.aarch64-darwin; # Home-manager requires 'pkgs' instance
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [
           # > Our main home-manager configuration file <
@@ -145,7 +145,7 @@
         ];
       };
       "david@mini" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.aarch64-darwin; # Home-manager requires 'pkgs' instance
+        pkgs = pkgsFor.aarch64-darwin; # Home-manager requires 'pkgs' instance
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [
           # > Our main home-manager configuration file <
@@ -153,7 +153,7 @@
         ];
       };
       "davidsanchez@nr" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.aarch64-darwin; # Home-manager requires 'pkgs' instance
+        pkgs = pkgsFor.aarch64-darwin; # Home-manager requires 'pkgs' instance
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [
           # > Our main home-manager configuration file <
@@ -161,7 +161,7 @@
         ];
       };
       "david@nixos-vm" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.aarch64-linux;
+        pkgs = pkgsFor.aarch64-linux;
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [
           # > Our main home-manager configuration file <

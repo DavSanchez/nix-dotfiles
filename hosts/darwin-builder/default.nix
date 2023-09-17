@@ -3,7 +3,7 @@
   inherit (nixpkgs) lib;
 
   system = "aarch64-darwin";
-  pkgs = nixpkgs.legacyPackages."${system}";
+  pkgs = import nixpkgs {inherit system;};
   linuxSystem = builtins.replaceStrings ["darwin"] ["linux"] system;
 
   darwin-builder = lib.nixosSystem {
