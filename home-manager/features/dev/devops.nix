@@ -20,7 +20,7 @@
       kubernetes-helm
       kops
       k9s
-      kubescape
+      # kubescape
       kube-score
       kubeval
       kompose
@@ -39,7 +39,7 @@
 
       ## NixOps
       # nixops
-      nixops_unstable
+      # nixops_unstable
       # nixops-dns
       # morph
       colmena
