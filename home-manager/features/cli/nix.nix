@@ -3,6 +3,7 @@
     [
       nixd # Language server
       alejandra # Formatter
+      nix-bundle
       nix-output-monitor
       nix-update
       nix-diff

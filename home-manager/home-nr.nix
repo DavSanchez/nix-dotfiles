@@ -87,7 +87,7 @@
     "/Users/davidsanchez/Developer/NR-Repos"
   ];
   programs.zsh.shellAliases = {
-    sshCAOS = "ssh -i ~/.ssh/caos-dev-arm.cer";
+    sshCAOS = "ssh -i ~/.ssh/caos-dev-arm.cer -o \"StrictHostKeyChecking no\"";
   };
 
   # Enable home-manager and git

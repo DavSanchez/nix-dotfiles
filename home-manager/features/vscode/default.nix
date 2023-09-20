@@ -44,6 +44,7 @@
         jnoortheen.nix-ide
         justusadam.language-haskell
         llvm-vs-code-extensions.vscode-clangd
+        # markis.code-coverage # FIXME
         matklad.rust-analyzer
         mkhl.direnv
         # ms-azuretools.vscode-docker
@@ -54,18 +55,21 @@
         # ms-toolsai.jupyter
         # ms-toolsai.jupyter-renderers
         ms-vscode-remote.remote-ssh
+        ms-vscode-remote.remote-containers
         # ms-vscode.cmake-tools
         ms-vscode.hexeditor
         # ms-vscode.makefile-tools
         # ms-vscode.theme-tomorrowkit
+        # ms-vsliveshare.vsliveshare # FIXME
         pkief.material-icon-theme
         pkief.material-product-icons
         redhat.vscode-yaml
         tamasfe.even-better-toml
         timonwong.shellcheck
         usernamehw.errorlens
-        # vadimcn.vscode-lldb
+        # vadimcn.vscode-lldb # FIXME
         valentjn.vscode-ltex
+        vscode-icons-team.vscode-icons
         vscodevim.vim
         zxh404.vscode-proto3
       ]
@@ -118,12 +122,12 @@
         #   version = "2.0.0";
         #   sha256 = "sha256-YWA5UsA+cgvI66uB9d9smwghmsqf3vZPFNpSCK+DJxc=";
         # }
-        {
-          name = "remote-containers";
-          publisher = "ms-vscode-remote";
-          version = "0.285.0";
-          sha256 = "0bg336vwiwbbzpjm4g1gra7qdd7gch7d13h6iv7lnvbl1h9plyjh";
-        }
+        # {
+        #   name = "remote-containers";
+        #   publisher = "ms-vscode-remote";
+        #   version = "0.285.0";
+        #   sha256 = "0bg336vwiwbbzpjm4g1gra7qdd7gch7d13h6iv7lnvbl1h9plyjh";
+        # }
         {
           name = "veriloghdl";
           publisher = "mshr-h";
@@ -148,12 +152,12 @@
           version = "3.0.0";
           sha256 = "sha256-cWXd6AlyxBroZF+cXZzzWZbYPDuOqwCZIK67cEP5sNk=";
         }
-        {
-          name = "vscode-icons";
-          publisher = "vscode-icons-team";
-          version = "12.2.0";
-          sha256 = "sha256-PxM+20mkj7DpcdFuExUFN5wldfs7Qmas3CnZpEFeRYs=";
-        }
+        # {
+        #   name = "vscode-icons";
+        #   publisher = "vscode-icons-team";
+        #   version = "12.2.0";
+        #   sha256 = "sha256-PxM+20mkj7DpcdFuExUFN5wldfs7Qmas3CnZpEFeRYs=";
+        # }
         {
           name = "wavetrace";
           publisher = "wavetrace";

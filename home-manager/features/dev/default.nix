@@ -33,6 +33,8 @@
       ## Other
       gnumake
       # protobuf
+
+      grcov # code coverage
     ]
     ++ lib.optionals pkgs.stdenv.isLinux [
       rr
