@@ -40,40 +40,30 @@
     ...
   } @ inputs: let
     inherit (self) outputs;
-    forAllSystems = nixpkgs.lib.genAttrs [
+    # Supported systems for flake packages, shell, etc.
+    systems = [
       "aarch64-linux"
       "i686-linux"
       "x86_64-linux"
       "aarch64-darwin"
       "x86_64-darwin"
     ];
-    pkgsFor = forAllSystems (system: import nixpkgs {inherit system;});
-    hmModuleVMOpts = {
-      home-manager.useGlobalPkgs = true;
-      home-manager.useUserPackages = true;
-      home-manager.users.david = import ./home-manager/home-vm.nix;
-      home-manager.extraSpecialArgs = {inherit inputs outputs;};
-    };
+    # This is a function that generates an attribute by calling a function you
+    # pass to it, with each system as an argument
+    forAllSystems = nixpkgs.lib.genAttrs systems;
   in {
-    # Your custom packages
+    # Custom packages
     # Acessible through 'nix build', 'nix shell', etc
     packages =
-      forAllSystems (
-        system: import ./pkgs {pkgs = pkgsFor.${system};}
-      )
+      forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system})
       // {
         x86_64-linux.linuxVM = self.nixosConfigurations.linuxVM.config.system.build.vm;
         aarch64-darwin.darwinVM = self.nixosConfigurations.darwinVM.config.system.build.vm;
       };
 
-    # Devshell for bootstrapping
-    # Acessible through 'nix develop' or 'nix-shell' (legacy)
-    devShells = forAllSystems (
-      system: import ./shell.nix {pkgs = pkgsFor.${system};}
-    );
-
-    # Formatter
-    formatter = forAllSystems (system: pkgsFor.${system}.alejandra);
+    # Formatter for the nix files, available through 'nix fmt'
+    # Other options beside 'alejandra' include 'nixpkgs-fmt'
+    formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
     # Your custom packages and modifications, exported as overlays
     overlays = import ./overlays {inherit inputs;};
     # Reusable nixos modules you might want to export
@@ -102,7 +92,7 @@
         modules = [
           ./hosts/vm/configuration.nix
           {
-            virtualisation.vmVariant.virtualisation.host.pkgs = pkgsFor.aarch64-darwin;
+            virtualisation.vmVariant.virtualisation.host.pkgs = nixpkgs.legacyPackages.aarch64-darwin;
           }
         ];
       };
@@ -137,7 +127,7 @@
 
     homeConfigurations = {
       "david@mbp" = home-manager.lib.homeManagerConfiguration {
-        pkgs = pkgsFor.aarch64-darwin; # Home-manager requires 'pkgs' instance
+        pkgs = nixpkgs.legacyPackages.aarch64-darwin; # Home-manager requires 'pkgs' instance
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [
           # > Our main home-manager configuration file <
@@ -145,7 +135,7 @@
         ];
       };
       "david@mini" = home-manager.lib.homeManagerConfiguration {
-        pkgs = pkgsFor.aarch64-darwin; # Home-manager requires 'pkgs' instance
+        pkgs = nixpkgs.legacyPackages.aarch64-darwin; # Home-manager requires 'pkgs' instance
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [
           # > Our main home-manager configuration file <
@@ -153,7 +143,7 @@
         ];
       };
       "davidsanchez@nr" = home-manager.lib.homeManagerConfiguration {
-        pkgs = pkgsFor.aarch64-darwin; # Home-manager requires 'pkgs' instance
+        pkgs = nixpkgs.legacyPackages.aarch64-darwin; # Home-manager requires 'pkgs' instance
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [
           # > Our main home-manager configuration file <
@@ -161,7 +151,7 @@
         ];
       };
       "david@nixos-vm" = home-manager.lib.homeManagerConfiguration {
-        pkgs = pkgsFor.aarch64-linux;
+        pkgs = nixpkgs.legacyPackages.aarch64-linux;
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [
           # > Our main home-manager configuration file <
