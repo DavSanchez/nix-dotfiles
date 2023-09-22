@@ -112,7 +112,7 @@
         specialArgs = {inherit inputs outputs;};
         modules = [
           ./hosts/mini/darwin-configuration.nix
-          ./hosts/mbp/darwin-builder
+          # ./hosts/darwin-builder
         ];
       };
       nr = darwin.lib.darwinSystem {
@@ -120,7 +120,7 @@
         specialArgs = {inherit inputs outputs;};
         modules = [
           ./hosts/nr/darwin-configuration.nix
-          ./hosts/darwin-builder
+          # ./hosts/darwin-builder
         ];
       };
     };

@@ -3,7 +3,7 @@
   inherit (nixpkgs) lib;
 
   system = "aarch64-darwin";
-  pkgs = import nixpkgs {inherit system;};
+  pkgs = nixpkgs.legacyPackages.${system};
   linuxSystem = builtins.replaceStrings ["darwin"] ["linux"] system;
 
   darwin-builder = lib.nixosSystem {
@@ -12,9 +12,9 @@
       "${nixpkgs}/nixos/modules/profiles/macos-builder.nix"
       {
         virtualisation.host.pkgs = pkgs;
-        virtualisation.darwin-builder.diskSize = lib.mkForce (40 * 1024);
-        virtualisation.darwin-builder.memorySize = lib.mkForce (4 * 1024);
-        virtualisation.darwin-builder.workingDirectory = "/var/lib/darwin-builder";
+        # virtualisation.darwin-builder.diskSize = lib.mkForce (40 * 1024);
+        # virtualisation.darwin-builder.memorySize = lib.mkForce (4 * 1024);
+        # virtualisation.darwin-builder.workingDirectory = "/var/lib/darwin-builder";
         system.nixos.revision = nixpkgs.lib.mkForce null;
       }
     ];
