@@ -19,7 +19,7 @@
     [
       ## Utils
       coreutils
-      # binutils # Already included with GCC
+      # binutils # Already included with pkgs.gcc
       pciutils
 
       w3m
@@ -28,6 +28,10 @@
     ]
     ++ lib.optionals pkgs.stdenv.isDarwin [
       m-cli
+    ]
+    ++ lib.optionals pkgs.stdenv.isLinux [
+      elfutils
+      # patchelf # present in ./nix.nix
     ];
 
   programs = {
