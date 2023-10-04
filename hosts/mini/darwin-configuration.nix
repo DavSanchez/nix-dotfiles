@@ -143,6 +143,8 @@
     casks = [
       "adobe-acrobat-reader"
       "amethyst"
+      "anytype"  # Alternative to Notion, testing
+      "appflowy" # Alternative to Notion, testing
       "bartender"
       "brave-browser"
       # "dash" # Haven't used it

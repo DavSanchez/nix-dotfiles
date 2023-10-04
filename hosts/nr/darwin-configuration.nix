@@ -144,6 +144,8 @@
       "1password"
       "1password-cli"
       "amethyst"
+      "anytype"  # Alternative to Notion, testing
+      "appflowy" # Alternative to Notion, testing
       "bartender"
       "brave-browser"
       "disk-inventory-x"
