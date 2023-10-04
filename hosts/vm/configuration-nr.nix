@@ -4,29 +4,29 @@
   outputs,
   ...
 }: {
-  # imports = [
-  #   inputs.nix-relic.nixosModules.newrelic-infra
-  # ];
+  imports = [
+    inputs.nix-relic.nixosModules.newrelic-infra
+  ];
 
   nixpkgs = {
     overlays = [
       outputs.overlays.modifications
       outputs.overlays.additions
 
-      # inputs.nix-relic.overlays.additions # new packages such as the infra agent and nrdot
+      inputs.nix-relic.overlays.additions # new packages such as the infra agent and nrdot
     ];
   };
 
-  # services.newrelic-infra = {
-  #   enable = true;
-  #   configFile = ../../secrets/newrelic-infra-config.yml;
-  # };
+  services.newrelic-infra = {
+    enable = true;
+    configFile = ../../secrets/newrelic-infra-config.yml;
+  };
 
-  # services.opentelemetry-collector = {
-  #   enable = true;
-  #   package = pkgs.nr-otel-collector;
-  #   configFile = ../../secrets/nr-otel-collector-config.yml;
-  # };
+  services.opentelemetry-collector = {
+    enable = true;
+    package = pkgs.nr-otel-collector;
+    configFile = ../../secrets/nr-otel-collector-config.yml;
+  };
 
   system.stateVersion = "23.05";
 

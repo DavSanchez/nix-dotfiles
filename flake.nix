@@ -59,6 +59,7 @@
       // {
         x86_64-linux.linuxVM = self.nixosConfigurations.linuxVM.config.system.build.vm;
         aarch64-darwin.darwinVM = self.nixosConfigurations.darwinVM.config.system.build.vm;
+        aarch64-darwin.darwinVM-NR = self.nixosConfigurations.darwinVM-NR.config.system.build.vm;
       };
 
     # Formatter for the nix files, available through 'nix fmt'
@@ -91,6 +92,17 @@
         specialArgs = {inherit inputs outputs;};
         modules = [
           ./hosts/vm/configuration.nix
+          {
+            virtualisation.vmVariant.virtualisation.host.pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+          }
+        ];
+      };
+      darwinVM-NR = nixpkgs.lib.nixosSystem {
+        system = "aarch64-linux";
+        specialArgs = {inherit inputs outputs;};
+        modules = [
+          ./hosts/vm/configuration-nr.nix
+          # TODO: Put NR O11y utils in a separate module to be included here
           {
             virtualisation.vmVariant.virtualisation.host.pkgs = nixpkgs.legacyPackages.aarch64-darwin;
           }
