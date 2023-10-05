@@ -146,6 +146,7 @@
       "anytype"  # Alternative to Notion, testing
       "bartender"
       "brave-browser"
+      "crossover"
       # "dash" # Haven't used it
       "discord"
       "disk-inventory-x"
