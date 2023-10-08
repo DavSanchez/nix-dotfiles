@@ -94,6 +94,8 @@
   programs.home-manager.enable = true;
   programs.git.enable = true;
 
+  xdg.enable = true;
+
   home.file.".amethyst.yml".source = ./features/amethyst/amethyst.yml;
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
