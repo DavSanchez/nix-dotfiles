@@ -11,6 +11,11 @@
     userName = "David Sánchez";
     userEmail = "davidslt+git@pm.me";
 
+    signing = {
+      key = "578158208F11CECF";
+      signByDefault = true;
+    };
+
     includes = [{path = "~/.config/git/localconf";}];
 
     delta = {
