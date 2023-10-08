@@ -1,10 +1,8 @@
 {
   pkgs,
-  config,
   lib,
   ...
-}:
-{
+}: {
   home.packages = with pkgs; [
     cotp
     # oath-toolkit
@@ -16,6 +14,12 @@
       # homedir = "${config.xdg.configHome}/gnupg";
     };
     password-store.enable = true;
+  };
+
+  home.file.".gnupg/gpg-agent.conf" = lib.optionalAttrs pkgs.stdenv.isDarwin {
+    text = ''
+      pinentry-program ${pkgs.pinentry_mac}/Applications/pinentry-mac.app/Contents/MacOS/pinentry-mac
+    '';
   };
 
   services.gpg-agent = {
@@ -32,9 +36,4 @@
     maxCacheTtlSsh = 86400;
     sshKeys = null;
   };
-}
-// lib.mkIf pkgs.stdenv.isDarwin {
-  home.file.".gnupg/gpg-agent.conf".text = ''
-    pinentry-program ${pkgs.pinentry_mac}/Applications/pinentry-mac.app/Contents/MacOS/pinentry-mac
-  '';
 }
