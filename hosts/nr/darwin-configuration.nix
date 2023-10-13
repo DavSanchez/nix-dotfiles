@@ -21,12 +21,18 @@
     # ./users.nix
 
     inputs.nix-relic.darwinModules.newrelic-infra
+    inputs.nix-relic.darwinModules.nr-otel-collector
   ];
 
-  # services.newrelic-infra = {
-  #   enable = true;
-  #   config = ../../../secrets/newrelic-infra-config.yml;
-  # };
+  services.newrelic-infra = {
+    enable = true;
+    configFile = ../../secrets/newrelic-infra-config.yml;
+  };
+
+  services.nr-otel-collector = {
+    enable = true;
+    configFile = ../../secrets/nr-otel-collector-config.yml;
+  };
 
   nixpkgs = {
     # You can add overlays here
@@ -37,7 +43,7 @@
 
       # Or overlays exported from other flakes:
       # neovim-nightly-overlay.overlays.default
-      inputs.nix-relic.overlays.default
+      inputs.nix-relic.overlays.additions
 
       # Or define it inline, for example:
       # (final: prev: {
