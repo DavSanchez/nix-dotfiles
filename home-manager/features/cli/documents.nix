@@ -6,6 +6,8 @@
     typst
     python311Packages.pygments
     haskellPackages.pandoc-crossref
+
+    haskellPackages.patat # Terminal-based presentations
   ];
 
   programs = {
