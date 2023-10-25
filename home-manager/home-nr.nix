@@ -44,9 +44,9 @@
     overlays = [
       # If you want to use overlays your own flake exports (from overlays dir):
       outputs.overlays.additions
-      outputs.overlays.modifications
       outputs.overlays.rosetta-packages
       outputs.overlays.stable-packages
+      outputs.overlays.modifications
 
       # Or overlays exported from other flakes:
       # neovim-nightly-overlay.overlays.default
