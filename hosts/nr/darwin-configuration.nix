@@ -37,7 +37,7 @@
 
       # Or overlays exported from other flakes:
       # neovim-nightly-overlay.overlays.default
-      inputs.nix-relic.overlays.default
+      inputs.nix-relic.overlays.additions
 
       # Or define it inline, for example:
       # (final: prev: {
@@ -182,6 +182,25 @@
   ## Other configs
   # Enable sudo authentication with Touch ID
   # security.pam.enableSudoTouchIdAuth = true;
+
+  services = {
+    yabai = {
+      enable = true;
+      enableScriptingAddition = false; # Requires SIP disabled
+      config = {};
+    };
+    skhd = {
+      enable = true;
+      skhdConfig = "";
+    };
+    sketchybar = {
+      enable = false;
+      config = {};
+      extraPackages = [
+        pkgs.sketchybar-app-font
+      ];
+    };
+  };
 
   system.defaults.dock.autohide = true;
   system.defaults.dock.mru-spaces = false;
