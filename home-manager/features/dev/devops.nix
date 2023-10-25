@@ -19,7 +19,6 @@
       kubectl
       kubernetes-helm
       kops
-      k9s
       # kubescape
       kube-score
       kubeval
@@ -51,4 +50,10 @@
       ## Container runtimes on macOS
       colima
     ];
+
+    programs = {
+      k9s = {
+        enable = true;
+      };
+    };
 }
