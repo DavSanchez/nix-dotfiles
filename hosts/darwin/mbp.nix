@@ -19,6 +19,7 @@
 
     # You can also split up your configuration and import pieces of it here:
     # ./users.nix
+    ./common/desktop-management.nix
   ];
 
   nixpkgs = {
@@ -138,7 +139,7 @@
     ];
     casks = [
       "adobe-acrobat-reader"
-      "amethyst"
+      # "amethyst"
       "anytype" # Alternative to Notion, testing
       "bartender"
       "brave-browser"
