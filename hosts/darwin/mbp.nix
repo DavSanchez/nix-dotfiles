@@ -19,7 +19,9 @@
 
     # You can also split up your configuration and import pieces of it here:
     # ./users.nix
-    ./common/desktop-management.nix
+    ./common/yabai.nix
+    ./common/skhd.nix
+
   ];
 
   nixpkgs = {
