@@ -81,7 +81,7 @@
     };
 
     linux-builder = {
-      enable = true;
+      enable = false;
     };
   };
 
