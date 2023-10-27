@@ -48,6 +48,7 @@
       outputs.overlays.stable-packages
       outputs.overlays.rosetta-packages
       outputs.overlays.modifications
+      outputs.overlays.devenv
 
       # Or overlays exported from other flakes:
       # neovim-nightly-overlay.overlays.default
@@ -58,11 +59,6 @@
       #     patches = [ ./change-hello-to-hi.patch ];
       #   });
       # })
-
-      # devenv.sh
-      (_final: _prev: {
-        inherit (inputs.devenv.packages.${pkgs.system}) devenv;
-      })
     ];
     # Configure your nixpkgs instance
     config = {

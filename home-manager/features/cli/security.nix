@@ -16,14 +16,8 @@
     password-store.enable = true;
   };
 
-  home.file.".gnupg/gpg-agent.conf" = lib.optionalAttrs pkgs.stdenv.isDarwin {
-    text = ''
-      pinentry-program ${pkgs.pinentry_mac}/Applications/pinentry-mac.app/Contents/MacOS/pinentry-mac
-    '';
-  };
-
   services.gpg-agent = {
-    enable = pkgs.stdenv.isLinux;
+    enable = true;
     enableBashIntegration = true;
     enableZshIntegration = true;
     enableFishIntegration = true;
@@ -35,5 +29,9 @@
     defaultCacheTtlSsh = 14400;
     maxCacheTtlSsh = 86400;
     sshKeys = null;
+
+    extraConfig = ''
+      ${lib.optionalString pkgs.stdenv.isDarwin "pinentry-program ${pkgs.pinentry_mac}/Applications/pinentry-mac.app/Contents/MacOS/pinentry-mac"}
+    '';
   };
 }

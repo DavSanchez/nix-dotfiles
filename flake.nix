@@ -57,7 +57,6 @@
     packages =
       forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system})
       // {
-        x86_64-linux.linuxVM = self.nixosConfigurations.linuxVM.config.system.build.vm;
         aarch64-darwin.darwinVM = self.nixosConfigurations.darwinVM.config.system.build.vm;
       };
 
@@ -79,21 +78,21 @@
     templates = import ./templates;
 
     nixosConfigurations = {
-      linuxVM = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {inherit inputs outputs;};
-        modules = [
-          ./hosts/vm/configuration.nix
-        ];
-      };
       darwinVM = nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";
         specialArgs = {inherit inputs outputs;};
         modules = [
-          ./hosts/vm/configuration.nix
+          ./hosts/vm/configuration-lite.nix
           {
             virtualisation.vmVariant.virtualisation.host.pkgs = nixpkgs.legacyPackages.aarch64-darwin;
           }
+        ];
+      };
+      nr-vm-utm = nixpkgs.lib.nixosSystem {
+        system = "aarch64-linux";
+        specialArgs = {inherit inputs outputs;};
+        modules = [
+          ./hosts/vm/utm/configuration.nix
         ];
       };
     };
@@ -103,7 +102,7 @@
         system = "aarch64-darwin";
         specialArgs = {inherit inputs outputs;};
         modules = [
-          ./hosts/mbp/darwin-configuration.nix
+          ./hosts/darwin/mbp.nix
           # ./hosts/darwin-builder
         ];
       };
@@ -111,16 +110,7 @@
         system = "aarch64-darwin";
         specialArgs = {inherit inputs outputs;};
         modules = [
-          ./hosts/mini/darwin-configuration.nix
-          # ./hosts/darwin-builder
-        ];
-      };
-      nr = darwin.lib.darwinSystem {
-        system = "aarch64-darwin";
-        specialArgs = {inherit inputs outputs;};
-        modules = [
-          ./hosts/nr/darwin-configuration.nix
-          # ./hosts/darwin-builder
+          ./hosts/darwin/mini.nix
         ];
       };
     };
@@ -130,32 +120,21 @@
         pkgs = nixpkgs.legacyPackages.aarch64-darwin; # Home-manager requires 'pkgs' instance
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [
-          # > Our main home-manager configuration file <
           ./home-manager/home-darwin.nix
         ];
       };
       "david@mini" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.aarch64-darwin; # Home-manager requires 'pkgs' instance
+        pkgs = nixpkgs.legacyPackages.aarch64-darwin;
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [
-          # > Our main home-manager configuration file <
           ./home-manager/home-darwin.nix
         ];
       };
-      "davidsanchez@nr" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.aarch64-darwin; # Home-manager requires 'pkgs' instance
-        extraSpecialArgs = {inherit inputs outputs;};
-        modules = [
-          # > Our main home-manager configuration file <
-          ./home-manager/home-nr.nix
-        ];
-      };
-      "david@nixos-vm" = home-manager.lib.homeManagerConfiguration {
+      "davidsanchez@nr-vm" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.aarch64-linux;
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [
-          # > Our main home-manager configuration file <
-          ./home-manager/home.nix
+          ./home-manager/home-nr-vm.nix
         ];
       };
     };
