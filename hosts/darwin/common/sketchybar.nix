@@ -8,4 +8,6 @@
       ];
     };
   };
+  # Make way for the sketchybar
+  system.defaults.NSGlobalDomain._HIHideMenuBar = true;
 }
