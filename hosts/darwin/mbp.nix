@@ -21,7 +21,6 @@
     # ./users.nix
     ./common/yabai.nix
     ./common/skhd.nix
-
   ];
 
   nixpkgs = {
