@@ -119,6 +119,9 @@ _: {
         # Equalize size of windows
         lctrl + alt - e : yabai -m space --balance
 
+        # Toggle window split type
+        alt - e : yabai -m window --toggle split
+
         # Enable / Disable gaps in current workspace
         lctrl + alt - g : yabai -m space --toggle padding; yabai -m space --toggle gap
 
