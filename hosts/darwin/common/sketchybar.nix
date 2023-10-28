@@ -2,7 +2,7 @@
   services = {
     sketchybar = {
       enable = true;
-      config = {};
+      # config = {};
       extraPackages = [
         # pkgs.sketchybar-app-font # Already in fonts
       ];

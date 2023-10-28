@@ -21,6 +21,7 @@
     # ./users.nix
     ./common/yabai.nix
     ./common/skhd.nix
+    # ./common/sketchybar.nix
   ];
 
   nixpkgs = {
