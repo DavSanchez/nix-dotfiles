@@ -75,79 +75,81 @@ _: {
         #
         #               an EOL character signifies the end of the bind.
 
-        # ############################################################### #
-        # THE FOLLOWING SECTION CONTAIN SIMPLE MAPPINGS DEMONSTRATING HOW #
-        # TO INTERACT WITH THE YABAI WM. THESE ARE SUPPOSED TO BE USED AS #
-        # A REFERENCE ONLY, WHEN MAKING YOUR OWN CONFIGURATION..          #
-        # ############################################################### #
+        # opens WezTerm
+        alt - return : /usr/bin/env wezterm
 
-        # focus window
+        # Show system statistics
+        # fn + lalt - 1 : ~/.config/yabai/scripts/show_cpu.sh
+        # fn + lalt - 2 : ~/.config/yabai/scripts/show_mem.sh
+        # fn + lalt - 3 : ~/.config/yabai/scripts/show_bat.sh
+        # fn + lalt - 4 : ~/.config/yabai/scripts/show_disk.sh
+        # fn + lalt - 5 : ~/.config/yabai/scripts/show_song.sh
+
+        # Navigation
         alt - h : yabai -m window --focus west
+        alt - j : yabai -m window --focus south
+        alt - k : yabai -m window --focus north
+        alt - l : yabai -m window --focus east
 
-        # swap managed window
-        shift + alt - h : yabai -m window --swap north
+        # Moving windows
+        shift + alt - h : yabai -m window --warp west
+        shift + alt - j : yabai -m window --warp south
+        shift + alt - k : yabai -m window --warp north
+        shift + alt - l : yabai -m window --warp east
 
-        # move managed window
-        shift + cmd - h : yabai -m window --warp east
+        # Move focus container to workspace
+        shift + alt - m : yabai -m window --space last; yabai -m space --focus last
+        shift + alt - p : yabai -m window --space prev; yabai -m space --focus prev
+        shift + alt - n : yabai -m window --space next; yabai -m space --focus next
+        shift + alt - 1 : yabai -m window --space 1; yabai -m space --focus 1
+        shift + alt - 2 : yabai -m window --space 2; yabai -m space --focus 2
+        shift + alt - 3 : yabai -m window --space 3; yabai -m space --focus 3
+        shift + alt - 4 : yabai -m window --space 4; yabai -m space --focus 4
 
-        # balance size of windows
-        shift + alt - 0 : yabai -m space --balance
+        # Resize windows
+        lctrl + alt - h : yabai -m window --resize left:-50:0; \
+                          yabai -m window --resize right:-50:0
+        lctrl + alt - j : yabai -m window --resize bottom:0:50; \
+                          yabai -m window --resize top:0:50
+        lctrl + alt - k : yabai -m window --resize top:0:-50; \
+                          yabai -m window --resize bottom:0:-50
+        lctrl + alt - l : yabai -m window --resize right:50:0; \
+                          yabai -m window --resize left:50:0
 
-        # make floating window fill screen
-        shift + alt - up     : yabai -m window --grid 1:1:0:0:1:1
+        # Equalize size of windows
+        lctrl + alt - e : yabai -m space --balance
 
-        # make floating window fill left-half of screen
-        shift + alt - left   : yabai -m window --grid 1:2:0:0:1:1
+        # Enable / Disable gaps in current workspace
+        lctrl + alt - g : yabai -m space --toggle padding; yabai -m space --toggle gap
 
-        # create desktop, move window and follow focus - uses jq for parsing json (brew install jq)
-        shift + cmd - n : yabai -m space --create && \
-                          index="$(yabai -m query --spaces --display | jq 'map(select(."is-native-fullscreen" == false))[-1].index')" && \
-                          yabai -m window --space "$index" && \
-                          yabai -m space --focus "$index"
+        # Rotate windows clockwise and anticlockwise
+        alt - r         : yabai -m space --rotate 270
+        shift + alt - r : yabai -m space --rotate 90
 
-        # fast focus desktop
-        cmd + alt - x : yabai -m space --focus recent
-        cmd + alt - 1 : yabai -m space --focus 1
+        # Rotate on X and Y Axis
+        shift + alt - x : yabai -m space --mirror x-axis
+        shift + alt - y : yabai -m space --mirror y-axis
 
-        # send window to desktop and follow focus
-        shift + cmd - z : yabai -m window --space next; yabai -m space --focus next
-        shift + cmd - 2 : yabai -m window --space  2; yabai -m space --focus 2
+        # Set insertion point for focused container
+        shift + lctrl + alt - h : yabai -m window --insert west
+        shift + lctrl + alt - j : yabai -m window --insert south
+        shift + lctrl + alt - k : yabai -m window --insert north
+        shift + lctrl + alt - l : yabai -m window --insert east
 
-        # focus monitor
-        ctrl + alt - z  : yabai -m display --focus prev
-        ctrl + alt - 3  : yabai -m display --focus 3
+        # Float / Unfloat window
+        shift + alt - space : \
+            yabai -m window --toggle float; \
+            yabai -m window --toggle border
 
-        # send window to monitor and follow focus
-        ctrl + cmd - c  : yabai -m window --display next; yabai -m display --focus next
-        ctrl + cmd - 1  : yabai -m window --display 1; yabai -m display --focus 1
+        # Restart Yabai
+        # shift + lctrl + alt - r : \
+        #     /usr/bin/env osascript <<< \
+        #         "display notification \"Restarting Yabai\" with title \"Yabai\""; \
+        #     launchctl kickstart -k "gui/$(echo -n $UID)/homebrew.mxcl.yabai"
 
-        # move floating window
-        shift + ctrl - a : yabai -m window --move rel:-20:0
-        shift + ctrl - s : yabai -m window --move rel:0:20
-
-        # increase window size
-        shift + alt - a : yabai -m window --resize left:-20:0
-        shift + alt - w : yabai -m window --resize top:0:-20
-
-        # decrease window size
-        shift + cmd - s : yabai -m window --resize bottom:0:-20
-        shift + cmd - w : yabai -m window --resize top:0:20
-
-        # set insertion point in focused container
-        ctrl + alt - h : yabai -m window --insert west
-
-        # toggle window zoom
-        alt - d : yabai -m window --toggle zoom-parent
-        alt - f : yabai -m window --toggle zoom-fullscreen
-
-        # toggle window split type
-        alt - e : yabai -m window --toggle split
-
-        # float / unfloat window and center on screen
-        alt - t : yabai -m window --toggle float --grid 4:4:1:1:2:2
-
-        # toggle sticky(+float), picture-in-picture
-        alt - p : yabai -m window --toggle sticky --toggle pip
+        # Make window native fullscreen
+        alt - f         : yabai -m window --toggle zoom-fullscreen
+        shift + alt - f : yabai -m window --toggle native-fullscreen
       '';
     };
   };
