@@ -14,7 +14,7 @@
     ./features/neovim
     ./features/nu
     ./features/starship
-    # ./features/vscode
+    ./features/vscode
     ./features/zsh
     ./features/bash
     ./features/fish
