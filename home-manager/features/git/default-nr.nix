@@ -11,7 +11,7 @@
     userEmail = "davidslt+git@pm.me";
 
     signing = {
-      key = "0049380F7629074C";
+      key = "5485C37B9941B0BF";
       signByDefault = true;
     };
 
