@@ -120,14 +120,14 @@
         pkgs = nixpkgs.legacyPackages.aarch64-darwin; # Home-manager requires 'pkgs' instance
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [
-          ./home-manager/home-darwin.nix
+          ./home-manager/home-mbp.nix
         ];
       };
       "david@mini" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.aarch64-darwin;
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [
-          ./home-manager/home-darwin.nix
+          ./home-manager/home-mini.nix
         ];
       };
       "davidsanchez@nr-vm" = home-manager.lib.homeManagerConfiguration {

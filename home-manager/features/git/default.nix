@@ -11,10 +11,11 @@
     userName = "David Sánchez";
     userEmail = "davidslt+git@pm.me";
 
-    signing = {
-      key = "84EE4903D8FAF0F6";
-      signByDefault = true;
-    };
+    # Move to localconf? Currently specifying on separate files
+    # signing = {
+    #   key = "...";
+    #   signByDefault = true;
+    # };
 
     includes = [{path = "~/.config/git/localconf";}];
 

@@ -10,7 +10,8 @@
     ./features/dev/default-nr.nix
     ./features/direnv
     ./features/emacs
-    ./features/git/default-nr.nix
+    ./features/git
+    ./features/git/signing-nr.nix
     ./features/neovim
     ./features/nu
     ./features/starship
