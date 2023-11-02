@@ -13,9 +13,14 @@
       enable = true;
       # homedir = "${config.xdg.configHome}/gnupg";
     };
+    ssh = {
+      enable = true;
+      # ...
+    };
     password-store.enable = true;
   };
 
+  services.ssh-agent.enable = pkgs.stdenv.isLinux;
   services.gpg-agent = {
     enable = pkgs.stdenv.isLinux;
     enableBashIntegration = true;
