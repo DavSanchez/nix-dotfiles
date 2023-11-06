@@ -41,6 +41,7 @@
 
   users.users = {
     david = {
+      shell = pkgs.zsh;
       isNormalUser = true;
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAtJ6zSsueNkp3+N+DjXwpXi4Lrq9TYvnfXDGIl1Ccsq davidsanchez@newrelic.com"
@@ -57,6 +58,7 @@
   };
 
   programs.nix-ld.enable = true;
+  programs.zsh.enable = true;
 
   services.qemuGuest.enable = true;
 
