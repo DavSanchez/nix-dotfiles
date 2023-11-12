@@ -175,6 +175,7 @@
       "transmission"
       "vlc"
       "warp"
+      "whatsapp"
       "wireshark"
       "xld"
       "xquartz" # X11 applications on macOS
@@ -203,7 +204,6 @@
       "Shazam" = 897118787;
       "The Unarchiver" = 425424353;
       "UTM" = 1538878817;
-      "WhatsApp" = 1147396723;
       "Xcode" = 497799835;
     };
     # extraConfig = '' '';
