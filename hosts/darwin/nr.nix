@@ -153,6 +153,7 @@
       "firefox"
       "imhex"
       "insomnia"
+      "keymapp"
       "logseq"
       "maccy"
       "openvpn-connect"

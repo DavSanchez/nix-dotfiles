@@ -159,6 +159,7 @@
       "handbrake"
       "imhex"
       "insomnia"
+      "keymapp"
       "krita"
       "libreoffice"
       "little-snitch"

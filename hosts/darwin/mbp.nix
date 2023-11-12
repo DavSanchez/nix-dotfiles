@@ -155,6 +155,7 @@
       "handbrake"
       "imhex"
       "insomnia"
+      "keymapp"
       "krita"
       "little-snitch"
       "logseq"
