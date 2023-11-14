@@ -75,8 +75,8 @@
       EDITOR = "nvim";
       LC_ALL = "en_US.UTF-8";
       LANG = "en_US.UTF-8";
-      NIX_PATH = "$HOME/.nix-defexpr/channels\${NIX_PATH:+:}$NIX_PATH";
-      FPATH = "$HOME/.nix-profile/share/zsh/site-functions:$FPATH";
+      # NIX_PATH = "$HOME/.nix-defexpr/channels\${NIX_PATH:+:}$NIX_PATH";
+      # FPATH = "$HOME/.nix-profile/share/zsh/site-functions:$FPATH";
       ZSH_AUTOSUGGEST_STRATEGY = ["history" "completion"];
     };
 
@@ -114,7 +114,7 @@
       export LESS_TERMCAP_ue=$'\E[0m' # reset underline
 
       # Prepend nix dirs to PATH so they take precendence
-      export PATH="$HOME/.local/bin:$HOME/.nix-profile/bin:/run/current-system/sw/bin:/nix/var/nix/profiles/default/bin:$PATH"
+      export PATH="$HOME/.local/bin:$PATH"
     '';
 
     initExtra = ''
