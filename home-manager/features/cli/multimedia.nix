@@ -4,7 +4,7 @@
     imagemagick
     qrencode
     zbar # Barcode reading
-    xdot
+    # xdot
     ffmpeg
 
     # Download content from the internet
