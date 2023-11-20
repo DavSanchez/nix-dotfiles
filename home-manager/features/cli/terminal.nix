@@ -16,6 +16,15 @@
     ## Other
     eva
     rmlint # Extremely fast tool to remove duplicates and other lint from your filesystem
+
+    ## For use with Yazi
+    ffmpegthumbnailer
+    unar
+    jq
+    poppler
+    ripgrep
+    fzf
+    zoxide
   ];
 
   programs = {
@@ -85,6 +94,23 @@
           execution = ":panel_left";
         }
       ];
+    };
+
+    xplr = {
+      enable = true;
+      extraConfig = "";
+      plugins = [];
+    };
+
+    yazi = {
+      enable = true;
+      enableBashIntegration = true;
+      enableZshIntegration = true;
+      enableFishIntegration = true;
+      enableNushellIntegration = true;
+      keymap = { };
+      settings = { };
+      theme = { };
     };
 
     lf = {
