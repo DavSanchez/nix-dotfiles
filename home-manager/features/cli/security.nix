@@ -14,7 +14,7 @@
       # homedir = "${config.xdg.configHome}/gnupg";
     };
     ssh = {
-      enable = true;
+      enable = false; # Managed manually for now
       # ...
     };
     password-store.enable = true;
