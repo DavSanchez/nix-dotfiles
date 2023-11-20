@@ -15,8 +15,6 @@ jobs:
       image: nixos/nix:latest
       env:
         NIX_EXPERIMENTAL_FEATURES: "nix-command flakes"
-      volumes:
-        - docker_volume:/volume_mount
     steps:
       - uses: actions/checkout@v4
       - uses: cachix/cachix-action@v12
@@ -24,9 +22,9 @@ jobs:
           name: davsanchez
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
       - name: Build Darwin VM
-        run: nixos-rebuild build --flake .#nixosConfigurations.darwinVM
+        run: nixos-rebuild build --flake .#darwinVM
       - name: Build UTM VM
-        run: nixos-rebuild build .#darwinConfigurations.nr-vm-utm
+        run: nixos-rebuild build --flake .#nr-vm-utm
 
   # TODO: aarch64-darwin is not yet available to run on GitHub Actions
   # test_darwin_builds:
@@ -41,11 +39,11 @@ jobs:
   #         name: davsanchez
   #         authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
   #     - name: Install nix-darwin
-  #       run: nix run nix-darwin -- switch --flake .#darwinConfigurations.mbp
+  #       run: nix run nix-darwin -- switch --flake .#mbp
   #     - name: Build Darwin MBP
-  #       run: darwin-rebuild build --flake .#darwinConfigurations.mbp
+  #       run: darwin-rebuild build --flake .#mbp
   #     - name: Build Darwin Mini
-  #       run: darwin-rebuild build --flake .#darwinConfigurations.mini
+  #       run: darwin-rebuild build --flake .#mini
     
   test_home_manager_builds:
     name: Build Home Manager configurations
@@ -68,10 +66,10 @@ jobs:
         run: nix run home-manager/master -- init --switch
       - name: Build Home Manager david@mbp
         if: ${{ matrix.os == 'macos-latest' }}
-        run: home-manager build --flake ".#homeConfigurations.david@mbp"
+        run: home-manager build --flake ".#david@mbp"
       - name: Build Home Manager david@mini
         if: ${{ matrix.os == 'macos-latest' }}
-        run: home-manager build --flake ".#homeConfigurations.david@mini"
+        run: home-manager build --flake ".#david@mini"
       - name: Build Home Manager davidsanchez@nr-vm
         if: ${{ matrix.os == 'ubuntu-latest' }}
-        run: home-manager build --flake ".#homeConfigurations.davidsanchez@nr-vm"
+        run: home-manager build --flake ".#davidsanchez@nr-vm"
