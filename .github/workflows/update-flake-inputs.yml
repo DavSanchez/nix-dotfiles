@@ -23,8 +23,12 @@ jobs:
       - name: Update flake inputs
         run: nix flake update --commit-lock-file
       - name: Create Pull Request using GH CLI
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh pr create --title "chore: update flake inputs" --body "Update flake inputs"
       - name: Set branch for auto-merge
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: gh pr merge --squash --auto --delete-branch
       
