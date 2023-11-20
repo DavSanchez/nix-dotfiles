@@ -28,23 +28,24 @@ jobs:
       - name: Build UTM VM
         run: nixos-rebuild build .#darwinConfigurations.nr-vm-utm
 
-  test_darwin_builds:
-    name: Build Darwin configurations
-    runs-on: macos-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Install Nix
-        uses: DeterminateSystems/nix-installer-action@v7
-      - uses: cachix/cachix-action@v12
-        with:
-          name: davsanchez
-          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-      - name: Install nix-darwin
-        run: nix run nix-darwin -- switch --flake .#
-      - name: Build Darwin MBP
-        run: darwin-rebuild build --flake .#darwinConfigurations.mbp
-      - name: Build Darwin Mini
-        run: darwin-rebuild build --flake .#darwinConfigurations.mini
+  # TODO: aarch64-darwin is not yet available to run on GitHub Actions
+  # test_darwin_builds:
+  #   name: Build Darwin configurations
+  #   runs-on: macos-latest
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - name: Install Nix
+  #       uses: DeterminateSystems/nix-installer-action@v7
+  #     - uses: cachix/cachix-action@v12
+  #       with:
+  #         name: davsanchez
+  #         authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+  #     - name: Install nix-darwin
+  #       run: nix run nix-darwin -- switch --flake .#darwinConfigurations.mbp
+  #     - name: Build Darwin MBP
+  #       run: darwin-rebuild build --flake .#darwinConfigurations.mbp
+  #     - name: Build Darwin Mini
+  #       run: darwin-rebuild build --flake .#darwinConfigurations.mini
     
   test_home_manager_builds:
     name: Build Home Manager configurations
@@ -62,12 +63,13 @@ jobs:
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
       - name: Install home-manager
         run: nix run home-manager/master -- init --switch
-      - name: Build Home Manager david@mbp
-        if: ${{ matrix.os == 'macos-latest' }}
-        run: home-manager build --flake ".#homeConfigurations.david@mbp"
-      - name: Build Home Manager david@mini
-        if: ${{ matrix.os == 'macos-latest' }}
-        run: home-manager build --flake ".#homeConfigurations.david@mini"
+      # TODO: aarch64-darwin is not yet available to run on GitHub Actions
+      # - name: Build Home Manager david@mbp
+      #   if: ${{ matrix.os == 'macos-latest' }}
+      #   run: home-manager build --flake ".#homeConfigurations.david@mbp"
+      # - name: Build Home Manager david@mini
+      #   if: ${{ matrix.os == 'macos-latest' }}
+      #   run: home-manager build --flake ".#homeConfigurations.david@mini"
       - name: Build Home Manager davidsanchez@nr-vm
         if: ${{ matrix.os == 'ubuntu-latest' }}
         run: home-manager build --flake ".#homeConfigurations.davidsanchez@nr-vm"
