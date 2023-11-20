@@ -4,7 +4,7 @@
     git-quick-stats
     git-crypt
 
-    sapling
+    # sapling
   ];
   programs.git = {
     enable = true;
