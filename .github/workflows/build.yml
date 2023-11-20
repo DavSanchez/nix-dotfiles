@@ -26,24 +26,23 @@ jobs:
       - name: Build UTM VM
         run: nixos-rebuild build --flake .#nr-vm-utm
 
-  # TODO: aarch64-darwin is not yet available to run on GitHub Actions
-  # test_darwin_builds:
-  #   name: Build Darwin configurations
-  #   runs-on: macos-latest
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - name: Install Nix
-  #       uses: DeterminateSystems/nix-installer-action@v7
-  #     - uses: cachix/cachix-action@v12
-  #       with:
-  #         name: davsanchez
-  #         authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-  #     - name: Install nix-darwin
-  #       run: nix run nix-darwin -- switch --flake .#mbp
-  #     - name: Build Darwin MBP
-  #       run: darwin-rebuild build --flake .#mbp
-  #     - name: Build Darwin Mini
-  #       run: darwin-rebuild build --flake .#mini
+  test_darwin_builds:
+    name: Build Darwin configurations
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v7
+      - uses: cachix/cachix-action@v12
+        with:
+          name: davsanchez
+          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+      - name: Install nix-darwin
+        run: nix run nix-darwin -- switch --flake .#mbp
+      - name: Build Darwin MBP
+        run: darwin-rebuild build --flake .#mbp
+      - name: Build Darwin Mini
+        run: darwin-rebuild build --flake .#mini
     
   test_home_manager_builds:
     name: Build Home Manager configurations
@@ -51,8 +50,7 @@ jobs:
       matrix:
         os: 
           - ubuntu-latest
-          # TODO: aarch64-darwin is not yet available to run on GitHub Actions
-          # - macos-latest
+          - macos-latest
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
