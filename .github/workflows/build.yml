@@ -1,0 +1,68 @@
+name: Update flake inputs
+on:
+  schedule:
+    # 1st and 15th of each month at midnight UTC
+    - cron: '0 0 1,15 * *'
+  workflow_dispatch:
+
+jobs:
+
+  update_flake_inputs:
+    name: Update flake inputs
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v7
+      - name: Update flake inputs
+        run: nix flake update
+
+  test_nixos_builds:
+    name: Build NixOS configurations
+    runs-on: ubuntu-latest
+    needs: [update_flake_inputs]
+    container:
+      image: nix/nixos:latest
+      env:
+        NIX_EXPERIMENTAL_FEATURES: "nix-command flakes"
+    steps:
+      - name: Build Darwin VM
+        run: nixos-rebuild build --flake .#nixosConfigurations.darwinVM
+      - name: Build UTM VM
+        run: nixos-rebuild build .#darwinConfigurations.nr-vm-utm
+
+  test_darwin_builds:
+    name: Build Darwin configurations
+    runs-on: macos-latest
+    needs: [update_flake_inputs]
+    steps:
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v7
+      - name: Install nix-darwin
+        run: nix run nix-darwin -- switch --flake .#
+      - name: Build Darwin MBP
+        run: darwin-rebuild build --flake .#darwinConfigurations.mbp
+      - name: Build Darwin Mini
+        run: darwin-rebuild build --flake .#darwinConfigurations.mini
+    
+  test_home_manager_builds:
+    name: Build Home Manager configurations
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    needs: [update_flake_inputs]
+    steps:
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v7
+      - name: Install home-manager
+        run: nix run home-manager/master -- init --switch
+      - name: Build Home Manager david@mbp
+        if: ${{ matrix.os == 'macos-latest' }}
+        run: home-manager build --flake ".#homeConfigurations.david@mbp"
+      - name: Build Home Manager david@mini
+        if: ${{ matrix.os == 'macos-latest' }}
+        run: home-manager build --flake ".#homeConfigurations.david@mini"
+      - name: Build Home Manager davidsanchez@nr-vm
+        if: ${{ matrix.os == 'ubuntu-latest' }}
+        run: home-manager build --flake ".#homeConfigurations.davidsanchez@nr-vm"
