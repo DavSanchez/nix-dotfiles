@@ -51,7 +51,10 @@ jobs:
     name: Build Home Manager configurations
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        os: 
+          - ubuntu-latest
+          # TODO: aarch64-darwin is not yet available to run on GitHub Actions
+          # - macos-latest
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
@@ -63,13 +66,12 @@ jobs:
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
       - name: Install home-manager
         run: nix run home-manager/master -- init --switch
-      # TODO: aarch64-darwin is not yet available to run on GitHub Actions
-      # - name: Build Home Manager david@mbp
-      #   if: ${{ matrix.os == 'macos-latest' }}
-      #   run: home-manager build --flake ".#homeConfigurations.david@mbp"
-      # - name: Build Home Manager david@mini
-      #   if: ${{ matrix.os == 'macos-latest' }}
-      #   run: home-manager build --flake ".#homeConfigurations.david@mini"
+      - name: Build Home Manager david@mbp
+        if: ${{ matrix.os == 'macos-latest' }}
+        run: home-manager build --flake ".#homeConfigurations.david@mbp"
+      - name: Build Home Manager david@mini
+        if: ${{ matrix.os == 'macos-latest' }}
+        run: home-manager build --flake ".#homeConfigurations.david@mini"
       - name: Build Home Manager davidsanchez@nr-vm
         if: ${{ matrix.os == 'ubuntu-latest' }}
         run: home-manager build --flake ".#homeConfigurations.davidsanchez@nr-vm"
