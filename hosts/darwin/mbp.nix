@@ -162,6 +162,7 @@
       "maccy"
       "openemu"
       "openra"
+      "proton-drive"
       "protonmail-bridge"
       "protonvpn"
       "qflipper"

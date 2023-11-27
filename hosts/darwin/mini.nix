@@ -168,6 +168,7 @@
       "openemu"
       "openra"
       "plex-media-server"
+      "proton-drive"
       "protonmail-bridge"
       "protonvpn"
       "qflipper"
