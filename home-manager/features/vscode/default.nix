@@ -39,7 +39,7 @@
         hashicorp.terraform
         haskell.haskell
         jakebecker.elixir-ls
-        james-yu.latex-workshop
+        # james-yu.latex-workshop
         # jdinhlife.gruvbox
         jnoortheen.nix-ide
         justusadam.language-haskell
@@ -164,12 +164,12 @@
           version = "1.1.2";
           sha256 = "11k57vppx5i7i56kgp4b2r97g6fqmvm7x0mzf8zj5r42ipn070zg";
         }
-        {
-          name = "vscode-zig";
-          publisher = "ziglang";
-          version = "0.3.1";
-          sha256 = "sha256-c38c0XbKa6BUWEIJikbHT9otqe9GTnOr9l1D58OUYp4=";
-        }
+        # {
+        #   name = "vscode-zig";
+        #   publisher = "ziglang";
+        #   version = "0.3.1";
+        #   sha256 = "sha256-c38c0XbKa6BUWEIJikbHT9otqe9GTnOr9l1D58OUYp4=";
+        # }
       ];
   };
 }
