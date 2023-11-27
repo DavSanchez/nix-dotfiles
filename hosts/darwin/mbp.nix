@@ -184,10 +184,7 @@
       "yacreader"
       "zed"
     ];
-    brews = [
-      "ghcup"
-      "tart"
-    ];
+    brews = [];
     masApps = {
       "1Blocker" = 1365531024;
       "Amphetamine" = 937984704;

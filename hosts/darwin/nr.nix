@@ -164,10 +164,7 @@
       "warp"
       "wireshark"
     ];
-    brews = [
-      "ghcup"
-      "tart" # VMs on Apple Silicon
-    ];
+    brews = [];
     masApps = {
       "1Blocker" = 1365531024;
       "1Password for Safari" = 1569813296;
