@@ -168,6 +168,7 @@
       "openemu"
       "openra"
       "plex-media-server"
+      "proton-drive"
       "protonmail-bridge"
       "protonvpn"
       "qflipper"
@@ -190,10 +191,7 @@
       "zed"
       "zotero"
     ];
-    brews = [
-      "ghcup"
-      "tart"
-    ];
+    brews = [];
     masApps = {
       "1Blocker" = 1365531024;
       "Amphetamine" = 937984704;

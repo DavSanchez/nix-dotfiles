@@ -48,7 +48,8 @@
     ]
     ++ lib.optionals pkgs.stdenv.isDarwin [
       ## Container runtimes on macOS
-      colima
+      colima # Containers
+      tart # VMs
     ];
 
   programs = {
