@@ -20,8 +20,8 @@
       kubernetes-helm
       kops
       # kubescape
-      kube-score
-      kubeval
+      # kube-score
+      # kubeval
       kompose
       stern
       kubeshark
@@ -29,16 +29,17 @@
       ansible
 
       ## Terraform
-      terraform
-      terraform-ls # Langserver
-      terraformer
-      terrascan
+      # terraform
+      # terraform-ls # Langserver
+      opentofu # Terraform alternative
+      # terraformer
+      # terrascan
       # terragrunt
       # terraform-rover
 
       ## NixOps
       # nixops
-      # nixops_unstable
+      nixops_unstable
       # nixops-dns
       # morph
       colmena

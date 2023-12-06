@@ -36,7 +36,7 @@
         github.vscode-pull-request-github
         golang.go
         gruntfuggly.todo-tree
-        hashicorp.terraform
+        # hashicorp.terraform
         haskell.haskell
         jakebecker.elixir-ls
         # james-yu.latex-workshop
