@@ -18,12 +18,12 @@
       minikube
       kubectl
       kubernetes-helm
-      kops
+      # kops
       # kubescape
       # kube-score
       # kubeval
-      kompose
-      stern
+      # kompose
+      # stern
       kubeshark
 
       ansible
@@ -38,11 +38,10 @@
       # terraform-rover
 
       ## NixOps
-      # nixops
-      nixops_unstable
       # nixops-dns
       # morph
       colmena
+      deploy-rs
 
       # Monitoring
       # netdata # broken
@@ -55,7 +54,7 @@
 
   programs = {
     k9s = {
-      enable = true;
+      enable = false;
     };
   };
 }
