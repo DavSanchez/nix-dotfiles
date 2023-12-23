@@ -86,6 +86,8 @@
 
   xdg.enable = true;
 
+  home.sessionPath = ["$HOME/.local/bin"];
+
   # Amethyst configuration
   home.file.".amethyst.yml".source = ./darwin/amethyst.yml;
   xdg.configFile."yabai/yabairc" = {
