@@ -8,6 +8,7 @@
     ./c-cpp.nix
     ./devops.nix
     # ./digital-design.nix
+    ./fp.nix
     ./go.nix
     ./haskell
     ./java.nix
@@ -21,18 +22,8 @@
       taplo # TOML Langserver
       nodePackages.yaml-language-server # Langserver
 
-      ## Learning
-      exercism
-
       # devenv.sh, let's work with any language!
       devenv
-
-      idris2 # not in devenv yet!
-      agda # not in devenv yet!
-
-      elixir
-      dotnet-sdk
-      elmPackages.elm
 
       ## Other
       gnumake
