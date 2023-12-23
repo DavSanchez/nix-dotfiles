@@ -71,7 +71,7 @@
 #               an EOL character signifies the end of the bind.
 
 # opens WezTerm
-alt - return : /usr/bin/env wezterm
+alt - return : open "${HOME}/Applications/Home Manager Apps/WezTerm.app"
 
 # Show system statistics
 # fn + lalt - 1 : ~/.config/yabai/scripts/show_cpu.sh
