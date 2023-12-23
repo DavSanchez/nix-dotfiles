@@ -38,6 +38,7 @@
         gruntfuggly.todo-tree
         # hashicorp.terraform
         haskell.haskell
+        ionide.ionide-fsharp
         jakebecker.elixir-ls
         # james-yu.latex-workshop
         # jdinhlife.gruvbox
@@ -80,12 +81,6 @@
           version = "3.0.2";
           sha256 = "15w1ixvp6vn9ng6mmcmv9ch0ngx8m85i1yabxdfn6zx3ypq802c5";
         }
-        # {
-        #   name = "codestream";
-        #   publisher = "CodeStream";
-        #   version = "14.15.0";
-        #   sha256 = "sha256-YCB2Emz9QWtXAJf5z2mnXOVtd6tUgSY/xX386HF72d0=";
-        # }
         {
           name = "disableligatures";
           publisher = "CoenraadS";
@@ -104,24 +99,6 @@
           version = "0.0.1";
           sha256 = "0dgkd3z0kxpaa2m01k0xqqsj9f01j4bac5sx8c3jhg19pg9zvl4m";
         }
-        # {
-        #   name = "vscode-kafka";
-        #   publisher = "jeppeandersen";
-        #   version = "0.15.0";
-        #   sha256 = "1qf4a4d0wngyjdwdsbi8viska8i7gb56d1bc8cwa1ws07lz439gp";
-        # }
-        # {
-        #   name = "vscode-postgresql";
-        #   publisher = "ms-ossdata";
-        #   version = "0.3.0";
-        #   sha256 = "02sp5sv1sapynq4xx04b9z86jz2vmcsma1cpkbd05k2cw5g999lk";
-        # }
-        # {
-        #   name = "cpptools-themes";
-        #   publisher = "ms-vscode";
-        #   version = "2.0.0";
-        #   sha256 = "sha256-YWA5UsA+cgvI66uB9d9smwghmsqf3vZPFNpSCK+DJxc=";
-        # }
         # {
         #   name = "remote-containers";
         #   publisher = "ms-vscode-remote";
