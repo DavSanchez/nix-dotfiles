@@ -19,7 +19,7 @@
     ./features/cli
     ./features/dev
     ./features/direnv
-    ./features/emacs
+    # ./features/emacs
     ./features/git
     ./features/git/signing-mini.nix
     ./features/neovim

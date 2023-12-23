@@ -9,7 +9,7 @@
     ./features/cli
     ./features/dev/default-nr.nix
     ./features/direnv
-    ./features/emacs
+    # ./features/emacs
     ./features/git
     ./features/git/signing-nr.nix
     ./features/neovim
