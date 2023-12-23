@@ -50,6 +50,7 @@
       outputs.overlays.rosetta-packages
       outputs.overlays.modifications
       outputs.overlays.devenv
+      # outputs.overlays.roc
 
       # Or overlays exported from other flakes:
       # neovim-nightly-overlay.overlays.default

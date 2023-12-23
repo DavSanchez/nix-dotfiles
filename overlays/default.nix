@@ -7,6 +7,10 @@
     inherit (inputs.devenv.packages.${prev.system}) devenv;
   };
 
+  roc = _final: prev: {
+    rocPkgs = inputs.roc.packages.${prev.system};
+  };
+
   # When applied, the stable nixpkgs set (declared in the flake inputs) will
   # be accessible through 'pkgs.stable'
   stable-packages = final: _prev: {

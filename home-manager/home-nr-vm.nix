@@ -34,6 +34,7 @@
       outputs.overlays.stable-packages
       outputs.overlays.modifications
       outputs.overlays.devenv
+      # outputs.overlays.roc
     ];
     config = {
       allowUnfree = true;

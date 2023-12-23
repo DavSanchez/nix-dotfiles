@@ -20,16 +20,13 @@
 
     # TODO: Add any other flake you might need
     hardware.url = "github:nixos/nixos-hardware";
+    nix-colors.url = "github:misterio77/nix-colors";
     nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
     devenv.url = "github:cachix/devenv/latest";
-    vscode-server.url = "github:nix-community/nixos-vscode-server";
+    roc.url = "github:roc-lang/roc"; # Even more FP
 
     nix-relic.url = "github:DavSanchez/Nix-Relic";
     nix-relic.inputs.nixpkgs.follows = "nixpkgs";
-
-    # Shameless plug: looking for a way to nixify your themes and make
-    # everything match nicely? Try nix-colors!
-    nix-colors.url = "github:misterio77/nix-colors";
   };
 
   outputs = {
