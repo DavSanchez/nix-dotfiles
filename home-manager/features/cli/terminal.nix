@@ -16,15 +16,6 @@
     ## Other
     eva
     rmlint # Extremely fast tool to remove duplicates and other lint from your filesystem
-
-    ## For use with Yazi
-    ffmpegthumbnailer
-    unar
-    jq
-    poppler
-    ripgrep
-    fzf
-    zoxide
   ];
 
   programs = {
@@ -77,57 +68,14 @@
 
     less.enable = true;
 
-    broot = {
-      enable = false;
-      enableZshIntegration = true;
-      enableBashIntegration = true;
-      enableFishIntegration = true;
-      settings.verbs = [
-        {
-          invocation = "custom_panel_right";
-          key = "shift-right";
-          execution = ":panel_right";
-        }
-        {
-          invocation = "custom_panel_left";
-          key = "shift-left";
-          execution = ":panel_left";
-        }
-      ];
-    };
-
     xplr = {
       enable = true;
       extraConfig = "";
       plugins = [];
     };
 
-    yazi = {
-      enable = true;
-      enableBashIntegration = true;
-      enableZshIntegration = true;
-      enableFishIntegration = true;
-      enableNushellIntegration = true;
-      keymap = { };
-      settings = { };
-      theme = { };
-    };
-
     lf = {
       enable = true;
-    };
-
-    nnn = {
-      enable = true;
-      package = pkgs.nnn.override {withNerdIcons = true;};
-      extraPackages = with pkgs;
-        [
-          ffmpegthumbnailer
-          mediainfo
-        ]
-        ++ lib.optionals pkgs.stdenv.isLinux [
-          sxiv
-        ];
     };
 
     tealdeer = {
@@ -151,7 +99,7 @@
     };
 
     atuin = {
-      enable = true;
+      enable = false;
       # enableZshIntegration = true;
       # enableBashIntegration = true;
       # enableFishIntegration = true;

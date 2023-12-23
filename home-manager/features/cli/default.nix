@@ -7,6 +7,7 @@
     ./data.nix
     ./documents.nix
     ./multimedia.nix
+    ./navigation.nix
     ./networking.nix
     ./nix.nix
     ./security.nix
