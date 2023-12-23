@@ -3,9 +3,5 @@
   home.packages = with pkgs; [
     # maven
     # gradle
-
-    ## Clojure
-    # clojure
-    # clojure-lsp # Langserver
   ];
 }

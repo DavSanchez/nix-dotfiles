@@ -6,6 +6,7 @@
     dotnet-sdk # For F-sharp: functional programming for .NET
     elmPackages.elm # Functional programming for the frontend
     flix # Functional programming for the JVM
+    clojure # Functional programming for the JVM, lisp-like
     roc.cli # Roc programming lang, it's an overlay
     unison-ucm # ... and more
   ];
