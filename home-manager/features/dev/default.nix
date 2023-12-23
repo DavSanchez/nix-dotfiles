@@ -30,6 +30,10 @@
       idris2 # not in devenv yet!
       agda # not in devenv yet!
 
+      elixir
+      dotnet-sdk
+      elmPackages.elm
+
       ## Other
       gnumake
       # protobuf

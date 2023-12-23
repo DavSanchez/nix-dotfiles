@@ -5,9 +5,7 @@
     # gradle
 
     ## Clojure
-    clojure
-    clojure-lsp # Langserver
-    # leiningen
-    # joker
+    # clojure
+    # clojure-lsp # Langserver
   ];
 }
