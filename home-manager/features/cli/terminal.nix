@@ -78,7 +78,7 @@
     less.enable = true;
 
     broot = {
-      enable = true;
+      enable = false;
       enableZshIntegration = true;
       enableBashIntegration = true;
       enableFishIntegration = true;
