@@ -33,6 +33,9 @@
           "git-lfs"
           "golang"
           "helm"
+          "history"
+          # "history-substring-search" # Using fzf instead
+          "kops"
           "kubectl"
           "minikube"
           "mix"
@@ -56,6 +59,46 @@
           "macos"
           "xcode"
         ];
+    };
+
+    prezto = {
+      enable = false;
+      # caseSensitive = true;
+      utility.safeOps = true;
+      editor.keymap = "vi";
+      pmodules =
+        [
+          "environment"
+          "terminal"
+          "editor"
+          "history"
+          "directory"
+          "spectrum"
+          "utility"
+          "completion"
+          "prompt"
+          # The below order is important
+          "syntax-highlighting"
+          "history-substring-search"
+          "autosuggestions"
+        ]
+        ++ lib.optionals pkgs.stdenv.isDarwin [
+          "osx"
+        ];
+      syntaxHighlighting = {
+        highlighters = [
+          "main"
+          "brackets"
+          "pattern"
+          "line"
+          "cursor"
+          "root"
+        ];
+      };
+      tmux = {
+        autoStartLocal = true;
+        autoStartRemote = true;
+      };
     };
 
     antidote = {
