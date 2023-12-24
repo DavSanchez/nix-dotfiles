@@ -18,12 +18,12 @@
       minikube
       kubectl
       kubernetes-helm
-      # kops
+      kops
       # kubescape
       # kube-score
       # kubeval
       # kompose
-      # stern
+      stern
       kubeshark
 
       ansible
