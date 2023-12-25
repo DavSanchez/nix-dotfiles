@@ -12,5 +12,6 @@
     q # Replacing dogdns
     gping
     bandwhich
+    mosh
   ];
 }
