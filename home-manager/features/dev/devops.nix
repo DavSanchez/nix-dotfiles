@@ -54,7 +54,7 @@
 
   programs = {
     k9s = {
-      enable = false;
+      enable = true;
     };
   };
 }
