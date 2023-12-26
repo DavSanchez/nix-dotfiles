@@ -144,6 +144,8 @@
       # nvim-lspsaga # custom plugin
       # nvim-sqls # custom plugin
       rust-tools-nvim
+      haskell-tools-nvim
+      elixir-tools-nvim
 
       # Progrmming: Treesitter
       (nvim-treesitter.withPlugins (plugins:
