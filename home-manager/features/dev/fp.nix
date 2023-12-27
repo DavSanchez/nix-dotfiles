@@ -1,14 +1,17 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
-    idris2 # Functional programming with dependent types
-    agda # Functional programmingw with dependent types, 2
-    elixir # Functional programming for the Erlang VM
-    dotnet-sdk # For F-sharp: functional programming for .NET
-    fstar # ML-like functional programming language aimed at program verification
-    elmPackages.elm # Functional programming for the frontend
-    flix # Functional programming for the JVM
-    clojure # Functional programming for the JVM, lisp-like
-    roc.cli # Roc programming lang, it's an overlay
-    unison-ucm # ... and more
+    idris2 # FP with dependent types, compiles to C
+    # agda # FP with dependent types, compiles to Haskell
+    elixir # Dynmic FP for the Erlang VM
+    # gleam # Statically typed FP for the Erlang VM
+    dotnet-sdk # For F-sharp: FP for .NET
+    # fstar # ML-like FP language aimed at program verification
+    elmPackages.elm # FP for the frontend
+    # purescript # FP for the frontend
+    clojure # FP for the JVM, lisp-like
+    # flix # FP for the JVM
+    roc.cli # Roc programming lang, comes from an overlay
+    # grain # FP for the web
+    unison-ucm # distributed, content-addressed FP
   ];
 }
