@@ -25,7 +25,7 @@ disabled = false
 
 [time]
 disabled = false
-format = '[  $time ](fg:blue bold)'
+format = '[ $time](fg:blue bold)'
 time_format = "%F %R"
 
 [shell]
