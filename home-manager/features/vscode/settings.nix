@@ -1,4 +1,9 @@
-{pkgs}: {
+{pkgs}: let
+  tmux-shell-profile = {
+    "path" = "${pkgs.tmux}/bin/tmux";
+    "args" = ["new-session" "-A" "-s" "vscode:\${workspaceFolder}"];
+  };
+in {
   "[haskell]"."editor.defaultFormatter" = "haskell.haskell";
   # "[jsonc]"."editor.defaultFormatter" = "esbenp.prettier-vscode";
   # "[python]"."editor.formatOnType" = true;
@@ -118,6 +123,15 @@
   "terminal.integrated.fontFamily" = "'JetBrainsMono Nerd Font'";
   "terminal.integrated.scrollback" = 5000;
   "terminal.integrated.shellIntegration.enabled" = true;
+  "terminal.integrated.shellIntegration.suggestEnabled" = false;
+  "terminal.integrated.profiles" = {
+    "linux" = {"tmux" = tmux-shell-profile;};
+    "osx" = {"tmux" = tmux-shell-profile;};
+  };
+  "terminal.integrated.defaultProfile" = {
+    "linux" = "tmux";
+    "osx" = "tmux";
+  };
   "terraform.codelens.referenceCount" = true;
   "todo-tree.general.showActivityBarBadge" = true;
   "todo-tree.regex.regex" = "(//|#|<!--|;|/\\*|--|\\{-|^|^[ \\t]*(-|\\d+.))\\s*($TAGS)";
