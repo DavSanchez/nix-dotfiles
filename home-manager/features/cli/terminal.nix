@@ -71,7 +71,7 @@
     xplr = {
       enable = true;
       extraConfig = "";
-      plugins = [];
+      plugins = {};
     };
 
     lf = {
