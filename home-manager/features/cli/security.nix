@@ -29,7 +29,7 @@
     enableScDaemon = true;
     defaultCacheTtl = 14400;
     maxCacheTtl = 86400;
-
+    pinentryFlavor = "curses";
     enableSshSupport = true;
     defaultCacheTtlSsh = 14400;
     maxCacheTtlSsh = 86400;
