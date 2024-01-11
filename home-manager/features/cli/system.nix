@@ -3,6 +3,8 @@
     procs
     neofetch
     diskonaut
+  ] ++ lib.optionals pkgs.stdenv.isLinux [
+    kmon
   ];
 
   programs = {
