@@ -15,7 +15,7 @@
       enableBashIntegration = true;
       enableZshIntegration = true;
       enableFishIntegration = true;
-      settings = { };
+      settings = {};
       useTheme = null;
     };
   };
