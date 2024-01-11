@@ -3,6 +3,14 @@
     "path" = "${pkgs.tmux}/bin/tmux";
     "args" = ["new-session" "-A" "-s" "vscode:\${workspaceFolder}"];
   };
+  zellij-shell-profile = {
+    "path" = "${pkgs.zellij}/bin/zellij";
+    "args" = ["--session" "vscode::\${workspaceFolderBasename}" "--layout" "compact" "options" "--no-pane-frames"];
+  };
+  term-profiles = {
+    "tmux" = tmux-shell-profile;
+    "zellij" = zellij-shell-profile;
+  };
 in {
   "[haskell]"."editor.defaultFormatter" = "haskell.haskell";
   # "[jsonc]"."editor.defaultFormatter" = "esbenp.prettier-vscode";
@@ -125,12 +133,12 @@ in {
   "terminal.integrated.shellIntegration.enabled" = true;
   "terminal.integrated.shellIntegration.suggestEnabled" = false;
   "terminal.integrated.profiles" = {
-    "linux" = {"tmux" = tmux-shell-profile;};
-    "osx" = {"tmux" = tmux-shell-profile;};
+    "linux" = term-profiles;
+    "osx" = term-profiles;
   };
   "terminal.integrated.defaultProfile" = {
-    "linux" = "tmux";
-    "osx" = "tmux";
+    "linux" = "zellij";
+    "osx" = "zellij";
   };
   "terraform.codelens.referenceCount" = true;
   "todo-tree.general.showActivityBarBadge" = true;
