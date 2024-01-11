@@ -1,11 +1,11 @@
 _: {
   programs.zellij = {
-    enable = false;
+    enable = true;
     enableBashIntegration = true;
     enableFishIntegration = true;
     enableZshIntegration = true;
     settings = {
-      ui.pane_frames.rounded_corners = false;
+      ui.pane_frames.rounded_corners = true;
     };
   };
   # xdg.configFile."zellij/layouts".source = ./layouts;
@@ -14,5 +14,5 @@ _: {
   # Creating .config/zellij/layouts overwrites
   # the default config location for mac, hence
   # we create the config file here as well
-  xdg.configFile."zellij/config.kdl".source = ./config.kdl;
+  # xdg.configFile."zellij/config.kdl".source = ./config.kdl;
 }

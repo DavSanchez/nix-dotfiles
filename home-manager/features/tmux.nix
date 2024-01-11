@@ -1,10 +1,10 @@
 {pkgs, ...}: {
-  programs.zsh = {
-    localVariables = {
-      ZSH_TMUX_AUTOSTART = true;
-      ZSH_TMUX_CONFIG = "$HOME/.config/tmux/tmux.conf";
-    };
-  };
+  # programs.zsh = {
+  # localVariables = {
+  # ZSH_TMUX_AUTOSTART = true;
+  # ZSH_TMUX_CONFIG = "$HOME/.config/tmux/tmux.conf";
+  # };
+  # };
   programs.tmux = {
     enable = true;
     terminal = "xterm-256color";
