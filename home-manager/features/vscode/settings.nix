@@ -1,11 +1,24 @@
 {pkgs}: let
   tmux-shell-profile = {
     "path" = "${pkgs.tmux}/bin/tmux";
-    "args" = ["new-session" "-A" "-s" "vscode:\${workspaceFolder}"];
+    "args" = [
+      "new-session"
+      "-A"
+      "-s"
+      "vscode:\${workspaceFolder}"
+    ];
   };
   zellij-shell-profile = {
     "path" = "${pkgs.zellij}/bin/zellij";
-    "args" = ["--session" "vscode::\${workspaceFolderBasename}" "--layout" "compact" "options" "--no-pane-frames"];
+    "args" = [
+      "--layout"
+      "compact"
+      "attach"
+      "--create"
+      "vscode::\${workspaceFolderBasename}"
+      "options"
+      "--no-pane-frames"
+    ];
   };
   term-profiles = {
     "tmux" = tmux-shell-profile;
