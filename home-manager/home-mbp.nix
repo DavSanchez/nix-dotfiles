@@ -89,33 +89,35 @@
   home.sessionPath = ["$HOME/.local/bin"];
 
   # Amethyst configuration
-  home.file.".amethyst.yml".source = ./darwin/amethyst.yml;
-  xdg.configFile."yabai/yabairc" = {
-    source = ./darwin/yabairc;
-    executable = true;
-    onChange = ''
-      /bin/launchctl stop org.nixos.yabai
-      /bin/launchctl start org.nixos.yabai
-      /bin/launchctl stop org.nixos.skhd
-      /bin/launchctl start org.nixos.skhd
-    '';
+  home.file.".amethyst.yml" = {
+    source = ./darwin/amethyst.yml;
   };
-  xdg.configFile."skhd/skhdrc" = {
-    source = ./darwin/skhdrc;
-    # executable = true;
-    onChange = ''
-      /bin/launchctl stop org.nixos.skhd
-      /bin/launchctl start org.nixos.skhd
-    '';
-  };
-  xdg.configFile."sketchybar" = {
-    source = ./darwin/sketchybar;
-    # recursive = true;
-    onChange = ''
-      /bin/launchctl stop org.nixos.sketchybar
-      /bin/launchctl start org.nixos.sketchybar
-    '';
-  };
+  # xdg.configFile."yabai/yabairc" = {
+  #   source = ./darwin/yabairc;
+  #   executable = true;
+  #   onChange = ''
+  #     /bin/launchctl stop org.nixos.yabai
+  #     /bin/launchctl start org.nixos.yabai
+  #     /bin/launchctl stop org.nixos.skhd
+  #     /bin/launchctl start org.nixos.skhd
+  #   '';
+  # };
+  # xdg.configFile."skhd/skhdrc" = {
+  #   source = ./darwin/skhdrc;
+  #   # executable = true;
+  #   onChange = ''
+  #     /bin/launchctl stop org.nixos.skhd
+  #     /bin/launchctl start org.nixos.skhd
+  #   '';
+  # };
+  # xdg.configFile."sketchybar" = {
+  #   source = ./darwin/sketchybar;
+  #   # recursive = true;
+  #   onChange = ''
+  #     /bin/launchctl stop org.nixos.sketchybar
+  #     /bin/launchctl start org.nixos.sketchybar
+  #   '';
+  # };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   home.stateVersion = "22.11";

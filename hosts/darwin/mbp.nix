@@ -19,8 +19,8 @@
 
     # You can also split up your configuration and import pieces of it here:
     # ./users.nix
-    ./common/yabai.nix
-    ./common/skhd.nix
+    # ./common/yabai.nix
+    # ./common/skhd.nix
     # ./common/sketchybar.nix
   ];
 
@@ -141,7 +141,7 @@
     ];
     casks = [
       "adobe-acrobat-reader"
-      # "amethyst"
+      "amethyst"
       "anytype" # Alternative to Notion, testing
       "bartender"
       "brave-browser"
@@ -166,6 +166,7 @@
       "protonmail-bridge"
       "protonvpn"
       "qflipper"
+      "raycast"
       "remarkable"
       "secretive"
       "sonic-pi"
