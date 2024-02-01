@@ -1,7 +1,6 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
     # Searching/Movement helpers and other replacements
-    ripgrep
     dua
     duf
     du-dust
@@ -10,15 +9,15 @@
     rm-improved
     hyperfine
     tokei
-    tre-command
     erdtree # File-tree visualizer and disk usage analyzer
 
     ## Other
-    eva
     rmlint # Extremely fast tool to remove duplicates and other lint from your filesystem
   ];
 
   programs = {
+    ripgrep.enable = true;
+
     lsd = {
       enable = true;
       enableAliases = true;
