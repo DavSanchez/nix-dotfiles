@@ -8,7 +8,7 @@
     ./c-cpp.nix
     ./devops.nix
     # ./digital-design.nix
-    ./fp.nix
+    # ./fp.nix
     ./go.nix
     ./haskell
     ./java.nix
