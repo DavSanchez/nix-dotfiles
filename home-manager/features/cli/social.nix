@@ -1,6 +1,8 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
     gomuks # Matrix client
+
+    neonmodem # BB client
   ];
   programs = {
     # TUI IRC client written in Rust.
