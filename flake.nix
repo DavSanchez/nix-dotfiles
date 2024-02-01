@@ -51,10 +51,7 @@
     # Custom packages
     # Acessible through 'nix build', 'nix shell', etc
     packages =
-      forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system})
-      // {
-        aarch64-darwin.darwinVM = self.nixosConfigurations.darwinVM.config.system.build.vm;
-      };
+      forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
 
     # Formatter for the nix files, available through 'nix fmt'
     # Other options beside 'alejandra' include 'nixpkgs-fmt'
@@ -74,16 +71,6 @@
     templates = import ./templates;
 
     nixosConfigurations = {
-      darwinVM = nixpkgs.lib.nixosSystem {
-        system = "aarch64-linux";
-        specialArgs = {inherit inputs outputs;};
-        modules = [
-          ./hosts/vm/configuration-lite.nix
-          {
-            virtualisation.vmVariant.virtualisation.host.pkgs = nixpkgs.legacyPackages.aarch64-darwin;
-          }
-        ];
-      };
       nr-vm-utm = nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";
         specialArgs = {inherit inputs outputs;};
