@@ -1,11 +1,13 @@
 {pkgs, ...}: {
-  home.packages = with pkgs; [
-    procs
-    neofetch
-    diskonaut
-  ] ++ lib.optionals pkgs.stdenv.isLinux [
-    kmon
-  ];
+  home.packages = with pkgs;
+    [
+      procs
+      neofetch
+      diskonaut
+    ]
+    ++ lib.optionals pkgs.stdenv.isLinux [
+      kmon
+    ];
 
   programs = {
     noti = {

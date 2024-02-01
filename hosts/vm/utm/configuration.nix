@@ -33,7 +33,7 @@
       experimental-features = "nix-command flakes";
       auto-optimise-store = true;
     };
-    
+
     package = pkgs.nixUnstable;
   };
 
