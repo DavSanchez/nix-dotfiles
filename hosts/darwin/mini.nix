@@ -58,7 +58,7 @@
     # Making legacy nix commands consistent as well, awesome!
     nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
 
-    package = pkgs.nixUnstable;
+    package = pkgs.nixVersions.unstable;
 
     settings = {
       trusted-users = ["root" "david"]; # For groups prepend @: "@admin"
@@ -146,14 +146,11 @@
     casks = [
       "adobe-acrobat-reader"
       "amethyst"
-      "anytype" # Alternative to Notion, testing
       "bartender"
       "brave-browser"
       "crossover"
-      # "dash" # Haven't used it
       "discord"
       "disk-inventory-x"
-      "finch"
       "firefox"
       "gqrx"
       "handbrake"
@@ -194,7 +191,6 @@
     masApps = {
       "1Blocker" = 1365531024;
       "Amphetamine" = 937984704;
-      "Draw Things" = 6444050820;
       "Hush" = 1544743900;
       "iMovie" = 408981434;
       "Keynote" = 409183694;

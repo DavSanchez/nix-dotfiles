@@ -62,7 +62,7 @@
     # Making legacy nix commands consistent as well, awesome!
     nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
 
-    package = pkgs.nixUnstable;
+    package = pkgs.nixVersions.unstable;
 
     settings = {
       trusted-users = ["root" "davidsanchez"]; # For groups prepend @: "@admin"
@@ -144,12 +144,10 @@
       "1password"
       "1password-cli"
       "amethyst"
-      "anytype" # Alternative to Notion, testing
       "bartender"
       "brave-browser"
       "disk-inventory-x"
       "docker"
-      "finch"
       "firefox"
       "imhex"
       "insomnia"
@@ -165,7 +163,6 @@
     brews = [];
     masApps = {
       "1Blocker" = 1365531024;
-      "1Password for Safari" = 1569813296;
       "Amphetamine" = 937984704;
       "Hush" = 1544743900;
       "Microsoft Remote Desktop" = 1295203466;
