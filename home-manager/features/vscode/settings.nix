@@ -1,4 +1,4 @@
-{pkgs}: let
+pkgs: let
   tmux-shell-profile = {
     "path" = "${pkgs.tmux}/bin/tmux";
     "args" = [
