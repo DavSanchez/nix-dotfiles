@@ -50,6 +50,9 @@
       ## Container runtimes on macOS
       colima # Containers
       tart # VMs
+    ]
+    ++ lib.optionals pkgs.stdenv.isLinux [
+      nerdctl
     ];
 
   programs = {
