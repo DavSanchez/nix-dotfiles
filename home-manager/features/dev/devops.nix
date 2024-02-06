@@ -45,11 +45,14 @@
 
       # Monitoring
       # netdata # broken
+
+      # cirrus-cli # Related to tart/orchard
     ]
     ++ lib.optionals pkgs.stdenv.isDarwin [
       ## Container runtimes on macOS
       colima # Containers
       tart # VMs
+      orchard # VM orchestrator for macOS clusters
     ]
     ++ lib.optionals pkgs.stdenv.isLinux [
       nerdctl
