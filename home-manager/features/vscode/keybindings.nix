@@ -199,17 +199,17 @@
     command = "workbench.action.files.saveFiles";
   }
   # navigate forward (like browser)
-  {
-    key = "alt+right";
-    command = "workbench.action.navigateForward";
-    when = "canNavigateForward";
-  }
+  # {
+  #   key = "alt+right";
+  #   command = "workbench.action.navigateForward";
+  #   when = "canNavigateForward";
+  # }
   # navigate back (like browser)
-  {
-    key = "alt+left";
-    command = "workbench.action.navigateBack";
-    when = "canNavigateBack";
-  }
+  # {
+  #   key = "alt+left";
+  #   command = "workbench.action.navigateBack";
+  #   when = "canNavigateBack";
+  # }
   # easier jumps to side bar items using hyper key plus left hand top row,
   # a, d, f
   #
