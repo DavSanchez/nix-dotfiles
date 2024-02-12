@@ -10,15 +10,20 @@ pkgs: let
   };
   zellij-shell-profile = {
     "path" = "${pkgs.zellij}/bin/zellij";
-    "args" = [
-      "--layout"
-      "compact"
-      "attach"
-      "--create"
-      "vscode::\${workspaceFolderBasename}"
-      "options"
-      "--no-pane-frames"
-    ];
+    "args" =
+      [
+        "--layout"
+        "compact"
+        "attach"
+        "--create"
+        "vscode::\${workspaceFolderBasename}"
+        "options"
+        "--no-pane-frames"
+      ]
+      ++ pkgs.lib.optionals pkgs.stdenv.isDarwin [
+        "--copy-command"
+        "pbcopy"
+      ];
   };
   term-profiles = {
     "tmux" = tmux-shell-profile;
