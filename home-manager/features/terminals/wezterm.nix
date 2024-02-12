@@ -7,7 +7,7 @@ _: {
       local wezterm = require 'wezterm'
 
       return {
-        font_size = 14, 
+        font_size = 14,
         color_scheme = 'SynthWave (Gogh)',
         window_background_opacity = 0.95,
         hide_tab_bar_if_only_one_tab = true,
