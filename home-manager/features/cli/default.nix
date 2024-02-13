@@ -44,7 +44,7 @@
     };
 
     taskwarrior = {
-      enable = true;
+      enable = false;
       # colorTheme = null;
       # config = {};
     };
