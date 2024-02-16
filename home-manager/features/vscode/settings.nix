@@ -144,7 +144,7 @@ in {
     "**/.direnv" = true;
   };
   "svelte.enable-ts-plugin" = true;
-  "telemetry.telemetryLevel" = "error";
+  "telemetry.telemetryLevel" = "all";
   "terminal.external.osxExec" = "WezTerm.app";
   "terminal.integrated.fontFamily" = "'JetBrainsMono Nerd Font'";
   "terminal.integrated.scrollback" = 5000;
