@@ -7,7 +7,6 @@
       url = "github:cachix/pre-commit-hooks.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    devenv.url = "github:cachix/devenv";
     flake-utils.url = "github:numtide/flake-utils";
   };
 
@@ -16,7 +15,6 @@
     nixpkgs,
     pre-commit-hooks,
     flake-utils,
-    devenv,
   }:
     flake-utils.lib.eachDefaultSystem (
       system: let
@@ -50,7 +48,6 @@
               haskell-language-server
             ];
           };
-          # devenv = devenv.lib.mkShell {};
         };
         packages = {
           default = pkgs.haskellPackages.callPackage ./default.nix {};

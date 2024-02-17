@@ -22,9 +22,6 @@
       taplo # TOML Langserver
       nodePackages.yaml-language-server # Langserver
 
-      # devenv.sh, let's work with any language!
-      devenv
-
       ## Other
       gnumake
       # protobuf

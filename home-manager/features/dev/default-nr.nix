@@ -23,9 +23,6 @@
       gnumake
       just # project-specific commands
       protobuf
-
-      # devenv.sh
-      devenv
     ]
     ++ lib.optionals pkgs.stdenv.isLinux [
       rr
