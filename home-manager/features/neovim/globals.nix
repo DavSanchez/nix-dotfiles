@@ -1,4 +1,3 @@
 {
   mapleader = " ";
-  timeoutlen = 500;
 }
