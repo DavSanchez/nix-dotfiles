@@ -1,6 +1,7 @@
 {
   chadtree.enable = true;
   codeium-nvim.enable = true;
+  comment-nvim.enable = true;
   dap.enable = true;
   haskell-scope-highlighting.enable = true;
   lsp = {
