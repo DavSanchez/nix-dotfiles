@@ -1,5 +1,6 @@
 {pkgs, ...}: {
   programs.nixvim = {
+    enable = true;
     enableMan = true;
     viAlias = true;
     vimAlias = true;
