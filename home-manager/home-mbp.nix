@@ -13,6 +13,7 @@
 
     # Or modules exported from other flakes (such as nix-colors):
     # inputs.nix-colors.homeManagerModules.default
+    inputs.nixvim.homeManagerModules.nixvim
 
     # You can also split up your configuration and import pieces of it here:
     ./features/aws
@@ -49,10 +50,6 @@
       outputs.overlays.stable-packages
       outputs.overlays.rosetta-packages
       outputs.overlays.modifications
-      outputs.overlays.devenv
-
-      # Or overlays exported from other flakes:
-      # neovim-nightly-overlay.overlays.default
 
       # Or define it inline, for example:
       # (final: prev: {

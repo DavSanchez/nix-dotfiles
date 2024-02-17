@@ -20,12 +20,18 @@
 
     # TODO: Add any other flake you might need
     hardware.url = "github:nixos/nixos-hardware";
-    nix-colors.url = "github:misterio77/nix-colors";
-    nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
-    devenv.url = "github:cachix/devenv/latest";
+    # nix-colors.url = "github:misterio77/nix-colors";
 
     nix-relic.url = "github:DavSanchez/Nix-Relic";
     nix-relic.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Editors
+    ## NixVim
+    # If you are not running an unstable channel of nixpkgs, select the corresponding branch of nixvim.
+    # url = "github:nix-community/nixvim/nixos-23.05";
+    nixvim.url = "github:nix-community/nixvim";
+    nixvim.inputs.nixpkgs.follows = "nixpkgs";
+    # nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
   };
 
   outputs = {
