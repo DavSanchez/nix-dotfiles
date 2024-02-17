@@ -37,6 +37,10 @@ in {
   "breadcrumbs.enabled" = true;
   "calva.paredit.defaultKeyMap" = "strict";
   "clangd.checkUpdates" = true;
+  "codeium.enableConfig" = {
+    "*" = true;
+    "nix" = true;
+  };
   "diffEditor.ignoreTrimWhitespace" = false;
   "editor.accessibilitySupport" = "off";
   "editor.bracketPairColorization.enabled" = true;

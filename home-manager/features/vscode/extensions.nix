@@ -67,6 +67,12 @@ with pkgs.vscode-extensions;
       sha256 = "15w1ixvp6vn9ng6mmcmv9ch0ngx8m85i1yabxdfn6zx3ypq802c5";
     }
     {
+      name = "codeium";
+      publisher = "Codeium";
+      version = "1.6.31";
+      sha256 = "15w1ixvp6vn9ng6mmcmv9ch0ngx8m85i1yabxdfn6zx3ypq802c5";
+    }
+    {
       name = "disableligatures";
       publisher = "CoenraadS";
       version = "0.0.10";
