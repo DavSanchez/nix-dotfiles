@@ -56,11 +56,11 @@
   nix = {
     # This will add each flake input as a registry
     # To make nix3 commands consistent with your flake
-    registry = lib.mapAttrs (_: value: {flake = value;}) inputs;
+    registry = (lib.mapAttrs (_: flake: {inherit flake;})) ((lib.filterAttrs (_: lib.isType "flake")) inputs);
 
     # This will additionally add your inputs to the system's legacy channels
     # Making legacy nix commands consistent as well, awesome!
-    nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
+    nixPath = ["/etc/nix/path"];
 
     package = pkgs.nixVersions.unstable;
 
@@ -101,6 +101,14 @@
     variables = {
       FPATH = "${(config.homebrew.brewPrefix)}/share/zsh/site-functions:$FPATH";
     };
+    # see nix.registry and nix.nixPath above
+    etc =
+      lib.mapAttrs'
+      (name: value: {
+        name = "nix/path/${name}";
+        value.source = value.flake;
+      })
+      config.nix.registry;
   };
 
   # Use a custom configuration.nix location.

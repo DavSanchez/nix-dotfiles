@@ -25,17 +25,22 @@
   };
 
   nix = {
-    registry = lib.mapAttrs (_: value: {flake = value;}) inputs;
-
-    nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
-
+    registry = (lib.mapAttrs (_: flake: {inherit flake;})) ((lib.filterAttrs (_: lib.isType "flake")) inputs);
+    nixPath = ["/etc/nix/path"];
     settings = {
       experimental-features = "nix-command flakes";
       auto-optimise-store = true;
     };
-
     package = pkgs.nixUnstable;
   };
+  # see nix.registry and nix.nixPath above
+  environment.etc =
+    lib.mapAttrs'
+    (name: value: {
+      name = "nix/path/${name}";
+      value.source = value.flake;
+    })
+    config.nix.registry;
 
   networking.hostName = "nixos-vm";
 
