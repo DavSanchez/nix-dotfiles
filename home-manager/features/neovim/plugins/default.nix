@@ -1,7 +1,10 @@
 {
   chadtree.enable = true;
   codeium-nvim.enable = true;
-  comment-nvim.enable = true;
+  comment-nvim = {
+    enable = true;
+    toggler.line = "<leader>/";
+  };
   dap.enable = true;
   haskell-scope-highlighting.enable = true;
   lsp = {
