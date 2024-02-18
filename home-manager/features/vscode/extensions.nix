@@ -67,7 +67,7 @@ with pkgs.vscode-extensions;
     {
       name = "codeium";
       publisher = "Codeium";
-      version = "1.6.31";
+      version = "1.7.38";
       sha256 = "sha256-bT+9nlhj0trX1lfCdYsbsrF2SCONyPaC7cqJtm13AYw=";
     }
     {
