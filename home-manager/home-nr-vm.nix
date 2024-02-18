@@ -6,7 +6,7 @@
 }: {
   imports = [
     inputs.nixvim.homeManagerModules.nixvim
-    
+
     ./features/aws
     ./features/cli
     ./features/dev/default-nr.nix
