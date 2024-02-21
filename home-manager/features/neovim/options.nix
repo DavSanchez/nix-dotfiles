@@ -3,5 +3,5 @@
   relativenumber = true;
   showmode = false;
   shiftwidth = 2;
-  timeoutlen = 300;
+  timeoutlen = 500;
 }

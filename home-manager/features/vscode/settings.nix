@@ -21,8 +21,6 @@ pkgs: let
         "--no-pane-frames"
         "--simplified-ui"
         "true"
-        "--mouse-mode"
-        "false"
       ]
       ++ pkgs.lib.optionals pkgs.stdenv.isDarwin [
         "--copy-command"
