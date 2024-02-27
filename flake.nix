@@ -3,10 +3,10 @@
 
   inputs = {
     # Nixpkgs
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
     # You can access packages and modules from different nixpkgs revs
-    # at the same time. Here's an working example:
+    # at the same time. Here's a working example:
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.05";
     # Also see the 'unstable-packages' overlay at 'overlays/default.nix'.
 
