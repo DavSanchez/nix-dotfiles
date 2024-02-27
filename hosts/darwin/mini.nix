@@ -231,8 +231,8 @@
   # system.defaults.finder.AppleShowAllFiles = true;
   system.defaults.finder.ShowPathbar = true;
   system.defaults.finder.ShowStatusBar = true;
-  # system.keyboard.enableKeyMapping = true;
-  # system.keyboard.remapCapsLockToControl = true;
+  system.keyboard.enableKeyMapping = true;
+  system.keyboard.remapCapsLockToEscape = true;
   system.defaults.magicmouse.MouseButtonMode = "TwoButton";
 
   fonts.fontDir.enable = true;
