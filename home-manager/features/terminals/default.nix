@@ -3,11 +3,8 @@
     ./foot.nix
     ./kitty.nix
     ./wezterm.nix # main
+    ./rio.nix
   ];
-
-  # home.packages = with pkgs; [
-  #   contour
-  # ];
 
   programs = {
     oh-my-posh = {
