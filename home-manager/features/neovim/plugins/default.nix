@@ -1,4 +1,5 @@
 {
+  barbar.enable = true;
   chadtree.enable = true;
   codeium-nvim.enable = true;
   comment-nvim = {

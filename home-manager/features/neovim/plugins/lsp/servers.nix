@@ -24,7 +24,6 @@
     installCargo = false;
     installRustc = false;
   };
-  statix.enable = true;
   taplo.enable = true;
   terraformls.enable = true;
   tsserver.enable = true;
