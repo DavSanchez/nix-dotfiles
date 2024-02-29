@@ -23,7 +23,6 @@
     ]
     ++ lib.optionals pkgs.stdenv.isDarwin [
       # iterm2
-      warp-terminal
     ]
     ++ lib.optionals pkgs.stdenv.isLinux [
       zathura
