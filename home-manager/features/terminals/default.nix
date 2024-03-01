@@ -3,7 +3,7 @@
     ./foot.nix
     ./kitty.nix
     ./wezterm.nix # main
-    ./rio.nix
+    ./rio
   ];
 
   programs = {
