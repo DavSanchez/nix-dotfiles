@@ -91,12 +91,6 @@
     #   zsh
     #   bashInteractive
     # ];
-    systemPath = [
-      "${config.homebrew.brewPrefix}/sbin"
-    ];
-    variables = {
-      FPATH = "${(config.homebrew.brewPrefix)}/share/zsh/site-functions:$FPATH";
-    };
 
     # see nix.registry and nix.nixPath above
     etc =
