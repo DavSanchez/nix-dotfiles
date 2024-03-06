@@ -14,13 +14,12 @@ pkgs: let
       [
         "--layout"
         "compact"
-        "attach"
-        "--create"
-        "vscode::\${workspaceFolderBasename}"
+        # "attach"
+        # "--create"
+        # "vscode::\${workspaceFolderBasename}"
         "options"
         "--no-pane-frames"
-        "--simplified-ui"
-        "true"
+        "--simplified-ui=true"
       ]
       ++ pkgs.lib.optionals pkgs.stdenv.isDarwin [
         "--copy-command"
