@@ -21,7 +21,6 @@ with pkgs.vscode-extensions;
     gruntfuggly.todo-tree
     # hashicorp.terraform
     haskell.haskell
-    ionide.ionide-fsharp
     jakebecker.elixir-ls
     # james-yu.latex-workshop
     # jdinhlife.gruvbox
