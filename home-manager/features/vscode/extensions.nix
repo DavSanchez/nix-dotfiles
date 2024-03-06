@@ -55,6 +55,7 @@ with pkgs.vscode-extensions;
     vscode-icons-team.vscode-icons
     vscodevim.vim
     zxh404.vscode-proto3
+    ziglang.vscode-zig
   ]
   ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
     {
@@ -117,22 +118,10 @@ with pkgs.vscode-extensions;
       version = "3.0.0";
       sha256 = "sha256-cWXd6AlyxBroZF+cXZzzWZbYPDuOqwCZIK67cEP5sNk=";
     }
-    # {
-    #   name = "vscode-icons";
-    #   publisher = "vscode-icons-team";
-    #   version = "12.2.0";
-    #   sha256 = "sha256-PxM+20mkj7DpcdFuExUFN5wldfs7Qmas3CnZpEFeRYs=";
-    # }
     {
       name = "wavetrace";
       publisher = "wavetrace";
       version = "1.1.2";
       sha256 = "11k57vppx5i7i56kgp4b2r97g6fqmvm7x0mzf8zj5r42ipn070zg";
     }
-    # {
-    #   name = "vscode-zig";
-    #   publisher = "ziglang";
-    #   version = "0.3.1";
-    #   sha256 = "sha256-c38c0XbKa6BUWEIJikbHT9otqe9GTnOr9l1D58OUYp4=";
-    # }
   ]
