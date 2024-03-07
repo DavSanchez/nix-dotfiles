@@ -74,6 +74,10 @@
       automatic = true;
       interval = {Day = 7;};
     };
+    linux-builder = {
+      enable = true;
+      ephemeral = true;
+    };
   };
 
   environment = {
