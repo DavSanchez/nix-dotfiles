@@ -3,7 +3,11 @@
   chadtree.enable = true;
   codeium-nvim.enable = true;
   comment-nvim.enable = true;
-  copilot-vim.enable = true;
+  copilot-lua = {
+    enable = true;
+    suggestion.enabled = false;
+    panel.enabled = false;
+  };
   dap.enable = true;
   direnv.enable = true;
   haskell-scope-highlighting.enable = true;
