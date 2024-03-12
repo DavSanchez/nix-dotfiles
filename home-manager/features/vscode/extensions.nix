@@ -15,6 +15,8 @@ with pkgs.vscode-extensions;
     eamodio.gitlens
     # esbenp.prettier-vscode
     # github.github-vscode-theme
+    github.copilot
+    github.copilot-chat
     github.vscode-github-actions
     github.vscode-pull-request-github
     golang.go
@@ -64,12 +66,12 @@ with pkgs.vscode-extensions;
       version = "3.0.2";
       sha256 = "15w1ixvp6vn9ng6mmcmv9ch0ngx8m85i1yabxdfn6zx3ypq802c5";
     }
-    {
-      name = "codeium";
-      publisher = "Codeium";
-      version = "1.7.38";
-      sha256 = "sha256-bT+9nlhj0trX1lfCdYsbsrF2SCONyPaC7cqJtm13AYw=";
-    }
+    # {
+    #   name = "codeium";
+    #   publisher = "Codeium";
+    #   version = "1.7.38";
+    #   sha256 = "sha256-bT+9nlhj0trX1lfCdYsbsrF2SCONyPaC7cqJtm13AYw=";
+    # }
     {
       name = "disableligatures";
       publisher = "CoenraadS";
