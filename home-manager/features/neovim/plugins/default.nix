@@ -16,7 +16,7 @@
     servers = import ./lsp/servers.nix;
   };
   lualine.enable = true;
-  luasnip.enable = false;
+  luasnip.enable = true;
   multicursors.enable = true;
   neogit.enable = true;
   neorg.enable = true;
@@ -26,6 +26,11 @@
   cmp = {
     enable = true;
     settings = {
+      snippet.expand = ''
+        function(args)
+          require('luasnip').lsp_expand(args.body)
+        end
+      '';
       mapping = {
         "<C-Space>" = "cmp.mapping.complete()";
         "<C-d>" = "cmp.mapping.scroll_docs(-4)";

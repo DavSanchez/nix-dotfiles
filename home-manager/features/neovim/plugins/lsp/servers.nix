@@ -20,7 +20,7 @@
   pylsp.enable = true;
   pyright.enable = true;
   rust-analyzer = {
-    enable = true;
+    enable = false; # Using rustaceanvim
     installCargo = false;
     installRustc = false;
   };
