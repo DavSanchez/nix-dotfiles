@@ -1,6 +1,5 @@
 {
   barbar.enable = true;
-  chadtree.enable = true;
   codeium-nvim.enable = true;
   comment-nvim.enable = true;
   copilot-lua = {
@@ -18,6 +17,7 @@
   lualine.enable = true;
   luasnip.enable = true;
   multicursors.enable = true;
+  neo-tree.enable = true;
   neogit.enable = true;
   neorg.enable = true;
   nix.enable = true;
