@@ -9,7 +9,7 @@
 }: {
   # Colmena specifics
   deployment = {
-    targetHost = "192.168.8.224";
+    targetHost = "${name}.local";
     targetUser = "david";
     tags = ["raspberrypi" "monitor"];
   };
@@ -76,21 +76,32 @@
     settings.PasswordAuthentication = false;
   };
 
+  # Expose the hostname
+  # Publish this server and its address on the network
+  services.avahi = {
+    enable = true;
+    publish = {
+      enable = true;
+      addresses = true;
+      workstation = true;
+    };
+  };
+
   # grafana configuration
   services.grafana = {
     enable = true;
     settings.server = {
-      # domain = "${name}.local";
+      domain = "${name}.local";
       http_port = 2342;
       http_addr = "127.0.0.1";
-      root_url = "http://localhost/grafana/";
+      root_url = "http://${name}.local/grafana/";
       serve_from_sub_path = true;
     };
   };
   # nginx reverse proxy
   services.nginx = {
     enable = true;
-    virtualHosts."localhost" = {
+    virtualHosts."${name}.local" = {
       locations."/grafana/" = {
         proxyPass = "http://${toString config.services.grafana.settings.server.http_addr}:${toString config.services.grafana.settings.server.http_port}";
         proxyWebsockets = true;
