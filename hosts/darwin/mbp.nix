@@ -58,7 +58,7 @@
     # Making legacy nix commands consistent as well, awesome!
     nixPath = ["/etc/nix/path"];
 
-    package = pkgs.nixVersions.unstable;
+    # package = pkgs.nixVersions.unstable;
 
     settings = {
       trusted-users = ["root" "david"]; # For groups prepend @: "@admin"
