@@ -84,6 +84,13 @@
           ./hosts/vm/utm/configuration.nix
         ];
       };
+      nixberrypi = nixpkgs.lib.nixosSystem {
+        system = "aarch64-linux";
+        specialArgs = {inherit inputs outputs;};
+        modules = [
+          ./hosts/nixberrypi/configuration.nix
+        ];
+      };
     };
     # macOS systems using nix-darwin
     darwinConfigurations = {
@@ -126,6 +133,21 @@
           ./home-manager/home-nr-vm.nix
         ];
       };
+    };
+
+    colmena = {
+      meta = {
+        nixpkgs = import nixpkgs {
+          # Change it to the local arch-os you are using locally
+          system = "aarch64-darwin";
+        };
+        nodeNixpkgs = {
+          nixberrypi = import nixpkgs {
+            system = "aarch64-linux";
+          };
+        };
+      };
+      nixberrypi = ./hosts/colmena/nixberrypi/configuration.nix;
     };
   };
 }
