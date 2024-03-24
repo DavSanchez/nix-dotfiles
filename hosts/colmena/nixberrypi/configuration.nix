@@ -35,6 +35,10 @@
       networks."TP-Link_89F4".psk = "@HALL_PASS@";
       interfaces = ["wlan0"];
     };
+    firewall = {
+      enable = true;
+      allowedTCPPorts = [80];
+    };
   };
 
   # Set your time zone.
@@ -76,18 +80,21 @@
   services.grafana = {
     enable = true;
     settings.server = {
-      domain = "${name}.local";
+      # domain = "${name}.local";
       http_port = 2342;
       http_addr = "127.0.0.1";
+      root_url = "http://localhost/grafana/";
+      serve_from_sub_path = true;
     };
   };
   # nginx reverse proxy
   services.nginx = {
     enable = true;
-    virtualHosts.${config.services.grafana.settings.server.domain} = {
-      locations."/" = {
-        proxyPass = "http://127.0.0.1:${toString config.services.grafana.settings.server.http_port}";
+    virtualHosts."localhost" = {
+      locations."/grafana/" = {
+        proxyPass = "http://${toString config.services.grafana.settings.server.http_addr}:${toString config.services.grafana.settings.server.http_port}";
         proxyWebsockets = true;
+        recommendedProxySettings = true;
       };
     };
   };
