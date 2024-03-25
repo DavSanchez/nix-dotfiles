@@ -13,6 +13,7 @@ with pkgs.vscode-extensions;
     # dhall.dhall-lang
     # dhall.vscode-dhall-lsp-server
     eamodio.gitlens
+    editorconfig.editorconfig
     # esbenp.prettier-vscode
     # github.github-vscode-theme
     # github.copilot
