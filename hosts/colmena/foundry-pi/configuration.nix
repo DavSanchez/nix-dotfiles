@@ -11,7 +11,7 @@
   deployment = {
     targetHost = "${name}.local";
     targetUser = "david";
-    tags = ["raspberrypi" "monitor"];
+    tags = ["raspberrypi" "foundry"];
   };
 
   #
@@ -35,10 +35,6 @@
       networks."TP-Link_89F4".psk = "@HALL_PASS@";
       interfaces = ["wlan0"];
     };
-    firewall = {
-      enable = true;
-      allowedTCPPorts = [80];
-    };
   };
 
   # Set your time zone.
@@ -56,7 +52,7 @@
     };
   };
 
-  environment.systemPackages = with pkgs; [vim];
+  environment.systemPackages = with pkgs; [vim nodejs];
 
   users = {
     users.david = {
@@ -87,51 +83,11 @@
     };
   };
 
-  # grafana configuration
-  services.grafana = {
+  services.prometheus.exporters.node = {
     enable = true;
-    settings.server = {
-      domain = "${name}.local";
-      http_port = 2342;
-      http_addr = "127.0.0.1";
-      root_url = "http://${name}.local/grafana/";
-      serve_from_sub_path = true;
-    };
-  };
-  # nginx reverse proxy
-  services.nginx = {
-    enable = true;
-    virtualHosts."${name}.local" = {
-      locations."/grafana/" = {
-        proxyPass = "http://${toString config.services.grafana.settings.server.http_addr}:${toString config.services.grafana.settings.server.http_port}";
-        proxyWebsockets = true;
-        recommendedProxySettings = true;
-      };
-    };
-  };
-  services.prometheus = {
-    enable = true;
-    port = 9001;
-    exporters = {
-      node = {
-        enable = true;
-        enabledCollectors = ["systemd"];
-        port = 9002;
-      };
-    };
-    scrapeConfigs = [
-      {
-        job_name = name;
-        static_configs = [
-          {
-            targets = [
-              "127.0.0.1:${toString config.services.prometheus.exporters.node.port}"
-              "${nodes.foundry-pi.name}.local:${toString nodes.foundry-pi.services.prometheus.exporters.node.port}"
-            ];
-          }
-        ];
-      }
-    ];
+    enabledCollectors = ["systemd"];
+    openFirewall = true;
+    port = 9002;
   };
 
   programs.nix-ld.enable = true;
