@@ -7,10 +7,10 @@
     };
   }
   {
-    action = "<cmd>CHADopen<CR>";
-    key = "<leader>v";
+    action = "<cmd>Neotree<CR>";
+    key = "<leader>t";
     options = {
-      desc = "Toggle ChadTree";
+      desc = "Toggle Neotree";
     };
   }
   # {
