@@ -15,8 +15,8 @@ with pkgs.vscode-extensions;
     eamodio.gitlens
     # esbenp.prettier-vscode
     # github.github-vscode-theme
-    github.copilot
-    github.copilot-chat
+    # github.copilot
+    # github.copilot-chat
     github.vscode-github-actions
     github.vscode-pull-request-github
     golang.go
