@@ -19,8 +19,7 @@
   ## Other packages
   home.packages = with pkgs;
     [
-      taplo # TOML Langserver
-      nodePackages.yaml-language-server # Langserver
+      devenv
 
       ## Other
       gnumake
