@@ -7,7 +7,7 @@
   pkgs,
   ...
 }: {
-  # Colmena specifics
+  # colmena specifics
   deployment = {
     targetHost = "${name}.local";
     targetUser = "david";
