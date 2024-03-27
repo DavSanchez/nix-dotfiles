@@ -29,7 +29,7 @@
 
   networking = {
     hostName = "zima-blade";
-    firewall.allowedTCPPorts = [80 9001];
+    firewall.allowedTCPPorts = [80];
   };
 
   time.timeZone = "Atlantic/Canary";
