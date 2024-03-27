@@ -40,8 +40,8 @@
       ## NixOps
       # nixops-dns
       # morph
+      # deploy-rs
       colmena
-      deploy-rs
 
       # Monitoring
       # netdata # broken
