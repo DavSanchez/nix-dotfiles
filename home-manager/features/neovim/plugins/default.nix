@@ -1,7 +1,7 @@
 {
   barbar.enable = true;
   codeium-nvim.enable = true;
-  comment-nvim.enable = true;
+  comment.enable = true;
   copilot-lua = {
     enable = true;
     suggestion.enabled = false;
