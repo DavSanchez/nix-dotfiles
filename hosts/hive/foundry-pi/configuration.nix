@@ -35,6 +35,7 @@
       networks."TP-Link_89F4".psk = "@HALL_PASS@";
       interfaces = ["wlan0"];
     };
+    firewall.allowedTCPPorts = [80 443]; # nginx reverse proxy
   };
 
   # Set your time zone.
@@ -52,7 +53,7 @@
     };
   };
 
-  environment.systemPackages = with pkgs; [vim nodejs];
+  environment.systemPackages = with pkgs; [vim];
 
   users = {
     users.david = {
@@ -83,11 +84,35 @@
     };
   };
 
+  # nginx reverse proxy
+  services.nginx = {
+    enable = true;
+    virtualHosts."${name}.local" = {
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:30000"; # Foundry VTT
+        proxyWebsockets = true;
+        recommendedProxySettings = true;
+      };
+    };
+  };
+
   services.prometheus.exporters.node = {
     enable = true;
     enabledCollectors = ["systemd"];
     openFirewall = true;
     port = 9002;
+  };
+
+  # Foundry VTT server
+  systemd.services."foundryvtt" = let
+    node = "${pkgs.nodejs}/bin/node";
+    foundryEntryPoint = "/home/david/foundryvtt/resources/app/main.js";
+    foundryData = "/home/david/foundrydata";
+  in {
+    enable = true;
+    description = "Foundry VTT service (Node.js)";
+    serviceConfig.ExecStart = "${node} ${foundryEntryPoint} --dataPath=${foundryData}";
+    wantedBy = ["multi-user.target"];
   };
 
   programs.nix-ld.enable = true;
