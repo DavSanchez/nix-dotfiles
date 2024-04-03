@@ -23,8 +23,10 @@
     ]
     ++ lib.optionals pkgs.stdenv.isDarwin [
       # iterm2
+      utm
     ]
     ++ lib.optionals pkgs.stdenv.isLinux [
+      imhex
       zathura
     ];
 }
