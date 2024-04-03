@@ -8,13 +8,23 @@
   }
   {
     action = "<cmd>Neotree<CR>";
-    key = "<leader>t";
+    key = "<leader>n";
     options = {
       desc = "Toggle Neotree";
     };
   }
-  # {
-  #   action = "<cmd>call setqflist([])<CR>";
-  #   key = "<leader>l";
-  # }
+  {
+    action = "<cmd>UndotreeToggle<CR>";
+    key = "<leader>u";
+    options = {
+      desc = "Toggle undotree";
+    };
+  }
+  {
+    action = "<cmd>ToggleTerm<CR>";
+    key = "<leader>t";
+    options = {
+      desc = "Toggle term";
+    };
+  }
 ]

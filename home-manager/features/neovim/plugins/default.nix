@@ -83,4 +83,5 @@
   treesitter.enable = true;
   undotree.enable = true;
   which-key.enable = true;
+  toggleterm.enable = true;
 }
