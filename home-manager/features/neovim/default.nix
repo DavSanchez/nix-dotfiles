@@ -9,7 +9,7 @@
     colorschemes = import ./colorschemes.nix;
     highlight = import ./highlight.nix;
     keymaps = import ./keymaps.nix;
-    options = import ./options.nix;
+    opts = import ./options.nix;
     plugins = import ./plugins;
   };
 }
