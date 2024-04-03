@@ -202,7 +202,6 @@
       "Reeder" = 1529448980;
       "Shazam" = 897118787;
       "The Unarchiver" = 425424353;
-      "UTM" = 1538878817;
       "Xcode" = 497799835;
     };
     # extraConfig = '' '';

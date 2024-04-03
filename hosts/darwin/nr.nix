@@ -158,7 +158,6 @@
       "openvpn-connect"
       "parallels"
       "stats"
-      "utm" # When tart is not enough
       "wireshark"
     ];
     brews = [];
