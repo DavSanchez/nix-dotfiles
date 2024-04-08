@@ -6,7 +6,7 @@ _: {
     enableZshIntegration = true;
     settings = {
       ui.pane_frames.rounded_corners = true;
-      theme = "tokyo-night"; # "cyber-noir", "darkfox"
+      theme = "catppuccin-mocha"; # "cyber-noir", "darkfox"
     };
   };
   # xdg.configFile."zellij/layouts".source = ./layouts;
