@@ -46,14 +46,14 @@ with pkgs.vscode-extensions;
     ms-vscode.hexeditor
     # ms-vscode.makefile-tools
     # ms-vscode.theme-tomorrowkit
-    # ms-vsliveshare.vsliveshare # FIXME
+    ms-vsliveshare.vsliveshare
     pkief.material-icon-theme
     pkief.material-product-icons
     redhat.vscode-yaml
     tamasfe.even-better-toml
     timonwong.shellcheck
     usernamehw.errorlens
-    # vadimcn.vscode-lldb # FIXME
+    vadimcn.vscode-lldb
     valentjn.vscode-ltex
     vscode-icons-team.vscode-icons
     vscodevim.vim
