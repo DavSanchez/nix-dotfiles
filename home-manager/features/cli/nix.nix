@@ -4,6 +4,7 @@
       nixd # Language server
       alejandra # Formatter
       nix-bundle
+      nix-inspect
       nix-output-monitor
       nix-update
       nix-diff
