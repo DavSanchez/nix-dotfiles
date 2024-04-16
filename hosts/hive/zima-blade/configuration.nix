@@ -40,11 +40,12 @@
     description = "David";
     extraGroups = ["networkmanager" "wheel"];
     packages = with pkgs; [
-      firefox
-      #  thunderbird
+      # firefox
+      # thunderbird
     ];
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILvM06bcMBkqNyadDKDGQXl4ztggBM1mgg5/CLqnqNvn davidslt+ssh@pm.me"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMgJQWw5UU2QSDIgEwwDwISqztyyLyaTTglmnplyx17A davidslt+git@pm.me"
     ];
   };
   # Make deployments to this machine passwordless
