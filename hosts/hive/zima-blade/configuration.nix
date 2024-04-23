@@ -25,8 +25,11 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.supportedFilesystems = ["zfs"];
+  boot.zfs.forceImportRoot = false;
 
   networking = {
+    hostId = "bfbc2f21";
     hostName = "zima-blade";
     firewall.allowedTCPPorts = [80];
   };
