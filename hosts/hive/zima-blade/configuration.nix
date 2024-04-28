@@ -32,25 +32,42 @@
   services.zfs.autoScrub.enable = true;
   services.zfs.trim.enable = true;
   # Accessible via network
-  services.nfs.server.enable = true;
+  services.nfs.server = {
+    enable = true;
+    # fixed rpc.statd port; for firewall
+    lockdPort = 4001;
+    mountdPort = 4002;
+    statdPort = 4000;
+    # extraNfsdConfig = '''';
+    exports = ''
+      /mnt/seclusium 192.168.8.0/24(rw,fsid=0,no_subtree_check)
+
+      /mnt/seclusium/echoes 192.168.8.0/24(rw,nohide,insecure,no_subtree_check)
+      /mnt/seclusium/dimensions 192.168.8.0/24(rw,nohide,insecure,no_subtree_check)
+      /mnt/seclusium/creation 192.168.8.0/24(rw,nohide,insecure,no_subtree_check)
+      /mnt/seclusium/technique 192.168.8.0/24(rw,nohide,insecure,no_subtree_check)
+      /mnt/seclusium/imagery 192.168.8.0/24(rw,nohide,insecure,no_subtree_check)
+    '';
+  };
+
   # Enable mail notifications
   programs.msmtp = {
     enable = true;
     setSendmail = true;
     defaults = {
       aliases = "/etc/aliases";
-      port = 465;
+      port = 587;
       tls_trust_file = "/etc/ssl/certs/ca-certificates.crt";
       tls = "on";
       auth = "login";
-      tls_starttls = "off";
+      tls_starttls = "on";
     };
     accounts = {
-      default = {
-        host = "mail.example.com"; # CHANGEME
+      zed = {
+        host = "smtp.gmail.com";
         passwordeval = "cat /etc/emailpass.txt";
-        user = "user@example.com"; # CHANGEME
-        from = "user@example.com"; # CHANGEME
+        user = "d.vinternatt@gmail.com";
+        from = "zed@${name}.local";
       };
     };
   };
@@ -61,7 +78,7 @@
       "zimazfszed.jc5ka@passmail.net"
     ];
     ZED_EMAIL_PROG = "${pkgs.msmtp}/bin/msmtp";
-    ZED_EMAIL_OPTS = "@ADDRESS@";
+    ZED_EMAIL_OPTS = "-a zed @ADDRESS@";
 
     ZED_NOTIFY_INTERVAL_SECS = 3600;
     ZED_NOTIFY_VERBOSE = true;
@@ -77,7 +94,22 @@
     hostName = "zima-blade";
     firewall.allowedTCPPorts = [
       80
-      2049 # NFSv4
+      # NFS
+      111
+      2049
+      4000
+      4001
+      4002
+      20048
+    ];
+    firewall.allowedUDPPorts = [
+      111
+      # NFS
+      2049
+      4000
+      4001
+      4002
+      20048
     ];
   };
 
