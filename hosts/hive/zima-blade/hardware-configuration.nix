@@ -12,7 +12,7 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  boot.initrd.availableKernelModules = ["ahci" "xhci_pci" "usbhid" "usb_storage" "sd_mod" "sdhci_pci"];
+  boot.initrd.availableKernelModules = ["ahci" "xhci_pci" "sd_mod" "sdhci_pci"];
   boot.initrd.kernelModules = [];
   boot.kernelModules = ["kvm-intel"];
   boot.extraModulePackages = [];
@@ -25,6 +25,37 @@
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/B8B2-C7D3";
     fsType = "vfat";
+    options = ["fmask=0022" "dmask=0022"];
+  };
+
+  fileSystems."/mnt/seclusium" = {
+    device = "seclusium";
+    fsType = "zfs";
+  };
+
+  fileSystems."/mnt/seclusium/echoes" = {
+    device = "seclusium/echoes";
+    fsType = "zfs";
+  };
+
+  fileSystems."/mnt/seclusium/dimensions" = {
+    device = "seclusium/dimensions";
+    fsType = "zfs";
+  };
+
+  fileSystems."/mnt/seclusium/creation" = {
+    device = "seclusium/creation";
+    fsType = "zfs";
+  };
+
+  fileSystems."/mnt/seclusium/technique" = {
+    device = "seclusium/technique";
+    fsType = "zfs";
+  };
+
+  fileSystems."/mnt/seclusium/imagery" = {
+    device = "seclusium/imagery";
+    fsType = "zfs";
   };
 
   swapDevices = [
@@ -36,7 +67,6 @@
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.enp0s21f0u3u1.useDHCP = lib.mkDefault true;
   # networking.interfaces.enp2s0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
