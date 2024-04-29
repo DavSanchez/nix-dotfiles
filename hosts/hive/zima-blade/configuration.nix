@@ -149,6 +149,7 @@
 
   environment.systemPackages = with pkgs; [
     vim
+    yazi
   ];
 
   services.openssh = {
