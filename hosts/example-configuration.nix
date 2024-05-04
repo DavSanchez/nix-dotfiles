@@ -2,8 +2,10 @@
 # Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
 {
   inputs,
+  outputs,
   lib,
   config,
+  pkgs,
   ...
 }: {
   # You can import other NixOS modules here
@@ -25,11 +27,12 @@
   nixpkgs = {
     # You can add overlays here
     overlays = [
-      # If you want to use overlays your own flake exports (from overlays dir):
-      # outputs.overlays.modifications
-      # outputs.overlays.additions
+      # Add overlays your own flake exports (from overlays and pkgs dir):
+      outputs.overlays.additions
+      outputs.overlays.modifications
+      outputs.overlays.unstable-packages
 
-      # Or overlays exported from other flakes:
+      # You can also add overlays exported from other flakes:
       # neovim-nightly-overlay.overlays.default
 
       # Or define it inline, for example:
@@ -46,30 +49,29 @@
     };
   };
 
-  nix = {
-    # This will add each flake input as a registry
-    # To make nix3 commands consistent with your flake
-    registry = lib.mapAttrs (_: value: {flake = value;}) inputs;
-
-    # This will additionally add your inputs to the system's legacy channels
-    # Making legacy nix commands consistent as well, awesome!
-    nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
-
+  nix = let
+    flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
+  in {
     settings = {
       # Enable flakes and new 'nix' command
       experimental-features = "nix-command flakes";
-      # Deduplicate and optimize nix store
-      auto-optimise-store = true;
+      # Opinionated: disable global registry
+      flake-registry = "";
+      # Workaround for https://github.com/NixOS/nix/issues/9574
+      nix-path = config.nix.nixPath;
     };
+    # Opinionated: disable channels
+    channel.enable = false;
+
+    # Opinionated: make flake registry and nix path match flake inputs
+    registry = lib.mapAttrs (_: flake: {inherit flake;}) flakeInputs;
+    nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
   };
 
   # FIXME: Add the rest of your current configuration
 
   # TODO: Set your hostname
   networking.hostName = "your-hostname";
-
-  # TODO: This is just an example, be sure to use whatever bootloader you prefer
-  boot.loader.systemd-boot.enable = true;
 
   # TODO: Configure your system-wide user settings (groups, etc), add more users as needed.
   users.users = {
@@ -78,7 +80,7 @@
       # TODO: You can set an initial password for your user.
       # If you do, you can skip setting a root password by passing '--no-root-passwd' to nixos-install.
       # Be sure to change it (using passwd) after rebooting!
-      # initialPassword = "correcthorsebatterystaple";
+      initialPassword = "correcthorsebatterystaple";
       isNormalUser = true;
       openssh.authorizedKeys.keys = [
         # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
@@ -92,12 +94,15 @@
   # Feel free to remove if you don't need it.
   services.openssh = {
     enable = true;
-    # Forbid root login through SSH.
-    permitRootLogin = "no";
-    # Use keys only. Remove if you want to SSH using password (not recommended)
-    passwordAuthentication = false;
+    settings = {
+      # Opinionated: forbid root login through SSH.
+      PermitRootLogin = "no";
+      # Opinionated: use keys only.
+      # Remove if you want to SSH using passwords
+      PasswordAuthentication = false;
+    };
   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  system.stateVersion = "22.05";
+  system.stateVersion = "23.05";
 }

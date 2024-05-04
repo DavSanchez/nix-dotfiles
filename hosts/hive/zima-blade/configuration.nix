@@ -1,6 +1,8 @@
 {
   name,
   nodes,
+  inputs,
+  lib,
   config,
   pkgs,
   ...
@@ -21,6 +23,36 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
+
+  nixpkgs = {
+    overlays = [
+    ];
+    config = {
+      allowUnfree = true;
+    };
+  };
+
+  nix = let
+    flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
+  in {
+    settings = {
+      trusted-users = ["root" "david"];
+      experimental-features = "nix-command flakes repl-flake";
+      # Opinionated: disable global registry
+      flake-registry = "";
+      # Workaround for https://github.com/NixOS/nix/issues/9574
+      nix-path = config.nix.nixPath;
+    };
+    # Opinionated: disable channels
+    channel.enable = false;
+    # Opinionated: make flake registry and nix path match flake inputs
+    registry = lib.mapAttrs (_: flake: {inherit flake;}) flakeInputs;
+    nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
+    gc = {
+      automatic = true;
+      dates = "weekly";
+    };
+  };
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -121,7 +153,7 @@
     isNormalUser = true;
     description = "David";
     extraGroups = ["networkmanager" "wheel"];
-    packages = with pkgs; [
+    packages = [
       # firefox
       # thunderbird
     ];
@@ -132,20 +164,6 @@
   };
   # Make deployments to this machine passwordless
   security.sudo.wheelNeedsPassword = false;
-
-  nix = {
-    settings = {
-      trusted-users = ["root" "david"];
-      experimental-features = "nix-command flakes";
-      auto-optimise-store = true;
-    };
-    gc = {
-      automatic = true;
-      dates = "weekly";
-    };
-  };
-
-  nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
     vim

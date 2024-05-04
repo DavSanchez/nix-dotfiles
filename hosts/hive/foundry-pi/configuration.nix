@@ -1,7 +1,7 @@
 # Colmena functions take `name` and `nodes` as arguments as well.
 {
   name,
-  nodes,
+  inputs,
   config,
   lib,
   pkgs,
@@ -22,6 +22,36 @@
     ./hardware-configuration.nix
   ];
 
+  nixpkgs = {
+    overlays = [
+    ];
+    config = {
+      allowUnfree = true;
+    };
+  };
+
+  nix = let
+    flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
+  in {
+    settings = {
+      trusted-users = ["root" "david"];
+      experimental-features = "nix-command flakes repl-flake";
+      # Opinionated: disable global registry
+      flake-registry = "";
+      # Workaround for https://github.com/NixOS/nix/issues/9574
+      nix-path = config.nix.nixPath;
+    };
+    # Opinionated: disable channels
+    channel.enable = false;
+    # Opinionated: make flake registry and nix path match flake inputs
+    registry = lib.mapAttrs (_: flake: {inherit flake;}) flakeInputs;
+    nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
+    gc = {
+      automatic = true;
+      dates = "weekly";
+    };
+  };
+
   # Use the extlinux boot loader. (NixOS wants to enable GRUB by default)
   boot.loader.grub.enable = false;
   # Enables the generation of /boot/extlinux/extlinux.conf
@@ -40,18 +70,6 @@
 
   # Set your time zone.
   time.timeZone = "Atlantic/Canary";
-
-  nix = {
-    settings = {
-      trusted-users = ["root" "david"];
-      experimental-features = "nix-command flakes";
-      auto-optimise-store = true;
-    };
-    gc = {
-      automatic = true;
-      dates = "weekly";
-    };
-  };
 
   environment.systemPackages = with pkgs; [
     vim

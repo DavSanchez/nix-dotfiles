@@ -135,6 +135,6 @@
       };
     };
 
-    colmena = import ./hosts/hive {inherit nixpkgs;};
+    colmena = import ./hosts/hive {inherit nixpkgs inputs outputs;};
   };
 }
