@@ -18,8 +18,6 @@ export EDITOR="nvim"
 export LC_ALL="en_US.UTF-8"
 export LANG="en_US.UTF-8"
 
-# Add python site-packages to path
-export NIX_PATH="$HOME/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH"
 export FPATH="$HOME/.nix-profile/share/zsh/site-functions:$FPATH"
 
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
