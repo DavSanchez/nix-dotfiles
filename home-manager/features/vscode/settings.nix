@@ -134,13 +134,7 @@ in {
   "latex-workshop.view.pdf.viewer" = "tab";
   "nix.enableLanguageServer" = true;
   "nix.serverPath" = "${pkgs.nixd}/bin/nixd";
-  "nix.serverSettings" = {
-    "nixd" = {
-      "formatting" = {
-        "command" = "${pkgs.alejandra}/bin/alejandra";
-      };
-    };
-  };
+  "nix.formatterPath" = "${pkgs.alejandra}/bin/alejandra";
   "platformio-ide.activateOnlyOnPlatformIOProject" = true;
   # "python.languageServer" = "Pylance";
   "redhat.telemetry.enabled" = false;
