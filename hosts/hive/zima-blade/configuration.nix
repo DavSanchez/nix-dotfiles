@@ -71,14 +71,16 @@
     mountdPort = 4002;
     statdPort = 4000;
     # extraNfsdConfig = '''';
+    # see `man exports` for option details
     exports = ''
-      /mnt/seclusium 192.168.8.0/24(rw,fsid=0,no_subtree_check)
+      /mnt/seclusium 192.168.8.0/24(fsid=0,no_subtree_check)
 
-      /mnt/seclusium/echoes 192.168.8.0/24(rw,nohide,insecure,no_subtree_check)
-      /mnt/seclusium/dimensions 192.168.8.0/24(rw,nohide,insecure,no_subtree_check)
-      /mnt/seclusium/creation 192.168.8.0/24(rw,nohide,insecure,no_subtree_check)
-      /mnt/seclusium/technique 192.168.8.0/24(rw,nohide,insecure,no_subtree_check)
-      /mnt/seclusium/imagery 192.168.8.0/24(rw,nohide,insecure,no_subtree_check)
+      /mnt/seclusium/creation 192.168.8.0/24(rw,no_subtree_check,all_squash,anonuid=1000,anongid=100)
+      /mnt/seclusium/dimensions 192.168.8.0/24(no_subtree_check,all_squash,anonuid=1000,anongid=100)
+      /mnt/seclusium/echoes 192.168.8.0/24(rw,no_subtree_check,all_squash,anonuid=1000,anongid=100)
+      /mnt/seclusium/imagery 192.168.8.0/24(no_subtree_check,all_squash,anonuid=1000,anongid=100)
+      /mnt/seclusium/technique 192.168.8.0/24(no_subtree_check,all_squash,anonuid=1000,anongid=100)
+      /mnt/seclusium/zg 192.168.8.0/24(no_subtree_check,all_squash,anonuid=1000,anongid=100)
     '';
   };
 

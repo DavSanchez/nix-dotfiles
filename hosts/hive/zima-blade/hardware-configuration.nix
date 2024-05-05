@@ -58,6 +58,11 @@
     fsType = "zfs";
   };
 
+  fileSystems."/mnt/seclusium/zg" = {
+    device = "seclusium/zg";
+    fsType = "zfs";
+  };
+
   swapDevices = [
     {device = "/dev/disk/by-uuid/a55f8911-b16c-4fd1-a205-ee853d6873fb";}
   ];
