@@ -135,6 +135,22 @@ in {
   "nix.enableLanguageServer" = true;
   "nix.serverPath" = "${pkgs.nixd}/bin/nixd";
   "nix.formatterPath" = "${pkgs.alejandra}/bin/alejandra";
+  "nix.severSettings" = {
+    nixd = {
+      formatting.command = ["${pkgs.alejandra}/bin/alejandra"];
+      # "options": {
+      # By default, this entriy will be read from `import <nixpkgs> { }`
+      # You can write arbitary nix expression here, to produce valid "options" declaration result.
+      # Tip: for flake-based configuration, utilize `builtins.getFlake`
+      # "nixos": {
+      #    "expr": "(builtins.getFlake \"/absolute/path/to/flake\").nixosConfigurations.<name>.options"
+      # },
+      # "home-manager": {
+      #     "expr": "(builtins.getFlake \"/absolute/path/to/flake\").homeConfigurations.<name>.options"
+      # }
+      # }
+    };
+  };
   "platformio-ide.activateOnlyOnPlatformIOProject" = true;
   # "python.languageServer" = "Pylance";
   "redhat.telemetry.enabled" = false;
