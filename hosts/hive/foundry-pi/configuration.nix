@@ -35,7 +35,7 @@
   in {
     settings = {
       trusted-users = ["root" "david"];
-      experimental-features = "nix-command flakes repl-flake";
+      experimental-features = "nix-command flakes";
       # Opinionated: disable global registry
       flake-registry = "";
       # Workaround for https://github.com/NixOS/nix/issues/9574
