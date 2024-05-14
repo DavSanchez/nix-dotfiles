@@ -135,7 +135,7 @@ in {
   "nix.enableLanguageServer" = true;
   "nix.serverPath" = "${pkgs.nixd}/bin/nixd";
   "nix.formatterPath" = "${pkgs.alejandra}/bin/alejandra";
-  "nix.severSettings" = {
+  "nix.serverSettings" = {
     nixd = {
       formatting.command = ["${pkgs.alejandra}/bin/alejandra"];
       # "options": {
