@@ -1,7 +1,7 @@
 _: {
   imports = [
     ./foot.nix
-    ./kitty.nix
+    ./kitty
     ./wezterm # main
     ./rio
   ];
