@@ -1,4 +1,7 @@
 {pkgs, ...}: {
+  xdg.configFile."kitty/themes/rose-pine-moon.conf".source = ./rose-pine-moon.conf;
+  xdg.configFile."kitty/kitty.app.png".source = ./kitty.app.png;
+
   programs = {
     kitty = {
       enable = true;
@@ -12,6 +15,9 @@
           then "titlebar-only"
           else "no";
       };
+      extraConfig = ''
+        include rose-pine-moon.conf
+      '';
     };
   };
 }

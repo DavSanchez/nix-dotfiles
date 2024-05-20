@@ -10,7 +10,7 @@ _: {
         # whitespace.render = "all";
         indent-guides.render = true;
       };
-      theme = "catppuccin_mocha";
+      theme = "rose_pine_moon";
       # keys.normal = {
       #   space.space = "file_picker";
       #   space.w = ":w";
