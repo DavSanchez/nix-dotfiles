@@ -16,7 +16,7 @@
           else "no";
       };
       extraConfig = ''
-        include rose-pine-moon.conf
+        include themes/rose-pine-moon.conf
       '';
     };
   };
