@@ -1,8 +1,8 @@
-{pkgs, ...}: {
+_: {
   imports = [
     ./foot.nix
     ./kitty.nix
-    ./wezterm.nix # main
+    ./wezterm # main
     ./rio
   ];
 

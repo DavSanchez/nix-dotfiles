@@ -6,11 +6,14 @@ _: {
     enableZshIntegration = true;
     settings = {
       ui.pane_frames.rounded_corners = true;
-      theme = "catppuccin-mocha"; # "cyber-noir", "darkfox"
+      theme = "rose-pine-moon"; # "cyber-noir", "darkfox"
     };
   };
-  # xdg.configFile."zellij/layouts".source = ./layouts;
-  # xdg.configFile."layouts".recursive = true;
+
+  xdg.configFile."zellij/themes" = {
+    source = ./themes;
+    recursive = true;
+  };
 
   # Creating .config/zellij/layouts overwrites
   # the default config location for mac, hence
