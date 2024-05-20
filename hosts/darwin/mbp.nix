@@ -177,7 +177,7 @@
       "synthesia"
       "tor-browser"
       "transmission"
-      # "vlc"
+      "vlc"
       "whatsapp"
       "wireshark"
       "xld"
