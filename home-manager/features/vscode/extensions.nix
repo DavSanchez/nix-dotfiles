@@ -47,6 +47,7 @@ with pkgs.vscode-extensions;
     # ms-vscode.makefile-tools
     # ms-vscode.theme-tomorrowkit
     ms-vsliveshare.vsliveshare
+    mvllow.rose-pine
     pkief.material-icon-theme
     pkief.material-product-icons
     redhat.vscode-yaml
