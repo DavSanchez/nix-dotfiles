@@ -74,7 +74,10 @@
   environment.systemPackages = with pkgs; [
     vim
     yazi
+    devenv # Quickly set up projects in any language
   ];
+
+  programs.nix-ld.enable = true;
 
   users = {
     users.david = {
@@ -136,8 +139,6 @@
     serviceConfig.ExecStart = "${node} ${foundryEntryPoint} --dataPath=${foundryData}";
     wantedBy = ["multi-user.target"];
   };
-
-  programs.nix-ld.enable = true;
 
   system.stateVersion = "24.05";
 }

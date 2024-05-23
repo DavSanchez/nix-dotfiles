@@ -170,7 +170,10 @@
   environment.systemPackages = with pkgs; [
     vim
     yazi
+    devenv # Quickly set up projects in any language
   ];
+
+  programs.nix-ld.enable = true;
 
   services.openssh = {
     enable = true;
