@@ -2,7 +2,7 @@ _: {
   programs.rio = {
     enable = true;
     settings = {
-      theme = "tokyonight";
+      theme = "rose-pine-moon";
     };
   };
 
