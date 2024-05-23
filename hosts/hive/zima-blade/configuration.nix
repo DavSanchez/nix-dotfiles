@@ -175,6 +175,7 @@
   ];
 
   programs.nix-ld.enable = true;
+  programs.direnv.enable = true;
 
   services.openssh = {
     enable = true;

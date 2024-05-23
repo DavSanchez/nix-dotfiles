@@ -79,6 +79,7 @@
   ];
 
   programs.nix-ld.enable = true;
+  programs.direnv.enable = true;
 
   users = {
     users.david = {
