@@ -50,6 +50,7 @@
       automatic = true;
       dates = "weekly";
     };
+    optimise.automatic = true;
   };
 
   # Use the extlinux boot loader. (NixOS wants to enable GRUB by default)

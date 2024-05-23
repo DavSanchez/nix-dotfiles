@@ -52,6 +52,7 @@
       automatic = true;
       dates = "weekly";
     };
+    optimise.automatic = true;
   };
 
   # Bootloader.
