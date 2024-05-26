@@ -247,5 +247,10 @@
     ];
   };
 
+  services.plex = {
+    enable = true;
+    openFirewall = true;
+  };
+
   system.stateVersion = "23.11";
 }
