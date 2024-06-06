@@ -14,6 +14,7 @@ with pkgs.vscode-extensions;
     # dhall.vscode-dhall-lsp-server
     eamodio.gitlens
     editorconfig.editorconfig
+    elixir-lsp.vscode-elixir-ls
     # esbenp.prettier-vscode
     # github.github-vscode-theme
     # github.copilot
@@ -24,14 +25,12 @@ with pkgs.vscode-extensions;
     gruntfuggly.todo-tree
     # hashicorp.terraform
     haskell.haskell
-    jakebecker.elixir-ls
     # james-yu.latex-workshop
     # jdinhlife.gruvbox
     jnoortheen.nix-ide
     justusadam.language-haskell
     llvm-vs-code-extensions.vscode-clangd
     # markis.code-coverage # FIXME
-    matklad.rust-analyzer
     mkhl.direnv
     # ms-azuretools.vscode-docker
     # ms-kubernetes-tools.vscode-kubernetes-tools
@@ -51,6 +50,7 @@ with pkgs.vscode-extensions;
     pkief.material-icon-theme
     pkief.material-product-icons
     redhat.vscode-yaml
+    rust-lang.rust-analyzer
     tamasfe.even-better-toml
     timonwong.shellcheck
     usernamehw.errorlens
