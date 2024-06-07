@@ -146,7 +146,6 @@
     casks = [
       "adobe-acrobat-reader"
       "amethyst"
-      "bartender"
       "brave-browser"
       "crossover"
       "discord"
@@ -157,6 +156,7 @@
       "iina"
       "imhex"
       "insomnia"
+      "jordanbaird-ice"
       "keymapp"
       "krita"
       "little-snitch"
@@ -165,7 +165,9 @@
       "openemu"
       "openra"
       "proton-drive"
+      "proton-mail"
       "protonmail-bridge"
+      "proton-pass"
       "protonvpn"
       "qflipper"
       "raycast"
@@ -199,6 +201,7 @@
       "Numbers" = 409203825;
       "one sec" = 1532875441;
       "Pages" = 409201541;
+      "Proton Pass for Safari" = 6502835663;
       "Tailscale" = 1475387142;
       "Reeder" = 1529448980;
       "Shazam" = 897118787;
