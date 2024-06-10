@@ -25,13 +25,16 @@
           src = ./.;
           hooks = {
             actionlint.enable = true;
-            alejandra.enable = true;
             ansible-lint.enable = true;
             convco.enable = true;
             gofmt.enable = true;
             gotest.enable = true;
             govet.enable = true;
             markdownlint.enable = true;
+            nixfmt = {
+              enable = true;
+              package = pkgs.nixfmt-rfc-style;
+            };
             rustfmt.enable = true;
             shellcheck.enable = true;
             staticcheck.enable = true;

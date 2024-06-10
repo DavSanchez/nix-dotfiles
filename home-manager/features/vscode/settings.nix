@@ -134,10 +134,10 @@ in {
   "latex-workshop.view.pdf.viewer" = "tab";
   "nix.enableLanguageServer" = true;
   "nix.serverPath" = "${pkgs.nixd}/bin/nixd";
-  "nix.formatterPath" = "${pkgs.alejandra}/bin/alejandra";
+  "nix.formatterPath" = "${pkgs.nixfmt-rfc-style}/bin/nixfmt";
   "nix.serverSettings" = {
     nixd = {
-      formatting.command = ["${pkgs.alejandra}/bin/alejandra"];
+      formatting.command = ["${pkgs.nixfmt-rfc-style}/bin/nixfmt"];
       # "options": {
       # By default, this entriy will be read from `import <nixpkgs> { }`
       # You can write arbitary nix expression here, to produce valid "options" declaration result.

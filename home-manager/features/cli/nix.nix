@@ -2,7 +2,7 @@
   home.packages = with pkgs;
     [
       nixd # Language server
-      alejandra # Formatter
+      nixfmt-rfc-style # Nix formatter
       nix-bundle
       nix-inspect
       nix-output-monitor
@@ -21,9 +21,6 @@
 
       # Binary management
       patchelf
-    ]
-    ++ lib.optionals pkgs.stdenv.isLinux [
-      nix-ld
     ];
 
   programs = {

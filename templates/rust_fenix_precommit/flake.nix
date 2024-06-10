@@ -30,12 +30,15 @@
           src = ./.;
           hooks = {
             actionlint.enable = true;
-            alejandra.enable = true;
             ansible-lint.enable = true;
             cargo-check.enable = true;
             clippy.enable = true;
             convco.enable = true;
             markdownlint.enable = true;
+            nixfmt = {
+              enable = true;
+              package = pkgs.nixfmt-rfc-style;
+            };
             rustfmt.enable = true;
             taplo.enable = true;
             terraform-format.enable = true;

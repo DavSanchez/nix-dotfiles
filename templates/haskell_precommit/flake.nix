@@ -25,17 +25,17 @@
             src = ./.;
             hooks = {
               actionlint.enable = true;
-              alejandra.enable = true;
               cabal-fmt.enable = true;
               cabal2nix.enable = true;
               convco.enable = true;
               fourmolu.enable = true;
               hlint.enable = true;
               hpack.enable = true;
+              nixfmt = {
+                enable = true;
+                package = pkgs.nixfmt-rfc-style;
+              };
               # hunspell.enable = true;
-            };
-            settings = {
-              alejandra.exclude = ["default.nix"];
             };
           };
         };
