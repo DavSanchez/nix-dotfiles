@@ -1,8 +1,5 @@
+{ lib, pkgs, ... }:
 {
-  lib,
-  pkgs,
-  ...
-}: {
   imports = [
     ./data.nix
     ./documents.nix
@@ -16,7 +13,8 @@
     ./terminal.nix
   ];
 
-  home.packages = with pkgs;
+  home.packages =
+    with pkgs;
     [
       ## Utils
       coreutils
@@ -27,9 +25,7 @@
 
       github-copilot-cli
     ]
-    ++ lib.optionals pkgs.stdenv.isDarwin [
-      m-cli
-    ]
+    ++ lib.optionals pkgs.stdenv.isDarwin [ m-cli ]
     ++ lib.optionals pkgs.stdenv.isLinux [
       elfutils
       # patchelf # present in ./nix.nix

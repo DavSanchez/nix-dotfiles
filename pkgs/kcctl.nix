@@ -16,33 +16,29 @@ stdenv.mkDerivation rec {
     description = "A modern and intuitive command line client for Kafka Connect";
     homepage = "https://github.com/kcctl/kcctl";
     license = licenses.asl20;
-    platforms = ["x86_64-linux" "x86_64-darwin"];
+    platforms = [
+      "x86_64-linux"
+      "x86_64-darwin"
+    ];
   };
 
   src =
-    if stdenv.isLinux
-    then
-      fetchzip
-      {
+    if stdenv.isLinux then
+      fetchzip {
         url = "${baseURL}-linux-x86_64.zip";
         sha256 = "sha256-FJOZrTzAXBh6K1HL4EF/4+doJWdua10+XH4nwSvS9No=";
       }
-    else if stdenv.isDarwin
-    then
-      fetchzip
-      {
+    else if stdenv.isDarwin then
+      fetchzip {
         url = "${baseURL}-osx-x86_64.zip";
         sha256 = "sha256-dhUcKys4Np2LlL9RtJtHT3osXupkbodP/4s9EW9MKM8=";
       }
-    else throw "Unsupported system: ${stdenv.system}";
+    else
+      throw "Unsupported system: ${stdenv.system}";
 
-  buildInputs = [
-    zlib
-  ];
+  buildInputs = [ zlib ];
 
-  nativeBuildInputs = lib.optionals stdenv.isLinux [
-    autoPatchelfHook
-  ];
+  nativeBuildInputs = lib.optionals stdenv.isLinux [ autoPatchelfHook ];
 
   sourceRoot = ".";
 

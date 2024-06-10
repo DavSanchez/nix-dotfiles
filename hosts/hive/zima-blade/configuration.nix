@@ -5,14 +5,15 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   # colmena specifics
   deployment = {
     # No other x86_64 builder yet, so...
     buildOnTarget = true;
     targetHost = "${name}.local";
     targetUser = "david";
-    tags = ["zima"];
+    tags = [ "zima" ];
   };
 
   #
@@ -27,35 +28,39 @@
   ];
 
   nixpkgs = {
-    overlays = [
-    ];
+    overlays = [ ];
     config = {
       allowUnfree = true;
     };
   };
 
-  nix = let
-    flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
-  in {
-    settings = {
-      trusted-users = ["root" "david"];
-      experimental-features = "nix-command flakes";
-      # Opinionated: disable global registry
-      flake-registry = "";
-      # Workaround for https://github.com/NixOS/nix/issues/9574
-      nix-path = config.nix.nixPath;
+  nix =
+    let
+      flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
+    in
+    {
+      settings = {
+        trusted-users = [
+          "root"
+          "david"
+        ];
+        experimental-features = "nix-command flakes";
+        # Opinionated: disable global registry
+        flake-registry = "";
+        # Workaround for https://github.com/NixOS/nix/issues/9574
+        nix-path = config.nix.nixPath;
+      };
+      # Opinionated: disable channels
+      channel.enable = false;
+      # Opinionated: make flake registry and nix path match flake inputs
+      registry = lib.mapAttrs (_: flake: { inherit flake; }) flakeInputs;
+      nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
+      gc = {
+        automatic = true;
+        dates = "weekly";
+      };
+      optimise.automatic = true;
     };
-    # Opinionated: disable channels
-    channel.enable = false;
-    # Opinionated: make flake registry and nix path match flake inputs
-    registry = lib.mapAttrs (_: flake: {inherit flake;}) flakeInputs;
-    nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
-    gc = {
-      automatic = true;
-      dates = "weekly";
-    };
-    optimise.automatic = true;
-  };
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -157,7 +162,10 @@
   users.users.david = {
     isNormalUser = true;
     description = "David";
-    extraGroups = ["networkmanager" "wheel"];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
     packages = [
       # firefox
       # thunderbird

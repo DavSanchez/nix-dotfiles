@@ -7,10 +7,9 @@
   config,
   pkgs,
   ...
-}: {
-  imports = [
-    ./hardware-configuration.nix
-  ];
+}:
+{
+  imports = [ ./hardware-configuration.nix ];
 
   nixpkgs = {
     overlays = [
@@ -25,8 +24,10 @@
   };
 
   nix = {
-    registry = (lib.mapAttrs (_: flake: {inherit flake;})) ((lib.filterAttrs (_: lib.isType "flake")) inputs);
-    nixPath = ["/etc/nix/path"];
+    registry = (lib.mapAttrs (_: flake: { inherit flake; })) (
+      (lib.filterAttrs (_: lib.isType "flake")) inputs
+    );
+    nixPath = [ "/etc/nix/path" ];
     settings = {
       experimental-features = "nix-command flakes";
       auto-optimise-store = true;
@@ -34,13 +35,10 @@
     package = pkgs.nixUnstable;
   };
   # see nix.registry and nix.nixPath above
-  environment.etc =
-    lib.mapAttrs'
-    (name: value: {
-      name = "nix/path/${name}";
-      value.source = value.flake;
-    })
-    config.nix.registry;
+  environment.etc = lib.mapAttrs' (name: value: {
+    name = "nix/path/${name}";
+    value.source = value.flake;
+  }) config.nix.registry;
 
   networking.hostName = "nixos-vm";
 
@@ -54,7 +52,10 @@
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAtJ6zSsueNkp3+N+DjXwpXi4Lrq9TYvnfXDGIl1Ccsq davidsanchez@newrelic.com"
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILvM06bcMBkqNyadDKDGQXl4ztggBM1mgg5/CLqnqNvn davidslt+ssh@pm.me"
       ];
-      extraGroups = ["wheel" "docker"];
+      extraGroups = [
+        "wheel"
+        "docker"
+      ];
     };
   };
 

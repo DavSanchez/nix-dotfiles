@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   home.packages = with pkgs; [
     # Searching/Movement helpers and other replacements
     dua
@@ -29,14 +30,20 @@
       enableBashIntegration = true;
       enableFishIntegration = true;
       changeDirWidgetCommand = "fd --type d";
-      changeDirWidgetOptions = ["--preview 'tree -C {} | head 200'"];
+      changeDirWidgetOptions = [ "--preview 'tree -C {} | head 200'" ];
       defaultCommand = "fd --type f";
-      defaultOptions = ["--height 40%" "--border"];
+      defaultOptions = [
+        "--height 40%"
+        "--border"
+      ];
       fileWidgetCommand = "fd --type f";
-      fileWidgetOptions = ["--preview 'bat --color=always --style=numbers --line-range=:500 {}'"];
-      historyWidgetOptions = ["--sort" "--exact"];
+      fileWidgetOptions = [ "--preview 'bat --color=always --style=numbers --line-range=:500 {}'" ];
+      historyWidgetOptions = [
+        "--sort"
+        "--exact"
+      ];
       tmux.enableShellIntegration = true;
-      tmux.shellIntegrationOptions = ["-d 40%"];
+      tmux.shellIntegrationOptions = [ "-d 40%" ];
       colors = {
         fg = "#908caa";
         bg = "#232136";
@@ -87,7 +94,7 @@
     xplr = {
       enable = true;
       extraConfig = "";
-      plugins = {};
+      plugins = { };
     };
 
     lf = {

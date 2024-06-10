@@ -7,7 +7,8 @@
   inputs,
   outputs,
   ...
-}: {
+}:
+{
   # You can import other nix-darwin modules here
   imports = [
     # If you want to use modules your own flake exports (from modules/darwin):
@@ -49,54 +50,58 @@
     };
   };
 
-  nix = let
-    flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
-  in {
-    package = pkgs.nixVersions.latest;
-    settings = {
-      trusted-users = ["root" "david"]; # For groups prepend @: "@admin"
-      # Enable flakes and new 'nix' command
-      experimental-features = "nix-command flakes";
-      # Opinionated: disable global registry
-      flake-registry = "";
-      # Workaround for https://github.com/NixOS/nix/issues/9574
-      nix-path = config.nix.nixPath;
-      extra-platforms = lib.optionalString (pkgs.system == "aarch64-darwin") "x86_64-darwin aarch64-darwin";
-    };
-    # Opinionated: make flake registry and nix path match flake inputs
-    registry = lib.mapAttrs (_: flake: {inherit flake;}) flakeInputs;
-    nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
+  nix =
+    let
+      flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
+    in
+    {
+      package = pkgs.nixVersions.latest;
+      settings = {
+        trusted-users = [
+          "root"
+          "david"
+        ]; # For groups prepend @: "@admin"
+        # Enable flakes and new 'nix' command
+        experimental-features = "nix-command flakes";
+        # Opinionated: disable global registry
+        flake-registry = "";
+        # Workaround for https://github.com/NixOS/nix/issues/9574
+        nix-path = config.nix.nixPath;
+        extra-platforms = lib.optionalString (
+          pkgs.system == "aarch64-darwin"
+        ) "x86_64-darwin aarch64-darwin";
+      };
+      # Opinionated: make flake registry and nix path match flake inputs
+      registry = lib.mapAttrs (_: flake: { inherit flake; }) flakeInputs;
+      nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
 
-    gc = {
-      automatic = true;
-      interval = {Day = 7;};
-    };
+      gc = {
+        automatic = true;
+        interval = {
+          Day = 7;
+        };
+      };
 
-    linux-builder = {
-      enable = true;
-      ephemeral = true;
+      linux-builder = {
+        enable = true;
+        ephemeral = true;
+      };
     };
-  };
 
   environment = {
     # List packages installed in system profile. To search by name, run:
     # $ nix-env -qaP | grep wget
-    systemPackages = with pkgs; [
-      vim
-    ];
+    systemPackages = with pkgs; [ vim ];
     # shells = with pkgs; [
     #   zsh
     #   bashInteractive
     # ];
 
     # see nix.registry and nix.nixPath above
-    etc =
-      lib.mapAttrs'
-      (name: value: {
-        name = "nix/path/${name}";
-        value.source = value.flake;
-      })
-      config.nix.registry;
+    etc = lib.mapAttrs' (name: value: {
+      name = "nix/path/${name}";
+      value.source = value.flake;
+    }) config.nix.registry;
   };
 
   # Use a custom configuration.nix location.
@@ -137,7 +142,7 @@
     enable = true;
     global.brewfile = true;
     onActivation.autoUpdate = true;
-    onActivation.upgrade = true; # This defaults to false so calls are idempotent.
+    onActivation.upgrade = true; # This defaults to false so calls are idempotent.
     onActivation.cleanup = "zap";
 
     taps = [
@@ -188,7 +193,7 @@
       "zed"
       "zerotier-one"
     ];
-    brews = [];
+    brews = [ ];
     masApps = {
       "1Blocker" = 1365531024;
       "Amphetamine" = 937984704;

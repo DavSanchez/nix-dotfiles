@@ -6,12 +6,16 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   # colmena specifics
   deployment = {
     targetHost = "${name}.local";
     targetUser = "david";
-    tags = ["raspberrypi" "foundry"];
+    tags = [
+      "raspberrypi"
+      "foundry"
+    ];
   };
 
   #
@@ -23,35 +27,39 @@
   ];
 
   nixpkgs = {
-    overlays = [
-    ];
+    overlays = [ ];
     config = {
       allowUnfree = true;
     };
   };
 
-  nix = let
-    flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
-  in {
-    settings = {
-      trusted-users = ["root" "david"];
-      experimental-features = "nix-command flakes";
-      # Opinionated: disable global registry
-      flake-registry = "";
-      # Workaround for https://github.com/NixOS/nix/issues/9574
-      nix-path = config.nix.nixPath;
+  nix =
+    let
+      flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
+    in
+    {
+      settings = {
+        trusted-users = [
+          "root"
+          "david"
+        ];
+        experimental-features = "nix-command flakes";
+        # Opinionated: disable global registry
+        flake-registry = "";
+        # Workaround for https://github.com/NixOS/nix/issues/9574
+        nix-path = config.nix.nixPath;
+      };
+      # Opinionated: disable channels
+      channel.enable = false;
+      # Opinionated: make flake registry and nix path match flake inputs
+      registry = lib.mapAttrs (_: flake: { inherit flake; }) flakeInputs;
+      nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
+      gc = {
+        automatic = true;
+        dates = "weekly";
+      };
+      optimise.automatic = true;
     };
-    # Opinionated: disable channels
-    channel.enable = false;
-    # Opinionated: make flake registry and nix path match flake inputs
-    registry = lib.mapAttrs (_: flake: {inherit flake;}) flakeInputs;
-    nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
-    gc = {
-      automatic = true;
-      dates = "weekly";
-    };
-    optimise.automatic = true;
-  };
 
   # Use the extlinux boot loader. (NixOS wants to enable GRUB by default)
   boot.loader.grub.enable = false;
@@ -64,9 +72,12 @@
       enable = true;
       environmentFile = "/home/david/secrets/wireless.env";
       networks."TP-Link_89F4".psk = "@HALL_PASS@";
-      interfaces = ["wlan0"];
+      interfaces = [ "wlan0" ];
     };
-    firewall.allowedTCPPorts = [80 443]; # nginx reverse proxy
+    firewall.allowedTCPPorts = [
+      80
+      443
+    ]; # nginx reverse proxy
   };
 
   # Set your time zone.
@@ -88,7 +99,7 @@
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILvM06bcMBkqNyadDKDGQXl4ztggBM1mgg5/CLqnqNvn davidslt+ssh@pm.me"
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMgJQWw5UU2QSDIgEwwDwISqztyyLyaTTglmnplyx17A davidslt+git@pm.me"
       ];
-      extraGroups = ["wheel"];
+      extraGroups = [ "wheel" ];
     };
   };
   # Make deployments to this machine passwordless
@@ -125,22 +136,24 @@
 
   services.prometheus.exporters.node = {
     enable = true;
-    enabledCollectors = ["systemd"];
+    enabledCollectors = [ "systemd" ];
     openFirewall = true;
     port = 9002;
   };
 
   # Foundry VTT server
-  systemd.services."foundryvtt" = let
-    node = "${pkgs.nodejs}/bin/node";
-    foundryEntryPoint = "/home/david/foundryvtt/resources/app/main.js";
-    foundryData = "/home/david/foundrydata";
-  in {
-    enable = true;
-    description = "Foundry VTT service (Node.js)";
-    serviceConfig.ExecStart = "${node} ${foundryEntryPoint} --dataPath=${foundryData}";
-    wantedBy = ["multi-user.target"];
-  };
+  systemd.services."foundryvtt" =
+    let
+      node = "${pkgs.nodejs}/bin/node";
+      foundryEntryPoint = "/home/david/foundryvtt/resources/app/main.js";
+      foundryData = "/home/david/foundrydata";
+    in
+    {
+      enable = true;
+      description = "Foundry VTT service (Node.js)";
+      serviceConfig.ExecStart = "${node} ${foundryEntryPoint} --dataPath=${foundryData}";
+      wantedBy = [ "multi-user.target" ];
+    };
 
   system.stateVersion = "24.05";
 }

@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   programs = {
     yazi = {
       enable = true;
@@ -6,9 +7,9 @@
       enableZshIntegration = true;
       enableFishIntegration = true;
       enableNushellIntegration = true;
-      keymap = {};
-      settings = {};
-      theme = {};
+      keymap = { };
+      settings = { };
+      theme = { };
     };
 
     # broot = {

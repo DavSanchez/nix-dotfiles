@@ -1,8 +1,5 @@
+{ lib, pkgs, ... }:
 {
-  lib,
-  pkgs,
-  ...
-}: {
   ## Main features
   imports = [
     ./c-cpp.nix
@@ -17,7 +14,8 @@
   ];
 
   ## Other packages
-  home.packages = with pkgs;
+  home.packages =
+    with pkgs;
     [
       devenv
       devcontainer
@@ -26,7 +24,5 @@
       gnumake
       # protobuf
     ]
-    ++ lib.optionals pkgs.stdenv.isLinux [
-      rr
-    ];
+    ++ lib.optionals pkgs.stdenv.isLinux [ rr ];
 }

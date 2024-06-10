@@ -1,7 +1,8 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   home.packages = with pkgs; [
     idris2 # FP with dependent types, compiles to C
-    agda # FP with dependent types, compiles to Haskell
+    agda # FP with dependent types, compiles to Haskell
     elixir # Dynamic FP for the Erlang VM
     gleam # Statically typed FP for the Erlang VM
     dotnet-sdk # For F-sharp: FP for .NET

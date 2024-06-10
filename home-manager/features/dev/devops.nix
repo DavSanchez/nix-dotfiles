@@ -1,9 +1,7 @@
+{ lib, pkgs, ... }:
 {
-  lib,
-  pkgs,
-  ...
-}: {
-  home.packages = with pkgs;
+  home.packages =
+    with pkgs;
     [
       ## Containers
       docker
@@ -50,13 +48,11 @@
     ]
     ++ lib.optionals pkgs.stdenv.isDarwin [
       ## Container runtimes on macOS
-      colima # Containers
+      colima # Containers
       tart # VMs
       orchard # VM orchestrator for macOS clusters
     ]
-    ++ lib.optionals pkgs.stdenv.isLinux [
-      nerdctl
-    ];
+    ++ lib.optionals pkgs.stdenv.isLinux [ nerdctl ];
 
   programs = {
     k9s = {

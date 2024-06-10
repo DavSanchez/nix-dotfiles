@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   home.packages = with pkgs; [
     bfg-repo-cleaner
     git-quick-stats
@@ -17,7 +18,7 @@
     #   signByDefault = true;
     # };
 
-    includes = [{path = "~/.config/git/localconf";}];
+    includes = [ { path = "~/.config/git/localconf"; } ];
 
     delta = {
       enable = false;
@@ -57,10 +58,10 @@
       pull.ff = "only";
       pull.rebase = true;
 
-      pager.log = "diff-so-fancy | less --tabs=4 -RFX"; # delta
-      pager.reflog = "diff-so-fancy | less --tabs=4 -RFX"; # delta
-      pager.show = "diff-so-fancy | less --tabs=4 -RFX"; # delta
-      pager.blame = "diff-so-fancy | less --tabs=4 -RFX"; # delta
+      pager.log = "diff-so-fancy | less --tabs=4 -RFX"; # delta
+      pager.reflog = "diff-so-fancy | less --tabs=4 -RFX"; # delta
+      pager.show = "diff-so-fancy | less --tabs=4 -RFX"; # delta
+      pager.blame = "diff-so-fancy | less --tabs=4 -RFX"; # delta
 
       color.diff-highlight.oldNormal = "red bold";
       color.diff-highlight.oldHighlight = "red bold 52";

@@ -1,4 +1,5 @@
-pkgs: let
+pkgs:
+let
   tmux-shell-profile = {
     "path" = "${pkgs.tmux}/bin/tmux";
     "args" = [
@@ -30,7 +31,8 @@ pkgs: let
     "tmux" = tmux-shell-profile;
     "zellij" = zellij-shell-profile;
   };
-in {
+in
+{
   "[haskell]"."editor.defaultFormatter" = "haskell.haskell";
   # "[jsonc]"."editor.defaultFormatter" = "esbenp.prettier-vscode";
   # "[python]"."editor.formatOnType" = true;
@@ -137,7 +139,7 @@ in {
   "nix.formatterPath" = "${pkgs.nixfmt-rfc-style}/bin/nixfmt";
   "nix.serverSettings" = {
     nixd = {
-      formatting.command = ["${pkgs.nixfmt-rfc-style}/bin/nixfmt"];
+      formatting.command = [ "${pkgs.nixfmt-rfc-style}/bin/nixfmt" ];
       # "options": {
       # By default, this entriy will be read from `import <nixpkgs> { }`
       # You can write arbitary nix expression here, to produce valid "options" declaration result.

@@ -3,7 +3,8 @@
   outputs,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
     inputs.nixvim.homeManagerModules.nixvim
 
@@ -47,9 +48,7 @@
     homeDirectory = "/home/david";
   };
 
-  programs.zsh.cdpath = [
-    "/home/david/NR-Repos"
-  ];
+  programs.zsh.cdpath = [ "/home/david/NR-Repos" ];
   programs.zsh.shellAliases = {
     sshCAOS = "ssh -i ~/.ssh/caos-dev-arm.cer -o \"StrictHostKeyChecking no\"";
   };

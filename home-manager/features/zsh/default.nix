@@ -1,8 +1,5 @@
+{ lib, pkgs, ... }:
 {
-  lib,
-  pkgs,
-  ...
-}: {
   programs.zsh = {
     enable = true;
     dotDir = ".config/zsh";
@@ -66,25 +63,21 @@
       # caseSensitive = true;
       utility.safeOps = true;
       editor.keymap = "vi";
-      pmodules =
-        [
-          "environment"
-          "terminal"
-          "editor"
-          "history"
-          "directory"
-          "spectrum"
-          "utility"
-          "completion"
-          "prompt"
-          # The below order is important
-          "syntax-highlighting"
-          "history-substring-search"
-          "autosuggestions"
-        ]
-        ++ lib.optionals pkgs.stdenv.isDarwin [
-          "osx"
-        ];
+      pmodules = [
+        "environment"
+        "terminal"
+        "editor"
+        "history"
+        "directory"
+        "spectrum"
+        "utility"
+        "completion"
+        "prompt"
+        # The below order is important
+        "syntax-highlighting"
+        "history-substring-search"
+        "autosuggestions"
+      ] ++ lib.optionals pkgs.stdenv.isDarwin [ "osx" ];
       syntaxHighlighting = {
         highlighters = [
           "main"
@@ -120,7 +113,10 @@
       LANG = "en_US.UTF-8";
       # NIX_PATH = "$HOME/.nix-defexpr/channels\${NIX_PATH:+:}$NIX_PATH";
       # FPATH = "$HOME/.nix-profile/share/zsh/site-functions:$FPATH";
-      ZSH_AUTOSUGGEST_STRATEGY = ["history" "completion"];
+      ZSH_AUTOSUGGEST_STRATEGY = [
+        "history"
+        "completion"
+      ];
     };
 
     initExtraBeforeCompInit = ''

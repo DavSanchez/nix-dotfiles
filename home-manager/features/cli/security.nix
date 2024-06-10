@@ -1,8 +1,5 @@
+{ pkgs, lib, ... }:
 {
-  pkgs,
-  lib,
-  ...
-}: {
   home.packages = with pkgs; [
     cotp
     # oath-toolkit

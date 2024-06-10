@@ -1,8 +1,5 @@
+{ lib, pkgs, ... }:
 {
-  lib,
-  pkgs,
-  ...
-}: {
   ## Main features
   imports = [
     ./c-cpp.nix
@@ -14,7 +11,8 @@
   ];
 
   ## Other packages
-  home.packages = with pkgs;
+  home.packages =
+    with pkgs;
     [
       taplo # TOML Langserver
       nodePackages.yaml-language-server # Langserver
@@ -24,7 +22,5 @@
       just # project-specific commands
       protobuf
     ]
-    ++ lib.optionals pkgs.stdenv.isLinux [
-      rr
-    ];
+    ++ lib.optionals pkgs.stdenv.isLinux [ rr ];
 }

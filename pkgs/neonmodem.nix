@@ -16,13 +16,13 @@ buildGoModule rec {
 
   vendorHash = "sha256-EGltrOKPHpgRNYspIv7LuGJ6SvCtp7TGap/DBa8yHZg=";
 
-  ldflags = ["-X github.com/mrusme/neonmodem/config.VERSION=${version}"];
+  ldflags = [ "-X github.com/mrusme/neonmodem/config.VERSION=${version}" ];
 
   meta = with lib; {
     description = "Neon Modem Overdrive";
     homepage = "https://github.com/mrusme/neonmodem.git";
     license = licenses.gpl3Only;
-    maintainers = with maintainers; [davsanchez];
+    maintainers = with maintainers; [ davsanchez ];
     mainProgram = "neonmodem";
   };
 }

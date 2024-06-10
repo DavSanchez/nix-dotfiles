@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   home.packages = with pkgs; [
     gomuks # Matrix client
 
@@ -15,13 +16,13 @@
             port = 6697;
             tls = true;
             realname = "David Sánchez";
-            nicks = ["DavSanchez"];
+            nicks = [ "DavSanchez" ];
           }
         ];
         defaults = {
           realname = "David Sánchez";
-          nicks = ["DavSanchez"];
-          join = [];
+          nicks = [ "DavSanchez" ];
+          join = [ ];
           tls = true;
         };
       };

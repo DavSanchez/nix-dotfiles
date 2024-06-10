@@ -1,9 +1,10 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   home.packages = with pkgs; [
     ## Media
     imagemagick
     qrencode
-    zbar # Barcode reading
+    zbar # Barcode reading
     # xdot
     ffmpeg
 

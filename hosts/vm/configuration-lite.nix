@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   system.stateVersion = "23.05";
 
   # Configure networking
@@ -10,7 +11,7 @@
   users.users.test.isNormalUser = true;
 
   # Enable passwordless ‘sudo’ for the "test" user
-  users.users.test.extraGroups = ["wheel"];
+  users.users.test.extraGroups = [ "wheel" ];
   security.sudo.wheelNeedsPassword = false;
 
   # Make VM output to the terminal instead of a separate window

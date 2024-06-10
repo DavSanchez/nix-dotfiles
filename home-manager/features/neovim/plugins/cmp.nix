@@ -14,27 +14,13 @@
     "<Tab>" = "cmp.mapping(cmp.mapping.select_next_item(), {'i', 's'})";
   };
   sources = [
-    {
-      name = "nvim_lsp";
-    }
-    {
-      name = "luasnip";
-    }
-    {
-      name = "path";
-    }
-    {
-      name = "buffer";
-    }
-    {
-      name = "conventionalcommits";
-    }
-    {
-      name = "dictionary";
-    }
-    {
-      name = "copilot";
-    }
+    { name = "nvim_lsp"; }
+    { name = "luasnip"; }
+    { name = "path"; }
+    { name = "buffer"; }
+    { name = "conventionalcommits"; }
+    { name = "dictionary"; }
+    { name = "copilot"; }
     # {
     # name = "codeium";
     # }

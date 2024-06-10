@@ -3,7 +3,8 @@
   nodes,
   config,
   ...
-}: {
+}:
+{
   # grafana configuration
   services.grafana = {
     enable = true;
@@ -32,7 +33,7 @@
     exporters = {
       node = {
         enable = true;
-        enabledCollectors = ["systemd"];
+        enabledCollectors = [ "systemd" ];
         port = 9002;
       };
       exportarr-radarr.enable = false;
@@ -47,11 +48,7 @@
       {
         job_name = name;
         static_configs = [
-          {
-            targets = [
-              "127.0.0.1:${toString config.services.prometheus.exporters.node.port}"
-            ];
-          }
+          { targets = [ "127.0.0.1:${toString config.services.prometheus.exporters.node.port}" ]; }
         ];
       }
       {
@@ -59,7 +56,9 @@
         static_configs = [
           {
             # FIXME: resolve? ${nodes.foundry-pi.config.networking.hostName}.local
-            targets = ["192.168.8.224:${toString nodes.foundry-pi.config.services.prometheus.exporters.node.port}"];
+            targets = [
+              "192.168.8.224:${toString nodes.foundry-pi.config.services.prometheus.exporters.node.port}"
+            ];
           }
         ];
       }

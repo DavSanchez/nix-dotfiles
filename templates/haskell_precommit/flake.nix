@@ -10,16 +10,19 @@
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = inputs @ {
-    self,
-    nixpkgs,
-    pre-commit-hooks,
-    flake-utils,
-  }:
+  outputs =
+    inputs@{
+      self,
+      nixpkgs,
+      pre-commit-hooks,
+      flake-utils,
+    }:
     flake-utils.lib.eachDefaultSystem (
-      system: let
-        pkgs = import nixpkgs {inherit system;};
-      in {
+      system:
+      let
+        pkgs = import nixpkgs { inherit system; };
+      in
+      {
         checks = {
           pre-commit-check = pre-commit-hooks.lib.${system}.run {
             src = ./.;
@@ -50,7 +53,7 @@
           };
         };
         packages = {
-          default = pkgs.haskellPackages.callPackage ./default.nix {};
+          default = pkgs.haskellPackages.callPackage ./default.nix { };
         };
       }
     );

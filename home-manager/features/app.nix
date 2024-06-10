@@ -1,9 +1,7 @@
+{ lib, pkgs, ... }:
 {
-  lib,
-  pkgs,
-  ...
-}: {
-  home.packages = with pkgs;
+  home.packages =
+    with pkgs;
     [
       # element-desktop
       # sniffnet

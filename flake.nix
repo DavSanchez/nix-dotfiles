@@ -34,106 +34,110 @@
     # nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    home-manager,
-    darwin,
-    ...
-  } @ inputs: let
-    inherit (self) outputs;
-    # Supported systems for flake packages, shell, etc.
-    systems = [
-      "aarch64-linux"
-      "i686-linux"
-      "x86_64-linux"
-      "aarch64-darwin"
-      "x86_64-darwin"
-    ];
-    # This is a function that generates an attribute by calling a function you
-    # pass to it, with each system as an argument
-    forAllSystems = nixpkgs.lib.genAttrs systems;
-  in {
-    # Custom packages
-    # Acessible through 'nix build', 'nix shell', etc
-    packages =
-      forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
+  outputs =
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      darwin,
+      ...
+    }@inputs:
+    let
+      inherit (self) outputs;
+      # Supported systems for flake packages, shell, etc.
+      systems = [
+        "aarch64-linux"
+        "i686-linux"
+        "x86_64-linux"
+        "aarch64-darwin"
+        "x86_64-darwin"
+      ];
+      # This is a function that generates an attribute by calling a function you
+      # pass to it, with each system as an argument
+      forAllSystems = nixpkgs.lib.genAttrs systems;
+    in
+    {
+      # Custom packages
+      # Acessible through 'nix build', 'nix shell', etc
+      packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
 
-    # Formatter for the nix files, available through 'nix fmt'
-    formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt-rfc-style);
-    # Your custom packages and modifications, exported as overlays
-    overlays = import ./overlays {inherit inputs;};
-    # Reusable nixos modules you might want to export
-    # These are usually stuff you would upstream into nixpkgs
-    nixosModules = import ./modules/nixos;
-    # Reusable nix-darwin modules you might want to export
-    # These are usually stuff you would upstream into nix-darwin
-    darwinModules = import ./modules/darwin;
-    # Reusable home-manager modules you might want to export
-    # These are usually stuff you would upstream into home-manager
-    homeManagerModules = import ./modules/home-manager;
+      # Formatter for the nix files, available through 'nix fmt'
+      formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt-rfc-style);
+      # Your custom packages and modifications, exported as overlays
+      overlays = import ./overlays { inherit inputs; };
+      # Reusable nixos modules you might want to export
+      # These are usually stuff you would upstream into nixpkgs
+      nixosModules = import ./modules/nixos;
+      # Reusable nix-darwin modules you might want to export
+      # These are usually stuff you would upstream into nix-darwin
+      darwinModules = import ./modules/darwin;
+      # Reusable home-manager modules you might want to export
+      # These are usually stuff you would upstream into home-manager
+      homeManagerModules = import ./modules/home-manager;
 
-    templates = import ./templates;
+      templates = import ./templates;
 
-    nixosConfigurations = {
-      nr-vm-utm = nixpkgs.lib.nixosSystem {
-        system = "aarch64-linux";
-        specialArgs = {inherit inputs outputs;};
-        modules = [
-          ./hosts/vm/utm/configuration.nix
-        ];
+      nixosConfigurations = {
+        nr-vm-utm = nixpkgs.lib.nixosSystem {
+          system = "aarch64-linux";
+          specialArgs = {
+            inherit inputs outputs;
+          };
+          modules = [ ./hosts/vm/utm/configuration.nix ];
+        };
+        nixberrypi = nixpkgs.lib.nixosSystem {
+          system = "aarch64-linux";
+          specialArgs = {
+            inherit inputs outputs;
+          };
+          modules = [ ./hosts/nixberrypi/configuration.nix ];
+        };
       };
-      nixberrypi = nixpkgs.lib.nixosSystem {
-        system = "aarch64-linux";
-        specialArgs = {inherit inputs outputs;};
-        modules = [
-          ./hosts/nixberrypi/configuration.nix
-        ];
+      # macOS systems using nix-darwin
+      darwinConfigurations = {
+        mbp = darwin.lib.darwinSystem {
+          system = "aarch64-darwin";
+          specialArgs = {
+            inherit inputs outputs;
+          };
+          modules = [
+            ./hosts/darwin/mbp.nix
+            # ./hosts/darwin-builder
+          ];
+        };
+        mini = darwin.lib.darwinSystem {
+          system = "aarch64-darwin";
+          specialArgs = {
+            inherit inputs outputs;
+          };
+          modules = [ ./hosts/darwin/mini.nix ];
+        };
       };
+
+      homeConfigurations = {
+        "david@mbp" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.aarch64-darwin; # Home-manager requires 'pkgs' instance
+          extraSpecialArgs = {
+            inherit inputs outputs;
+          };
+          modules = [ ./home-manager/home-mbp.nix ];
+        };
+        "david@mini" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+          extraSpecialArgs = {
+            inherit inputs outputs;
+          };
+          modules = [ ./home-manager/home-mini.nix ];
+        };
+        "davidsanchez@nr-vm" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.aarch64-linux;
+          extraSpecialArgs = {
+            inherit inputs outputs;
+          };
+          modules = [ ./home-manager/home-nr-vm.nix ];
+        };
+      };
+
+      colmena = import ./hosts/hive { inherit nixpkgs inputs outputs; };
     };
-    # macOS systems using nix-darwin
-    darwinConfigurations = {
-      mbp = darwin.lib.darwinSystem {
-        system = "aarch64-darwin";
-        specialArgs = {inherit inputs outputs;};
-        modules = [
-          ./hosts/darwin/mbp.nix
-          # ./hosts/darwin-builder
-        ];
-      };
-      mini = darwin.lib.darwinSystem {
-        system = "aarch64-darwin";
-        specialArgs = {inherit inputs outputs;};
-        modules = [
-          ./hosts/darwin/mini.nix
-        ];
-      };
-    };
-
-    homeConfigurations = {
-      "david@mbp" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.aarch64-darwin; # Home-manager requires 'pkgs' instance
-        extraSpecialArgs = {inherit inputs outputs;};
-        modules = [
-          ./home-manager/home-mbp.nix
-        ];
-      };
-      "david@mini" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.aarch64-darwin;
-        extraSpecialArgs = {inherit inputs outputs;};
-        modules = [
-          ./home-manager/home-mini.nix
-        ];
-      };
-      "davidsanchez@nr-vm" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.aarch64-linux;
-        extraSpecialArgs = {inherit inputs outputs;};
-        modules = [
-          ./home-manager/home-nr-vm.nix
-        ];
-      };
-    };
-
-    colmena = import ./hosts/hive {inherit nixpkgs inputs outputs;};
-  };
 }
