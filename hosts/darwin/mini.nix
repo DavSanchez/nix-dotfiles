@@ -149,6 +149,7 @@
     casks = [
       "adobe-acrobat-reader"
       "amethyst"
+      "bartender"
       "brave-browser"
       "crossover"
       "discord"
@@ -159,7 +160,7 @@
       "iina"
       "imhex"
       "insomnia"
-      "jordanbaird-ice"
+      # "jordanbaird-ice"
       "keymapp"
       "krita"
       "libreoffice"
