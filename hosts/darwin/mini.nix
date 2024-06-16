@@ -198,6 +198,7 @@
     masApps = {
       "1Blocker" = 1365531024;
       "Amphetamine" = 937984704;
+      "Draw Things" = 6444050820;
       "Hush" = 1544743900;
       "iMovie" = 408981434;
       "Keynote" = 409183694;
