@@ -157,6 +157,7 @@ in
   # "python.languageServer" = "Pylance";
   "redhat.telemetry.enabled" = false;
   "rust-analyzer.check.command" = "clippy";
+  "scm.experimental.showHistoryGraph" = true;
   "search.exclude" = {
     "**/.direnv" = true;
   };
