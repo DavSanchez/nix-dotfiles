@@ -1,9 +1,9 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
   programs.nushell = {
     enable = true;
     environmentVariables = {
-      DOTFILES = "$HOME/.dotfiles";
+      DOTFILES = "${config.home.homeDirectory}/.dotfiles";
     };
 
     # Other options:
