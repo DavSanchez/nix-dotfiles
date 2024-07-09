@@ -1,8 +1,7 @@
 { lib, pkgs, ... }:
 {
   home.packages =
-    with pkgs;
-    [
+    (with pkgs; [
       ## Containers
       docker
       docker-compose
@@ -45,14 +44,17 @@
       # netdata # broken
 
       # cirrus-cli # Related to tart/orchard
-    ]
-    ++ lib.optionals pkgs.stdenv.isDarwin [
-      ## Container runtimes on macOS
-      colima # Containers
-      tart # VMs
-      orchard # VM orchestrator for macOS clusters
-    ]
-    ++ lib.optionals pkgs.stdenv.isLinux [ nerdctl ];
+    ])
+    ++ lib.optionals pkgs.stdenv.isDarwin (
+      with pkgs;
+      [
+        ## Container runtimes on macOS
+        colima # Containers
+        tart # VMs
+        orchard # VM orchestrator for macOS clusters
+      ]
+    )
+    ++ lib.optionals pkgs.stdenv.isLinux [ pkgs.nerdctl ];
 
   programs = {
     k9s = {

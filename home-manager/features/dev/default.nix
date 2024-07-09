@@ -4,8 +4,8 @@
   imports = [
     ./c-cpp.nix
     ./devops.nix
-    # ./digital-design.nix
-    # ./fp.nix
+    ./digital-design.nix
+    ./fp.nix
     ./go.nix
     ./haskell
     ./java.nix
@@ -15,14 +15,15 @@
 
   ## Other packages
   home.packages =
-    with pkgs;
-    [
+    (with pkgs; [
       devenv
       devcontainer
 
       ## Other
       gnumake
       # protobuf
-    ]
-    ++ lib.optionals pkgs.stdenv.isLinux [ rr ];
+
+      zig
+    ])
+    ++ lib.optionals pkgs.stdenv.isLinux [ pkgs.rr ];
 }
