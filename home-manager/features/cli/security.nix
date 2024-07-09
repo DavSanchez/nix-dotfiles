@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 {
   home.packages = with pkgs; [
     cotp
@@ -15,6 +15,19 @@
       # ...
     };
     password-store.enable = true;
+
+    keychain = {
+      enable = true;
+      enableBashIntegration = true;
+      enableZshIntegration = true;
+      enableFishIntegration = true;
+      enableNushellIntegration = true;
+
+      keys = [
+        "id_rsa"
+        "id_ed25519"
+      ];
+    };
   };
 
   services.ssh-agent.enable = pkgs.stdenv.isLinux;
@@ -23,6 +36,7 @@
     enableBashIntegration = true;
     enableZshIntegration = true;
     enableFishIntegration = true;
+    enableNushellIntegration = true;
     enableScDaemon = true;
     defaultCacheTtl = 14400;
     maxCacheTtl = 86400;

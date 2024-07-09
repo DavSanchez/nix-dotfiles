@@ -24,6 +24,14 @@
       enableAliases = true;
     };
 
+    eza = {
+      enable = true;
+      enableBashIntegration = true;
+      enableZshIntegration = true;
+      enableFishIntegration = true;
+      enableNushellIntegration = true;
+    };
+
     fzf = {
       enable = true;
       enableZshIntegration = true;
@@ -87,6 +95,7 @@
       enableZshIntegration = true;
       enableBashIntegration = true;
       enableFishIntegration = true;
+      enableNushellIntegration = true;
     };
 
     less.enable = true;
@@ -122,14 +131,22 @@
     };
 
     atuin = {
-      enable = false;
-      # enableZshIntegration = true;
-      # enableBashIntegration = true;
-      # enableFishIntegration = true;
-      # enableNuIntegration = true;
-      settings = {
-        inline_height = 40;
-      };
+      enable = true;
+      enableZshIntegration = true;
+      enableBashIntegration = true;
+      enableFishIntegration = true;
+      enableNushellIntegration = true;
+      # settings = {
+      #   inline_height = 40;
+      # };
+    };
+
+    carapace = {
+      enable = true;
+      enableZshIntegration = true;
+      enableBashIntegration = true;
+      enableFishIntegration = true;
+      enableNushellIntegration = true;
     };
   };
 }

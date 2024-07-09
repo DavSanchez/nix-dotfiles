@@ -1,17 +1,22 @@
-{ lib, pkgs, ... }:
-lib.mkMerge [
-  {
-    programs.nushell = {
-      enable = true;
-      # configFile.source = ./config.nu;
-      # envFile.source = ./env.nu;
+{ pkgs, ... }:
+{
+  programs.nushell = {
+    enable = true;
+    environmentVariables = {
+      DOTFILES = "$HOME/.dotfiles";
     };
-  }
-  # Until https://github.com/nushell/nushell/issues/893 is solved...
-  (lib.mkIf pkgs.stdenv.isDarwin {
-    home.file = {
-      # "Library/Application Support/nushell/config.nu".source = ./config.nu;
-      # "Library/Application Support/nushell/env.nu".source = ./env.nu;
-    };
-  })
-]
+
+    # Other options:
+    # configFile = ...;
+    # envFile = ...;
+    # loginFile = ...;
+
+    # extraConfig = ...;
+    # extraEnv = ...;
+    # extraLogin = ...;
+
+    # shellAliases = ...;
+  };
+
+  home.packages = with pkgs; [ nufmt ];
+}

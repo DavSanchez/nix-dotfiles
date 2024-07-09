@@ -16,6 +16,12 @@
       extraConfig = ''
         include themes/rose-pine-moon.conf
       '';
+
+      shellIntegration = {
+        enableBashIntegration = true;
+        enableZshIntegration = true;
+        enableFishIntegration = true;
+      };
     };
   };
 }

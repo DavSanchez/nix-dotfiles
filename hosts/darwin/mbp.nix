@@ -121,8 +121,6 @@
   programs = {
     zsh = {
       enable = true; # default shell on Catalina+
-      enableFzfCompletion = true;
-      enableFzfGit = true;
     };
     # fish.enable = true;
     bash = {

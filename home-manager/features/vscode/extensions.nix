@@ -1,6 +1,5 @@
 pkgs:
-with pkgs.vscode-extensions;
-[
+(with pkgs.vscode-extensions; [
   ## Extensions present in nixpkgs
   ## Clashing with complete list in ./extensions.nix, so case by case here
   arrterian.nix-env-selector
@@ -52,6 +51,7 @@ with pkgs.vscode-extensions;
   redhat.vscode-yaml
   rust-lang.rust-analyzer
   tamasfe.even-better-toml
+  thenuprojectcontributors.vscode-nushell-lang
   timonwong.shellcheck
   usernamehw.errorlens
   vadimcn.vscode-lldb
@@ -60,7 +60,7 @@ with pkgs.vscode-extensions;
   vscodevim.vim
   zxh404.vscode-proto3
   ziglang.vscode-zig
-]
+])
 ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
   {
     name = "better-comments";

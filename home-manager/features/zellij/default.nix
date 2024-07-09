@@ -1,4 +1,5 @@
-_: {
+{ pkgs, ... }:
+{
   programs.zellij = {
     enable = true;
     enableBashIntegration = true;
@@ -7,6 +8,7 @@ _: {
     settings = {
       ui.pane_frames.rounded_corners = true;
       theme = "rose-pine-moon"; # "cyber-noir", "darkfox"
+      default_shell = "${pkgs.nushell}/bin/nu";
     };
   };
 

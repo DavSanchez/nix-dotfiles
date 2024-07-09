@@ -1,8 +1,7 @@
 { lib, pkgs, ... }:
 {
   home.packages =
-    with pkgs;
-    [
+    (with pkgs; [
       # element-desktop
       # sniffnet
       # contour # broken
@@ -18,13 +17,8 @@
       # sonic-pi
       # mtr-gui
       # czkawka # Multi functional app to find duplicates, empty folders, similar images etc
-    ]
-    ++ lib.optionals pkgs.stdenv.isDarwin [
-      # iterm2
-      utm
-    ]
-    ++ lib.optionals pkgs.stdenv.isLinux [
-      imhex
       zathura
-    ];
+    ])
+    ++ lib.optionals pkgs.stdenv.isDarwin [ pkgs.utm ]
+    ++ lib.optionals pkgs.stdenv.isLinux [ pkgs.imhex ];
 }
