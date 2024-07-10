@@ -51,6 +51,7 @@
         ## Container runtimes on macOS
         colima # Containers
         tart # VMs
+        softnet # VM networking for tart
         orchard # VM orchestrator for macOS clusters
       ]
     )
