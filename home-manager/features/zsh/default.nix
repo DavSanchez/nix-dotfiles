@@ -1,4 +1,9 @@
-{ lib, pkgs, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 {
   programs.zsh = {
     enable = true;
@@ -151,4 +156,6 @@
       eval "$(${pkgs.github-copilot-cli}/bin/github-copilot-cli alias -- "$0")"
     '';
   };
+
+  home.packages = lib.optionals config.programs.zsh.enable [ pkgs.zsh-forgit ];
 }
