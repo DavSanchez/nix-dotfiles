@@ -11,7 +11,8 @@ _: {
 
       return {
         font_size = 14,
-        window_background_opacity = 0.95,
+        window_background_opacity = 0.8,
+        use_fancy_tab_bar = false,
         hide_tab_bar_if_only_one_tab = true,
         colors = theme.colors(),
         window_frame = theme.window_frame(), -- needed only if using fancy tab bar
