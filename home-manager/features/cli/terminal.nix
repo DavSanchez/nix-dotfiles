@@ -44,8 +44,8 @@
         "--height 40%"
         "--border"
       ];
-      fileWidgetCommand = "fd --type f";
-      fileWidgetOptions = [ "--preview 'bat --color=always --style=numbers --line-range=:500 {}'" ];
+      # fileWidgetCommand = "fd --type f";
+      # fileWidgetOptions = [ "--preview 'bat --color=always --style=numbers --line-range=:500 {}'" ];
       historyWidgetOptions = [
         "--sort"
         "--exact"

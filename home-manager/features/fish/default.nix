@@ -1,4 +1,15 @@
-{ pkgs, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
+let
+  gen-plugin = pkg: {
+    name = "${pkg}";
+    inherit (pkgs.fishPlugins.${pkg}) src;
+  };
+in
 {
   programs.fish = {
     enable = true;
@@ -14,12 +25,37 @@
     interactiveShellInit = ''
       fish_config theme choose "Rosé Pine Moon"
 
+      # https://fishshell.com/docs/current/interactive.html#vi-mode
+      set -g fish_key_bindings fish_vi_key_bindings
+
+      # Nix shell for non-Bash shells
       ${pkgs.nix-your-shell}/bin/nix-your-shell fish | source
     '';
 
     loginShellInit = "";
 
-    plugins = [ ];
+    plugins =
+      map gen-plugin [
+        "grc" # grc Colourizer for some commands on Fish shell
+        "forgit" # Utility tool powered by fzf for using git interactively (adds abbrvs!)
+        "fzf-fish" # Augment your fish command line with fzf key bindings
+        "done" # Automatically receive notifications when long processes finish
+        "colored-man-pages" # Fish shell plugin to colorize man pages
+        "bass" # Fish function making it easy to use utilities written for Bash in Fish shell
+        "autopair" # Auto-complete matching pairs in the Fish command line
+        "clownfish" # Fish function to mock the behaviour of commands
+      ]
+      ++ [
+        # {
+        #   name = "fish-abbreviation-tips";
+        #   src = pkgs.fetchFromGitHub {
+        #     owner = "gazorby";
+        #     repo = "fish-abbreviation-tips";
+        #     rev = "v0.7.0";
+        #     sha256 = "sha256-F1t81VliD+v6WEWqj1c1ehFBXzqLyumx5vV46s/FZRU=";
+        #   };
+        # }
+      ];
 
     shellAbbrs = { };
 
@@ -34,4 +70,7 @@
     source = ./themes;
     recursive = true;
   };
+
+  # For the "grc" plugin enabled above, we need grc as it does not provide the package
+  home.packages = lib.optionals config.programs.fish.enable [ pkgs.grc ];
 }
