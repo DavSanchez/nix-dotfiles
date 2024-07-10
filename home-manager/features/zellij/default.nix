@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, ... }:
 {
   programs.zellij = {
     enable = true;
@@ -8,7 +8,7 @@
     settings = {
       ui.pane_frames.rounded_corners = true;
       theme = "rose-pine-moon"; # "cyber-noir", "darkfox"
-      # default_shell = "${pkgs.nushell}/bin/nu";
+      default_shell = "${config.programs.fish.package}/bin/fish";
     };
   };
 
