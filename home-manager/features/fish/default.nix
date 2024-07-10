@@ -10,7 +10,9 @@ _: {
       gitignore = "curl -sL https://www.gitignore.io/api/$argv";
     };
 
-    interactiveShellInit = "";
+    interactiveShellInit = ''
+      fish_config theme choose "Rosé Pine Moon"
+    '';
 
     loginShellInit = "";
 
@@ -23,5 +25,10 @@ _: {
     shellInit = "";
 
     shellInitLast = "";
+  };
+
+  xdg.configFile."fish/themes" = {
+    source = ./themes;
+    recursive = true;
   };
 }
