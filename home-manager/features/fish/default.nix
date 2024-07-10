@@ -1,4 +1,5 @@
-_: {
+{ pkgs, ... }:
+{
   programs.fish = {
     enable = true;
 
@@ -12,6 +13,8 @@ _: {
 
     interactiveShellInit = ''
       fish_config theme choose "Rosé Pine Moon"
+
+      ${pkgs.nix-your-shell}/bin/nix-your-shell fish | source
     '';
 
     loginShellInit = "";

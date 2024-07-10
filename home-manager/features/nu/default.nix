@@ -1,4 +1,9 @@
 { pkgs, config, ... }:
+let
+  nix-your-shell-config-nu = pkgs.runCommand "nix-your-shell-config-nu" { } ''
+    ${pkgs.nix-your-shell}/bin/nix-your-shell "nu" >> "$out"
+  '';
+in
 {
   programs.nushell = {
     enable = true;
@@ -11,7 +16,9 @@
     # envFile = ...;
     # loginFile = ...;
 
-    # extraConfig = ...;
+    extraConfig = ''
+      source ${nix-your-shell-config-nu}
+    '';
     # extraEnv = ...;
     # extraLogin = ...;
 

@@ -97,7 +97,7 @@
     antidote = {
       enable = true;
       plugins = [
-        "chisui/zsh-nix-shell"
+        # "chisui/zsh-nix-shell"
         "MichaelAquilina/zsh-you-should-use"
         "wfxr/formarks"
         "hlissner/zsh-autopair kind:defer"
@@ -145,6 +145,8 @@
     '';
 
     initExtra = ''
+      ${pkgs.nix-your-shell}/bin/nix-your-shell zsh | source /dev/stdin
+
       # Add aliases for github-copilot-cli (other shells?)
       eval "$(${pkgs.github-copilot-cli}/bin/github-copilot-cli alias -- "$0")"
     '';
