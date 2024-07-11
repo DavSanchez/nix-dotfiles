@@ -28,6 +28,9 @@ in
       # https://fishshell.com/docs/current/interactive.html#vi-mode
       set -g fish_key_bindings fish_vi_key_bindings
 
+      # Change greeting
+      set -U fish_greeting "🐟"
+
       # Nix shell for non-Bash shells
       ${pkgs.nix-your-shell}/bin/nix-your-shell fish | source
     '';
