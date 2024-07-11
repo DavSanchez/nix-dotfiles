@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, lib, ... }:
 {
   programs.zellij = {
     enable = true;
@@ -8,7 +8,9 @@
     settings = {
       ui.pane_frames.rounded_corners = true;
       theme = "rose-pine-moon"; # "cyber-noir", "darkfox"
-      default_shell = "${config.programs.fish.package}/bin/fish";
+
+      # Let's use fish as the default shell (if enabled)
+      default_shell = lib.optionalString config.programs.fish.enable "${config.programs.fish.package}/bin/fish";
     };
   };
 
