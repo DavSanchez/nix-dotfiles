@@ -18,7 +18,7 @@ _: {
         window_frame = theme.window_frame(), -- needed only if using fancy tab bar
         -- color_scheme = 'Catppuccin Mocha',
         -- term = "wezterm",
-        -- font = wezterm.font 'JetBrainsMono Nerd Font',
+        font = wezterm.font 'JetBrainsMono Nerd Font',
         window_decorations = "RESIZE",
       }
     '';

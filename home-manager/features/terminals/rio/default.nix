@@ -8,6 +8,7 @@ _: {
         opacity = 0.75;
         blur = true;
       };
+      fonts.family = "JetBrainsMono Nerd Font";
     };
   };
 
