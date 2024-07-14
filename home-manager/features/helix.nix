@@ -1,4 +1,4 @@
-_: {
+{pkgs, config, ...}: {
   programs.helix = {
     enable = true;
     settings = {
@@ -10,13 +10,24 @@ _: {
         # whitespace.render = "all";
         indent-guides.render = true;
       };
+      keys.normal = {
+        "C-y" = ":sh ${pkgs.zellij}/bin/zellij run -f -x 10% -y 10% --width 80% --height 80% -- ${pkgs.bash}/bin/bash ${config.xdg.configHome}/helix/yazi-picker.sh";
+      };
       theme = "rose_pine_moon";
-      # keys.normal = {
-      #   space.space = "file_picker";
-      #   space.w = ":w";
-      #   space.q = ":q";
-      # };
     };
-    # themes = {  };
   };
+
+  xdg.configFile."helix/yazi-picker.sh".text = ''
+    paths=$(${pkgs.yazi}/bin/yazi --chooser-file=/dev/stdout | while read -r; do printf "%q " "$REPLY"; done)
+
+    if [[ -n "$paths" ]]; then
+	    ${pkgs.zellij}/bin/zellij action toggle-floating-panes
+	    ${pkgs.zellij}/bin/zellij action write 27 # send <Escape> key
+	    ${pkgs.zellij}/bin/zellij action write-chars ":open $paths"
+	    ${pkgs.zellij}/bin/zellij action write 13 # send <Enter> key
+	    ${pkgs.zellij}/bin/zellij action toggle-floating-panes
+    fi
+
+    ${pkgs.zellij}/bin/zellij action close-pane
+  '';
 }
