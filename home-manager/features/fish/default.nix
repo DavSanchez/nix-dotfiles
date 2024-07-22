@@ -28,6 +28,22 @@ in
       # https://fishshell.com/docs/current/interactive.html#vi-mode
       set -g fish_key_bindings fish_vi_key_bindings
 
+      # Some emacs keybindings even though I'm using vi mode
+      bind -M default \ca beginning-of-line
+      bind -M insert \ca beginning-of-line
+      bind -M default \ce end-of-line
+      bind -M insert \ce end-of-line
+      bind -M default \cb backward-char
+      bind -M insert \cb backward-char
+      bind -M default \cf forward-char
+      bind -M insert \cf forward-char
+      bind -M default \cq backward-bigword
+      bind -M insert \cq backward-bigword
+      bind -M default \cw forward-bigword
+      bind -M insert \cw forward-bigword
+      bind -M default \cz complete-and-search
+      bind -M insert \cz complete-and-search
+
       # Change greeting
       set -U fish_greeting "🐟"
 
