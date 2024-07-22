@@ -13,7 +13,7 @@
         hide_window_decorations = if pkgs.stdenv.isDarwin then "titlebar-only" else "no";
 
         background_opacity = "0.75";
-        background_blur = "10";
+        background_blur = "16";
       };
       extraConfig = ''
         include themes/rose-pine-moon.conf
