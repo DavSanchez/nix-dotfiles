@@ -44,6 +44,7 @@
       # netdata # broken
 
       # cirrus-cli # Related to tart/orchard
+      process-compose
     ])
     ++ lib.optionals pkgs.stdenv.isDarwin (
       with pkgs;
