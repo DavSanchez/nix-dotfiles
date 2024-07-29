@@ -1,4 +1,5 @@
-{pkgs, config, ...}: {
+{ pkgs, config, ... }:
+{
   programs.helix = {
     enable = true;
     settings = {
@@ -18,16 +19,16 @@
   };
 
   xdg.configFile."helix/yazi-picker.sh".text = ''
-    paths=$(${pkgs.yazi}/bin/yazi --chooser-file=/dev/stdout | while read -r; do printf "%q " "$REPLY"; done)
+        paths=$(${pkgs.yazi}/bin/yazi --chooser-file=/dev/stdout | while read -r; do printf "%q " "$REPLY"; done)
 
-    if [[ -n "$paths" ]]; then
-	    ${pkgs.zellij}/bin/zellij action toggle-floating-panes
-	    ${pkgs.zellij}/bin/zellij action write 27 # send <Escape> key
-	    ${pkgs.zellij}/bin/zellij action write-chars ":open $paths"
-	    ${pkgs.zellij}/bin/zellij action write 13 # send <Enter> key
-	    ${pkgs.zellij}/bin/zellij action toggle-floating-panes
-    fi
+        if [[ -n "$paths" ]]; then
+    	    ${pkgs.zellij}/bin/zellij action toggle-floating-panes
+    	    ${pkgs.zellij}/bin/zellij action write 27 # send <Escape> key
+    	    ${pkgs.zellij}/bin/zellij action write-chars ":open $paths"
+    	    ${pkgs.zellij}/bin/zellij action write 13 # send <Enter> key
+    	    ${pkgs.zellij}/bin/zellij action toggle-floating-panes
+        fi
 
-    ${pkgs.zellij}/bin/zellij action close-pane
+        ${pkgs.zellij}/bin/zellij action close-pane
   '';
 }
