@@ -34,37 +34,37 @@
     ];
   };
 
-  fileSystems."/mnt/seclusium" = {
+  fileSystems."/seclusium" = {
     device = "seclusium";
     fsType = "zfs";
   };
 
-  fileSystems."/mnt/seclusium/echoes" = {
+  fileSystems."/seclusium/echoes" = {
     device = "seclusium/echoes";
     fsType = "zfs";
   };
 
-  fileSystems."/mnt/seclusium/dimensions" = {
+  fileSystems."/seclusium/dimensions" = {
     device = "seclusium/dimensions";
     fsType = "zfs";
   };
 
-  fileSystems."/mnt/seclusium/creation" = {
+  fileSystems."/seclusium/creation" = {
     device = "seclusium/creation";
     fsType = "zfs";
   };
 
-  fileSystems."/mnt/seclusium/technique" = {
+  fileSystems."/seclusium/technique" = {
     device = "seclusium/technique";
     fsType = "zfs";
   };
 
-  fileSystems."/mnt/seclusium/imagery" = {
+  fileSystems."/seclusium/imagery" = {
     device = "seclusium/imagery";
     fsType = "zfs";
   };
 
-  fileSystems."/mnt/seclusium/zg" = {
+  fileSystems."/seclusium/zg" = {
     device = "seclusium/zg";
     fsType = "zfs";
   };

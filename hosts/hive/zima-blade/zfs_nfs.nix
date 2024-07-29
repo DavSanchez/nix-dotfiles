@@ -3,7 +3,10 @@
   # ZFS
   boot.supportedFilesystems = [ "zfs" ];
   boot.zfs.forceImportRoot = false;
-  services.zfs.autoScrub.enable = true;
+  services.zfs.autoScrub = {
+    enable = true;
+    interval = "monthly";
+  };
   services.zfs.trim.enable = true;
   # Accessible via network
   services.nfs.server = {
@@ -15,14 +18,14 @@
     # extraNfsdConfig = '''';
     # see `man exports` for option details
     exports = ''
-      /mnt/seclusium 192.168.8.0/24(fsid=0,no_subtree_check)
+      /seclusium 192.168.8.0/24(fsid=0,no_subtree_check)
 
-      /mnt/seclusium/creation 192.168.8.0/24(rw,no_subtree_check,all_squash,anonuid=1000,anongid=100)
-      /mnt/seclusium/dimensions 192.168.8.0/24(no_subtree_check,all_squash,anonuid=1000,anongid=100)
-      /mnt/seclusium/echoes 192.168.8.0/24(rw,no_subtree_check,all_squash,anonuid=1000,anongid=100)
-      /mnt/seclusium/imagery 192.168.8.0/24(no_subtree_check,all_squash,anonuid=1000,anongid=100)
-      /mnt/seclusium/technique 192.168.8.0/24(no_subtree_check,all_squash,anonuid=1000,anongid=100)
-      /mnt/seclusium/zg 192.168.8.0/24(no_subtree_check,all_squash,anonuid=1000,anongid=100)
+      /seclusium/creation 192.168.8.0/24(rw,no_subtree_check,all_squash,anonuid=1000,anongid=100)
+      /seclusium/dimensions 192.168.8.0/24(no_subtree_check,all_squash,anonuid=1000,anongid=100)
+      /seclusium/echoes 192.168.8.0/24(rw,no_subtree_check,all_squash,anonuid=1000,anongid=100)
+      /seclusium/imagery 192.168.8.0/24(no_subtree_check,all_squash,anonuid=1000,anongid=100)
+      /seclusium/technique 192.168.8.0/24(no_subtree_check,all_squash,anonuid=1000,anongid=100)
+      /seclusium/zg 192.168.8.0/24(no_subtree_check,all_squash,anonuid=1000,anongid=100)
     '';
   };
 

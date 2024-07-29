@@ -66,70 +66,6 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # ZFS
-  # boot.supportedFilesystems = ["zfs"];
-  # boot.zfs.forceImportRoot = false;
-  # services.zfs.autoScrub.enable = true;
-  # services.zfs.trim.enable = true;
-  # # Accessible via network
-  # services.nfs.server = {
-  #   enable = true;
-  #   # fixed rpc.statd port; for firewall
-  #   lockdPort = 4001;
-  #   mountdPort = 4002;
-  #   statdPort = 4000;
-  #   # extraNfsdConfig = '''';
-  #   # see `man exports` for option details
-  #   exports = ''
-  #     /mnt/seclusium 192.168.8.0/24(fsid=0,no_subtree_check)
-
-  #     /mnt/seclusium/creation 192.168.8.0/24(rw,no_subtree_check,all_squash,anonuid=1000,anongid=100)
-  #     /mnt/seclusium/dimensions 192.168.8.0/24(no_subtree_check,all_squash,anonuid=1000,anongid=100)
-  #     /mnt/seclusium/echoes 192.168.8.0/24(rw,no_subtree_check,all_squash,anonuid=1000,anongid=100)
-  #     /mnt/seclusium/imagery 192.168.8.0/24(no_subtree_check,all_squash,anonuid=1000,anongid=100)
-  #     /mnt/seclusium/technique 192.168.8.0/24(no_subtree_check,all_squash,anonuid=1000,anongid=100)
-  #     /mnt/seclusium/zg 192.168.8.0/24(no_subtree_check,all_squash,anonuid=1000,anongid=100)
-  #   '';
-  # };
-
-  # # Enable mail notifications
-  # programs.msmtp = {
-  #   enable = true;
-  #   setSendmail = true;
-  #   defaults = {
-  #     aliases = "/etc/aliases";
-  #     port = 587;
-  #     tls_trust_file = "/etc/ssl/certs/ca-certificates.crt";
-  #     tls = "on";
-  #     auth = "login";
-  #     tls_starttls = "on";
-  #   };
-  #   accounts = {
-  #     zed = {
-  #       host = "smtp.gmail.com";
-  #       passwordeval = "cat /etc/emailpass.txt";
-  #       user = "d.vinternatt@gmail.com";
-  #       from = "zed@${name}.local";
-  #     };
-  #   };
-  # };
-  # services.zfs.zed.settings = {
-  #   ZED_DEBUG_LOG = "/tmp/zed.debug.log";
-  #   ZED_EMAIL_ADDR = [
-  #     # "root"
-  #     "zimazfszed.jc5ka@passmail.net"
-  #   ];
-  #   ZED_EMAIL_PROG = "${pkgs.msmtp}/bin/msmtp";
-  #   ZED_EMAIL_OPTS = "-a zed @ADDRESS@";
-
-  #   ZED_NOTIFY_INTERVAL_SECS = 3600;
-  #   ZED_NOTIFY_VERBOSE = true;
-
-  #   ZED_USE_ENCLOSURE_LEDS = true;
-  #   ZED_SCRUB_AFTER_RESILVER = true;
-  # };
-  # services.zfs.zed.enableMail = false;
-
   networking = {
     # Required for ZFS
     hostId = "bfbc2f21";
@@ -165,6 +101,8 @@
     extraGroups = [
       "networkmanager"
       "wheel"
+
+      "multimedia"
     ];
     packages = [
       # firefox
@@ -175,6 +113,10 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMgJQWw5UU2QSDIgEwwDwISqztyyLyaTTglmnplyx17A davidslt+git@pm.me"
     ];
   };
+  users.groups = {
+    multimedia = { };
+  };
+
   # Make deployments to this machine passwordless
   security.sudo.wheelNeedsPassword = false;
 
@@ -201,66 +143,6 @@
       workstation = true;
     };
   };
-
-  # grafana configuration
-  # services.grafana = {
-  #   enable = true;
-  #   settings.server = {
-  #     domain = "${name}.local";
-  #     http_port = 2342;
-  #     http_addr = "127.0.0.1";
-  #     root_url = "http://${name}.local/grafana/";
-  #     serve_from_sub_path = true;
-  #   };
-  # };
-  # # nginx reverse proxy
-  # services.nginx = {
-  #   enable = true;
-  #   virtualHosts."${name}.local" = {
-  #     locations."/grafana/" = {
-  #       proxyPass = "http://${config.services.grafana.settings.server.http_addr}:${toString config.services.grafana.settings.server.http_port}";
-  #       proxyWebsockets = true;
-  #       recommendedProxySettings = true;
-  #     };
-  #   };
-  # };
-  # services.prometheus = {
-  #   enable = true;
-  #   port = 9001;
-  #   exporters = {
-  #     node = {
-  #       enable = true;
-  #       enabledCollectors = ["systemd"];
-  #       port = 9002;
-  #     };
-  #   };
-  #   scrapeConfigs = [
-  #     {
-  #       job_name = name;
-  #       static_configs = [
-  #         {
-  #           targets = [
-  #             "127.0.0.1:${toString config.services.prometheus.exporters.node.port}"
-  #           ];
-  #         }
-  #       ];
-  #     }
-  #     {
-  #       job_name = nodes.foundry-pi.config.networking.hostName;
-  #       static_configs = [
-  #         {
-  #           # FIXME: resolve? ${nodes.foundry-pi.config.networking.hostName}.local
-  #           targets = ["192.168.8.224:${toString nodes.foundry-pi.config.services.prometheus.exporters.node.port}"];
-  #         }
-  #       ];
-  #     }
-  #   ];
-  # };
-
-  # services.plex = {
-  #   enable = true;
-  #   openFirewall = true;
-  # };
 
   system.stateVersion = "23.11";
 }
