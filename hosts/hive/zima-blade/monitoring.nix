@@ -43,6 +43,7 @@
       };
       exportarr-readarr.enable = false;
       exportarr-bazarr.enable = false;
+      exportarr-prowlarr.enable = false;
     };
     scrapeConfigs = [
       {

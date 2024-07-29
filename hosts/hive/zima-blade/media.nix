@@ -17,6 +17,7 @@
       enable = true;
       # user = "david";
       openFirewall = true;
+      dataDir = "/seclusium/echoes/lidarr/.config/Lidarr";
     };
 
     # Books
@@ -28,6 +29,12 @@
     # Subtitles
     bazarr = {
       enable = false;
+      openFirewall = true;
+    };
+
+    # Indexers
+    prowlarr = {
+      enable = true;
       openFirewall = true;
     };
 
