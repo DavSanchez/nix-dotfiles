@@ -1,4 +1,10 @@
-{ config, lib, ... }:
+{
+  name,
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   services = {
     plex = {
@@ -43,6 +49,12 @@
       home = "/seclusium/zg/transmission";
       openPeerPorts = true;
       openRPCPort = true;
+      settings = {
+        rpc-bind-address = "0.0.0.0";
+        rpc-whitelist = "192.168.8.*";
+        rpc-host-whitelist = "${name}.local";
+      };
+      webHome = pkgs.flood-for-transmission;
     };
   };
 
