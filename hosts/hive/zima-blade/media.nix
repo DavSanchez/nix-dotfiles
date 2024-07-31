@@ -40,7 +40,9 @@
 
     transmission = {
       enable = true;
-      openFirewall = true;
+      home = "/seclusium/zg/transmission";
+      openPeerPorts = true;
+      openRPCPort = true;
     };
   };
 
