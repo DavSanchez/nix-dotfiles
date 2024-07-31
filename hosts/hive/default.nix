@@ -7,15 +7,15 @@
 {
   meta = {
     nixpkgs = import nixpkgs {
-      # Change it to the local arch-os you are using locally
+      # Change it to the arch-os you are using locally
       system = "aarch64-darwin";
     };
     specialArgs = {
       inherit inputs outputs;
     };
     nodeNixpkgs = {
-      foundry-pi = import nixpkgs { system = "aarch64-linux"; };
-      zima-blade = import nixpkgs { system = "x86_64-linux"; };
+      foundry-pi = import inputs.nixpkgs-stable { system = "aarch64-linux"; };
+      zima-blade = import inputs.nixpkgs-stable { system = "x86_64-linux"; };
     };
   };
   # nixberrypi = ./nixberrypi/configuration.nix;
