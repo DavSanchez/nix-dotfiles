@@ -21,7 +21,6 @@
     ])
     ++ lib.optionals pkgs.stdenv.isDarwin [
       pkgs.utm
-      pkgs.ollama
     ]
     ++ lib.optionals pkgs.stdenv.isLinux [ pkgs.imhex ];
 }
