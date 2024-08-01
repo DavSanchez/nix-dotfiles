@@ -1,6 +1,6 @@
 _: {
   programs.rio = {
-    enable = true;
+    enable = false;
     settings = {
       theme = "rose-pine-moon";
       window = {
