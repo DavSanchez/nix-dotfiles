@@ -8,7 +8,7 @@
   programs = {
     # TUI IRC client written in Rust.
     tiny = {
-      enable = true;
+      enable = false;
       settings = {
         servers = [
           {
@@ -17,6 +17,14 @@
             tls = true;
             realname = "David Sánchez";
             nicks = [ "DavSanchez" ];
+            join = [ ];
+          }
+          {
+            addr = "irc.dejatoons.net";
+            port = 6697;
+            realname = "David";
+            nicks = [ "4rch1v4d0r" ];
+            join = [ ];
           }
         ];
         defaults = {
