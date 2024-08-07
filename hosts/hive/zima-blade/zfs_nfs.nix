@@ -22,7 +22,7 @@
 
       /seclusium/creation 192.168.8.0/24(rw,no_subtree_check,all_squash,anonuid=1000,anongid=100)
       /seclusium/dimensions 192.168.8.0/24(no_subtree_check,all_squash,anonuid=1000,anongid=100)
-      /seclusium/echoes 192.168.8.0/24(rw,no_subtree_check,all_squash,anonuid=1000,anongid=100)
+      /seclusium/echoes 192.168.8.169/32(rw,no_subtree_check,all_squash,anonuid=1000,anongid=100)
       /seclusium/imagery 192.168.8.0/24(no_subtree_check,all_squash,anonuid=1000,anongid=100)
       /seclusium/technique 192.168.8.0/24(no_subtree_check,all_squash,anonuid=1000,anongid=100)
       /seclusium/zg 192.168.8.0/24(no_subtree_check,all_squash,anonuid=1000,anongid=100)
