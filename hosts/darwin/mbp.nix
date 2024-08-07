@@ -181,7 +181,6 @@
       "stats"
       "steam"
       "synthesia"
-      "thunderbird"
       "tor-browser"
       "transmission"
       "vlc"
