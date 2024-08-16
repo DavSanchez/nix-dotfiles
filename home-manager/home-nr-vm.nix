@@ -18,7 +18,7 @@
     ./features/bash
     ./features/fish
     ./features/zellij
-    # ./features/terminals
+    ./features/terminals
 
     ./features/fonts.nix
     ./features/helix.nix
@@ -28,8 +28,8 @@
   nixpkgs = {
     overlays = [
       outputs.overlays.additions
-      outputs.overlays.rosetta-packages
       outputs.overlays.stable-packages
+      outputs.overlays.rosetta-packages
       outputs.overlays.modifications
     ];
     config = {

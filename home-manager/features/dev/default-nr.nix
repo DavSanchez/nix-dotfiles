@@ -14,13 +14,14 @@
   home.packages =
     with pkgs;
     [
-      taplo # TOML Langserver
-      nodePackages.yaml-language-server # Langserver
+      devenv
+      devcontainer
 
       ## Other
       gnumake
-      just # project-specific commands
-      protobuf
+      # protobuf
+
+      zig
     ]
     ++ lib.optionals pkgs.stdenv.isLinux [ rr ];
 }

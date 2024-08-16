@@ -83,7 +83,7 @@
           specialArgs = {
             inherit inputs outputs;
           };
-          modules = [ ./hosts/vm/utm/configuration.nix ];
+          modules = [ ./hosts/vm/utm-nr/configuration.nix ];
         };
         nixberrypi = nixpkgs.lib.nixosSystem {
           system = "aarch64-linux";
@@ -129,7 +129,7 @@
           };
           modules = [ ./home-manager/home-mini.nix ];
         };
-        "davidsanchez@nr-vm" = home-manager.lib.homeManagerConfiguration {
+        "david@nr-vm" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.aarch64-linux;
           extraSpecialArgs = {
             inherit inputs outputs;

@@ -32,8 +32,9 @@
       experimental-features = "nix-command flakes";
       auto-optimise-store = true;
     };
-    package = pkgs.nixUnstable;
+    package = pkgs.nixVersions.latest;
   };
+
   # see nix.registry and nix.nixPath above
   environment.etc = lib.mapAttrs' (name: value: {
     name = "nix/path/${name}";
