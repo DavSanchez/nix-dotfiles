@@ -22,6 +22,9 @@
     hardware.url = "github:nixos/nixos-hardware";
     # nix-colors.url = "github:misterio77/nix-colors";
 
+    # nh with darwin support
+    nh_darwin.url = "github:ToyVo/nh_darwin";
+
     nix-relic.url = "github:DavSanchez/Nix-Relic";
     nix-relic.inputs.nixpkgs.follows = "nixpkgs";
 

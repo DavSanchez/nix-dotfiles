@@ -17,6 +17,7 @@
     # Or modules from other flakes (such as nixos-hardware):
     # inputs.hardware.nixosModules.common-cpu-amd
     # inputs.hardware.nixosModules.common-ssd
+    inputs.nh_darwin.nixDarwinModules.prebuiltin
 
     # You can also split up your configuration and import pieces of it here:
     # ./users.nix
@@ -76,7 +77,7 @@
       nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
 
       gc = {
-        automatic = true;
+        automatic = false; # see programs.nh.clean
         interval = {
           Day = 7;
         };
@@ -87,6 +88,17 @@
         ephemeral = true;
       };
     };
+
+  # Alias for nh_darwin
+  environment.shellAliases.nh = "nh_darwin";
+
+  programs.nh = {
+    enable = true;
+    clean.enable = true;
+    # Installation option once https://github.com/LnL7/nix-darwin/pull/942 is merged:
+    # package = nh_darwin.packages.${pkgs.stdenv.hostPlatform.system}.default;
+    flake = "/Users/david/.dotfiles";
+  };
 
   environment = {
     # List packages installed in system profile. To search by name, run:

@@ -81,6 +81,10 @@
 
   home.sessionPath = [ "$HOME/.local/bin" ];
 
+  home.sessionVariables = {
+    DOTFILES = "$HOME/.dotfiles";
+  };
+
   home.file = {
     # Amethyst configuration
     ".amethyst.yml".source = ./darwin/amethyst.yml;
