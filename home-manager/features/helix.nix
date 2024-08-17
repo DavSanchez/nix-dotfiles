@@ -2,6 +2,7 @@
 {
   programs.helix = {
     enable = true;
+    defaultEditor = true;
     settings = {
       editor = {
         line-number = "relative";
@@ -15,6 +16,15 @@
         "C-y" = ":sh ${pkgs.zellij}/bin/zellij run -f -x 10% -y 10% --width 80% --height 80% -- ${pkgs.bash}/bin/bash ${config.xdg.configHome}/helix/yazi-picker.sh";
       };
       theme = "rose_pine_moon";
+    };
+    languages = {
+      language = [
+        {
+          name = "nix";
+          language-servers = [ "nixd" ];
+        }
+      ];
+      language-server.nixd.command = "${pkgs.nixd}/bin/nixd";
     };
   };
 
