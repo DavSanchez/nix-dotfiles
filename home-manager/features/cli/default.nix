@@ -22,8 +22,6 @@
       pciutils
 
       w3m
-
-      github-copilot-cli
     ]
     ++ lib.optionals pkgs.stdenv.isDarwin [ m-cli ]
     ++ lib.optionals pkgs.stdenv.isLinux [
