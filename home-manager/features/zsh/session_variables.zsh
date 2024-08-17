@@ -14,7 +14,7 @@ export DOTFILES="$HOME/.dotfiles"
 
 # export ZSH=~/.oh-my-zsh
 export NVIM_TUI_ENABLE_TRUE_COLOR=1
-export EDITOR="nvim"
+export EDITOR="hx"
 export LC_ALL="en_US.UTF-8"
 export LANG="en_US.UTF-8"
 

@@ -113,7 +113,7 @@
       KEYTIMEOUT = 1;
       DOTFILES = "$HOME/.dotfiles";
       NVIM_TUI_ENABLE_TRUE_COLOR = 1;
-      EDITOR = "nvim";
+      EDITOR = "hx";
       LC_ALL = "en_US.UTF-8";
       LANG = "en_US.UTF-8";
       # NIX_PATH = "$HOME/.nix-defexpr/channels\${NIX_PATH:+:}$NIX_PATH";
@@ -151,9 +151,6 @@
 
     initExtra = ''
       ${pkgs.nix-your-shell}/bin/nix-your-shell zsh | source /dev/stdin
-
-      # Add aliases for github-copilot-cli (other shells?)
-      eval "$(${pkgs.github-copilot-cli}/bin/github-copilot-cli alias -- "$0")"
     '';
   };
 
