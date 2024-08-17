@@ -4,7 +4,7 @@
 # We use a custom module for VSCode
 {
   programs.vscode = {
-    enable = false;
+    enable = true;
     # package = pkgs.vscodium; # vscodium.fhs for complex extensions?
     enableUpdateCheck = true;
 
