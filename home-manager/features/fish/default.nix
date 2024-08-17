@@ -80,7 +80,9 @@ in
 
     shellAliases = { };
 
-    shellInit = "";
+    shellInit = ''
+      set -Ux EDITOR hx
+    '';
 
     shellInitLast = "";
   };
