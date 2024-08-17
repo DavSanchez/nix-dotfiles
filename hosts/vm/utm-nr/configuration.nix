@@ -2,13 +2,20 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, inputs, outputs, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  inputs,
+  outputs,
+  ...
+}:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   nixpkgs = {
     overlays = [
@@ -21,7 +28,6 @@
       allowUnfree = true;
     };
   };
-
 
   nix = {
     registry = (lib.mapAttrs (_: flake: { inherit flake; })) (
@@ -115,13 +121,16 @@
     description = "David";
     # shell = pkgs.fish;
     openssh.authorizedKeys.keys = [
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAtJ6zSsueNkp3+N+DjXwpXi4Lrq9TYvnfXDGIl1Ccsq davidsanchez@newrelic.com"
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILvM06bcMBkqNyadDKDGQXl4ztggBM1mgg5/CLqnqNvn davidslt+ssh@pm.me"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAtJ6zSsueNkp3+N+DjXwpXi4Lrq9TYvnfXDGIl1Ccsq davidsanchez@newrelic.com"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILvM06bcMBkqNyadDKDGQXl4ztggBM1mgg5/CLqnqNvn davidslt+ssh@pm.me"
     ];
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
     packages = with pkgs; [
       kdePackages.kate
-    #  thunderbird
+      #  thunderbird
     ];
   };
 
@@ -138,8 +147,8 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
+    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    #  wget
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
