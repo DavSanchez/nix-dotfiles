@@ -20,7 +20,7 @@
   multicursors.enable = true;
   neo-tree.enable = true;
   neogit.enable = true;
-  neorg.enable = true;
+  neorg.enable = false;
   nix.enable = true;
   nix-develop.enable = true;
   nvim-autopairs.enable = true;
