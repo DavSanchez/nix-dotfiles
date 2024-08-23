@@ -4,4 +4,6 @@
 {
   # example = pkgs.callPackage ./example { };
   neonmodem = pkgs.callPackage ./neonmodem.nix { };
+
+  aerospace = pkgs.callPackage ./aerospace.nix { };
 }
