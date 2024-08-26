@@ -1,6 +1,5 @@
 { pkgs, ... }:
 {
-  xdg.configFile."kitty/themes/rose-pine-moon.conf".source = ./rose-pine-moon.conf;
   xdg.configFile."kitty/kitty.app.png".source = ./kitty.app.png;
 
   programs = {
@@ -15,9 +14,6 @@
         background_opacity = "0.75";
         background_blur = "16";
       };
-      extraConfig = ''
-        include themes/rose-pine-moon.conf
-      '';
 
       shellIntegration = {
         enableBashIntegration = true;

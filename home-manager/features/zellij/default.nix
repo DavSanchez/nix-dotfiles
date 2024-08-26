@@ -7,16 +7,10 @@
     enableZshIntegration = true;
     settings = {
       ui.pane_frames.rounded_corners = true;
-      theme = "rose-pine-moon"; # "cyber-noir", "darkfox"
 
       # Let's use fish as the default shell (if enabled)
       default_shell = lib.optionalString config.programs.fish.enable "${config.programs.fish.package}/bin/fish";
     };
-  };
-
-  xdg.configFile."zellij/themes" = {
-    source = ./themes;
-    recursive = true;
   };
 
   # Creating .config/zellij/layouts overwrites

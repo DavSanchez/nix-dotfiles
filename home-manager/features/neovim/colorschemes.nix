@@ -1,11 +1,11 @@
 {
-  # gruvbox.enable = true;
+  gruvbox.enable = false;
   catppuccin = {
-    enable = false;
+    enable = true;
     settings.flavour = "mocha";
   };
   rose-pine = {
-    enable = true;
+    enable = false;
     settings.variant = "moon";
   };
 }

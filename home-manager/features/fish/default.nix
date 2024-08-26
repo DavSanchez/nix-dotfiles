@@ -23,8 +23,6 @@ in
     };
 
     interactiveShellInit = ''
-      fish_config theme choose "Rosé Pine Moon"
-
       # https://fishshell.com/docs/current/interactive.html#vi-mode
       set -g fish_key_bindings fish_vi_key_bindings
 
@@ -85,11 +83,6 @@ in
     '';
 
     shellInitLast = "";
-  };
-
-  xdg.configFile."fish/themes" = {
-    source = ./themes;
-    recursive = true;
   };
 
   # For the "grc" plugin enabled above, we need grc as it does not provide the package

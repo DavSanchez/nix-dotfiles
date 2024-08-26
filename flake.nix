@@ -35,6 +35,9 @@
     nixvim.url = "github:nix-community/nixvim";
     nixvim.inputs.nixpkgs.follows = "nixpkgs";
     # nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
+
+    # Uniform colors across all apps?
+    catppuccin.url = "github:catppuccin/nix";
   };
 
   outputs =
@@ -43,6 +46,7 @@
       nixpkgs,
       home-manager,
       darwin,
+      catppuccin,
       ...
     }@inputs:
     let
@@ -86,14 +90,20 @@
           specialArgs = {
             inherit inputs outputs;
           };
-          modules = [ ./hosts/vm/utm-nr/configuration.nix ];
+          modules = [
+            ./hosts/vm/utm-nr/configuration.nix
+            catppuccin.nixosModules.catppuccin
+          ];
         };
         nixberrypi = nixpkgs.lib.nixosSystem {
           system = "aarch64-linux";
           specialArgs = {
             inherit inputs outputs;
           };
-          modules = [ ./hosts/nixberrypi/configuration.nix ];
+          modules = [
+            ./hosts/nixberrypi/configuration.nix
+            catppuccin.nixosModules.catppuccin
+          ];
         };
       };
       # macOS systems using nix-darwin
@@ -123,21 +133,30 @@
           extraSpecialArgs = {
             inherit inputs outputs;
           };
-          modules = [ ./home-manager/home-mbp.nix ];
+          modules = [
+            ./home-manager/home-mbp.nix
+            catppuccin.homeManagerModules.catppuccin
+          ];
         };
         "david@mini" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.aarch64-darwin;
           extraSpecialArgs = {
             inherit inputs outputs;
           };
-          modules = [ ./home-manager/home-mini.nix ];
+          modules = [
+            ./home-manager/home-mini.nix
+            catppuccin.homeManagerModules.catppuccin
+          ];
         };
         "david@nr-vm" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.aarch64-linux;
           extraSpecialArgs = {
             inherit inputs outputs;
           };
-          modules = [ ./home-manager/home-nr-vm.nix ];
+          modules = [
+            ./home-manager/home-nr-vm.nix
+            catppuccin.homeManagerModules.catppuccin
+          ];
         };
       };
 

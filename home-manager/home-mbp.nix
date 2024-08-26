@@ -89,6 +89,10 @@
     # Amethyst configuration
     ".amethyst.yml".source = ./darwin/amethyst.yml;
   };
+
+  catppuccin.enable = true;
+  catppuccin.flavor = "mocha";
+
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   home.stateVersion = "22.11";
 }
