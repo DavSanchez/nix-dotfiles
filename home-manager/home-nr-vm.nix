@@ -53,6 +53,9 @@
 
   xdg.enable = true;
 
+  catppuccin.enable = true;
+  catppuccin.flavor = "mocha";
+
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   home.stateVersion = "22.11";
 }
