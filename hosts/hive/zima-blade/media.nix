@@ -51,7 +51,7 @@
       openRPCPort = true;
       settings = {
         rpc-bind-address = "0.0.0.0";
-        rpc-whitelist = "192.168.8.*";
+        rpc-whitelist = "192.168.*.* 127.0.0.1";
         rpc-host-whitelist = "${name}.local";
       };
       webHome = pkgs.flood-for-transmission;
