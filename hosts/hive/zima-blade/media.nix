@@ -27,7 +27,6 @@
     # Music
     lidarr = {
       enable = true;
-      # user = "david";
       openFirewall = true;
       dataDir = "/seclusium/echoes/lidarr/.config/Lidarr";
     };
