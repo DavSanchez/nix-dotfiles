@@ -180,6 +180,7 @@
       "maccy"
       "openemu"
       "openra"
+      "plex"
       "proton-drive"
       "proton-mail"
       "protonmail-bridge"

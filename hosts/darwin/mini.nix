@@ -169,6 +169,7 @@
       "maccy"
       "openemu"
       "openra"
+      "plex"
       "plex-media-server"
       "proton-drive"
       "proton-mail"
