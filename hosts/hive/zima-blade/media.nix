@@ -18,6 +18,12 @@
       openFirewall = true;
     };
 
+    # Series
+    sonarr = {
+      enable = true;
+      openFirewall = true;
+    };
+
     # Music
     lidarr = {
       enable = true;
@@ -65,6 +71,7 @@
         "multimedia"
         (lib.optionalString config.services.plex.enable config.services.plex.group)
         (lib.optionalString config.services.radarr.enable config.services.radarr.group)
+        (lib.optionalString config.services.sonarr.enable config.services.sonarr.group)
         (lib.optionalString config.services.lidarr.enable config.services.lidarr.group)
         (lib.optionalString config.services.readarr.enable config.services.readarr.group)
         (lib.optionalString config.services.bazarr.enable config.services.bazarr.group)
@@ -72,6 +79,13 @@
     }
     // lib.optionalAttrs config.services.radarr.enable {
       radarr.extraGroups = [
+        "multimedia"
+        (lib.optionalString config.services.transmission.enable config.services.transmission.group)
+        (lib.optionalString config.services.plex.enable config.services.plex.group)
+      ];
+    }
+    // lib.optionalAttrs config.services.sonarr.enable {
+      sonarr.extraGroups = [
         "multimedia"
         (lib.optionalString config.services.transmission.enable config.services.transmission.group)
         (lib.optionalString config.services.plex.enable config.services.plex.group)
