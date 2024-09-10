@@ -38,7 +38,7 @@
       experimental-features = "nix-command flakes";
       auto-optimise-store = true;
     };
-    package = pkgs.nixVersions.latest;
+    package = pkgs.nixVersions.nix_2_23;
   };
 
   # see nix.registry and nix.nixPath above
