@@ -55,7 +55,7 @@
       flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
     in
     {
-      # package = pkgs.nixVersions.unstable;
+      package = pkgs.nixVersions.latest;
       settings = {
         trusted-users = [
           "root"
