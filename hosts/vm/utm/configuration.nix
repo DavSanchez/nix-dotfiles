@@ -13,8 +13,8 @@
 
   nixpkgs = {
     overlays = [
-      outputs.overlays.additions
-      outputs.overlays.modifications
+      inputs.self.overlays.additions
+      inputs.self.overlays.modifications
       inputs.nix-relic.overlays.additions
     ];
 
@@ -24,22 +24,12 @@
   };
 
   nix = {
-    registry = (lib.mapAttrs (_: flake: { inherit flake; })) (
-      (lib.filterAttrs (_: lib.isType "flake")) inputs
-    );
-    nixPath = [ "/etc/nix/path" ];
     settings = {
       experimental-features = "nix-command flakes";
       auto-optimise-store = true;
     };
     package = pkgs.nixVersions.nix_2_23;
   };
-
-  # see nix.registry and nix.nixPath above
-  environment.etc = lib.mapAttrs' (name: value: {
-    name = "nix/path/${name}";
-    value.source = value.flake;
-  }) config.nix.registry;
 
   networking.hostName = "nixos-vm";
 

@@ -2,6 +2,7 @@
 {
   imports = [
     inputs.nixvim.homeManagerModules.nixvim
+    inputs.catppuccin.homeManagerModules.catppuccin
 
     ./features/aws
     ./features/cli
@@ -27,10 +28,10 @@
 
   nixpkgs = {
     overlays = [
-      outputs.overlays.additions
-      outputs.overlays.stable-packages
-      outputs.overlays.rosetta-packages
-      outputs.overlays.modifications
+      inputs.self.overlays.additions
+      inputs.self.overlays.stable-packages
+      inputs.self.overlays.rosetta-packages
+      inputs.self.overlays.modifications
     ];
     config = {
       allowUnfree = true;

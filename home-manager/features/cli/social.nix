@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
-    gomuks # Matrix client
+    # gomuks # Matrix client
 
     neonmodem # BB client
   ];

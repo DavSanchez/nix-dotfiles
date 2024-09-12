@@ -12,7 +12,7 @@
   # You can import other nix-darwin modules here
   imports = [
     # If you want to use modules your own flake exports (from modules/darwin):
-    # outputs.darwinModules.example
+    # inputs.self.darwinModules.example
 
     # Or modules from other flakes (such as nixos-hardware):
     # inputs.hardware.nixosModules.common-cpu-amd
@@ -30,9 +30,9 @@
     # You can add overlays here
     overlays = [
       # If you want to use overlays your own flake exports (from overlays dir):
-      outputs.overlays.additions
-      outputs.overlays.stable-packages
-      outputs.overlays.modifications
+      inputs.self.overlays.additions
+      inputs.self.overlays.stable-packages
+      inputs.self.overlays.modifications
 
       # Or overlays exported from other flakes:
       # neovim-nightly-overlay.overlays.default
@@ -51,43 +51,32 @@
     };
   };
 
-  nix =
-    let
-      flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
-    in
-    {
-      package = pkgs.nixVersions.nix_2_23;
-      settings = {
-        trusted-users = [
-          "root"
-          "david"
-        ]; # For groups prepend @: "@admin"
-        # Enable flakes and new 'nix' command
-        experimental-features = "nix-command flakes";
-        # Opinionated: disable global registry
-        flake-registry = "";
-        # Workaround for https://github.com/NixOS/nix/issues/9574
-        nix-path = config.nix.nixPath;
-        extra-platforms = lib.optionalString (
-          pkgs.system == "aarch64-darwin"
-        ) "x86_64-darwin aarch64-darwin";
-      };
-      # Opinionated: make flake registry and nix path match flake inputs
-      registry = lib.mapAttrs (_: flake: { inherit flake; }) flakeInputs;
-      nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
+  nix = {
+    package = pkgs.nixVersions.nix_2_23;
+    settings = {
+      trusted-users = [
+        "root"
+        "david"
+      ]; # For groups prepend @: "@admin"
+      # Enable flakes and new 'nix' command
+      experimental-features = "nix-command flakes";
+      extra-platforms = lib.optionalString (
+        pkgs.system == "aarch64-darwin"
+      ) "x86_64-darwin aarch64-darwin";
+    };
 
-      gc = {
-        automatic = false; # see programs.nh.clean
-        interval = {
-          Day = 7;
-        };
-      };
-
-      linux-builder = {
-        enable = true;
-        ephemeral = true;
+    gc = {
+      automatic = false; # see programs.nh.clean
+      interval = {
+        Day = 7;
       };
     };
+
+    linux-builder = {
+      enable = true;
+      ephemeral = true;
+    };
+  };
 
   # Alias for nh_darwin
   environment.shellAliases.nh = "nh_darwin";
@@ -97,7 +86,8 @@
     clean.enable = true;
     # Installation option once https://github.com/LnL7/nix-darwin/pull/942 is merged:
     # package = nh_darwin.packages.${pkgs.stdenv.hostPlatform.system}.default;
-    flake = "/Users/david/.dotfiles";
+    os.flake = "/Users/david/.dotfiles";
+    home.flake = "/Users/david/.dotfiles";
   };
 
   environment = {
@@ -108,12 +98,6 @@
     #   zsh
     #   bashInteractive
     # ];
-
-    # see nix.registry and nix.nixPath above
-    etc = lib.mapAttrs' (name: value: {
-      name = "nix/path/${name}";
-      value.source = value.flake;
-    }) config.nix.registry;
   };
 
   # Use a custom configuration.nix location.

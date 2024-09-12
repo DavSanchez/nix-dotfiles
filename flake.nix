@@ -46,11 +46,9 @@
       nixpkgs,
       home-manager,
       darwin,
-      catppuccin,
       ...
     }@inputs:
     let
-      inherit (self) outputs;
       # Supported systems for flake packages, shell, etc.
       systems = [
         "aarch64-linux"
@@ -88,22 +86,9 @@
         nr-vm-utm = nixpkgs.lib.nixosSystem {
           system = "aarch64-linux";
           specialArgs = {
-            inherit inputs outputs;
+            inherit inputs;
           };
-          modules = [
-            ./hosts/vm/utm-nr/configuration.nix
-            catppuccin.nixosModules.catppuccin
-          ];
-        };
-        nixberrypi = nixpkgs.lib.nixosSystem {
-          system = "aarch64-linux";
-          specialArgs = {
-            inherit inputs outputs;
-          };
-          modules = [
-            ./hosts/nixberrypi/configuration.nix
-            catppuccin.nixosModules.catppuccin
-          ];
+          modules = [ ./hosts/vm/utm-nr/configuration.nix ];
         };
       };
       # macOS systems using nix-darwin
@@ -111,7 +96,7 @@
         mbp = darwin.lib.darwinSystem {
           system = "aarch64-darwin";
           specialArgs = {
-            inherit inputs outputs;
+            inherit inputs;
           };
           modules = [
             ./hosts/darwin/mbp.nix
@@ -121,7 +106,7 @@
         mini = darwin.lib.darwinSystem {
           system = "aarch64-darwin";
           specialArgs = {
-            inherit inputs outputs;
+            inherit inputs;
           };
           modules = [ ./hosts/darwin/mini.nix ];
         };
@@ -131,35 +116,26 @@
         "david@mbp" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.aarch64-darwin; # Home-manager requires 'pkgs' instance
           extraSpecialArgs = {
-            inherit inputs outputs;
+            inherit inputs;
           };
-          modules = [
-            ./home-manager/home-mbp.nix
-            catppuccin.homeManagerModules.catppuccin
-          ];
+          modules = [ ./home-manager/home-mbp.nix ];
         };
         "david@mini" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.aarch64-darwin;
           extraSpecialArgs = {
-            inherit inputs outputs;
+            inherit inputs;
           };
-          modules = [
-            ./home-manager/home-mini.nix
-            catppuccin.homeManagerModules.catppuccin
-          ];
+          modules = [ ./home-manager/home-mini.nix ];
         };
         "david@nr-vm" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.aarch64-linux;
           extraSpecialArgs = {
-            inherit inputs outputs;
+            inherit inputs;
           };
-          modules = [
-            ./home-manager/home-nr-vm.nix
-            catppuccin.homeManagerModules.catppuccin
-          ];
+          modules = [ ./home-manager/home-nr-vm.nix ];
         };
       };
 
-      colmena = import ./hosts/hive { inherit nixpkgs inputs outputs; };
+      colmena = import ./hosts/hive { inherit nixpkgs inputs; };
     };
 }
