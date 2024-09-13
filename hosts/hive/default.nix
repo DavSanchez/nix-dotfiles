@@ -1,7 +1,6 @@
 {
   nixpkgs,
   inputs,
-  outputs,
   ...
 }:
 {
@@ -11,7 +10,7 @@
       system = "aarch64-darwin";
     };
     specialArgs = {
-      inherit inputs outputs;
+      inherit inputs;
     };
     nodeNixpkgs = {
       foundry-pi = import inputs.nixpkgs-stable { system = "aarch64-linux"; };

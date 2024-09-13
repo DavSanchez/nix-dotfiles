@@ -1,9 +1,7 @@
 # Colmena functions take `name` and `nodes` as arguments as well.
 {
   name,
-  inputs,
   config,
-  lib,
   pkgs,
   ...
 }:
