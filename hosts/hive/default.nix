@@ -13,8 +13,8 @@
       inherit inputs;
     };
     nodeNixpkgs = {
-      foundry-pi = import inputs.nixpkgs-stable { system = "aarch64-linux"; };
-      zima-blade = import inputs.nixpkgs-stable { system = "x86_64-linux"; };
+      foundry-pi = import inputs.nixpkgs { system = "aarch64-linux"; };
+      zima-blade = import inputs.nixpkgs { system = "x86_64-linux"; };
     };
   };
   # nixberrypi = ./nixberrypi/configuration.nix;
