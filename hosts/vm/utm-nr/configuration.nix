@@ -7,7 +7,6 @@
   pkgs,
   lib,
   inputs,
-  outputs,
   ...
 }:
 
@@ -15,6 +14,8 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    
+    inputs.catppuccin.nixosModules.catppuccin
   ];
 
   nixpkgs = {
