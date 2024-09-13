@@ -76,7 +76,9 @@ in
 
     shellAbbrs = { };
 
-    shellAliases = { };
+    shellAliases = {
+      nh = "nh_darwin";
+    };
 
     shellInit = ''
       set -Ux EDITOR hx
