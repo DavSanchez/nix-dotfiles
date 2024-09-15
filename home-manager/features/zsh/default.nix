@@ -16,7 +16,7 @@
     shellAliases = import ./aliases.nix;
     history.extended = true;
     oh-my-zsh = {
-      enable = true;
+      enable = false;
       plugins =
         [
           "aws"
@@ -24,7 +24,6 @@
           "docker"
           "docker-compose"
           # "emacs"
-          "fd"
           "gh"
           "git"
           "git-auto-fetch"
@@ -44,7 +43,6 @@
           "nmap"
           # "nomad"
           "pass"
-          "ripgrep"
           "rust"
           # "ssh-agent"
           "terraform"
@@ -100,7 +98,7 @@
     };
 
     antidote = {
-      enable = true;
+      enable = false;
       plugins = [
         # "chisui/zsh-nix-shell"
         "MichaelAquilina/zsh-you-should-use"
