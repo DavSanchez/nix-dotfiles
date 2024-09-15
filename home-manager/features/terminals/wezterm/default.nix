@@ -14,6 +14,7 @@ _: {
         -- term = "wezterm",
         -- font = wezterm.font 'JetBrainsMono Nerd Font',
         window_decorations = "RESIZE",
+        front_end = "WebGpu",
       }
     '';
   };
