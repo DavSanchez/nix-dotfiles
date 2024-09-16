@@ -43,7 +43,7 @@
       nix-path = config.nix.nixPath;
     };
     gc = {
-      automatic = true;
+      automatic = false; # managed by nh, below
       dates = "weekly";
     };
     optimise.automatic = true;
@@ -102,6 +102,11 @@
   };
   users.groups = {
     multimedia = { };
+  };
+
+  programs.nh = {
+    enable = true;
+    clean.enable = true;
   };
 
   # Make deployments to this machine passwordless
