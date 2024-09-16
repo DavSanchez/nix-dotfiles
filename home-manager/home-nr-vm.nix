@@ -42,6 +42,9 @@
   home = {
     username = "david";
     homeDirectory = "/home/david";
+    sessionVariables = {
+      DOTFILES = "$HOME/.dotfiles";
+    };
   };
 
   programs.zsh.cdpath = [ "/home/david/NR-Repos" ];

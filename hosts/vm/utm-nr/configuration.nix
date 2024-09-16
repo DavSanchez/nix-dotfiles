@@ -159,6 +159,12 @@
     settings.PasswordAuthentication = false;
   };
 
+  programs.nh = {
+    enable = true;
+    clean.enable = true;
+    flake = "/home/david/.dotfiles";
+  };
+
   services.qemuGuest.enable = true;
 
   # Open ports in the firewall.
