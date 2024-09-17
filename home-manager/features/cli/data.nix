@@ -14,6 +14,7 @@
     delta
     graphviz
     grex
+    # binsider # broken on aarch64
   ];
 
   programs = {
