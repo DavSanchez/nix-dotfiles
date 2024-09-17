@@ -26,7 +26,7 @@
   };
   taplo.enable = true;
   terraformls.enable = true;
-  tsserver.enable = true;
+  ts-ls.enable = true;
   yamlls.enable = true;
   zls.enable = true;
 }
