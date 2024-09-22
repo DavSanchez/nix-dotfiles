@@ -1,0 +1,154 @@
+diff --git a/build-debug.sh b/build-debug.sh
+index 28ce7b5..1afff14 100755
+--- a/build-debug.sh
++++ b/build-debug.sh
+@@ -1,6 +1,5 @@
+ #!/usr/bin/env bash
+ cd "$(dirname "$0")"
+-source ./script/setup.sh
+ 
+ ./generate.sh "$@"
+ swift build
+diff --git a/build-docs.sh b/build-docs.sh
+index 845bc94..30f59b2 100755
+--- a/build-docs.sh
++++ b/build-docs.sh
+@@ -1,6 +1,5 @@
+ #!/usr/bin/env bash
+ cd "$(dirname "$0")"
+-source ./script/setup.sh
+ 
+ rm -rf .site && mkdir .site
+ rm -rf .man && mkdir .man
+diff --git a/build-release.sh b/build-release.sh
+index 658532f..baea71f 100755
+--- a/build-release.sh
++++ b/build-release.sh
+@@ -1,6 +1,5 @@
+ #!/usr/bin/env bash
+ cd "$(dirname "$0")"
+-source ./script/setup.sh
+ 
+ build_version="0.0.0-SNAPSHOT"
+ codesign_identity="aerospace-codesign-certificate"
+diff --git a/build-shell-completion.sh b/build-shell-completion.sh
+index f43eacb..a011c96 100755
+--- a/build-shell-completion.sh
++++ b/build-shell-completion.sh
+@@ -1,6 +1,5 @@
+ #!/usr/bin/env bash
+ cd "$(dirname "$0")"
+-source ./script/setup.sh
+ 
+ ./script/install-deps.sh --complgen
+ 
+diff --git a/generate-shell-parser.sh b/generate-shell-parser.sh
+index 38e6614..c0828c4 100755
+--- a/generate-shell-parser.sh
++++ b/generate-shell-parser.sh
+@@ -1,6 +1,5 @@
+ #!/usr/bin/env bash
+ cd "$(dirname "$0")"
+-source ./script/setup.sh
+ 
+ ./script/install-deps.sh --antlr
+ ./.deps/python-venv/bin/antlr4 -v 4.13.1 -no-listener -Dlanguage=Swift \
+diff --git a/generate.sh b/generate.sh
+index bd46b35..c5b2888 100755
+--- a/generate.sh
++++ b/generate.sh
+@@ -1,6 +1,5 @@
+ #!/usr/bin/env bash
+ cd "$(dirname "$0")"
+-source ./script/setup.sh
+ 
+ export XCODEGEN_AEROSPACE_CODE_SIGN_IDENTITY="aerospace-codesign-certificate"
+ build_version="0.0.0-SNAPSHOT"
+diff --git a/install-release.sh b/install-release.sh
+index eeaf845..91a578e 100755
+--- a/install-release.sh
++++ b/install-release.sh
+@@ -1,6 +1,5 @@
+ #!/usr/bin/env bash
+ cd "$(dirname "$0")"
+-source ./script/setup.sh
+ 
+ brew uninstall aerospace || true
+ ./build-release.sh
+diff --git a/run-cli.sh b/run-cli.sh
+index 9bb2f57..a78c6d8 100755
+--- a/run-cli.sh
++++ b/run-cli.sh
+@@ -1,6 +1,5 @@
+ #!/usr/bin/env bash
+ cd "$(dirname "$0")"
+-source ./script/setup.sh
+ 
+ # I'd not need this script if `swift run` wasn't that damn slow compared to `swift build`!
+ # https://forums.swift.org/t/swift-run-really-slow/67807/12
+diff --git a/run-debug.sh b/run-debug.sh
+index 9954a07..aabcf32 100755
+--- a/run-debug.sh
++++ b/run-debug.sh
+@@ -1,6 +1,5 @@
+ #!/usr/bin/env bash
+ cd "$(dirname "$0")"
+-source ./script/setup.sh
+ 
+ ./build-debug.sh
+ ./.debug/AeroSpace-Debug.app/Contents/MacOS/AeroSpace-Debug
+diff --git a/run-tests.sh b/run-tests.sh
+index 6bb342e..0b49525 100755
+--- a/run-tests.sh
++++ b/run-tests.sh
+@@ -1,6 +1,5 @@
+ #!/usr/bin/env bash
+ cd "$(dirname "$0")"
+-source ./script/setup.sh
+ 
+ # ./build-debug.sh || exit 125 # `git bisect run` compatible
+ swift test
+diff --git a/script/check-uncommitted-files.sh b/script/check-uncommitted-files.sh
+index 621e04f..22de53a 100755
+--- a/script/check-uncommitted-files.sh
++++ b/script/check-uncommitted-files.sh
+@@ -1,6 +1,5 @@
+ #!/usr/bin/env bash
+ cd "$(dirname "$0")/.."
+-source ./script/setup.sh
+ 
+ if [ ! -z "$(git status --porcelain)" ]; then
+     echo !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+diff --git a/script/clean-project.sh b/script/clean-project.sh
+index 3a48f23..70d2f56 100755
+--- a/script/clean-project.sh
++++ b/script/clean-project.sh
+@@ -1,6 +1,5 @@
+ #!/usr/bin/env bash
+ cd "$(dirname "$0")/.."
+-source ./script/setup.sh
+ 
+ ./script/check-uncommitted-files.sh
+ 
+diff --git a/script/install-deps.sh b/script/install-deps.sh
+index d724095..d740b9b 100755
+--- a/script/install-deps.sh
++++ b/script/install-deps.sh
+@@ -1,6 +1,5 @@
+ #!/usr/bin/env bash
+ cd "$(dirname "$0")/.."
+-source ./script/setup.sh
+ 
+ all=1
+ antlr=0
+diff --git a/script/publish-release.sh b/script/publish-release.sh
+index 1a62d3c..e1e299c 100755
+--- a/script/publish-release.sh
++++ b/script/publish-release.sh
+@@ -1,6 +1,5 @@
+ #!/usr/bin/env bash
+ cd "$(dirname "$0")/.."
+-source ./script/setup.sh
+ 
+ build_version=""
+ while [[ $# -gt 0 ]]; do
