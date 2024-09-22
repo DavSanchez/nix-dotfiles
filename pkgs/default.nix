@@ -3,7 +3,5 @@
 { pkgs, ... }:
 {
   # example = pkgs.callPackage ./example { };
-  # kcctl = pkgs.callPackage ./kcctl.nix {};
-  # nvchad = pkgs.callPackage ./nvchad.nix {};
   neonmodem = pkgs.callPackage ./neonmodem.nix { };
 }
