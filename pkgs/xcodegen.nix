@@ -14,7 +14,10 @@ stdenv.mkDerivation {
     sha256 = "sha256-wcjmADG+XnS2kR8BHe6ijApomucS9Tx7ZRjWZmTCUiI=";
   };
 
-  nativeBuildInputs = [ pkgs.swift ];
+  nativeBuildInputs = with pkgs; [
+    swift
+    swiftpm
+  ];
 
   buildPhase = ''
     make build
