@@ -5,7 +5,8 @@ pkgs:
   arrterian.nix-env-selector
   bbenoist.nix
   # betterthantomorrow.calva
-  # catppuccin.catppuccin-vsc
+  catppuccin.catppuccin-vsc
+  catppuccin.catppuccin-vsc-icons
   christian-kohler.path-intellisense
   davidanson.vscode-markdownlint
   dbaeumer.vscode-eslint
