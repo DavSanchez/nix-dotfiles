@@ -44,4 +44,5 @@
   undotree.enable = true;
   which-key.enable = true;
   toggleterm.enable = true;
+  web-devicons.enable = true;
 }
