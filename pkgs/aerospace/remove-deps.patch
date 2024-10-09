@@ -1,0 +1,59 @@
+diff --git a/build-shell-completion.sh b/build-shell-completion.sh
+index a011c96..b8d9ce5 100755
+--- a/build-shell-completion.sh
++++ b/build-shell-completion.sh
+@@ -1,14 +1,13 @@
+ #!/usr/bin/env bash
+ cd "$(dirname "$0")"
+ 
+-./script/install-deps.sh --complgen
+ 
+ rm -rf .shell-completion && mkdir -p \
+     .shell-completion/zsh \
+     .shell-completion/fish \
+     .shell-completion/bash
+ 
+-./.deps/cargo-root/bin/complgen aot ./grammar/commands-bnf-grammar.txt \
++complgen aot ./grammar/commands-bnf-grammar.txt \
+     --zsh-script .shell-completion/zsh/_aerospace 2>&1 \
+     --fish-script .shell-completion/fish/aerospace.fish 2>&1 \
+     --bash-script .shell-completion/bash/aerospace 2>&1
+diff --git a/generate-shell-parser.sh b/generate-shell-parser.sh
+index c0828c4..a4216d0 100755
+--- a/generate-shell-parser.sh
++++ b/generate-shell-parser.sh
+@@ -1,8 +1,7 @@
+ #!/usr/bin/env bash
+ cd "$(dirname "$0")"
+ 
+-./script/install-deps.sh --antlr
+-./.deps/python-venv/bin/antlr4 -v 4.13.1 -no-listener -Dlanguage=Swift \
++antlr4 -v 4.13.1 -no-listener -Dlanguage=Swift \
+     -o ./Sources/ShellParserGenerated \
+     ./grammar/ShellLexer.g4 \
+     ./grammar/ShellParser.g4
+diff --git a/generate.sh b/generate.sh
+index c5b2888..d8af8ff 100755
+--- a/generate.sh
++++ b/generate.sh
+@@ -62,5 +62,4 @@ public let gitShortHash = "SNAPSHOT"
+ EOF
+ 
+ export XCODEGEN_AEROSPACE_VERSION=$build_version
+-./script/install-deps.sh --xcodegen
+-./swift-exec-deps/.build/debug/xcodegen # https://github.com/yonaskolb/XcodeGen
++xcodegen # https://github.com/yonaskolb/XcodeGen
+diff --git a/run-tests.sh b/run-tests.sh
+index 0b49525..3447a0f 100755
+--- a/run-tests.sh
++++ b/run-tests.sh
+@@ -7,8 +7,7 @@ swift test
+ ./run-cli.sh -h
+ ./run-cli.sh -v
+ 
+-./script/install-deps.sh --swiftlint
+-./swift-exec-deps/.build/debug/swiftlint lint --quiet
++swiftlint lint --quiet
+ 
+ ./generate.sh --all
+ ./script/check-uncommitted-files.sh

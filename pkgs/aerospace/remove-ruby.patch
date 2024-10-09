@@ -1,0 +1,37 @@
+diff --git a/build-docs.sh b/build-docs.sh
+index 30f59b2..096bfe2 100755
+--- a/build-docs.sh
++++ b/build-docs.sh
+@@ -17,7 +17,7 @@ build-site() {
+     cd .site
+         # Delete "aerospace " prefifx in synopsis
+         sed -i -E '/tag::synopsis/, /end::synopsis/ s/^(aerospace | {10})//' aerospace*
+-        bundler exec asciidoctor ./*.adoc
++        asciidoctor ./*.adoc
+         rm -rf ./*.adoc
+         rm -rf aerospace* # Drop man pages
+     cd - > /dev/null
+@@ -31,7 +31,7 @@ build-site() {
+ build-man() {
+     cp-docs .man
+     cd .man
+-        bundler exec asciidoctor -b manpage aerospace*.adoc
++        asciidoctor -b manpage aerospace*.adoc
+         rm -rf *.adoc
+     cd - > /dev/null
+ }
+diff --git a/script/install-deps.sh b/script/install-deps.sh
+index d740b9b..af35ce8 100755
+--- a/script/install-deps.sh
++++ b/script/install-deps.sh
+@@ -40,10 +40,6 @@ check-version() {
+     test -f "$1" && "$@" | grep --fixed-strings -q "$version"
+ }
+ 
+-if test $all == 1; then
+-    bundler install
+-fi
+-
+ if test $all == 1 || test $antlr == 1; then
+     if ! check-version 4.13.1 ./.deps/python-venv/bin/antlr4 -v 4.13.1; then
+         python3 -m venv .deps/python-venv
