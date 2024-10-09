@@ -62,6 +62,7 @@ in
   "files.autoSave" = "afterDelay";
   "git.autofetch" = true;
   "git.defaultBranchName" = "master";
+  "nix.formatterPath" = "${pkgs.nixfmt-rfc-style}/bin/nixfmt";
   "rust-analyzer.check.command" = "clippy";
   "search.exclude" = {
     "**/.direnv" = true;

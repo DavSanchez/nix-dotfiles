@@ -21,7 +21,7 @@
       language = [
         {
           name = "nix";
-          language-servers = [ "nixd" ];
+          language-servers = [ "nixd" "nil" ];
           formatter = {
             command = "${pkgs.nixfmt-rfc-style}/bin/nixfmt";
           };
