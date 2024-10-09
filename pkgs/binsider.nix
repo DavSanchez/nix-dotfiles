@@ -20,13 +20,16 @@ rustPlatform.buildRustPackage rec {
 
   buildNoDefaultFeatures = stdenv.isDarwin;
 
-  buildInputs = lib.optionals stdenv.isDarwin (with darwin.apple_sdk.frameworks; [
-    AppKit
-    CoreServices
-  ]);
+  buildInputs = lib.optionals stdenv.isDarwin (
+    with darwin.apple_sdk.frameworks;
+    [
+      AppKit
+      CoreServices
+    ]
+  );
 
   doCheck = !stdenv.isDarwin;
-    # Tests need the executable in target/debug/
+  # Tests need the executable in target/debug/
   preCheck = ''
     cargo build
   '';
