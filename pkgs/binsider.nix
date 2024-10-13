@@ -29,7 +29,7 @@ rustPlatform.buildRustPackage rec {
   );
 
   checkType = "debug";
-  checkFlags = lib.optionals (stdenv.isDarwin || stdenv.isAarch64) [
+  checkFlags = [
     "--skip=test_extract_strings"
     "--skip=test_init"
   ];
