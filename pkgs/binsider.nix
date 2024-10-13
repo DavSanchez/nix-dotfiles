@@ -18,7 +18,7 @@ rustPlatform.buildRustPackage rec {
 
   cargoHash = "sha256-eBZ7zUOucarzdxTjHecUxGqUsKTQPaaotOfs/v0MxHk=";
 
-  buildNoDefaultFeatures = stdenv.isDarwin || stdenv.isAarch64;
+  buildNoDefaultFeatures = stdenv.isDarwin;
 
   buildInputs = lib.optionals stdenv.isDarwin (
     with darwin.apple_sdk.frameworks;
@@ -28,11 +28,11 @@ rustPlatform.buildRustPackage rec {
     ]
   );
 
-  doCheck = !stdenv.isDarwin && !stdenv.isAarch64;
-  # Tests need the executable in target/debug/
-  preCheck = ''
-    cargo build
-  '';
+  checkType = "debug";
+  checkFlags = lib.optionals (stdenv.isDarwin || stdenv.isAarch64) [
+    "--skip=test_extract_strings"
+    "--skip=test_init"
+  ];
 
   meta = with lib; {
     description = "Analyzer of executables using a terminal user interface";
