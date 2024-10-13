@@ -63,6 +63,7 @@ in
   "git.autofetch" = true;
   "git.defaultBranchName" = "master";
   "nix.serverSettings.nixd.formatting.command" = [ "${pkgs.nixfmt-rfc-style}/bin/nixfmt" ];
+  "nix.formatterPath" = "${pkgs.nixfmt-rfc-style}/bin/nixfmt";
   "rust-analyzer.check.command" = "clippy";
   "search.exclude" = {
     "**/.direnv" = true;
