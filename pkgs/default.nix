@@ -5,4 +5,5 @@
   # example = pkgs.callPackage ./example { };
   neonmodem = pkgs.callPackage ./neonmodem.nix { };
   binsider = pkgs.callPackage ./binsider.nix { };
+  kontroll = pkgs.callPackage ./kontroll.nix { };
 }
