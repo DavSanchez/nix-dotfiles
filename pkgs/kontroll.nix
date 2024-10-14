@@ -32,14 +32,17 @@ rustPlatform.buildRustPackage rec {
     "--examples"
   ];
 
-  checkInputs = lib.optionals stdenv.isDarwin (with darwin.apple_sdk.frameworks; [
-    Foundation
-    AppKit
-    Vision
-    AVFoundation
-    MetalKit
-  ]); 
-  
+  checkInputs = lib.optionals stdenv.isDarwin (
+    with darwin.apple_sdk.frameworks;
+    [
+      Foundation
+      AppKit
+      Vision
+      AVFoundation
+      MetalKit
+    ]
+  );
+
   meta = {
     description = "Kontroll demonstates how to control the Keymapp API, making it easy to control your ZSA keyboard from the command line and scripts";
     homepage = "https://github.com/zsa/kontroll";
