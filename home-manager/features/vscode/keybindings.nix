@@ -259,4 +259,8 @@
     command = "timeline.focus";
     # end of manually edited keybindings   -----------------------------------
   }
+  {
+    key = "shift+cmd+2";
+    command = "coverage-gutters.displayCoverage";
+  }
 ]
