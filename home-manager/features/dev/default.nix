@@ -17,13 +17,13 @@
   home.packages =
     (with pkgs; [
       devenv
-      devcontainer
 
       ## Other
       gnumake
       # protobuf
 
       zig
+      zls
     ])
     ++ lib.optionals pkgs.stdenv.isLinux [ pkgs.rr ];
 }

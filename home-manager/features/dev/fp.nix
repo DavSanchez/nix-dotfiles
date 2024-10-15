@@ -2,14 +2,25 @@
 {
   home.packages = with pkgs; [
     idris2 # FP with dependent types, compiles to C
+    idris2Packages.idris2Lsp # Langserver
+
     agda # FP with dependent types, compiles to Haskell
+    # haskellPackages.agda-language-server # Langserver (BROKEN)
+
     elixir # Dynamic FP for the Erlang VM
-    gleam # Statically typed FP for the Erlang VM
+    elixir-ls # Langserver
+
+    # gleam # Statically typed FP for the Erlang VM
     # dotnet-sdk # For F-sharp: FP for .NET
-    fstar # ML-like FP language aimed at program verification
+    # fstar # ML-like FP language aimed at program verification
     elmPackages.elm # FP for the frontend
+
     purescript # FP for the frontend
+    nodePackages.purescript-language-server # Langserver
+
     clojure # FP for the JVM, lisp-like
+    clojure-lsp # Langserver
+
     flix # FP for the JVM
     # roc.cli # Roc programming lang, comes from an overlay
     # grain # FP for the web
