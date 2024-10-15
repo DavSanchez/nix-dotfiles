@@ -5,6 +5,9 @@
       ghc
 
       cabal-install
+      # cabal-add
+      # cabal-audit
+
       stack
 
       haskell-language-server # Langserver
