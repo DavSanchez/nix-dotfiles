@@ -62,6 +62,8 @@ in
   "files.autoSave" = "afterDelay";
   "git.autofetch" = true;
   "git.defaultBranchName" = "master";
+  "nix.enableLanguageServer" = true;
+  "nix.serverPath" = "${pkgs.nixd}/bin/nixd";
   "nix.serverSettings.nixd.formatting.command" = [ "${pkgs.nixfmt-rfc-style}/bin/nixfmt" ];
   "nix.formatterPath" = "${pkgs.nixfmt-rfc-style}/bin/nixfmt";
   "rust-analyzer.check.command" = "clippy";
