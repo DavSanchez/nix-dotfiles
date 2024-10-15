@@ -12,6 +12,19 @@
         color-modes = true;
         # whitespace.render = "all";
         indent-guides.render = true;
+        cursor-shape = {
+          insert = "bar";
+          normal = "block";
+          select = "underline";
+        };
+        statusline = {
+          left = [
+            "mode"
+            "spinner"
+            "version-control"
+            "file-name"
+          ];
+        };
       };
       keys.normal = {
         "C-y" = ":sh ${pkgs.zellij}/bin/zellij run -f -x 10% -y 10% --width 80% --height 80% -- ${pkgs.bash}/bin/bash ${config.xdg.configHome}/helix/yazi-picker.sh";
