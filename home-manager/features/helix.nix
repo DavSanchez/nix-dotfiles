@@ -3,6 +3,7 @@
   programs.helix = {
     enable = true;
     defaultEditor = true;
+    extraPackages = [ ]; # For ading LSPs and stuff
     settings = {
       editor = {
         line-number = "relative";
