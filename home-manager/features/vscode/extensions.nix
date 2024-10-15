@@ -3,6 +3,7 @@ pkgs:
   ## Extensions present in nixpkgs
   ## Clashing with complete list in ./extensions.nix, so case by case here
   arrterian.nix-env-selector
+  banacorn.agda-mode
   bbenoist.nix
   # betterthantomorrow.calva
   catppuccin.catppuccin-vsc
