@@ -21,7 +21,7 @@
     # ./users.nix
     # ./common/yabai.nix
     # ./common/skhd.nix
-    # ./common/sketchybar.nix
+    ./common/sketchybar.nix
     # ./common/aerospace.nix
   ];
 
@@ -63,7 +63,7 @@
         pkgs.system == "aarch64-darwin"
       ) "x86_64-darwin aarch64-darwin";
 
-      sandbox = true;
+      # sandbox = true;
     };
 
     gc = {
