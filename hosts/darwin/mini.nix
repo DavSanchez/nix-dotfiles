@@ -156,7 +156,7 @@
       "iina"
       "imhex"
       "insomnia"
-      # "jordanbaird-ice"
+      "jordanbaird-ice"
       "keymapp"
       "krita"
       "libreoffice"
