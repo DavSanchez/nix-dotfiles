@@ -3,7 +3,7 @@
   services = {
     sketchybar = {
       enable = true;
-      config = builtins.readFile ./sketchybarrc;
+      # config = builtins.readFile ./sketchybarrc;
       extraPackages = with pkgs; [
         sketchybar-app-font
         (nerdfonts.override {
@@ -11,6 +11,8 @@
             "Hack"
           ];
         })
+
+        lua
       ];
     };
   };
