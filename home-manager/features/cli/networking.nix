@@ -13,6 +13,6 @@
     dog
     gping
     bandwhich
-    mosh
+    # mosh
   ];
 }

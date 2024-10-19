@@ -1,10 +1,4 @@
-{ pkgs, ... }:
-{
-  home.packages = with pkgs; [
-    # gomuks # Matrix client
-
-    neonmodem # BB client
-  ];
+_: {
   programs = {
     # TUI IRC client written in Rust.
     tiny = {
