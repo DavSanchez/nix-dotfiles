@@ -263,4 +263,9 @@
     key = "shift+cmd+2";
     command = "coverage-gutters.displayCoverage";
   }
+  {
+    key = "cmd+/";
+    command = "editor.action.commentLine";
+    when = "editorTextFocus && !editorReadonly";
+  }
 ]
