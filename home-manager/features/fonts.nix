@@ -12,6 +12,5 @@
     })
     fira-code-symbols
     iosevka # Allows for customization via privateBuildPlan
-    sketchybar-app-font # for sketchybar
   ];
 }
