@@ -2,7 +2,6 @@
 # Use this to configure your system environment (it replaces ~/.nixpkgs/darwin-configuration.nix)
 {
   pkgs,
-  config,
   lib,
   inputs,
   ...
@@ -62,6 +61,8 @@
       extra-platforms = lib.optionalString (
         pkgs.system == "aarch64-darwin"
       ) "x86_64-darwin aarch64-darwin";
+
+      sandbox = true;
     };
 
     gc = {
