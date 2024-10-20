@@ -1,6 +1,6 @@
 # This is your home-manager configuration file
 # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
-{ inputs, ... }:
+{ inputs, pkgs, ... }:
 {
   # You can import other home-manager modules here
   imports = [
@@ -90,6 +90,12 @@
     # Amethyst configuration
     ".amethyst.yml".source = ./darwin/amethyst.yml;
   };
+
+  xdg.configFile."sketchybar" = {
+    source = ./darwin/sketchybar;
+    recursive = true;
+  };
+  xdg.configFile."sketchybar/sketchybarrc".text = (import ./darwin/sketchybarrc.nix) pkgs.lua;
 
   catppuccin.enable = true;
   catppuccin.flavor = "mocha";
