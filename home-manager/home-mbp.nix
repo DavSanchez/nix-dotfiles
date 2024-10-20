@@ -95,7 +95,6 @@
     source = ./darwin/sketchybar;
     recursive = true;
   };
-  xdg.configFile."sketchybar/sketchybarrc".text = (import ./darwin/sketchybarrc.nix) pkgs.lua;
 
   catppuccin.enable = true;
   catppuccin.flavor = "mocha";

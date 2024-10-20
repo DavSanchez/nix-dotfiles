@@ -21,7 +21,7 @@
     # ./users.nix
     # ./common/yabai.nix
     # ./common/skhd.nix
-    ./common/sketchybar.nix
+    # ./common/sketchybar.nix
     # ./common/aerospace.nix
   ];
 
