@@ -3,6 +3,7 @@
 {
   pkgs,
   lib,
+  config,
   inputs,
   ...
 }:
@@ -229,6 +230,23 @@
   system.keyboard.enableKeyMapping = true;
   system.keyboard.remapCapsLockToEscape = true;
   system.defaults.magicmouse.MouseButtonMode = "TwoButton";
+
+  services = {
+    sketchybar = {
+      enable = true;
+      # config = builtins.readFile ./sketchybarrc;
+      extraPackages = with pkgs; [
+        sketchybar-app-font
+        (nerdfonts.override {
+          fonts = [
+            "Hack"
+          ];
+        })
+      ];
+    };
+  };
+  # Make way for the sketchybar
+  system.defaults.NSGlobalDomain._HIHideMenuBar = config.services.sketchybar.enable;
 
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
