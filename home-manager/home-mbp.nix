@@ -93,11 +93,17 @@
   xdg.configFile."amethyst/amethyst.yml".source = ./darwin/amethyst.yml;
   xdg.configFile."borders/bordersrc" = {
     source = ./darwin/bordersrc;
+    executable = true;
     onChange = "/bin/bash ${./darwin/bordersrc}";
   };
   xdg.configFile."sketchybar" = {
     source = ./darwin/sketchybar;
     recursive = true;
+    onChange = "${pkgs.sketchybar}/bin/sketchybar --reload";
+  };
+  xdg.configFile."sketchybar/sketchybarrc" = {
+    source = ./darwin/sketchybarrc-mbp;
+    executable = true;
     onChange = "${pkgs.sketchybar}/bin/sketchybar --reload";
   };
 
