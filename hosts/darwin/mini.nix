@@ -3,6 +3,7 @@
 {
   pkgs,
   lib,
+  config,
   inputs,
   ...
 }:
@@ -232,6 +233,8 @@
   system.keyboard.enableKeyMapping = true;
   system.keyboard.remapCapsLockToEscape = true;
   system.defaults.magicmouse.MouseButtonMode = "TwoButton";
+
+  system.defaults.NSGlobalDomain._HIHideMenuBar = config.services.sketchybar.enable;
 
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
