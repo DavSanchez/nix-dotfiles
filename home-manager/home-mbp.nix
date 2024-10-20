@@ -1,6 +1,10 @@
 # This is your home-manager configuration file
 # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
-{ inputs, pkgs, ... }:
+{
+  inputs,
+  pkgs,
+  ...
+}:
 {
   # You can import other home-manager modules here
   imports = [
@@ -86,14 +90,15 @@
     DOTFILES = "$HOME/.dotfiles";
   };
 
-  home.file = {
-    # Amethyst configuration
-    ".amethyst.yml".source = ./darwin/amethyst.yml;
+  xdg.configFile."amethyst/amethyst.yml".source = ./darwin/amethyst.yml;
+  xdg.configFile."borders/bordersrc" = {
+    source = ./darwin/bordersrc;
+    onChange = "/bin/bash ${./darwin/bordersrc}";
   };
-
   xdg.configFile."sketchybar" = {
     source = ./darwin/sketchybar;
     recursive = true;
+    onChange = "${pkgs.sketchybar}/bin/sketchybar --reload";
   };
 
   catppuccin.enable = true;

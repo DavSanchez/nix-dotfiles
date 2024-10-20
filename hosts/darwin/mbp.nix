@@ -112,6 +112,9 @@
       enable = false; # Using App Store application for the moment
       overrideLocalDns = false;
     };
+
+    sketchybar.enable = true;
+    jankyborders.enable = true;
   };
   networking.hostName = "Davids-MacBook-Pro";
 
@@ -231,20 +234,6 @@
   system.keyboard.remapCapsLockToEscape = true;
   system.defaults.magicmouse.MouseButtonMode = "TwoButton";
 
-  services = {
-    sketchybar = {
-      enable = true;
-      # config = builtins.readFile ./sketchybarrc;
-      extraPackages = with pkgs; [
-        sketchybar-app-font
-        (nerdfonts.override {
-          fonts = [
-            "Hack"
-          ];
-        })
-      ];
-    };
-  };
   # Make way for the sketchybar
   system.defaults.NSGlobalDomain._HIHideMenuBar = config.services.sketchybar.enable;
 

@@ -12,7 +12,5 @@ _: {
         ];
       };
     };
-
-    jankyborders.enable = true;
   };
 }

@@ -16,17 +16,20 @@
 # layouts - Ordered list of layouts to use by layout key (default tall, wide, fullscreen, and column).
 layouts:
   - tall
+  - wide
+  - two-pane
+  - middle-wide
+  - floating
   - fullscreen
   # - tall-right
-  - wide
-  # - two-pane
+  #- wide
   # - middle-wide
   # - 3column-left
-  # - 3column-middle
+  # - middle-wide # The legacy name of "3column-middle"
   # - 3column-right
   # - 4column-left
   # - 4column-right
-  - column
+  #- column
   # - row
   # - floating
   # - widescreen-tall
@@ -175,20 +178,15 @@ swap-main:
 # Select tall layout
 select-tall-layout:
   mod: mod1
-  key: a
+  key: s
 
 # Select wide layout
 select-wide-layout:
   mod: mod1
-  key: s
+  key: d
 
 # Select fullscreen layout
 select-fullscreen-layout:
-  mod: mod1
-  key: d
-
-# Select column layout
-select-column-layout:
   mod: mod1
   key: f
 
@@ -232,8 +230,8 @@ relaunch-amethyst:
   mod: mod2
   key: z
 
-# disable screen padding on in-built display
-disable-screen-padding-on-inbuilt: false
+# disable screen padding on builtin display
+disable-padding-on-builtin-display: false
 
 # Boolean flag for whether or not to add margins betwen windows (default false).
 window-margins: true
@@ -245,7 +243,7 @@ smart-window-margins: false
 # window-margins: true
 # window-margin-size: 5
 # The size of the margins between windows (in px, default 0).
-window-margin-size: 5
+window-margin-size: 15
 
 # The max number of windows that may be visible on a screen at one time before
 # additional windows are minimized. A value of 0 disables the feature.
@@ -258,26 +256,25 @@ window-minimum-height: 0
 window-minimum-width: 0
 
 # List of bundle identifiers for applications to either be automatically floating or automatically tiled based on floating-is-blacklist (default []).
-floating:
-  - "eu.exelban.Stats"
+floating: []
 
 # Boolean flag determining behavior of the floating list. true if the applications should be floating and all others tiled. false if the applications should be tiled and all others floating (default true).
 floating-is-blacklist: true
 
 # true if screen frames should exclude the status bar. false if the screen frames should include the status bar (default false).
-ignore-menu-bar: false
+ignore-menu-bar: true
 
 # true if windows smaller than a 500px square should be floating by default (default true)
 float-small-windows: true
 
 # true if the mouse should move position to the center of a window when it becomes focused (default false). Note that this is largely incompatible with focus-follows-mouse.
-mouse-follows-focus: false
+mouse-follows-focus: true
 
 # true if the windows underneath the mouse should become focused as the mouse moves (default false). Note that this is largely incompatible with mouse-follows-focus
 focus-follows-mouse: false
 
 # true if dragging and dropping windows on to each other should swap their positions (default false).
-mouse-swaps-windows: false
+mouse-swaps-windows: true
 
 # true if changing the frame of a window with the mouse should update the layout to accommodate the change (default false). Note that not all layouts will be able to respond to the change.
 mouse-resizes-windows: true
@@ -286,7 +283,7 @@ mouse-resizes-windows: true
 enables-layout-hud: true
 
 # true to display the name of the layout when moving to a new space (default true).
-enables-layout-hud-on-space-change: true
+enables-layout-hud-on-space-change: false
 
 # true to get updates to beta versions of the software (default false).
 use-canary-build: false
@@ -307,7 +304,7 @@ screen-padding-left: 0
 screen-padding-right: 0
 
 # Padding to apply between windows and the top edge of the screen (in px, default 0).
-screen-padding-top: 0
+screen-padding-top: 40
 
 # Padding to apply between windows and the bottom edge of the screen (in px, default 0).
 screen-padding-bottom: 0

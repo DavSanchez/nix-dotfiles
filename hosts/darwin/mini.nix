@@ -110,6 +110,8 @@
       enable = false; # Using App Store application for the moment
       overrideLocalDns = false;
     };
+    sketchybar.enable = true;
+    jankyborders.enable = true;
   };
 
   networking.hostName = "Davids-Mac-Mini";
