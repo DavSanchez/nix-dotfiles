@@ -3,6 +3,5 @@
 { pkgs, ... }:
 {
   # example = pkgs.callPackage ./example { };
-  binsider = pkgs.callPackage ./binsider.nix { };
   kontroll = pkgs.callPackage ./kontroll.nix { };
 }
