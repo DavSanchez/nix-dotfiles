@@ -1,5 +1,4 @@
-{ name, pkgs, ... }:
-{
+_: {
   # Accessible via network
   services.nfs.server = {
     enable = false;
