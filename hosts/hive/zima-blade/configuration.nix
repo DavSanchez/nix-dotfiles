@@ -2,6 +2,7 @@
   name,
   config,
   pkgs,
+  lib,
   ...
 }:
 {
@@ -20,7 +21,8 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ./zfs_nfs.nix
+    ./fs_share.nix
+    ./zfs.nix
     ./monitoring.nix
     ./media.nix
   ];
@@ -57,19 +59,20 @@
     # Required for ZFS
     hostId = "bfbc2f21";
     hostName = "zima-blade";
-    firewall.allowedTCPPorts = [
-      80
-      # NFS
+    firewall.allowedTCPPorts =
+      [
+        80
+      ]
+      ++ lib.optionals config.services.nfs.server.enable [
+        111
+        2049
+        4000
+        4001
+        4002
+        20048
+      ];
+    firewall.allowedUDPPorts = lib.optionals config.services.nfs.server.enable [
       111
-      2049
-      4000
-      4001
-      4002
-      20048
-    ];
-    firewall.allowedUDPPorts = [
-      111
-      # NFS
       2049
       4000
       4001

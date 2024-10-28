@@ -8,26 +8,6 @@
     interval = "monthly";
   };
   services.zfs.trim.enable = true;
-  # Accessible via network
-  services.nfs.server = {
-    enable = true;
-    # fixed rpc.statd port; for firewall
-    lockdPort = 4001;
-    mountdPort = 4002;
-    statdPort = 4000;
-    # extraNfsdConfig = '''';
-    # see `man exports` for option details
-    exports = ''
-      /seclusium 192.168.8.0/24(fsid=0,no_subtree_check)
-
-      /seclusium/creation 192.168.8.0/24(rw,no_subtree_check,all_squash,anonuid=1000,anongid=100)
-      /seclusium/dimensions 192.168.8.0/24(no_subtree_check,all_squash,anonuid=1000,anongid=100)
-      /seclusium/echoes 192.168.8.169/32(rw,no_subtree_check,all_squash,anonuid=1000,anongid=100)
-      /seclusium/imagery 192.168.8.0/24(no_subtree_check,all_squash,anonuid=1000,anongid=100)
-      /seclusium/technique 192.168.8.0/24(no_subtree_check,all_squash,anonuid=1000,anongid=100)
-      /seclusium/zg 192.168.8.0/24(no_subtree_check,all_squash,anonuid=1000,anongid=100)
-    '';
-  };
 
   # Enable mail notifications
   programs.msmtp = {
