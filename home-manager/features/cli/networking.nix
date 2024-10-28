@@ -13,6 +13,7 @@
     dog
     gping
     bandwhich
-    # mosh
+    mosh
+    trippy
   ];
 }
