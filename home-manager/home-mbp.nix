@@ -101,8 +101,18 @@
     recursive = true;
     onChange = "${pkgs.sketchybar}/bin/sketchybar --reload";
   };
+  xdg.dataFile."sketchybar/sketchybar.so" = {
+    source = "${pkgs.sbar-lua}/lib/sketchybar.so";
+    onChange = "${pkgs.sketchybar}/bin/sketchybar --reload";
+  };
   xdg.configFile."sketchybar/sketchybarrc" = {
-    source = ./darwin/sketchybarrc-mbp;
+    text = ''
+      #!${pkgs.lua}/bin/lua
+
+      -- Load the sketchybar-package and prepare the helper binaries
+      require("helpers")
+      require("init")
+    '';
     executable = true;
     onChange = "${pkgs.sketchybar}/bin/sketchybar --reload";
   };
