@@ -116,7 +116,7 @@
     sketchybar.enable = true;
     jankyborders.enable = true;
   };
-  networking.hostName = "Davids-MacBook-Pro";
+  networking.hostName = "sierpe";
 
   # Create /etc/zshrc that loads the nix-darwin environment.
   programs = {

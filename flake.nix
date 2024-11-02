@@ -93,39 +93,39 @@
       };
       # macOS systems using nix-darwin
       darwinConfigurations = {
-        mbp = darwin.lib.darwinSystem {
+        sierpe = darwin.lib.darwinSystem {
           system = "aarch64-darwin";
           specialArgs = {
             inherit inputs;
           };
           modules = [
-            ./hosts/darwin/mbp.nix
+            ./hosts/darwin/sierpe.nix
             # ./hosts/darwin-builder
           ];
         };
-        mini = darwin.lib.darwinSystem {
+        solio = darwin.lib.darwinSystem {
           system = "aarch64-darwin";
           specialArgs = {
             inherit inputs;
           };
-          modules = [ ./hosts/darwin/mini.nix ];
+          modules = [ ./hosts/darwin/solio.nix ];
         };
       };
 
       homeConfigurations = {
-        "david@mbp" = home-manager.lib.homeManagerConfiguration {
+        "david@sierpe" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.aarch64-darwin; # Home-manager requires 'pkgs' instance
           extraSpecialArgs = {
             inherit inputs;
           };
-          modules = [ ./home-manager/home-mbp.nix ];
+          modules = [ ./home-manager/sierpe.nix ];
         };
-        "david@mini" = home-manager.lib.homeManagerConfiguration {
+        "david@solio" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.aarch64-darwin;
           extraSpecialArgs = {
             inherit inputs;
           };
-          modules = [ ./home-manager/home-mini.nix ];
+          modules = [ ./home-manager/solio.nix ];
         };
         "david@nr-vm" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.aarch64-linux;

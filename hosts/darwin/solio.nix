@@ -115,7 +115,7 @@
     jankyborders.enable = true;
   };
 
-  networking.hostName = "Davids-Mac-Mini";
+  networking.hostName = "solio";
 
   # Create /etc/zshrc that loads the nix-darwin environment.
   programs = {
