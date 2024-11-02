@@ -1,38 +1,28 @@
 {
-  pkgs,
   lib,
   stdenv,
+  clang,
+  gcc,
+  readline,
   fetchFromGitHub,
 }:
 
 stdenv.mkDerivation {
-  pname = "sbar-lua";
-  version = "unstable-2024-08-12";
-
+  pname = "sketchybar-lua";
+  version = "0.0.0.0";
   src = fetchFromGitHub {
     owner = "FelixKratz";
     repo = "SbarLua";
     rev = "437bd2031da38ccda75827cb7548e7baa4aa9978";
     hash = "sha256-F0UfNxHM389GhiPQ6/GFbeKQq5EvpiqQdvyf7ygzkPg=";
   };
-
-  buildInputs =
-    with pkgs;
-    [
-      gcc
-      readline
-    ]
-    ++ lib.optionals stdenv.hostPlatform.isDarwin [
-      darwin.apple_sdk.frameworks.CoreFoundation
-    ];
-
-  buildPhase = ''
-    make bin/sketchybar.so
-  '';
-
+  nativeBuildInputs = [
+    clang
+    gcc
+  ];
+  buildInputs = [ readline ];
   installPhase = ''
-    mkdir -p $out/lib
-    mv bin/sketchybar.so $out/lib/sketchybar.so
+    mv bin "$out"
   '';
 
   meta = {
