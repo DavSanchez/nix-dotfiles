@@ -4,4 +4,5 @@
 {
   # example = pkgs.callPackage ./example { };
   kontroll = pkgs.callPackage ./kontroll.nix { };
+  sbar-lua = pkgs.callPackage ./sbarlua.nix { };
 }
