@@ -113,7 +113,10 @@
       overrideLocalDns = false;
     };
 
-    sketchybar.enable = true;
+    sketchybar = {
+      enable = true;
+      extraPackages = [ pkgs.lua ];
+    };
     jankyborders.enable = true;
   };
   networking.hostName = "Davids-MacBook-Pro";

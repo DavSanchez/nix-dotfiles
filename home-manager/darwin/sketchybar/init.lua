@@ -1,5 +1,7 @@
 -- Require the sketchybar module
+print("Attempting to require sketchybar")
 sbar = require("sketchybar")
+print("Successfully required sketchybar")
 
 -- Set the bar name, if you are using another bar instance than sketchybar
 -- sbar.set_bar_name("bottom_bar")

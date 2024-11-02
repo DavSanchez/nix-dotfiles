@@ -101,14 +101,18 @@
     recursive = true;
     onChange = "${pkgs.sketchybar}/bin/sketchybar --reload";
   };
-  xdg.dataFile."sketchybar_lua/sketchybar.so" = {
-    source = "${pkgs.sbar-lua}/sketchybar.so";
-    onChange = "${pkgs.sketchybar}/bin/sketchybar --reload";
-  };
+  # xdg.dataFile."sketchybar_lua/sketchybar.so" = {
+  #   source = "${pkgs.sbar-lua}/sketchybar.so";
+  #   onChange = "${pkgs.sketchybar}/bin/sketchybar --reload";
+  # };
   xdg.configFile."sketchybar/sketchybarrc" = {
     text = ''
-      #!/usr/bin/env ${pkgs.lua}/bin/lua
+      #!${pkgs.lua}/bin/lua
 
+      -- Add the sketchybar module to the package cpath (the module could be
+      -- installed into the default search path then this would not be needed)
+      package.cpath = package.cpath .. ";${pkgs.sbar-lua}/lib/lua/${pkgs.lua.luaversion}/sketchybar.so"
+      -- Search for local modules
       package.path = "./?.lua;./?/init.lua;" .. package.path
 
       -- Load the sketchybar-package and prepare the helper binaries

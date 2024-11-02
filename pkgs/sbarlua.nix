@@ -1,36 +1,41 @@
 {
-  lib,
-  stdenv,
   clang,
+  fetchFromGitHub,
   gcc,
   readline,
-  fetchFromGitHub,
+  lua,
 }:
+lua.stdenv.mkDerivation rec {
+  pname = "SBarLua";
+  version = "unstable-2024-07-15";
 
-stdenv.mkDerivation {
-  pname = "sketchybar-lua";
-  version = "0.0.0.0";
+  name = "lua${lua.luaversion}-" + pname + "-" + version;
+
   src = fetchFromGitHub {
     owner = "FelixKratz";
     repo = "SbarLua";
-    rev = "437bd2031da38ccda75827cb7548e7baa4aa9978";
-    hash = "sha256-F0UfNxHM389GhiPQ6/GFbeKQq5EvpiqQdvyf7ygzkPg=";
+    rev = "19ca262c39cc45f1841155697dffd649cc119d9c";
+    hash = "sha256-nz8NAeoprQ7OeFfs+7ixd6EFJyJV35WZK4mAS5izn8k=";
   };
+
   nativeBuildInputs = [
     clang
     gcc
   ];
-  buildInputs = [ readline ];
-  installPhase = ''
-    mv bin "$out"
-  '';
 
-  meta = {
-    description = "A Lua API for SketchyBar";
-    homepage = "git@github.com:FelixKratz/SbarLua.git";
-    license = lib.licenses.gpl3Only;
-    maintainers = with lib.maintainers; [ davsanchez ];
-    mainProgram = "sbar-lua";
-    platforms = lib.platforms.darwin;
-  };
+  buildInputs = [ readline ];
+
+  propagatedBuildInputs = [ lua ];
+
+  makeFlags = [
+    "PREFIX=$(out)"
+    "LUA_INC=-I${lua}/include"
+    "LUA_LIBDIR=$(out)/lib/lua/${lua.luaversion}"
+    "LUA_VERSION=${lua.luaversion}"
+  ];
+
+  installPhase = ''
+    mkdir -p $out/lib/lua/${lua.luaversion}/
+    cp -r bin/* "$out/lib/lua/${lua.luaversion}/"
+  '';
 }
