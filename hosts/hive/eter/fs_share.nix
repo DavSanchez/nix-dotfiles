@@ -41,6 +41,7 @@ _: {
       echoes = {
         path = "/seclusium/echoes";
         writeable = "yes";
+        "hosts allow" = ".solio.local";
       };
       imagery = {
         path = "/seclusium/imagery";
