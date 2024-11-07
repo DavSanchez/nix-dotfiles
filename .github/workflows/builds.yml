@@ -26,7 +26,7 @@ jobs:
       # - name: Build NixOS config
       #   run: nix build --flake ".#nixosConfigurations.nr-vm-utm"
       - name: Build Colmena configs
-        run: nix shell "nixpkgs#colmena" --command colmena build --on eter
+        run: nix shell "nixpkgs#colmena" --command colmena build --on eter --no-build-on-target
 
   macos:
     runs-on: macos-latest
