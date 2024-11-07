@@ -23,8 +23,8 @@ jobs:
       # Commented out as this is aarch64-linux only
       # - name: Build Linux Home configs
       #   run: nix run home-manager/master -- build --flake ".#david@nr-vm"
-      - name: Build NixOS config
-        run: nix build --flake ".#nixosConfigurations.nr-vm-utm"
+      # - name: Build NixOS config
+      #   run: nix build --flake ".#nixosConfigurations.nr-vm-utm"
       - name: Build Colmena configs
         run: nix shell "nixpkgs#colmena" --command colmena build --on eter
 
