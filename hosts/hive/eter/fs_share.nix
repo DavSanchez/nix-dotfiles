@@ -1,7 +1,7 @@
 _: {
   # Accessible via network
   services.nfs.server = {
-    enable = false;
+    enable = true;
     # fixed rpc.statd port; for firewall
     lockdPort = 4001;
     mountdPort = 4002;
@@ -11,9 +11,9 @@ _: {
     exports = ''
       /seclusium 192.168.8.0/24(fsid=0,no_subtree_check)
 
-      /seclusium/creation 192.168.8.0/24(rw,no_subtree_check,all_squash,anonuid=1000,anongid=100)
+      /seclusium/creation 192.168.8.0/24(no_subtree_check,all_squash,anonuid=1000,anongid=100)
       /seclusium/dimensions 192.168.8.0/24(no_subtree_check,all_squash,anonuid=1000,anongid=100)
-      /seclusium/echoes 192.168.8.0/24(rw,no_subtree_check,all_squash,anonuid=1000,anongid=100)
+      /seclusium/echoes solio.local(rw,no_subtree_check,all_squash,anonuid=1000,anongid=100)
       /seclusium/imagery 192.168.8.0/24(no_subtree_check,all_squash,anonuid=1000,anongid=100)
       /seclusium/technique 192.168.8.0/24(no_subtree_check,all_squash,anonuid=1000,anongid=100)
       /seclusium/zg 192.168.8.0/24(no_subtree_check,all_squash,anonuid=1000,anongid=100)

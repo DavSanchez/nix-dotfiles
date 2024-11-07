@@ -12,7 +12,11 @@
     buildOnTarget = true;
     targetHost = "${name}.local";
     targetUser = "david";
-    tags = [ "zima" "seclusium" "eter" ];
+    tags = [
+      "zima"
+      "seclusium"
+      "eter"
+    ];
   };
 
   #
@@ -58,7 +62,7 @@
   networking = {
     # Required for ZFS
     hostId = "bfbc2f21";
-    hostName = "eter";
+    hostName = name;
     firewall.allowedTCPPorts =
       [
         80
