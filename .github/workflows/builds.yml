@@ -1,0 +1,40 @@
+name: builds
+on:
+  workflow_dispatch: # allows manual triggering
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  linux:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@main
+      - name: Build Linux Home configs
+        run: nix run home-manager/master -- build --flake ".#david@nr-vm"
+      - name: Build NixOS config
+        run: nix build --flake ".#nixosConfigurations.nr-vm-utm"
+      - name: Build Colmena configs
+        run: nix shell "nixpkgs#colmena" --command colmena build --on eter
+
+  macos:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@main
+      - name: Build MacOS Home configs (solio)
+        run: nix run home-manager/master -- build --flake ".#david@solio"
+      - name: Build MacOS Home configs (sierpe)
+        run: nix run home-manager/master -- build --flake ".#david@solio"
+      - name: Build MacOS config (solio)
+        run: nix run nix-darwin -- build --flake ".#solio"
+      - name: Build MacOS config (sierpe)
+        run: nix run nix-darwin -- build --flake "#sierpe"
