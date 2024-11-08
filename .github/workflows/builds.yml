@@ -1,4 +1,4 @@
-name: builds
+name: CI
 on:
   workflow_dispatch: # allows manual triggering
   push:
@@ -10,6 +10,7 @@ on:
 
 jobs:
   linux:
+    name: Build Linux configs
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -21,14 +22,15 @@ jobs:
           name: davsanchez
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
       # Commented out as this is aarch64-linux only
-      # - name: Build Linux Home configs
+      # - name: Home configs
       #   run: nix run home-manager -- build --flake ".#david@nr-vm"
-      # - name: Build NixOS config
+      # - name: NixOS config (VM)
       #   run: nix build --flake ".#nixosConfigurations.nr-vm-utm"
-      - name: Build Colmena configs
+      - name: Colmena configs
         run: nix shell "nixpkgs#colmena" --command colmena build --on eter --no-build-on-target
 
   macos:
+    name: Build macOS configs
     runs-on: macos-latest
     steps:
       - name: Checkout repository
@@ -39,11 +41,11 @@ jobs:
         with:
           name: davsanchez
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-      - name: Build MacOS Home configs (solio)
+      - name: Home configs (solio)
         run: nix run home-manager -- build --flake ".#david@solio"
-      - name: Build MacOS Home configs (sierpe)
+      - name: Home configs (sierpe)
         run: nix run home-manager -- build --flake ".#david@sierpe"
-      - name: Build MacOS config (solio)
+      - name: nix-darwin config (solio)
         run: nix run nix-darwin -- build --flake ".#solio"
-      - name: Build MacOS config (sierpe)
+      - name: nix-darwin config (sierpe)
         run: nix run nix-darwin -- build --flake ".#sierpe"
