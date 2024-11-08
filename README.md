@@ -2,7 +2,7 @@
 
 ## [![built with nix](https://builtwithnix.org/badge.svg)](https://builtwithnix.org)
 
-[![NixOS Unstable](https://img.shields.io/badge/NixOS-unstable-blue.svg?style=flat-square&logo=NixOS&logoColor=white)](https://nixos.org)
+[![CI](https://github.com/DavSanchez/nix-dotfiles/actions/workflows/builds.yml/badge.svg)](https://github.com/DavSanchez/nix-dotfiles/actions/workflows/builds.yml) [![NixOS Unstable](https://img.shields.io/badge/NixOS-unstable-blue.svg?style=flat-square&logo=NixOS&logoColor=white)](https://nixos.org)
 
 ## Usage
 
