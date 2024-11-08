@@ -13,7 +13,7 @@ _: {
 
       /seclusium/creation 192.168.8.0/24(no_subtree_check,all_squash,anonuid=1000,anongid=100)
       /seclusium/dimensions 192.168.8.0/24(no_subtree_check,all_squash,anonuid=1000,anongid=100)
-      /seclusium/echoes solio.local(rw,no_subtree_check,all_squash,anonuid=1000,anongid=100)
+      /seclusium/echoes 192.168.8.171(rw,no_subtree_check,all_squash,anonuid=1000,anongid=100)
       /seclusium/imagery 192.168.8.0/24(no_subtree_check,all_squash,anonuid=1000,anongid=100)
       /seclusium/technique 192.168.8.0/24(no_subtree_check,all_squash,anonuid=1000,anongid=100)
       /seclusium/zg 192.168.8.0/24(no_subtree_check,all_squash,anonuid=1000,anongid=100)
@@ -41,7 +41,7 @@ _: {
       echoes = {
         path = "/seclusium/echoes";
         writeable = "yes";
-        "hosts allow" = ".solio.local";
+        "hosts allow" = "192.168.8.171";
       };
       imagery = {
         path = "/seclusium/imagery";
