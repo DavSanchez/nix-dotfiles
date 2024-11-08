@@ -22,7 +22,7 @@ jobs:
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
       # Commented out as this is aarch64-linux only
       # - name: Build Linux Home configs
-      #   run: nix run home-manager/master -- build --flake ".#david@nr-vm"
+      #   run: nix run home-manager -- build --flake ".#david@nr-vm"
       # - name: Build NixOS config
       #   run: nix build --flake ".#nixosConfigurations.nr-vm-utm"
       - name: Build Colmena configs
@@ -40,10 +40,10 @@ jobs:
           name: davsanchez
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
       - name: Build MacOS Home configs (solio)
-        run: nix run home-manager/master -- build --flake ".#david@solio"
+        run: nix run home-manager -- build --flake ".#david@solio"
       - name: Build MacOS Home configs (sierpe)
-        run: nix run home-manager/master -- build --flake ".#david@solio"
+        run: nix run home-manager -- build --flake ".#david@sierpe"
       - name: Build MacOS config (solio)
         run: nix run nix-darwin -- build --flake ".#solio"
       - name: Build MacOS config (sierpe)
-        run: nix run nix-darwin -- build --flake "#sierpe"
+        run: nix run nix-darwin -- build --flake ".#sierpe"
