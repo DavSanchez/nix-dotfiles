@@ -210,8 +210,10 @@
       "Proton Pass for Safari" = 6502835663;
       "Tailscale" = 1475387142;
       "Reeder" = 1529448980;
+      "reMarkable" = 1276493162;
       "Shazam" = 897118787;
       "The Unarchiver" = 425424353;
+      "UTM" = 1538878817;
       "Xcode" = 497799835;
     };
     # extraConfig = '' '';
