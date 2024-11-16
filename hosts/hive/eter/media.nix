@@ -79,7 +79,15 @@
 
   # User and groups setup
   users.users =
-    lib.optionalAttrs config.services.transmission.enable {
+    lib.optionalAttrs config.services.plex.enable {
+      plex.extraGroups = [
+        "multimedia"
+        (lib.optionalString config.services.transmission.enable config.services.transmission.group)
+        (lib.optionalString config.services.radarr.enable config.services.radarr.group)
+        (lib.optionalString config.services.sonarr.enable config.services.sonarr.group)
+      ];
+    }
+    // lib.optionalAttrs config.services.transmission.enable {
       transmission.extraGroups = [
         "multimedia"
         (lib.optionalString config.services.plex.enable config.services.plex.group)
