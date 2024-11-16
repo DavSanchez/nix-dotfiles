@@ -61,7 +61,21 @@
       };
       webHome = pkgs.flood-for-transmission;
     };
+
+    navidrome = {
+      enable = true;
+      openFirewall = true;
+      settings = {
+        MusicFolder = "/seclusium/echoes/apple_music/Music";
+        DataFolder = "/seclusium/echoes/navidrome";
+      };
+    };
   };
+
+  # Navidrome can use it
+  environment.systemPackages = lib.optionals config.services.navidrome.enable [
+    pkgs.ffmpeg
+  ];
 
   # User and groups setup
   users.users =
@@ -105,6 +119,13 @@
     }
     // lib.optionalAttrs config.services.bazarr.enable {
       bazarr.extraGroups = [
+        "multimedia"
+        (lib.optionalString config.services.transmission.enable config.services.transmission.group)
+        (lib.optionalString config.services.plex.enable config.services.plex.group)
+      ];
+    }
+    // lib.optionalAttrs config.services.navidrome.enable {
+      navidrome.extraGroups = [
         "multimedia"
         (lib.optionalString config.services.transmission.enable config.services.transmission.group)
         (lib.optionalString config.services.plex.enable config.services.plex.group)

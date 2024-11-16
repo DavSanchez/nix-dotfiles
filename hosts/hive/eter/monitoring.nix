@@ -20,10 +20,42 @@
   services.nginx = {
     enable = true;
     virtualHosts."${name}.local" = {
-      locations."/grafana/" = {
-        proxyPass = "http://${config.services.grafana.settings.server.http_addr}:${toString config.services.grafana.settings.server.http_port}";
-        proxyWebsockets = true;
-        recommendedProxySettings = true;
+      locations = {
+        "/grafana/" = {
+          proxyPass = "http://${config.services.grafana.settings.server.http_addr}:${toString config.services.grafana.settings.server.http_port}";
+          proxyWebsockets = true;
+          recommendedProxySettings = true;
+        };
+        "/prometheus/" = {
+          proxyPass = "http://127.0.0.1:${config.services.prometheus.port}";
+          proxyWebsockets = true;
+          recommendedProxySettings = true;
+        };
+        "/transmission/" = {
+          proxyPass = "http://127.0.0.1:9091";
+          proxyWebsockets = true;
+          recommendedProxySettings = true;
+        };
+        "/radarr/" = {
+          proxyPass = "http://127.0.0.1:7878";
+          proxyWebsockets = true;
+          recommendedProxySettings = true;
+        };
+        "/lidarr/" = {
+          proxyPass = "http://127.0.0.1:8686";
+          proxyWebsockets = true;
+          recommendedProxySettings = true;
+        };
+        "/prowlarr/" = {
+          proxyPass = "http://127.0.0.1:9696";
+          proxyWebsockets = true;
+          recommendedProxySettings = true;
+        };
+        "/navidrome/" = {
+          proxyPass = "http://127.0.0.1:${config.services.navidrome.settings.Port}";
+          proxyWebsockets = true;
+          recommendedProxySettings = true;
+        };
       };
     };
   };
@@ -52,17 +84,17 @@
           { targets = [ "127.0.0.1:${toString config.services.prometheus.exporters.node.port}" ]; }
         ];
       }
-      {
-        job_name = nodes.foundry-pi.config.networking.hostName;
-        static_configs = [
-          {
-            # FIXME: resolve? ${nodes.foundry-pi.config.networking.hostName}.local
-            targets = [
-              "192.168.8.224:${toString nodes.foundry-pi.config.services.prometheus.exporters.node.port}"
-            ];
-          }
-        ];
-      }
+      # {
+      #   job_name = nodes.foundry-pi.config.networking.hostName;
+      #   static_configs = [
+      #     {
+      #       # FIXME: resolve? ${nodes.foundry-pi.config.networking.hostName}.local
+      #       targets = [
+      #         "192.168.8.224:${toString nodes.foundry-pi.config.services.prometheus.exporters.node.port}"
+      #       ];
+      #     }
+      #   ];
+      # }
     ];
   };
 }
