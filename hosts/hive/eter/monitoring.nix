@@ -27,7 +27,7 @@
           recommendedProxySettings = true;
         };
         "/prometheus/" = {
-          proxyPass = "http://127.0.0.1:${config.services.prometheus.port}";
+          proxyPass = "http://127.0.0.1:${toString config.services.prometheus.port}";
           proxyWebsockets = true;
           recommendedProxySettings = true;
         };
@@ -52,7 +52,7 @@
           recommendedProxySettings = true;
         };
         "/navidrome/" = {
-          proxyPass = "http://127.0.0.1:${config.services.navidrome.settings.Port}";
+          proxyPass = "http://127.0.0.1:${toString config.services.navidrome.settings.Port}";
           proxyWebsockets = true;
           recommendedProxySettings = true;
         };
