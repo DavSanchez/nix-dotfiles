@@ -10,6 +10,7 @@
     plex = {
       enable = true;
       openFirewall = true;
+      dataDir = "/seclusium/imagery/plex";
     };
 
     # Movies
