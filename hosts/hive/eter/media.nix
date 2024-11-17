@@ -17,12 +17,14 @@
     radarr = {
       enable = true;
       openFirewall = true;
+      dataDir = "/seclusium/imagery/radarr/.config/Radarr";
     };
 
     # Series
     sonarr = {
       enable = true;
       openFirewall = true;
+      dataDir = "/seclusium/imagery/sonarr/.config/Sonarr";
     };
 
     # Music
@@ -69,6 +71,7 @@
       settings = {
         MusicFolder = "/seclusium/echoes/apple_music/Music";
         DataFolder = "/seclusium/echoes/navidrome";
+        BaseURL = "/navidrome";
       };
     };
   };
