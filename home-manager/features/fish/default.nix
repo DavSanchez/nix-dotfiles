@@ -55,12 +55,18 @@ in
       map gen-plugin [
         "grc" # grc Colourizer for some commands on Fish shell
         "forgit" # Utility tool powered by fzf for using git interactively (adds abbrvs!)
+        "plugin-git" # Git plugin for fish (similar to oh-my-zsh git)
         "fzf-fish" # Augment your fish command line with fzf key bindings
         "done" # Automatically receive notifications when long processes finish
         "colored-man-pages" # Fish shell plugin to colorize man pages
         "bass" # Fish function making it easy to use utilities written for Bash in Fish shell
+        "foreign-env" # Foreign environment interface for Fish shell
         "autopair" # Auto-complete matching pairs in the Fish command line
         "clownfish" # Fish function to mock the behaviour of commands
+        # "async-prompt" # Make prompt asynchronous to improve the reactivity
+        "plugin-sudope" # Fish plugin to quickly put 'sudo' in your command
+        "fish-you-should-use" # Fish plugin that reminds you to use your aliases
+        "puffer" # Text Expansions for Fish
       ]
       ++ [
         # {
