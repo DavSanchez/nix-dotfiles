@@ -189,7 +189,6 @@
       "xld"
       "xquartz" # X11 applications on macOS
       "yacreader"
-      "zed"
       "zerotier-one"
     ];
     brews = [ ];
