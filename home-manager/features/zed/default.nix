@@ -4,8 +4,18 @@ _: {
 
     extensions = [
       "nix"
+      # "haskell" # FIXME Already present?
+      "catppuccin"
+      "TOML"
     ];
     userKeymaps = { };
-    userSettings = { };
+    userSettings = {
+      vim_mode = true;
+      theme = {
+        mode = "system";
+        light = "Catppuccin Latte";
+        dark = "Catppuccin Macchiato";
+      };
+    };
   };
 }
