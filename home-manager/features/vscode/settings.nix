@@ -85,13 +85,13 @@ in
   "vim.enableNeovim" = true; # programs.neovim.enable;
   "vim.neovimUseConfigFile" = true; # programs.neovim.enable;
   "window.commandCenter" = true;
-  "workbench.colorTheme" = "Catppuccin Macchiato"; # "Lambda Dark+";
+  "workbench.colorTheme" = "Catppuccin Mocha"; # "Lambda Dark+";
   # Catppuccin recommended settings
   "editor.semanticHighlighting.enabled" = true;
   "terminal.integrated.minimumContrastRatio" = 1;
   "window.titleBarStyle" = "custom";
   "gopls.ui.semanticTokens" = true;
-  "workbench.iconTheme" = "catppuccin-macchiato";
+  "workbench.iconTheme" = "catppuccin-mocha";
   # End Catppuccin settings
   "workbench.editorAssociations" = {
     "*.pdf" = "latex-workshop-pdf-hook";

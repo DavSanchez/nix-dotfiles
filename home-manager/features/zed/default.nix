@@ -14,7 +14,7 @@ _: {
       theme = {
         mode = "system";
         light = "Catppuccin Latte";
-        dark = "Catppuccin Macchiato";
+        dark = "Catppuccin Mocha";
       };
     };
   };
