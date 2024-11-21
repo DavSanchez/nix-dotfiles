@@ -69,15 +69,15 @@ in
         "puffer" # Text Expansions for Fish
       ]
       ++ [
-        # {
-        #   name = "fish-abbreviation-tips";
-        #   src = pkgs.fetchFromGitHub {
-        #     owner = "gazorby";
-        #     repo = "fish-abbreviation-tips";
-        #     rev = "v0.7.0";
-        #     sha256 = "sha256-F1t81VliD+v6WEWqj1c1ehFBXzqLyumx5vV46s/FZRU=";
-        #   };
-        # }
+        {
+          name = "fish-abbreviation-tips";
+          src = pkgs.fetchFromGitHub {
+            owner = "gazorby";
+            repo = "fish-abbreviation-tips";
+            rev = "v0.7.0";
+            sha256 = "sha256-F1t81VliD+v6WEWqj1c1ehFBXzqLyumx5vV46s/FZRU=";
+          };
+        }
       ];
 
     shellAbbrs = { };
@@ -92,6 +92,31 @@ in
 
     shellInitLast = "";
   };
+
+  # In fish, the contents of .config/fish/conf.d (e.g. plugins) get executed BEFORE config.fish
+  # So, if I want to override the aliases defined in the forgit plugin I need to place
+  # something in .config/fish/conf.d and ensure it runs before forgit!
+  xdg.configFile."fish/conf.d/00-forgit-preload.fish".text = ''
+    set -gx forgit_log gflo
+    set -gx forgit_reflog gfrl
+    set -gx forgit_diff gfd
+    set -gx forgit_add gfa
+    set -gx forgit_reset_head gfrh
+    set -gx forgit_ignore gfi
+    set -gx forgit_checkout_file gfcf
+    set -gx forgit_checkout_branch gfcb
+    set -gx forgit_branch_delete gfbd
+    set -gx forgit_checkout_tag gfct
+    set -gx forgit_checkout_commit gfco
+    set -gx forgit_revert_commit gfrc
+    set -gx forgit_clean gfclean
+    set -gx forgit_stash_show gfss
+    set -gx forgit_stash_push gfsp
+    set -gx forgit_cherry_pick gfcp
+    set -gx forgit_rebase gfrb
+    set -gx forgit_blame gfbl
+    set -gx forgit_fixup gffu
+  '';
 
   # For the "grc" plugin enabled above, we need grc as it does not provide the package
   home.packages = lib.optionals config.programs.fish.enable [ pkgs.grc ];
