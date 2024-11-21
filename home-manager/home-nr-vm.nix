@@ -15,6 +15,7 @@
     ./features/nu
     ./features/starship
     ./features/vscode
+    ./features/zed
     ./features/zsh
     ./features/bash
     ./features/fish

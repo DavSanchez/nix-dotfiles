@@ -190,7 +190,6 @@
       "xld"
       "xquartz" # X11 applications on macOS
       "yacreader"
-      "zed"
       "zotero"
     ];
     brews = [ ];

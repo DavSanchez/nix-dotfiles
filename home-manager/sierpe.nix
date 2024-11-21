@@ -28,6 +28,7 @@
     ./features/nu
     ./features/starship
     ./features/vscode
+    ./features/zed
     ./features/zellij
     ./features/zsh
     ./features/bash
