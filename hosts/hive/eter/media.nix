@@ -16,40 +16,34 @@
     # Movies
     radarr = {
       enable = true;
-      openFirewall = true;
       dataDir = "/seclusium/imagery/radarr/.config/Radarr";
     };
 
     # Series
     sonarr = {
       enable = true;
-      openFirewall = true;
       dataDir = "/seclusium/imagery/sonarr/.config/Sonarr";
     };
 
     # Music
     lidarr = {
       enable = true;
-      openFirewall = true;
       dataDir = "/seclusium/echoes/lidarr/.config/Lidarr";
     };
 
     # Books
     readarr = {
       enable = false;
-      openFirewall = true;
     };
 
     # Subtitles
     bazarr = {
       enable = false;
-      openFirewall = true;
     };
 
     # Indexers
     prowlarr = {
       enable = true;
-      openFirewall = true;
     };
 
     transmission = {
@@ -67,7 +61,6 @@
 
     navidrome = {
       enable = true;
-      openFirewall = true;
       settings = {
         MusicFolder = "/seclusium/echoes/apple_music/Music";
         DataFolder = "/seclusium/echoes/navidrome";
