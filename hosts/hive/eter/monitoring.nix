@@ -74,15 +74,15 @@
         enabledCollectors = [ "systemd" ];
         port = 9002;
       };
-      exportarr-radarr.enable = true;
-      exportarr-sonarr.enable = true;
+      exportarr-radarr.enable = false;
+      exportarr-sonarr.enable = false;
       exportarr-lidarr = {
-        enable = true;
+        enable = false;
         apiKeyFile = "/var/lib/lidarr/lidarr.api-key"; # FIXME
       };
       exportarr-readarr.enable = false;
       exportarr-bazarr.enable = false;
-      exportarr-prowlarr.enable = true;
+      exportarr-prowlarr.enable = false;
     };
     scrapeConfigs = [
       {
