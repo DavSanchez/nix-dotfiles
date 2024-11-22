@@ -46,6 +46,11 @@
           proxyWebsockets = true;
           recommendedProxySettings = true;
         };
+        "/sonarr/" = {
+          proxyPass = "http://127.0.0.1:8989";
+          proxyWebsockets = true;
+          recommendedProxySettings = true;
+        };
         "/prowlarr/" = {
           proxyPass = "http://127.0.0.1:9696";
           proxyWebsockets = true;
@@ -69,14 +74,15 @@
         enabledCollectors = [ "systemd" ];
         port = 9002;
       };
-      exportarr-radarr.enable = false;
+      exportarr-radarr.enable = true;
+      exportarr-sonarr.enable = true;
       exportarr-lidarr = {
         enable = true;
         apiKeyFile = "/var/lib/lidarr/lidarr.api-key"; # FIXME
       };
       exportarr-readarr.enable = false;
       exportarr-bazarr.enable = false;
-      exportarr-prowlarr.enable = false;
+      exportarr-prowlarr.enable = true;
     };
     scrapeConfigs = [
       {
