@@ -9,23 +9,22 @@ let
       "vscode:\${workspaceFolder}"
     ];
   };
+  zellij-script = pkgs.writeShellScript "vscode-zellij" ''
+    if ${pkgs.zellij}/bin/zellij ls -n |& grep -E "^$1 .*EXITED" >/dev/null; then
+      ${pkgs.zellij}/bin/zellij delete-session "$1" # delete dead session
+    fi
+    if ${pkgs.zellij}/bin/zellij ls -n |& grep -E "^$1 " >/dev/null; then
+      ${pkgs.zellij}/bin/zellij attach "$1"
+    else
+      # We don't have a session with this name yet
+      ${pkgs.zellij}/bin/zellij --session "$1" --new-session-with-layout=compact options --no-pane-frames --simplified-ui=true ${pkgs.lib.optionalString pkgs.stdenv.isDarwin "--copy-command=pbcopy"}
+    fi
+  '';
   zellij-shell-profile = {
-    "path" = "${pkgs.zellij}/bin/zellij";
-    "args" =
-      [
-        "--layout"
-        "compact"
-        # "attach"
-        # "--create"
-        # "vscode::\${workspaceFolderBasename}"
-        "options"
-        "--no-pane-frames"
-        "--simplified-ui=true"
-      ]
-      ++ pkgs.lib.optionals pkgs.stdenv.isDarwin [
-        "--copy-command"
-        "pbcopy"
-      ];
+    "path" = "${zellij-script}";
+    "args" = [
+      "vscode:\${workspaceFolderBasename}"
+    ];
   };
   term-profiles = {
     "tmux" = tmux-shell-profile;
@@ -64,7 +63,9 @@ in
   "git.defaultBranchName" = "master";
   "nix.enableLanguageServer" = true;
   "nix.serverPath" = "${pkgs.nixd}/bin/nixd";
-  "nix.serverSettings.nixd.formatting.command" = [ "${pkgs.nixfmt-rfc-style}/bin/nixfmt" ];
+  "nix.serverSettings" = {
+    "nixd.formatting.command" = [ "${pkgs.nixfmt-rfc-style}/bin/nixfmt" ];
+  };
   "nix.formatterPath" = "${pkgs.nixfmt-rfc-style}/bin/nixfmt";
   "rust-analyzer.check.command" = "clippy";
   "search.exclude" = {
@@ -74,14 +75,10 @@ in
   "terminal.integrated.fontFamily" = "'JetBrainsMono Nerd Font'";
   "terminal.integrated.scrollback" = 5000;
   "terminal.integrated.shellIntegration.enabled" = true;
-  "terminal.integrated.profiles" = {
-    "linux" = term-profiles;
-    "osx" = term-profiles;
-  };
-  "terminal.integrated.defaultProfile" = {
-    "linux" = "zellij";
-    "osx" = "zellij";
-  };
+  "terminal.integrated.profiles.linux" = term-profiles;
+  "terminal.integrated.profiles.osx" = term-profiles;
+  "terminal.integrated.defaultProfile.linux" = "zellij";
+  "terminal.integrated.defaultProfile.osx" = "zellij";
   "vim.enableNeovim" = true; # programs.neovim.enable;
   "vim.neovimUseConfigFile" = true; # programs.neovim.enable;
   "window.commandCenter" = true;
@@ -90,7 +87,6 @@ in
   "editor.semanticHighlighting.enabled" = true;
   "terminal.integrated.minimumContrastRatio" = 1;
   "window.titleBarStyle" = "custom";
-  "gopls.ui.semanticTokens" = true;
   "workbench.iconTheme" = "catppuccin-mocha";
   # End Catppuccin settings
   "workbench.editorAssociations" = {
