@@ -56,11 +56,6 @@
           proxyWebsockets = true;
           recommendedProxySettings = true;
         };
-        "/navidrome/" = {
-          proxyPass = "http://127.0.0.1:${toString config.services.navidrome.settings.Port}";
-          proxyWebsockets = true;
-          recommendedProxySettings = true;
-        };
       };
     };
   };
