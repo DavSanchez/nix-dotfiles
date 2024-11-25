@@ -85,76 +85,46 @@
     lib.optionalAttrs config.services.jellyfin.enable {
       jellyfin.extraGroups = [
         "multimedia"
-        # (lib.optionalString config.services.transmission.enable config.services.transmission.group)
       ];
     }
     // lib.optionalAttrs config.services.plex.enable {
       plex.extraGroups = [
         "multimedia"
-        # (lib.optionalString config.services.transmission.enable config.services.transmission.group)
-        # (lib.optionalString config.services.radarr.enable config.services.radarr.group)
-        # (lib.optionalString config.services.sonarr.enable config.services.sonarr.group)
       ];
     }
     // lib.optionalAttrs config.services.transmission.enable {
       transmission.extraGroups = [
         "multimedia"
-        # (lib.optionalString config.services.plex.enable config.services.plex.group)
-        # (lib.optionalString config.services.jellyfin.enable config.services.jellyfin.group)
-        # (lib.optionalString config.services.navidrome.enable config.services.navidrome.group)
-        # (lib.optionalString config.services.radarr.enable config.services.radarr.group)
-        # (lib.optionalString config.services.sonarr.enable config.services.sonarr.group)
-        # (lib.optionalString config.services.lidarr.enable config.services.lidarr.group)
-        # (lib.optionalString config.services.readarr.enable config.services.readarr.group)
-        # (lib.optionalString config.services.bazarr.enable config.services.bazarr.group)
       ];
     }
     // lib.optionalAttrs config.services.radarr.enable {
       radarr.extraGroups = [
         "multimedia"
-        # (lib.optionalString config.services.transmission.enable config.services.transmission.group)
-        # (lib.optionalString config.services.plex.enable config.services.plex.group)
-        # (lib.optionalString config.services.jellyfin.enable config.services.jellyfin.group)
       ];
     }
     // lib.optionalAttrs config.services.sonarr.enable {
       sonarr.extraGroups = [
         "multimedia"
-        # (lib.optionalString config.services.transmission.enable config.services.transmission.group)
-        # (lib.optionalString config.services.plex.enable config.services.plex.group)
-        # (lib.optionalString config.services.jellyfin.enable config.services.jellyfin.group)
       ];
     }
     // lib.optionalAttrs config.services.lidarr.enable {
       lidarr.extraGroups = [
         "multimedia"
-        # (lib.optionalString config.services.transmission.enable config.services.transmission.group)
-        # (lib.optionalString config.services.jellyfin.enable config.services.jellyfin.group)
-        # (lib.optionalString config.services.plex.enable config.services.plex.group)
-        # (lib.optionalString config.services.navidrome.enable config.services.navidrome.group)
       ];
     }
     // lib.optionalAttrs config.services.readarr.enable {
       readarr.extraGroups = [
         "multimedia"
-        # (lib.optionalString config.services.transmission.enable config.services.transmission.group)
-        # (lib.optionalString config.services.jellyfin.enable config.services.jellyfin.group)
       ];
     }
     // lib.optionalAttrs config.services.bazarr.enable {
       bazarr.extraGroups = [
         "multimedia"
-        # (lib.optionalString config.services.transmission.enable config.services.transmission.group)
-        # (lib.optionalString config.services.jellyfin.enable config.services.jellyfin.group)
-        # (lib.optionalString config.services.plex.enable config.services.plex.group)
       ];
     }
     // lib.optionalAttrs config.services.navidrome.enable {
       navidrome.extraGroups = [
         "multimedia"
-        # (lib.optionalString config.services.transmission.enable config.services.transmission.group)
-        # (lib.optionalString config.services.jellyfin.enable config.services.jellyfin.group)
-        # (lib.optionalString config.services.plex.enable config.services.plex.group)
       ];
     };
 }
