@@ -60,7 +60,7 @@ pkgs:
   vadimcn.vscode-lldb
   valentjn.vscode-ltex
   vscode-icons-team.vscode-icons
-  vscodevim.vim
+  # vscodevim.vim
   zxh404.vscode-proto3
   ziglang.vscode-zig
 ])
@@ -129,6 +129,12 @@ pkgs:
     name = "wavetrace";
     publisher = "wavetrace";
     version = "1.1.2";
+    sha256 = "11k57vppx5i7i56kgp4b2r97g6fqmvm7x0mzf8zj5r42ipn070zg";
+  }
+  {
+    name = "vscode-helix-emulation";
+    publisher = "jasew";
+    version = "0.6.2";
     sha256 = "11k57vppx5i7i56kgp4b2r97g6fqmvm7x0mzf8zj5r42ipn070zg";
   }
 ]

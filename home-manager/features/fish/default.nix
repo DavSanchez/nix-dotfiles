@@ -87,7 +87,7 @@ in
     shellInit = ''
       ${lib.optionalString pkgs.stdenv.isDarwin "eval (/opt/homebrew/bin/brew shellenv)"}
 
-      set -Ux EDITOR nvim
+      set -Ux EDITOR hx
     '';
 
     shellInitLast = "";
