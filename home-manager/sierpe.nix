@@ -39,7 +39,6 @@
     ./features/fonts.nix
     ./features/helix.nix
     ./features/tmux.nix
-    ./features/cava.nix
 
     # Darwin specifics
     # ./features/darwin.nix
