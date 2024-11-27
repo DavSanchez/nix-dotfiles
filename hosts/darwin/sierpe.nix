@@ -149,6 +149,7 @@
     casks = [
       "adobe-acrobat-reader"
       "amethyst"
+      "background-music"
       "brave-browser"
       "crossover"
       "discord"
