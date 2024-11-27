@@ -112,7 +112,7 @@
       overrideLocalDns = false;
     };
 
-    sketchybar.enable = true;
+    sketchybar.enable = false;
     jankyborders.enable = true;
   };
   networking.hostName = "sierpe";
