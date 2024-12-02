@@ -28,19 +28,4 @@
       elfutils
       # patchelf # present in ./nix.nix
     ];
-
-  programs = {
-    watson = {
-      enable = true;
-      enableZshIntegration = true;
-      enableBashIntegration = true;
-      enableFishIntegration = true;
-    };
-
-    taskwarrior = {
-      enable = false;
-      # colorTheme = null;
-      # config = {};
-    };
-  };
 }
