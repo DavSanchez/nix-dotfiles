@@ -17,6 +17,7 @@
     # inputs.hardware.nixosModules.common-cpu-amd
     # inputs.hardware.nixosModules.common-ssd
     inputs.nh_darwin.nixDarwinModules.prebuiltin
+    inputs.mac-app-util.darwinModules.default
 
     # You can also split up your configuration and import pieces of it here:
     # ./users.nix
@@ -165,7 +166,7 @@
       "libreoffice"
       "little-snitch"
       "logseq"
-      "maccy"
+      # "maccy"
       "openemu"
       "openra"
       "plex"
@@ -176,7 +177,7 @@
       "proton-pass"
       "protonvpn"
       "qflipper"
-      "raycast"
+      # "raycast"
       "remarkable"
       "secretive"
       "sonic-pi"
