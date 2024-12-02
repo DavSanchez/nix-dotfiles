@@ -19,13 +19,10 @@
   programs = {
     ripgrep.enable = true;
 
-    lsd = {
-      enable = true;
-      enableAliases = true;
-    };
-
     eza = {
       enable = true;
+      icons = true;
+      git = true;
       enableBashIntegration = true;
       enableZshIntegration = true;
       enableFishIntegration = true;
