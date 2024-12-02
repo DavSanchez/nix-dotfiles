@@ -21,8 +21,9 @@
 
     eza = {
       enable = true;
-      icons = true;
       git = true;
+      icons = "auto";
+      colors = "auto";
       enableBashIntegration = true;
       enableZshIntegration = true;
       enableFishIntegration = true;
