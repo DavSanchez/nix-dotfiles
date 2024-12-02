@@ -5,12 +5,14 @@
     enableBashIntegration = true;
     enableFishIntegration = true;
     enableZshIntegration = true;
-    settings = {
-      ui.pane_frames.rounded_corners = true;
-
+    settings =
+      {
+        ui.pane_frames.rounded_corners = true;
+      }
       # Let's use fish as the default shell (if enabled)
-      default_shell = lib.optionalString config.programs.fish.enable "${config.programs.fish.package}/bin/fish";
-    };
+      // lib.optionalString config.programs.fish.enable {
+        default_shell = "${config.programs.fish.package}/bin/fish";
+      };
   };
 
   # Creating .config/zellij/layouts overwrites
