@@ -103,7 +103,7 @@ in
     environment = mkIf cfg.enable {
       systemPackages = [ cfg.package ];
       variables = mkIf (cfg.flake != null) {
-        FLAKE = cfg.flake;
+        NH_FLAKE = cfg.flake;
       };
     };
 
