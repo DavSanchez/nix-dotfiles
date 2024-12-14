@@ -168,6 +168,7 @@
       "little-snitch"
       "logseq"
       # "maccy"
+      "ollama"
       "openemu"
       "openra"
       "plex"
