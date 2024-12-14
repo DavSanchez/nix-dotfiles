@@ -153,6 +153,7 @@
       "bartender"
       "brave-browser"
       "crossover"
+      "diffusionbee"
       "discord"
       "disk-inventory-x"
       "firefox"

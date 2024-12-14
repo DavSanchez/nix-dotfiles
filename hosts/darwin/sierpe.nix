@@ -154,6 +154,7 @@
       "background-music"
       "brave-browser"
       "crossover"
+      "diffusionbee"
       "discord"
       "disk-inventory-x"
       "firefox"
