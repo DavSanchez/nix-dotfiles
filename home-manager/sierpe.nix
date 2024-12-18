@@ -13,9 +13,6 @@
 
     # Or modules exported from other flakes (such as nix-colors):
     # inputs.nix-colors.homeManagerModules.default
-    inputs.nixvim.homeManagerModules.nixvim
-    inputs.catppuccin.homeManagerModules.catppuccin
-    inputs.mac-app-util.homeManagerModules.default
 
     # You can also split up your configuration and import pieces of it here:
     ./features/aws
@@ -108,9 +105,6 @@
     executable = true;
     onChange = "${pkgs.sketchybar}/bin/sketchybar --reload";
   };
-
-  catppuccin.enable = true;
-  catppuccin.flavor = "mocha";
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   home.stateVersion = "22.11";

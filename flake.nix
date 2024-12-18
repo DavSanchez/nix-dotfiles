@@ -37,7 +37,8 @@
     # nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
 
     # Uniform colors across all apps?
-    catppuccin.url = "github:catppuccin/nix";
+    # catppuccin.url = "github:catppuccin/nix";
+    stylix.url = "github:danth/stylix";
 
     # Fix .app programs installed by Nix on Mac
     mac-app-util.url = "github:hraban/mac-app-util";
@@ -102,8 +103,11 @@
             inherit inputs;
           };
           modules = [
+            # nh with darwin support (to remove once <https://github.com/LnL7/nix-darwin/pull/942>) merges
+            inputs.self.darwinModules.nh
+            inputs.mac-app-util.darwinModules.default
+            inputs.stylix.darwinModules.stylix
             ./hosts/darwin/sierpe.nix
-            # ./hosts/darwin-builder
           ];
         };
         solio = darwin.lib.darwinSystem {
@@ -111,7 +115,13 @@
           specialArgs = {
             inherit inputs;
           };
-          modules = [ ./hosts/darwin/solio.nix ];
+          modules = [
+            # nh with darwin support (to remove once <https://github.com/LnL7/nix-darwin/pull/942>) merges
+            inputs.self.darwinModules.nh
+            inputs.mac-app-util.darwinModules.default
+            inputs.stylix.darwinModules.stylix
+            ./hosts/darwin/solio.nix
+          ];
         };
       };
 
@@ -121,21 +131,36 @@
           extraSpecialArgs = {
             inherit inputs;
           };
-          modules = [ ./home-manager/sierpe.nix ];
+          modules = [
+            inputs.nixvim.homeManagerModules.nixvim
+            inputs.mac-app-util.homeManagerModules.default
+            inputs.stylix.homeManagerModules.stylix
+            ./home-manager/sierpe.nix
+          ];
         };
         "david@solio" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.aarch64-darwin;
           extraSpecialArgs = {
             inherit inputs;
           };
-          modules = [ ./home-manager/solio.nix ];
+          modules = [
+            inputs.nixvim.homeManagerModules.nixvim
+            inputs.mac-app-util.homeManagerModules.default
+            inputs.stylix.homeManagerModules.stylix
+            ./home-manager/solio.nix
+          ];
         };
         "david@nr-vm" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.aarch64-linux;
           extraSpecialArgs = {
             inherit inputs;
           };
-          modules = [ ./home-manager/home-nr-vm.nix ];
+          modules = [
+            inputs.nixvim.homeManagerModules.nixvim
+            inputs.mac-app-util.homeManagerModules.default
+            inputs.stylix.homeManagerModules.stylix
+            ./home-manager/home-nr-vm.nix
+          ];
         };
       };
 

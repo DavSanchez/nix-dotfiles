@@ -1,10 +1,6 @@
 { inputs, ... }:
 {
   imports = [
-    inputs.nixvim.homeManagerModules.nixvim
-    inputs.catppuccin.homeManagerModules.catppuccin
-    inputs.mac-app-util.homeManagerModules.default
-
     ./features/aws
     ./features/cli
     ./features/dev/default-nr.nix
@@ -58,9 +54,6 @@
   programs.git.enable = true;
 
   xdg.enable = true;
-
-  catppuccin.enable = true;
-  catppuccin.flavor = "mocha";
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   home.stateVersion = "22.11";
