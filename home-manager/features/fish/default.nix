@@ -44,9 +44,6 @@ in
 
       # Change greeting
       set -U fish_greeting "🐟"
-
-      # Nix shell for non-Bash shells
-      ${pkgs.nix-your-shell}/bin/nix-your-shell fish | source
     '';
 
     loginShellInit = "";

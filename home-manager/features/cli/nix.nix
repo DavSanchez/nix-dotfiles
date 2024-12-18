@@ -30,5 +30,12 @@
       enableBashIntegration = true;
       enableFishIntegration = true;
     };
+
+    nix-your-shell = {
+      enable = true;
+      enableZshIntegration = true;
+      enableFishIntegration = true;
+      enableNushellIntegration = true;
+    };
   };
 }

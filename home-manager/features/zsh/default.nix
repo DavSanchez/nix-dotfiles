@@ -149,8 +149,6 @@
 
     initExtra = ''
       ${lib.optionalString pkgs.stdenv.isDarwin "eval \"$(/opt/homebrew/bin/brew shellenv)\""}
-
-      ${pkgs.nix-your-shell}/bin/nix-your-shell zsh | source /dev/stdin
     '';
   };
 
