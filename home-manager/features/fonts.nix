@@ -3,15 +3,19 @@
   fonts.fontconfig.enable = true;
 
   home.packages = with pkgs; [
-    nerd-fonts.fira-code
-    nerd-fonts.hack
-    nerd-fonts.iosevka
-    nerd-fonts.iosevka-term
-    nerd-fonts.iosevka-term-slab
-    nerd-fonts.jetbrains-mono
+    iosevka # Allows for customization via privateBuildPlan
+
+    iosevka-custom # From my overlay
+    iosevka-term-custom # From my overlay
+    iosevka-slab-custom # From my overlay
+    iosevka-term-slab-custom # From my overlay
 
     fira-code-symbols
-    iosevka # Allows for customization via privateBuildPlan
+    nerd-fonts.fira-code
+    nerd-fonts.jetbrains-mono
+
+    # For sketchybar
     sketchybar-app-font
+    nerd-fonts.hack
   ];
 }

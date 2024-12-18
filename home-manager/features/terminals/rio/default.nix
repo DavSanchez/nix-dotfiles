@@ -9,7 +9,7 @@ _: {
         blur = true;
       };
       navigation.mode = "Plain";
-      fonts.family = "JetBrainsMono Nerd Font";
+      fonts.family = "Iosevka Term Custom";
     };
   };
 }
