@@ -38,6 +38,8 @@
     ./features/helix.nix
     ./features/tmux.nix
 
+    ./features/stylix.nix
+
     # Darwin specifics
     # ./features/darwin.nix
     # ./darwin/colima.nix

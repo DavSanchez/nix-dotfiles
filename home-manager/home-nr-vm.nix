@@ -22,6 +22,8 @@
     ./features/fonts.nix
     ./features/helix.nix
     ./features/tmux.nix
+
+    ./features/stylix.nix
   ];
 
   nixpkgs = {
