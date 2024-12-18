@@ -37,7 +37,9 @@ in
   "editor.accessibilitySupport" = "off";
   "editor.bracketPairColorization.enabled" = true;
   "editor.cursorSmoothCaretAnimation" = "on";
-  "editor.fontFamily" = "'FiraCode Nerd Font', Menlo, Monaco, 'Courier New', monospace";
+  "editor.fontFamily" =
+    "'Iosevka Custom', 'FiraCode Nerd Font', Menlo, Monaco, 'Courier New', monospace";
+  "editor.fontSize" = 14;
   "editor.fontLigatures" = true;
   "editor.formatOnPaste" = true;
   "editor.formatOnSave" = true;
@@ -72,7 +74,9 @@ in
     "**/.direnv" = true;
   };
   "terminal.external.osxExec" = "WezTerm.app";
-  "terminal.integrated.fontFamily" = "'JetBrainsMono Nerd Font'";
+  "terminal.integrated.fontFamily" = "'Iosevka Term Custom'";
+  "terminal.integrated.fontSize" = 14;
+  "terminal.integrated.fontLigatures" = true;
   "terminal.integrated.scrollback" = 5000;
   "terminal.integrated.shellIntegration.enabled" = true;
   "terminal.integrated.profiles.linux" = term-profiles;
