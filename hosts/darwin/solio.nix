@@ -17,10 +17,6 @@
     # inputs.hardware.nixosModules.common-cpu-amd
     # inputs.hardware.nixosModules.common-ssd
 
-    # nh with darwin support (to remove once <https://github.com/LnL7/nix-darwin/pull/942>) merges
-    inputs.self.darwinModules.nh
-    inputs.mac-app-util.darwinModules.default
-
     # You can also split up your configuration and import pieces of it here:
     # ./users.nix
     # ./common/yabai.nix
