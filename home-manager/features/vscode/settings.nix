@@ -37,8 +37,9 @@ in
   "editor.accessibilitySupport" = "off";
   "editor.bracketPairColorization.enabled" = true;
   "editor.cursorSmoothCaretAnimation" = "on";
-  "editor.fontFamily" = "'Iosevka Nerd Font Mono' 'FiraCode Nerd Font', Menlo, Monaco, 'Courier New', monospace";
-  "editor.fontSize" = 13;
+  "editor.fontFamily" =
+    "'Iosevka Nerd Font Mono' 'FiraCode Nerd Font', Menlo, Monaco, 'Courier New', monospace";
+  "editor.fontSize" = 14;
   "editor.fontLigatures" = true;
   "editor.formatOnPaste" = true;
   "editor.formatOnSave" = true;
