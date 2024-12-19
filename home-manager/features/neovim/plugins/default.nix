@@ -1,6 +1,5 @@
 {
   barbar.enable = true;
-  codeium-nvim.enable = true;
   comment.enable = true;
   conform-nvim.enable = true;
   copilot-lua = {

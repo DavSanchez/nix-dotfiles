@@ -21,8 +21,5 @@
     { name = "conventionalcommits"; }
     { name = "dictionary"; }
     { name = "copilot"; }
-    # {
-    # name = "codeium";
-    # }
   ];
 }
