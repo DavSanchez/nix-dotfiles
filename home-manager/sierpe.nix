@@ -97,7 +97,7 @@
   xdg.configFile."borders/bordersrc" = {
     source = ./darwin/bordersrc;
     executable = true;
-    onChange = "/bin/bash ${config.configFile."borders/bordersrc".target}";
+    onChange = "/bin/bash ${config.xdg.configFile."borders/bordersrc".target}";
   };
   xdg.configFile."sketchybar" = {
     source = ./darwin/sketchybar;
