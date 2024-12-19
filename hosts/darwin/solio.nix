@@ -112,7 +112,7 @@
       enable = false; # Using App Store application for the moment
       overrideLocalDns = false;
     };
-    sketchybar.enable = true;
+    sketchybar.enable = false;
     jankyborders.enable = true;
   };
 

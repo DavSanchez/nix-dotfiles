@@ -3,6 +3,7 @@
 {
   inputs,
   pkgs,
+  config,
   ...
 }:
 {
@@ -96,7 +97,11 @@
   xdg.configFile."borders/bordersrc" = {
     source = ./darwin/bordersrc;
     executable = true;
-    onChange = "/bin/bash ${./darwin/bordersrc}";
+    onChange = ''
+      # Add borders to PATH
+      PATH=$PATH:${pkgs.jankyborders}/bin
+      . ${config.xdg.configFile."borders/bordersrc".target}
+    '';
   };
   xdg.configFile."sketchybar" = {
     source = ./darwin/sketchybar;
