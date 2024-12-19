@@ -74,7 +74,7 @@ in
     "**/.direnv" = true;
   };
   "terminal.external.osxExec" = "WezTerm.app";
-  "terminal.integrated.fontFamily" = "'Iosevka Term Custom'";
+  "terminal.integrated.fontFamily" = "'Iosevka Term Slab Custom'";
   "terminal.integrated.fontSize" = 13;
   "terminal.integrated.fontLigatures" = true;
   "terminal.integrated.scrollback" = 5000;
