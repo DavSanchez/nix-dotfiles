@@ -243,7 +243,7 @@ smart-window-margins: false
 # window-margins: true
 # window-margin-size: 5
 # The size of the margins between windows (in px, default 0).
-window-margin-size: 15
+window-margin-size: 5
 
 # The max number of windows that may be visible on a screen at one time before
 # additional windows are minimized. A value of 0 disables the feature.
@@ -304,10 +304,10 @@ screen-padding-left: 0
 screen-padding-right: 0
 
 # Padding to apply between windows and the top edge of the screen (in px, default 0).
-screen-padding-top: 40
+screen-padding-top: 5
 
 # Padding to apply between windows and the bottom edge of the screen (in px, default 0).
-screen-padding-bottom: 0
+screen-padding-bottom: 5
 
 # true to maintain layout state across application executions (default true).
 restore-layouts-on-launch: true

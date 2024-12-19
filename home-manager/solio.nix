@@ -1,6 +1,12 @@
 # This is your home-manager configuration file
 # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
-{ inputs, pkgs, ... }:
+{
+  inputs,
+  pkgs,
+  config,
+  ...
+}:
+
 {
   # You can import other home-manager modules here
   imports = [
@@ -81,7 +87,7 @@
   xdg.configFile."borders/bordersrc" = {
     source = ./darwin/bordersrc;
     executable = true;
-    onChange = "/bin/bash ${./darwin/bordersrc}";
+    onChange = "/bin/bash ${config.xdg.configFile."borders/bordersrc".target}";
   };
   xdg.configFile."sketchybar" = {
     source = ./darwin/sketchybar;

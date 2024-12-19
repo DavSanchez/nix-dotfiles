@@ -3,6 +3,7 @@
 {
   inputs,
   pkgs,
+  config,
   ...
 }:
 {
@@ -96,7 +97,7 @@
   xdg.configFile."borders/bordersrc" = {
     source = ./darwin/bordersrc;
     executable = true;
-    onChange = "/bin/bash ${./darwin/bordersrc}";
+    onChange = "/bin/bash ${config.configFile."borders/bordersrc".target}";
   };
   xdg.configFile."sketchybar" = {
     source = ./darwin/sketchybar;
