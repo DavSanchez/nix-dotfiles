@@ -33,6 +33,13 @@ let
 in
 {
   "breadcrumbs.enabled" = true;
+  "dance.modes" = {
+    "" = {
+      "hiddenSelectionsIndicatorsDecoration" = {
+        "isWholeLine" = false;
+      };
+    };
+  };
   "diffEditor.ignoreTrimWhitespace" = false;
   "editor.accessibilitySupport" = "off";
   "editor.bracketPairColorization.enabled" = true;
@@ -53,8 +60,7 @@ in
       "column" = 100;
     }
   ];
-  "editor.stickyScroll.enabled" = true;
-  "editor.suggestSelection" = "first";
+  "editor.stickyScroll.enabled" = false;
   "editor.tabSize" = 2;
   "editor.wordWrap" = "on";
   "files.associations" = {
