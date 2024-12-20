@@ -148,7 +148,6 @@
       "background-music"
       "brave-browser"
       "crossover"
-      "diffusionbee"
       "discord"
       "disk-inventory-x"
       "firefox"
@@ -156,24 +155,19 @@
       "handbrake"
       "iina"
       "imhex"
-      "insomnia"
       "jordanbaird-ice"
       "keymapp"
       "krita"
       "little-snitch"
       "logseq"
-      # "maccy"
-      "ollama"
       "openemu"
       "openra"
-      "plex"
       "proton-drive"
       "proton-mail"
       "protonmail-bridge"
       "proton-pass"
       "protonvpn"
       "qflipper"
-      # "raycast"
       "remarkable"
       "secretive"
       "sonic-pi"
@@ -194,7 +188,6 @@
     masApps = {
       "1Blocker" = 1365531024;
       "Amphetamine" = 937984704;
-      "Draw Things" = 6444050820;
       "Hush" = 1544743900;
       "iMovie" = 408981434;
       "Keynote" = 409183694;

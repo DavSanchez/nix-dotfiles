@@ -149,7 +149,6 @@
       "bartender"
       "brave-browser"
       "crossover"
-      "diffusionbee"
       "discord"
       "disk-inventory-x"
       "firefox"
@@ -157,19 +156,14 @@
       "handbrake"
       "iina"
       "imhex"
-      "insomnia"
       "jordanbaird-ice"
       "keymapp"
       "krita"
       "libreoffice"
       "little-snitch"
       "logseq"
-      # "maccy"
-      "ollama"
       "openemu"
       "openra"
-      "plex"
-      "plex-media-server"
       "proton-drive"
       "proton-mail"
       "protonmail-bridge"
@@ -182,7 +176,6 @@
       "sonic-pi"
       "stats"
       "steam"
-      "synthesia"
       "tor-browser"
       "transmission"
       "vlc"
@@ -191,13 +184,12 @@
       "xld"
       "xquartz" # X11 applications on macOS
       "yacreader"
-      "zotero"
+      "zerotier-one"
     ];
     brews = [ ];
     masApps = {
       "1Blocker" = 1365531024;
       "Amphetamine" = 937984704;
-      "Draw Things" = 6444050820;
       "Hush" = 1544743900;
       "iMovie" = 408981434;
       "Keynote" = 409183694;
