@@ -18,6 +18,7 @@
     [
       ## Utils
       coreutils
+      uutils-uutils-coreutils
       # binutils # Already included with pkgs.gcc
       pciutils
 
