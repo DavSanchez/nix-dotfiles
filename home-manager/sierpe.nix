@@ -2,8 +2,6 @@
 # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
 {
   inputs,
-  pkgs,
-  config,
   ...
 }:
 {
@@ -91,27 +89,6 @@
 
   home.sessionVariables = {
     DOTFILES = "$HOME/.dotfiles";
-  };
-
-  xdg.configFile."amethyst/amethyst.yml".source = ./darwin/amethyst.yml;
-  xdg.configFile."borders/bordersrc" = {
-    source = ./darwin/bordersrc;
-    executable = true;
-    onChange = ''
-      # Add borders to PATH
-      PATH=$PATH:${pkgs.jankyborders}/bin
-      . ${config.xdg.configFile."borders/bordersrc".target}
-    '';
-  };
-  xdg.configFile."sketchybar" = {
-    source = ./darwin/sketchybar;
-    recursive = true;
-    onChange = "${pkgs.sketchybar}/bin/sketchybar --reload";
-  };
-  xdg.configFile."sketchybar/sketchybarrc" = {
-    source = ./darwin/sketchybarrc-mbp;
-    executable = true;
-    onChange = "${pkgs.sketchybar}/bin/sketchybar --reload";
   };
 
   catppuccin.enable = true;

@@ -23,10 +23,7 @@
 
     # You can also split up your configuration and import pieces of it here:
     # ./users.nix
-    # ./common/yabai.nix
-    # ./common/skhd.nix
-    # ./common/sketchybar.nix
-    # ./common/aerospace.nix
+    ./common/aerospace.nix
   ];
 
   nixpkgs = {
@@ -113,9 +110,7 @@
       enable = false; # Using App Store application for the moment
       overrideLocalDns = false;
     };
-
     sketchybar.enable = false;
-    jankyborders.enable = true;
   };
   networking.hostName = "sierpe";
 
@@ -150,7 +145,6 @@
     ];
     casks = [
       "adobe-acrobat-reader"
-      "amethyst"
       "background-music"
       "brave-browser"
       "crossover"
@@ -228,7 +222,8 @@
   security.pam.enableSudoTouchIdAuth = true;
 
   system.defaults.dock.autohide = true;
-  system.defaults.dock.mru-spaces = false;
+  # system.defaults.dock.mru-spaces = false;
+  system.defaults.dock.expose-group-apps = true;
   system.defaults.dock.orientation = "left";
   # system.defaults.dock.showhidden = true;
   system.defaults.finder.AppleShowAllExtensions = true;
