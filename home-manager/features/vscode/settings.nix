@@ -36,7 +36,11 @@ in
   "dance.modes" = {
     "" = {
       "hiddenSelectionsIndicatorsDecoration" = {
-        "isWholeLine" = false;
+        "after" = {
+          "color" = "$inputValidation.infoForeground";
+        };
+        "backgroundColor" = "$inputValidation.infoBackground";
+        "borderColor" = "$inputValidation.infoBorder";
       };
     };
   };
