@@ -11,11 +11,6 @@ _: {
     userKeymaps = { };
     userSettings = {
       vim_mode = true;
-      theme = {
-        mode = "system";
-        light = "Catppuccin Latte";
-        dark = "Catppuccin Mocha";
-      };
     };
   };
 }
