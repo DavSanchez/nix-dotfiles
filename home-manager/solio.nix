@@ -84,6 +84,9 @@
 
   home.sessionPath = [ "$HOME/.local/bin" ];
 
+  xdg.configFile."amethyst/amethyst.yml".source = ./darwin/amethyst.yml;
+  xdg.configFile."borders/bordersrc".source = ./darwin/bordersrc;
+
   catppuccin.enable = true;
   catppuccin.flavor = "mocha";
 

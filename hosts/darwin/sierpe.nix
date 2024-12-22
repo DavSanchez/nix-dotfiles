@@ -145,6 +145,7 @@
     ];
     casks = [
       "adobe-acrobat-reader"
+      "amethyst"
       "background-music"
       "brave-browser"
       "crossover"
@@ -215,8 +216,8 @@
   security.pam.enableSudoTouchIdAuth = true;
 
   system.defaults.dock.autohide = true;
-  # system.defaults.dock.mru-spaces = false;
-  system.defaults.dock.expose-group-apps = true;
+  system.defaults.dock.mru-spaces = false;
+  system.defaults.dock.expose-group-apps = false;
   system.defaults.dock.orientation = "left";
   # system.defaults.dock.showhidden = true;
   system.defaults.finder.AppleShowAllExtensions = true;
