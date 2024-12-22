@@ -276,13 +276,13 @@ float-small-windows: true
 mouse-follows-focus: false
 
 # true if the windows underneath the mouse should become focused as the mouse moves (default false). Note that this is largely incompatible with mouse-follows-focus
-focus-follows-mouse: true
+focus-follows-mouse: false
 
 # true if dragging and dropping windows on to each other should swap their positions (default false).
 mouse-swaps-windows: true
 
 # true if changing the frame of a window with the mouse should update the layout to accommodate the change (default false). Note that not all layouts will be able to respond to the change.
-mouse-resizes-windows: true
+mouse-resizes-windows: false
 
 # true to display the name of the layout when a new layout is selected (default true).
 enables-layout-hud: true
