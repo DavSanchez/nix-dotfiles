@@ -236,7 +236,7 @@ relaunch-amethyst:
 disable-padding-on-builtin-display: false
 
 # Boolean flag for whether or not to add margins between windows (default false).
-window-margins: false
+window-margins: true
 
 # Boolean flag for whether or not to set window margins if there is only one window on the screen, assuming window margins are enabled (default false).
 smart-window-margins: false
@@ -245,7 +245,7 @@ smart-window-margins: false
 # window-margins: true
 # window-margin-size: 5
 # The size of the margins between windows (in px, default 0).
-window-margin-size: 0
+window-margin-size: 5
 
 # The max number of windows that may be visible on a screen at one time before
 # additional windows are minimized. A value of 0 disables the feature.
@@ -276,13 +276,13 @@ float-small-windows: true
 mouse-follows-focus: false
 
 # true if the windows underneath the mouse should become focused as the mouse moves (default false). Note that this is largely incompatible with mouse-follows-focus
-focus-follows-mouse: false
+focus-follows-mouse: true
 
 # true if dragging and dropping windows on to each other should swap their positions (default false).
-mouse-swaps-windows: false
+mouse-swaps-windows: true
 
 # true if changing the frame of a window with the mouse should update the layout to accommodate the change (default false). Note that not all layouts will be able to respond to the change.
-mouse-resizes-windows: false
+mouse-resizes-windows: true
 
 # true to display the name of the layout when a new layout is selected (default true).
 enables-layout-hud: true
