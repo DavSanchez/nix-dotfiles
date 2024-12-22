@@ -166,7 +166,7 @@
       "openra"
       "proton-drive"
       "proton-mail"
-      "protonmail-bridge"
+      "proton-mail-bridge"
       "proton-pass"
       "protonvpn"
       "qflipper"
