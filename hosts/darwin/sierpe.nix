@@ -151,6 +151,7 @@
       "discord"
       "disk-inventory-x"
       "firefox"
+      "ghostty"
       "gqrx"
       "handbrake"
       "iina"
