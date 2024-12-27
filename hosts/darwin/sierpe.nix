@@ -187,16 +187,14 @@
     ];
     brews = [ ];
     masApps = {
-      "1Blocker" = 1365531024;
       "Amphetamine" = 937984704;
-      "Hush" = 1544743900;
+      "Ghostery Privacy Ad Blocker" = 6504861501;
       "iMovie" = 408981434;
       "Keynote" = 409183694;
       "Logic Pro" = 634148309;
       "MainStage" = 634159523;
       "Microsoft Remote Desktop" = 1295203466;
       "Numbers" = 409203825;
-      "one sec" = 1532875441;
       "Pages" = 409201541;
       "Proton Pass for Safari" = 6502835663;
       "Tailscale" = 1475387142;
