@@ -63,7 +63,7 @@
 
         # See: https://nikitabobko.github.io/AeroSpace/commands#exec-and-forget
         # You can uncomment the following lines to open up terminal with alt + enter shortcut (like in i3)
-        # alt-enter = "exec-and-forget wezterm";
+        alt-enter = "exec-and-forget open -n /Applications/Ghostty.app";
 
         # See: https://nikitabobko.github.io/AeroSpace/commands#layout
         ctrl-period = "layout tiles horizontal vertical";
