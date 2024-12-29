@@ -2,7 +2,7 @@
 {
   services.jankyborders.enable = true;
   services.aerospace = {
-    enable = true;
+    enable = false;
     settings = {
 
       # You can use it to add commands that run after AeroSpace startup.
