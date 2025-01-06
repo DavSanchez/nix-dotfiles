@@ -78,6 +78,12 @@ pkgs:
     sha256 = "090wg4lin4y06nhg45p9mjsqwfa21bdgafj57swh5z6fpv3pqxx2";
   }
   {
+    name = "vscode-keypromoter";
+    publisher = "donebd";
+    version = "1.0.3";
+    sha256 = "sha256-yG5KPGoagKCvOCHXOA7ZARnKj+GyaD8D8HLmZKwI3kQ=";
+  }
+  {
     name = "lambda-black";
     publisher = "janw4ld";
     version = "0.2.6";
