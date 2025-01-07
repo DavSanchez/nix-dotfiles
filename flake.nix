@@ -130,8 +130,15 @@
           };
           modules = [ ./home-manager/solio.nix ];
         };
-        "david@nr" = home-manager.lib.homeManagerConfiguration {
+        "david@nr-vm" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.aarch64-linux;
+          extraSpecialArgs = {
+            inherit inputs;
+          };
+          modules = [ ./home-manager/home-nr-vm.nix ];
+        };
+        "davidsanchez@nr" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.aarch64-darwin;
           extraSpecialArgs = {
             inherit inputs;
           };

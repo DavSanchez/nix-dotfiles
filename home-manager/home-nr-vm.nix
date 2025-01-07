@@ -42,14 +42,14 @@
   };
 
   home = {
-    username = "davidsanchez";
-    homeDirectory = "/Users/davidsanchez";
+    username = "david";
+    homeDirectory = "/home/david";
     sessionVariables = {
       DOTFILES = "$HOME/.dotfiles";
     };
   };
 
-  programs.zsh.cdpath = [ "/Users/davidsanchez/Developer/NR-Repos" ];
+  programs.zsh.cdpath = [ "/home/david/NR-Repos" ];
   programs.zsh.shellAliases = {
     sshCAOS = "ssh -i ~/.ssh/caos-dev-arm.cer -o \"StrictHostKeyChecking no\"";
   };
