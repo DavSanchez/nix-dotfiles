@@ -111,6 +111,17 @@
 
   programs.gitui.enable = true;
 
+  # Git-compatible DVCS that is both simple and powerful
+  programs.jujutsu = {
+    enable = true;
+    settings = {
+      user = {
+        email = "davidslt+jujutsu@pm.me";
+        name = "David Sánchez";
+      };
+    };
+  };
+
   # programs.gpg.enable = pkgs.stdenv.isLinux;
   # services.gpg-agent.enable = pkgs.stdenv.isLinux;
 }
