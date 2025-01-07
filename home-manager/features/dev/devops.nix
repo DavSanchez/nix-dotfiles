@@ -15,6 +15,7 @@
       minikube
       kubectl
       kubernetes-helm
+      helm-docs
       kops
       # kubescape
       # kube-score
