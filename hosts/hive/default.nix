@@ -14,7 +14,13 @@
     };
     nodeNixpkgs = {
       foundry-pi = import inputs.nixpkgs { system = "aarch64-linux"; };
-      eter = import inputs.nixpkgs { system = "x86_64-linux"; };
+      eter = import inputs.nixpkgs {
+        system = "x86_64-linux";
+        config.permittedInsecurePackages = [
+          "dotnet-sdk-6.0.428"
+          "aspnetcore-runtime-6.0.36"
+        ];
+      };
     };
   };
   # nixberrypi = ./nixberrypi/configuration.nix;
