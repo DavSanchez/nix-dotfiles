@@ -20,5 +20,5 @@ jobs:
           pr-labels: |                  # Labels to be set on the PR
             dependencies
             automated
-          branch: ${{ env.ACTION_DATE }}
+          branch: "update_flake_lock_action_${{ env.ACTION_DATE }}"
           token: ${{ secrets.GH_TOKEN_FOR_UPDATES }}
