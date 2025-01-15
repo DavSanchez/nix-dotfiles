@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   home.packages = with pkgs; [
     bfg-repo-cleaner
@@ -19,6 +19,15 @@
     # };
 
     includes = [ { path = "~/.config/git/localconf"; } ];
+
+    ignores =
+      [
+        ".vscode/"
+        "**/*.davs*/" # Put not-to-commit stuff in this directory
+      ]
+      ++ lib.optionals pkgs.stdenv.isDarwin [
+        ".DS_Store"
+      ];
 
     delta = {
       enable = false;
