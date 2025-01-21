@@ -1,11 +1,11 @@
 _: {
   programs.rio = {
-    enable = false;
+    enable = true;
     settings = {
       # theme = "rose-pine-moon";
       window = {
         decorations = "Disabled";
-        opacity = 0.75;
+        opacity = 0.80;
         blur = true;
       };
       navigation.mode = "Plain";
