@@ -196,7 +196,6 @@
       "Keynote" = 409183694;
       "Logic Pro" = 634148309;
       "MainStage" = 634159523;
-      "Microsoft Remote Desktop" = 1295203466;
       "Numbers" = 409203825;
       "Pages" = 409201541;
       "Proton Pass for Safari" = 6502835663;
@@ -205,6 +204,7 @@
       "reMarkable" = 1276493162;
       "The Unarchiver" = 425424353;
       "UTM" = 1538878817; # VMs (qemu)
+      "Windows App" = 1295203466;
       "Xcode" = 497799835;
     };
     # extraConfig = '' '';
