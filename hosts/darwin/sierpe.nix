@@ -177,6 +177,7 @@
       "synthesia"
       "tor-browser"
       "transmission"
+      "virtualbox" # VMs
       "vlc"
       "whatsapp"
       "wireshark"
@@ -202,7 +203,7 @@
       "reMarkable" = 1276493162;
       "Shazam" = 897118787;
       "The Unarchiver" = 425424353;
-      "UTM" = 1538878817;
+      "UTM" = 1538878817; # VMs (qemu)
       "Xcode" = 497799835;
     };
     # extraConfig = '' '';

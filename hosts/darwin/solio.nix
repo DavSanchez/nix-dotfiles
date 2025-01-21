@@ -179,6 +179,7 @@
       "steam"
       "tor-browser"
       "transmission"
+      "virtualbox" # VMs
       "vlc"
       "whatsapp"
       "wireshark"
@@ -203,7 +204,7 @@
       "Reeder" = 1529448980;
       "reMarkable" = 1276493162;
       "The Unarchiver" = 425424353;
-      "UTM" = 1538878817;
+      "UTM" = 1538878817; # VMs (qemu)
       "Xcode" = 497799835;
     };
     # extraConfig = '' '';

@@ -25,6 +25,7 @@
       kubeshark
 
       ansible
+      vagrant
 
       ## Terraform
       # terraform
@@ -52,16 +53,12 @@
       [
         ## Container runtimes on macOS
         colima # Containers
-        tart # VMs
+        tart # VMs (Apple hypervisor framework)
         softnet # VM networking for tart
         orchard # VM orchestrator for macOS clusters
       ]
     )
     ++ lib.optionals pkgs.stdenv.isLinux [ pkgs.nerdctl ];
 
-  programs = {
-    k9s = {
-      enable = true;
-    };
-  };
+  programs.k9s.enable = true;
 }
