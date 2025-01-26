@@ -12,7 +12,6 @@ jobs:
         uses: actions/checkout@v4
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@main
-      - run: echo "ACTION_DATE=$(date +%Y_%m_%d)" >> $GITHUB_ENV
       - name: Update flake.lock
         uses: DeterminateSystems/update-flake-lock@main
         with:
@@ -20,5 +19,4 @@ jobs:
           pr-labels: |                  # Labels to be set on the PR
             dependencies
             automated
-          branch: "update_flake_lock_action_${{ env.ACTION_DATE }}"
           token: ${{ secrets.GH_TOKEN_FOR_UPDATES }}
