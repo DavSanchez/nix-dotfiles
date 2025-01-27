@@ -73,6 +73,7 @@ in
   "files.autoSave" = "afterDelay";
   "git.autofetch" = true;
   "git.defaultBranchName" = "master";
+  "haskell.plugin.semanticTokens.globalOn" = true;
   "nix.enableLanguageServer" = true;
   "nix.serverPath" = "${pkgs.nixd}/bin/nixd";
   "nix.serverSettings" = {
