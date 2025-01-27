@@ -18,6 +18,7 @@
     inputs.mac-app-util.homeManagerModules.default
 
     # You can also split up your configuration and import pieces of it here:
+    ./features/ai
     ./features/aws
     ./features/cli
     ./features/dev

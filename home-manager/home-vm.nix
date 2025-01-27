@@ -13,6 +13,7 @@
     inputs.catppuccin.homeManagerModules.catppuccin
 
     # You can also split up your configuration and import pieces of it here:
+    ./features/ai
     ./features/aws
     ./features/cli
     ./features/dev
