@@ -19,7 +19,7 @@
         "alt+left=unbind"
         "alt+right=unbind"
       ];
-      macos-option-as-alt = true;
+      macos-option-as-alt = "left";
     };
   };
 }
