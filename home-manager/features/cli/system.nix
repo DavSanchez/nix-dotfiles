@@ -5,7 +5,6 @@
     [
       procs
       neofetch
-      diskonaut
       kontroll
     ]
     ++ lib.optionals pkgs.stdenv.isLinux [ kmon ];
