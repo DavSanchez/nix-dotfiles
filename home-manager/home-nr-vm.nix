@@ -5,6 +5,7 @@
     inputs.catppuccin.homeManagerModules.catppuccin
     inputs.mac-app-util.homeManagerModules.default
 
+    ./features/ai
     ./features/aws
     ./features/cli
     ./features/dev/default-nr.nix
