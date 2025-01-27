@@ -58,6 +58,12 @@
   programs.home-manager.enable = true;
   programs.git.enable = true;
 
+  programs.nh = {
+    enable = true;
+    clean.enable = true;
+    flake = "/Users/davidsanchez/.dotfiles";
+  };
+
   xdg.enable = true;
 
   catppuccin.enable = true;
