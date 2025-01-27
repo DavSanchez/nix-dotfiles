@@ -156,7 +156,6 @@
       "crossover"
       "discord"
       "disk-inventory-x"
-      "ghostty"
       "gqrx"
       "handbrake"
       "iina"
