@@ -25,7 +25,7 @@
       kubeshark
 
       ansible
-      # vagrant
+      vagrant
 
       ## Terraform
       # terraform
