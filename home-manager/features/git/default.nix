@@ -24,6 +24,7 @@
       [
         ".vscode/"
         "**/*.davs*/" # Put not-to-commit stuff in this directory
+        "*.local"
       ]
       ++ lib.optionals pkgs.stdenv.isDarwin [
         ".DS_Store"
