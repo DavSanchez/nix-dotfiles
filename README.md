@@ -8,18 +8,12 @@
 
 - Run `sudo nixos-rebuild switch --flake .#hostname` to apply your system configuration.
   - If you're still on a live installation medium, run `nixos-install --flake .#hostname` instead, and reboot.
-- Run `darwin-rebuild switch --flake .#username@hostname` to apply your home configuration.
-  - If you don't have nix-darwin installed, try `nix build .#darwinConfigurations.hostname.system` or see [here](https://github.com/LnL7/nix-darwin) for installation.
+- Run `darwin-rebuild switch --flake .#username@hostname` to apply your macOS configuration.
+  - If you don't have nix-darwin installed, try `nix run nix-darwin/master#darwin-rebuild -- switch` first or see [here](https://github.com/LnL7/nix-darwin) for installation.
 - Run `home-manager switch --flake .#username@hostname` to apply your home configuration.
-  - If you don't have home-manager installed, try `nix shell nixpkgs#home-manager`.
-  - When using for the first time, if the above does not work, try activating it directly:
+  - If you don't have home-manager installed, try `nix run home-manager/master -- init --switch` first.
 
-    ```console
-    nix build --no-link .#homeConfigurations.username@hostname.activationPackage
-    "$(nix path-info .#homeConfigurations.username@hostname.activationPackage)"/activate
-    ```
-
-And that's it, really! You're ready to have fun with your configurations using the latest and greatest nix3 flake-enabled command UX.
+And that's it, really!
 
 ## Influences
 
@@ -29,7 +23,6 @@ And that's it, really! You're ready to have fun with your configurations using t
 - [`github:dustinlyons/nixos-config`](https://github.com/dustinlyons/nixos-config)
 - [`github:tars0x9752/home`](https://github.com/tars0x9752/home)
 - [`github:Misterio77/nix-config`](https://github.com/Misterio77/nix-config)
-- [`github:nix-community/todomvc-nix`](https://github.com/nix-community/todomvc-nix)
 
 ## Further reading
 
@@ -37,13 +30,7 @@ And that's it, really! You're ready to have fun with your configurations using t
 
 ## Issues that might happen
 
-### On `darwin`: cannot link '/nix/store/.tmp-link-XX-XXXX' to '/nix/store/.links/XXXXX': File exists
-
-This is a bug being tracked in https://github.com/NixOS/nix/issues/7273. It appears when you have `nix.settings.auto-optimise-store = true` in your `darwinSystem` (or the equivalent option in `/etc/nix/nix.conf`). Disable it to get rid of this behavior.
-
-If you don't want to disable this option, you can always retry the builds until they succeed (and possibly also performing garbage collection in between). Use `until <switch_command>; do sleep 1; done` and go get a coffee.
-
-### VSCodium won't update
+### VSCode and derivatives (VSCodium) won't update
 
 Usually accompanied by the message "An update is ready to install. Visual Studio Code is trying to add a new helper tool".
 
