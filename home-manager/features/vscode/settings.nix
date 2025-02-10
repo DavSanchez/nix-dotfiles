@@ -72,6 +72,7 @@ in
   };
   "files.autoSave" = "afterDelay";
   "git.autofetch" = true;
+  "git.blame.editorDecoration.enabled" = true;
   "git.defaultBranchName" = "master";
   "haskell.plugin.semanticTokens.globalOn" = true;
   "nix.enableLanguageServer" = true;
@@ -87,7 +88,7 @@ in
   "terminal.external.osxExec" = "WezTerm.app";
   "terminal.integrated.fontFamily" = "'Iosevka Term Custom'";
   "terminal.integrated.fontSize" = 14;
-  "terminal.integrated.fontLigatures" = true;
+  "terminal.integrated.fontLigatures.enabled" = true;
   "terminal.integrated.scrollback" = 5000;
   "terminal.integrated.shellIntegration.enabled" = true;
   "terminal.integrated.profiles.linux" = term-profiles;
