@@ -75,12 +75,13 @@ in
   "git.blame.editorDecoration.enabled" = true;
   "git.defaultBranchName" = "master";
   "haskell.plugin.semanticTokens.globalOn" = true;
+  "haskell.manageHLS" = "PATH";
   "nix.enableLanguageServer" = true;
   "nix.serverPath" = "${pkgs.nixd}/bin/nixd";
   "nix.serverSettings" = {
     "nixd.formatting.command" = [ "${pkgs.nixfmt-rfc-style}/bin/nixfmt" ];
   };
-  "nix.formatterPath" = "${pkgs.nixfmt-rfc-style}/bin/nixfmt";
+  "nix.formatterPath" = "nixfmt";
   "rust-analyzer.check.command" = "clippy";
   "search.exclude" = {
     "**/.direnv" = true;
