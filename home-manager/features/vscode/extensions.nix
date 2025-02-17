@@ -13,7 +13,7 @@ pkgs:
   dbaeumer.vscode-eslint
   # dhall.dhall-lang
   # dhall.vscode-dhall-lsp-server
-  eamodio.gitlens
+  # eamodio.gitlens
   editorconfig.editorconfig
   elixir-lsp.vscode-elixir-ls
   # esbenp.prettier-vscode
