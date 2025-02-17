@@ -2,6 +2,7 @@
 # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
 {
   inputs,
+  pkgs,
   ...
 }:
 
@@ -85,6 +86,39 @@
 
   catppuccin.enable = true;
   catppuccin.flavor = "mocha";
+
+  launchd.agents = {
+    "smb-you-come-back-alive" = {
+      enable = true;
+      config = {
+        Program =
+          pkgs.writers.writeHaskellBin "you-come-back-alive" { } ''
+            import Control.Monad (void)
+            import Data.List (find, isPrefixOf)
+            import System.Directory (withCurrentDirectory)
+            import System.Process (callProcess, readProcess)
+
+            main :: IO ()
+            main = do
+              mounts <- lines <$> readProcess "/sbin/mount" [] []
+              let mountPoint = maybe (mountSmb >> pure "/Volumes/echoes") pure (mountLookup mounts)
+              mountPoint >>= \mp -> void $ withCurrentDirectory mp (readFile ".liveness.txt")
+
+            mountLookup :: [String] -> Maybe FilePath
+            mountLookup mountList =
+              find ("//david@eter/echoes" `isPrefixOf`) mountList
+                >>= \mountLine -> pure (words mountLine !! 2) -- Get the mount path from line of `mount` output
+
+            mountSmb :: IO ()
+            mountSmb = callProcess "/sbin/mount" ["-t", "smbfs", "//david@eter/echoes", "/Volumes/echoes"]
+          ''
+          + /bin/you-come-back-alive;
+        StartInterval = 30;
+        StandardErrorPath = "/Users/david/log/launchd/smb-you-come-back-alive/err.log";
+        StandardOutPath = "/Users/david/log/launchd/smb-you-come-back-alive/out.log";
+      };
+    };
+  };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   home.stateVersion = "22.11";
