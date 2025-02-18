@@ -23,7 +23,7 @@
 
     # You can also split up your configuration and import pieces of it here:
     # ./users.nix
-    ./common/aerospace.nix
+    # ./common/aerospace.nix
   ];
 
   nixpkgs = {
@@ -111,6 +111,11 @@
       overrideLocalDns = false;
     };
     sketchybar.enable = false;
+    jankyborders = {
+      enable = true;
+      active_color = "0xffe1e3e4";
+      inactive_color = "0xff494d64";
+    };
   };
   networking.hostName = "sierpe";
 

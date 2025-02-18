@@ -1,6 +1,5 @@
 { config, ... }:
 {
-  services.jankyborders.enable = true;
   services.aerospace = {
     enable = false;
     settings = {
