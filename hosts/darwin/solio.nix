@@ -23,7 +23,7 @@
 
     # You can also split up your configuration and import pieces of it here:
     # ./users.nix
-    ./common/aerospace.nix
+    # ./common/aerospace.nix
   ];
 
   nixpkgs = {
@@ -111,6 +111,11 @@
       overrideLocalDns = false;
     };
     sketchybar.enable = false;
+    jankyborders = {
+      enable = true;
+      active_color = "0xffe1e3e4";
+      inactive_color = "0xff494d64";
+    };
   };
 
   networking.hostName = "solio";
@@ -145,6 +150,7 @@
     taps = [ "homebrew/cask-drivers" ];
     casks = [
       "adobe-acrobat-reader"
+      "amethyst"
       "background-music"
       "bartender"
       "brave-browser"
@@ -216,8 +222,8 @@
   security.pam.enableSudoTouchIdAuth = true;
 
   system.defaults.dock.autohide = true;
-  system.defaults.dock.expose-group-apps = true;
-  # system.defaults.dock.mru-spaces = false;
+  system.defaults.dock.expose-group-apps = false;
+  system.defaults.dock.mru-spaces = false;
   system.defaults.dock.orientation = "bottom";
   # system.defaults.dock.showhidden = true;
   system.defaults.finder.AppleShowAllExtensions = true;
