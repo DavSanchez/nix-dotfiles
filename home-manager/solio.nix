@@ -89,6 +89,7 @@
   catppuccin.enable = true;
   catppuccin.flavor = "mocha";
 
+  # https://www.dzombak.com/blog/2024/03/Keeping-a-SMB-share-mounted-on-macOS-and-alerting-when-it-does-down.html
   launchd.agents = {
     "smb-you-come-back-alive" = {
       enable = true;
@@ -104,7 +105,7 @@
             main = do
               mounts <- lines <$> readProcess "/sbin/mount" [] []
               let mountPoint = maybe (mountSmb >> pure "/Volumes/echoes") pure (mountLookup mounts)
-              mountPoint >>= \mp -> void $ withCurrentDirectory mp (readFile ".liveness.txt")
+              mountPoint >>= \mp -> withCurrentDirectory mp (void $ readFile ".liveness.txt")
 
             mountLookup :: [String] -> Maybe FilePath
             mountLookup mountList =
@@ -115,7 +116,7 @@
             mountSmb = callProcess "/sbin/mount" ["-t", "smbfs", "//david@eter/echoes", "/Volumes/echoes"]
           ''
           + /bin/you-come-back-alive;
-        StartInterval = 30;
+        StartInterval = 10;
         StandardErrorPath = "/Users/david/log/launchd/smb-you-come-back-alive/err.log";
         StandardOutPath = "/Users/david/log/launchd/smb-you-come-back-alive/out.log";
       };
