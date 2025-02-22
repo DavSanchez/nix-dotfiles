@@ -96,24 +96,34 @@
       config = {
         Program =
           pkgs.writers.writeHaskellBin "you-come-back-alive" { } ''
+            {-# LANGUAGE TypeApplications #-}
+            
+            import Control.Exception (catch, IOException)
             import Control.Monad (void)
             import Data.List (find, isPrefixOf)
+            import Data.Time (getCurrentTime)
             import System.Directory (withCurrentDirectory)
             import System.Process (callProcess, readProcess)
+            import System.IO (hPutStrLn, stderr)
 
             main :: IO ()
             main = do
-              mounts <- lines <$> readProcess "/sbin/mount" [] []
-              let mountPoint = maybe (mountSmb >> pure "/Volumes/echoes") pure (mountLookup mounts)
-              mountPoint >>= \mp -> withCurrentDirectory mp (void $ readFile ".liveness.txt")
+              currentTime <- getCurrentTime
+              catch keepMountAlive (\e -> hPutStrLn stderr (show currentTime ++ ":" ++ show @IOException e))
+              where
+                keepMountAlive :: IO ()
+                keepMountAlive = do
+                  mounts <- lines <$> readProcess "/sbin/mount" [] []
+                  let mountPoint = maybe (mountSmb >> pure "/Volumes/echoes") pure (mountLookup mounts)
+                  mountPoint >>= \mp -> withCurrentDirectory mp (void $ readFile ".liveness.txt")
 
-            mountLookup :: [String] -> Maybe FilePath
-            mountLookup mountList =
-              find ("//david@eter/echoes" `isPrefixOf`) mountList
-                >>= \mountLine -> pure (words mountLine !! 2) -- Get the mount path from line of `mount` output
+                mountLookup :: [String] -> Maybe FilePath
+                mountLookup mountList =
+                  find ("//david@eter/echoes" `isPrefixOf`) mountList
+                    >>= \mountLine -> pure (words mountLine !! 2) -- Get the mount path from line of `mount` output
 
-            mountSmb :: IO ()
-            mountSmb = callProcess "/sbin/mount" ["-t", "smbfs", "//david@eter/echoes", "/Volumes/echoes"]
+                mountSmb :: IO ()
+                mountSmb = callProcess "/sbin/mount" ["-t", "smbfs", "//david@eter/echoes", "/Volumes/echoes"]
           ''
           + /bin/you-come-back-alive;
         StartInterval = 10;
