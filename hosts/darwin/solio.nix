@@ -105,7 +105,6 @@
   # environment.darwinConfig = "$HOME/.config/nixpkgs/darwin/configuration.nix";
 
   services = {
-    nix-daemon.enable = true; # Auto upgrade nix package and the daemon service.
     tailscale = {
       enable = false; # Using App Store application for the moment
       overrideLocalDns = false;
