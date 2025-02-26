@@ -6,6 +6,16 @@ _: {
       global = {
         "hosts allow" = "192.168.8. 127.0.0.1 localhost";
         "hosts deny" = "0.0.0.0/0";
+
+        # Enhanced OSX interoperability: https://www.samba.org/samba/docs/current/man-html/vfs_fruit.8.html
+        # Some file names with special characters do not show when mounted in macOS (shrug/facepalm).
+        # The configs below fix it.
+        "vfs objects" = "catia fruit streams_xattr";
+        "fruit:aapl" = "yes";
+        "fruit:resource" = "file";
+        "fruit:metadata" = "netatalk";
+        "fruit:locking" = "netatalk";
+        "fruit:encoding" = "native";
       };
       # Shares
       creation = {
