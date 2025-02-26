@@ -28,7 +28,7 @@ You might want to get rid of this, either for temporary maintenance reasons (e.g
     error: unable to download 'https://cache.nixos.org/d9l4i5phhrwy8f0yjp5yj4ri65z9cxzb.narinfo': Problem with the SSL CA cert (path? access rights?) (77)
     ```
 
-    To fix this issue, restore the old link to `/etc/ssl/certs/ca-certificates.crt`:
+    To fix this [issue](https://github.com/NixOS/nix/issues/8771#issuecomment-1662633816), restore the old link to `/etc/ssl/certs/ca-certificates.crt`:
 
     ```sh
     # Check that it exists with
