@@ -49,6 +49,7 @@ pkgs:
   # ms-vscode.theme-tomorrowkit
   ms-vsliveshare.vsliveshare
   mvllow.rose-pine
+  nefrob.vscode-just-syntax
   pkief.material-icon-theme
   pkief.material-product-icons
   redhat.vscode-yaml
