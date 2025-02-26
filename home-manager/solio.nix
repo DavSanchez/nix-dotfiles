@@ -97,7 +97,7 @@
         Program =
           pkgs.writers.writeHaskellBin "you-come-back-alive" { } ''
             {-# LANGUAGE TypeApplications #-}
-            
+
             import Control.Exception (catch, IOException)
             import Control.Monad (void)
             import Data.List (find, isPrefixOf)
