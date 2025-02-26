@@ -18,7 +18,7 @@ This repository is a **Nix Flake**. To use it, your Nix usage should have the ex
     - If you do not have an existing config that is applicable, follow the instructions to do a basic installation at [the `home-manager` repo](https://nix-community.github.io/home-manager/index.xhtml#ch-nix-flakes).
 4. Enjoy!
 
-To speed up the build processes, you can use my binary cache as substituter. If using `cachix`, you can enable it quickly with `cachix use davsanchez`, but this would modify your local `~ /.config/nix/nix.conf` which is not very declarative. I have configured it in this flake's `nixConfig`, but some commands might ignore it as not trusted. I'll try to elaborate more on how to use this in the future.
+To speed up the build processes, you can use my binary cache as substituter. If using `cachix`, you can enable it quickly with `cachix use davsanchez`, but this would modify your local `~ /.config/nix/nix.conf` which is not very declarative. I have configured it in this flake's `nixConfig`, but when running some builds for the first time your user might not be considered trusted, so the config might be ignored with a warning. This will change when you configure Nix to [trust your user](https://github.com/DavSanchez/nix-dotfiles/blob/f9e048b42920b12d2149be350314c91d9ed1739f/hosts/darwin/sierpe.nix#L61). I'll try to elaborate more on how to use this in the future.
 
 ## Uninstalling
 
