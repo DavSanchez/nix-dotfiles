@@ -40,3 +40,29 @@ This is usually caused due to VSCod{e,ium} residing in a different path than `/A
 sudo chown $USER ~/Library/Caches/com.vscodium.ShipIt/* # or com.microsoft.VSCode.ShipIt/*
 xattr -dr com.apple.quarantine ~/Applications/Home\ Manager\ Apps/VSCodium.app # Or Visual\ Studio\ Code.app
 ```
+
+# TODO cleanup and order
+
+Uninstallation:
+
+1. nix-darwin
+2. home-manager
+3. nix
+
+If after uninstalling nix-darwin you run into issues... try this (from https://discourse.nixos.org/t/ssl-ca-cert-error-on-macos/31171/5) 
+
+```sh
+sudo rm /etc/ssl/certs/ca-certificates.crt
+sudo ln -s /nix/var/nix/profiles/default/etc/ssl/certs/ca-bundle.crt /etc/ssl/certs/ca-certificates.crt
+```
+
+## Installation again
+
+0. Chances are my binary cache has already compiled much of the store paths. If you have `cachix` installed, run `cachix use davsanchez` to use it. You can run this step after installing Nix, after installing nix-darwin, or at any moment to benefit from the caching.
+  a. Particularly useful for saving compilation time for the customized Iosevka fonts that I am using... why the hell do they take so long? 8 hours!?!?!?!??
+1. Install Nix using the Determinate Nix installer, select **no** on the first prompt, which is to install the enterprise-focused Determinate Nix downstream version.
+2. Install nix-darwin via switching to one of the existing configs directly with `nix run nix-darwin/master#darwin-rebuild -- switch --flake .#<hostname>`.
+  a. If you do not have an existing config that is applicable, follow these instructions: TODO
+3. Install home-manager via switching to one of the existing configs directly with `nix run home-manager/master -- switch --flake .#<USER>@<HOSTNAME>`.
+  a. If you do not have an existing config that is applicable, follow these instructions: TODO
+4. Enjoy!
