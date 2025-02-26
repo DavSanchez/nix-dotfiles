@@ -218,7 +218,7 @@
 
   ## Other configs
   # Enable sudo authentication with Touch ID
-  security.pam.enableSudoTouchIdAuth = true;
+  security.pam.services.sudo_local.touchIdAuth = true;
 
   system.defaults.dock.autohide = true;
   system.defaults.dock.expose-group-apps = false;
@@ -237,5 +237,5 @@
 
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
-  system.stateVersion = 4;
+  system.stateVersion = 6;
 }
