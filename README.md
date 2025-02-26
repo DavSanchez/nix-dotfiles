@@ -8,11 +8,11 @@
 
 This repository is a **Nix Flake**. To use it, your Nix usage should have the experimental features `nix-command` and `flakes` enabled. See the [wiki](https://wiki.nixos.org/wiki/Flakes) for more details.
 
-0. If you're on NixOS already there's not much else needed. Run `sudo nixos-rebuild switch --flake .#<HOSTNAME>` to apply the desired system configuration.
-1. If you're not on NixOS, install Nix, preferably using the [Determinate Nix installer](https://github.com/DeterminateSystems/nix-installer). I recommend it because it has some functionalities that the official installer still does not have, such as enabling the `flakes` experimental feature by default, but **read just below**.
+0. If you're on NixOS already there's not much else needed regarding applying system-level configs. Run `sudo nixos-rebuild switch --flake .#<HOSTNAME>` to apply the desired system configuration. To install NixOS, see the instructions on [the official site](https://nixos.org/download/).
+1. (Non-NixOS), install Nix, preferably using the [Determinate Nix installer](https://github.com/DeterminateSystems/nix-installer). I recommend it because it has some functionalities that the official installer still does not have, such as enabling the `flakes` experimental feature by default, but **read just below**.
     - This installer will suggest installing Determinate System's downstream distribution for Nix, setting certain configs and adding other utilities, all of them tiered to enterprise/corporate usage. Vanilla Nix is enough for (almost) all use cases. The installer will prompt you something along the lines of `Cut the fuss with Determinate Nix?` to which you can press `[n]o` and continue with the standard Nix installation. I hope [they make this *opt-in* instead](https://github.com/DeterminateSystems/nix-installer/issues/1463).
     - You can always install with the official Nix installation script instead, with `sh <(curl -L <https://nixos.org/nix/install>)`.
-2. If you're on macOS and want to use the `nix-darwin` configurations, install `nix-darwin` via switching to one of the existing configs directly with `nix run nix-darwin/master#darwin-rebuild -- switch --flake .#<HOSTNAME>`.
+2. (macOS) If you want to use the `nix-darwin` configurations, install `nix-darwin` via switching to one of the existing configs directly with `nix run nix-darwin/master#darwin-rebuild -- switch --flake .#<HOSTNAME>`.
     - If there's no config you desire to apply just yet, follow the instructions to do a basic installation at [the `nix-darwin` repo](https://github.com/LnL7/nix-darwin).
 3. To use the `home-manager` configurations, install `home-manager` via switching to one of the existing configs directly with `nix run home-manager/master -- switch --flake .#<USER>@<HOSTNAME>`.
     - If you do not have an existing config that is applicable, follow the instructions to do a basic installation at [the `home-manager` repo](https://nix-community.github.io/home-manager/index.xhtml#ch-nix-flakes).
@@ -22,9 +22,9 @@ To speed up the build processes, you can use my binary cache as substituter. If 
 
 ## Uninstalling
 
-You might want to get rid of this, either for temporary maintenance reasons (e.g. `nix-darwin` recommends to just reinstall Nix if you're manually bumping a config's [`stateVersion`](https://daiderd.com/nix-darwin/manual/index.html#opt-system.stateVersion), though generally you should not be doing that) or because you just don't want to use Nix anymore (you should not be doing that either :D). In any case, you can uninstall everything by going through these steps.
+You might want to get rid of the configs and the programs that manage it, either for temporary maintenance reasons (e.g. at the time of writing this, `nix-darwin` recommends to just reinstall Nix if you're manually bumping a config's [`stateVersion`](https://daiderd.com/nix-darwin/manual/index.html#opt-system.stateVersion), though generally you should not be doing that) or maybe because you just don't want to use Nix anymore (you should not be doing that either :D). In any case, you can uninstall everything by going through these steps.
 
-1. If you're on macOS, uninstall `nix-darwin` with `nix --extra-experimental-features "nix-command flakes" run nix-darwin#darwin-uninstaller`.
+1. (macOS) Uninstall `nix-darwin` with `nix --extra-experimental-features "nix-command flakes" run nix-darwin#darwin-uninstaller`.
 2. After running the command above you might run into problems regarding SSL CA certs. With an error like this one:
 
     ```sh
@@ -42,11 +42,11 @@ You might want to get rid of this, either for temporary maintenance reasons (e.g
     ```
 
 3. Uninstall `home-manager` via `nix run home-manager/master -- uninstall`.
-4. Uninstall Nix altogether.
+4. (Non-NixOS) Uninstall Nix altogether.
     - If you used the Determinate Nix installer, just do `/nix/nix-installer uninstall`.
     - If you used the standard Nix installation script, follow the [uninstall instructions](https://nix.dev/manual/nix/2.25/installation/uninstall.html) in the Nix Reference Manual.
 
-And that's it, really!
+The cool thing of Nix is that, any time you want to come back, you can get the exact same configs you last used (same program versions, everything) by repeating the installation commands above this section. Cool!
 
 ## Influences
 
