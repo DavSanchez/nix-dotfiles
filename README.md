@@ -18,6 +18,8 @@ This repository is a **Nix Flake**. To use it, your Nix usage should have the ex
     - If you do not have an existing config that is applicable, follow the instructions to do a basic installation at [the `home-manager` repo](https://nix-community.github.io/home-manager/index.xhtml#ch-nix-flakes).
 4. Enjoy!
 
+To speed up the build processes, you can use my binary cache as substituter. If using `cachix`, you can enable it quickly with `cachix use davsanchez`, but this would modify your local `~ /.config/nix/nix.conf` which is not very declarative. I have configured it in this flake's `nixConfig`, but some commands might ignore it as not trusted. I'll try to elaborate more on how to use this in the future.
+
 ## Uninstalling
 
 You might want to get rid of this, either for temporary maintenance reasons (e.g. `nix-darwin` recommends to just reinstall Nix if you're manually bumping a config's [`stateVersion`](https://daiderd.com/nix-darwin/manual/index.html#opt-system.stateVersion), though generally you should not be doing that) or because you just don't want to use Nix anymore (you should not be doing that either :D). In any case, you can uninstall everything by going through these steps.
