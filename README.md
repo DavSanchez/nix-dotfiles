@@ -22,7 +22,7 @@ To speed up the build processes, you can use my binary cache as substituter. If 
 
 ## Uninstalling
 
-You might want to get rid of the configs and the programs that manage it, either for temporary maintenance reasons (e.g. at the time of writing this, `nix-darwin` recommends to just reinstall Nix if you're manually bumping a config's [`stateVersion`](https://daiderd.com/nix-darwin/manual/index.html#opt-system.stateVersion), though generally you should not be doing that) or maybe because you just don't want to use Nix anymore (you should not be doing that either :D). In any case, you can uninstall everything by going through these steps.
+You might want to get rid of the configs and the programs that manage it, either for temporary maintenance reasons (e.g. perhaps you were bit by [macOS Sequoia stepping over the builder users created by Nix](https://github.com/NixOS/nix/issues/10892), so you want to start from scratch to avoid any issues) or maybe because you just don't want to use Nix anymore (but why would you want that? 😆). In any case, you can uninstall everything by going through these steps.
 
 1. (macOS) Uninstall `nix-darwin` with `nix --extra-experimental-features "nix-command flakes" run nix-darwin#darwin-uninstaller`.
 2. After running the command above you might run into problems regarding SSL CA certs. With an error like this one:
