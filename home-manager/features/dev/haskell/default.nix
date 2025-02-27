@@ -38,11 +38,5 @@
     };
 
     file.".summoner.toml".source = ./summoner.toml;
-
-    # sessionPath = [ ] ++ lib.optionals pkgs.stdenv.isDarwin [
-    #   # Handled via Homebrew + ghcup in macOS until behavior is stabilized
-    #   "$HOME/.cabal/bin"
-    #   "$HOME/.ghcup/bin"
-    # ];
   };
 }

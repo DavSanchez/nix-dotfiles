@@ -91,6 +91,7 @@
 
   home.sessionVariables = {
     DOTFILES = "$HOME/.dotfiles";
+    EDITOR = "hx";
   };
 
   xdg.configFile."amethyst/amethyst.yml".source = ./darwin/amethyst.yml;

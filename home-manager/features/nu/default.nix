@@ -28,11 +28,7 @@
       # Custom completions
       # TODO
     '';
-    extraEnv = ''
-      $env.PATH = ($env.PATH | split row (char esep) | prepend '/opt/homebrew/bin')
-
-      $env.EDITOR = "${pkgs.helix}/bin/hx"
-    '';
+    extraEnv = '''';
     # extraLogin = ...;
 
     # FIXME: forgit is not available

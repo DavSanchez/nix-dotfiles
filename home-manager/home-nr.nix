@@ -47,6 +47,7 @@
     homeDirectory = "/Users/davidsanchez";
     sessionVariables = {
       DOTFILES = "$HOME/.dotfiles";
+      EDITOR = "hx";
     };
   };
 

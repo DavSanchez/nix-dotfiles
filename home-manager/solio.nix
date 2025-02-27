@@ -84,6 +84,11 @@
 
   home.sessionPath = [ "$HOME/.local/bin" ];
 
+  home.sessionVariables = {
+    DOTFILES = "$HOME/.dotfiles";
+    EDITOR = "hx";
+  };
+
   xdg.configFile."amethyst/amethyst.yml".source = ./darwin/amethyst.yml;
 
   catppuccin.enable = true;
@@ -97,7 +102,7 @@
         Program =
           pkgs.writers.writeHaskellBin "you-come-back-alive" { } ''
             {-# LANGUAGE TypeApplications #-}
-            
+
             import Control.Exception (catch, IOException)
             import Control.Monad (void)
             import Data.List (find, isPrefixOf)

@@ -109,9 +109,7 @@
 
     sessionVariables = {
       KEYTIMEOUT = 1;
-      DOTFILES = "$HOME/.dotfiles";
       NVIM_TUI_ENABLE_TRUE_COLOR = 1;
-      EDITOR = "${pkgs.helix}/bin/hx";
       LC_ALL = "en_US.UTF-8";
       LANG = "en_US.UTF-8";
       # NIX_PATH = "$HOME/.nix-defexpr/channels\${NIX_PATH:+:}$NIX_PATH";
@@ -147,9 +145,7 @@
       export LESS_TERMCAP_ue=$'\E[0m' # reset underline
     '';
 
-    initExtra = ''
-      ${lib.optionalString pkgs.stdenv.isDarwin "eval \"$(/opt/homebrew/bin/brew shellenv)\""}
-    '';
+    initExtra = '''';
   };
 
   home.packages = lib.optionals config.programs.zsh.enable [ pkgs.zsh-forgit ];
