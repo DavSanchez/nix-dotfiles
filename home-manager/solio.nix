@@ -124,7 +124,7 @@
 
                 mountLookup :: [String] -> Maybe FilePath
                 mountLookup mountList =
-                  find ("//david@eter/echoes" `isPrefixOf`) mountList
+                  find (\m -> "//david@eter/echoes" `isPrefixOf` m || "//david@eter.local/echoes" `isPrefixOf` m) mountList
                     >>= \mountLine -> pure (words mountLine !! 2) -- Get the mount path from line of `mount` output
 
                 mountSmb :: IO ()
