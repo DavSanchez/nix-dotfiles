@@ -168,6 +168,7 @@
       "logseq"
       "openemu"
       "openra"
+      "orion"
       "proton-drive"
       "proton-mail"
       "proton-mail-bridge"
