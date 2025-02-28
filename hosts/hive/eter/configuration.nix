@@ -122,8 +122,8 @@
   environment.systemPackages = with pkgs; [
     vim
     yazi
-    devenv # Quickly set up projects in any language
-  ];
+    bottom
+ ];
 
   programs.nix-ld.enable = true;
   programs.direnv.enable = true;
