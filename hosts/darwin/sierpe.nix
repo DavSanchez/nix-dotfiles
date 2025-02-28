@@ -144,9 +144,7 @@
     onActivation.upgrade = true; # This defaults to false so calls are idempotent.
     onActivation.cleanup = "zap";
 
-    taps = [
-      "homebrew/cask-drivers" # for qFlipper
-    ];
+    taps = [ ];
     casks = [
       "adobe-acrobat-reader"
       "amethyst"
@@ -175,7 +173,6 @@
       "proton-pass"
       "protonvpn"
       "qflipper"
-      "remarkable"
       "secretive"
       "sonic-pi"
       "stats"
