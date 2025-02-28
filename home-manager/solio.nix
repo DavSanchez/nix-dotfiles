@@ -128,7 +128,7 @@
                     >>= \mountLine -> pure (words mountLine !! 2) -- Get the mount path from line of `mount` output
 
                 mountSmb :: IO ()
-                mountSmb = callProcess "/sbin/mount" ["-t", "smbfs", "//david@eter/echoes", "/Volumes/echoes"]
+                mountSmb = callProcess "/sbin/mount" ["-t", "smbfs", "//david@eter/echoes.local", "/Volumes/echoes"]
           ''
           + /bin/you-come-back-alive;
         StartInterval = 10;
