@@ -23,6 +23,7 @@
     ./features/fish
     ./features/zellij
     ./features/terminals
+    ./features/web
 
     ./features/fonts.nix
     ./features/helix.nix

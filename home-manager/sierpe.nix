@@ -35,6 +35,7 @@
     ./features/bash
     ./features/fish
     ./features/terminals
+    ./features/web
 
     ./features/app.nix
     ./features/fonts.nix
