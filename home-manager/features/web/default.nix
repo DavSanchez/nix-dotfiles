@@ -1,6 +1,6 @@
-_: {
+{ pkgs, ... }: {
   programs.librewolf = {
-    enable = true;
+    enable = pkgs.stdenv.isLinux;
     settings = { };
   };
 }
