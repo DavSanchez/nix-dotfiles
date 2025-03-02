@@ -153,7 +153,6 @@
       "crossover"
       "discord"
       "disk-inventory-x"
-      "firefox"
       "ghostty"
       "gqrx"
       "handbrake"
@@ -164,7 +163,6 @@
       "krita"
       "little-snitch"
       "logseq"
-      "openemu"
       "openra"
       "orion"
       "proton-drive"
@@ -178,7 +176,6 @@
       "stats"
       "steam"
       "synthesia"
-      "tor-browser"
       "transmission"
       "virtualbox" # VMs
       "vlc"

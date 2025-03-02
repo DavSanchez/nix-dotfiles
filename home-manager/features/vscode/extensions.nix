@@ -22,7 +22,6 @@ pkgs:
   # github.copilot-chat
   github.vscode-github-actions
   github.vscode-pull-request-github
-  gleam.gleam
   golang.go
   gruntfuggly.todo-tree
   # hashicorp.terraform

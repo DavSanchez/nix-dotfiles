@@ -11,7 +11,6 @@
   dockerls.enable = true;
   elixirls.enable = true;
   eslint.enable = true;
-  # gleam.enable = true;
   gopls.enable = true;
   helm_ls.enable = true;
   hls = {

@@ -10,7 +10,6 @@
     elixir # Dynamic FP for the Erlang VM
     elixir-ls # Langserver
 
-    # gleam # Statically typed FP for the Erlang VM
     # dotnet-sdk # For F-sharp: FP for .NET
     # fstar # ML-like FP language aimed at program verification
     elmPackages.elm # FP for the frontend
