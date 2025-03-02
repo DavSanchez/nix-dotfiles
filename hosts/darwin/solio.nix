@@ -156,7 +156,6 @@
       "crossover"
       "discord"
       "disk-inventory-x"
-      "firefox"
       "ghostty"
       "gqrx"
       "handbrake"
@@ -181,7 +180,6 @@
       "sonic-pi"
       "stats"
       "steam"
-      "tor-browser"
       "transmission"
       "virtualbox" # VMs
       "vlc"
