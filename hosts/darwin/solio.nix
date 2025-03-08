@@ -202,7 +202,7 @@
       "Pages" = 409201541;
       "Proton Pass for Safari" = 6502835663;
       "Tailscale" = 1475387142;
-      "Reeder" = 1529448980;
+      "Reeder" = 6475002485;
       "reMarkable" = 1276493162;
       "The Unarchiver" = 425424353;
       "UTM" = 1538878817; # VMs (qemu)
