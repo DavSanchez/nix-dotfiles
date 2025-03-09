@@ -1,8 +1,6 @@
 {
   description = "DavSanchez's Nix configs";
 
-  nixConfig.substituters = [ "https://davsanchez.cachix.org/" ];
-
   inputs = {
     # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
