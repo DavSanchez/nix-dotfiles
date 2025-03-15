@@ -50,7 +50,7 @@ in
   "editor.cursorSmoothCaretAnimation" = "on";
   "editor.fontFamily" =
     "'Iosevka Custom', 'FiraCode Nerd Font', Menlo, Monaco, 'Courier New', monospace";
-  "editor.fontSize" = 14;
+  # "editor.fontSize" = 14;
   "editor.fontLigatures" = true;
   "editor.formatOnPaste" = true;
   "editor.formatOnSave" = true;
@@ -88,7 +88,7 @@ in
   };
   "terminal.external.osxExec" = "WezTerm.app";
   "terminal.integrated.fontFamily" = "'Iosevka Term Custom'";
-  "terminal.integrated.fontSize" = 14;
+  # "terminal.integrated.fontSize" = 14;
   "terminal.integrated.fontLigatures.enabled" = true;
   "terminal.integrated.scrollback" = 5000;
   "terminal.integrated.shellIntegration.enabled" = true;
