@@ -48,8 +48,6 @@ pkgs:
   # ms-vscode.theme-tomorrowkit
   ms-vsliveshare.vsliveshare
   mvllow.rose-pine
-  pkief.material-icon-theme
-  pkief.material-product-icons
   redhat.vscode-yaml
   rust-lang.rust-analyzer
   tamasfe.even-better-toml
