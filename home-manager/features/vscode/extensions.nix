@@ -6,46 +6,32 @@ pkgs:
   banacorn.agda-mode
   bbenoist.nix
   # betterthantomorrow.calva
-  catppuccin.catppuccin-vsc
+  # catppuccin.catppuccin-vsc # Delegated to catppuccin flake
   catppuccin.catppuccin-vsc-icons
   christian-kohler.path-intellisense
   davidanson.vscode-markdownlint
   dbaeumer.vscode-eslint
   # dhall.dhall-lang
   # dhall.vscode-dhall-lsp-server
-  # eamodio.gitlens
   editorconfig.editorconfig
   elixir-lsp.vscode-elixir-ls
-  # esbenp.prettier-vscode
-  # github.github-vscode-theme
   # github.copilot
   # github.copilot-chat
   github.vscode-github-actions
   github.vscode-pull-request-github
   golang.go
   gruntfuggly.todo-tree
-  # hashicorp.terraform
   haskell.haskell
   # james-yu.latex-workshop
-  # jdinhlife.gruvbox
   jnoortheen.nix-ide
   justusadam.language-haskell
   llvm-vs-code-extensions.vscode-clangd
   # markis.code-coverage # FIXME
   mkhl.direnv
-  # ms-azuretools.vscode-docker
-  # ms-kubernetes-tools.vscode-kubernetes-tools
-  # ms-python.python
-  # ms-python.vscode-pylance
-  # ms-pyright.pyright
-  # ms-toolsai.jupyter
-  # ms-toolsai.jupyter-renderers
   ms-vscode-remote.remote-ssh
   ms-vscode-remote.remote-containers
-  # ms-vscode.cmake-tools
   ms-vscode.hexeditor
   # ms-vscode.makefile-tools
-  # ms-vscode.theme-tomorrowkit
   ms-vsliveshare.vsliveshare
   mvllow.rose-pine
   redhat.vscode-yaml
