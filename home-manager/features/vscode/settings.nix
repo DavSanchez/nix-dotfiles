@@ -99,11 +99,8 @@ in
   "vim.enableNeovim" = true; # programs.neovim.enable;
   "vim.neovimUseConfigFile" = true; # programs.neovim.enable;
   "window.commandCenter" = true;
-  "workbench.colorTheme" = "Catppuccin Mocha"; # "Lambda Dark+";
   # Catppuccin recommended settings
-  "editor.semanticHighlighting.enabled" = true;
-  "terminal.integrated.minimumContrastRatio" = 1;
-  "window.titleBarStyle" = "custom";
+  # Others are delegated to catppuccin flake
   "workbench.iconTheme" = "catppuccin-mocha";
   # End Catppuccin settings
   "workbench.editorAssociations" = {
