@@ -86,10 +86,11 @@ in
   "search.exclude" = {
     "**/.direnv" = true;
   };
-  "terminal.external.osxExec" = "WezTerm.app";
+  "terminal.external.osxExec" = "Ghostty.app";
   "terminal.integrated.fontFamily" = "'Iosevka Term Custom'";
   "terminal.integrated.fontSize" = 14;
   "terminal.integrated.fontLigatures.enabled" = true;
+  "terminal.integrated.macOptionIsMeta" = true;
   "terminal.integrated.scrollback" = 5000;
   "terminal.integrated.shellIntegration.enabled" = true;
   "terminal.integrated.profiles.linux" = term-profiles;
@@ -100,7 +101,7 @@ in
   "vim.neovimUseConfigFile" = true; # programs.neovim.enable;
   "window.commandCenter" = true;
   # Catppuccin recommended settings
-  # Others are delegated to catppuccin flake
+  # Others are delegated to the catppuccin flake
   "workbench.iconTheme" = "catppuccin-mocha";
   # End Catppuccin settings
   "workbench.editorAssociations" = {
