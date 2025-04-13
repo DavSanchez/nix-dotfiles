@@ -2,7 +2,7 @@
 {
   imports = [
     inputs.nixvim.homeManagerModules.nixvim
-    inputs.catppuccin.homeManagerModules.catppuccin
+    inputs.catppuccin.homeModules.catppuccin
     inputs.mac-app-util.homeManagerModules.default
 
     ./features/ai
