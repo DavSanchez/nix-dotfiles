@@ -24,7 +24,7 @@
       stern
       kubeshark
 
-      ansible
+      # ansible
       # vagrant
 
       ## Terraform
