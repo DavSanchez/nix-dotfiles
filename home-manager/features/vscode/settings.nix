@@ -54,6 +54,8 @@ pkgs: {
     "**/.direnv" = true;
   };
   "terminal.external.osxExec" = "Ghostty.app";
+  "terminal.integrated.defaultProfile.linux" = "fish";
+  "terminal.integrated.defaultProfile.osx" = "fish";
   "terminal.integrated.fontFamily" = "'Iosevka Term Slab Custom'";
   "terminal.integrated.fontSize" = 14;
   "terminal.integrated.fontLigatures.enabled" = true;
