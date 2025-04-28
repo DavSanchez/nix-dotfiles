@@ -11,6 +11,6 @@
     "background-opacity = 0.8"
     "background-blur-radius = 20"
     "cursor-click-to-move = true"
-    (lib.optionalString config.programs.fish.enable "command = ${config.programs.fish.package}/bin/fish")
+    (lib.optionalString config.programs.fish.enable "command = \"${config.programs.fish.package}/bin/fish\"")
   ];
 }
