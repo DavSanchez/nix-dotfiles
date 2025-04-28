@@ -120,7 +120,7 @@
       ];
     };
 
-    initExtraBeforeCompInit = ''
+    initContent = lib.mkOrder 500 ''
       ${builtins.readFile ./functions.zsh}
 
       bindkey -M vicmd 'k' history-beginning-search-backward
