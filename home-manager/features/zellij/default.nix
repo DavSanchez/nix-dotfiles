@@ -1,8 +1,8 @@
 { config, lib, ... }:
 {
   programs.zellij = {
-    enable = true;
-    enableBashIntegration = true;
+    enable = false;
+    # enableBashIntegration = true; # For debugging purposes, we leave bash disabled
     enableFishIntegration = true;
     enableZshIntegration = true;
     settings =

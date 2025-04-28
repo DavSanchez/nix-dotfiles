@@ -1,37 +1,4 @@
-pkgs:
-let
-  tmux-shell-profile = {
-    "path" = "${pkgs.tmux}/bin/tmux";
-    "args" = [
-      "new-session"
-      "-A"
-      "-s"
-      "vscode:\${workspaceFolder}"
-    ];
-  };
-  zellij-script = pkgs.writeShellScript "vscode-zellij" ''
-    if ${pkgs.zellij}/bin/zellij ls -n |& grep -E "^$1 .*EXITED" >/dev/null; then
-      ${pkgs.zellij}/bin/zellij delete-session "$1" # delete dead session
-    fi
-    if ${pkgs.zellij}/bin/zellij ls -n |& grep -E "^$1 " >/dev/null; then
-      ${pkgs.zellij}/bin/zellij attach "$1"
-    else
-      # We don't have a session with this name yet
-      ${pkgs.zellij}/bin/zellij --session "$1" --new-session-with-layout=compact options --no-pane-frames --simplified-ui=true ${pkgs.lib.optionalString pkgs.stdenv.isDarwin "--copy-command=pbcopy"}
-    fi
-  '';
-  zellij-shell-profile = {
-    "path" = "${zellij-script}";
-    "args" = [
-      "vscode:\${workspaceFolderBasename}"
-    ];
-  };
-  term-profiles = {
-    "tmux" = tmux-shell-profile;
-    "zellij" = zellij-shell-profile;
-  };
-in
-{
+pkgs: {
   "breadcrumbs.enabled" = true;
   "dance.modes" = {
     "" = {
@@ -93,10 +60,6 @@ in
   "terminal.integrated.macOptionIsMeta" = true;
   "terminal.integrated.scrollback" = 5000;
   "terminal.integrated.shellIntegration.enabled" = true;
-  "terminal.integrated.profiles.linux" = term-profiles;
-  "terminal.integrated.profiles.osx" = term-profiles;
-  "terminal.integrated.defaultProfile.linux" = "zellij";
-  "terminal.integrated.defaultProfile.osx" = "zellij";
   "vim.enableNeovim" = true; # programs.neovim.enable;
   "vim.neovimUseConfigFile" = true; # programs.neovim.enable;
   "window.commandCenter" = true;
