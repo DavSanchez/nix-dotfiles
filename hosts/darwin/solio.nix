@@ -125,7 +125,11 @@
       enable = true; # default shell on Catalina+
       enableFzfCompletion = true;
       enableFzfGit = true;
-    }; # fish.enable = true;
+    };
+    fish = {
+      enable = true;
+      useBabelfish = true;
+    };
     bash = {
       enable = true;
       completion.enable = true;

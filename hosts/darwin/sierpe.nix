@@ -123,7 +123,10 @@
     zsh = {
       enable = true; # default shell on Catalina+
     };
-    # fish.enable = true;
+    fish = {
+      enable = true;
+      useBabelfish = true;
+    };
     bash = {
       enable = true;
       completion.enable = true;
