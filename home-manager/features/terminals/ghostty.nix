@@ -4,7 +4,7 @@
   ...
 }:
 {
-  xdg.configFile."ghostty/config".text = lib.strings.concatStrings [
+  xdg.configFile."ghostty/config".text = lib.strings.concatStringsSep "\n" [
     "font-family = \"Iosevka Term Slab Custom\""
     "font-size = 14"
     "theme = catppuccin-mocha"
