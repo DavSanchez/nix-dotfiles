@@ -1,10 +1,10 @@
 { config, lib, ... }:
 {
   programs.zellij = {
-    enable = false;
-    # enableBashIntegration = true; # For debugging purposes, we leave bash disabled
-    enableFishIntegration = true;
-    enableZshIntegration = true;
+    enable = true;
+    enableBashIntegration = false;
+    enableFishIntegration = false;
+    enableZshIntegration = false;
     settings =
       {
         ui.pane_frames.rounded_corners = true;
