@@ -59,7 +59,6 @@ pkgs: {
   "terminal.integrated.fontFamily" = "'Iosevka Term Slab Custom'";
   "terminal.integrated.fontSize" = 14;
   "terminal.integrated.fontLigatures.enabled" = true;
-  "terminal.integrated.macOptionIsMeta" = true;
   "terminal.integrated.scrollback" = 5000;
   "terminal.integrated.shellIntegration.enabled" = true;
   "vim.enableNeovim" = true; # programs.neovim.enable;
