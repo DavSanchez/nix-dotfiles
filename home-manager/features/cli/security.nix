@@ -40,7 +40,7 @@
     enableScDaemon = true;
     defaultCacheTtl = 14400;
     maxCacheTtl = 86400;
-    pinentryPackage = pkgs.pinentry-curses;
+    pinentry.package = pkgs.pinentry-curses;
     enableSshSupport = true;
     defaultCacheTtlSsh = 14400;
     maxCacheTtlSsh = 86400;
