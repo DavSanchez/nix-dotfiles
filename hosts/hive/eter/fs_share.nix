@@ -4,8 +4,15 @@ _: {
     openFirewall = true;
     settings = {
       global = {
-        "hosts allow" = "192.168.8. 127.0.0.1 localhost";
+        "hosts allow" = "192.168.0. 127.0.0.1 localhost";
         "hosts deny" = "0.0.0.0/0";
+        # "mangled names" = "no";
+        # "dos charset" = "CP850";
+        # "unix charset" = "UTF-8";
+        # macOS compatibility settings (also ran `convmv` to convert filenames to UTF-8)
+        "vfs objects" = "fruit catia streams_xattr";
+        "fruit:aapl" = "yes";
+        "fruit:encoding" = "native";
       };
       # Shares
       creation = {
@@ -19,7 +26,7 @@ _: {
       echoes = {
         path = "/seclusium/echoes";
         writeable = "yes";
-        "hosts allow" = "192.168.8.102";
+        "hosts allow" = "192.168.0.107";
       };
       imagery = {
         path = "/seclusium/imagery";
