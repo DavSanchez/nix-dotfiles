@@ -218,6 +218,7 @@
   # Enable sudo authentication with Touch ID
   security.pam.services.sudo_local.touchIdAuth = true;
 
+  system.primaryUser = "david";
   system.defaults.dock.autohide = true;
   system.defaults.dock.mru-spaces = false;
   system.defaults.dock.expose-group-apps = false;
