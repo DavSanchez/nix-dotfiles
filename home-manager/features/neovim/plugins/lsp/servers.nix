@@ -3,7 +3,7 @@
     enable = true;
     package = null;
   };
-  ansiblels.enable = true;
+  ansiblels.enable = false;
   bashls.enable = true;
   clangd.enable = true;
   clojure_lsp.enable = true;
@@ -11,7 +11,6 @@
   dockerls.enable = true;
   elixirls.enable = true;
   eslint.enable = true;
-  # gleam.enable = true;
   gopls.enable = true;
   helm_ls.enable = true;
   hls = {

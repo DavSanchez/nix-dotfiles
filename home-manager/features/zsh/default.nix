@@ -109,9 +109,7 @@
 
     sessionVariables = {
       KEYTIMEOUT = 1;
-      DOTFILES = "$HOME/.dotfiles";
       NVIM_TUI_ENABLE_TRUE_COLOR = 1;
-      EDITOR = "${pkgs.helix}/bin/hx";
       LC_ALL = "en_US.UTF-8";
       LANG = "en_US.UTF-8";
       # NIX_PATH = "$HOME/.nix-defexpr/channels\${NIX_PATH:+:}$NIX_PATH";
@@ -122,7 +120,7 @@
       ];
     };
 
-    initExtraBeforeCompInit = ''
+    initContent = lib.mkOrder 500 ''
       ${builtins.readFile ./functions.zsh}
 
       bindkey -M vicmd 'k' history-beginning-search-backward
@@ -136,6 +134,7 @@
     # envExtra = '' '';
 
     profileExtra = ''
+      ${lib.optionalString pkgs.stdenv.isDarwin "eval \"$(/opt/homebrew/bin/brew shellenv)\""}
       # Less variables (quoted inside sessionVariables so they don't work there)
       export LESS=-R
       export LESS_TERMCAP_mb=$'\E[1;31m' # begin blink
@@ -147,9 +146,7 @@
       export LESS_TERMCAP_ue=$'\E[0m' # reset underline
     '';
 
-    initExtra = ''
-      ${lib.optionalString pkgs.stdenv.isDarwin "eval \"$(/opt/homebrew/bin/brew shellenv)\""}
-    '';
+    initExtra = '''';
   };
 
   home.packages = lib.optionals config.programs.zsh.enable [ pkgs.zsh-forgit ];

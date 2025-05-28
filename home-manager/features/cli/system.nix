@@ -4,6 +4,7 @@
     with pkgs;
     [
       procs
+      procps
       neofetch
       kontroll
     ]

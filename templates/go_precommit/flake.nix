@@ -29,7 +29,6 @@
             src = ./.;
             hooks = {
               actionlint.enable = true;
-              ansible-lint.enable = true;
               convco.enable = true;
               gofmt.enable = true;
               gotest.enable = true;

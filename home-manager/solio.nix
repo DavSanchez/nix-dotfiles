@@ -15,7 +15,7 @@
     # Or modules exported from other flakes (such as nix-colors):
     # inputs.nix-colors.homeManagerModules.default
     inputs.nixvim.homeManagerModules.nixvim
-    inputs.catppuccin.homeManagerModules.catppuccin
+    inputs.catppuccin.homeModules.catppuccin
     inputs.mac-app-util.homeManagerModules.default
 
     # You can also split up your configuration and import pieces of it here:
@@ -84,6 +84,11 @@
 
   home.sessionPath = [ "$HOME/.local/bin" ];
 
+  home.sessionVariables = {
+    DOTFILES = "$HOME/.dotfiles";
+    EDITOR = "hx";
+  };
+
   xdg.configFile."amethyst/amethyst.yml".source = ./darwin/amethyst.yml;
 
   catppuccin.enable = true;
@@ -119,11 +124,11 @@
 
                 mountLookup :: [String] -> Maybe FilePath
                 mountLookup mountList =
-                  find ("//david@eter/echoes" `isPrefixOf`) mountList
+                  find (\m -> "//david@eter/echoes" `isPrefixOf` m || "//david@eter.local/echoes" `isPrefixOf` m) mountList
                     >>= \mountLine -> pure (words mountLine !! 2) -- Get the mount path from line of `mount` output
 
                 mountSmb :: IO ()
-                mountSmb = callProcess "/sbin/mount" ["-t", "smbfs", "//david@eter/echoes", "/Volumes/echoes"]
+                mountSmb = callProcess "/sbin/mount" ["-t", "smbfs", "//david@eter/echoes.local", "/Volumes/echoes"]
           ''
           + /bin/you-come-back-alive;
         StartInterval = 10;

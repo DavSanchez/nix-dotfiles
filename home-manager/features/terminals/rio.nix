@@ -9,7 +9,7 @@ _: {
         blur = true;
       };
       navigation.mode = "Plain";
-      fonts.family = "Iosevka Term Custom";
+      fonts.family = "Iosevka Term Slab Custom";
       fonts.size = 14;
     };
   };

@@ -81,11 +81,7 @@ in
 
     shellAliases = { };
 
-    shellInit = ''
-      ${lib.optionalString pkgs.stdenv.isDarwin "eval (/opt/homebrew/bin/brew shellenv)"}
-
-      set -Ux EDITOR ${pkgs.helix}/bin/hx
-    '';
+    shellInit = '''';
 
     shellInitLast = ''
       ${lib.optionalString config.programs.starship.enable "enable_transience"}

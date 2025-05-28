@@ -34,7 +34,6 @@
             src = ./.;
             hooks = {
               actionlint.enable = true;
-              ansible-lint.enable = true;
               cargo-check.enable = true;
               clippy.enable = true;
               convco.enable = true;

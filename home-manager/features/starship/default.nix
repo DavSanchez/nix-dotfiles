@@ -30,6 +30,7 @@
       };
 
       shlvl.disabled = false;
+      direnv.disabled = false;
     };
   };
 }

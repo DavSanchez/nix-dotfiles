@@ -123,7 +123,10 @@
     zsh = {
       enable = true; # default shell on Catalina+
     };
-    # fish.enable = true;
+    fish = {
+      enable = true;
+      useBabelfish = true;
+    };
     bash = {
       enable = true;
       completion.enable = true;
@@ -144,9 +147,7 @@
     onActivation.upgrade = true; # This defaults to false so calls are idempotent.
     onActivation.cleanup = "zap";
 
-    taps = [
-      "homebrew/cask-drivers" # for qFlipper
-    ];
+    taps = [ ];
     casks = [
       "adobe-acrobat-reader"
       "amethyst"
@@ -155,7 +156,6 @@
       "crossover"
       "discord"
       "disk-inventory-x"
-      "firefox"
       "ghostty"
       "gqrx"
       "handbrake"
@@ -166,21 +166,19 @@
       "krita"
       "little-snitch"
       "logseq"
-      "openemu"
       "openra"
+      "orion"
       "proton-drive"
       "proton-mail"
       "proton-mail-bridge"
       "proton-pass"
       "protonvpn"
       "qflipper"
-      "remarkable"
       "secretive"
       "sonic-pi"
       "stats"
       "steam"
       "synthesia"
-      "tor-browser"
       "transmission"
       "virtualbox" # VMs
       "vlc"
@@ -189,6 +187,7 @@
       "xld"
       "xquartz" # X11 applications on macOS
       "yacreader"
+      "zen-browser"
       "zerotier-one"
     ];
     brews = [ ];
@@ -203,7 +202,7 @@
       "Pages" = 409201541;
       "Proton Pass for Safari" = 6502835663;
       "Tailscale" = 1475387142;
-      "Reeder" = 1529448980;
+      "Reeder" = 6475002485;
       "reMarkable" = 1276493162;
       "Shazam" = 897118787;
       "The Unarchiver" = 425424353;
@@ -219,6 +218,7 @@
   # Enable sudo authentication with Touch ID
   security.pam.services.sudo_local.touchIdAuth = true;
 
+  system.primaryUser = "david";
   system.defaults.dock.autohide = true;
   system.defaults.dock.mru-spaces = false;
   system.defaults.dock.expose-group-apps = false;

@@ -19,7 +19,7 @@
       ## Utils
       coreutils
       uutils-coreutils
-      # binutils # Already included with pkgs.gcc
+      binutils
       pciutils
 
       w3m
