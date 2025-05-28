@@ -6,7 +6,6 @@ _: {
       global = {
         "hosts allow" = "192.168.0. 127.0.0.1 localhost";
         "hosts deny" = "0.0.0.0/0";
-
         # "mangled names" = "no";
         # "dos charset" = "CP850";
         # "unix charset" = "UTF-8";
