@@ -4,7 +4,10 @@
     packages = with pkgs.haskellPackages; [
       ghc
 
+      ormolu
+
       cabal-install
+      cabal-gild
       # cabal-add
       # cabal-audit
 
