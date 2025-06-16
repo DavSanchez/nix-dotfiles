@@ -1,4 +1,9 @@
-{ lib, pkgs, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 {
   programs.ghostty = {
     enable = true;
@@ -18,7 +23,6 @@
         background-opacity = 0.8;
         background-blur-radius = 20;
         cursor-click-to-move = true;
-        # (lib.optionalString config.programs.fish.enable "command = \"${config.programs.fish.package}/bin/fish\"")
         auto-update = "check"; # Let Nix handle this while we use ghostty-bin
       }
       // lib.optionalAttrs pkgs.stdenv.isDarwin {
@@ -27,6 +31,9 @@
         #   "alt+right=unbind"
         # ];
         macos-option-as-alt = "left";
+      }
+      // lib.optionalAttrs config.programs.fish.enable {
+        command = "${config.programs.fish.package}/bin/fish";
       };
   };
 }
