@@ -19,6 +19,7 @@
         background-blur-radius = 20;
         cursor-click-to-move = true;
         # (lib.optionalString config.programs.fish.enable "command = \"${config.programs.fish.package}/bin/fish\"")
+        auto-update = "check"; # Let Nix handle this while we use ghostty-bin
       }
       // lib.optionalAttrs pkgs.stdenv.isDarwin {
         # keybind = [
