@@ -21,10 +21,10 @@
         # (lib.optionalString config.programs.fish.enable "command = \"${config.programs.fish.package}/bin/fish\"")
       }
       // lib.optionalAttrs pkgs.stdenv.isDarwin {
-        keybind = [
-          "alt+left=unbind"
-          "alt+right=unbind"
-        ];
+        # keybind = [
+        #   "alt+left=unbind"
+        #   "alt+right=unbind"
+        # ];
         macos-option-as-alt = "left";
       };
   };
