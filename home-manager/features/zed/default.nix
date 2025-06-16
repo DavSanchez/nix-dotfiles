@@ -12,7 +12,7 @@
       # "catppuccin-icons" # added with catppuccin-nix
       "catppuccin-blur"
     ];
-    userKeymaps = { };
+    # userKeymaps = { };
     userSettings = {
       vim_mode = true;
 
