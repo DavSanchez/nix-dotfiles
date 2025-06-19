@@ -5,12 +5,7 @@
     extensions = [
       "nix"
       "haskell"
-      "elixir"
-      "make"
-      "helm"
-      # "catppuccin" # added with catppuccin-nix
-      # "catppuccin-icons" # added with catppuccin-nix
-      "catppuccin-blur"
+      # "catppuccin-blur"
     ];
     # userKeymaps = { };
     userSettings = {
@@ -31,8 +26,6 @@
       rust-analyzer
       haskell-language-server
       nixd
-      elixir-ls
-      helm-ls
     ];
     installRemoteServer = true;
   };
