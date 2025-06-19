@@ -26,6 +26,7 @@
 
       # ansible
       # vagrant
+      lima
 
       ## Terraform
       # terraform
