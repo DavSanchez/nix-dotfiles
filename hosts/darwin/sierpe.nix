@@ -157,7 +157,7 @@
       "discord"
       "disk-inventory-x"
       "gqrx"
-      "handbrake"
+      "handbrake-app"
       "iina"
       "imhex"
       "jordanbaird-ice"
@@ -182,7 +182,7 @@
       "virtualbox" # VMs
       "vlc"
       "whatsapp"
-      "wireshark"
+      "wireshark-app"
       "xld"
       "xquartz" # X11 applications on macOS
       "yacreader"
