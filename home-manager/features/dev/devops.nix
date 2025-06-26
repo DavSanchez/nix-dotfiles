@@ -7,6 +7,7 @@
       docker-compose
       podman
       podman-compose
+      colima
 
       act # GH Actions locally
       ctop # Monitor containers
@@ -26,7 +27,9 @@
 
       # ansible
       # vagrant
-      lima
+      (lima.override {
+        withAdditionalGuestAgents = true; # for emulating non-native architectures
+      })
 
       ## Terraform
       # terraform
@@ -52,8 +55,6 @@
     ++ lib.optionals pkgs.stdenv.isDarwin (
       with pkgs;
       [
-        ## Container runtimes on macOS
-        colima # Containers
         tart # VMs (Apple hypervisor framework)
         softnet # VM networking for tart
         orchard # VM orchestrator for macOS clusters
