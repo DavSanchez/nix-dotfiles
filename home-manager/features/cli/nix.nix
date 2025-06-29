@@ -37,5 +37,11 @@
       enableFishIntegration = true;
       enableNushellIntegration = true;
     };
+
+    nh = {
+      enable = true;
+      clean.enable = true;
+      # `flake` attr set at home.sessionVariables
+    };
   };
 }

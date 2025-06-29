@@ -17,8 +17,6 @@
     # inputs.hardware.nixosModules.common-cpu-amd
     # inputs.hardware.nixosModules.common-ssd
 
-    # nh with darwin support (to remove once <https://github.com/LnL7/nix-darwin/pull/942>) merges
-    inputs.self.darwinModules.nh
     inputs.mac-app-util.darwinModules.default
 
     # You can also split up your configuration and import pieces of it here:
@@ -36,9 +34,6 @@
 
       # Or overlays exported from other flakes:
       # neovim-nightly-overlay.overlays.default
-
-      # nh with darwin support (to remove once <https://github.com/LnL7/nix-darwin/pull/942>) merges
-      inputs.nh.overlays.default
 
       # Or define it inline, for example:
       # (final: prev: {
@@ -80,14 +75,6 @@
       enable = true;
       ephemeral = true;
     };
-  };
-
-  programs.nh = {
-    enable = true;
-    clean.enable = true;
-    # Installation option once https://github.com/LnL7/nix-darwin/pull/942 is merged:
-    # package = nh_darwin.packages.${pkgs.stdenv.hostPlatform.system}.default;
-    flake = "/Users/david/.dotfiles";
   };
 
   environment = {
