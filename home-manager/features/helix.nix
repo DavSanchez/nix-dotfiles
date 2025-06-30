@@ -6,31 +6,18 @@
     extraPackages = [ ]; # For ading LSPs and stuff
     settings = {
       editor = {
+        auto-save = true;
+        cursorline = true;
         line-number = "relative";
-        lsp.display-messages = true;
-        true-color = true;
-        color-modes = true;
-        # whitespace.render = "all";
-        indent-guides.render = true;
         cursor-shape = {
           insert = "bar";
           normal = "block";
           select = "underline";
         };
-        statusline = {
-          left = [
-            "mode"
-            "spinner"
-            "version-control"
-            "file-name"
-          ];
+        soft-wrap = {
+          enable = true;
         };
       };
-      keys.normal = {
-        "C-y" =
-          ":sh ${pkgs.zellij}/bin/zellij run -f -x 10% -y 10% --width 80% --height 80% -- ${pkgs.bash}/bin/bash ${config.xdg.configHome}/helix/yazi-picker.sh";
-      };
-      # teme = "rose_pine_moon";
     };
     languages = {
       language = [
@@ -51,17 +38,4 @@
     };
   };
 
-  xdg.configFile."helix/yazi-picker.sh".text = ''
-        paths=$(${pkgs.yazi}/bin/yazi --chooser-file=/dev/stdout | while read -r; do printf "%q " "$REPLY"; done)
-
-        if [[ -n "$paths" ]]; then
-    	    ${pkgs.zellij}/bin/zellij action toggle-floating-panes
-    	    ${pkgs.zellij}/bin/zellij action write 27 # send <Escape> key
-    	    ${pkgs.zellij}/bin/zellij action write-chars ":open $paths"
-    	    ${pkgs.zellij}/bin/zellij action write 13 # send <Enter> key
-    	    ${pkgs.zellij}/bin/zellij action toggle-floating-panes
-        fi
-
-        ${pkgs.zellij}/bin/zellij action close-pane
-  '';
 }
