@@ -123,7 +123,7 @@
     vim
     yazi
     bottom
- ];
+  ];
 
   programs.nix-ld.enable = true;
   programs.direnv.enable = true;

@@ -19,5 +19,5 @@
     ++ lib.optionals pkgs.stdenv.isDarwin [ pkgs.utm ]
     ++ lib.optionals pkgs.stdenv.isLinux [ pkgs.imhex ];
 
-    programs.librewolf.enable = true;
+  programs.librewolf.enable = true;
 }

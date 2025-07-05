@@ -1,4 +1,9 @@
-{ pkgs, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 {
   home.packages = with pkgs; [
     nixd # Language server
@@ -41,7 +46,7 @@
     nh = {
       enable = true;
       clean.enable = true;
-      # `flake` attr set at home.sessionVariables
+      flake = lib.path.append (/. + config.home.homeDirectory) ".dotfiles";
     };
   };
 }

@@ -87,7 +87,6 @@
   home.sessionVariables = {
     DOTFILES = "$HOME/.dotfiles";
     EDITOR = "hx";
-    FLAKE = "$HOME/.dotfiles"; # For `nh` and the like
   };
 
   xdg.configFile."amethyst/amethyst.yml".source = ./darwin/amethyst.yml;

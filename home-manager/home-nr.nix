@@ -48,7 +48,6 @@
     sessionVariables = {
       DOTFILES = "$HOME/.dotfiles";
       EDITOR = "hx";
-      FLAKE = "$HOME/.dotfiles"; # For `nh` and the like
     };
   };
 
