@@ -14,7 +14,6 @@
       # mtr-gui
       czkawka # Multi functional app to find duplicates, empty folders, similar images etc
       zathura
-      qbittorrent
     ])
     ++ lib.optionals pkgs.stdenv.isDarwin [ pkgs.utm ]
     ++ lib.optionals pkgs.stdenv.isLinux [ pkgs.imhex ];
