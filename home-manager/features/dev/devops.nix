@@ -21,6 +21,7 @@ in
 
       ## K8s
       minikube
+      kind
       kubectl
       kubernetes-helm
       helm-docs
