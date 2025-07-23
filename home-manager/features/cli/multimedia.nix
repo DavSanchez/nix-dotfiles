@@ -4,7 +4,7 @@
     ## Media
     imagemagick
     qrencode
-    zbar # Barcode reading
+    # zbar # Barcode reading
     # xdot
     ffmpeg
 
