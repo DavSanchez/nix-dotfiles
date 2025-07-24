@@ -57,13 +57,14 @@ in
 
       # cirrus-cli # Related to tart/orchard
       process-compose
+
+      # orchard # VM orchestrator for macOS clusters
     ])
     ++ lib.optionals pkgs.stdenv.isDarwin (
       with pkgs;
       [
         tart # VMs (Apple hypervisor framework)
         softnet # VM networking for tart
-        orchard # VM orchestrator for macOS clusters
       ]
     )
     ++ lib.optionals pkgs.stdenv.isLinux [ pkgs.nerdctl ];
