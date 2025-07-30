@@ -28,6 +28,7 @@ pkgs:
   llvm-vs-code-extensions.vscode-clangd
   # markis.code-coverage # FIXME
   mkhl.direnv
+  ms-kubernetes-tools.vscode-kubernetes-tools
   ms-vscode-remote.remote-ssh
   ms-vscode-remote.remote-containers
   ms-vscode.hexeditor
