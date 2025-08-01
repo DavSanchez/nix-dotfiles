@@ -62,15 +62,16 @@
         devShells = {
           default = pkgs.mkShell {
             inherit (self.checks.${system}.pre-commit-check) shellHook;
-            buildInputs =
-              [ rustPackages.toolchain ]
-              ++ (
-                with pkgs;
-                lib.optionals stdenv.isDarwin [
-                  libiconv
-                  darwin.apple_sdk.frameworks.Security
-                ]
-              );
+            buildInputs = [
+              rustPackages.toolchain
+            ]
+            ++ (
+              with pkgs;
+              lib.optionals stdenv.isDarwin [
+                libiconv
+                darwin.apple_sdk.frameworks.Security
+              ]
+            );
           };
         };
 
