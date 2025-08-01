@@ -41,6 +41,7 @@ pkgs: {
   "git.autofetch" = true;
   "git.blame.editorDecoration.enabled" = true;
   "git.defaultBranchName" = "master";
+  "github.copilot.nextEditSuggestions.enabled" = true;
   "haskell.plugin.semanticTokens.globalOn" = true;
   "haskell.manageHLS" = "PATH";
   "nix.enableLanguageServer" = true;
@@ -61,8 +62,8 @@ pkgs: {
   "terminal.integrated.fontLigatures.enabled" = true;
   "terminal.integrated.scrollback" = 5000;
   "terminal.integrated.shellIntegration.enabled" = true;
-  "vim.enableNeovim" = true; # programs.neovim.enable;
-  "vim.neovimUseConfigFile" = true; # programs.neovim.enable;
+  # "vim.enableNeovim" = true; # programs.neovim.enable;
+  # "vim.neovimUseConfigFile" = true; # programs.neovim.enable;
   "window.commandCenter" = true;
   # Catppuccin recommended settings
   # Others are delegated to the catppuccin flake
