@@ -32,6 +32,7 @@ in
       # kompose
       stern
       kubeshark
+      tilt
 
       # ansible
       # vagrant
