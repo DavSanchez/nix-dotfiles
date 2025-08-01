@@ -7,7 +7,7 @@
 {
   programs.zsh = {
     enable = true;
-    dotDir = ".config/zsh";
+    dotDir = builtins.toString (lib.path.append (/. + config.xdg.configHome) "zsh");
     enableCompletion = true;
     defaultKeymap = "emacs";
     autosuggestion.enable = true;
@@ -17,48 +17,47 @@
     history.extended = true;
     oh-my-zsh = {
       enable = false;
-      plugins =
-        [
-          "aws"
-          "cp"
-          "docker"
-          "docker-compose"
-          # "emacs"
-          "gh"
-          "git"
-          "git-auto-fetch"
-          "git-extras"
-          "gitfast"
-          "github"
-          "gitignore"
-          "git-lfs"
-          "golang"
-          "helm"
-          "history"
-          # "history-substring-search" # Using fzf instead
-          "kops"
-          "kubectl"
-          "minikube"
-          "mix"
-          "nmap"
-          # "nomad"
-          "pass"
-          "rust"
-          # "ssh-agent"
-          "terraform"
-          "tmux"
-          "torrent"
-          "transfer"
-          "urltools"
-          "vi-mode"
-          "vscode"
-          "web-search"
-        ]
-        ++ lib.optionals pkgs.stdenv.isDarwin [
-          "brew"
-          "macos"
-          "xcode"
-        ];
+      plugins = [
+        "aws"
+        "cp"
+        "docker"
+        "docker-compose"
+        # "emacs"
+        "gh"
+        "git"
+        "git-auto-fetch"
+        "git-extras"
+        "gitfast"
+        "github"
+        "gitignore"
+        "git-lfs"
+        "golang"
+        "helm"
+        "history"
+        # "history-substring-search" # Using fzf instead
+        "kops"
+        "kubectl"
+        "minikube"
+        "mix"
+        "nmap"
+        # "nomad"
+        "pass"
+        "rust"
+        # "ssh-agent"
+        "terraform"
+        "tmux"
+        "torrent"
+        "transfer"
+        "urltools"
+        "vi-mode"
+        "vscode"
+        "web-search"
+      ]
+      ++ lib.optionals pkgs.stdenv.isDarwin [
+        "brew"
+        "macos"
+        "xcode"
+      ];
     };
 
     prezto = {
@@ -80,7 +79,8 @@
         "syntax-highlighting"
         "history-substring-search"
         "autosuggestions"
-      ] ++ lib.optionals pkgs.stdenv.isDarwin [ "osx" ];
+      ]
+      ++ lib.optionals pkgs.stdenv.isDarwin [ "osx" ];
       syntaxHighlighting = {
         highlighters = [
           "main"
