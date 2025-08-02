@@ -67,7 +67,7 @@
       packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
 
       # Formatter for the nix files, available through 'nix fmt'
-      formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt-rfc-style);
+      formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt-tree);
       # Your custom packages and modifications, exported as overlays
       overlays = import ./overlays { inherit inputs; };
       # Reusable nixos modules you might want to export

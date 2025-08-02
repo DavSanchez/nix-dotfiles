@@ -20,15 +20,14 @@
 
     includes = [ { path = "~/.config/git/localconf"; } ];
 
-    ignores =
-      [
-        ".vscode/"
-        "**/*.davs*/" # Put not-to-commit stuff in this directory
-        "*.local"
-      ]
-      ++ lib.optionals pkgs.stdenv.isDarwin [
-        ".DS_Store"
-      ];
+    ignores = [
+      ".vscode/"
+      "**/*.davs*/" # Put not-to-commit stuff in this directory
+      "*.local"
+    ]
+    ++ lib.optionals pkgs.stdenv.isDarwin [
+      ".DS_Store"
+    ];
 
     delta = {
       enable = false;

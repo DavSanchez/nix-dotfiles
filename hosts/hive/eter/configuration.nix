@@ -63,18 +63,17 @@
     # Required for ZFS
     hostId = "bfbc2f21";
     hostName = name;
-    firewall.allowedTCPPorts =
-      [
-        80
-      ]
-      ++ lib.optionals config.services.nfs.server.enable [
-        111
-        2049
-        4000
-        4001
-        4002
-        20048
-      ];
+    firewall.allowedTCPPorts = [
+      80
+    ]
+    ++ lib.optionals config.services.nfs.server.enable [
+      111
+      2049
+      4000
+      4001
+      4002
+      20048
+    ];
     firewall.allowedUDPPorts = lib.optionals config.services.nfs.server.enable [
       111
       2049

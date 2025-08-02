@@ -46,7 +46,7 @@
     nh = {
       enable = true;
       clean.enable = true;
-      flake = lib.path.append (/. + config.home.homeDirectory) ".dotfiles";
+      flake = builtins.toString (lib.path.append (/. + config.home.homeDirectory) ".dotfiles");
     };
   };
 }
