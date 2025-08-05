@@ -10,6 +10,8 @@
 
     # Download content from the internet
     aria
+
+    poppler-utils # Work with PDFs
   ];
 
   programs = {
