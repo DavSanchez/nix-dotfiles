@@ -37,6 +37,7 @@ pkgs:
   mvllow.rose-pine
   redhat.vscode-yaml
   rust-lang.rust-analyzer
+  skellock.just
   tamasfe.even-better-toml
   thenuprojectcontributors.vscode-nushell-lang
   timonwong.shellcheck

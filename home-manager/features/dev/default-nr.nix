@@ -19,6 +19,8 @@
 
       ## Other
       gnumake
+      just
+      just-lsp
       # protobuf
 
       zig
