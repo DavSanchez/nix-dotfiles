@@ -11,7 +11,9 @@
     # Download content from the internet
     aria
 
-    poppler-utils # Work with PDFs
+    # Work with PDFs
+    poppler-utils
+    exiftool
   ];
 
   programs = {
