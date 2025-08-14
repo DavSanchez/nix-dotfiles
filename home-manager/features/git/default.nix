@@ -24,6 +24,7 @@
       ".vscode/"
       "**/*.davs*/" # Put not-to-commit stuff in this directory
       "*.local"
+      ".envrc"
     ]
     ++ lib.optionals pkgs.stdenv.isDarwin [
       ".DS_Store"
@@ -125,7 +126,7 @@
     enable = true;
     settings = {
       user = {
-        email = "davidslt+jujutsu@pm.me";
+        email = "davidslt+jj@pm.me";
         name = "David Sánchez";
       };
     };
