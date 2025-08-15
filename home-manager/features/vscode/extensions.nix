@@ -35,6 +35,7 @@ pkgs:
   # ms-vscode.makefile-tools
   ms-vsliveshare.vsliveshare
   mvllow.rose-pine
+  nefrob.vscode-just-syntax
   redhat.vscode-yaml
   rust-lang.rust-analyzer
   skellock.just

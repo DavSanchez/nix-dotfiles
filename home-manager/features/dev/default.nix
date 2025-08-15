@@ -26,6 +26,9 @@
 
       zig
       zls
+
+      # A command runner
+      just
     ])
     ++ lib.optionals pkgs.stdenv.isLinux [ pkgs.rr ];
 }
