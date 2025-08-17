@@ -18,7 +18,6 @@ rustPlatform.buildRustPackage rec {
     hash = "sha256-SSKAueJbDhziEwM6VcMKgvgdNdZWCXVJUj0P4EQtiKs=";
   };
 
-  useFetchCargoVendor = true;
   cargoHash = "sha256-04jd5Oqm2Ec7rpj7x3FidRCtGJ10phEbOe0PsvgsS/Y=";
 
   nativeBuildInputs = [
@@ -32,17 +31,6 @@ rustPlatform.buildRustPackage rec {
     "--bins"
     "--examples"
   ];
-
-  checkInputs = lib.optionals stdenv.isDarwin (
-    with darwin.apple_sdk.frameworks;
-    [
-      Foundation
-      AppKit
-      Vision
-      AVFoundation
-      MetalKit
-    ]
-  );
 
   meta = {
     description = "Kontroll demonstates how to control the Keymapp API, making it easy to control your ZSA keyboard from the command line and scripts";

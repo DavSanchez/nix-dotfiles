@@ -1,7 +1,7 @@
 { inputs, ... }:
 {
   imports = [
-    inputs.nixvim.homeManagerModules.nixvim
+    inputs.nixvim.homeModules.nixvim
     inputs.catppuccin.homeModules.catppuccin
     inputs.mac-app-util.homeManagerModules.default
 

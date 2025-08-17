@@ -14,7 +14,7 @@
 
     # Or modules exported from other flakes (such as nix-colors):
     # inputs.nix-colors.homeManagerModules.default
-    inputs.nixvim.homeManagerModules.nixvim
+    inputs.nixvim.homeModules.nixvim
     inputs.catppuccin.homeModules.catppuccin
     inputs.mac-app-util.homeManagerModules.default
 
