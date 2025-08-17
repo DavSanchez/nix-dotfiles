@@ -7,7 +7,7 @@ pkgs:
   bbenoist.nix
   # betterthantomorrow.calva
   # catppuccin.catppuccin-vsc # Delegated to catppuccin flake
-  catppuccin.catppuccin-vsc-icons
+  # catppuccin.catppuccin-vsc-icons # Delegated to catppuccin flake
   christian-kohler.path-intellisense
   davidanson.vscode-markdownlint
   dbaeumer.vscode-eslint
