@@ -141,6 +141,7 @@
     casks = [
       "adobe-acrobat-reader"
       "amethyst"
+      "anytype"
       "background-music"
       "bartender"
       "brave-browser"

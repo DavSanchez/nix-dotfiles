@@ -138,6 +138,7 @@
     casks = [
       "adobe-acrobat-reader"
       "amethyst"
+      "anytype"
       "background-music"
       "brave-browser"
       "crossover"
