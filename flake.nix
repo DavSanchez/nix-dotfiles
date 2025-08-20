@@ -38,6 +38,9 @@
 
     # Fix .app programs installed by Nix on Mac
     mac-app-util.url = "github:hraban/mac-app-util";
+
+    nix-rosetta-builder.url = "github:cpick/nix-rosetta-builder";
+    nix-rosetta-builder.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -98,10 +101,7 @@
           specialArgs = {
             inherit inputs;
           };
-          modules = [
-            ./hosts/darwin/sierpe.nix
-            # ./hosts/darwin-builder
-          ];
+          modules = [ ./hosts/darwin/sierpe.nix ];
         };
         solio = darwin.lib.darwinSystem {
           system = "aarch64-darwin";

@@ -18,6 +18,7 @@
     # inputs.hardware.nixosModules.common-ssd
 
     inputs.mac-app-util.darwinModules.default
+    inputs.nix-rosetta-builder.darwinModules.default
 
     # You can also split up your configuration and import pieces of it here:
     # ./users.nix
@@ -71,11 +72,14 @@
       };
     };
 
-    linux-builder = {
-      enable = true;
-      ephemeral = true;
-    };
+    # Uncomment if building nix-rosetta-builder for the first time
+    # linux-builder = {
+    #   enable = true;
+    #   ephemeral = true;
+    # };
   };
+
+  nix-rosetta-builder.onDemand = true;
 
   environment = {
     # List packages installed in system profile. To search by name, run:
