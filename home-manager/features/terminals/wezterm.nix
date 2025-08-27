@@ -3,8 +3,7 @@ _: {
 
   programs.wezterm = {
     enable = true;
-    enableBashIntegration = true;
-    enableZshIntegration = true;
+
     extraConfig = ''
       return {
         font_size = 14,

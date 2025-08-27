@@ -2,10 +2,7 @@ _: {
   programs = {
     yazi = {
       enable = true;
-      enableBashIntegration = true;
-      enableZshIntegration = true;
-      enableFishIntegration = true;
-      enableNushellIntegration = true;
+
       keymap = { };
       settings = { };
       theme = { };
@@ -13,10 +10,7 @@ _: {
 
     broot = {
       enable = true;
-      enableZshIntegration = true;
-      enableBashIntegration = true;
-      enableFishIntegration = true;
-      enableNushellIntegration = true;
+
       settings.verbs = [
         {
           invocation = "custom_panel_right";

@@ -18,10 +18,6 @@
 
     keychain = {
       enable = true;
-      enableBashIntegration = true;
-      enableZshIntegration = true;
-      enableFishIntegration = true;
-      enableNushellIntegration = true;
 
       keys = [
         "id_rsa"
@@ -33,10 +29,7 @@
   services.ssh-agent.enable = pkgs.stdenv.isLinux;
   services.gpg-agent = {
     enable = pkgs.stdenv.isLinux;
-    enableBashIntegration = true;
-    enableZshIntegration = true;
-    enableFishIntegration = true;
-    enableNushellIntegration = true;
+
     enableScDaemon = true;
     defaultCacheTtl = 14400;
     maxCacheTtl = 86400;

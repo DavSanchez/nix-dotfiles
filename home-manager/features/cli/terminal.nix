@@ -24,17 +24,12 @@
       git = true;
       icons = "auto";
       colors = "auto";
-      enableBashIntegration = true;
-      enableZshIntegration = true;
-      enableFishIntegration = true;
-      enableNushellIntegration = true;
+
     };
 
     fzf = {
       enable = true;
-      enableZshIntegration = true;
-      enableBashIntegration = true;
-      enableFishIntegration = true;
+
       changeDirWidgetCommand = "fd --type d";
       changeDirWidgetOptions = [ "--preview 'tree -C {} | head 200'" ];
       defaultCommand = "fd --type f";
@@ -48,7 +43,6 @@
         "--sort"
         "--exact"
       ];
-      tmux.enableShellIntegration = true;
       tmux.shellIntegrationOptions = [ "-d 40%" ];
     };
 
@@ -73,10 +67,7 @@
 
     zoxide = {
       enable = true;
-      enableZshIntegration = true;
-      enableBashIntegration = true;
-      enableFishIntegration = true;
-      enableNushellIntegration = true;
+
     };
 
     less.enable = true;
@@ -106,17 +97,12 @@
 
     navi = {
       enable = true;
-      enableZshIntegration = true;
-      enableBashIntegration = true;
-      enableFishIntegration = true;
+
     };
 
     atuin = {
       enable = true;
-      enableZshIntegration = true;
-      enableBashIntegration = true;
-      enableFishIntegration = true;
-      enableNushellIntegration = true;
+
       # settings = {
       #   inline_height = 40;
       # };
@@ -124,10 +110,7 @@
 
     carapace = {
       enable = true;
-      enableZshIntegration = true;
-      enableBashIntegration = true;
-      enableFishIntegration = true;
-      enableNushellIntegration = true;
+
     };
   };
 }

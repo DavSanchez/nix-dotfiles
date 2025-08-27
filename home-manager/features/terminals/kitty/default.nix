@@ -14,12 +14,6 @@
         background_opacity = "0.75";
         background_blur = "16";
       };
-
-      shellIntegration = {
-        enableBashIntegration = true;
-        enableZshIntegration = true;
-        enableFishIntegration = true;
-      };
     };
   };
 }

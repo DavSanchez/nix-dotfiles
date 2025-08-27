@@ -2,9 +2,7 @@
 {
   programs.zellij = {
     enable = true;
-    enableBashIntegration = false;
-    enableFishIntegration = false;
-    enableZshIntegration = false;
+
     settings = {
       ui.pane_frames.rounded_corners = true;
     }
