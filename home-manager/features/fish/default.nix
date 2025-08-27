@@ -23,6 +23,7 @@ in
     };
 
     interactiveShellInit = ''
+      ${lib.optionalString pkgs.stdenv.isDarwin "/opt/homebrew/bin/brew shellenv | source"}
       # https://fishshell.com/docs/current/interactive.html#vi-mode
       set -g fish_key_bindings fish_vi_key_bindings
 
