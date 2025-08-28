@@ -29,16 +29,10 @@
   ];
 
   programs = {
-    nix-index = {
-      enable = true;
+    nix-index.enable = true;
 
-    };
-
-    nix-your-shell = {
-      enable = true;
-
-    };
-
+    nix-your-shell.enable = true;
+    
     nh = {
       enable = true;
       clean.enable = true;
