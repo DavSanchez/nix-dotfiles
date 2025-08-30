@@ -29,11 +29,6 @@
     # extraEnv = ...;
     # extraLogin = ...;
 
-    shellAliases = lib.optionalAttrs pkgs.stdenv.isDarwin {
-      nu-open = "open";
-      open = "^open"; # ^ escapes the command and invokes the operating system one
-    };
-
     settings = {
       highlight_resolved_externals = true;
     };
