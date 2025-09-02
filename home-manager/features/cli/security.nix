@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   home.packages = with pkgs; [
     cotp
@@ -11,8 +11,26 @@
       # homedir = "${config.xdg.configHome}/gnupg";
     };
     ssh = {
-      enable = false; # Managed manually for now
-      # ...
+      enable = true;
+      enableDefaultConfig = false;
+      includes = [
+        "~/.lima/*/ssh.config" # Lima package (VMs)
+      ]
+      ++ lib.optionals pkgs.stdenv.isDarwin [
+        "~/.config/colima/ssh_config" # Colima package (containers)
+      ];
+
+      matchBlocks = {
+        "github.com" = {
+          addKeysToAgent = "yes";
+          identityFile = "~/.ssh/id_ed25519";
+        }
+        // lib.optionalAttrs pkgs.stdenv.isDarwin {
+          extraOptions = {
+            UseKeychain = "yes";
+          };
+        };
+      };
     };
     password-store.enable = true;
 
