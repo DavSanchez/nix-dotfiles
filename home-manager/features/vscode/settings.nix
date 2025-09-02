@@ -11,6 +11,7 @@ pkgs: {
       };
     };
   };
+  "debug.allowBreakpointsEverywhere" = true;
   "diffEditor.ignoreTrimWhitespace" = false;
   "editor.accessibilitySupport" = "off";
   "editor.bracketPairColorization.enabled" = true;
