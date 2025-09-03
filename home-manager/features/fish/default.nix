@@ -54,31 +54,45 @@ in
     loginShellInit = "";
 
     plugins =
-      map gen-plugin [
-        "grc" # grc Colourizer for some commands on Fish shell
-        "forgit" # Utility tool powered by fzf for using git interactively (adds abbrvs!)
-        "plugin-git" # Git plugin for fish (similar to oh-my-zsh git)
-        # "fzf-fish" # Augment your fish command line with fzf key bindings
-        "fifc" # Configurable fzf completions for fish shell
-        "done" # Automatically receive notifications when long processes finish
-        "colored-man-pages" # Fish shell plugin to colorize man pages
-        "bass" # Fish function making it easy to use utilities written for Bash in Fish shell
-        "foreign-env" # Foreign environment interface for Fish shell
-        "autopair" # Auto-complete matching pairs in the Fish command line
-        "clownfish" # Fish function to mock the behaviour of commands
-        # "async-prompt" # Make prompt asynchronous to improve the reactivity
-        "plugin-sudope" # Fish plugin to quickly put 'sudo' in your command
-        "fish-you-should-use" # Fish plugin that reminds you to use your aliases
-        "puffer" # Text Expansions for Fish
-      ]
+      map gen-plugin (
+        [
+          "grc" # grc Colourizer for some commands on Fish shell
+          "forgit" # Utility tool powered by fzf for using git interactively (adds abbrvs!)
+          "plugin-git" # Git plugin for fish (similar to oh-my-zsh git)
+          # "fzf-fish" # Augment your fish command line with fzf key bindings
+          "fifc" # Configurable fzf completions for fish shell
+          "done" # Automatically receive notifications when long processes finish
+          "colored-man-pages" # Fish shell plugin to colorize man pages
+          "bass" # Fish function making it easy to use utilities written for Bash in Fish shell
+          "foreign-env" # Foreign environment interface for Fish shell
+          "autopair" # Auto-complete matching pairs in the Fish command line
+          "clownfish" # Fish function to mock the behaviour of commands
+          # "async-prompt" # Make prompt asynchronous to improve the reactivity
+          "plugin-sudope" # Fish plugin to quickly put 'sudo' in your command
+          "fish-you-should-use" # Fish plugin that reminds you to use your aliases
+          "puffer" # Text Expansions for Fish
+        ]
+        ++ lib.optionals pkgs.stdenv.isDarwin [
+          "macos"
+        ]
+      )
       ++ [
+        # {
+        #   name = "fish-abbreviation-tips";
+        #   src = pkgs.fetchFromGitHub {
+        #     owner = "gazorby";
+        #     repo = "fish-abbreviation-tips";
+        #     rev = "v0.7.0";
+        #     sha256 = "sha256-F1t81VliD+v6WEWqj1c1ehFBXzqLyumx5vV46s/FZRU=";
+        #   };
+        # }
         {
-          name = "fish-abbreviation-tips";
+          name = "fish-utils-core";
           src = pkgs.fetchFromGitHub {
-            owner = "gazorby";
-            repo = "fish-abbreviation-tips";
-            rev = "v0.7.0";
-            sha256 = "sha256-F1t81VliD+v6WEWqj1c1ehFBXzqLyumx5vV46s/FZRU=";
+            owner = "halostatue";
+            repo = "fish-utils-core";
+            rev = "v3.2.0";
+            sha256 = "sha256-XHOuxw0vZLQEv3q0ZYa4ERnO/sTNMugZB/uy0Zu8hxU=";
           };
         }
       ];
