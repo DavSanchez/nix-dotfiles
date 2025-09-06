@@ -70,6 +70,7 @@ pkgs: {
   # Others are delegated to the catppuccin flake
   "workbench.iconTheme" = "catppuccin-mocha";
   # End Catppuccin settings
+  "workbench.editor.wrapTabs" = true;
   "workbench.editorAssociations" = {
     "*.pdf" = "latex-workshop-pdf-hook";
   };
