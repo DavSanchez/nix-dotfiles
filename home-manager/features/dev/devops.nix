@@ -35,7 +35,7 @@ in
       tilt
 
       # ansible
-      # vagrant
+      vagrant
       limaWithGuests
 
       ## Terraform
@@ -59,7 +59,7 @@ in
       # cirrus-cli # Related to tart/orchard
       process-compose
 
-      # orchard # VM orchestrator for macOS clusters
+      orchard # VM orchestrator for macOS clusters
     ])
     ++ lib.optionals pkgs.stdenv.isDarwin (
       with pkgs;
