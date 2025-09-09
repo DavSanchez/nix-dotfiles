@@ -1,16 +1,5 @@
 pkgs: {
   "breadcrumbs.enabled" = true;
-  "dance.modes" = {
-    "" = {
-      "hiddenSelectionsIndicatorsDecoration" = {
-        "after" = {
-          "color" = "$inputValidation.infoForeground";
-        };
-        "backgroundColor" = "$inputValidation.infoBackground";
-        "borderColor" = "$inputValidation.infoBorder";
-      };
-    };
-  };
   "debug.allowBreakpointsEverywhere" = true;
   "diffEditor.ignoreTrimWhitespace" = false;
   "editor.accessibilitySupport" = "off";
