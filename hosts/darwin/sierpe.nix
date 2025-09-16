@@ -205,20 +205,9 @@
 
   system.primaryUser = "david";
   system.defaults.dock.autohide = true;
-  system.defaults.dock.mru-spaces = false;
-  system.defaults.dock.expose-group-apps = false;
-  system.defaults.dock.orientation = "left";
-  # system.defaults.dock.showhidden = true;
   system.defaults.finder.AppleShowAllExtensions = true;
-  # system.defaults.finder.AppleShowAllFiles = true;
-  system.defaults.finder.ShowPathbar = true;
-  system.defaults.finder.ShowStatusBar = true;
   system.keyboard.enableKeyMapping = true;
   system.keyboard.remapCapsLockToEscape = true;
-  system.defaults.magicmouse.MouseButtonMode = "TwoButton";
-
-  # Make way for the sketchybar
-  system.defaults.NSGlobalDomain._HIHideMenuBar = config.services.sketchybar.enable;
 
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
