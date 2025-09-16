@@ -137,7 +137,7 @@
     taps = [ ];
     casks = [
       "adobe-acrobat-reader"
-      # "anytype"
+      "anytype"
       "background-music"
       "brave-browser"
       "crossover"
