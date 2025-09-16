@@ -140,10 +140,8 @@
     taps = [ ];
     casks = [
       "adobe-acrobat-reader"
-      "amethyst"
-      "anytype"
+      # "anytype"
       "background-music"
-      "bartender"
       "brave-browser"
       "crossover"
       "discord"
@@ -152,7 +150,6 @@
       "handbrake-app"
       "iina"
       "imhex"
-      "jordanbaird-ice"
       "keymapp"
       "krita"
       "libreoffice"
