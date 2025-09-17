@@ -103,9 +103,7 @@ in
 
     shellInit = '''';
 
-    shellInitLast = ''
-      ${lib.optionalString config.programs.starship.enable "enable_transience"}
-    '';
+    shellInitLast = '''';
   };
 
   # In fish, the contents of .config/fish/conf.d (e.g. plugins) get executed BEFORE config.fish
