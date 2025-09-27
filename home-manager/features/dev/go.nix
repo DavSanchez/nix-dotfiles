@@ -1,8 +1,13 @@
-{ pkgs, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 {
   programs.go = {
     enable = true;
-    env.GOPATH = ".go";
+    env.GOPATH = builtins.toString (lib.path.append (/. + config.home.homeDirectory) ".go");
   };
 
   home.packages = with pkgs; [
