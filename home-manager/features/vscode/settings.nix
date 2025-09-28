@@ -63,4 +63,10 @@ pkgs: {
   "workbench.editorAssociations" = {
     "*.pdf" = "latex-workshop-pdf-hook";
   };
+  "[dockercompose]" = {
+    "editor.insertSpaces" = true;
+    "editor.tabSize" = 2;
+    "editor.autoIndent" = "advanced";
+    "editor.defaultFormatter" = "redhat.vscode-yaml";
+  };
 }
