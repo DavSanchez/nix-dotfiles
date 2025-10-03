@@ -69,4 +69,7 @@ pkgs: {
     "editor.autoIndent" = "advanced";
     "editor.defaultFormatter" = "redhat.vscode-yaml";
   };
+  "[github-actions-workflow]" = {
+    "editor.defaultFormatter" = "redhat.vscode-yaml";
+  };
 }
