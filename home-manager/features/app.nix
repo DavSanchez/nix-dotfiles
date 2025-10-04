@@ -5,7 +5,7 @@
       sniffnet
       transmission_4
       # zotero
-      mtr-gui
+      # mtr-gui # Already using mtr
       czkawka # Multi functional app to find duplicates, empty folders, similar images etc
       zathura
       imhex
