@@ -3,7 +3,6 @@
 {
   pkgs,
   lib,
-  config,
   inputs,
   ...
 }:
@@ -141,12 +140,9 @@
       "background-music"
       "brave-browser"
       "crossover"
-      "discord"
       "disk-inventory-x"
       "gqrx"
       "handbrake-app"
-      "iina"
-      "imhex"
       "keymapp"
       "krita"
       "little-snitch"
@@ -164,7 +160,6 @@
       "stats"
       "steam"
       "synthesia"
-      "transmission"
       "virtualbox" # VMs
       "vlc"
       "whatsapp"
