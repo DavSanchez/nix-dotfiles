@@ -2,21 +2,34 @@
 {
   home.packages =
     (with pkgs; [
-      # sniffnet
-      # handbrake
-      # logseq
-      # gqrx
-      # vlc
-      # transmission
-      # yacreader
+      sniffnet
+      transmission_4
       # zotero
-      # sonic-pi
-      # mtr-gui
+      mtr-gui
       czkawka # Multi functional app to find duplicates, empty folders, similar images etc
       zathura
+      imhex
+      discord
 
-      # anytype # P2P note-taking app
     ])
-    ++ lib.optionals pkgs.stdenv.isDarwin [ pkgs.utm ]
-    ++ lib.optionals pkgs.stdenv.isLinux [ pkgs.imhex ];
+    ++ lib.optionals pkgs.stdenv.isDarwin (
+      with pkgs;
+      [
+        utm
+        chatgpt
+        iina
+      ]
+    )
+    ++ lib.optionals pkgs.stdenv.isLinux (
+      with pkgs;
+      [
+        handbrake
+        gqrx
+        vlc
+        sonic-pi
+        # logseq
+        # anytype # P2P note-taking app
+        # yacreader
+      ]
+    );
 }
