@@ -46,7 +46,6 @@
 
     # Darwin specifics
     # ./features/darwin.nix
-    # ./darwin/colima.nix
   ];
 
   nixpkgs = {
