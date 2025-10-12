@@ -93,8 +93,6 @@
     EDITOR = "hx";
   };
 
-  xdg.configFile."amethyst/amethyst.yml".source = ./darwin/amethyst.yml;
-
   catppuccin.enable = true;
   catppuccin.flavor = "mocha";
 
