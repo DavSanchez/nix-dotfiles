@@ -56,12 +56,12 @@
       #                 Monitor pattern is the same as for 'workspace-to-monitor-force-assignment'.
       #                 See:
       #                 https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
-      gaps.inner.horizontal = 0;
-      gaps.inner.vertical = 0;
-      gaps.outer.left = 0;
-      gaps.outer.bottom = 0;
-      gaps.outer.top = 0;
-      gaps.outer.right = 0;
+      gaps.inner.horizontal = 8;
+      gaps.inner.vertical = 8;
+      gaps.outer.left = 8;
+      gaps.outer.bottom = 8;
+      gaps.outer.top = 8;
+      gaps.outer.right = 8;
 
       # 'main' binding mode declaration
       # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -96,90 +96,90 @@
         # '''
 
         # See: https://nikitabobko.github.io/AeroSpace/commands#layout
-        alt-slash = "layout tiles horizontal vertical";
-        alt-comma = "layout accordion horizontal vertical";
+        ctrl-period = "layout tiles horizontal vertical";
+        ctrl-comma = "layout accordion horizontal vertical";
 
         # See: https://nikitabobko.github.io/AeroSpace/commands#focus
-        alt-h = "focus left";
-        alt-j = "focus down";
-        alt-k = "focus up";
-        alt-l = "focus right";
+        alt-shift-h = "focus left";
+        alt-shift-j = "focus down";
+        alt-shift-k = "focus up";
+        alt-shift-l = "focus right";
 
         # See: https://nikitabobko.github.io/AeroSpace/commands#move
-        alt-shift-h = "move left";
-        alt-shift-j = "move down";
-        alt-shift-k = "move up";
-        alt-shift-l = "move right";
+        alt-ctrl-shift-h = "move left";
+        alt-ctrl-shift-j = "move down";
+        alt-ctrl-shift-k = "move up";
+        alt-ctrl-shift-l = "move right";
 
         # See: https://nikitabobko.github.io/AeroSpace/commands#resize
-        alt-minus = "resize smart -50";
-        alt-equal = "resize smart +50";
+        alt-ctrl-shift-comma = "resize smart -50";
+        alt-ctrl-shift-period = "resize smart +50";
 
         # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
-        alt-1 = "workspace 1";
-        alt-2 = "workspace 2";
-        alt-3 = "workspace 3";
-        alt-4 = "workspace 4";
-        alt-5 = "workspace 5";
-        alt-6 = "workspace 6";
-        alt-7 = "workspace 7";
-        alt-8 = "workspace 8";
-        alt-9 = "workspace 9";
-        alt-a = "workspace A"; # In your config, you can drop workspace bindings that you don't need
-        alt-b = "workspace B";
-        alt-c = "workspace C";
-        alt-d = "workspace D";
-        alt-e = "workspace E";
-        alt-f = "workspace F";
-        alt-g = "workspace G";
-        alt-i = "workspace I";
-        alt-m = "workspace M";
-        alt-n = "workspace N";
-        alt-o = "workspace O";
-        alt-p = "workspace P";
-        alt-q = "workspace Q";
-        alt-r = "workspace R";
-        alt-s = "workspace S";
-        alt-t = "workspace T";
-        alt-u = "workspace U";
-        alt-v = "workspace V";
-        alt-w = "workspace W";
-        alt-x = "workspace X";
-        alt-y = "workspace Y";
-        alt-z = "workspace Z";
+        alt-shift-1 = "workspace 1";
+        alt-shift-2 = "workspace 2";
+        alt-shift-3 = "workspace 3";
+        alt-shift-4 = "workspace 4";
+        alt-shift-5 = "workspace 5";
+        alt-shift-6 = "workspace 6";
+        alt-shift-7 = "workspace 7";
+        alt-shift-8 = "workspace 8";
+        alt-shift-9 = "workspace 9";
+        alt-shift-a = "workspace A"; # In your config, you can drop workspace bindings that you don't need
+        alt-shift-b = "workspace B";
+        alt-shift-c = "workspace C";
+        alt-shift-d = "workspace D";
+        alt-shift-e = "workspace E";
+        alt-shift-f = "workspace F";
+        alt-shift-g = "workspace G";
+        alt-shift-i = "workspace I";
+        alt-shift-m = "workspace M";
+        alt-shift-n = "workspace N";
+        alt-shift-o = "workspace O";
+        alt-shift-p = "workspace P";
+        alt-shift-q = "workspace Q";
+        alt-shift-r = "workspace R";
+        alt-shift-s = "workspace S";
+        alt-shift-t = "workspace T";
+        alt-shift-u = "workspace U";
+        alt-shift-v = "workspace V";
+        alt-shift-w = "workspace W";
+        alt-shift-x = "workspace X";
+        alt-shift-y = "workspace Y";
+        alt-shift-z = "workspace Z";
 
         # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
-        alt-shift-1 = "move-node-to-workspace 1";
-        alt-shift-2 = "move-node-to-workspace 2";
-        alt-shift-3 = "move-node-to-workspace 3";
-        alt-shift-4 = "move-node-to-workspace 4";
-        alt-shift-5 = "move-node-to-workspace 5";
-        alt-shift-6 = "move-node-to-workspace 6";
-        alt-shift-7 = "move-node-to-workspace 7";
-        alt-shift-8 = "move-node-to-workspace 8";
-        alt-shift-9 = "move-node-to-workspace 9";
-        alt-shift-a = "move-node-to-workspace A";
-        alt-shift-b = "move-node-to-workspace B";
-        alt-shift-c = "move-node-to-workspace C";
-        alt-shift-d = "move-node-to-workspace D";
-        alt-shift-e = "move-node-to-workspace E";
-        alt-shift-f = "move-node-to-workspace F";
-        alt-shift-g = "move-node-to-workspace G";
-        alt-shift-i = "move-node-to-workspace I";
-        alt-shift-m = "move-node-to-workspace M";
-        alt-shift-n = "move-node-to-workspace N";
-        alt-shift-o = "move-node-to-workspace O";
-        alt-shift-p = "move-node-to-workspace P";
-        alt-shift-q = "move-node-to-workspace Q";
-        alt-shift-r = "move-node-to-workspace R";
-        alt-shift-s = "move-node-to-workspace S";
-        alt-shift-t = "move-node-to-workspace T";
-        alt-shift-u = "move-node-to-workspace U";
-        alt-shift-v = "move-node-to-workspace V";
-        alt-shift-w = "move-node-to-workspace W";
-        alt-shift-x = "move-node-to-workspace X";
-        alt-shift-y = "move-node-to-workspace Y";
-        alt-shift-z = "move-node-to-workspace Z";
+        alt-ctrl-shift-1 = "move-node-to-workspace 1";
+        alt-ctrl-shift-2 = "move-node-to-workspace 2";
+        alt-ctrl-shift-3 = "move-node-to-workspace 3";
+        alt-ctrl-shift-4 = "move-node-to-workspace 4";
+        alt-ctrl-shift-5 = "move-node-to-workspace 5";
+        alt-ctrl-shift-6 = "move-node-to-workspace 6";
+        alt-ctrl-shift-7 = "move-node-to-workspace 7";
+        alt-ctrl-shift-8 = "move-node-to-workspace 8";
+        alt-ctrl-shift-9 = "move-node-to-workspace 9";
+        alt-ctrl-shift-a = "move-node-to-workspace A";
+        alt-ctrl-shift-b = "move-node-to-workspace B";
+        alt-ctrl-shift-c = "move-node-to-workspace C";
+        alt-ctrl-shift-d = "move-node-to-workspace D";
+        alt-ctrl-shift-e = "move-node-to-workspace E";
+        alt-ctrl-shift-f = "move-node-to-workspace F";
+        alt-ctrl-shift-g = "move-node-to-workspace G";
+        alt-ctrl-shift-i = "move-node-to-workspace I";
+        alt-ctrl-shift-m = "move-node-to-workspace M";
+        alt-ctrl-shift-n = "move-node-to-workspace N";
+        alt-ctrl-shift-o = "move-node-to-workspace O";
+        alt-ctrl-shift-p = "move-node-to-workspace P";
+        alt-ctrl-shift-q = "move-node-to-workspace Q";
+        alt-ctrl-shift-r = "move-node-to-workspace R";
+        alt-ctrl-shift-s = "move-node-to-workspace S";
+        alt-ctrl-shift-t = "move-node-to-workspace T";
+        alt-ctrl-shift-u = "move-node-to-workspace U";
+        alt-ctrl-shift-v = "move-node-to-workspace V";
+        alt-ctrl-shift-w = "move-node-to-workspace W";
+        alt-ctrl-shift-x = "move-node-to-workspace X";
+        alt-ctrl-shift-y = "move-node-to-workspace Y";
+        alt-ctrl-shift-z = "move-node-to-workspace Z";
 
         # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
         alt-tab = "workspace-back-and-forth";
@@ -187,7 +187,9 @@
         alt-shift-tab = "move-workspace-to-monitor --wrap-around next";
 
         # See: https://nikitabobko.github.io/AeroSpace/commands#mode
-        alt-shift-semicolon = "mode service";
+        alt-ctrl-shift-quote = "mode service";
+
+        alt-ctrl-f = "fullscreen";
       };
       # 'service' binding mode declaration.
       # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -212,19 +214,19 @@
         # sticky is not yet supported https://github.com/nikitabobko/AeroSpace/issues/2
         #s = ['layout sticky tiling', 'mode main']
 
-        alt-shift-h = [
+        alt-ctrl-shift-h = [
           "join-with left"
           "mode main"
         ];
-        alt-shift-j = [
+        alt-ctrl-shift-j = [
           "join-with down"
           "mode main"
         ];
-        alt-shift-k = [
+        alt-ctrl-shift-k = [
           "join-with up"
           "mode main"
         ];
-        alt-shift-l = [
+        alt-ctrl-shift-l = [
           "join-with right"
           "mode main"
         ];
