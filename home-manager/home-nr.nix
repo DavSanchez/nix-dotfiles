@@ -27,6 +27,9 @@
     ./features/fonts.nix
     ./features/helix.nix
     ./features/tmux.nix
+
+    # Darwin specifics
+    ./features/darwin/aerospace.nix
   ];
 
   nixpkgs = {
