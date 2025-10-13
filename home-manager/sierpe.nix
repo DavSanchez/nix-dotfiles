@@ -44,7 +44,6 @@
 
     # Darwin specifics
     # ./features/darwin.nix
-    # ./darwin/colima.nix
   ];
 
   nixpkgs = {
@@ -93,8 +92,6 @@
     DOTFILES = "$HOME/.dotfiles";
     EDITOR = "hx";
   };
-
-  xdg.configFile."amethyst/amethyst.yml".source = ./darwin/amethyst.yml;
 
   catppuccin.enable = true;
   catppuccin.flavor = "mocha";
