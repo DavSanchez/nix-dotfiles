@@ -1,8 +1,8 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
-    idris2 # FP with dependent types, compiles to C
-    idris2Packages.idris2Lsp # Langserver
+    # idris2 # FP with dependent types, compiles to C
+    # idris2Packages.idris2Lsp # Langserver
 
     agda # FP with dependent types, compiles to Haskell
     # haskellPackages.agda-language-server # Langserver (BROKEN)

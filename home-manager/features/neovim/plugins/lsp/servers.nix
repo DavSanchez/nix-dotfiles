@@ -18,7 +18,7 @@
     installGhc = false;
   };
   html.enable = true;
-  idris2_lsp.enable = true;
+  idris2_lsp.enable = false;
   jsonls.enable = true;
   marksman.enable = true;
   nickel_ls.enable = true;
