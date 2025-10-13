@@ -18,6 +18,7 @@
         utm
         chatgpt
         iina
+        # ice-bar # Waiting for Tahoe compat
       ]
     )
     ++ lib.optionals pkgs.stdenv.isLinux (
