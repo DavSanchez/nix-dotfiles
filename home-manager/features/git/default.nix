@@ -48,9 +48,11 @@
 
     difftastic = {
       enable = false;
-      background = "dark";
-      color = "auto";
-      display = "side-by-side";
+      options = {
+        background = "dark";
+        color = "auto";
+        display = "side-by-side";
+      };
     };
 
     diff-so-fancy = {
