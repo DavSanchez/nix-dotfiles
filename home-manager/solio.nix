@@ -45,7 +45,7 @@
     ./features/cava.nix
 
     # Darwin specifics
-    # ./features/darwin.nix
+    ./features/darwin/aerospace.nix
   ];
 
   nixpkgs = {
