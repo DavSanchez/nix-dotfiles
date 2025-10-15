@@ -117,7 +117,7 @@
     settings = { };
   };
 
-  programs.gitui.enable = true;
+  programs.gitui.enable = false;
 
   # Git-compatible DVCS that is both simple and powerful
   programs.jujutsu = {
