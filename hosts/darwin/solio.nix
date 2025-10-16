@@ -2,7 +2,6 @@
 # Use this to configure your system environment (it replaces ~/.nixpkgs/darwin-configuration.nix)
 {
   pkgs,
-  lib,
   inputs,
   ...
 }:
@@ -55,10 +54,7 @@
       ]; # For groups prepend @: "@admin"
       # Enable flakes and new 'nix' command
       experimental-features = "nix-command flakes";
-      extra-platforms = lib.optionalString (
-        pkgs.system == "aarch64-darwin"
-      ) "x86_64-darwin aarch64-darwin";
-
+      extra-platforms = "x86_64-darwin aarch64-darwin";
       # sandbox = true;
     };
 

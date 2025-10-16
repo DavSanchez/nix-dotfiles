@@ -33,7 +33,6 @@
       experimental-features = "nix-command flakes";
       auto-optimise-store = true;
     };
-    package = pkgs.nixVersions.nix_2_23;
   };
 
   # Bootloader.
