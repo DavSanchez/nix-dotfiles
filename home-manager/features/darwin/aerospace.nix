@@ -96,8 +96,8 @@
         # '''
 
         # See: https://nikitabobko.github.io/AeroSpace/commands#layout
-        ctrl-period = "layout tiles horizontal vertical";
-        ctrl-comma = "layout accordion horizontal vertical";
+        alt-ctrl-period = "layout tiles horizontal vertical";
+        alt-ctrl-comma = "layout accordion horizontal vertical";
 
         # See: https://nikitabobko.github.io/AeroSpace/commands#focus
         alt-shift-h = "focus left";
