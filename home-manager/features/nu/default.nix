@@ -44,7 +44,7 @@
         polars
         # semver # not available for macOS
         formats
-        highlight
+        # highlight # broken
       ]
       ++ lib.optionals pkgs.stdenv.isLinux [ dbus ];
   };
