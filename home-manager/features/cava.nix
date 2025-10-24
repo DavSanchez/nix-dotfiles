@@ -1,7 +1,7 @@
 { lib, pkgs, ... }:
 {
   programs.cava = {
-    enable = true;
+    enable = false;
     settings =
       { }
       // lib.optionalAttrs pkgs.stdenv.isDarwin {
