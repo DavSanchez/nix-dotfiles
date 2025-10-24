@@ -4,83 +4,89 @@
     bfg-repo-cleaner
     git-quick-stats
     git-crypt
-
-    # sapling
   ];
-  programs.git = {
-    enable = true;
 
-    # Move to localconf? Currently specifying on separate files
-    # signing = {
-    #   key = "...";
-    #   signByDefault = true;
-    # };
+  programs = {
+    git = {
+      enable = true;
 
-    includes = [ { path = "~/.config/git/localconf"; } ];
+      # Move to localconf? Currently specifying on separate files
+      # signing = {
+      #   key = "...";
+      #   signByDefault = true;
+      # };
 
-    ignores = [
-      ".vscode/"
-      "**/*.davs*/" # Put not-to-commit stuff in this directory
-      "*.local"
-      ".envrc"
-    ]
-    ++ lib.optionals pkgs.stdenv.isDarwin [
-      ".DS_Store"
-    ];
+      includes = [ { path = "~/.config/git/localconf"; } ];
 
-    settings = {
-      user = {
-        name = "David Sánchez";
-        email = "davidslt+git@pm.me";
-      };
+      ignores = [
+        ".vscode/"
+        "**/*.davs*/" # Put not-to-commit stuff in this directory
+        "*.local"
+        ".envrc"
+      ]
+      ++ lib.optionals pkgs.stdenv.isDarwin [
+        ".DS_Store"
+      ];
 
-      alias = {
-        pushall = "!git remote | xargs -L1 git push --all";
-        graph = "log --decorate --oneline --graph";
-        add-nowhitespace = "!git diff -U0 -w --no-color | git apply --cached --ignore-whitespace --unidiff-zero -";
-      };
+      settings = {
+        user = {
+          name = "David Sánchez";
+          email = "davidslt+git@pm.me";
+        };
 
-      init.defaultBranch = "master";
-      branch.sort = "-committerdate";
-      merge.conflictStyle = "zdiff3";
+        alias = {
+          pushall = "!git remote | xargs -L1 git push --all";
+          graph = "log --decorate --oneline --graph";
+          add-nowhitespace = "!git diff -U0 -w --no-color | git apply --cached --ignore-whitespace --unidiff-zero -";
+        };
 
-      pull = {
-        ff = "only";
-        rebase = true;
-      };
-    };
-  };
+        init.defaultBranch = "master";
+        branch.sort = "-committerdate";
+        merge.conflictStyle = "zdiff3";
 
-  programs.gh = {
-    enable = true;
-    gitCredentialHelper.enable = true;
-    settings = { };
-  };
-
-  programs.gitui.enable = false;
-
-  # Git-compatible DVCS that is both simple and powerful
-  programs.jujutsu = {
-    enable = true;
-    settings = {
-      user = {
-        email = "davidslt+jj@pm.me";
-        name = "David Sánchez";
+        pull = {
+          ff = "only";
+          rebase = true;
+        };
       };
     };
-  };
-  programs.jjui.enable = true;
 
-  # programs.gpg.enable = pkgs.stdenv.isLinux;
-  # services.gpg-agent.enable = pkgs.stdenv.isLinux;
+    gh = {
+      enable = true;
+      gitCredentialHelper.enable = true;
+      settings = { };
+    };
 
-  # diffs
+    gitui.enable = false;
 
-  programs.delta = {
-    enable = true;
-    enableGitIntegration = true;
-    options = {
-      navigate = true;
+    # Git-compatible DVCS that is both simple and powerful
+    jujutsu = {
+      enable = true;
+      settings = {
+        user = {
+          email = "davidslt+jj@pm.me";
+          name = "David Sánchez";
+        };
+      };
+    };
+    jjui.enable = true;
+
+    # diffs
+
+    delta = {
+      enable = true;
+      enableGitIntegration = true;
+      options = {
+        navigate = true;
+      };
+    };
+
+    difftastic = {
+      enable = true;
+    };
+
+    git-cliff = {
+      enable = true;
     };
   };
 }
