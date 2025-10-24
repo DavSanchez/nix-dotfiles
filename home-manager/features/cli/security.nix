@@ -44,23 +44,16 @@
     };
   };
 
-  services.ssh-agent.enable = pkgs.stdenv.isLinux;
+  services.ssh-agent.enable = pkgs.stdenv.isLinux; # not available for darwin
   services.gpg-agent = {
-    enable = pkgs.stdenv.isLinux;
-
+    enable = true;
     enableScDaemon = true;
     defaultCacheTtl = 14400;
     maxCacheTtl = 86400;
-    pinentry.package = pkgs.pinentry-curses;
+    pinentry.package = if pkgs.stdenv.isDarwin then pkgs.pinentry_mac else pkgs.pinentry-tty;
     enableSshSupport = true;
     defaultCacheTtlSsh = 14400;
     maxCacheTtlSsh = 86400;
     sshKeys = null;
-  };
-  home.file.".gnupg/gpg-agent.conf" = {
-    enable = pkgs.stdenv.isDarwin;
-    text = ''
-      pinentry-program ${pkgs.pinentry_mac}/Applications/pinentry-mac.app/Contents/MacOS/pinentry-mac
-    '';
   };
 }
