@@ -16,7 +16,6 @@
     # inputs.nix-colors.homeManagerModules.default
     inputs.nixvim.homeModules.nixvim
     inputs.catppuccin.homeModules.catppuccin
-    inputs.mac-app-util.homeManagerModules.default
 
     # You can also split up your configuration and import pieces of it here:
     ./features/ai

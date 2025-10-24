@@ -3,7 +3,6 @@
   imports = [
     inputs.nixvim.homeModules.nixvim
     inputs.catppuccin.homeModules.catppuccin
-    inputs.mac-app-util.homeManagerModules.default
 
     ./features/ai
     ./features/aws

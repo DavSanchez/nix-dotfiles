@@ -35,9 +35,6 @@
 
     # Uniform colors across all apps?
     catppuccin.url = "github:catppuccin/nix";
-
-    # Fix .app programs installed by Nix on Mac
-    mac-app-util.url = "github:hraban/mac-app-util";
   };
 
   outputs =
