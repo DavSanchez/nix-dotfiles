@@ -10,8 +10,6 @@
     jo
     fq
     dasel
-    difftastic
-    delta
     graphviz
     grex
     binsider

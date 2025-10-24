@@ -59,7 +59,10 @@
     sshCAOS = "ssh -i ~/.ssh/caos-dev-arm.cer -o \"StrictHostKeyChecking no\"";
   };
 
-  home.sessionPath = [ "$HOME/.local/bin" "$HOME/.rd/bin"];
+  home.sessionPath = [
+    "$HOME/.local/bin"
+    "$HOME/.rd/bin"
+  ];
 
   programs.home-manager.enable = true;
   programs.git.enable = true;
