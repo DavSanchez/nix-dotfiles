@@ -3,6 +3,7 @@
 {
   pkgs,
   inputs,
+  config,
   ...
 }:
 {
@@ -42,6 +43,7 @@
       # Disable if you don't want unfree packages
       allowUnfree = true;
     };
+    hostPlatform = "aarch64-darwin";
   };
 
   nix = {
@@ -207,6 +209,9 @@
   system.defaults.finder.AppleShowAllExtensions = true;
   system.keyboard.enableKeyMapping = true;
   system.keyboard.remapCapsLockToEscape = true;
+
+  # Set Git commit hash for darwin-version.
+  system.configurationRevision = config.rev or config.dirtyRev or null;
 
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
