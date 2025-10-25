@@ -1,5 +1,17 @@
 pkgs: {
   "breadcrumbs.enabled" = true;
+  "dance.modes" = {
+    "normal" = {
+      "decorations" = {
+        "isWholeLine" = false;
+      };
+    };
+    "helix/normal" = {
+      "decorations" = {
+        "isWholeLine" = false;
+      };
+    };
+  };
   "debug.allowBreakpointsEverywhere" = true;
   "diffEditor.ignoreTrimWhitespace" = false;
   "editor.accessibilitySupport" = "off";
