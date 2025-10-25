@@ -107,6 +107,9 @@
           };
           modules = [ ./hosts/darwin/solio.nix ];
         };
+        ci = darwin.lib.darwinSystem {
+          modules = [ ./hosts/darwin/ci.nix ];
+        };
       };
 
       homeConfigurations = {
