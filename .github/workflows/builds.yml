@@ -37,10 +37,6 @@ jobs:
       - uses: cachix/install-nix-action@v31
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
-      - uses: cachix/cachix-action@v16
-        with:
-          name: davsanchez
-          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
       - name: Move files to be overwritten by nix-darwin installation
         run: |
@@ -52,6 +48,11 @@ jobs:
         run: >
           sudo nix --extra-experimental-features "nix-command flakes"
           run nix-darwin -- switch --flake ".#ci"
+
+      - uses: cachix/cachix-action@v16
+        with:
+          name: davsanchez
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
       - name: Home configs (solio)
         run: nix run home-manager -- build --flake ".#david@solio"
