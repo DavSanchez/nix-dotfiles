@@ -39,7 +39,7 @@ You might want to get rid of the configs and the programs that manage it, either
     sudo ln -s /nix/var/nix/profiles/default/etc/ssl/certs/ca-bundle.crt /etc/ssl/certs/ca-certificates.crt
     ```
 
-3. Uninstall `home-manager` via `nix run home-manager/master -- uninstall`.
+3. Uninstall `home-manager` via `nix --extra-experimental-features "nix-command flakes" run home-manager/master -- uninstall`.
 4. (Non-NixOS) Uninstall Nix altogether, following the [uninstallation instructions](https://nix.dev/manual/nix/2.25/installation/uninstall.html) in the Nix Reference Manual.
 
 The cool thing of Nix is that, any time you want to come back, you can get the exact same configs you last used (same program versions, everything) by repeating the installation commands above this section. Cool!
