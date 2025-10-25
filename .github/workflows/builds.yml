@@ -42,13 +42,16 @@ jobs:
           name: davsanchez
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
-      - name: Set up nix-darwin with linux-builder
+      - name: Move files to be overwritten by nix-darwin installation
         run: |
           sudo mv /etc/nix/nix.conf /etc/nix/nix.conf.before-nix-darwin
           sudo mv /etc/bashrc /etc/bashrc.before-nix-darwin
           sudo mv /etc/zshrc /etc/zshrc.before-nix-darwin
 
-          sudo nix run nix-darwin -- switch --flake ".#ci"
+      - name: Set up nix-darwin with linux-builder
+        run: >
+          sudo nix --extra-experimental-features "nix-command flakes"
+          run nix-darwin -- switch --flake ".#ci"
 
       - name: Home configs (solio)
         run: nix run home-manager -- build --flake ".#david@solio"
