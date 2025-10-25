@@ -8,7 +8,13 @@
 
   # Necessary for using flakes on this system.
   nix = {
-    settings.experimental-features = "nix-command flakes";
+    settings = {
+      experimental-features = "nix-command flakes";
+      trusted-users = [
+        "root"
+        "runner" # GitHub runner user
+      ];
+    };
     linux-builder = {
       enable = true;
       ephemeral = true;
