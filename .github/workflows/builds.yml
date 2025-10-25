@@ -41,8 +41,14 @@ jobs:
         with:
           name: davsanchez
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+
       - name: Set up nix-darwin with linux-builder
-        run: sudo nix run nix-darwin -- switch --flake ".#ci"
+        run: |
+          sudo mv /etc/nix/nix.conf /etc/nix/nix.conf.before-nix-darwin
+          sudo mv /etc/bashrc /etc/bashrc.before-nix-darwin
+          sudo mv /etc/zshrc /etc/zshrc.before-nix-darwin
+
+          sudo nix run nix-darwin -- switch --flake ".#ci"
 
       - name: Home configs (solio)
         run: nix run home-manager -- build --flake ".#david@solio"
