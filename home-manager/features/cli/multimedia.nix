@@ -14,9 +14,6 @@
     # Work with PDFs
     poppler-utils
     exiftool
-
-    transmission_4
-    rustmission
   ];
 
   programs = {
