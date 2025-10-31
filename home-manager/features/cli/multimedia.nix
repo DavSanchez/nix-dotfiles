@@ -9,7 +9,8 @@
     ffmpeg
 
     # Download content from the internet
-    aria
+    aria2
+    ariang
 
     # Work with PDFs
     poppler-utils
