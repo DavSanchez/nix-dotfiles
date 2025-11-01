@@ -54,6 +54,7 @@
 
     transmission = {
       enable = true;
+      package = pkgs.transmission_4;
       home = "/seclusium/zg/transmission";
       openPeerPorts = true;
       openRPCPort = true;
