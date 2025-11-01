@@ -4,7 +4,7 @@
     # Searching/Movement helpers and other replacements
     dua
     duf
-    du-dust
+    dust
     fd
     sd
     rm-improved
