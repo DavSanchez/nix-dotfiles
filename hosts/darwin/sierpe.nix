@@ -136,6 +136,7 @@
     taps = [ ];
     casks = [
       "adobe-acrobat-reader"
+      "affinity"
       "anytype"
       "background-music"
       "brave-browser"
