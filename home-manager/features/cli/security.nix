@@ -15,6 +15,7 @@
       enableDefaultConfig = false;
       includes = [
         "~/.lima/*/ssh.config" # Lima package (VMs)
+        "~/.ssh/dynamic_ssh_config"
       ]
       ++ lib.optionals pkgs.stdenv.isDarwin [
         "~/.config/colima/ssh_config" # Colima package (containers)
