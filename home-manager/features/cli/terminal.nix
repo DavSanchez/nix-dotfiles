@@ -59,7 +59,7 @@
       extraPackages = with pkgs.bat-extras; [
         prettybat
         batman
-        # batgrep # tests broken
+        batgrep
         batdiff
         batwatch
       ];
