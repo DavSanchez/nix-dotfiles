@@ -161,7 +161,6 @@
       "stats"
       "steam"
       "synthesia"
-      "transmission"
       "virtualbox" # VMs
       "vlc"
       "whatsapp"

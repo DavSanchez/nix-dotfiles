@@ -165,7 +165,6 @@
       "sonic-pi"
       "stats"
       "steam"
-      "transmission"
       "virtualbox" # VMs
       "vlc"
       "whatsapp"
