@@ -13,6 +13,7 @@
     graphviz
     grex
     binsider
+    magika
   ];
 
   programs.jq.enable = true;
