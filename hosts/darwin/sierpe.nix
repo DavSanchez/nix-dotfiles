@@ -174,7 +174,6 @@
     brews = [ ];
     masApps = {
       "Amphetamine" = 937984704;
-      "Ghostery Privacy Ad Blocker" = 6504861501;
       "iMovie" = 408981434;
       "Keynote" = 409183694;
       "Logic Pro" = 634148309;
@@ -187,6 +186,7 @@
       "reMarkable" = 1276493162;
       "Shazam" = 897118787;
       "The Unarchiver" = 425424353;
+      "uBlock Origin Lite" = 6745342698;
       "UTM" = 1538878817; # VMs (qemu)
       "Windows App" = 1295203466;
       "Xcode" = 497799835;
