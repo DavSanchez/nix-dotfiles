@@ -7,4 +7,6 @@ _: {
     custom-instructions = "";
     settings = { };
   };
+
+  programs.gemini-cli.enable = true;
 }
