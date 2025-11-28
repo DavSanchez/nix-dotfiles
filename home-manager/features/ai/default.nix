@@ -1,6 +1,6 @@
 _: {
   # Starting simple
-  services.ollama.enable = false;
+  services.ollama.enable = true;
 
   programs.codex = {
     enable = true;
