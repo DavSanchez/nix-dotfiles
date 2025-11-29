@@ -3,7 +3,7 @@
   # Starting simple
   services.ollama = {
     enable = true;
-    package = pkgs.stable-2505.ollama;
+    package = pkgs.stable.ollama;
   };
 
   programs.codex = {
