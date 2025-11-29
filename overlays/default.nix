@@ -7,7 +7,11 @@
   # When applied, the stable nixpkgs set (declared in the flake inputs) will
   # be accessible through 'pkgs.stable'
   stable-packages = final: _prev: {
-    stable = import inputs.nixpkgs-stable {
+    stable-2505 = import inputs.nixpkgs-25-05 {
+      system = final.system;
+      config.allowUnfree = true;
+    };
+    stable-2511 = import inputs.nixpkgs-25-11 {
       system = final.system;
       config.allowUnfree = true;
     };
