@@ -2,7 +2,7 @@
 {
   programs.aerospace = {
     enable = true;
-    userSettings = {
+    settings = {
       # Place a copy of this config to ~/.aerospace.toml
       # After that, you can edit ~/.aerospace.toml to your liking
 
