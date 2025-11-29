@@ -1,6 +1,10 @@
-_: {
+{ pkgs, ... }:
+{
   # Starting simple
-  services.ollama.enable = false;
+  services.ollama = {
+    enable = true;
+    package = pkgs.stable.ollama;
+  };
 
   programs.codex = {
     enable = true;

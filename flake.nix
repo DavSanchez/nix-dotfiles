@@ -7,8 +7,7 @@
 
     # You can access packages and modules from different nixpkgs revs
     # at the same time. Here's a working example:
-    nixpkgs-25-05.url = "github:nixos/nixpkgs/nixos-25.05";
-    nixpkgs-25-11.url = "github:nixos/nixpkgs/nixos-25.11";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
     # Also see the 'unstable-packages' overlay at 'overlays/default.nix'.
 
     # Home manager
