@@ -176,7 +176,7 @@
         "type": "github"
       }
     },
-    "nixpkgs-25-05": {
+    "nixpkgs-stable": {
       "locked": {
         "lastModified": 1764316264,
         "narHash": "sha256-82L+EJU+40+FIdeG4gmUlOF1jeSwlf2AwMarrpdHF6o=",
@@ -188,22 +188,6 @@
       "original": {
         "owner": "nixos",
         "ref": "nixos-25.05",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs-25-11": {
-      "locked": {
-        "lastModified": 1764406085,
-        "narHash": "sha256-CYbMp8hwuOf4umokSNp+t1s4Hjd4vxXq4S5CD+xvgNs=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "9561691c9f450fad7c3526916e1c4f44be0d1192",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "ref": "nixos-25.11",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -278,8 +262,7 @@
         "home-manager": "home-manager",
         "nix-relic": "nix-relic",
         "nixpkgs": "nixpkgs_2",
-        "nixpkgs-25-05": "nixpkgs-25-05",
-        "nixpkgs-25-11": "nixpkgs-25-11",
+        "nixpkgs-stable": "nixpkgs-stable",
         "nixvim": "nixvim"
       }
     },
