@@ -77,7 +77,7 @@
       # These are usually stuff you would upstream into home-manager
       homeModules = import ./modules/home-manager;
 
-      templates = import ./templates;
+      # templates = import ./templates;
 
       nixosConfigurations = {
         nr-vm-utm = nixpkgs.lib.nixosSystem {
