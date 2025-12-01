@@ -66,6 +66,12 @@
       webHome = pkgs.flood-for-transmission;
     };
 
+    qbittorrent = {
+      enable = true;
+      profileDir = "/seclusium/zg/qbittorrent";
+      openFirewall = true;
+    };
+
     navidrome = {
       enable = false;
       settings = {
@@ -95,6 +101,11 @@
     }
     // lib.optionalAttrs config.services.transmission.enable {
       transmission.extraGroups = [
+        "multimedia"
+      ];
+    }
+    // lib.optionalAttrs config.services.qbittorrent.enable {
+      qbittorrent.extraGroups = [
         "multimedia"
       ];
     }

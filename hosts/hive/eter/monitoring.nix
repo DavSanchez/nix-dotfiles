@@ -35,6 +35,11 @@
           proxyWebsockets = true;
           recommendedProxySettings = true;
         };
+        "/qbittorrent/" = {
+          proxyPass = "http://127.0.0.1:8080";
+          proxyWebsockets = true;
+          recommendedProxySettings = true;
+        };
         "/radarr/" = {
           proxyPass = "http://127.0.0.1:7878";
           proxyWebsockets = true;
