@@ -50,7 +50,7 @@ in
       ## NixOps
       # nixops-dns
       # morph
-      # deploy-rs
+      deploy-rs
       colmena
 
       # Monitoring
@@ -60,6 +60,8 @@ in
       process-compose
 
       orchard # VM orchestrator for macOS clusters
+
+      shellcheck # always shell scripts
     ])
     ++ lib.optionals pkgs.stdenv.isDarwin (
       with pkgs;
