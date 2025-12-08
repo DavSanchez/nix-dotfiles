@@ -1,11 +1,11 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
-    # idris2 # FP with dependent types, compiles to C
+    idris2 # FP with dependent types, compiles to C
     # idris2Packages.idris2Lsp # Langserver
 
     agda # FP with dependent types, compiles to Haskell
-    # haskellPackages.agda-language-server # Langserver (BROKEN)
+    # haskellPackages.agda-language-server # Langserver
 
     elixir # Dynamic FP for the Erlang VM
     elixir-ls # Langserver
@@ -19,6 +19,8 @@
 
     clojure # FP for the JVM, lisp-like
     clojure-lsp # Langserver
+
+    elan # Lean theorem prover version manager, FP with dependent types
 
     flix # FP for the JVM
     # roc.cli # Roc programming lang, comes from an overlay

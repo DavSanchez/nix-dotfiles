@@ -25,6 +25,7 @@ pkgs:
   # james-yu.latex-workshop
   jnoortheen.nix-ide
   justusadam.language-haskell
+  leanprover.lean4
   llvm-vs-code-extensions.vscode-clangd
   # markis.code-coverage # FIXME
   mkhl.direnv
