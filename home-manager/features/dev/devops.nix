@@ -52,6 +52,7 @@ in
       # morph
       deploy-rs
       colmena
+      nixos-anywhere
 
       # Monitoring
       # netdata # broken

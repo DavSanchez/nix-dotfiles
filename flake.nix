@@ -21,6 +21,7 @@
     # TODO: Add any other flake you might need
     hardware.url = "github:nixos/nixos-hardware";
     # nix-colors.url = "github:misterio77/nix-colors";
+    nixos-raspberrypi.url = "github:nvmd/nixos-raspberrypi/main";
 
     nix-relic.url = "github:DavSanchez/Nix-Relic";
     nix-relic.inputs.nixpkgs.follows = "nixpkgs";
@@ -43,6 +44,7 @@
       nixpkgs,
       home-manager,
       darwin,
+      nixos-raspberrypi,
       ...
     }@inputs:
     let
@@ -86,6 +88,13 @@
             inherit inputs;
           };
           modules = [ ./hosts/vm/utm-nr/configuration.nix ];
+        };
+
+        blackbee = nixos-raspberrypi.lib.nixosSystem {
+          specialArgs = inputs;
+          modules = [
+            ./hosts/blackbee/configuration.nix
+          ];
         };
       };
       # macOS systems using nix-darwin
@@ -140,6 +149,9 @@
         };
       };
 
+      # Fleet managed with colmena
       colmena = import ./hosts/hive { inherit nixpkgs inputs; };
+
+      # Fleet managed with deploy-rs
     };
 }
