@@ -15,8 +15,7 @@ pkgs:
   # dhall.vscode-dhall-lsp-server
   editorconfig.editorconfig
   elixir-lsp.vscode-elixir-ls
-  # github.copilot
-  # github.copilot-chat
+  github.copilot-chat
   github.vscode-github-actions
   github.vscode-pull-request-github
   golang.go
@@ -64,18 +63,6 @@ pkgs:
   #   version = "1.0.3";
   #   sha256 = "sha256-yG5KPGoagKCvOCHXOA7ZARnKj+GyaD8D8HLmZKwI3kQ=";
   # }
-  {
-    name = "lambda-black";
-    publisher = "janw4ld";
-    version = "0.2.6";
-    sha256 = "12rskwvz7vqr9s6875pv9k5rf8qknnljpwr9v8mrx0gh5cxds5yf";
-  }
-  {
-    name = "nix-develop";
-    publisher = "jamesottaway";
-    version = "0.0.1";
-    sha256 = "0dgkd3z0kxpaa2m01k0xqqsj9f01j4bac5sx8c3jhg19pg9zvl4m";
-  }
   # {
   #   name = "remote-containers";
   #   publisher = "ms-vscode-remote";
@@ -100,12 +87,6 @@ pkgs:
   #   version = "0.2.8";
   #   sha256 = "1nhzvjwxld53mlaflf8idyjj18r1dzdys9ygy86095g7gc4b1qys";
   # }
-  {
-    name = "nix-extension-pack";
-    publisher = "pinage404";
-    version = "3.0.0";
-    sha256 = "sha256-cWXd6AlyxBroZF+cXZzzWZbYPDuOqwCZIK67cEP5sNk=";
-  }
   {
     name = "wavetrace";
     publisher = "wavetrace";
