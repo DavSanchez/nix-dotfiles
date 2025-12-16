@@ -24,10 +24,6 @@
   nickel_ls.enable = true;
   nixd.enable = true;
   nushell.enable = true;
-  purescriptls = {
-    enable = true;
-    package = null;
-  };
   pylsp.enable = true;
   pyright.enable = true;
   rust_analyzer = {

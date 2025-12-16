@@ -15,7 +15,7 @@
     elmPackages.elm # FP for the frontend
 
     purescript # FP for the frontend
-    nodePackages.purescript-language-server # Langserver
+    # nodePackages.purescript-language-server # Langserver (unmaintained)
 
     clojure # FP for the JVM, lisp-like
     clojure-lsp # Langserver
