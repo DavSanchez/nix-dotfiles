@@ -47,7 +47,6 @@ pkgs:
   valentjn.vscode-ltex
   vscode-icons-team.vscode-icons
   vscodevim.vim
-  zxh404.vscode-proto3
   ziglang.vscode-zig
 ])
 ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
