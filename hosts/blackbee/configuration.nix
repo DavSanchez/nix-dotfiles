@@ -36,9 +36,11 @@
 
   networking = {
     hostName = "blackbee";
+    wireless.enable = true;
   };
 
   time.timeZone = "Atlantic/Canary";
+  console.keyMap = "es";
 
   users.users.david = {
     initialPassword = "changeme";
