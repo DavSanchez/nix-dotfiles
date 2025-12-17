@@ -1,15 +1,18 @@
-{ pkgs, ... }:
-{
+_: {
   # Starting simple
-  services.ollama = {
-    enable = true;
+  services = {
+    ollama.enable = true;
   };
 
-  programs.codex = {
-    enable = true;
-    custom-instructions = "";
-    settings = { };
+  programs = {
+    codex.enable = true;
+    gemini-cli.enable = true;
+    opencode = {
+      enable = true;
+      settings = {
+        theme = "catppuccin";
+        autoshare = false;
+      };
+    };
   };
-
-  programs.gemini-cli.enable = true;
 }
