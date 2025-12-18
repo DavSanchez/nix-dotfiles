@@ -1,4 +1,5 @@
-_: {
+{ config, ... }:
+{
   # Starting simple
   services = {
     ollama.enable = true;
@@ -6,24 +7,27 @@ _: {
 
   programs = {
     codex.enable = true;
-    gemini-cli.enable = true;
+
+    gemini-cli = {
+      enable = true;
+      settings = {
+        security = {
+          auth = {
+            selectedType = "oauth-personal";
+          };
+        };
+        general = {
+          previewFeatures = true;
+          preferredEditor = "hx";
+        };
+      };
+    };
+
     opencode = {
       enable = true;
       settings = {
         theme = "catppuccin";
         autoshare = false;
-      };
-    };
-
-    mcp = {
-      enable = true;
-      servers = {
-        anytype = {
-          command = "anytype-mcp";
-          env = {
-            OPENAPI_MCP_HEADERS = "{\"Authorization\":\"Bearer {env:ANYTYPE_API_KEY}\", \"Anytype-Version\":\"2025-11-08\"}-";
-          };
-        };
       };
     };
   };
