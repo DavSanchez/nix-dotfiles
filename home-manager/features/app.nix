@@ -40,6 +40,7 @@ lib.mkMerge [
 
     # This depends on having `raycast` installed. See `home.packages` above.
     launchd.agents.raycast = {
+      enable = true;
       config = {
         Program = builtins.toString (
           lib.path.append (
@@ -52,6 +53,7 @@ lib.mkMerge [
 
     # This depends on having `alt-tab-macos` installed. See `home.packages` above.
     launchd.agents.alt-tab = {
+      enable = true;
       config = {
         Program = builtins.toString (
           lib.path.append (
