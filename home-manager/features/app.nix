@@ -36,6 +36,7 @@ lib.mkMerge [
       # ice-bar # Waiting for Tahoe compat
       raycast
       alt-tab-macos
+      stats
     ];
 
     # This depends on having `raycast` installed. See `home.packages` above.
@@ -48,6 +49,9 @@ lib.mkMerge [
           ) "Applications/Home Manager Apps/Raycast.app/Contents/MacOS/Raycast"
         );
         RunAtLoad = true;
+        KeepAlive = true;
+        StandardOutPath = "/tmp/raycast.log";
+        StandardErrPath = "/tmp/raycast.err.log";
       };
     };
 
@@ -61,6 +65,25 @@ lib.mkMerge [
           ) "Applications/Home Manager Apps/AltTab.app/Contents/MacOS/AltTab"
         );
         RunAtLoad = true;
+        KeepAlive = true;
+        StandardOutPath = "/tmp/alt-tab.log";
+        StandardErrPath = "/tmp/alt-tab.err.log";
+      };
+    };
+
+    # This depends on having `stats` installed. See `home.packages` above.
+    launchd.agents.stats = {
+      enable = true;
+      config = {
+        Program = builtins.toString (
+          lib.path.append (
+            /. + config.home.homeDirectory
+          ) "Applications/Home Manager Apps/Stats.app/Contents/MacOS/Stats"
+        );
+        RunAtLoad = true;
+        KeepAlive = true;
+        StandardOutPath = "/tmp/stats.log";
+        StandardErrPath = "/tmp/stats.err.log";
       };
     };
   })

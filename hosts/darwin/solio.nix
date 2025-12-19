@@ -163,7 +163,6 @@
       "qflipper"
       "secretive"
       "sonic-pi"
-      "stats"
       "steam"
       "virtualbox" # VMs
       "vlc"
@@ -184,6 +183,7 @@
       "MainStage" = 634159523;
       "Numbers" = 409203825;
       "Pages" = 409201541;
+      # "Proton Authenticator" = 0;
       "Proton Pass for Safari" = 6502835663;
       "Tailscale" = 1475387142;
       "Reeder" = 6475002485;
