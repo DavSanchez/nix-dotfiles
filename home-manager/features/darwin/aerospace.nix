@@ -183,7 +183,7 @@
         alt-ctrl-shift-z = "move-node-to-workspace Z";
 
         # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
-        alt-tab = "workspace-back-and-forth";
+        ctrl-tab = "workspace-back-and-forth";
         # See: https://nikitabobko.github.io/AeroSpace/commands#move-workspace-to-monitor
         alt-shift-tab = "move-workspace-to-monitor --wrap-around next";
 
