@@ -92,12 +92,12 @@
 
   services = {
     tailscale = {
-      enable = false; # Using App Store application for the moment
+      enable = false; # Using standalone application for now 
       overrideLocalDns = false;
     };
     sketchybar.enable = false;
     jankyborders = {
-      enable = false;
+      enable = false; # Called on aerospace startup
       active_color = "0xffe1e3e4";
       inactive_color = "0xff494d64";
     };
@@ -160,6 +160,7 @@
       "sonic-pi"
       "steam"
       "synthesia"
+      "tailscale-app"
       "virtualbox" # VMs
       "vlc"
       "whatsapp"
@@ -180,7 +181,6 @@
       "Pages" = 409201541;
       # "Proton Authenticator" = 0;
       "Proton Pass for Safari" = 6502835663;
-      "Tailscale" = 1475387142;
       "Reeder" = 6475002485;
       "reMarkable" = 1276493162;
       "Shazam" = 897118787;

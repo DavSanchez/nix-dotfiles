@@ -92,7 +92,7 @@
 
   services = {
     tailscale = {
-      enable = false; # Using App Store application for the moment
+      enable = false; # Using standalone application for the moment
       overrideLocalDns = false;
     };
     sketchybar.enable = false;
@@ -164,6 +164,7 @@
       "secretive"
       "sonic-pi"
       "steam"
+      "tailscale-app"
       "virtualbox" # VMs
       "vlc"
       "whatsapp"
@@ -184,7 +185,6 @@
       "Pages" = 409201541;
       # "Proton Authenticator" = 0;
       "Proton Pass for Safari" = 6502835663;
-      "Tailscale" = 1475387142;
       "Reeder" = 6475002485;
       "reMarkable" = 1276493162;
       "The Unarchiver" = 425424353;
