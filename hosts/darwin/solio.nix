@@ -141,7 +141,7 @@
       "adobe-acrobat-reader"
       "affinity"
       "anytype"
-      "background-music"
+      # "background-music"
       "brave-browser"
       "crossover"
       "disk-inventory-x"
@@ -157,7 +157,6 @@
       "orion"
       "proton-drive"
       "proton-mail"
-      "proton-mail-bridge"
       "proton-pass"
       "protonvpn"
       "qflipper"
@@ -183,7 +182,6 @@
       "MainStage" = 634159523;
       "Numbers" = 409203825;
       "Pages" = 409201541;
-      # "Proton Authenticator" = 0;
       "Proton Pass for Safari" = 6502835663;
       "Reeder" = 6475002485;
       "reMarkable" = 1276493162;
@@ -204,7 +202,7 @@
   system.primaryUser = "david";
   system.defaults.dock.autohide = true;
   system.defaults.dock.expose-group-apps = true;
-  system.defaults.spaces.spans-displays = true;
+  # system.defaults.spaces.spans-displays = true; # Displays have separate spaces (default false)
   system.defaults.NSGlobalDomain.NSWindowShouldDragOnGesture = true;
   system.defaults.finder.AppleShowAllExtensions = true;
   system.keyboard.enableKeyMapping = true;
