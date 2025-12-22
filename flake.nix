@@ -82,14 +82,6 @@
       # templates = import ./templates;
 
       nixosConfigurations = {
-        nr-vm-utm = nixpkgs.lib.nixosSystem {
-          system = "aarch64-linux";
-          specialArgs = {
-            inherit inputs;
-          };
-          modules = [ ./hosts/vm/utm-nr/configuration.nix ];
-        };
-
         blackbee = nixos-raspberrypi.lib.nixosSystem {
           specialArgs = inputs;
           modules = [
@@ -106,7 +98,6 @@
           };
           modules = [
             ./hosts/darwin/sierpe.nix
-            # ./hosts/darwin-builder
           ];
         };
         solio = darwin.lib.darwinSystem {
@@ -132,13 +123,6 @@
             inherit inputs;
           };
           modules = [ ./home-manager/solio.nix ];
-        };
-        "david@nr-vm" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.aarch64-linux;
-          extraSpecialArgs = {
-            inherit inputs;
-          };
-          modules = [ ./home-manager/home-nr-vm.nix ];
         };
         "davidsanchez@nr" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.aarch64-darwin;
