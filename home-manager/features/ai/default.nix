@@ -9,17 +9,7 @@ _: {
 
     gemini-cli = {
       enable = true;
-      settings = {
-        security = {
-          auth = {
-            selectedType = "oauth-personal";
-          };
-        };
-        general = {
-          previewFeatures = true;
-          preferredEditor = "hx";
-        };
-      };
+      # settings = { };
     };
 
     opencode = {
