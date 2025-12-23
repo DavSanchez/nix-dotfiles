@@ -189,7 +189,7 @@
       "uBlock Origin Lite" = 6745342698;
       "UTM" = 1538878817; # VMs (qemu)
       "Windows App" = 1295203466;
-      "Xcode" = 497799835;
+      # "Xcode" = 497799835;
     };
     # extraConfig = '' '';
     # whalebrews = [ ];
