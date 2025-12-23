@@ -25,7 +25,7 @@
     ./features/direnv
     # ./features/emacs
     ./features/git
-    ./features/git/signing-mini.nix
+    ./features/git/signing-solio.nix
     ./features/neovim
     ./features/nu
     ./features/starship

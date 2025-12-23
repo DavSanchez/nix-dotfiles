@@ -23,7 +23,7 @@
     ./features/direnv
     # ./features/emacs
     ./features/git
-    ./features/git/signing-mbp.nix
+    ./features/git/signing-sierpe.nix
     ./features/neovim
     ./features/nu
     ./features/starship

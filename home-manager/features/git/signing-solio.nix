@@ -2,7 +2,7 @@ _: {
   programs.git = {
     # Move to localconf?
     signing = {
-      key = "A4BEA54CB5BA50FC";
+      key = "FB27FC70B15E6D6C";
       signByDefault = true;
     };
   };
