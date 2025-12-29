@@ -46,7 +46,6 @@ pkgs:
   vadimcn.vscode-lldb
   valentjn.vscode-ltex
   vscode-icons-team.vscode-icons
-  vscodevim.vim
   ziglang.vscode-zig
 ])
 ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
@@ -55,6 +54,18 @@ pkgs:
     publisher = "CoenraadS";
     version = "0.0.10";
     sha256 = "090wg4lin4y06nhg45p9mjsqwfa21bdgafj57swh5z6fpv3pqxx2";
+  }
+  {
+    name = "dance";
+    publisher = "gregoire";
+    version = "0.5.15002"; # pre-release
+    sha256 = "sha256-du4Sz5rlKaAy5LXf7RfCt6iUSOAMMshlvewzcn4sCCk=";
+  }
+  {
+    name = "dance-helix"; # Depends on `gregoire.dance` pre-release above
+    publisher = "gregoire";
+    version = "0.1.1001";
+    sha256 = "sha256-wWOlBsOJEQ8rjN3yMsegYg/8t3Jy6Gz/RyCn4/Ts7ZE=";
   }
   # {
   #   name = "vscode-keypromoter";
