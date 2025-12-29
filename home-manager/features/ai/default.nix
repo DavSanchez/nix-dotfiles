@@ -17,6 +17,7 @@ _: {
       settings = {
         theme = "catppuccin";
         autoshare = false;
+        plugin = [ "opencode-gemini-auth@latest" ];
       };
     };
   };
