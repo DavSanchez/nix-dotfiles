@@ -26,7 +26,7 @@ _: {
       echoes = {
         path = "/seclusium/echoes";
         writeable = "yes";
-        "hosts allow" = "192.168.0.157";
+        "hosts allow" = "192.168.0.228";
       };
       imagery = {
         path = "/seclusium/imagery";
