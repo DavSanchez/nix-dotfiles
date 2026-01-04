@@ -37,14 +37,13 @@
       with pkgs.nushellPlugins;
       [
         # net # currently broken (not compatible with nu version)
-        skim
         # units # currently broken (not compatible with nu version)
         query
         gstat
         polars
-        # semver # not available for macOS
+        semver # not available for macOS
         formats
-        # highlight # broken
+        highlight # broken
       ]
       ++ lib.optionals pkgs.stdenv.isLinux [ dbus ];
   };
