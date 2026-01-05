@@ -41,9 +41,9 @@
         query
         gstat
         polars
-        semver # not available for macOS
+        # semver # currently broken (not compatible with nu version)
         formats
-        highlight # broken
+        # highlight # currently broken (not compatible with nu version)
       ]
       ++ lib.optionals pkgs.stdenv.isLinux [ dbus ];
   };
