@@ -4,7 +4,6 @@ pkgs:
   ## Clashing with complete list in ./extensions.nix, so case by case here
   arrterian.nix-env-selector
   banacorn.agda-mode
-  bbenoist.nix
   # betterthantomorrow.calva
   # catppuccin.catppuccin-vsc # Delegated to catppuccin flake
   # catppuccin.catppuccin-vsc-icons # Delegated to catppuccin flake
