@@ -25,8 +25,7 @@ _: {
       };
       echoes = {
         path = "/seclusium/echoes";
-        writeable = "yes";
-        "hosts allow" = "192.168.0.228";
+        writeable = "yes"; # Music app updates library
       };
       imagery = {
         path = "/seclusium/imagery";
