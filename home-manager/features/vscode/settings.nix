@@ -37,7 +37,7 @@ pkgs: {
   "nix.enableLanguageServer" = true;
   "nix.serverPath" = "${pkgs.nixd}/bin/nixd";
   "nix.serverSettings" = {
-    "nixd.formatting.command" = [ "${pkgs.nixfmt-rfc-style}/bin/nixfmt" ];
+    "nixd.formatting.command" = [ "${pkgs.nixfmt}/bin/nixfmt" ];
   };
   "nix.formatterPath" = "nixfmt";
   "rust-analyzer.check.command" = "clippy";

@@ -7,7 +7,7 @@
 {
   home.packages = with pkgs; [
     nixd # Language server
-    nixfmt-rfc-style # Nix formatter
+    nixfmt # Nix formatter
     nix-bundle
     nix-inspect
     nix-output-monitor
