@@ -144,7 +144,6 @@
       # "background-music"
       "brave-browser"
       "crossover"
-      "disk-inventory-x"
       "gqrx"
       "handbrake-app"
       "keymapp"
