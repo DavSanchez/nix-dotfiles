@@ -139,6 +139,7 @@
       "affinity"
       "anytype"
       # "background-music"
+      "bartender"
       "brave-browser"
       "crossover"
       "gqrx"
