@@ -6,7 +6,7 @@
 {
   # grafana configuration
   services.grafana = {
-    enable = true;
+    enable = false;
     settings.server = {
       http_port = 2342;
       http_addr = "127.0.0.1";
@@ -63,7 +63,7 @@
     };
   };
   services.prometheus = {
-    enable = true;
+    enable = false;
     port = 9001;
     webExternalUrl = "http://${name}.local/prometheus/";
     exporters = {

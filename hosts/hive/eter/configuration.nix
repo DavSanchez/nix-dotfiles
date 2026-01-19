@@ -117,9 +117,8 @@
   security.sudo.wheelNeedsPassword = false;
 
   environment.systemPackages = with pkgs; [
-    vim
-    yazi
     bottom
+    helix
   ];
 
   programs.nix-ld.enable = true;
