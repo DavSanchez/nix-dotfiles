@@ -10,15 +10,11 @@
 
     # Download content from the internet
     aria2
-    ariang
-
-    # Work with PDFs
-    poppler-utils
-    exiftool
   ];
 
   programs = {
     yt-dlp.enable = true;
     feh.enable = true;
+    rtorrent.enable = true;
   };
 }
