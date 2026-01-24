@@ -37,7 +37,6 @@ lib.mkMerge [
       raycast
       alt-tab-macos
       stats
-      qbittorrent
     ];
 
     # This depends on having `raycast` installed. See `home.packages` above.
