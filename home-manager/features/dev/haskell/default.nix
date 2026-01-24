@@ -20,10 +20,13 @@
 
     # hoogle ghci integration
     # example> :hoogle <$>
-    file.".ghci".text = ''
-      :def hoogle \x -> return $ ":!hoogle \"" ++ x ++ "\""
-      :def doc \x -> return $ ":!hoogle --info \"" ++ x ++ "\""
-    '';
+    file.".ghci" = {
+      enable = false;
+      text = ''
+        :def hoogle \x -> return $ ":!hoogle \"" ++ x ++ "\""
+        :def doc \x -> return $ ":!hoogle --info \"" ++ x ++ "\""
+      '';
+    };
     # https://docs.haskellstack.org/en/stable/yaml_configuration/#non-project-specific-config
     file.".stack/config.yaml" = {
       enable = false;
