@@ -32,8 +32,17 @@ jobs:
         run: nix shell "nixpkgs#colmena" --command colmena build --on eter --no-build-on-target
 
   macos:
-    name: Build macOS configs
+    name: Build macOS configs (${{ matrix.type }})
     runs-on: macos-latest
+    strategy:
+      matrix:
+        include:
+          - type: home-manager
+            command: nix run home-manager -- build --flake
+            prefix: "david@"
+          - type: nix-darwin
+            command: nix run nix-darwin -- build --flake
+            prefix: ""
     steps:
       - uses: actions/checkout@v6
       - name: Free up space
@@ -45,11 +54,7 @@ jobs:
         with:
           name: davsanchez
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
-      - name: Home configs (solio)
-        run: nix run home-manager -- build --flake ".#david@solio"
-      - name: Home configs (sierpe)
-        run: nix run home-manager -- build --flake ".#david@sierpe"
-      - name: nix-darwin config (solio)
-        run: nix run nix-darwin -- build --flake ".#solio"
-      - name: nix-darwin config (sierpe)
-        run: nix run nix-darwin -- build --flake ".#sierpe"
+      - name: Build ${{ matrix.type }} (solio)
+        run: ${{ matrix.command }} ".#${{ matrix.prefix }}solio"
+      - name: Build ${{ matrix.type }} (sierpe)
+        run: ${{ matrix.command }} ".#${{ matrix.prefix }}sierpe"
