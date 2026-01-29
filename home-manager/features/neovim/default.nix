@@ -1,6 +1,6 @@
 _: {
   programs.nixvim = {
-    enable = true;
+    enable = false;
     enableMan = true;
     viAlias = true;
     vimAlias = true;
