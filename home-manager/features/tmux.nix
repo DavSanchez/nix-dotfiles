@@ -34,7 +34,7 @@
       prefix-highlight
       sidebar
       better-mouse-mode
-      fingers
+      tmux-thumbs
       {
         plugin = resurrect;
         extraConfig = "set -g @resurrect-strategy-nvim 'session'";
