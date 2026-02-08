@@ -23,9 +23,6 @@
       just
       just-lsp
       # protobuf
-
-      zig
-      zls
     ])
     ++ lib.optionals pkgs.stdenv.isLinux [ pkgs.rr ];
 }
