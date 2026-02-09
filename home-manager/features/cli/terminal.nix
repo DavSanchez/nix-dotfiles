@@ -16,6 +16,7 @@
 
     ## Other
     rmlint # Extremely fast tool to remove duplicates and other lint from your filesystem
+    watchexec 
   ];
 
   programs = {

@@ -4,10 +4,11 @@
     packages = with pkgs; [
       rustup
 
-      trunk # WASM bundler
-      cargo-watch # Watch for changes and run cargo-watch
       cargo-zigbuild # cross-compilation via zig
+      zig # needed by cargo-zigbuild
       cargo-cache
+      cargo-nextest
+      bacon # background rust code checker
     ];
   };
 }
