@@ -9,58 +9,24 @@
     enable = false;
     settings.server = {
       http_port = 2342;
-      http_addr = "127.0.0.1";
       root_url = "http://${name}.local/grafana/";
       serve_from_sub_path = true;
     };
   };
-  # nginx reverse proxy
-  services.nginx = {
+  # caddy reverse proxy
+  services.caddy = {
     enable = true;
-    virtualHosts."${name}.local" = {
-      locations = {
-        # These require that each application sets its "base URL" config to the same path
-        "/grafana/" = {
-          proxyPass = "http://${config.services.grafana.settings.server.http_addr}:${toString config.services.grafana.settings.server.http_port}";
-          proxyWebsockets = true;
-          recommendedProxySettings = true;
-        };
-        "/prometheus/" = {
-          proxyPass = "http://127.0.0.1:${toString config.services.prometheus.port}";
-          proxyWebsockets = true;
-          recommendedProxySettings = true;
-        };
-        # "/transmission/" = {
-        #   proxyPass = "http://127.0.0.1:9091";
-        #   proxyWebsockets = true;
-        #   recommendedProxySettings = true;
-        # };
-        "/qbittorrent/" = {
-          proxyPass = "http://127.0.0.1:8080";
-          recommendedProxySettings = true;
-        };
-        "/radarr/" = {
-          proxyPass = "http://127.0.0.1:7878";
-          proxyWebsockets = true;
-          recommendedProxySettings = true;
-        };
-        "/lidarr/" = {
-          proxyPass = "http://127.0.0.1:8686";
-          proxyWebsockets = true;
-          recommendedProxySettings = true;
-        };
-        "/sonarr/" = {
-          proxyPass = "http://127.0.0.1:8989";
-          proxyWebsockets = true;
-          recommendedProxySettings = true;
-        };
-        "/prowlarr/" = {
-          proxyPass = "http://127.0.0.1:9696";
-          proxyWebsockets = true;
-          recommendedProxySettings = true;
-        };
-      };
-    };
+    virtualHosts."${name}.local".extraConfig = ''
+      reverse_proxy /grafana/* http://127.0.0.1:${toString config.services.grafana.settings.server.http_port}
+      reverse_proxy /prometheus/* http://127.0.0.1:${toString config.services.prometheus.port}
+      reverse_proxy /qbittorrent/* http://127.0.0.1:${toString config.services.qbittorrent.webuiPort}
+      reverse_proxy /radarr/* http://127.0.0.1:${toString config.services.radarr.settings.server.port}
+      reverse_proxy /lidarr/* http://127.0.0.1:${toString config.services.lidarr.settings.server.port}
+      reverse_proxy /sonarr/* http://127.0.0.1:${toString config.services.sonarr.settings.server.port}
+      reverse_proxy /prowlarr/* http://127.0.0.1:${toString config.services.prowlarr.settings.server.port}
+      reverse_proxy /flood/* http://127.0.0.1:${toString config.services.flood.port}
+      reverse_proxy /navidrome/* http://127.0.0.1:${toString config.services.navidrome.settings.Port}
+    '';
   };
   services.prometheus = {
     enable = false;

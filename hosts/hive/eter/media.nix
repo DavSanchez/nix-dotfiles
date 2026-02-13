@@ -20,6 +20,7 @@
     # Movies
     radarr = {
       enable = true;
+      openFirewall = true;
       dataDir = "/seclusium/imagery/radarr/.config/Radarr";
     };
 
