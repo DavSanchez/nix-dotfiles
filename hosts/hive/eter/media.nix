@@ -67,13 +67,24 @@
     qbittorrent = {
       enable = true;
       profileDir = "/seclusium/zg/qbittorrent";
+    };
+
+    rtorrent = {
+      enable = true;
+      port = 51412;
       openFirewall = true;
     };
 
+    flood = {
+      enable = true;
+      port = 8112;
+      extraArgs = [ "--rtsocket=${config.services.rtorrent.rpcSocket}" ];
+    };
+
     navidrome = {
-      enable = false;
+      enable = true;
       settings = {
-        MusicFolder = "/seclusium/echoes/apple_music/Music";
+        MusicFolder = "/seclusium/echoes/music";
         DataFolder = "/seclusium/echoes/navidrome";
         BaseURL = "/navidrome";
       };
@@ -137,4 +148,14 @@
         "multimedia"
       ];
     };
+}
+// lib.mkIf (config.services.flood.enable) {
+  # If you have lots of torrents in the seed you may see rtorrent stack-trace with "too many open files"
+  # to increase the limit of open files use:
+  systemd.services.rtorrent.serviceConfig.LimitNOFILE = 16384;
+}
+// lib.mkIf (config.services.rtorrent.enable) {
+  # allow access to the socket by putting it in the same group as rtorrent service
+  # the socket will have g+w permissions
+  systemd.services.flood.serviceConfig.SupplementaryGroups = [ config.services.rtorrent.group ];
 }
