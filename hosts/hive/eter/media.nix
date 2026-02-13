@@ -72,8 +72,8 @@
 
     rtorrent = {
       enable = true;
-      port = 51412;
       openFirewall = true;
+      dataDir = "/seclusium/zg/rtorrent";
     };
 
     flood = {
