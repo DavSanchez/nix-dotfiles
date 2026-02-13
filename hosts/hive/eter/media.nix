@@ -9,13 +9,11 @@
   services = {
     plex = {
       enable = false;
-      openFirewall = true;
       dataDir = "/seclusium/imagery/plex";
     };
 
     jellyfin = {
       enable = true;
-      openFirewall = true;
       dataDir = "/seclusium/zg/jellyfin";
     };
 
