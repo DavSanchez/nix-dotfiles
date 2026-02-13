@@ -13,28 +13,15 @@ _: {
         "vfs objects" = "fruit catia streams_xattr";
         "fruit:aapl" = "yes";
         "fruit:encoding" = "native";
+
+        writeable = "yes"; # Fine-tune when needed
       };
       # Shares
-      creation = {
-        path = "/seclusium/creation";
-        writeable = "no";
-      };
-      dimensions = {
-        path = "/seclusium/dimensions";
-        writeable = "no";
-      };
-      echoes = {
-        path = "/seclusium/echoes";
-        writeable = "yes"; # Music app updates library
-      };
-      imagery = {
-        path = "/seclusium/imagery";
-        writeable = "no";
-      };
-      technique = {
-        path = "/seclusium/technique";
-        writeable = "no";
-      };
+      creation.path = "/seclusium/creation";
+      dimensions.path = "/seclusium/dimensions";
+      echoes.path = "/seclusium/echoes";
+      imagery.path = "/seclusium/imagery";
+      technique.path = "/seclusium/technique";
       zg = {
         path = "/seclusium/zg";
         writeable = "no";
