@@ -21,9 +21,6 @@ in
     };
   };
 
-  # # Allow Caddy to read the ACME certificates
-  # users.users.caddy.extraGroups = [ "acme" ];
-
   # grafana configuration
   services.grafana = {
     enable = false;
