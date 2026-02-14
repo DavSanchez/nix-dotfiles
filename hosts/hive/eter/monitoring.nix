@@ -26,9 +26,10 @@
       reverse_proxy /prowlarr/* http://127.0.0.1:${toString config.services.prowlarr.settings.server.port}
       reverse_proxy /flood/* http://127.0.0.1:${toString config.services.flood.port}
       reverse_proxy /navidrome/* http://127.0.0.1:${toString config.services.navidrome.settings.Port}
+      reverse_proxy /jellyfin/* http://127.0.0.1:8096
     '';
   };
-  
+
   services.prometheus = {
     enable = false;
     port = 9001;
