@@ -173,7 +173,7 @@
       "yacreader"
       "zen"
     ];
-    brews = [ 
+    brews = [
       "mole"
     ];
     masApps = {

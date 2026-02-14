@@ -101,9 +101,9 @@ in
 
     shellAliases = { };
 
-    shellInit = '''';
+    shellInit = "";
 
-    shellInitLast = '''';
+    shellInitLast = "";
   };
 
   # In fish, the contents of .config/fish/conf.d (e.g. plugins) get executed BEFORE config.fish
