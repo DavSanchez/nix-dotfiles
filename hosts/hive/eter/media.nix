@@ -80,7 +80,10 @@ lib.mkMerge [
       flood = {
         enable = true;
         host = "127.0.0.1";
-        extraArgs = [ "--rtsocket=${config.services.rtorrent.rpcSocket}" ];
+        extraArgs = [
+          "--rtsocket=${config.services.rtorrent.rpcSocket}"
+          "--baseuri=/flood"
+        ];
       };
 
       navidrome = {
