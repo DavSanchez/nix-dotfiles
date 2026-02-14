@@ -119,6 +119,11 @@
         "multimedia"
       ];
     }
+    // lib.optionalAttrs config.services.rtorrent.enable {
+      rtorrent.extraGroups = [
+        "multimedia"
+      ];
+    }
     // lib.optionalAttrs config.services.radarr.enable {
       radarr.extraGroups = [
         "multimedia"
