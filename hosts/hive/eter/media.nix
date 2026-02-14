@@ -5,163 +5,165 @@
   pkgs,
   ...
 }:
-{
-  services = {
-    plex = {
-      enable = false;
-      dataDir = "/seclusium/imagery/plex";
-    };
-
-    jellyfin = {
-      enable = true;
-      openFirewall = true;
-      dataDir = "/seclusium/zg/jellyfin";
-    };
-
-    # Movies
-    radarr = {
-      enable = true;
-      dataDir = "/seclusium/imagery/radarr/.config/Radarr";
-    };
-
-    # Series
-    sonarr = {
-      enable = true;
-      dataDir = "/seclusium/imagery/sonarr/.config/Sonarr";
-    };
-
-    # Music
-    lidarr = {
-      enable = true;
-      dataDir = "/seclusium/echoes/lidarr/.config/Lidarr";
-    };
-
-    # Books
-    readarr = {
-      enable = false;
-    };
-
-    # Subtitles
-    bazarr = {
-      enable = false;
-    };
-
-    # Indexers
-    prowlarr = {
-      enable = true;
-    };
-
-    transmission = {
-      enable = false;
-      package = pkgs.transmission_4;
-      home = "/seclusium/zg/transmission";
-      openPeerPorts = true;
-      openRPCPort = true;
-      settings = {
-        rpc-bind-address = "0.0.0.0";
-        rpc-whitelist = "192.168.*.* 127.0.0.1";
-        rpc-host-whitelist = "${name}.local";
+lib.mkMerge [
+  {
+    services = {
+      plex = {
+        enable = false;
+        dataDir = "/seclusium/imagery/plex";
       };
-      webHome = pkgs.flood-for-transmission;
-    };
 
-    qbittorrent = {
-      enable = true;
-      profileDir = "/seclusium/zg/qbittorrent";
-    };
+      jellyfin = {
+        enable = true;
+        openFirewall = true;
+        dataDir = "/seclusium/zg/jellyfin";
+      };
 
-    rtorrent = {
-      enable = true;
-      openFirewall = true;
-      dataDir = "/seclusium/zg/rtorrent";
-    };
+      # Movies
+      radarr = {
+        enable = true;
+        dataDir = "/seclusium/imagery/radarr/.config/Radarr";
+      };
 
-    flood = {
-      enable = true;
-      port = 8112;
-      extraArgs = [ "--rtsocket=${config.services.rtorrent.rpcSocket}" ];
-    };
+      # Series
+      sonarr = {
+        enable = true;
+        dataDir = "/seclusium/imagery/sonarr/.config/Sonarr";
+      };
 
-    navidrome = {
-      enable = true;
-      settings = {
-        MusicFolder = "/seclusium/echoes/music";
-        DataFolder = "/seclusium/echoes/navidrome";
-        BaseURL = "/navidrome";
+      # Music
+      lidarr = {
+        enable = true;
+        dataDir = "/seclusium/echoes/lidarr/.config/Lidarr";
+      };
+
+      # Books
+      readarr = {
+        enable = false;
+      };
+
+      # Subtitles
+      bazarr = {
+        enable = false;
+      };
+
+      # Indexers
+      prowlarr = {
+        enable = true;
+      };
+
+      transmission = {
+        enable = false;
+        package = pkgs.transmission_4;
+        home = "/seclusium/zg/transmission";
+        openPeerPorts = true;
+        openRPCPort = true;
+        settings = {
+          rpc-bind-address = "0.0.0.0";
+          rpc-whitelist = "192.168.*.* 127.0.0.1";
+          rpc-host-whitelist = "${name}.local";
+        };
+        webHome = pkgs.flood-for-transmission;
+      };
+
+      qbittorrent = {
+        enable = true;
+        profileDir = "/seclusium/zg/qbittorrent";
+      };
+
+      rtorrent = {
+        enable = true;
+        openFirewall = true;
+        dataDir = "/seclusium/zg/rtorrent";
+      };
+
+      flood = {
+        enable = true;
+        port = 8112;
+        extraArgs = [ "--rtsocket=${config.services.rtorrent.rpcSocket}" ];
+      };
+
+      navidrome = {
+        enable = true;
+        settings = {
+          MusicFolder = "/seclusium/echoes/music";
+          DataFolder = "/seclusium/echoes/navidrome";
+          BaseURL = "/navidrome";
+        };
       };
     };
-  };
 
-  # Navidrome can use it
-  environment.systemPackages = lib.optionals config.services.navidrome.enable [
-    pkgs.ffmpeg
-  ];
+    # Navidrome can use it
+    environment.systemPackages = lib.optionals config.services.navidrome.enable [
+      pkgs.ffmpeg
+    ];
 
-  # User and groups setup
-  users.users =
-    lib.optionalAttrs config.services.jellyfin.enable {
-      jellyfin.extraGroups = [
-        "multimedia"
-      ];
-    }
-    // lib.optionalAttrs config.services.plex.enable {
-      plex.extraGroups = [
-        "multimedia"
-      ];
-    }
-    // lib.optionalAttrs config.services.transmission.enable {
-      transmission.extraGroups = [
-        "multimedia"
-      ];
-    }
-    // lib.optionalAttrs config.services.qbittorrent.enable {
-      qbittorrent.extraGroups = [
-        "multimedia"
-      ];
-    }
-    // lib.optionalAttrs config.services.rtorrent.enable {
-      rtorrent.extraGroups = [
-        "multimedia"
-      ];
-    }
-    // lib.optionalAttrs config.services.radarr.enable {
-      radarr.extraGroups = [
-        "multimedia"
-      ];
-    }
-    // lib.optionalAttrs config.services.sonarr.enable {
-      sonarr.extraGroups = [
-        "multimedia"
-      ];
-    }
-    // lib.optionalAttrs config.services.lidarr.enable {
-      lidarr.extraGroups = [
-        "multimedia"
-      ];
-    }
-    // lib.optionalAttrs config.services.readarr.enable {
-      readarr.extraGroups = [
-        "multimedia"
-      ];
-    }
-    // lib.optionalAttrs config.services.bazarr.enable {
-      bazarr.extraGroups = [
-        "multimedia"
-      ];
-    }
-    // lib.optionalAttrs config.services.navidrome.enable {
-      navidrome.extraGroups = [
-        "multimedia"
-      ];
-    };
-}
-// lib.mkIf (config.services.flood.enable) {
-  # If you have lots of torrents in the seed you may see rtorrent stack-trace with "too many open files"
-  # to increase the limit of open files use:
-  systemd.services.rtorrent.serviceConfig.LimitNOFILE = 16384;
-}
-// lib.mkIf (config.services.rtorrent.enable) {
-  # allow access to the socket by putting it in the same group as rtorrent service
-  # the socket will have g+w permissions
-  systemd.services.flood.serviceConfig.SupplementaryGroups = [ config.services.rtorrent.group ];
-}
+    # User and groups setup
+    users.users =
+      lib.optionalAttrs config.services.jellyfin.enable {
+        jellyfin.extraGroups = [
+          "multimedia"
+        ];
+      }
+      // lib.optionalAttrs config.services.plex.enable {
+        plex.extraGroups = [
+          "multimedia"
+        ];
+      }
+      // lib.optionalAttrs config.services.transmission.enable {
+        transmission.extraGroups = [
+          "multimedia"
+        ];
+      }
+      // lib.optionalAttrs config.services.qbittorrent.enable {
+        qbittorrent.extraGroups = [
+          "multimedia"
+        ];
+      }
+      // lib.optionalAttrs config.services.rtorrent.enable {
+        rtorrent.extraGroups = [
+          "multimedia"
+        ];
+      }
+      // lib.optionalAttrs config.services.radarr.enable {
+        radarr.extraGroups = [
+          "multimedia"
+        ];
+      }
+      // lib.optionalAttrs config.services.sonarr.enable {
+        sonarr.extraGroups = [
+          "multimedia"
+        ];
+      }
+      // lib.optionalAttrs config.services.lidarr.enable {
+        lidarr.extraGroups = [
+          "multimedia"
+        ];
+      }
+      // lib.optionalAttrs config.services.readarr.enable {
+        readarr.extraGroups = [
+          "multimedia"
+        ];
+      }
+      // lib.optionalAttrs config.services.bazarr.enable {
+        bazarr.extraGroups = [
+          "multimedia"
+        ];
+      }
+      // lib.optionalAttrs config.services.navidrome.enable {
+        navidrome.extraGroups = [
+          "multimedia"
+        ];
+      };
+  }
+  (lib.mkIf (config.services.flood.enable) {
+    # If you have lots of torrents in the seed you may see rtorrent stack-trace with "too many open files"
+    # to increase the limit of open files use:
+    systemd.services.rtorrent.serviceConfig.LimitNOFILE = 16384;
+  })
+  (lib.mkIf (config.services.rtorrent.enable) {
+    # allow access to the socket by putting it in the same group as rtorrent service
+    # the socket will have g+w permissions
+    systemd.services.flood.serviceConfig.SupplementaryGroups = [ config.services.rtorrent.group ];
+  })
+]
