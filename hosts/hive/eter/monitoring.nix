@@ -4,6 +4,7 @@
   ...
 }:
 let
+  # Setting DNS A records on the Gandi for certificate generation and reverse proxy configuration.
   domain = "eter.davidslt.es";
 in
 {
