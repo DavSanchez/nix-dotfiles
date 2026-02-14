@@ -14,13 +14,13 @@
 
     jellyfin = {
       enable = true;
+      openFirewall = true;
       dataDir = "/seclusium/zg/jellyfin";
     };
 
     # Movies
     radarr = {
       enable = true;
-      openFirewall = true;
       dataDir = "/seclusium/imagery/radarr/.config/Radarr";
     };
 
