@@ -22,18 +22,21 @@ lib.mkMerge [
       # Movies
       radarr = {
         enable = true;
+        openFirewall = true;
         dataDir = "/seclusium/imagery/radarr/.config/Radarr";
       };
 
       # Series
       sonarr = {
         enable = true;
+        openFirewall = true;
         dataDir = "/seclusium/imagery/sonarr/.config/Sonarr";
       };
 
       # Music
       lidarr = {
         enable = true;
+        openFirewall = true;
         dataDir = "/seclusium/echoes/lidarr/.config/Lidarr";
       };
 
@@ -50,6 +53,7 @@ lib.mkMerge [
       # Indexers
       prowlarr = {
         enable = true;
+        openFirewall = true;
       };
 
       transmission = {
