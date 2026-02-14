@@ -34,65 +34,67 @@ in
   # caddy reverse proxy
   services.caddy = {
     enable = true;
-    virtualHosts."grafana.${domain}" = {
-      useACMEHost = domain;
-      extraConfig = ''
-        reverse_proxy http://127.0.0.1:${toString config.services.grafana.settings.server.http_port}
-      '';
-    };
-    virtualHosts."prometheus.${domain}" = {
-      useACMEHost = domain;
-      extraConfig = ''
-        reverse_proxy http://127.0.0.1:${toString config.services.prometheus.port}
-      '';
-    };
-    virtualHosts."qbittorrent.${domain}" = {
-      useACMEHost = domain;
-      extraConfig = ''
-        reverse_proxy http://127.0.0.1:${toString config.services.qbittorrent.webuiPort}
-      '';
-    };
-    virtualHosts."radarr.${domain}" = {
-      useACMEHost = domain;
-      extraConfig = ''
-        reverse_proxy http://127.0.0.1:${toString config.services.radarr.settings.server.port}
-      '';
-    };
-    virtualHosts."lidarr.${domain}" = {
-      useACMEHost = domain;
-      extraConfig = ''
-        reverse_proxy http://127.0.0.1:${toString config.services.lidarr.settings.server.port}
-      '';
-    };
-    virtualHosts."sonarr.${domain}" = {
-      useACMEHost = domain;
-      extraConfig = ''
-        reverse_proxy http://127.0.0.1:${toString config.services.sonarr.settings.server.port}
-      '';
-    };
-    virtualHosts."prowlarr.${domain}" = {
-      useACMEHost = domain;
-      extraConfig = ''
-        reverse_proxy http://127.0.0.1:${toString config.services.prowlarr.settings.server.port}
-      '';
-    };
-    virtualHosts."flood.${domain}" = {
-      useACMEHost = domain;
-      extraConfig = ''
-        reverse_proxy http://127.0.0.1:${toString config.services.flood.port}
-      '';
-    };
-    virtualHosts."navidrome.${domain}" = {
-      useACMEHost = domain;
-      extraConfig = ''
-        reverse_proxy http://127.0.0.1:${toString config.services.navidrome.settings.Port}
-      '';
-    };
-    virtualHosts."jellyfin.${domain}" = {
-      useACMEHost = domain;
-      extraConfig = ''
-        reverse_proxy http://127.0.0.1:8096
-      '';
+    virtualHosts = {
+      "grafana.${domain}" = {
+        useACMEHost = domain;
+        extraConfig = ''
+          reverse_proxy http://127.0.0.1:${toString config.services.grafana.settings.server.http_port}
+        '';
+      };
+      "prometheus.${domain}" = {
+        useACMEHost = domain;
+        extraConfig = ''
+          reverse_proxy http://127.0.0.1:${toString config.services.prometheus.port}
+        '';
+      };
+      "qbittorrent.${domain}" = {
+        useACMEHost = domain;
+        extraConfig = ''
+          reverse_proxy http://127.0.0.1:${toString config.services.qbittorrent.webuiPort}
+        '';
+      };
+      "radarr.${domain}" = {
+        useACMEHost = domain;
+        extraConfig = ''
+          reverse_proxy http://127.0.0.1:${toString config.services.radarr.settings.server.port}
+        '';
+      };
+      "lidarr.${domain}" = {
+        useACMEHost = domain;
+        extraConfig = ''
+          reverse_proxy http://127.0.0.1:${toString config.services.lidarr.settings.server.port}
+        '';
+      };
+      "sonarr.${domain}" = {
+        useACMEHost = domain;
+        extraConfig = ''
+          reverse_proxy http://127.0.0.1:${toString config.services.sonarr.settings.server.port}
+        '';
+      };
+      "prowlarr.${domain}" = {
+        useACMEHost = domain;
+        extraConfig = ''
+          reverse_proxy http://127.0.0.1:${toString config.services.prowlarr.settings.server.port}
+        '';
+      };
+      "flood.${domain}" = {
+        useACMEHost = domain;
+        extraConfig = ''
+          reverse_proxy http://127.0.0.1:${toString config.services.flood.port}
+        '';
+      };
+      "navidrome.${domain}" = {
+        useACMEHost = domain;
+        extraConfig = ''
+          reverse_proxy http://127.0.0.1:${toString config.services.navidrome.settings.Port}
+        '';
+      };
+      "jellyfin.${domain}" = {
+        useACMEHost = domain;
+        extraConfig = ''
+          reverse_proxy http://127.0.0.1:8096
+        '';
+      };
     };
   };
 
