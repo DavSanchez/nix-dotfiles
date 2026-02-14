@@ -13,6 +13,7 @@ in
     acceptTerms = true;
     defaults.email = "acme.2yrzm@mail.davidslt.es";
     certs."${domain}" = {
+      inherit domain;
       group = config.services.caddy.group;
       dnsProvider = "gandiv5";
       environmentFile = "/var/lib/caddy/acme-gandi-env";
