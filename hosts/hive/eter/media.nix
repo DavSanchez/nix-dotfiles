@@ -79,7 +79,7 @@ lib.mkMerge [
 
       flood = {
         enable = true;
-        port = 8112;
+        host = "127.0.0.1";
         extraArgs = [ "--rtsocket=${config.services.rtorrent.rpcSocket}" ];
       };
 
