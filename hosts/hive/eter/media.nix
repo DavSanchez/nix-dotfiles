@@ -68,22 +68,20 @@ lib.mkMerge [
 
       qbittorrent = {
         enable = true;
+        openFirewall = true;
         profileDir = "/seclusium/zg/qbittorrent";
       };
 
       rtorrent = {
-        enable = true;
+        enable = false;
         openFirewall = true;
         dataDir = "/seclusium/zg/rtorrent";
       };
 
       flood = {
-        enable = true;
+        enable = false;
         host = "127.0.0.1";
-        extraArgs = [
-          "--rtsocket=${config.services.rtorrent.rpcSocket}"
-          "--baseuri=/flood"
-        ];
+        extraArgs = [ "--rtsocket=${config.services.rtorrent.rpcSocket}" ];
       };
 
       navidrome = {
@@ -159,12 +157,12 @@ lib.mkMerge [
         ];
       };
   }
-  (lib.mkIf (config.services.flood.enable) {
+  (lib.mkIf (config.services.rtorrent.enable) {
     # If you have lots of torrents in the seed you may see rtorrent stack-trace with "too many open files"
     # to increase the limit of open files use:
     systemd.services.rtorrent.serviceConfig.LimitNOFILE = 16384;
   })
-  (lib.mkIf (config.services.rtorrent.enable) {
+  (lib.mkIf (config.services.flood.enable && config.services.rtorrent.enable) {
     # allow access to the socket by putting it in the same group as rtorrent service
     # the socket will have g+w permissions
     systemd.services.flood.serviceConfig.SupplementaryGroups = [ config.services.rtorrent.group ];
