@@ -28,6 +28,7 @@
       reverse_proxy /navidrome/* http://127.0.0.1:${toString config.services.navidrome.settings.Port}
     '';
   };
+  
   services.prometheus = {
     enable = false;
     port = 9001;
