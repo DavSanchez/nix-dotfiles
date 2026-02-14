@@ -17,7 +17,18 @@ in
       group = config.services.caddy.group;
       dnsProvider = "gandiv5";
       environmentFile = "/var/lib/caddy/acme-gandi-env";
-      extraDomainNames = [ "*.${domain}" ];
+      extraDomainNames = [
+        "grafana.${domain}"
+        "prometheus.${domain}"
+        "qbittorrent.${domain}"
+        "radarr.${domain}"
+        "lidarr.${domain}"
+        "sonarr.${domain}"
+        "prowlarr.${domain}"
+        "flood.${domain}"
+        "navidrome.${domain}"
+        "jellyfin.${domain}"
+      ];
     };
   };
 
