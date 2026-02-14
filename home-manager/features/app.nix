@@ -43,7 +43,7 @@ lib.mkMerge [
     launchd.agents.raycast = {
       enable = true;
       config = {
-        Program = builtins.toString (
+        Program = toString (
           lib.path.append (
             /. + config.home.homeDirectory
           ) "Applications/Home Manager Apps/Raycast.app/Contents/MacOS/Raycast"
@@ -59,7 +59,7 @@ lib.mkMerge [
     launchd.agents.alt-tab = {
       enable = true;
       config = {
-        Program = builtins.toString (
+        Program = toString (
           lib.path.append (
             /. + config.home.homeDirectory
           ) "Applications/Home Manager Apps/AltTab.app/Contents/MacOS/AltTab"
@@ -75,7 +75,7 @@ lib.mkMerge [
     launchd.agents.stats = {
       enable = true;
       config = {
-        Program = builtins.toString (
+        Program = toString (
           lib.path.append (
             /. + config.home.homeDirectory
           ) "Applications/Home Manager Apps/Stats.app/Contents/MacOS/Stats"
