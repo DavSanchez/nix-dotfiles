@@ -3,37 +3,102 @@
   config,
   ...
 }:
+let
+  domain = "eter.davidslt.es";
+in
 {
+  # ACME certificate via DNS-01 challenge (Let's Encrypt + Gandi)
+  security.acme = {
+    acceptTerms = true;
+    defaults.email = "acme.2yrzm@mail.davidslt.es";
+    certs."${domain}" = {
+      group = config.services.caddy.group;
+      dnsProvider = "gandiv5";
+      environmentFile = "/var/lib/caddy/acme-gandi-env";
+      extraDomainNames = [ "*.${domain}" ];
+    };
+  };
+
+  # # Allow Caddy to read the ACME certificates
+  # users.users.caddy.extraGroups = [ "acme" ];
+
   # grafana configuration
   services.grafana = {
     enable = false;
     settings.server = {
       http_port = 2342;
-      root_url = "http://${name}.local/grafana/";
-      serve_from_sub_path = true;
+      root_url = "https://grafana.${domain}/";
     };
   };
   # caddy reverse proxy
   services.caddy = {
     enable = true;
-    virtualHosts."${name}.local".extraConfig = ''
-      reverse_proxy /grafana/* http://127.0.0.1:${toString config.services.grafana.settings.server.http_port}
-      reverse_proxy /prometheus/* http://127.0.0.1:${toString config.services.prometheus.port}
-      reverse_proxy /qbittorrent/* http://127.0.0.1:${toString config.services.qbittorrent.webuiPort}
-      reverse_proxy /radarr/* http://127.0.0.1:${toString config.services.radarr.settings.server.port}
-      reverse_proxy /lidarr/* http://127.0.0.1:${toString config.services.lidarr.settings.server.port}
-      reverse_proxy /sonarr/* http://127.0.0.1:${toString config.services.sonarr.settings.server.port}
-      reverse_proxy /prowlarr/* http://127.0.0.1:${toString config.services.prowlarr.settings.server.port}
-      reverse_proxy /flood/* http://127.0.0.1:${toString config.services.flood.port}
-      reverse_proxy /navidrome/* http://127.0.0.1:${toString config.services.navidrome.settings.Port}
-      reverse_proxy /jellyfin/* http://127.0.0.1:8096
-    '';
+    virtualHosts."grafana.${domain}" = {
+      useACMEHost = domain;
+      extraConfig = ''
+        reverse_proxy http://127.0.0.1:${toString config.services.grafana.settings.server.http_port}
+      '';
+    };
+    virtualHosts."prometheus.${domain}" = {
+      useACMEHost = domain;
+      extraConfig = ''
+        reverse_proxy http://127.0.0.1:${toString config.services.prometheus.port}
+      '';
+    };
+    virtualHosts."qbittorrent.${domain}" = {
+      useACMEHost = domain;
+      extraConfig = ''
+        reverse_proxy http://127.0.0.1:${toString config.services.qbittorrent.webuiPort}
+      '';
+    };
+    virtualHosts."radarr.${domain}" = {
+      useACMEHost = domain;
+      extraConfig = ''
+        reverse_proxy http://127.0.0.1:${toString config.services.radarr.settings.server.port}
+      '';
+    };
+    virtualHosts."lidarr.${domain}" = {
+      useACMEHost = domain;
+      extraConfig = ''
+        reverse_proxy http://127.0.0.1:${toString config.services.lidarr.settings.server.port}
+      '';
+    };
+    virtualHosts."sonarr.${domain}" = {
+      useACMEHost = domain;
+      extraConfig = ''
+        reverse_proxy http://127.0.0.1:${toString config.services.sonarr.settings.server.port}
+      '';
+    };
+    virtualHosts."prowlarr.${domain}" = {
+      useACMEHost = domain;
+      extraConfig = ''
+        reverse_proxy http://127.0.0.1:${toString config.services.prowlarr.settings.server.port}
+      '';
+    };
+    virtualHosts."flood.${domain}" = {
+      useACMEHost = domain;
+      extraConfig = ''
+        reverse_proxy http://127.0.0.1:${toString config.services.flood.port}
+      '';
+    };
+    virtualHosts."navidrome.${domain}" = {
+      useACMEHost = domain;
+      extraConfig = ''
+        reverse_proxy http://127.0.0.1:${toString config.services.navidrome.settings.Port}
+      '';
+    };
+    virtualHosts."jellyfin.${domain}" = {
+      useACMEHost = domain;
+      extraConfig = ''
+        reverse_proxy http://127.0.0.1:8096
+      '';
+    };
   };
 
   services.prometheus = {
     enable = false;
     port = 9001;
-    webExternalUrl = "http://${name}.local/prometheus/";
+    webExternalUrl = "https://prometheus.${domain}/";
     exporters = {
       node = {
         enable = true;

@@ -89,7 +89,6 @@ lib.mkMerge [
         settings = {
           MusicFolder = "/seclusium/echoes/music";
           DataFolder = "/seclusium/echoes/navidrome";
-          BaseURL = "/navidrome";
         };
       };
     };
