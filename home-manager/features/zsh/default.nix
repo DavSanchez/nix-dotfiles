@@ -146,7 +146,7 @@
       export LESS_TERMCAP_ue=$'\E[0m' # reset underline
     '';
 
-    initExtra = '''';
+    initExtra = "";
   };
 
   home.packages = lib.optionals config.programs.zsh.enable [ pkgs.zsh-forgit ];

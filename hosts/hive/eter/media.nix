@@ -9,7 +9,6 @@
   services = {
     plex = {
       enable = false;
-      openFirewall = true;
       dataDir = "/seclusium/imagery/plex";
     };
 
@@ -22,18 +21,21 @@
     # Movies
     radarr = {
       enable = true;
+      openFirewall = true;
       dataDir = "/seclusium/imagery/radarr/.config/Radarr";
     };
 
     # Series
     sonarr = {
       enable = true;
+      openFirewall = true;
       dataDir = "/seclusium/imagery/sonarr/.config/Sonarr";
     };
 
     # Music
     lidarr = {
       enable = true;
+      openFirewall = true;
       dataDir = "/seclusium/echoes/lidarr/.config/Lidarr";
     };
 
@@ -50,6 +52,7 @@
     # Indexers
     prowlarr = {
       enable = true;
+      openFirewall = true;
     };
 
     transmission = {
@@ -68,16 +71,15 @@
 
     qbittorrent = {
       enable = true;
-      profileDir = "/seclusium/zg/qbittorrent";
       openFirewall = true;
+      profileDir = "/seclusium/zg/qbittorrent";
     };
 
     navidrome = {
-      enable = false;
+      enable = true;
       settings = {
-        MusicFolder = "/seclusium/echoes/apple_music/Music";
+        MusicFolder = "/seclusium/echoes/music";
         DataFolder = "/seclusium/echoes/navidrome";
-        BaseURL = "/navidrome";
       };
     };
   };
@@ -106,6 +108,11 @@
     }
     // lib.optionalAttrs config.services.qbittorrent.enable {
       qbittorrent.extraGroups = [
+        "multimedia"
+      ];
+    }
+    // lib.optionalAttrs config.services.rtorrent.enable {
+      rtorrent.extraGroups = [
         "multimedia"
       ];
     }

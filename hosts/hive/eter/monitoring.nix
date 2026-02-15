@@ -3,69 +3,108 @@
   config,
   ...
 }:
+let
+  # Setting DNS A records on the Gandi for certificate generation and reverse proxy configuration.
+  domain = "eter.davidslt.es";
+in
 {
+  # ACME certificate via DNS-01 challenge (Let's Encrypt + Gandi)
+  security.acme = {
+    acceptTerms = true;
+    defaults.email = "acme.2yrzm@mail.davidslt.es";
+    certs."${domain}" = {
+      inherit domain;
+      group = config.services.caddy.group;
+      dnsProvider = "gandiv5";
+      environmentFile = "/var/lib/caddy/acme-gandi-env";
+      extraDomainNames = [
+        "grafana.${domain}"
+        "prometheus.${domain}"
+        "qbittorrent.${domain}"
+        "radarr.${domain}"
+        "lidarr.${domain}"
+        "sonarr.${domain}"
+        "prowlarr.${domain}"
+        "flood.${domain}"
+        "navidrome.${domain}"
+        "jellyfin.${domain}"
+      ];
+    };
+  };
+
   # grafana configuration
   services.grafana = {
     enable = false;
     settings.server = {
       http_port = 2342;
-      http_addr = "127.0.0.1";
-      root_url = "http://${name}.local/grafana/";
-      serve_from_sub_path = true;
+      root_url = "https://grafana.${domain}/";
     };
   };
-  # nginx reverse proxy
-  services.nginx = {
+  # caddy reverse proxy
+  services.caddy = {
     enable = true;
-    virtualHosts."${name}.local" = {
-      locations = {
-        # These require that each application sets its "base URL" config to the same path
-        "/grafana/" = {
-          proxyPass = "http://${config.services.grafana.settings.server.http_addr}:${toString config.services.grafana.settings.server.http_port}";
-          proxyWebsockets = true;
-          recommendedProxySettings = true;
-        };
-        "/prometheus/" = {
-          proxyPass = "http://127.0.0.1:${toString config.services.prometheus.port}";
-          proxyWebsockets = true;
-          recommendedProxySettings = true;
-        };
-        # "/transmission/" = {
-        #   proxyPass = "http://127.0.0.1:9091";
-        #   proxyWebsockets = true;
-        #   recommendedProxySettings = true;
-        # };
-        "/qbittorrent/" = {
-          proxyPass = "http://127.0.0.1:8080";
-          recommendedProxySettings = true;
-        };
-        "/radarr/" = {
-          proxyPass = "http://127.0.0.1:7878";
-          proxyWebsockets = true;
-          recommendedProxySettings = true;
-        };
-        "/lidarr/" = {
-          proxyPass = "http://127.0.0.1:8686";
-          proxyWebsockets = true;
-          recommendedProxySettings = true;
-        };
-        "/sonarr/" = {
-          proxyPass = "http://127.0.0.1:8989";
-          proxyWebsockets = true;
-          recommendedProxySettings = true;
-        };
-        "/prowlarr/" = {
-          proxyPass = "http://127.0.0.1:9696";
-          proxyWebsockets = true;
-          recommendedProxySettings = true;
-        };
+    virtualHosts = {
+      "grafana.${domain}" = {
+        useACMEHost = domain;
+        extraConfig = ''
+          reverse_proxy http://127.0.0.1:${toString config.services.grafana.settings.server.http_port}
+        '';
+      };
+      "prometheus.${domain}" = {
+        useACMEHost = domain;
+        extraConfig = ''
+          reverse_proxy http://127.0.0.1:${toString config.services.prometheus.port}
+        '';
+      };
+      "qbittorrent.${domain}" = {
+        useACMEHost = domain;
+        extraConfig = ''
+          reverse_proxy http://127.0.0.1:${toString config.services.qbittorrent.webuiPort}
+        '';
+      };
+      "radarr.${domain}" = {
+        useACMEHost = domain;
+        extraConfig = ''
+          reverse_proxy http://127.0.0.1:${toString config.services.radarr.settings.server.port}
+        '';
+      };
+      "lidarr.${domain}" = {
+        useACMEHost = domain;
+        extraConfig = ''
+          reverse_proxy http://127.0.0.1:${toString config.services.lidarr.settings.server.port}
+        '';
+      };
+      "sonarr.${domain}" = {
+        useACMEHost = domain;
+        extraConfig = ''
+          reverse_proxy http://127.0.0.1:${toString config.services.sonarr.settings.server.port}
+        '';
+      };
+      "prowlarr.${domain}" = {
+        useACMEHost = domain;
+        extraConfig = ''
+          reverse_proxy http://127.0.0.1:${toString config.services.prowlarr.settings.server.port}
+        '';
+      };
+      "navidrome.${domain}" = {
+        useACMEHost = domain;
+        extraConfig = ''
+          reverse_proxy http://127.0.0.1:${toString config.services.navidrome.settings.Port}
+        '';
+      };
+      "jellyfin.${domain}" = {
+        useACMEHost = domain;
+        extraConfig = ''
+          reverse_proxy http://127.0.0.1:8096
+        '';
       };
     };
   };
+
   services.prometheus = {
     enable = false;
     port = 9001;
-    webExternalUrl = "http://${name}.local/prometheus/";
+    webExternalUrl = "https://prometheus.${domain}/";
     exporters = {
       node = {
         enable = true;

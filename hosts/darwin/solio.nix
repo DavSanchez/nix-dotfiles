@@ -173,10 +173,11 @@
       "yacreader"
       "zen"
     ];
-    brews = [ 
+    brews = [
       "mole"
     ];
     masApps = {
+      "Amperfy" = 1530145038;
       "Amphetamine" = 937984704;
       "iMovie" = 408981434;
       "Keynote" = 409183694;

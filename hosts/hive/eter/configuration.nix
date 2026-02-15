@@ -63,6 +63,7 @@
     hostName = name;
     firewall.allowedTCPPorts = [
       80
+      443
     ]
     ++ lib.optionals config.services.nfs.server.enable [
       111

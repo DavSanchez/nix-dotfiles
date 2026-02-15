@@ -1,11 +1,6 @@
 # This is your home-manager configuration file
 # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
-{
-  inputs,
-  pkgs,
-  ...
-}:
-
+{ inputs, ... }:
 {
   # You can import other home-manager modules here
   imports = [
@@ -89,50 +84,6 @@
 
   catppuccin.enable = true;
   catppuccin.flavor = "mocha";
-
-  # https://www.dzombak.com/blog/2024/03/Keeping-a-SMB-share-mounted-on-macOS-and-alerting-when-it-does-down.html
-  launchd.agents = {
-    "smb-you-come-back-alive" = {
-      enable = true;
-      config = {
-        Program =
-          pkgs.writers.writeHaskellBin "you-come-back-alive" { } ''
-            {-# LANGUAGE TypeApplications #-}
-
-            import Control.Exception (catch, IOException)
-            import Control.Monad (void)
-            import Data.List (find, isPrefixOf)
-            import Data.Time (getCurrentTime)
-            import System.Directory (withCurrentDirectory)
-            import System.Process (callProcess, readProcess)
-            import System.IO (hPutStrLn, stderr)
-
-            main :: IO ()
-            main = do
-              currentTime <- getCurrentTime
-              catch keepMountAlive (\e -> hPutStrLn stderr (show currentTime ++ ":" ++ show @IOException e))
-              where
-                keepMountAlive :: IO ()
-                keepMountAlive = do
-                  mounts <- lines <$> readProcess "/sbin/mount" [] []
-                  let mountPoint = maybe (mountSmb >> pure "/Volumes/echoes") pure (mountLookup mounts)
-                  mountPoint >>= \mp -> withCurrentDirectory mp (void $ readFile ".liveness.txt")
-
-                mountLookup :: [String] -> Maybe FilePath
-                mountLookup mountList =
-                  find (\m -> "//david@eter/echoes" `isPrefixOf` m || "//david@eter.local/echoes" `isPrefixOf` m) mountList
-                    >>= \mountLine -> pure (words mountLine !! 2) -- Get the mount path from line of `mount` output
-
-                mountSmb :: IO ()
-                mountSmb = callProcess "/sbin/mount" ["-t", "smbfs", "//david@eter/echoes.local", "/Volumes/echoes"]
-          ''
-          + /bin/you-come-back-alive;
-        StartInterval = 10;
-        StandardErrorPath = "/Users/david/log/launchd/smb-you-come-back-alive/err.log";
-        StandardOutPath = "/Users/david/log/launchd/smb-you-come-back-alive/out.log";
-      };
-    };
-  };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   home.stateVersion = "25.11";
