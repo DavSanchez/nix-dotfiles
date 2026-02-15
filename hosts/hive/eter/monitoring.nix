@@ -86,12 +86,6 @@ in
           reverse_proxy http://127.0.0.1:${toString config.services.prowlarr.settings.server.port}
         '';
       };
-      "flood.${domain}" = {
-        useACMEHost = domain;
-        extraConfig = ''
-          reverse_proxy http://127.0.0.1:${toString config.services.flood.port}
-        '';
-      };
       "navidrome.${domain}" = {
         useACMEHost = domain;
         extraConfig = ''
