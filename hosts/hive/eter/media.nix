@@ -14,46 +14,30 @@
 
     jellyfin = {
       enable = true;
-      openFirewall = true;
       dataDir = "/seclusium/zg/jellyfin";
     };
 
     # Movies
     radarr = {
       enable = true;
-      openFirewall = true;
       dataDir = "/seclusium/imagery/radarr/.config/Radarr";
     };
-
     # Series
     sonarr = {
       enable = true;
-      openFirewall = true;
       dataDir = "/seclusium/imagery/sonarr/.config/Sonarr";
     };
-
     # Music
     lidarr = {
       enable = true;
-      openFirewall = true;
       dataDir = "/seclusium/echoes/lidarr/.config/Lidarr";
     };
-
     # Books
-    readarr = {
-      enable = false;
-    };
-
+    readarr.enable = false;
     # Subtitles
-    bazarr = {
-      enable = false;
-    };
-
+    bazarr.enable = false;
     # Indexers
-    prowlarr = {
-      enable = true;
-      openFirewall = true;
-    };
+    prowlarr.enable = true;
 
     transmission = {
       enable = false;
