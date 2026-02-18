@@ -2,6 +2,7 @@ _: {
   programs = {
     yazi = {
       enable = true;
+      shellWrapperName = "y";
 
       keymap = { };
       settings = { };
