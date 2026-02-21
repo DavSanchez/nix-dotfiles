@@ -9,6 +9,17 @@ let
     name = "${pkg}";
     inherit (pkgs.fishPlugins.${pkg}) src;
   };
+  helixModeFunctions =
+    let
+      dir = ./helix-mode-functions;
+      files = lib.attrNames (lib.readDir dir);
+    in
+    lib.listToAttrs (
+      map (name: {
+        name = lib.removeSuffix ".fish" name;
+        value = lib.readFile (dir + "/${name}");
+      }) (lib.filter (n: lib.hasSuffix ".fish" n) files)
+    );
 in
 {
   programs.fish = {
@@ -20,28 +31,13 @@ in
       #   onEvent = "fish_command_not_found";
       # };
       gitignore = "curl -sL https://www.gitignore.io/api/$argv";
-    };
+    }
+    // helixModeFunctions;
 
     interactiveShellInit = ''
       ${lib.optionalString pkgs.stdenv.isDarwin "/opt/homebrew/bin/brew shellenv | source"}
-      # https://fishshell.com/docs/current/interactive.html#vi-mode
-      set -g fish_key_bindings fish_vi_key_bindings
-
-      # Some emacs keybindings even though I'm using vi mode
-      bind -M default \ca beginning-of-line
-      bind -M insert \ca beginning-of-line
-      bind -M default \ce end-of-line
-      bind -M insert \ce end-of-line
-      bind -M default \cb backward-char
-      bind -M insert \cb backward-char
-      bind -M default \cf forward-char
-      bind -M insert \cf forward-char
-      bind -M default \cq backward-bigword
-      bind -M insert \cq backward-bigword
-      bind -M default \cw forward-bigword
-      bind -M insert \cw forward-bigword
-      bind -M default \cz complete-and-search
-      bind -M insert \cz complete-and-search
+      # `fish-helix` init
+      fish_helix_key_bindings
 
       # fifc plugin setup and keybinding
       set -Ux fifc_editor hx
@@ -132,5 +128,8 @@ in
   '';
 
   # For the "grc" plugin enabled above, we need grc as it does not provide the package
-  home.packages = lib.optionals config.programs.fish.enable [ pkgs.grc ];
+  home.packages = lib.optionals config.programs.fish.enable [
+    pkgs.grc
+    pkgs.perl # dependency for fish-helix keybindings
+  ];
 }
