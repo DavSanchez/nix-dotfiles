@@ -144,6 +144,7 @@
       # "background-music"
       "bartender"
       "brave-browser"
+      "claude"
       "crossover"
       "gqrx"
       "handbrake-app"

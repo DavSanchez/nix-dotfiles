@@ -1,9 +1,8 @@
 pkgs:
 (with pkgs.vscode-extensions; [
   ## Extensions present in nixpkgs
-  ## Clashing with complete list in ./extensions.nix, so case by case here
+  anthropic.claude-code
   arrterian.nix-env-selector
-  banacorn.agda-mode
   # betterthantomorrow.calva
   # catppuccin.catppuccin-vsc # Delegated to catppuccin flake
   # catppuccin.catppuccin-vsc-icons # Delegated to catppuccin flake
