@@ -5,11 +5,14 @@ _: {
   };
 
   programs = {
-    codex.enable = true;
 
     gemini-cli = {
       enable = true;
       # settings = { };
+    };
+
+    claude-code = {
+      enable = true;
     };
 
     opencode = {
