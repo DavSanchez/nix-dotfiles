@@ -65,6 +65,12 @@ pkgs:
     version = "0.1.1001";
     sha256 = "sha256-wWOlBsOJEQ8rjN3yMsegYg/8t3Jy6Gz/RyCn4/Ts7ZE=";
   }
+  {
+    name = "nix-embedded-highlighter";
+    publisher = "atomicspirit";
+    version = "0.0.1";
+    sha256 = "sha256-KZfUaPjReHQH0XCCiejAs+0Go8WEeGiOuxjkTfSnku0=";
+  }
   # {
   #   name = "vscode-keypromoter";
   #   publisher = "donebd";
