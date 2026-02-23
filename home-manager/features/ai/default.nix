@@ -8,7 +8,6 @@ _: {
 
     gemini-cli = {
       enable = true;
-      # settings = { };
     };
 
     claude-code = {
