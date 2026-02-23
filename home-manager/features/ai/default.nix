@@ -4,8 +4,8 @@ _: {
     ollama.enable = true;
   };
 
+  catppuccin.gemini-cli.enable = false; # settings.json is mutable by the CLI :(
   programs = {
-
     gemini-cli = {
       enable = true;
     };
