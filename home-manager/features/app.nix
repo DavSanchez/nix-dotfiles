@@ -34,26 +34,9 @@ lib.mkMerge [
       utm
       iina
       # ice-bar # Waiting for Tahoe compat
-      raycast
       alt-tab-macos
       stats
     ];
-
-    # This depends on having `raycast` installed. See `home.packages` above.
-    launchd.agents.raycast = {
-      enable = true;
-      config = {
-        Program = toString (
-          lib.path.append (
-            /. + config.home.homeDirectory
-          ) "Applications/Home Manager Apps/Raycast.app/Contents/MacOS/Raycast"
-        );
-        RunAtLoad = true;
-        KeepAlive = true;
-        StandardOutPath = "/tmp/raycast.log";
-        StandardErrPath = "/tmp/raycast.err.log";
-      };
-    };
 
     # This depends on having `alt-tab-macos` installed. See `home.packages` above.
     launchd.agents.alt-tab = {
