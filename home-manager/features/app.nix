@@ -11,7 +11,6 @@ lib.mkMerge [
         sniffnet
         # zotero
         # mtr-gui # Already using mtr
-        czkawka # Multi functional app to find duplicates, empty folders, similar images etc
         zathura
         imhex
         discord
@@ -26,6 +25,7 @@ lib.mkMerge [
           # logseq
           anytype # P2P note-taking app
           # yacreader
+          czkawka # Multi functional app to find duplicates, empty folders, similar images etc
         ]
       );
   }
