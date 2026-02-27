@@ -1,27 +1,10 @@
 {
-  name,
   config,
   pkgs,
   lib,
   ...
 }:
 {
-  # colmena specifics
-  deployment = {
-    # No other x86_64 builder yet, so...
-    buildOnTarget = true;
-    targetHost = "${name}.local";
-    targetUser = "david";
-    tags = [
-      "zima"
-      "seclusium"
-      "eter"
-    ];
-  };
-
-  #
-  # Normal NixOS configuration starts here.
-  #
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -60,7 +43,7 @@
   networking = {
     # Required for ZFS
     hostId = "bfbc2f21";
-    hostName = name;
+    hostName = "eter";
     firewall.allowedTCPPorts = [
       80
       443

@@ -8,7 +8,7 @@
     # You can access packages and modules from different nixpkgs revs
     # at the same time. Here's a working example:
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
-    # Also see the 'unstable-packages' overlay at 'overlays/default.nix'.
+    # Also see the 'stable-packages' overlay at 'overlays/default.nix'.
 
     # Home manager
     home-manager.url = "github:nix-community/home-manager";
@@ -18,9 +18,7 @@
     darwin.url = "github:LnL7/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
 
-    # TODO: Add any other flake you might need
     hardware.url = "github:nixos/nixos-hardware";
-    # nix-colors.url = "github:misterio77/nix-colors";
     nixos-raspberrypi.url = "github:nvmd/nixos-raspberrypi/main";
 
     nix-relic.url = "github:DavSanchez/Nix-Relic";
@@ -28,14 +26,16 @@
 
     # Editors
     ## NixVim
-    # If you are not running an unstable channel of nixpkgs, select the corresponding branch of nixvim.
-    # url = "github:nix-community/nixvim/nixos-23.05";
     nixvim.url = "github:nix-community/nixvim";
     nixvim.inputs.nixpkgs.follows = "nixpkgs";
     # nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
 
-    # Uniform colors across all apps?
+    # Uniform colors across all apps
     catppuccin.url = "github:catppuccin/nix";
+
+    # Deployment
+    deploy-rs.url = "github:serokell/deploy-rs";
+    deploy-rs.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -45,6 +45,7 @@
       home-manager,
       darwin,
       nixos-raspberrypi,
+      deploy-rs,
       ...
     }@inputs:
     let
@@ -86,6 +87,13 @@
           specialArgs = inputs;
           modules = [
             ./hosts/blackbee/configuration.nix
+          ];
+        };
+        eter = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = { inherit inputs; };
+          modules = [
+            ./hosts/eter/configuration.nix
           ];
         };
       };
@@ -133,9 +141,26 @@
         };
       };
 
-      # Fleet managed with colmena
-      colmena = import ./hosts/hive { inherit nixpkgs inputs; };
+      deploy.nodes = {
+        eter = {
+          hostname = "eter.local";
+          profiles.system = {
+            sshUser = "david";
+            user = "root";
+            remoteBuild = true;
+            path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.eter;
+          };
+        };
+        blackbee = {
+          hostname = "blackbee.local";
+          profiles.system = {
+            sshUser = "david";
+            user = "root";
+            path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.blackbee;
+          };
+        };
+      };
 
-      # Fleet managed with deploy-rs
+      checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
     };
 }

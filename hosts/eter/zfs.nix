@@ -1,4 +1,4 @@
-{ name, pkgs, ... }:
+{ pkgs, ... }:
 {
   # ZFS
   boot.supportedFilesystems = [ "zfs" ];
@@ -26,7 +26,7 @@
         host = "smtp.gmail.com";
         passwordeval = "cat /etc/emailpass.txt";
         user = "d.vinternatt@gmail.com";
-        from = "zed@${name}.local";
+        from = "zed@eter.local";
       };
     };
   };

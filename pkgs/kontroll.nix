@@ -3,8 +3,6 @@
   rustPlatform,
   fetchFromGitHub,
   protobuf,
-  stdenv,
-  darwin,
 }:
 
 rustPlatform.buildRustPackage rec {
