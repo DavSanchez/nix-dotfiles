@@ -27,12 +27,26 @@
       git = true;
       icons = "auto";
       colors = "auto";
+    };
 
+    television.enable = true;
+
+    nix-search-tv = {
+      enable = true;
+      settings = {
+        indexes = [
+          "nixpkgs"
+          "home-manager"
+          "nixos"
+          "darwin"
+          "nur"
+          "noogle"
+        ];
+      };
     };
 
     fzf = {
-      enable = true;
-
+      enable = false;
       changeDirWidgetCommand = "fd --type d";
       changeDirWidgetOptions = [ "--preview 'tree -C {} | head 200'" ];
       defaultCommand = "fd --type f";
@@ -68,22 +82,13 @@
       ];
     };
 
-    zoxide = {
-      enable = true;
-
-    };
+    zoxide.enable = true;
 
     less.enable = true;
 
-    xplr = {
-      enable = true;
-      extraConfig = "";
-      plugins = { };
-    };
+    xplr.enable = true;
 
-    lf = {
-      enable = true;
-    };
+    lf.enable = true;
 
     tealdeer = {
       enable = true;
@@ -94,22 +99,13 @@
       };
     };
 
-    navi = {
-      enable = true;
-
-    };
+    navi.enable = true;
 
     atuin = {
       enable = true;
-
-      # settings = {
-      #   inline_height = 40;
-      # };
+      flags = [ "--disable-ctrl-r" ]; # Using `television`, see above
     };
 
-    carapace = {
-      enable = true;
-
-    };
+    carapace.enable = true;
   };
 }

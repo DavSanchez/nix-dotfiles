@@ -34,7 +34,7 @@
         "golang"
         "helm"
         "history"
-        # "history-substring-search" # Using fzf instead
+        # "history-substring-search" # Using fzf/tv instead
         "kops"
         "kubectl"
         "minikube"
