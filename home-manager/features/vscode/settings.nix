@@ -72,4 +72,5 @@ pkgs: {
   "[github-actions-workflow]" = {
     "editor.defaultFormatter" = "redhat.vscode-yaml";
   };
+  "claudeCode.preferredLocation" = "panel";
 }
