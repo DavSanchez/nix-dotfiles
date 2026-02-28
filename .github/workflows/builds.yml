@@ -23,10 +23,10 @@ jobs:
         with:
           name: davsanchez
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
-      - name: Check flake
-        run: nix --verbose flake check -L
-      - name: Build NixOS config (eter)
+      - name: Build NixOS config for eter
         run: nix build ".#nixosConfigurations.eter.config.system.build.toplevel"
+      - name: Dry run deployment for eter
+        run: nix run github:serokell/deploy-rs -- .#eter --dry-activate
 
   linux-arm:
     name: 🐝 Build Linux configs (blackbee)
@@ -42,10 +42,10 @@ jobs:
         with:
           name: davsanchez
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
-      - name: Check flake
-        run: nix --verbose flake check -L
-      - name: Build NixOS config (blackbee)
+      - name: Build NixOS config for blackbee
         run: nix build ".#nixosConfigurations.blackbee.config.system.build.toplevel"
+      - name: Dry run deployment for blackbee
+        run: nix run github:serokell/deploy-rs -- .#blackbee --dry-activate
 
   darwin:
     name: 🍎 Build macOS configs (${{ matrix.type }})
@@ -70,8 +70,6 @@ jobs:
         with:
           name: davsanchez
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
-      - name: Check flake
-        run: nix --verbose flake check -L
       - name: Build ${{ matrix.type }} (solio)
         run: ${{ matrix.command }} ".#${{ matrix.prefix }}solio"
       - name: Build ${{ matrix.type }} (sierpe)
