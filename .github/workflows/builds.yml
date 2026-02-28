@@ -10,7 +10,7 @@ on:
 
 jobs:
   linux:
-    name: Build Linux configs
+    name: Build Linux configs (eter)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -23,13 +23,25 @@ jobs:
         with:
           name: davsanchez
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
-      # Commented out as this is aarch64-linux only
-      # - name: Home configs
-      #   run: nix run home-manager -- build --flake ".#david@nr-vm"
-      # - name: NixOS config (VM)
-      #   run: nix build --flake ".#nixosConfigurations.nr-vm-utm"
-      - name: Colmena configs
-        run: nix shell "nixpkgs#colmena" --command colmena build --on eter --no-build-on-target
+      - name: Build NixOS config (eter)
+        run: nix build ".#nixosConfigurations.eter.config.system.build.toplevel"
+
+  linux-arm:
+    name: Build Linux configs (blackbee)
+    runs-on: ubuntu-24.04-arm
+    steps:
+      - uses: actions/checkout@v6
+      - name: Free up space
+        run: bash .github/scripts/space_cleanup.sh
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: cachix/cachix-action@v16
+        with:
+          name: davsanchez
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+      - name: Build NixOS config (blackbee)
+        run: nix build ".#nixosConfigurations.blackbee.config.system.build.toplevel"
 
   macos:
     name: Build macOS configs (${{ matrix.type }})
