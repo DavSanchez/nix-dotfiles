@@ -54,7 +54,10 @@
     gh = {
       enable = true;
       gitCredentialHelper.enable = true;
-      settings = { };
+      settings = {
+        git_protocol = "ssh";
+      };
+      extensions = [ pkgs.gh-dash ];
     };
 
     gitui.enable = false;
