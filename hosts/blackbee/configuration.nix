@@ -24,8 +24,6 @@
         "david"
       ];
       experimental-features = "nix-command flakes";
-      # Workaround for https://github.com/NixOS/nix/issues/9574
-      nix-path = config.nix.nixPath;
     };
     gc = {
       automatic = true;
@@ -81,15 +79,13 @@
     };
   };
 
-  boot.loader.raspberryPi.bootloader = "kernel";
+  boot.loader.raspberry-pi.bootloader = "kernel";
 
-  system.nixos.tags =
-    let
-      cfg = config.boot.loader.raspberryPi;
-    in
-    [
-      "raspberry-pi-${cfg.variant}"
-      cfg.bootloader
-      config.boot.kernelPackages.kernel.version
-    ];
+  system.nixos.tags = [
+    "raspberry-pi-${config.boot.loader.raspberry-pi.variant}"
+    config.boot.loader.raspberry-pi.bootloader
+    config.boot.kernelPackages.kernel.version
+  ];
+
+  system.stateVersion = "25.11";
 }

@@ -1,5 +1,4 @@
 {
-  name,
   config,
   lib,
   pkgs,
@@ -48,7 +47,7 @@
       settings = {
         rpc-bind-address = "0.0.0.0";
         rpc-whitelist = "192.168.*.* 127.0.0.1";
-        rpc-host-whitelist = "${name}.local";
+        rpc-host-whitelist = "eter.local";
       };
       webHome = pkgs.flood-for-transmission;
     };

@@ -7,7 +7,7 @@
 {
   programs.zsh = {
     enable = true;
-    dotDir = builtins.toString (lib.path.append (/. + config.xdg.configHome) "zsh");
+    dotDir = toString (lib.path.append (/. + config.xdg.configHome) "zsh");
     enableCompletion = true;
     defaultKeymap = "emacs";
     autosuggestion.enable = true;
