@@ -24,7 +24,7 @@ jobs:
           name: davsanchez
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
       - name: Check flake
-        run: nix flake check -L
+        run: nix --verbose flake check -L
       - name: Build NixOS config (eter)
         run: nix build ".#nixosConfigurations.eter.config.system.build.toplevel"
 
@@ -43,7 +43,7 @@ jobs:
           name: davsanchez
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
       - name: Check flake
-        run: nix flake check -L
+        run: nix --verbose flake check -L
       - name: Build NixOS config (blackbee)
         run: nix build ".#nixosConfigurations.blackbee.config.system.build.toplevel"
 
@@ -71,7 +71,7 @@ jobs:
           name: davsanchez
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
       - name: Check flake
-        run: nix flake check -L
+        run: nix --verbose flake check -L
       - name: Build ${{ matrix.type }} (solio)
         run: ${{ matrix.command }} ".#${{ matrix.prefix }}solio"
       - name: Build ${{ matrix.type }} (sierpe)
