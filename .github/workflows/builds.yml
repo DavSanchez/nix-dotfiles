@@ -47,7 +47,7 @@ jobs:
       - name: Build NixOS config (blackbee)
         run: nix build ".#nixosConfigurations.blackbee.config.system.build.toplevel"
 
-  macos:
+  darwin:
     name: Build macOS configs (${{ matrix.type }})
     runs-on: macos-latest
     strategy:
@@ -76,3 +76,16 @@ jobs:
         run: ${{ matrix.command }} ".#${{ matrix.prefix }}solio"
       - name: Build ${{ matrix.type }} (sierpe)
         run: ${{ matrix.command }} ".#${{ matrix.prefix }}sierpe"
+
+  check:
+    if: always()
+    needs:
+    - linux
+    - linux-arm
+    - darwin
+    runs-on: ubuntu-latest
+    steps:
+    - name: 🟢 Decide whether the needed jobs succeeded or failed
+      uses: re-actors/alls-green@release/v1
+      with:
+        jobs: ${{ toJSON(needs) }}
