@@ -10,7 +10,7 @@ on:
 
 jobs:
   linux:
-    name: Build Linux configs (eter)
+    name: 🫧 Build Linux configs (eter)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -29,7 +29,7 @@ jobs:
         run: nix build ".#nixosConfigurations.eter.config.system.build.toplevel"
 
   linux-arm:
-    name: Build Linux configs (blackbee)
+    name: 🐝 Build Linux configs (blackbee)
     runs-on: ubuntu-24.04-arm
     steps:
       - uses: actions/checkout@v6
@@ -48,7 +48,7 @@ jobs:
         run: nix build ".#nixosConfigurations.blackbee.config.system.build.toplevel"
 
   darwin:
-    name: Build macOS configs (${{ matrix.type }})
+    name: 🍎 Build macOS configs (${{ matrix.type }})
     runs-on: macos-latest
     strategy:
       matrix:
@@ -78,14 +78,14 @@ jobs:
         run: ${{ matrix.command }} ".#${{ matrix.prefix }}sierpe"
 
   check:
+    name: 🟢 Decide whether the needed jobs succeeded or failed
     if: always()
     needs:
-    - linux
-    - linux-arm
-    - darwin
+      - linux
+      - linux-arm
+      - darwin
     runs-on: ubuntu-latest
     steps:
-    - name: 🟢 Decide whether the needed jobs succeeded or failed
-      uses: re-actors/alls-green@release/v1
-      with:
-        jobs: ${{ toJSON(needs) }}
+      - uses: re-actors/alls-green@release/v1
+        with:
+          jobs: ${{ toJSON(needs) }}
