@@ -143,7 +143,4 @@
   system.defaults.finder.AppleShowAllExtensions = true;
   system.keyboard.enableKeyMapping = true;
   system.keyboard.remapCapsLockToEscape = true;
-
-  system.configurationRevision = config.rev or config.dirtyRev or null;
-  system.stateVersion = 6;
 }
