@@ -5,7 +5,7 @@
     [
       procs
       procps
-      neofetch
+      fastfetch
       kontroll
     ]
     ++ lib.optionals pkgs.stdenv.isLinux [ kmon ];
