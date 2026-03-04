@@ -6,7 +6,7 @@ pkgs: {
   "editor.bracketPairColorization.enabled" = true;
   "editor.cursorSmoothCaretAnimation" = "on";
   "editor.fontFamily" =
-    "'Iosevka Slab', 'FiraCode Nerd Font', Menlo, Monaco, 'Courier New', monospace";
+    "'IosevkaTermSlab NF', 'FiraCode Nerd Font', Menlo, Monaco, 'Courier New', monospace";
   "editor.fontSize" = 14;
   "editor.fontLigatures" = true;
   "editor.formatOnPaste" = true;
@@ -47,7 +47,7 @@ pkgs: {
   "terminal.external.osxExec" = "Ghostty.app";
   "terminal.integrated.defaultProfile.linux" = "fish";
   "terminal.integrated.defaultProfile.osx" = "fish";
-  "terminal.integrated.fontFamily" = "'Iosevka Term Slab'";
+  "terminal.integrated.fontFamily" = "'IosevkaTermSlab NF'";
   "terminal.integrated.fontSize" = 14;
   "terminal.integrated.fontLigatures.enabled" = true;
   "terminal.integrated.scrollback" = 5000;
