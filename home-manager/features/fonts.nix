@@ -3,16 +3,16 @@
   fonts.fontconfig.enable = true;
 
   home.packages = with pkgs; [
-    iosevka # Allows for customization via privateBuildPlan
-
-    iosevka-custom # From my overlay
-    iosevka-term-custom # From my overlay
-    iosevka-slab-custom # From my overlay
-    iosevka-term-slab-custom # From my overlay
-
+    nerd-fonts.iosevka
+    nerd-fonts.iosevka-term
+    nerd-fonts.iosevka-term-slab
+    
     fira-code-symbols
     nerd-fonts.fira-code
     nerd-fonts.jetbrains-mono
+    nerd-fonts.monaspace
+
+    maple-mono
 
     # For sketchybar
     sketchybar-app-font

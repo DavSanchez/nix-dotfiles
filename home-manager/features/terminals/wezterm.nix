@@ -10,7 +10,7 @@ _: {
         window_background_opacity = 0.8,
         hide_tab_bar_if_only_one_tab = true,
         color_scheme = 'Catppuccin Mocha',
-        font = wezterm.font 'Iosevka Term Slab Custom',
+        font = wezterm.font 'Iosevka Term Slab',
         -- term = "wezterm",
         -- font = wezterm.font 'JetBrainsMono Nerd Font',
         window_decorations = "RESIZE",

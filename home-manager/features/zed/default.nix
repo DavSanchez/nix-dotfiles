@@ -10,7 +10,7 @@
     # userKeymaps = { };
     userSettings = {
       helix_mode = true;
-      buffer_font_family = "Iosevka Slab Custom";
+      buffer_font_family = "Iosevka Slab";
       load_direnv = "shell_hook";
       show_whitespaces = "all";
       autosave = {
