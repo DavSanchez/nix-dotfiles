@@ -12,7 +12,7 @@
     nerd-fonts.jetbrains-mono
     nerd-fonts.monaspace
 
-    maple-mono
+    maple-mono.NF
 
     # For sketchybar
     sketchybar-app-font
