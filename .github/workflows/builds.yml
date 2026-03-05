@@ -46,8 +46,11 @@ jobs:
       #   run: nix flake check -L
       - name: Build NixOS config (blackbee)
         run: nix build ".#nixosConfigurations.blackbee.config.system.build.toplevel"
+      - name: Pre-build nix-darwin Linux builder VM (for macOS CI)
+        run: nix build ".#darwinConfigurations.solio.config.nix.linux-builder.package.nixosConfig.system.build.toplevel"
 
   darwin:
+    needs: linux-arm
     name: 🍎 Build macOS configs (${{ matrix.type }})
     runs-on: macos-latest
     strategy:
