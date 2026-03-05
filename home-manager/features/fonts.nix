@@ -19,6 +19,9 @@
 
     maple-mono.NF
 
+    hasklig
+    nerd-fonts.hasklug
+
     # For sketchybar
     sketchybar-app-font
     nerd-fonts.hack
