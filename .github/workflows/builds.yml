@@ -47,18 +47,26 @@ jobs:
       - name: Build NixOS config (blackbee)
         run: nix build ".#nixosConfigurations.blackbee.config.system.build.toplevel"
 
-  darwin:
-    name: 🍎 Build macOS configs (${{ matrix.type }})
+  darwin-linux-builder:
+    name: 🔧 Pre-build Linux builder VM (for macOS CI)
+    runs-on: ubuntu-24.04-arm
+    steps:
+      - uses: actions/checkout@v6
+      - name: Free up space
+        run: bash .github/scripts/space_cleanup.sh
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: cachix/cachix-action@v16
+        with:
+          name: davsanchez
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+      - name: Build Linux builder VM
+        run: nix build ".#darwinConfigurations.solio.config.nix.linux-builder.package.nixosConfig.system.build.toplevel"
+
+  darwin-home-manager:
+    name: 🍎 Build macOS configs (home-manager)
     runs-on: macos-latest
-    strategy:
-      matrix:
-        include:
-          - type: home-manager
-            command: nix run home-manager -- build --flake
-            prefix: "david@"
-          - type: nix-darwin
-            command: nix run nix-darwin -- build --flake
-            prefix: ""
     steps:
       - uses: actions/checkout@v6
       - name: Free up space
@@ -72,10 +80,30 @@ jobs:
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
       # - name: Check flake
       #   run: nix flake check -L
-      - name: Build ${{ matrix.type }} (solio)
-        run: ${{ matrix.command }} ".#${{ matrix.prefix }}solio"
-      - name: Build ${{ matrix.type }} (sierpe)
-        run: ${{ matrix.command }} ".#${{ matrix.prefix }}sierpe"
+      - name: Build home-manager (solio)
+        run: nix run home-manager -- build --flake ".#david@solio"
+      - name: Build home-manager (sierpe)
+        run: nix run home-manager -- build --flake ".#david@sierpe"
+
+  darwin-nix-darwin:
+    needs: darwin-linux-builder
+    name: 🍎 Build macOS configs (nix-darwin)
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Free up space
+        run: bash .github/scripts/space_cleanup.sh
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: cachix/cachix-action@v16
+        with:
+          name: davsanchez
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+      - name: Build nix-darwin (solio)
+        run: nix run nix-darwin -- build --flake ".#solio"
+      - name: Build nix-darwin (sierpe)
+        run: nix run nix-darwin -- build --flake ".#sierpe"
 
   check:
     name: 🟢 Decide whether the needed jobs succeeded or failed
@@ -83,7 +111,9 @@ jobs:
     needs:
       - linux
       - linux-arm
-      - darwin
+      - darwin-linux-builder
+      - darwin-home-manager
+      - darwin-nix-darwin
     runs-on: ubuntu-latest
     steps:
       - uses: re-actors/alls-green@release/v1
