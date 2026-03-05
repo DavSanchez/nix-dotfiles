@@ -3,7 +3,7 @@
   fonts.fontconfig.enable = true;
 
   home.packages = with pkgs; [
-    iosevka
+    iosevka-bin
     nerd-fonts.iosevka
     nerd-fonts.iosevka-term
     nerd-fonts.iosevka-term-slab
@@ -18,6 +18,9 @@
     nerd-fonts.monaspace
 
     maple-mono.NF
+
+    hasklig
+    nerd-fonts.hasklug
 
     # For sketchybar
     sketchybar-app-font
