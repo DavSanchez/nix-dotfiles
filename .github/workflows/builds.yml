@@ -46,11 +46,26 @@ jobs:
       #   run: nix flake check -L
       - name: Build NixOS config (blackbee)
         run: nix build ".#nixosConfigurations.blackbee.config.system.build.toplevel"
-      - name: Pre-build nix-darwin Linux builder VM (for macOS CI)
+
+  darwin-linux-builder:
+    name: 🔧 Pre-build Linux builder VM (for macOS CI)
+    runs-on: ubuntu-24.04-arm
+    steps:
+      - uses: actions/checkout@v6
+      - name: Free up space
+        run: bash .github/scripts/space_cleanup.sh
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: cachix/cachix-action@v16
+        with:
+          name: davsanchez
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+      - name: Build Linux builder VM
         run: nix build ".#darwinConfigurations.solio.config.nix.linux-builder.package.nixosConfig.system.build.toplevel"
 
   darwin:
-    needs: linux-arm
+    needs: darwin-linux-builder
     name: 🍎 Build macOS configs (${{ matrix.type }})
     runs-on: macos-latest
     strategy:
@@ -86,6 +101,7 @@ jobs:
     needs:
       - linux
       - linux-arm
+      - darwin-linux-builder
       - darwin
     runs-on: ubuntu-latest
     steps:
