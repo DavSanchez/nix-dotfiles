@@ -9,7 +9,7 @@ _: {
         blur = true;
       };
       navigation.mode = "Plain";
-      fonts.family = "IosevkaTermSlab NF";
+      fonts.family = "IosevkaTermSlab NFM";
       fonts.size = 14;
     };
   };
