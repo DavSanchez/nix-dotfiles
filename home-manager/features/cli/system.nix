@@ -4,11 +4,13 @@
     with pkgs;
     [
       procs
-      procps
       fastfetch
       kontroll
     ]
-    ++ lib.optionals pkgs.stdenv.isLinux [ kmon ];
+    ++ lib.optionals pkgs.stdenv.isLinux [
+      kmon
+      uutils-uutils-procps
+    ];
 
   programs = {
     noti = {
