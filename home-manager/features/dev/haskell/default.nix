@@ -6,7 +6,7 @@
 
       cabal-install
       cabal-gild
-      cabal-add
+      # cabal-add
       # cabal-audit # broken
 
       haskell-language-server
