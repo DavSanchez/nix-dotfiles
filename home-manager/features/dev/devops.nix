@@ -1,9 +1,4 @@
 { lib, pkgs, ... }:
-let
-  limaWithGuests = pkgs.lima.override {
-    withAdditionalGuestAgents = true; # for emulating non-native architectures
-  };
-in
 {
   home.packages =
     (with pkgs; [
@@ -12,9 +7,7 @@ in
       docker-compose
       podman
       podman-compose
-      (colima.override {
-        lima = limaWithGuests;
-      })
+      colima
 
       act # GH Actions locally
       ctop # Monitor containers
@@ -36,7 +29,7 @@ in
 
       # ansible
       vagrant
-      limaWithGuests
+      lima-full
 
       ## Terraform
       # terraform
