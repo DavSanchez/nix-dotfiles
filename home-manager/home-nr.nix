@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ inputs, pkgs, ... }:
 {
   imports = [
     inputs.nixvim.homeModules.nixvim
@@ -7,7 +7,7 @@
     ./features/ai
     ./features/aws
     ./features/cli
-    ./features/dev/default-nr.nix
+    ./features/dev
     ./features/direnv
     # ./features/emacs
     ./features/git
@@ -61,6 +61,10 @@
   home.sessionPath = [
     "$HOME/.local/bin"
     "$HOME/.rd/bin"
+  ];
+
+  home.packages = with pkgs; [
+    postman
   ];
 
   programs.home-manager.enable = true;

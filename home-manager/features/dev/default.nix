@@ -9,7 +9,7 @@
     ./go.nix
     ./haskell
     ./java.nix
-    # ./kafka.nix
+    ./kafka.nix
     ./rust.nix
   ];
 
@@ -17,6 +17,7 @@
   home.packages =
     (with pkgs; [
       devenv
+      devcontainer
 
       ## Other
       gnumake

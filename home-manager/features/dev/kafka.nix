@@ -3,9 +3,7 @@
   home.packages = with pkgs; [
     kcat
     kaf
-    kcctl
-    # kaskade
-    avro-tools
+    kafkactl
     apacheKafka
   ];
 }
