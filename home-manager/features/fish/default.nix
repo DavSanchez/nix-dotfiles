@@ -25,10 +25,6 @@ in
     interactiveShellInit = ''
       ${lib.optionalString pkgs.stdenv.isDarwin "/opt/homebrew/bin/brew shellenv | source"}
 
-      # fifc plugin setup and keybinding
-      set -Ux fifc_editor hx
-      set -U fifc_keybinding \cx
-
       # Change greeting
       set -U fish_greeting "🐟"
     '';
