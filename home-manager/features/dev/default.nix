@@ -8,8 +8,8 @@
     ./fp.nix
     ./go.nix
     ./haskell
-    ./java.nix
-    ./kafka.nix
+    # ./java.nix
+    # ./kafka.nix
     ./rust.nix
   ];
 
