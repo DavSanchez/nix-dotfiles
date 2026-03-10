@@ -24,6 +24,8 @@
       just
       just-lsp
       # protobuf
+      
+      hoppscotch
     ])
     ++ lib.optionals pkgs.stdenv.isLinux [ pkgs.rr ];
 }
