@@ -14,6 +14,9 @@ lib.mkMerge [
         zathura
         imhex
         discord
+        czkawka # Multi functional app to find duplicates, empty folders, similar images etc
+        obsidian
+        obsidian-export
       ])
       ++ lib.optionals pkgs.stdenv.isLinux (
         with pkgs;
@@ -23,9 +26,8 @@ lib.mkMerge [
           vlc
           sonic-pi
           # logseq
-          anytype # P2P note-taking app
           # yacreader
-          czkawka # Multi functional app to find duplicates, empty folders, similar images etc
+          anytype # P2P note-taking app
         ]
       );
   }
