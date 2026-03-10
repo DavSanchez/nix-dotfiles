@@ -28,6 +28,7 @@
       # Testing APIs
       bruno
       bruno-cli
+      hoppscotch
     ])
     ++ lib.optionals pkgs.stdenv.isLinux [ pkgs.rr ];
 }
