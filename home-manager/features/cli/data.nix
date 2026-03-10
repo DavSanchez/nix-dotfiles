@@ -14,6 +14,7 @@
     grex
     binsider
     magika
+    glow
   ];
 
   programs.jq.enable = true;
