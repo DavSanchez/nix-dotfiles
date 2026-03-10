@@ -17,7 +17,6 @@ pkgs:
   github.vscode-github-actions
   github.vscode-pull-request-github
   golang.go
-  Google.gemini-cli-vscode-ide-companion
   gruntfuggly.todo-tree
   haskell.haskell
   # james-yu.latex-workshop
