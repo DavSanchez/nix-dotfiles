@@ -24,8 +24,10 @@
       just
       just-lsp
       # protobuf
-      
-      hoppscotch
+
+      # Testing APIs
+      bruno
+      bruno-cli
     ])
     ++ lib.optionals pkgs.stdenv.isLinux [ pkgs.rr ];
 }
