@@ -52,7 +52,7 @@
       macos-option-as-alt = "left";
     }
     // lib.optionalAttrs config.programs.fish.enable {
-      command = "${config.programs.fish.package}/bin/fish";
+      command = lib.getExe config.programs.fish.package;
     };
   }
   // lib.optionalAttrs pkgs.stdenv.isDarwin {
