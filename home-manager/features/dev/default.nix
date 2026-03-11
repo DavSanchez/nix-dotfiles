@@ -11,6 +11,7 @@
     # ./java.nix
     # ./kafka.nix
     ./rust.nix
+    ./api.nix
   ];
 
   ## Other packages
@@ -24,11 +25,6 @@
       just
       just-lsp
       # protobuf
-
-      # Testing APIs
-      bruno
-      bruno-cli
-      hoppscotch
     ])
     ++ lib.optionals pkgs.stdenv.isLinux [ pkgs.rr ];
 }
