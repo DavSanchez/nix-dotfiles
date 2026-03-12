@@ -38,61 +38,12 @@ stdenv.mkDerivation (finalAttrs: {
 
   installPhase = ''
     runHook preInstall
-
-    out_lib="$out/lib/prism"
-    mkdir -p "$out_lib"
-
-    # Copy compiled dist output and package.json for each workspace package.
-    # After yarn build, each packages/*/dist/ contains the compiled TypeScript.
-    for pkg in core http http-server cli; do
-      mkdir -p "$out_lib/packages/$pkg"
-      cp -r "packages/$pkg/dist" "$out_lib/packages/$pkg/"
-      cp "packages/$pkg/package.json" "$out_lib/packages/$pkg/"
-      # Copy any package-local node_modules (yarn may leave unhoisted deps here)
-      if [[ -d "packages/$pkg/node_modules" ]]; then
-        cp -r "packages/$pkg/node_modules" "$out_lib/packages/$pkg/"
-      fi
-    done
-
-    # Copy hoisted node_modules to the output, skipping:
-    #   - Hidden dirs (.yarn-integrity, .cache, .bin — build-only artifacts)
-    #   - Workspace package symlinks (recreated below with absolute store paths)
-    mkdir -p "$out_lib/node_modules"
-    for entry in node_modules/*/; do
-      name="$(basename "''${entry%/}")"
-      [[ "$name" == .* ]] && continue
-      [[ -L "node_modules/$name" ]] && continue
-      cp -r "$entry" "$out_lib/node_modules/"
-    done
-
-    # Handle @-scoped packages (e.g. @stoplight/json, @types/*, etc.)
-    for scope_dir in node_modules/@*/; do
-      [[ -d "$scope_dir" ]] || continue
-      scope="$(basename "''${scope_dir%/}")"
-      mkdir -p "$out_lib/node_modules/$scope"
-      for entry in "''${scope_dir}"*/; do
-        name="$(basename "''${entry%/}")"
-        # Skip workspace symlinks (e.g. @stoplight/prism-core -> ../../packages/core)
-        [[ -L "''${scope_dir}''${name}" ]] && continue
-        cp -r "$entry" "$out_lib/node_modules/$scope/"
-      done
-    done
-
-    # Recreate workspace package symlinks with absolute Nix store paths.
-    # In the source tree these were relative symlinks (../../packages/*), which
-    # would break after copying. Node.js resolves modules by traversing up from
-    # the entry point, so $out_lib/node_modules is found from packages/cli/dist/.
-    mkdir -p "$out_lib/node_modules/@stoplight"
-    for pkg in core http http-server cli; do
-      rm -rf "$out_lib/node_modules/@stoplight/prism-$pkg"
-      ln -sf "$out_lib/packages/$pkg" "$out_lib/node_modules/@stoplight/prism-$pkg"
-    done
-
-    # Wrap the CLI entry point with the correct Node.js interpreter
-    mkdir -p "$out/bin"
+    mkdir -p "$out/lib/prism" "$out/bin"
+    # -L resolves workspace symlinks (e.g. @stoplight/prism-cli -> ../../packages/cli)
+    # into real directories so the store path is self-contained.
+    cp -rL node_modules "$out/lib/prism/node_modules"
     makeWrapper "${nodejs}/bin/node" "$out/bin/prism" \
-      --add-flags "$out_lib/packages/cli/dist/index.js"
-
+      --add-flags "$out/lib/prism/node_modules/@stoplight/prism-cli/dist/index.js"
     runHook postInstall
   '';
 
