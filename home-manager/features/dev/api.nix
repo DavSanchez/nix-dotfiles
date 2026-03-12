@@ -7,6 +7,7 @@
       # Testing APIs
       openapi-tui
       openapi-generator-cli
+      prism-cli
     ]
   );
 }
