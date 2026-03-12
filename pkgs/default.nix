@@ -4,5 +4,5 @@
 {
   # example = pkgs.callPackage ./example { };
   kontroll = pkgs.callPackage ./kontroll.nix { };
-  prism = pkgs.callPackage ./prism.nix { };
+  prism-cli = pkgs.callPackage ./prism.nix { };
 }
