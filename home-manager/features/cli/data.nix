@@ -14,7 +14,7 @@
     grex
     binsider
     magika
-    glow
+    mdterm
   ];
 
   programs.jq.enable = true;
