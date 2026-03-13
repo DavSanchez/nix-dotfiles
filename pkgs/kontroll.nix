@@ -7,13 +7,13 @@
 
 rustPlatform.buildRustPackage rec {
   pname = "kontroll";
-  version = "1.0.3";
+  version = "1.0.4";
 
   src = fetchFromGitHub {
     owner = "zsa";
     repo = "kontroll";
     rev = version;
-    hash = "sha256-SSKAueJbDhziEwM6VcMKgvgdNdZWCXVJUj0P4EQtiKs=";
+    hash = "sha256-rixlq9w1r/TPV9FI076OLIk5Gs5UvfmjCnZ8wLWc3gc=";
   };
 
   cargoHash = "sha256-04jd5Oqm2Ec7rpj7x3FidRCtGJ10phEbOe0PsvgsS/Y=";
