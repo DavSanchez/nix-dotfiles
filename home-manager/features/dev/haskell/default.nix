@@ -7,12 +7,12 @@
       cabal-install
       cabal-gild
       # cabal-add
-      # cabal-audit
+      # cabal-audit # broken
 
-      # haskell-language-server # Langserver
+      haskell-language-server
       ghcid
 
-      # hoogle
+      hoogle
     ];
   };
 }
