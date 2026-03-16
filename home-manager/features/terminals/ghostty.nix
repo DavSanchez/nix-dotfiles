@@ -43,6 +43,11 @@
       ++ lib.optionals (!pkgs.stdenv.isDarwin) [
         "ctrl+n=new_window"
       ];
+      # Notify on command completion
+      notify-on-command-finish = "always"; # or "unfocused";
+      notify-on-command-finish-action = "bell,notify"; # configs can be negated
+      notify-on-command-finish-after = "10s"; # default 5s
+
     }
     // lib.optionalAttrs pkgs.stdenv.isDarwin {
       # keybind = [
