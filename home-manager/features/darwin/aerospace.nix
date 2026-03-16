@@ -40,6 +40,15 @@
       # Fallback value (if you omit the key): on-focused-monitor-changed = []
       on-focused-monitor-changed = [ "move-mouse monitor-lazy-center" ];
 
+      # Prevent ghostty tabs from registering as separate windows
+      # From <https://ghostty.org/docs/help/macos-tiling-wms#workarounds>
+      on-window-detected = [
+        {
+          "if".app-id = "com.mitchellh.ghostty";
+          run = [ "layout tiling" ];
+        }
+      ];
+
       # You can effectively turn off macOS "Hide application" (cmd-h) feature by toggling this flag
       # Useful if you don't use this macOS feature, but accidentally hit cmd-h or cmd-alt-h key
       # Also see: https://nikitabobko.github.io/AeroSpace/goodies#disable-hide-app
