@@ -72,6 +72,9 @@
   home.packages = with pkgs; [
     bruno
     bruno-cli
+
+    obsidian
+    obsidian-export
   ];
 
   # Force loading fish from zsh since I haven't enabled it globally for this config
