@@ -48,6 +48,12 @@
       notify-on-command-finish-action = "bell,notify"; # configs can be negated
       notify-on-command-finish-after = "10s"; # default 5s
 
+      custom-shader = map toString [
+        ./shaders/cursor_warp.glsl
+        ./shaders/ripple_cursor.glsl
+        ./shaders/crt_shader_with_chromatic_aberration_glow_scanlines_dot_matrix.glsl
+      ];
+      # custom-shader-animation = "always"; # if unfocus behavior is weird with the shaders
     }
     // lib.optionalAttrs pkgs.stdenv.isDarwin {
       # keybind = [

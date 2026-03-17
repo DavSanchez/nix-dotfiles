@@ -1,6 +1,6 @@
 _: {
   imports = [
-    ./ghostty.nix # main
+    ./ghostty # main
     ./wezterm.nix
     ./rio.nix
   ];
