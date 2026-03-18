@@ -8,7 +8,7 @@ pkgs:
   # catppuccin.catppuccin-vsc-icons # Delegated to catppuccin flake
   christian-kohler.path-intellisense
   davidanson.vscode-markdownlint
-  dbaeumer.vscode-eslint
+  # dbaeumer.vscode-eslint
   # dhall.dhall-lang
   # dhall.vscode-dhall-lsp-server
   editorconfig.editorconfig
@@ -32,7 +32,7 @@ pkgs:
   ms-vscode.hexeditor
   # ms-vscode.makefile-tools
   ms-vsliveshare.vsliveshare
-  mvllow.rose-pine
+  # mvllow.rose-pine
   redhat.vscode-yaml
   rust-lang.rust-analyzer
   skellock.just
@@ -42,7 +42,7 @@ pkgs:
   usernamehw.errorlens
   vadimcn.vscode-lldb
   valentjn.vscode-ltex
-  vscode-icons-team.vscode-icons
+  # vscode-icons-team.vscode-icons
   ziglang.vscode-zig
 ])
 ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
