@@ -3,6 +3,7 @@ pkgs:
   ## Extensions present in nixpkgs
   anthropic.claude-code
   arrterian.nix-env-selector
+  banacorn.agda-mode
   # betterthantomorrow.calva
   # catppuccin.catppuccin-vsc # Delegated to catppuccin flake
   # catppuccin.catppuccin-vsc-icons # Delegated to catppuccin flake
