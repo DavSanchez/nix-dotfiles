@@ -51,7 +51,6 @@
       # If you want to use overlays your own flake exports (from overlays dir):
       inputs.self.overlays.additions
       inputs.self.overlays.stable-packages
-      inputs.self.overlays.rosetta-packages
       inputs.self.overlays.modifications
 
       # Or define it inline, for example:
