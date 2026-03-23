@@ -74,6 +74,8 @@
 
     obsidian
     obsidian-export
+
+    yq-go
   ];
 
   # Force loading fish from zsh since I haven't enabled it globally for this config
