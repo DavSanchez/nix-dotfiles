@@ -131,6 +131,13 @@ float offsetFunction(float iTime) {
 void mainImage(out vec4 fragColor, in vec2 fragCoord) {
     vec2 uv = fragCoord.xy / iResolution.xy;
 
+    // Early exit when focused
+    if (iFocus == 1) {
+        // Render normal texture
+        fragColor = texture(iChannel0, uv);
+        return;
+    }
+
     // Apply Chromatic Aberration with alpha
     float amount = offsetFunction(iTime);
     vec4 colR = texture(iChannel0, vec2(uv.x-ABBERATION_FACTOR*amount / iResolution.x, uv.y));

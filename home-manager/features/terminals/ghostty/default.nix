@@ -51,7 +51,7 @@
       custom-shader = map toString [
         ./shaders/cursor_warp.glsl
         ./shaders/ripple_cursor.glsl
-        ./shaders/crt_shader_with_chromatic_aberration_glow_scanlines_dot_matrix.glsl
+        ./shaders/crt.glsl
       ];
       # custom-shader-animation = "always"; # if unfocus behavior is weird with the shaders
     }
