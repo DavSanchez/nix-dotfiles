@@ -150,6 +150,11 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord){
     fragColor = texture(iChannel0, fragCoord.xy / iResolution.xy);
     #endif
 
+    // Early return when unfocused
+    if (iFocus == 0) {
+        return;
+    }
+
     // normalization & setup(-1, 1 coords)
     vec2 vu = normalize(fragCoord, 1.);
     vec2 offsetFactor = vec2(-.5, 0.5);
