@@ -44,9 +44,8 @@
         "ctrl+n=new_window"
       ];
       # Notify on command completion
-      notify-on-command-finish = "always"; # or "unfocused";
+      notify-on-command-finish = "unfocused";
       notify-on-command-finish-action = "bell,notify"; # configs can be negated
-      notify-on-command-finish-after = "10s"; # default 5s
 
       custom-shader = map toString [
         ./shaders/cursor_warp.glsl
