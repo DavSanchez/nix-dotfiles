@@ -32,5 +32,8 @@
       # patchelf # present in ./nix.nix
     ];
 
-  services.tldr-update.enable = true;
+  services.tldr-update = {
+    enable = true;
+    package = pkgs.tlrc;
+  };
 }

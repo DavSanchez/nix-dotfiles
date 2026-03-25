@@ -7,6 +7,7 @@
 }:
 {
   imports = [
+    inputs.self.homeModules.tldr-update
     inputs.nixvim.homeModules.nixvim
     inputs.catppuccin.homeModules.catppuccin
 
