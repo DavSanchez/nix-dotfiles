@@ -23,10 +23,14 @@
       pciutils
 
       w3m
+
+      tlrc
     ]
     ++ lib.optionals pkgs.stdenv.isDarwin [ m-cli ]
     ++ lib.optionals pkgs.stdenv.isLinux [
       elfutils
       # patchelf # present in ./nix.nix
     ];
+
+  services.tldr-update.enable = true;
 }

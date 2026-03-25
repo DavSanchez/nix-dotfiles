@@ -91,7 +91,7 @@
     lf.enable = true;
 
     tealdeer = {
-      enable = true;
+      enable = false; # Using tlrc
       settings = {
         updates = {
           auto_update = true;
