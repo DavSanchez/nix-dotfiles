@@ -10,9 +10,6 @@
       # zbar # Barcode reading
       # xdot
       ffmpeg
-
-      # Download content from the internet
-      aria2
     ]
     ++ lib.optionals pkgs.stdenv.isLinux [
       ctpv
@@ -22,5 +19,6 @@
     yt-dlp.enable = true;
     feh.enable = true;
     rtorrent.enable = true;
+    aria2.enable = true;
   };
 }
