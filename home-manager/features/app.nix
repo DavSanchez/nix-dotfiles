@@ -15,7 +15,6 @@ lib.mkMerge [
         imhex
         discord
         czkawka # Multi functional app to find duplicates, empty folders, similar images etc
-        obsidian
         obsidian-export
       ])
       ++ lib.optionals pkgs.stdenv.isLinux (
@@ -30,6 +29,12 @@ lib.mkMerge [
           anytype # P2P note-taking app
         ]
       );
+
+    programs.obsidian = {
+      enable = true;
+      cli.enable = true;
+      # vaults are managed outside for now, will think on migration
+    };
   }
   (lib.mkIf pkgs.stdenv.isDarwin {
     home.packages = with pkgs; [
