@@ -140,25 +140,44 @@
         };
       };
 
-      deploy.nodes = {
-        eter = {
-          hostname = "eter.local";
-          profiles.system = {
-            sshUser = "david";
-            user = "root";
-            remoteBuild = true;
-            path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.eter;
+      deploy.nodes = forAllSystems (
+        system:
+        let
+          # nixpkgs with deploy-rs overlay but force the nixpkgs package
+          pkgs = import nixpkgs { inherit system; };
+          deployPkgs = import nixpkgs {
+            inherit system;
+            overlays = [
+              deploy-rs.overlay # or deploy-rs.overlays.default
+              (self: super: {
+                deploy-rs = {
+                  inherit (pkgs) deploy-rs;
+                  lib = super.deploy-rs.lib;
+                };
+              })
+            ];
           };
-        };
-        blackbee = {
-          hostname = "blackbee.local";
-          profiles.system = {
-            sshUser = "david";
-            user = "root";
-            path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.blackbee;
+        in
+        {
+          eter = {
+            hostname = "eter.local";
+            profiles.system = {
+              sshUser = "david";
+              user = "root";
+              remoteBuild = true;
+              path = deployPkgs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.eter;
+            };
           };
-        };
-      };
+          blackbee = {
+            hostname = "blackbee.local";
+            profiles.system = {
+              sshUser = "david";
+              user = "root";
+              path = deployPkgs.deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.blackbee;
+            };
+          };
+        }
+      );
 
       checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
     };
