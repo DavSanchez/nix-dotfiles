@@ -59,6 +59,21 @@
       # This is a function that generates an attribute by calling a function you
       # pass to it, with each system as an argument
       forAllSystems = nixpkgs.lib.genAttrs systems;
+
+      deployPkgs =
+        system:
+        import nixpkgs {
+          inherit system;
+          overlays = [
+            deploy-rs.overlays.default
+            (self: super: {
+              deploy-rs = {
+                inherit (import nixpkgs { inherit system; }) deploy-rs;
+                lib = super.deploy-rs.lib;
+              };
+            })
+          ];
+        };
     in
     {
       # Custom packages
@@ -147,7 +162,7 @@
             sshUser = "david";
             user = "root";
             remoteBuild = true;
-            path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.eter;
+            path = (deployPkgs "x86_64-linux").deploy-rs.lib.activate.nixos self.nixosConfigurations.eter;
           };
         };
         blackbee = {
@@ -155,11 +170,11 @@
           profiles.system = {
             sshUser = "david";
             user = "root";
-            path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.blackbee;
+            path = (deployPkgs "aarch64-linux").deploy-rs.lib.activate.nixos self.nixosConfigurations.blackbee;
           };
         };
       };
 
-      checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
+      checks = forAllSystems (system: (deployPkgs system).deploy-rs.lib.deployChecks self.deploy);
     };
 }
