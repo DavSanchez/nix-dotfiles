@@ -85,7 +85,7 @@
     casks = [
       "adobe-acrobat-reader"
       "affinity"
-      "anytype"
+      # "anytype"
       # "background-music"
       # "bartender"
       "brave-browser"
