@@ -26,7 +26,7 @@ lib.mkMerge [
           sonic-pi
           # logseq
           # yacreader
-          anytype # P2P note-taking app
+          # anytype # P2P note-taking app
         ]
       );
 
