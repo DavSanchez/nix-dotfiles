@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   home = {
-    packages = with pkgs.haskellPackages; [
+    packages = with pkgs; [
       ghc
 
       cabal-install
