@@ -130,6 +130,7 @@
       "Proton Pass for Safari" = 6502835663;
       "Reeder" = 6475002485;
       "reMarkable" = 1276493162;
+      "Tampermonkey" = 6738342400;
       "The Unarchiver" = 425424353;
       "uBlock Origin Lite" = 6745342698;
       "UTM" = 1538878817;
