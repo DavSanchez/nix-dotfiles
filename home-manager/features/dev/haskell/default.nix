@@ -5,7 +5,7 @@
       ghc
 
       cabal-install
-      cabal-gild
+      # cabal-gild
       # cabal-add
       # cabal-audit # broken
 
