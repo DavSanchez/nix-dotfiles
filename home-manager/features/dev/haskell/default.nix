@@ -9,7 +9,7 @@
     ]) ++ (with pkgs.haskellPackages; [
       cabal-gild
       cabal-add
-      cabal-audit
+      # cabal-audit
       hoogle
     ]);
   };
