@@ -1,18 +1,16 @@
 { pkgs, ... }:
 {
   home = {
-    packages = with pkgs.haskellPackages; [
+    packages = (with pkgs; [
       ghc
-
       cabal-install
-      cabal-gild
-      # cabal-add
-      # cabal-audit
-
-      # haskell-language-server # Langserver
+      haskell-language-server
       ghcid
-
-      # hoogle
-    ];
+    ]) ++ (with pkgs.haskellPackages; [
+      cabal-gild
+      cabal-add
+      # cabal-audit
+      hoogle
+    ]);
   };
 }
