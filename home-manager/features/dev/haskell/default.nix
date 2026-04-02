@@ -5,14 +5,14 @@
       ghc
 
       cabal-install
-      # haskellPackages.cabal-gild
+      haskellPackages.cabal-gild
       # cabal-add
       # cabal-audit # broken
 
       haskell-language-server
       ghcid
 
-      # haskellPackages.hoogle
+      haskellPackages.hoogle
     ];
   };
 }
