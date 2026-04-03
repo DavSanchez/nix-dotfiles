@@ -15,6 +15,7 @@
     binsider
     magika
     mdterm
+    rsync
   ];
 
   programs.jq.enable = true;
