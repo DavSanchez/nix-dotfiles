@@ -103,6 +103,7 @@
   environment.systemPackages = with pkgs; [
     bottom
     helix
+    yazi
   ];
 
   programs.nix-ld.enable = true;
