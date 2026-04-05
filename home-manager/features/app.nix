@@ -13,7 +13,6 @@ lib.mkMerge [
         # mtr-gui # Already using mtr
         zathura
         imhex
-        discord
         czkawka # Multi functional app to find duplicates, empty folders, similar images etc
         obsidian-export
       ])
