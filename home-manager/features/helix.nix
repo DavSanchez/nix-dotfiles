@@ -19,23 +19,5 @@
         };
       };
     };
-    languages = {
-      language = [
-        {
-          name = "nix";
-          language-servers = [
-            "nixd"
-            "nil"
-          ];
-          formatter = {
-            command = "${pkgs.nixfmt}/bin/nixfmt";
-          };
-        }
-      ];
-      language-server.nixd = {
-        command = "${pkgs.nixd}/bin/nixd";
-      };
-    };
   };
-
 }
