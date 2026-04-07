@@ -11,18 +11,18 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "prism-cli";
-  version = "5.14.3";
+  version = "5.15.6";
 
   src = fetchFromGitHub {
     owner = "stoplightio";
     repo = "prism";
-    rev = "adab4dd446d45d7e8b1588fe76a40dd0efaf8d33";
-    hash = "sha256-bVUwElcoKlDYxfytOGa8O2v2z2iczEqfL58PGNUOOSM=";
+    tag = "v${finalAttrs.version}";
+    hash = "sha256-TVY1hub6bC/4kl+DxUL7FPOQP44mQqcAUWfZP7dt3f8=";
   };
 
   yarnOfflineCache = fetchYarnDeps {
     yarnLock = finalAttrs.src + "/yarn.lock";
-    hash = "sha256-tFE9KLKOojfTqM1/5SNbA6fc36FGBMPKkPTJ0z1FIi0=";
+    hash = "sha256-/i0Z4IGZW/AfnaG49J0SnQPntVuEk0LvEC2S+VFN/mg=";
   };
 
   nativeBuildInputs = [
