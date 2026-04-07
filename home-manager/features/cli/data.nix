@@ -14,7 +14,7 @@
     grex
     binsider
     magika
-    mdterm
+    glow
     rsync
   ];
 
