@@ -5,14 +5,14 @@
   protobuf,
 }:
 
-rustPlatform.buildRustPackage rec {
+rustPlatform.buildRustPackage (finalAttrs: {
   pname = "kontroll";
   version = "1.0.4";
 
   src = fetchFromGitHub {
     owner = "zsa";
     repo = "kontroll";
-    rev = version;
+    tag = finalAttrs.version;
     hash = "sha256-rixlq9w1r/TPV9FI076OLIk5Gs5UvfmjCnZ8wLWc3gc=";
   };
 
@@ -22,19 +22,11 @@ rustPlatform.buildRustPackage rec {
     protobuf
   ];
 
-  # Integration tests ($src/tests) are not complete (trait impls are `todo!()`)
-  # so we just enable the rest
-  cargoTestFlags = [
-    "--lib"
-    "--bins"
-    "--examples"
-  ];
-
   meta = {
     description = "Kontroll demonstates how to control the Keymapp API, making it easy to control your ZSA keyboard from the command line and scripts";
     homepage = "https://github.com/zsa/kontroll";
     license = lib.licenses.mit;
-    maintainers = [ lib.maintainers.davsanchez ];
+    maintainers = with lib.maintainers; [ ];
     mainProgram = "kontroll";
   };
-}
+})
