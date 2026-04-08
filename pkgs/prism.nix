@@ -32,10 +32,6 @@ stdenv.mkDerivation (finalAttrs: {
     makeWrapper
   ];
 
-  # Root package.json build script: npm run clean && ttsc --build --verbose ./packages/tsconfig.build.json
-  # yarnBuildHook runs "yarn build" by default which matches. ttsc is available via node_modules/.bin
-  # since yarnConfigHook installs all deps (including devDeps) before build.
-
   installPhase = ''
     runHook preInstall
     mkdir -p "$out/lib/prism" "$out/bin"
