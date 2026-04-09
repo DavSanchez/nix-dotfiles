@@ -63,6 +63,8 @@ jobs:
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
       - name: Build Linux builder VM
         run: nix build ".#darwinConfigurations.solio.config.nix.linux-builder.package.nixosConfig.system.build.toplevel"
+      - name: Push Linux builder VM closure to Cachix (it has missed etc some times)
+        run: nix path-info --recursive ./result | cachix push davsanchez
 
   darwin-home-manager:
     name: 🍎 Build macOS configs (home-manager)
