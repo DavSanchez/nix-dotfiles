@@ -62,7 +62,7 @@ jobs:
           name: davsanchez
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
       - name: Build Linux builder VM
-        run: nix build ".#darwinConfigurations.solio.config.nix.linux-builder.package.nixosConfig.system.build.toplevel"
+        run: nix build ".#darwinConfigurations.solio.config.nix.linux-builder.package.nixosConfig.system.build.vm"
 
   darwin-home-manager:
     name: 🍎 Build macOS configs (home-manager)
