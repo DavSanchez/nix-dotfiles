@@ -17,6 +17,6 @@
       gcc
 
       # llvm
-      lldb
+      # lldb
     ];
 }
