@@ -75,6 +75,9 @@
     obsidian-export
 
     yq-go
+
+    trivy
+    lazytrivy
   ];
 
   # Force loading fish from zsh since I haven't enabled it globally for this config
