@@ -72,5 +72,6 @@ pkgs: {
   "[github-actions-workflow]" = {
     "editor.defaultFormatter" = "redhat.vscode-yaml";
   };
+  "chat.disableAIFeatures" = true; # I will use whatever provider
   "claudeCode.preferredLocation" = "panel";
 }
