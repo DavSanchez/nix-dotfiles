@@ -93,6 +93,7 @@
       "crossover"
       "gqrx"
       "handbrake-app"
+      "helium-browser"
       "keymapp"
       "krita"
       "little-snitch"
