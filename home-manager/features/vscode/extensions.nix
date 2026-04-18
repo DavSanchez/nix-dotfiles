@@ -1,7 +1,7 @@
 pkgs:
 (with pkgs.vscode-extensions; [
   ## Extensions present in nixpkgs
-  anthropic.claude-code
+  # anthropic.claude-code
   arrterian.nix-env-selector
   banacorn.agda-mode
   # betterthantomorrow.calva
