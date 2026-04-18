@@ -119,7 +119,7 @@
             inherit inputs;
           };
           modules = [
-            ./hosts/darwin/sierpe.nix
+            ./hosts/sierpe/configuration.nix
           ];
         };
         solio = darwin.lib.darwinSystem {
@@ -127,7 +127,7 @@
           specialArgs = {
             inherit inputs;
           };
-          modules = [ ./hosts/darwin/solio.nix ];
+          modules = [ ./hosts/solio/configuration.nix ];
         };
       };
 

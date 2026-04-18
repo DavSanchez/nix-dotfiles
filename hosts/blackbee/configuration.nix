@@ -1,64 +1,33 @@
 {
-  nixos-raspberrypi,
+  inputs,
   config,
   pkgs,
   ...
 }:
 {
-  imports = with nixos-raspberrypi.nixosModules; [
+  imports = with inputs.nixos-raspberrypi.nixosModules; [
     raspberry-pi-5.base
     raspberry-pi-5.bluetooth
+    ../nixos/nix.nix
+    ../nixos/locale.nix
+    ../nixos/ssh.nix
+    ../nixos/user.nix
   ];
-
-  nixpkgs = {
-    overlays = [ ];
-    config = {
-      allowUnfree = true;
-    };
-  };
-
-  nix = {
-    settings = {
-      trusted-users = [
-        "root"
-        "david"
-      ];
-      experimental-features = "nix-command flakes";
-    };
-    gc = {
-      automatic = true;
-      dates = "weekly";
-    };
-    optimise.automatic = true;
-  };
 
   networking = {
     hostName = "blackbee";
     wireless.enable = true;
   };
 
-  time.timeZone = "Atlantic/Canary";
-  console.keyMap = "es";
-
   users.users.david = {
     initialPassword = "changeme";
     isNormalUser = true;
     extraGroups = [ "wheel" ];
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILvM06bcMBkqNyadDKDGQXl4ztggBM1mgg5/CLqnqNvn davidslt+ssh@pm.me"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILVmyCytQRBGJMOdUawPjHZvHGfjovgHdq5o6hjmlW+P davidslt+ssh@pm.me"
-    ];
     packages = with pkgs; [
       helix
       yazi
       bottom
     ];
-  };
-
-  services.openssh = {
-    enable = true;
-    # settings.PermitRootLogin = "no";
-    # settings.PasswordAuthentication = false;
   };
 
   fileSystems = {
