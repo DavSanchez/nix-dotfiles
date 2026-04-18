@@ -98,7 +98,7 @@
 
       nixosConfigurations = {
         blackbee = nixos-raspberrypi.lib.nixosSystem {
-          specialArgs = inputs;
+          specialArgs = { inherit inputs; };
           modules = [
             ./hosts/blackbee/configuration.nix
           ];
