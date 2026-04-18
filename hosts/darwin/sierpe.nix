@@ -1,6 +1,13 @@
 { config, ... }:
 {
-  imports = [ ./common.nix ];
+  imports = [
+    ./nix.nix
+    ./homebrew.nix
+    ./system.nix
+    ./user.nix
+    ./shells.nix
+    ./services.nix
+  ];
 
   networking.hostName = "sierpe";
 
