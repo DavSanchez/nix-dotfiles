@@ -8,7 +8,10 @@
   imports = with inputs.nixos-raspberrypi.nixosModules; [
     raspberry-pi-5.base
     raspberry-pi-5.bluetooth
-    ../nixos/common.nix
+    ../nixos/nix.nix
+    ../nixos/locale.nix
+    ../nixos/ssh.nix
+    ../nixos/user.nix
   ];
 
   nix.gc = {

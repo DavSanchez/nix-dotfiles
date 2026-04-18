@@ -6,7 +6,10 @@
 }:
 {
   imports = [
-    ../nixos/common.nix
+    ../nixos/nix.nix
+    ../nixos/locale.nix
+    ../nixos/ssh.nix
+    ../nixos/user.nix
     ./hardware-configuration.nix
     ./fs_share.nix
     ./zfs.nix
