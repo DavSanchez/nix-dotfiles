@@ -3,7 +3,6 @@
   programs.helix = {
     enable = true;
     defaultEditor = true;
-    extraPackages = [ ]; # For ading LSPs and stuff
     settings = {
       editor = {
         auto-save = true;
