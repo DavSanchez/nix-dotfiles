@@ -6,7 +6,7 @@
 }:
 {
   imports = [
-    # Include the results of the hardware scan.
+    ../nixos/common.nix
     ./hardware-configuration.nix
     ./fs_share.nix
     ./zfs.nix
@@ -14,29 +14,11 @@
     ./media.nix
   ];
 
-  nixpkgs = {
-    overlays = [ ];
-    config = {
-      allowUnfree = true;
-    };
+  nix.gc = {
+    automatic = false; # managed by nh, below
+    dates = "weekly";
   };
 
-  nix = {
-    settings = {
-      trusted-users = [
-        "root"
-        "david"
-      ];
-      experimental-features = "nix-command flakes";
-    };
-    gc = {
-      automatic = false; # managed by nh, below
-      dates = "weekly";
-    };
-    optimise.automatic = true;
-  };
-
-  # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -66,26 +48,17 @@
     ];
   };
 
-  time.timeZone = "Atlantic/Canary";
-
-  console.keyMap = "es";
-
   users.users.david = {
     isNormalUser = true;
     description = "David";
     extraGroups = [
       "networkmanager"
       "wheel"
-
       "multimedia"
     ];
     packages = [
       # firefox
       # thunderbird
-    ];
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILvM06bcMBkqNyadDKDGQXl4ztggBM1mgg5/CLqnqNvn davidslt+ssh@pm.me"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILVmyCytQRBGJMOdUawPjHZvHGfjovgHdq5o6hjmlW+P davidslt+ssh@pm.me"
     ];
   };
   users.groups = {
@@ -108,12 +81,6 @@
 
   programs.nix-ld.enable = true;
   programs.direnv.enable = true;
-
-  services.openssh = {
-    enable = true;
-    settings.PermitRootLogin = "no";
-    settings.PasswordAuthentication = false;
-  };
 
   services.avahi = {
     enable = true;
