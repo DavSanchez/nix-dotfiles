@@ -13,6 +13,7 @@
     nix-output-monitor
     nix-update
     nix-diff
+    dix
     # statix # Lints and suggestions for Nix
     comma # Runs programs without installing them
     cachix
@@ -36,7 +37,7 @@
     nh = {
       enable = true;
       clean.enable = true;
-      flake = builtins.toString (lib.path.append (/. + config.home.homeDirectory) ".dotfiles");
+      flake = toString (lib.path.append (/. + config.home.homeDirectory) ".dotfiles");
     };
   };
 }
