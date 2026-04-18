@@ -17,11 +17,6 @@
     ./media.nix
   ];
 
-  nix.gc = {
-    automatic = false; # managed by nh, below
-    dates = "weekly";
-  };
-
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -66,11 +61,6 @@
   };
   users.groups = {
     multimedia = { };
-  };
-
-  programs.nh = {
-    enable = true;
-    clean.enable = true;
   };
 
   # Make deployments to this machine passwordless

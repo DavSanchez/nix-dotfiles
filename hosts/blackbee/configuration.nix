@@ -14,11 +14,6 @@
     ../nixos/user.nix
   ];
 
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-  };
-
   networking = {
     hostName = "blackbee";
     wireless.enable = true;
