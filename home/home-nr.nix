@@ -9,32 +9,32 @@
     inputs.nixvim.homeModules.nixvim
     inputs.catppuccin.homeModules.catppuccin
 
-    ./features/ai.nix
-    ./features/aws.nix
-    ./features/cli
-    ./features/dev
-    ./features/direnv.nix
-    # ./features/emacs
-    ./features/git
-    ./features/git/signing-nr.nix
-    ./features/neovim
-    ./features/nu.nix
-    ./features/starship.nix
-    ./features/vscode
-    ./features/zed.nix
-    ./features/zsh
-    ./features/bash.nix
-    ./features/fish.nix
-    ./features/zellij
-    ./features/terminals
-    ./features/fonts.nix
-    ./features/helix.nix
-    ./features/tmux.nix
-    ./features/nixpkgs.nix
-    ./features/theme.nix
+    ./modules/ai.nix
+    ./modules/aws.nix
+    ./modules/cli
+    ./modules/dev
+    ./modules/direnv.nix
+    # ./modules/emacs
+    ./modules/git
+    ./modules/git/signing-nr.nix
+    ./modules/neovim
+    ./modules/nu.nix
+    ./modules/starship.nix
+    ./modules/vscode
+    ./modules/zed.nix
+    ./modules/zsh
+    ./modules/bash.nix
+    ./modules/fish.nix
+    ./modules/zellij
+    ./modules/terminals
+    ./modules/fonts.nix
+    ./modules/helix.nix
+    ./modules/tmux.nix
+    ./modules/nixpkgs.nix
+    ./modules/theme.nix
 
     # Darwin specifics
-    ./features/darwin/aerospace.nix
+    ./modules/darwin/aerospace.nix
   ];
 
   home = {

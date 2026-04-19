@@ -137,21 +137,21 @@
           extraSpecialArgs = {
             inherit inputs;
           };
-          modules = [ ./home-manager/sierpe.nix ];
+          modules = [ ./home/sierpe.nix ];
         };
         "david@solio" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.aarch64-darwin;
           extraSpecialArgs = {
             inherit inputs;
           };
-          modules = [ ./home-manager/solio.nix ];
+          modules = [ ./home/solio.nix ];
         };
         "davidsanchez@nr" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.aarch64-darwin;
           extraSpecialArgs = {
             inherit inputs;
           };
-          modules = [ ./home-manager/home-nr.nix ];
+          modules = [ ./home/home-nr.nix ];
         };
       };
 
