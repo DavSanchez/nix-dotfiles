@@ -15,6 +15,7 @@ lib.mkMerge [
         imhex
         czkawka # Multi functional app to find duplicates, empty folders, similar images etc
         obsidian-export
+        motrix-next # Download manager
       ])
       ++ lib.optionals pkgs.stdenv.isLinux (
         with pkgs;
