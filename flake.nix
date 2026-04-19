@@ -92,7 +92,7 @@
       darwinModules = import ./modules/darwin;
       # Reusable home-manager modules you might want to export
       # These are usually stuff you would upstream into home-manager
-      homeModules = import ./modules/home-manager;
+      homeModules = import ./modules/home;
 
       # templates = import ./templates;
 
