@@ -9,44 +9,33 @@
     inputs.nixvim.homeModules.nixvim
     inputs.catppuccin.homeModules.catppuccin
 
-    ./features/ai
-    ./features/aws
+    ./features/ai.nix
+    ./features/aws.nix
     ./features/cli
     ./features/dev
-    ./features/direnv
+    ./features/direnv.nix
     # ./features/emacs
     ./features/git
     ./features/git/signing-nr.nix
     ./features/neovim
-    ./features/nu
-    ./features/starship
+    ./features/nu.nix
+    ./features/starship.nix
     ./features/vscode
-    ./features/zed
+    ./features/zed.nix
     ./features/zsh
-    ./features/bash
-    ./features/fish
+    ./features/bash.nix
+    ./features/fish.nix
     ./features/zellij
     ./features/terminals
-
     ./features/fonts.nix
     ./features/helix.nix
     ./features/tmux.nix
+    ./features/nixpkgs.nix
+    ./features/theme.nix
 
     # Darwin specifics
     ./features/darwin/aerospace.nix
   ];
-
-  nixpkgs = {
-    overlays = [
-      inputs.self.overlays.additions
-      inputs.self.overlays.stable-packages
-      inputs.self.overlays.modifications
-    ];
-    config = {
-      allowUnfree = true;
-      allowUnfreePredicate = _: true;
-    };
-  };
 
   home = {
     username = "davidsanchez";
@@ -84,12 +73,8 @@
   programs.ghostty.settings.command = lib.mkForce "zsh -c \"exec fish\"";
 
   programs.home-manager.enable = true;
-  programs.git.enable = true;
 
   xdg.enable = true;
-
-  catppuccin.enable = true;
-  catppuccin.flavor = "mocha";
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   home.stateVersion = "25.11";

@@ -7,7 +7,7 @@
     ./digital-design.nix
     ./fp.nix
     ./go.nix
-    ./haskell
+    ./haskell.nix
     # ./java.nix
     # ./kafka.nix
     ./rust.nix
