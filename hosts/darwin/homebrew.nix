@@ -18,6 +18,7 @@ _:
       "brave-browser"
       "claude"
       "crossover"
+      "google-gemini"
       "gqrx"
       "handbrake-app"
       "helium-browser"
