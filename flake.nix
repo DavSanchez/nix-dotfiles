@@ -100,14 +100,14 @@
         blackbee = nixos-raspberrypi.lib.nixosSystem {
           specialArgs = { inherit inputs; };
           modules = [
-            ./hosts/blackbee/configuration.nix
+            ./hosts/blackbee.nix
           ];
         };
         eter = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = { inherit inputs; };
           modules = [
-            ./hosts/eter/configuration.nix
+            ./hosts/eter.nix
           ];
         };
       };
@@ -119,7 +119,7 @@
             inherit inputs;
           };
           modules = [
-            ./hosts/sierpe/configuration.nix
+            ./hosts/sierpe.nix
           ];
         };
         solio = darwin.lib.darwinSystem {
@@ -127,7 +127,7 @@
           specialArgs = {
             inherit inputs;
           };
-          modules = [ ./hosts/solio/configuration.nix ];
+          modules = [ ./hosts/solio.nix ];
         };
       };
 
