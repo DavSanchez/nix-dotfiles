@@ -12,7 +12,7 @@ This repository is a **Nix Flake**. To use it, your Nix usage should have the ex
 1. (Non-NixOS), install Nix by going to <https://nixos.org/download/> and following instructions for your platform.
 2. (macOS) If you want to use the `nix-darwin` configurations, install `nix-darwin` via switching to one of the existing configs directly with `sudo nix --extra-experimental-features "nix-command flakes" run nix-darwin/master#darwin-rebuild -- switch --flake .#<HOSTNAME>`.
     - If there's no config you desire to apply just yet, follow the instructions to do a basic installation at [the `nix-darwin` repo](https://github.com/LnL7/nix-darwin).
-3. To use the `home-manager` configurations, install `home-manager` via switching to one of the existing configs directly with `nix --extra-experimental-features "nix-command flakes" run home-manager/master -- switch --flake .#<USER>@<HOSTNAME>`.
+3. To use the `home-manager` configurations, install `home-manager` via switching to one of the existing configs directly with `nix --extra-experimental-features "nix-command flakes" run home-manager/master -- switch --flake .#<USER>@<HOSTNAME>`. Configurations live in `home/`.
     - If you do not have an existing config that is applicable, follow the instructions to do a basic installation at [the `home-manager` repo](https://nix-community.github.io/home-manager/index.xhtml#ch-nix-flakes).
 4. Enjoy!
 
