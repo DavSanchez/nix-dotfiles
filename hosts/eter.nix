@@ -91,9 +91,11 @@
     tailscale = {
       enable = true;
     };
+
     librechat = {
-      enable = true;
+      enable = false;
     };
+
     ollama = {
       enable = true;
     };
