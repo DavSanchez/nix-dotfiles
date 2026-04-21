@@ -1,4 +1,5 @@
 {
+  inputs,
   config,
   pkgs,
   lib,
@@ -6,6 +7,8 @@
 }:
 {
   imports = [
+    inputs.sops-nix.nixosModules.sops
+
     ./modules/nixos/nix.nix
     ./modules/nixos/locale.nix
     ./modules/nixos/ssh.nix
@@ -93,6 +96,13 @@
     };
     ollama = {
       enable = true;
+    };
+
+    hermes-agent = {
+      enable = true;
+      settings.model.default = "anthropic/claude-sonnet-4"; # TODO change
+      environmentFiles = [ config.sops.secrets."hermes-env".path ]; # TODO setup
+      addToSystemPackages = true;
     };
   };
 

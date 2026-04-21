@@ -1,6 +1,8 @@
-{ config, ... }:
+{ inputs, config, ... }:
 {
   imports = [
+    inputs.sops-nix.darwinModules.sops
+
     ./modules/darwin/nix.nix
     ./modules/darwin/homebrew.nix
     ./modules/darwin/system.nix
