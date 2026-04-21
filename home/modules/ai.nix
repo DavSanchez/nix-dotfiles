@@ -1,4 +1,5 @@
-_: {
+{ pkgs, ... }:
+{
   # Starting simple
   services = {
     ollama.enable = true;
@@ -12,7 +13,6 @@ _: {
     opencode = {
       enable = true;
       settings = {
-        autoshare = false;
         plugin = [ "opencode-gemini-auth@latest" ];
       };
     };
@@ -21,4 +21,9 @@ _: {
       enable = true;
     };
   };
+
+  home.packages = with pkgs; [
+    llama-cpp
+    python313Packages.huggingface-hub
+  ];
 }
