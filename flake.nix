@@ -92,7 +92,7 @@
       darwinModules = import ./modules/darwin;
       # Reusable home-manager modules you might want to export
       # These are usually stuff you would upstream into home-manager
-      homeModules = import ./modules/home-manager;
+      homeModules = import ./modules/home;
 
       # templates = import ./templates;
 
@@ -100,14 +100,14 @@
         blackbee = nixos-raspberrypi.lib.nixosSystem {
           specialArgs = { inherit inputs; };
           modules = [
-            ./hosts/blackbee/configuration.nix
+            ./hosts/blackbee.nix
           ];
         };
         eter = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = { inherit inputs; };
           modules = [
-            ./hosts/eter/configuration.nix
+            ./hosts/eter.nix
           ];
         };
       };
@@ -119,7 +119,7 @@
             inherit inputs;
           };
           modules = [
-            ./hosts/sierpe/configuration.nix
+            ./hosts/sierpe.nix
           ];
         };
         solio = darwin.lib.darwinSystem {
@@ -127,7 +127,7 @@
           specialArgs = {
             inherit inputs;
           };
-          modules = [ ./hosts/solio/configuration.nix ];
+          modules = [ ./hosts/solio.nix ];
         };
       };
 
@@ -137,21 +137,21 @@
           extraSpecialArgs = {
             inherit inputs;
           };
-          modules = [ ./home-manager/sierpe.nix ];
+          modules = [ ./home/sierpe.nix ];
         };
         "david@solio" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.aarch64-darwin;
           extraSpecialArgs = {
             inherit inputs;
           };
-          modules = [ ./home-manager/solio.nix ];
+          modules = [ ./home/solio.nix ];
         };
         "davidsanchez@nr" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.aarch64-darwin;
           extraSpecialArgs = {
             inherit inputs;
           };
-          modules = [ ./home-manager/home-nr.nix ];
+          modules = [ ./home/home-nr.nix ];
         };
       };
 

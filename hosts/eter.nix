@@ -6,15 +6,15 @@
 }:
 {
   imports = [
-    ../nixos/nix.nix
-    ../nixos/locale.nix
-    ../nixos/ssh.nix
-    ../nixos/user.nix
-    ./hardware-configuration.nix
-    ./fs_share.nix
-    ./zfs.nix
-    ./monitoring.nix
-    ./media.nix
+    ./modules/nixos/nix.nix
+    ./modules/nixos/locale.nix
+    ./modules/nixos/ssh.nix
+    ./modules/nixos/user.nix
+    ./eter/hardware-configuration.nix
+    ./eter/fs_share.nix
+    ./eter/zfs.nix
+    ./eter/monitoring.nix
+    ./eter/media.nix
   ];
 
   boot.loader.systemd-boot.enable = true;

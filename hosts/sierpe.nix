@@ -1,12 +1,12 @@
 { config, ... }:
 {
   imports = [
-    ../darwin/nix.nix
-    ../darwin/homebrew.nix
-    ../darwin/system.nix
-    ../darwin/user.nix
-    ../darwin/shells.nix
-    ../darwin/services.nix
+    ./modules/darwin/nix.nix
+    ./modules/darwin/homebrew.nix
+    ./modules/darwin/system.nix
+    ./modules/darwin/user.nix
+    ./modules/darwin/shells.nix
+    ./modules/darwin/services.nix
   ];
 
   networking.hostName = "sierpe";
