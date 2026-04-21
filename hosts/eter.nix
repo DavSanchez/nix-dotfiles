@@ -84,8 +84,13 @@
     };
   };
 
-  services.tailscale = {
-    enable = true;
+  services = {
+    tailscale = {
+      enable = true;
+    };
+    librechat = {
+      enable = true;
+    };
   };
 
   system.stateVersion = "23.11";
