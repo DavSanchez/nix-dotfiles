@@ -1,5 +1,4 @@
-_:
-{
+_: {
   homebrew = {
     enable = true;
     enableBashIntegration = true;
@@ -10,8 +9,11 @@ _:
     onActivation.upgrade = true;
     onActivation.cleanup = "zap";
 
-    taps = [ ];
-    brews = [ "mole" ];
+    taps = [ "jundot/omlx" ];
+    brews = [
+      "mole"
+      "omlx"
+    ];
     casks = [
       "adobe-acrobat-reader"
       "affinity"
