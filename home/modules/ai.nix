@@ -24,6 +24,9 @@
 
   home.packages = with pkgs; [
     llama-cpp
+    llama-swap
     python313Packages.huggingface-hub
+
+    jan
   ];
 }
