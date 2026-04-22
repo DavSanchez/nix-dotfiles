@@ -2,6 +2,9 @@ _:
 {
   homebrew = {
     enable = true;
+    enableBashIntegration = true;
+    enableZshIntegration = true;
+    enableFishIntegration = true;
     global.brewfile = true;
     onActivation.autoUpdate = true;
     onActivation.upgrade = true;
