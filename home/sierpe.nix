@@ -4,6 +4,8 @@
     inputs.nixvim.homeModules.nixvim
     inputs.catppuccin.homeModules.catppuccin
 
+    inputs.self.homeModules.hermes-agent
+
     ./modules/ai.nix
     ./modules/aws.nix
     ./modules/cli

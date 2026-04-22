@@ -3,4 +3,5 @@
 {
   # List your module files here
   # my-module = import ./my-module.nix;
+  hermes-agent = import ./hermes-agent.nix;
 }
