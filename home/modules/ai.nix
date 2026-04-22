@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   # Starting simple
   services = {
@@ -22,11 +22,16 @@
     };
   };
 
-  home.packages = with pkgs; [
-    llama-cpp
-    llama-swap
-    python313Packages.huggingface-hub
+  home.packages =
+    with pkgs;
+    [
+      llama-cpp
+      llama-swap
+      python313Packages.huggingface-hub
 
-    jan
-  ];
+      llm
+    ]
+    ++ lib.optionals pkgs.stdenv.isDarwin [
+      jan
+    ];
 }
