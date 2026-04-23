@@ -3,6 +3,8 @@
   home.packages = with pkgs; [
     cotp
     # oath-toolkit
+    sops
+    age
   ];
 
   programs = {
