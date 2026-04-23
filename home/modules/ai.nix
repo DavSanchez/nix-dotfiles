@@ -6,7 +6,7 @@
   };
 
   programs = {
-    claude-code = {
+    codex = {
       enable = true;
     };
 
