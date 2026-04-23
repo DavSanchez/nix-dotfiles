@@ -7,7 +7,6 @@
 {
   programs.nushell = {
     enable = true;
-    package = pkgs.stable.nushell;
     environmentVariables = {
       DOTFILES = "${config.home.homeDirectory}/.dotfiles";
       EDITOR = "${pkgs.helix}/bin/hx";
@@ -19,10 +18,10 @@
 
     extraConfig = ''
       # Aliases from nu_scripts
-      source ${pkgs.stable.nu_scripts}/share/nu_scripts/aliases/bat/bat-aliases.nu
-      source ${pkgs.stable.nu_scripts}/share/nu_scripts/aliases/eza/eza-aliases.nu
-      source ${pkgs.stable.nu_scripts}/share/nu_scripts/aliases/docker/docker-aliases.nu
-      source ${pkgs.stable.nu_scripts}/share/nu_scripts/aliases/git/git-aliases.nu
+      source ${pkgs.nu_scripts}/share/nu_scripts/aliases/bat/bat-aliases.nu
+      source ${pkgs.nu_scripts}/share/nu_scripts/aliases/eza/eza-aliases.nu
+      source ${pkgs.nu_scripts}/share/nu_scripts/aliases/docker/docker-aliases.nu
+      source ${pkgs.nu_scripts}/share/nu_scripts/aliases/git/git-aliases.nu
 
       # Custom completions
       # TODO
@@ -35,7 +34,7 @@
     };
 
     plugins =
-      with pkgs.stable.nushellPlugins;
+      with pkgs.nushellPlugins;
       [
         # net # currently broken (not compatible with nu version)
         # units # currently broken (not compatible with nu version)
