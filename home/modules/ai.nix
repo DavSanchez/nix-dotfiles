@@ -1,4 +1,9 @@
-{ inputs, pkgs, lib, ... }:
+{
+  inputs,
+  pkgs,
+  lib,
+  ...
+}:
 {
   # Starting simple
   services = {
@@ -7,6 +12,9 @@
 
   programs = {
     codex = {
+      enable = true;
+    };
+    claude-code = {
       enable = true;
     };
 
