@@ -91,21 +91,6 @@
     tailscale = {
       enable = true;
     };
-
-    librechat = {
-      enable = false;
-    };
-
-    ollama = {
-      enable = true;
-    };
-
-    hermes-agent = {
-      enable = true;
-      settings.model.default = "anthropic/claude-sonnet-4"; # TODO change
-      environmentFiles = [ config.sops.secrets."hermes-env".path ]; # TODO setup
-      addToSystemPackages = true;
-    };
   };
 
   system.stateVersion = "23.11";

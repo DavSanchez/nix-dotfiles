@@ -10,6 +10,7 @@
     raspberry-pi-5.bluetooth
 
     inputs.sops-nix.nixosModules.sops
+    inputs.hermes-agent.nixosModules.default
 
     ./modules/nixos/nix.nix
     ./modules/nixos/locale.nix
@@ -58,6 +59,19 @@
     config.boot.loader.raspberry-pi.bootloader
     config.boot.kernelPackages.kernel.version
   ];
+
+  services = {
+    tailscale = {
+      enable = true;
+    };
+
+    hermes-agent = {
+      enable = true;
+      settings.model.default = "anthropic/claude-sonnet-4";
+      environmentFiles = [ config.sops.secrets."hermes-env".path ];
+      addToSystemPackages = true;
+    };
+  };
 
   system.stateVersion = "25.11";
 }
