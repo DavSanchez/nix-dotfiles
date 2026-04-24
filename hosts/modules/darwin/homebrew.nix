@@ -12,7 +12,7 @@ _: {
     taps = [ "jundot/omlx" ];
     brews = [
       "mole"
-      "omlx"
+      "jundot/omlx/omlx"
     ];
     casks = [
       "adobe-acrobat-reader"
