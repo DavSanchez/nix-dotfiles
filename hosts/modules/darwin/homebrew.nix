@@ -21,9 +21,7 @@ _: {
       # "background-music"
       # "bartender"
       "brave-browser"
-      "claude"
       "crossover"
-      "google-gemini"
       "gqrx"
       "handbrake-app"
       "helium-browser"
@@ -50,7 +48,6 @@ _: {
       "xld"
       "xquartz"
       "yacreader"
-      "zen"
     ];
     masApps = {
       "Amperfy" = 1530145038;
