@@ -65,6 +65,29 @@ _: {
       auto_update = false;
       hour_format = "hour24";
       option_as_meta = false;
+
+      lsp = {
+        rust-analyzer = {
+          binary = {
+            path_lookup = true;
+          };
+          initialization_options = {
+            check = {
+              command = "clippy";
+            };
+          };
+        };
+        nix = {
+          binary = {
+            path_lookup = true;
+          };
+        };
+        haskell-language-server = {
+          binary = {
+            path_lookup = true;
+          };
+        };
+      };
     };
 
     # extraPackages = [ ];
