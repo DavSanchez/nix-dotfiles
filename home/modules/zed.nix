@@ -1,4 +1,5 @@
-_: {
+{ pkgs, lib, ... }:
+{
   programs.zed-editor = {
     enable = true;
     extensions = [
@@ -22,6 +23,13 @@ _: {
           "monospace"
         ];
         max_scroll_history_lines = 5000;
+
+        shell = {
+          program = "${lib.getExe pkgs.fish}";
+        };
+        # scroll_multiplier = 3.0;
+        option_as_meta = true;
+
       };
       git = {
         inline_blame = {
@@ -64,7 +72,6 @@ _: {
       show_whitespaces = "all";
       auto_update = false;
       hour_format = "hour24";
-      option_as_meta = false;
 
       diagnostics = {
         inline = {
