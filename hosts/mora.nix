@@ -19,7 +19,7 @@
   ];
 
   networking = {
-    hostName = "blackbee";
+    hostName = "mora";
     wireless.enable = true;
   };
 

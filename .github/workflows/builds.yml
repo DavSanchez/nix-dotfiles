@@ -29,7 +29,7 @@ jobs:
         run: nix build ".#nixosConfigurations.eter.config.system.build.toplevel"
 
   linux-arm:
-    name: 🐝 Build Linux configs (blackbee)
+    name: 🫐 Build Linux configs (mora)
     runs-on: ubuntu-24.04-arm
     steps:
       - uses: actions/checkout@v6
@@ -44,8 +44,8 @@ jobs:
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
       # - name: Check flake
       #   run: nix flake check -L
-      - name: Build NixOS config (blackbee)
-        run: nix build ".#nixosConfigurations.blackbee.config.system.build.toplevel"
+      - name: Build NixOS config (mora)
+        run: nix build ".#nixosConfigurations.mora.config.system.build.toplevel"
 
   darwin-linux-builder:
     name: 🔧 Pre-build Linux builder VM (for macOS CI)

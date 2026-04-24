@@ -103,10 +103,10 @@
       # templates = import ./templates;
 
       nixosConfigurations = {
-        blackbee = nixos-raspberrypi.lib.nixosSystem {
+        mora = nixos-raspberrypi.lib.nixosSystem {
           specialArgs = { inherit inputs; };
           modules = [
-            ./hosts/blackbee.nix
+            ./hosts/mora.nix
           ];
         };
         eter = nixpkgs.lib.nixosSystem {
@@ -171,12 +171,12 @@
             path = (deployPkgs "x86_64-linux").deploy-rs.lib.activate.nixos self.nixosConfigurations.eter;
           };
         };
-        blackbee = {
-          hostname = "blackbee.local";
+        mora = {
+          hostname = "mora.local";
           profiles.system = {
             sshUser = "david";
             user = "root";
-            path = (deployPkgs "aarch64-linux").deploy-rs.lib.activate.nixos self.nixosConfigurations.blackbee;
+            path = (deployPkgs "aarch64-linux").deploy-rs.lib.activate.nixos self.nixosConfigurations.mora;
           };
         };
       };
