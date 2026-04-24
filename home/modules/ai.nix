@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ inputs, pkgs, lib, ... }:
 {
   # Starting simple
   services = {
@@ -30,6 +30,7 @@
       python313Packages.huggingface-hub
 
       llm
+      inputs.hermes-agent.packages.${pkgs.stdenv.hostPlatform.system}.default
     ]
     ++ lib.optionals pkgs.stdenv.isDarwin [
       jan
