@@ -71,6 +71,10 @@ _: {
           enabled = true;
         };
       };
+      code_lens = "on";
+      inlay_hints = {
+        enabled = true;
+      };
 
       lsp = {
         rust-analyzer = {
