@@ -304,11 +304,11 @@
         "systems": "systems_2"
       },
       "locked": {
-        "lastModified": 1776830812,
-        "narHash": "sha256-L2q0bpa6evlzE4IfIQ7JWqhTAuINggUSIxMmOAxUsCg=",
+        "lastModified": 1777011159,
+        "narHash": "sha256-E1laKghID0cclnIef9u98mlHHC4jFdxUXmQshDKFH2Y=",
         "owner": "nix-community",
         "repo": "nixvim",
-        "rev": "53aad7a9aaadaec21d740117ba0f0531b9a9b3cd",
+        "rev": "948b6c0125b35eab7b37e7f7edc79552027075a1",
         "type": "github"
       },
       "original": {
