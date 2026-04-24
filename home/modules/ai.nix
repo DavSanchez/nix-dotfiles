@@ -16,10 +16,6 @@
         plugin = [ "opencode-gemini-auth@latest" ];
       };
     };
-
-    aichat = {
-      enable = true;
-    };
   };
 
   home.packages =
