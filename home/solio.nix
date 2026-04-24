@@ -4,6 +4,8 @@
     inputs.nixvim.homeModules.nixvim
     inputs.catppuccin.homeModules.catppuccin
 
+    inputs.sops-nix.homeManagerModules.sops
+
     ./modules/ai.nix
     ./modules/aws.nix
     ./modules/cli

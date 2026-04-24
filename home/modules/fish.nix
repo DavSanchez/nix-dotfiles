@@ -23,8 +23,6 @@ in
     };
 
     interactiveShellInit = ''
-      ${lib.optionalString pkgs.stdenv.isDarwin "/opt/homebrew/bin/brew shellenv | source"}
-
       # Change greeting
       set -U fish_greeting "🐟"
     '';

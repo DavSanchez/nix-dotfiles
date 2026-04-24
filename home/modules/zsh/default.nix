@@ -134,7 +134,6 @@
     # envExtra = '' '';
 
     profileExtra = ''
-      ${lib.optionalString pkgs.stdenv.isDarwin "eval \"$(/opt/homebrew/bin/brew shellenv)\""}
       # Less variables (quoted inside sessionVariables so they don't work there)
       export LESS=-R
       export LESS_TERMCAP_mb=$'\E[1;31m' # begin blink

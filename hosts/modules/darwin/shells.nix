@@ -1,5 +1,4 @@
-_:
-{
+_: {
   programs = {
     zsh.enable = true;
     fish = {

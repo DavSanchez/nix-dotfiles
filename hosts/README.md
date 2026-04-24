@@ -8,7 +8,7 @@ their additional modules.
 
 | File | Platform | Role |
 | ---- | -------- | ---- |
-| `blackbee.nix` | NixOS (aarch64) | Raspberry Pi 5 |
+| `mora.nix` | NixOS (aarch64) | Raspberry Pi 5 |
 | `eter.nix` | NixOS (x86_64) | Home server |
 | `sierpe.nix` | nix-darwin (aarch64) | macOS |
 | `solio.nix` | nix-darwin (aarch64) | macOS |
@@ -22,5 +22,5 @@ and not intended as reusable modules for other flakes (those live in
 
 | Directory | Imported by |
 | --------- | ----------- |
-| `modules/nixos/` | `blackbee`, `eter` |
+| `modules/nixos/` | `mora`, `eter` |
 | `modules/darwin/` | `sierpe`, `solio` |

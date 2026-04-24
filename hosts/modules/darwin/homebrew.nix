@@ -1,14 +1,19 @@
-_:
-{
+_: {
   homebrew = {
     enable = true;
+    enableBashIntegration = true;
+    enableZshIntegration = true;
+    enableFishIntegration = true;
     global.brewfile = true;
     onActivation.autoUpdate = true;
     onActivation.upgrade = true;
     onActivation.cleanup = "zap";
 
-    taps = [ ];
-    brews = [ "mole" ];
+    taps = [ "jundot/omlx" ];
+    brews = [
+      "mole"
+      "omlx"
+    ];
     casks = [
       "adobe-acrobat-reader"
       "affinity"
@@ -16,9 +21,7 @@ _:
       # "background-music"
       # "bartender"
       "brave-browser"
-      "claude"
       "crossover"
-      "google-gemini"
       "gqrx"
       "handbrake-app"
       "helium-browser"
@@ -45,7 +48,6 @@ _:
       "xld"
       "xquartz"
       "yacreader"
-      "zen"
     ];
     masApps = {
       "Amperfy" = 1530145038;

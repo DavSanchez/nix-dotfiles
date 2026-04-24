@@ -1,4 +1,5 @@
 {
+  inputs,
   config,
   pkgs,
   lib,
@@ -6,6 +7,8 @@
 }:
 {
   imports = [
+    inputs.sops-nix.nixosModules.sops
+
     ./modules/nixos/nix.nix
     ./modules/nixos/locale.nix
     ./modules/nixos/ssh.nix
@@ -84,8 +87,10 @@
     };
   };
 
-  services.tailscale = {
-    enable = true;
+  services = {
+    tailscale = {
+      enable = true;
+    };
   };
 
   system.stateVersion = "23.11";

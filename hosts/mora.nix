@@ -8,6 +8,10 @@
   imports = with inputs.nixos-raspberrypi.nixosModules; [
     raspberry-pi-5.base
     raspberry-pi-5.bluetooth
+
+    inputs.sops-nix.nixosModules.sops
+    inputs.hermes-agent.nixosModules.default
+
     ./modules/nixos/nix.nix
     ./modules/nixos/locale.nix
     ./modules/nixos/ssh.nix
@@ -15,7 +19,7 @@
   ];
 
   networking = {
-    hostName = "blackbee";
+    hostName = "mora";
     wireless.enable = true;
   };
 
@@ -55,6 +59,19 @@
     config.boot.loader.raspberry-pi.bootloader
     config.boot.kernelPackages.kernel.version
   ];
+
+  services = {
+    tailscale = {
+      enable = true;
+    };
+
+    # hermes-agent = {
+    #   enable = true;
+    #   settings.model.default = "anthropic/claude-sonnet-4";
+    #   environmentFiles = [ config.sops.secrets."hermes-env".path ];
+    #   addToSystemPackages = true;
+    # };
+  };
 
   system.stateVersion = "25.11";
 }

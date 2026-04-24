@@ -1,20 +1,34 @@
-_: {
+{ inputs, pkgs, lib, ... }:
+{
   # Starting simple
   services = {
     ollama.enable = true;
   };
 
   programs = {
-    claude-code = {
+    codex = {
       enable = true;
     };
 
     opencode = {
       enable = true;
       settings = {
-        autoshare = false;
         plugin = [ "opencode-gemini-auth@latest" ];
       };
     };
   };
+
+  home.packages =
+    with pkgs;
+    [
+      llama-cpp
+      llama-swap
+      python313Packages.huggingface-hub
+
+      llm
+      inputs.hermes-agent.packages.${pkgs.stdenv.hostPlatform.system}.default
+    ]
+    ++ lib.optionals pkgs.stdenv.isDarwin [
+      jan
+    ];
 }

@@ -1,5 +1,4 @@
-_:
-{
+_: {
   services = {
     tailscale = {
       enable = false; # Using standalone application for now
