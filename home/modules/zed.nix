@@ -16,11 +16,9 @@
         # font_size= 14.0;
         font_family = "Iosevka Term Slab";
         font_fallbacks = [
-          "FiraCode"
           "Menlo"
           "Monaco"
           "Courier New"
-          "monospace"
         ];
         max_scroll_history_lines = 5000;
 
@@ -42,11 +40,9 @@
       };
       # buffer_font_size = 14.0;
       buffer_font_fallbacks = [
-        "FiraCode"
         "Menlo"
         "Monaco"
         "Courier New"
-        "monospace"
       ];
       file_types = {
         haskell = [
@@ -71,8 +67,9 @@
       relative_line_numbers = "enabled";
       show_whitespaces = "all";
       auto_update = false;
-      hour_format = "hour24";
-
+      journal = {
+        hour_format = "hour24";
+      };
       diagnostics = {
         inline = {
           enabled = true;
@@ -85,23 +82,10 @@
 
       lsp = {
         rust-analyzer = {
-          binary = {
-            path_lookup = true;
-          };
           initialization_options = {
             check = {
               command = "clippy";
             };
-          };
-        };
-        nix = {
-          binary = {
-            path_lookup = true;
-          };
-        };
-        haskell-language-server = {
-          binary = {
-            path_lookup = true;
           };
         };
       };
