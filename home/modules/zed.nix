@@ -66,6 +66,12 @@ _: {
       hour_format = "hour24";
       option_as_meta = false;
 
+      diagnostics = {
+        inline = {
+          enabled = true;
+        };
+      };
+
       lsp = {
         rust-analyzer = {
           binary = {
