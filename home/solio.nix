@@ -1,9 +1,10 @@
-{ inputs,  ... }:
+{ inputs, ... }:
 {
   imports = [
     inputs.nixvim.homeModules.nixvim
     inputs.catppuccin.homeModules.catppuccin
 
+    inputs.sops-nix.homeManagerModules.sops
     inputs.self.homeModules.hermes-agent
 
     ./modules/ai.nix
