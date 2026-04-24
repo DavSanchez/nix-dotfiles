@@ -12,8 +12,7 @@
     installVimSyntax = true;
 
     settings = {
-      theme = "catppuccin-mocha";
-      font-family = "IosevkaTermSlab NFM";
+      font-family = "Iosevka Term Slab";
       font-size = 14;
       background-opacity = 0.8;
       background-blur-radius = 20;

@@ -11,7 +11,7 @@ _: {
         hide_tab_bar_if_only_one_tab = true,
         color_scheme = 'Catppuccin Mocha',
         term = "wezterm",
-        font = wezterm.font 'IosevkaTermSlab NFM',
+        font = wezterm.font 'Iosevka Term Slab',
         -- font = wezterm.font 'JetBrainsMono Nerd Font',
         window_decorations = "RESIZE",
         front_end = "WebGpu",
