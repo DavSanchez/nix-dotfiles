@@ -26,8 +26,7 @@
           program = "${lib.getExe pkgs.fish}";
         };
         # scroll_multiplier = 3.0;
-        option_as_meta = true;
-
+        # option_as_meta = true; # `true` prevents writing `#` on term as it applies to both sides
       };
       git = {
         inline_blame = {
