@@ -65,10 +65,6 @@
   ];
 
   services = {
-    tailscale = {
-      enable = true;
-    };
-
     # hermes-agent = {
     #   enable = true;
     #   settings.model.default = "anthropic/claude-sonnet-4";
