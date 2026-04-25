@@ -16,7 +16,7 @@ in
       inherit domain;
       group = config.services.caddy.group;
       dnsProvider = "gandiv5";
-      environmentFile = "/var/lib/caddy/acme-gandi-env";
+      environmentFile = config.sops.secrets.acme_gandi_env_file.path;
       extraDomainNames = [
         "grafana.${domain}"
         "prometheus.${domain}"
@@ -115,7 +115,7 @@ in
       exportarr-sonarr.enable = false;
       exportarr-lidarr = {
         enable = false;
-        apiKeyFile = "/var/lib/lidarr/lidarr.api-key"; # FIXME
+        apiKeyFile = config.sops.secrets.lidarr_api_key_file.path;
       };
       exportarr-readarr.enable = false;
       exportarr-bazarr.enable = false;

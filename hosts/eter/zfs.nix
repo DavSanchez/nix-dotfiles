@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
   # ZFS
   boot.supportedFilesystems = [ "zfs" ];
@@ -24,7 +24,7 @@
     accounts = {
       zed = {
         host = "smtp.gmail.com";
-        passwordeval = "cat /etc/emailpass.txt";
+        passwordeval = "cat ${config.sops.secrets.zfs_mail_pass_file.path}";
         user = "d.vinternatt@gmail.com";
         from = "zed@eter.local";
       };

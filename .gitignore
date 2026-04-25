@@ -1,6 +1,5 @@
 .direnv
 result
-**/secrets*
 
 # Created by https://www.toptal.com/developers/gitignore/api/direnv
 # Edit at https://www.toptal.com/developers/gitignore?templates=direnv

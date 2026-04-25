@@ -93,5 +93,15 @@
     };
   };
 
+  sops = {
+    defaultSopsFile = ../secrets/secrets.yaml;
+    age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+    secrets = {
+      zfs_mail_pass_file = { };
+      acme_gandi_env_file = { };
+      lidarr_api_key_file = { };
+    };
+  };
+
   system.stateVersion = "23.11";
 }
