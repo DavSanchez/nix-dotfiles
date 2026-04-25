@@ -7,6 +7,7 @@
 {
   home.packages = with pkgs; [
     nixd # Language server
+    nil # another LS
     nixfmt # Nix formatter
     nix-bundle
     nix-inspect
