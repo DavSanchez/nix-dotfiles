@@ -52,7 +52,7 @@
       colorize_brackets = true;
       auto_indent_on_paste = true;
       show_edit_predictions = true;
-      semantic_tokens = "full";
+      semantic_tokens = "combined";
       # wrap_guides = [ ];
       soft_wrap = "editor_width";
       # tab_size = 2;
