@@ -9,10 +9,12 @@
   imports = [
     inputs.sops-nix.nixosModules.sops
 
-    ./modules/nixos/nix.nix
     ./modules/nixos/locale.nix
+    ./modules/nixos/network.nix
+    ./modules/nixos/nix.nix
     ./modules/nixos/ssh.nix
     ./modules/nixos/user.nix
+
     ./eter/hardware-configuration.nix
     ./eter/fs_share.nix
     ./eter/zfs.nix
@@ -77,21 +79,6 @@
 
   programs.nix-ld.enable = true;
   programs.direnv.enable = true;
-
-  services.avahi = {
-    enable = true;
-    publish = {
-      enable = true;
-      addresses = true;
-      workstation = true;
-    };
-  };
-
-  services = {
-    tailscale = {
-      enable = true;
-    };
-  };
 
   sops = {
     defaultSopsFile = ../secrets/secrets.yaml;

@@ -12,8 +12,9 @@
     inputs.sops-nix.nixosModules.sops
     inputs.hermes-agent.nixosModules.default
 
-    ./modules/nixos/nix.nix
     ./modules/nixos/locale.nix
+    ./modules/nixos/network.nix
+    ./modules/nixos/nix.nix
     ./modules/nixos/ssh.nix
     ./modules/nixos/user.nix
   ];
