@@ -9,7 +9,12 @@ _: {
     onActivation.upgrade = true;
     onActivation.cleanup = "zap";
 
-    taps = [ "jundot/omlx" ];
+    taps = [
+      {
+        name = "jundot/omlx";
+        clone_target = "https://github.com/jundot/omlx";
+      }
+    ];
     brews = [
       "mole"
       "jundot/omlx/omlx"
