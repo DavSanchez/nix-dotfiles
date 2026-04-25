@@ -6,8 +6,11 @@
 }:
 {
   imports = with inputs.nixos-raspberrypi.nixosModules; [
+    usb-gadget-ethernet
     raspberry-pi-5.base
     raspberry-pi-5.bluetooth
+    raspberry-pi-5.page-size-16k
+    raspberry-pi-5.display-vc4 # "regular" display connected
 
     inputs.sops-nix.nixosModules.sops
     inputs.hermes-agent.nixosModules.default
