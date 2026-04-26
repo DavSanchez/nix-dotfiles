@@ -2,6 +2,7 @@ keys:
   - &solio age1sg9f5uulpunc6ugcyrpenp49t3u34c4czr2g59ar6xwultupng8qlg79xe
   - &sierpe age1l5vsge04vuck7lk6rt2ms6z5crxek7rj7v3x02ulndht4qya8y9qxljse3
   - &eter age1h807c82a93e2qyhrd3thd664q0xrc8c8wfyzdplajpvzfpxejvksuu9sxx
+  - &mora age1thxs2h3lxq08rm5yczm4q2cf9cpgug3esfv5lwly9d7m0rj7lacq3nq5kg
 creation_rules:
   - path_regex: secrets/secrets.yaml$
     key_groups:
@@ -9,3 +10,4 @@ creation_rules:
           - *solio
           - *sierpe
           - *eter
+          - *mora
