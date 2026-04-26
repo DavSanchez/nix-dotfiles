@@ -38,6 +38,7 @@
     packages = with pkgs; [
       helix
       bottom
+      broot
     ];
   };
 
