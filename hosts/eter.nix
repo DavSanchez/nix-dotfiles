@@ -74,11 +74,9 @@
   environment.systemPackages = with pkgs; [
     bottom
     helix
-    yazi
   ];
 
-  programs.nix-ld.enable = true;
-  programs.direnv.enable = true;
+  programs.yazi.enable = true;
 
   sops = {
     defaultSopsFile = ../secrets/secrets.yaml;
