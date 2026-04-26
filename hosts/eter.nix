@@ -69,9 +69,6 @@
     multimedia = { };
   };
 
-  # Make deployments to this machine passwordless
-  security.sudo.wheelNeedsPassword = false;
-
   environment.systemPackages = with pkgs; [
     bottom
     helix

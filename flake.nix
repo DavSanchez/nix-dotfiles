@@ -163,17 +163,16 @@
       deploy.nodes = {
         eter = {
           hostname = "eter.local";
+          sshUser = "deploy";
           profiles.system = {
-            sshUser = "david";
             user = "root";
-            remoteBuild = true;
             path = (deployPkgs "x86_64-linux").deploy-rs.lib.activate.nixos self.nixosConfigurations.eter;
           };
         };
         mora = {
           hostname = "mora.local";
+          sshUser = "deploy";
           profiles.system = {
-            sshUser = "david";
             user = "root";
             path = (deployPkgs "aarch64-linux").deploy-rs.lib.activate.nixos self.nixosConfigurations.mora;
           };

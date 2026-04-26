@@ -21,4 +21,7 @@ _: {
   };
 
   nix.settings.trusted-users = [ "deploy" ];
+
+  # Make deployments to this machine passwordless
+  security.sudo.wheelNeedsPassword = false;
 }
