@@ -9,6 +9,7 @@
   imports = [
     inputs.sops-nix.nixosModules.sops
 
+    ./modules/nixos/deploy.nix
     ./modules/nixos/locale.nix
     ./modules/nixos/network.nix
     ./modules/nixos/nix.nix

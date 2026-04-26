@@ -15,6 +15,7 @@
     inputs.sops-nix.nixosModules.sops
     inputs.hermes-agent.nixosModules.default
 
+    ./modules/nixos/deploy.nix
     ./modules/nixos/locale.nix
     ./modules/nixos/network.nix
     ./modules/nixos/nix.nix
@@ -32,7 +33,6 @@
   };
 
   users.users.david = {
-    initialPassword = "changeme";
     isNormalUser = true;
     extraGroups = [ "wheel" ];
     packages = with pkgs; [
