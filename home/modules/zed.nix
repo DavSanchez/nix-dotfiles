@@ -9,6 +9,7 @@
       "rust"
       "go"
       "opencode"
+      "justfile"
     ];
     # userKeymaps = { };
     userSettings = {

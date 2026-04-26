@@ -2,6 +2,9 @@ flake := "github:DavSanchez/nix-dotfiles"
 
 _default:
     @just --list
+    
+update-sops:
+    sops updatekeys secrets/secrets.yaml
 
 # Compare home-manager config.home.path between two branches with dix
 dix-home config branch base="master":
