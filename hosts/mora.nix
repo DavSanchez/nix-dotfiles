@@ -24,7 +24,11 @@
 
   networking = {
     hostName = "mora";
-    wireless.enable = true;
+    wireless = {
+      enable = true;
+      secretsFile = "/home/david/wpafile.conf";
+      networks."TP-Link_83A4".pskRaw = "ext:dome";
+    };
   };
 
   users.users.david = {
