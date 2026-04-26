@@ -33,10 +33,11 @@
     extraGroups = [ "wheel" ];
     packages = with pkgs; [
       helix
-      yazi
       bottom
     ];
   };
+
+  programs.yazi.enable = false;
 
   fileSystems = {
     "/boot/firmware" = {
