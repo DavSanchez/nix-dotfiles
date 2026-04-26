@@ -26,8 +26,8 @@
     hostName = "mora";
     wireless = {
       enable = true;
-      secretsFile = "/home/david/wpafile.conf";
-      networks."TP-Link_83A4".pskRaw = "ext:dome";
+      secretsFile = config.sops.secrets.dome_wifi.path;
+      networks."TP-Link_83A4".pskRaw = "ext:dome_psk";
     };
   };
 
@@ -76,6 +76,12 @@
     #   environmentFiles = [ config.sops.secrets."hermes-env".path ];
     #   addToSystemPackages = true;
     # };
+  };
+
+  sops = {
+    defaultSopsFile = ../secrets/secrets.yaml;
+    age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+    secrets.dome_wifi = { };
   };
 
   system.stateVersion = "25.11";
