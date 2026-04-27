@@ -2,7 +2,9 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:recommended"],
   "nix": {
-    "enabled": true
+    "enabled": true,
+    "automerge": true,
+    "extends": ["schedule:daily"]
   },
   "packageRules": [
     {
@@ -10,7 +12,7 @@
       "matchUpdateTypes": ["minor", "patch", "digest"],
       "automerge": true,
       "automergeType": "branch",
-      "schedule": ["at any time"] 
+      "extends": ["schedule:daily"]
     }
   ]
 }
