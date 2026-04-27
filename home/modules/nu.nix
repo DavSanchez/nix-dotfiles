@@ -36,7 +36,7 @@
     plugins =
       with pkgs.nushellPlugins;
       [
-        # net # currently broken (not compatible with nu version)
+        # net # currently broken (not compatible with nu version)
         # units # currently broken (not compatible with nu version)
         query
         gstat

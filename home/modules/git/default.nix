@@ -10,7 +10,7 @@
     git = {
       enable = true;
 
-      # Move to localconf? Currently specifying on separate files
+      # Move to localconf? Currently specifying on separate files
       # signing = {
       #   key = "...";
       #   signByDefault = true;

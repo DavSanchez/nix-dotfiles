@@ -69,7 +69,7 @@
     lazytrivy
   ];
 
-  # Force loading fish from zsh since I haven't enabled it globally for this config
+  # Force loading fish from zsh since I haven't enabled it globally for this config
   programs.ghostty.settings.command = lib.mkForce "zsh -c \"exec fish\"";
 
   programs.home-manager.enable = true;

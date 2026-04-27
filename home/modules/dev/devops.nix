@@ -40,7 +40,7 @@
       # terragrunt
       # terraform-rover
 
-      ## NixOps
+      ## NixOps
       # nixops-dns
       # morph
       deploy-rs

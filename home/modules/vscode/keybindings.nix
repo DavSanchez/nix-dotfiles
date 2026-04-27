@@ -1,5 +1,5 @@
 [
-  # Gemini CLI terminal interaction
+  # Gemini CLI terminal interaction
   {
     key = "shift+enter";
     command = "workbench.action.terminal.sendSequence";

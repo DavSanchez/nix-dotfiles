@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
-    ## Data visualzation/manipulation
+    ## Data visualzation/manipulation
     gawk
     gnused
     findutils

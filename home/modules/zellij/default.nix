@@ -13,7 +13,7 @@
   };
 
   # Creating .config/zellij/layouts overwrites
-  # the default config location for mac, hence
-  # we create the config file here as well
+  # the default config location for mac, hence
+  # we create the config file here as well
   # xdg.configFile."zellij/config.kdl".source = ./config.kdl;
 }

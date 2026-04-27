@@ -40,7 +40,7 @@ lib.mkMerge [
     home.packages = with pkgs; [
       utm
       iina
-      # ice-bar # Waiting for Tahoe compat
+      # ice-bar # Waiting for Tahoe compat
       alt-tab-macos
       stats
     ];

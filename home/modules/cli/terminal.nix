@@ -14,7 +14,7 @@
     fend
     viddy
 
-    ## Other
+    ## Other
     rmlint # Extremely fast tool to remove duplicates and other lint from your filesystem
     watchexec
   ];
@@ -68,7 +68,7 @@
       config = {
         # theme = "TwoDark";
         # add --mouse below to enable mouse inside tmux,
-        # but text selection will be disabled unless:
+        # but text selection will be disabled unless:
         # - You press shift (not copy-mode)
         # - Enter copy-mode with C-b + [
         pager = "less --RAW-CONTROL-CHARS --quit-if-one-screen";

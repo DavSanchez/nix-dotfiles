@@ -20,7 +20,7 @@
       devenv
       devcontainer
 
-      ## Other
+      ## Other
       gnumake
       just
       just-lsp
