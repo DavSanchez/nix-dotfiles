@@ -74,4 +74,12 @@ pkgs: {
   };
   "chat.disableAIFeatures" = true; # I will use whatever provider
   "claudeCode.preferredLocation" = "panel";
+  "acp.providers" = {
+    "hermes" = {
+      "command" = "hermes-acp";
+      "args" = [ ];
+      "displayName" = "Hermes Agent";
+    };
+  };
+  "acp.defaultProvider" = "hermes";
 }

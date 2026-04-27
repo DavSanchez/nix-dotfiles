@@ -89,6 +89,17 @@
           };
         };
       };
+
+      agent = {
+        default_profile = "hermes";
+        profiles = {
+          hermes = {
+            name = "Hermes";
+            command = "hermes-acp";
+            args = [ ];
+          };
+        };
+      };
     };
 
     # extraPackages = [ ];
