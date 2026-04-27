@@ -3,13 +3,14 @@
   programs.zed-editor = {
     enable = true;
     extensions = [
-      "nix"
-      "haskell"
-      "toml"
-      "rust"
+      "dockerfile"
       "go"
-      "opencode"
+      "haskell"
       "justfile"
+      "nix"
+      "opencode"
+      "rust"
+      "toml"
     ];
     # userKeymaps = { };
     userSettings = {
