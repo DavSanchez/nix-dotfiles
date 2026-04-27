@@ -1,18 +1,15 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:recommended"],
+  "extends": ["config:recommended", "schedule:daily"],
   "nix": {
-    "enabled": true,
-    "automerge": true,
-    "extends": ["schedule:daily"]
+    "enabled": true
   },
   "packageRules": [
     {
       "matchManagers": ["nix"],
       "matchUpdateTypes": ["minor", "patch", "digest"],
       "automerge": true,
-      "automergeType": "branch",
-      "extends": ["schedule:daily"]
+      "automergeType": "branch"
     }
   ]
 }
