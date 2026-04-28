@@ -61,7 +61,7 @@
           name = "dance";
           publisher = "gregoire";
           version = "0.5.16000"; # pre-release
-          sha256 = "sha256-du4Sz5rlKaAy5LXf7RfCt6iUSOAMMshlvewzcn4sCCk=";
+          sha256 = "sha256-LOUsRQ18G4xARYO7RLz/YHvMv+Jg7ICWDG40iDjWWww=";
         }
         {
           name = "dance-helix"; # Depends on `gregoire.dance` pre-release above
