@@ -5,6 +5,11 @@
     # oath-toolkit
     sops
     age
+
+    proton-pass
+    proton-pass-cli
+
+    proton-vpn-cli
   ];
 
   programs = {
@@ -35,6 +40,7 @@
         };
       };
     };
+    
     password-store.enable = true;
 
     keychain = {

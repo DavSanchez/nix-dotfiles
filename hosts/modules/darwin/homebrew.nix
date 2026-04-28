@@ -37,8 +37,6 @@ _: {
       "openra"
       "orion"
       "proton-drive"
-      "proton-mail"
-      "proton-pass"
       "protonvpn"
       "qflipper"
       "secretive"
