@@ -1,16 +1,20 @@
 { pkgs, lib, ... }:
 {
-  home.packages = with pkgs; [
-    cotp
-    # oath-toolkit
-    sops
-    age
+  home.packages =
+    with pkgs;
+    [
+      cotp
+      # oath-toolkit
+      sops
+      age
 
-    proton-pass
-    proton-pass-cli
-
-    proton-vpn-cli
-  ];
+      proton-pass
+      proton-pass-cli
+    ]
+    ++ lib.optionals pkgs.stdenv.isLinux [
+      proton-vpn
+      proton-proton-vpn-cli
+    ];
 
   programs = {
     gpg = {
@@ -40,7 +44,7 @@
         };
       };
     };
-    
+
     password-store.enable = true;
 
     keychain = {
