@@ -10,102 +10,17 @@
     dotDir = toString (lib.path.append (/. + config.xdg.configHome) "zsh");
     enableCompletion = true;
     defaultKeymap = "emacs";
-    autosuggestion.enable = true;
+    autosuggestion = {
+      enable = true;
+      strategy = [
+        "history"
+        "completion"
+      ];
+    };
     syntaxHighlighting.enable = true;
     autocd = true;
     shellAliases = import ./aliases.nix;
     history.extended = true;
-    oh-my-zsh = {
-      enable = false;
-      plugins = [
-        "aws"
-        "cp"
-        "docker"
-        "docker-compose"
-        # "emacs"
-        "gh"
-        "git"
-        "git-auto-fetch"
-        "git-extras"
-        "gitfast"
-        "github"
-        "gitignore"
-        "git-lfs"
-        "golang"
-        "helm"
-        "history"
-        # "history-substring-search" # Using fzf/tv instead
-        "kops"
-        "kubectl"
-        "minikube"
-        "mix"
-        "nmap"
-        # "nomad"
-        "pass"
-        "rust"
-        # "ssh-agent"
-        "terraform"
-        "tmux"
-        "torrent"
-        "transfer"
-        "urltools"
-        "vi-mode"
-        "vscode"
-        "web-search"
-      ]
-      ++ lib.optionals pkgs.stdenv.isDarwin [
-        "brew"
-        "macos"
-        "xcode"
-      ];
-    };
-
-    prezto = {
-      enable = false;
-      # caseSensitive = true;
-      utility.safeOps = true;
-      editor.keymap = "vi";
-      pmodules = [
-        "environment"
-        "terminal"
-        "editor"
-        "history"
-        "directory"
-        "spectrum"
-        "utility"
-        "completion"
-        "prompt"
-        # The below order is important
-        "syntax-highlighting"
-        "history-substring-search"
-        "autosuggestions"
-      ]
-      ++ lib.optionals pkgs.stdenv.isDarwin [ "osx" ];
-      syntaxHighlighting = {
-        highlighters = [
-          "main"
-          "brackets"
-          "pattern"
-          "line"
-          "cursor"
-          "root"
-        ];
-      };
-      tmux = {
-        autoStartLocal = true;
-        autoStartRemote = true;
-      };
-    };
-
-    antidote = {
-      enable = false;
-      plugins = [
-        # "chisui/zsh-nix-shell"
-        "MichaelAquilina/zsh-you-should-use"
-        "wfxr/formarks"
-        "hlissner/zsh-autopair kind:defer"
-      ];
-    };
 
     sessionVariables = {
       KEYTIMEOUT = 1;
@@ -114,10 +29,6 @@
       LANG = "en_US.UTF-8";
       # NIX_PATH = "$HOME/.nix-defexpr/channels\${NIX_PATH:+:}$NIX_PATH";
       # FPATH = "$HOME/.nix-profile/share/zsh/site-functions:$FPATH";
-      ZSH_AUTOSUGGEST_STRATEGY = [
-        "history"
-        "completion"
-      ];
     };
 
     initContent = lib.mkOrder 500 ''
