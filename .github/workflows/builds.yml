@@ -26,8 +26,6 @@ jobs:
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
       - name: Build NixOS config (eter)
         run: nix build ".#nixosConfigurations.eter.config.system.build.toplevel"
-      - name: Deploy dry-run
-        run: nix run github:serokell/deploy-rs -- .#eter --dry-activate
 
   linux-arm:
     name: 🫐 Build Linux configs (mora)
@@ -45,8 +43,6 @@ jobs:
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
       - name: Build NixOS config (mora)
         run: nix build ".#nixosConfigurations.mora.config.system.build.toplevel"
-      - name: Deploy dry-run
-        run: nix run github:serokell/deploy-rs -- .#mora --dry-activate
 
   darwin-linux-builder:
     name: 🔧 Pre-build Linux builder VM (for macOS CI)
