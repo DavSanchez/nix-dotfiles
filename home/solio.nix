@@ -30,6 +30,7 @@
     ./modules/helix.nix
     ./modules/tmux.nix
     ./modules/cava.nix
+    ./modules/mail.nix
 
     # Darwin specifics
     ./modules/darwin/aerospace.nix

@@ -33,6 +33,7 @@
     ./modules/darwin/aerospace.nix
     ./modules/nixpkgs.nix
     ./modules/theme.nix
+    ./modules/mail.nix
   ];
 
   home = {
