@@ -64,21 +64,6 @@
       # This is a function that generates an attribute by calling a function you
       # pass to it, with each system as an argument
       forAllSystems = nixpkgs.lib.genAttrs systems;
-
-      deployPkgs =
-        system:
-        import nixpkgs {
-          inherit system;
-          overlays = [
-            deploy-rs.overlays.default
-            (self: super: {
-              deploy-rs = {
-                inherit (import nixpkgs { inherit system; }) deploy-rs;
-                lib = super.deploy-rs.lib;
-              };
-            })
-          ];
-        };
     in
     {
       # Custom packages
@@ -104,16 +89,12 @@
       nixosConfigurations = {
         mora = nixos-raspberrypi.lib.nixosSystem {
           specialArgs = { inherit inputs; };
-          modules = [
-            ./hosts/mora.nix
-          ];
+          modules = [ ./hosts/mora.nix ];
         };
         eter = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = { inherit inputs; };
-          modules = [
-            ./hosts/eter.nix
-          ];
+          modules = [ ./hosts/eter.nix ];
         };
       };
       # macOS systems using nix-darwin
@@ -123,9 +104,7 @@
           specialArgs = {
             inherit inputs;
           };
-          modules = [
-            ./hosts/sierpe.nix
-          ];
+          modules = [ ./hosts/sierpe.nix ];
         };
         solio = darwin.lib.darwinSystem {
           system = "aarch64-darwin";
@@ -166,7 +145,7 @@
           sshUser = "david";
           profiles.system = {
             user = "root";
-            path = (deployPkgs "x86_64-linux").deploy-rs.lib.activate.nixos self.nixosConfigurations.eter;
+            path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.eter;
           };
         };
         mora = {
@@ -174,11 +153,11 @@
           sshUser = "david";
           profiles.system = {
             user = "root";
-            path = (deployPkgs "aarch64-linux").deploy-rs.lib.activate.nixos self.nixosConfigurations.mora;
+            path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.mora;
           };
         };
       };
 
-      checks = forAllSystems (system: (deployPkgs system).deploy-rs.lib.deployChecks self.deploy);
+      checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
     };
 }
