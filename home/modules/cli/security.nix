@@ -57,16 +57,19 @@
     };
   };
 
-  services.ssh-agent.enable = pkgs.stdenv.isLinux; # not available for darwin
-  services.gpg-agent = {
-    enable = true;
-    enableScDaemon = true;
-    defaultCacheTtl = 14400;
-    maxCacheTtl = 86400;
-    pinentry.package = if pkgs.stdenv.isDarwin then pkgs.pinentry_mac else pkgs.pinentry-tty;
-    enableSshSupport = true;
-    defaultCacheTtlSsh = 14400;
-    maxCacheTtlSsh = 86400;
-    sshKeys = null;
+  services = {
+    ssh-agent.enable = true;
+    gpg-agent = {
+      enable = true;
+      enableScDaemon = true;
+      defaultCacheTtl = 14400;
+      maxCacheTtl = 86400;
+      pinentry.package = if pkgs.stdenv.isDarwin then pkgs.pinentry_mac else pkgs.pinentry-tty;
+      defaultCacheTtlSsh = 14400;
+      maxCacheTtlSsh = 86400;
+      sshKeys = null;
+    };
+    proton-pass-agent.enable = false;
+    yubikey-agent.enable = false;
   };
 }
