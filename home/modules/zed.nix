@@ -7,6 +7,7 @@
       "go"
       "haskell"
       "justfile"
+      "make"
       "nix"
       "opencode"
       "rust"
