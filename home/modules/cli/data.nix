@@ -10,6 +10,7 @@
     jo
     fq
     dasel
+    yq-go
     graphviz
     grex
     binsider
