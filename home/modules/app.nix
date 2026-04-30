@@ -11,7 +11,6 @@ lib.mkMerge [
         sniffnet
         # zotero
         # mtr-gui # Already using mtr
-        zathura
         imhex
         czkawka # Multi functional app to find duplicates, empty folders, similar images etc
         obsidian-export
@@ -30,10 +29,13 @@ lib.mkMerge [
         ]
       );
 
-    programs.obsidian = {
-      enable = true;
-      cli.enable = true;
-      # vaults are managed outside for now, will think on migration
+    programs = {
+      obsidian = {
+        enable = true;
+        cli.enable = true;
+        # vaults are managed outside for now, will think on migration
+      };
+      zathura.enable = true;
     };
   }
   (lib.mkIf pkgs.stdenv.isDarwin {
