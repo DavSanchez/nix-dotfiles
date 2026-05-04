@@ -114,7 +114,7 @@
           };
           modules = [ ./hosts/solio.nix ];
         };
-        nr = darwin.lib.darwinSystem {
+        V9X576T260 = darwin.lib.darwinSystem {
           system = "aarch64-darwin";
           specialArgs = {
             inherit inputs;
@@ -138,7 +138,7 @@
           };
           modules = [ ./home/solio.nix ];
         };
-        "davidsanchez@nr" = home-manager.lib.homeManagerConfiguration {
+        "davidsanchez@V9X576T260" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.aarch64-darwin;
           extraSpecialArgs = {
             inherit inputs;
