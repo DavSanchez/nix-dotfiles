@@ -1,12 +1,20 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 set -e
 
-## Freeing space since 14GB are not enough anymore
 # Got this from <https://github.com/newrelic/infrastructure-publish-action/blob/ecba9f25fc8c7badc3c4e7d2c2aed51c26d52f2b/action-run.sh#L22>
-df -ih
-df -h
-echo "Deleting android, dotnet, haskell, CodeQL, Python, swift to free up space"
-sudo rm -rf /usr/local/lib/android /usr/share/dotnet /usr/local/.ghcup /opt/hostedtoolcache/CodeQL /opt/hostedtoolcache/Python /usr/share/swift
-df -ih
-df -h
+df -h /
+
+echo "free up space"
+
+sudo rm -rf /usr/local/lib/android
+sudo rm -rf /usr/lib/jvm
+sudo rm -rf /usr/local/share/powershell
+sudo rm -rf /usr/share/dotnet
+sudo rm -rf /usr/local/.ghcup
+sudo rm -rf /opt/hostedtoolcache/CodeQL
+sudo rm -rf /opt/hostedtoolcache/Python
+sudo rm -rf /usr/share/swift
+sudo rm -rf "$AGENT_TOOLSDIRECTORY"
+
+df -h /
