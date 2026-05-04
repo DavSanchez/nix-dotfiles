@@ -71,7 +71,7 @@
   ];
 
   # Force loading fish from zsh since I haven't enabled it globally for this config
-  programs.ghostty.settings.command = lib.mkForce "zsh -c \"exec ${lib.getExe config.programs.fish.package}\"";
+  programs.ghostty.settings.command = lib.mkForce "${lib.getExe config.programs.zsh.package} -c \"exec ${lib.getExe config.programs.fish.package}\"";
 
   programs.home-manager.enable = true;
 
