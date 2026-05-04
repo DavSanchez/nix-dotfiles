@@ -25,4 +25,31 @@
 
   system.configurationRevision = config.rev or config.dirtyRev or null;
   system.stateVersion = 6;
+
+  
+  homebrew = {
+    enable = true;
+    enableBashIntegration = true;
+    enableZshIntegration = true;
+    enableFishIntegration = true;
+    global.brewfile = true;
+    onActivation.autoUpdate = true;
+    onActivation.upgrade = true;
+    onActivation.cleanup = "zap";
+
+    taps = [ ];
+    brews = [
+      "mole"
+    ];
+    casks = [
+      "1password"
+      "1password-cli"
+      "affinity"
+      "keymapp"
+      "thaw"
+      "virtualbox"
+      "vlc"
+      "wireshark-app"
+    ];
+  };
 }
