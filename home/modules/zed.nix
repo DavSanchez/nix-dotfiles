@@ -6,7 +6,7 @@
       "dockerfile"
       "go"
       "haskell"
-      "justfile"
+      "just"
       "make"
       "nix"
       "opencode"
