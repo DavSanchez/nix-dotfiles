@@ -12,7 +12,7 @@
 
     # dotnet-sdk # For F-sharp: FP for .NET
     # fstar # ML-like FP language aimed at program verification
-    elmPackages.elm # FP for the frontend
+    # elmPackages.elm # FP for the frontend
 
     purescript # FP for the frontend
     # nodePackages.purescript-language-server # Langserver (unmaintained)
