@@ -24,6 +24,5 @@
     # example = prev.example.overrideAttrs (oldAttrs: rec {
     # ...
     # });
-    nushell = final.stable.nushell;
   };
 }
