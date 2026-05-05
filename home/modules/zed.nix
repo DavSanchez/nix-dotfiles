@@ -92,14 +92,11 @@
         };
       };
 
-      agent = {
-        default_profile = "hermes";
-        profiles = {
-          hermes = {
-            name = "Hermes";
-            command = "hermes-acp";
-            args = [ ];
-          };
+      agent_servers = {
+        hermes-agent = {
+          type = "custom";
+          command = "hermes";
+          args = [ "acp" ];
         };
       };
     };
