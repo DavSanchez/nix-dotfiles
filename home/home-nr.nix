@@ -66,6 +66,8 @@
 
     trivy
     lazytrivy
+
+    fluxcd
   ];
 
   programs.home-manager.enable = true;
