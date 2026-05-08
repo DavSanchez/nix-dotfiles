@@ -35,7 +35,7 @@ lib.mkMerge [
         cli.enable = true;
         # vaults are managed outside for now, will think on migration
       };
-      zathura.enable = true;
+      zathura.enable = false;
     };
   }
   (lib.mkIf pkgs.stdenv.isDarwin {
