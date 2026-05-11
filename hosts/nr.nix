@@ -26,7 +26,6 @@
   system.configurationRevision = config.rev or config.dirtyRev or null;
   system.stateVersion = 6;
 
-  
   homebrew = {
     enable = true;
     enableBashIntegration = true;
