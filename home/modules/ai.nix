@@ -21,6 +21,7 @@
     opencode = {
       enable = true;
       settings = {
+        autoupdate = false;
         plugin = [ "opencode-gemini-auth@latest" ];
       };
     };
