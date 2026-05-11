@@ -20,5 +20,6 @@
     feh.enable = true;
     rtorrent.enable = true;
     aria2.enable = true;
+    asciinema.enable = true;
   };
 }
