@@ -1,7 +1,7 @@
 _: {
   imports = [
     ./ghostty # main
-    ./warp.nix
+    # ./warp.nix
     # ./wezterm.nix
     # ./rio.nix
   ];
