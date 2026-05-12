@@ -60,6 +60,7 @@ _: {
       "Reeder" = 6475002485;
       "reMarkable" = 1276493162;
       "Tampermonkey" = 6738342400;
+      "Telegram" = 747648890;
       "The Unarchiver" = 425424353;
       "uBlock Origin Lite" = 6745342698;
       "UTM" = 1538878817;
