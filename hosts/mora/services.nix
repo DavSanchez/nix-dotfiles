@@ -20,7 +20,7 @@ in
       node.openFirewall = true;
       settings = {
         node = {
-          alias = "radicle.mora.davidslt.es";
+          alias = "radicle.${domain}";
           seedingPolicy = {
             # restrictive while we learn the ropes
             default = "block";
