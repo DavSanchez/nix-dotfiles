@@ -21,6 +21,8 @@
     ./modules/nixos/nix.nix
     ./modules/nixos/ssh.nix
     ./modules/nixos/user.nix
+
+    ./mora/services.nix
   ];
 
   networking = {
@@ -71,18 +73,21 @@
   ];
 
   services = {
-    # hermes-agent = {
-    #   enable = true;
-    #   settings.model.default = "anthropic/claude-sonnet-4";
-    #   environmentFiles = [ config.sops.secrets."hermes-env".path ];
-    #   addToSystemPackages = true;
-    # };
+    hermes-agent = {
+      enable = true;
+      settings.model.default = "qwen/qwen3.6-plus";
+      environmentFiles = [ config.sops.secrets.hermes_env.path ];
+      addToSystemPackages = true;
+    };
   };
 
   sops = {
     defaultSopsFile = ../secrets/secrets.yaml;
     age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
-    secrets.dome_wifi = { };
+    secrets = {
+      dome_wifi = { };
+      hermes_env = { };
+    };
   };
 
   system.stateVersion = "25.11";
