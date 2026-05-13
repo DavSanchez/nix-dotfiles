@@ -36,14 +36,22 @@
     onActivation.upgrade = true;
     onActivation.cleanup = "zap";
 
-    taps = [ ];
+    taps = [
+      {
+        name = "newrelic/commune";
+        clone_target = "git@source.datanerd.us:commune/newrelic-homebrew";
+      }
+    ];
     brews = [
       "mole"
+      "newrelic/commune/claude-nerd-completion"
+      "newrelic/commune/selfserve"
     ];
     casks = [
       "1password"
       "1password-cli"
       "affinity"
+      "claude-code"
       "keymapp"
       "thaw"
       "virtualbox"
