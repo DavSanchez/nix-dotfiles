@@ -48,6 +48,9 @@
           ff = "only";
           rebase = true;
         };
+
+        diff.sopsdiffer.textconv = "sops decrypt"; # `sopsdiffer` is an arbitrary name. See <https://github.com/getsops/sops#48showing-diffs-in-cleartext-in-git>
+
       };
     };
 
@@ -89,6 +92,10 @@
     };
 
     git-cliff = {
+      enable = true;
+    };
+
+    radicle = {
       enable = true;
     };
   };
