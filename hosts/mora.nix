@@ -76,7 +76,7 @@
     hermes-agent = {
       enable = true;
       settings.model.default = "qwen/qwen3.6-plus";
-      environmentFiles = [ config.sops.secrets.hermes_env.path ];
+      environmentFiles = [ config.sops.secrets."hermes/mora/env".path ];
       addToSystemPackages = true;
     };
   };
@@ -86,7 +86,7 @@
     age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
     secrets = {
       dome_wifi = { };
-      hermes_env = { };
+      "hermes/mora/env" = { };
     };
   };
 
