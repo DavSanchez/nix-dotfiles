@@ -1,7 +1,7 @@
 { inputs, config, ... }:
 {
   imports = [
-    inputs.nixosModules.gandi-ddns
+    inputs.self.nixosModules.gandi-ddns
   ];
 
   services.gandi-ddns = {
