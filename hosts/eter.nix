@@ -21,6 +21,7 @@
     ./eter/zfs.nix
     ./eter/monitoring.nix
     ./eter/media.nix
+    ./eter/ddns.nix
   ];
 
   boot.loader.systemd-boot.enable = true;
