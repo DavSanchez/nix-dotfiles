@@ -69,100 +69,56 @@ in
 
               API_BASE="https://api.gandi.net/v5/livedns/domains/${cfg.domain}/records"
 
-              get_local_ipv4() {
-                ip -json addr show |
-                  jq -r '
-                    [
-                      .[] |
-                      select(
-                        .ifname != "lo" and
-                        (.ifname | startswith("docker") | not) and
-                        (.ifname | startswith("veth") | not) and
-                        (.ifname | startswith("br-") | not) and
-                        (.ifname | startswith("tailscale") | not) and
-                        (.ifname | startswith("utun") | not)
-                      ) |
-                      .addr_info[] |
-                      select(.family == "inet" and .scope == "global") |
-                      .local
-                    ] |
-                    map(
-                      split(".") |
-                      select(
-                        .[0] == "10" or
-                        (.[0] == "172" and (.[1] | tonumber) >= 16 and (.[1] | tonumber) <= 31) or
-                        (.[0] == "192" and .[1] == "168")
-                      ) |
-                      join(".")
-                    ) |
-                    unique |
-                    .[]
-                  ' 2>/dev/null
-              }
+              all_addrs=$(ip -json addr show)
 
-              get_local_ipv6() {
-                ip -json addr show |
-                  jq -r '
-                    [
-                      .[] |
-                      select(
-                        .ifname != "lo" and
-                        (.ifname | startswith("docker") | not) and
-                        (.ifname | startswith("veth") | not) and
-                        (.ifname | startswith("br-") | not) and
-                        (.ifname | startswith("tailscale") | not) and
-                        (.ifname | startswith("utun") | not)
-                      ) |
-                      .addr_info[] |
-                      select(.family == "inet6" and .scope == "global") |
-                      .local
-                    ] |
-                    map(
-                      select(
-                        (startswith("fc") or startswith("fd")) and
-                        (startswith("fe80:") | not)
-                      )
-                    ) |
-                    unique |
-                    .[]
-                  ' 2>/dev/null
-              }
+              ifaceFilter=".ifname != "lo" and (.ifname | test("^(docker|veth|br-|tailscale|utun)") | not)"
+              tsFilter=".ifname == \"tailscale0\""
 
-              ${lib.optionalString tsEnabled ''
-                get_tailscale_ipv4() {
-                  ip -json addr show tailscale0 2>/dev/null |
-                    jq -r '
-                      [
-                        .[] |
-                        .addr_info[] |
-                        select(.family == "inet" and .scope == "global") |
-                        .local
-                      ] |
-                      map(
-                        split(".") |
-                        select(.[0] == "100" and (.[1] | tonumber) >= 64 and (.[1] | tonumber) <= 127) |
-                        join(".")
-                      ) |
-                      unique |
-                      .[]
-                    ' 2>/dev/null || true
-                }
+              mapfile -t ipv4_addrs < <(echo "$all_addrs" | jq -r '
+                [
+                  (.[] 
+                    | select($ifaceFilter)
+                    | .addr_info[]
+                    | select(.family == "inet" and .scope == "global")
+                    | .local
+                    | split(".")
+                    | select(.[0] == "10" 
+                      or (.[0] == "172" and (.[1] | tonumber) >= 16 and (.[1] | tonumber) <= 31)
+                      or (.[0] == "192" and .[1] == "168"))
+                    | join("."))
+                  ${lib.optionalString tsEnabled ''
+                    ,
+                    (.[]
+                      | select($tsFilter)
+                      | .addr_info[]
+                      | select(.family == "inet" and .scope == "global")
+                      | .local
+                      | split(".")
+                      | select(.[0] == "100" and (.[1] | tonumber) >= 64 and (.[1] | tonumber) <= 127)
+                      | join("."))
+                  ''}
+                ] | unique | .[]
+              ' 2>/dev/null)
 
-                get_tailscale_ipv6() {
-                  ip -json addr show tailscale0 2>/dev/null |
-                    jq -r '
-                      [
-                        .[] |
-                        .addr_info[] |
-                        select(.family == "inet6" and .scope == "global") |
-                        .local
-                      ] |
-                      map(select(startswith("fd7a:115c:a1e0"))) |
-                      unique |
-                      .[]
-                    ' 2>/dev/null || true
-                }
-              ''}
+              mapfile -t ipv6_addrs < <(echo "$all_addrs" | jq -r '
+                [
+                  (.[]
+                    | select($ifaceFilter)
+                    | .addr_info[]
+                    | select(.family == "inet6" and .scope == "global")
+                    | .local
+                    | select((startswith("fc") or startswith("fd")) and (startswith("fe80:") | not)))
+                  ${lib.optionalString tsEnabled ''
+                    ,
+                    (.[]
+                      | select($tsFilter)
+                      | .addr_info[]
+                      | select(.family == "inet6" and .scope == "global")
+                      | .local
+                      | select(startswith("fd7a:115c:a1e0")))
+                  ''}
+                ] | unique | .[]
+              ' 2>/dev/null)
 
               update_record() {
                 local record_type="$1"
@@ -176,20 +132,20 @@ in
                   return 0
                 fi
 
-                local payload
-                payload=$(printf '%s\n' "''${ips[@]}" | jq -R . | jq -s '{rrset_ttl: 300, rrset_values: .}')
+                local values_json new_values payload
+                values_json=$(printf '%s\n' "''${ips[@]}" | jq -Rs 'split("\n") | map(select(length > 0))')
+                new_values=$(echo "$values_json" | jq -c 'sort')
+                payload=$(echo "$values_json" | jq '{rrset_ttl: 300, rrset_values: .}')
 
                 local current_response
                 current_response=$(curl -s -w "\n%{http_code}" \
                   -H "Authorization: Bearer $GANDI_TOKEN" \
                   "$url" 2>/dev/null || true)
 
-                local http_code
+                local http_code body current_values
                 http_code=$(echo "$current_response" | tail -n 1)
-                local body
                 body=$(echo "$current_response" | head -n -1)
 
-                local current_values
                 if [[ "$http_code" == "404" ]]; then
                   current_values="[]"
                 elif [[ "$http_code" != "200" ]]; then
@@ -198,9 +154,6 @@ in
                 else
                   current_values=$(echo "$body" | jq -c '.rrset_values // [] | sort')
                 fi
-
-                local new_values
-                new_values=$(printf '%s\n' "''${ips[@]}" | jq -R . | jq -sc 'sort')
 
                 if [[ "$current_values" == "$new_values" ]]; then
                   echo "INFO: $subdomain $record_type is up to date"
@@ -220,9 +173,6 @@ in
                   return 1
                 fi
               }
-
-              mapfile -t ipv4_addrs < <(get_local_ipv4${lib.optionalString tsEnabled "; get_tailscale_ipv4"})
-              mapfile -t ipv6_addrs < <(get_local_ipv6${lib.optionalString tsEnabled "; get_tailscale_ipv6"})
 
               update_record "A" "''${ipv4_addrs[@]}"
               update_record "AAAA" "''${ipv6_addrs[@]}"

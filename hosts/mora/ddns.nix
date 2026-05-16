@@ -9,6 +9,7 @@
     tokenFile = config.sops.secrets.gandi_ddns_token.path;
     domain = "davidslt.es";
     subdomain = "*.mora";
+    interval = "30m";
   };
 
   sops.secrets.gandi_ddns_token = { };
