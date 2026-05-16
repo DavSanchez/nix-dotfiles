@@ -90,6 +90,9 @@
             };
           };
         };
+        nil = {
+          flake.autoArchive = true;
+        };
       };
 
       agent_servers = {
