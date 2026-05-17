@@ -144,7 +144,29 @@ in
                 body=$(echo "$current_response" | head -n -1)
 
                 if [[ "$http_code" == "404" ]]; then
-                  current_values="[]"
+                  echo "INFO: Creating $subdomain $record_type: $new_values"
+
+                  local create_payload create_response create_http_code create_body
+                  create_payload=$(echo "$values_json" | jq --arg name "$subdomain" --arg type "$record_type" '{
+                    rrset_ttl: 10800,
+                    rrset_values: .
+                  }')
+
+                  create_response=$(curl -s --show-error -w "\n%{http_code}" -X POST \
+                    -H "Content-Type: application/json" \
+                    -H "Authorization: Bearer $GANDI_TOKEN" \
+                    -d "$create_payload" \
+                    "$url")
+                  create_http_code=$(echo "$create_response" | tail -n 1)
+                  create_body=$(echo "$create_response" | head -n -1)
+
+                  if [[ "$create_http_code" =~ ^2 ]]; then
+                    echo "INFO: Successfully created $subdomain $record_type"
+                    return 0
+                  else
+                    echo "ERROR: Failed to create $subdomain $record_type (HTTP $create_http_code): $create_body" >&2
+                    return 1
+                  fi
                 elif [[ "$http_code" != "200" ]]; then
                   echo "WARN: Could not fetch DNS record for $subdomain $record_type (HTTP $http_code), skipping" >&2
                   return 0
