@@ -41,6 +41,7 @@
       ]
       ++ lib.optionals (!pkgs.stdenv.isDarwin) [
         "ctrl+n=new_window"
+        "global:cmd+grave_accent=toggle_quick_terminal"
       ];
       # Notify on command completion
       notify-on-command-finish = "unfocused";

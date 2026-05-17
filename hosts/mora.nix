@@ -23,6 +23,7 @@
     ./modules/nixos/user.nix
 
     ./mora/services.nix
+    ./mora/livedns.nix
   ];
 
   networking = {
