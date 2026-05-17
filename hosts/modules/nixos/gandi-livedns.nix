@@ -102,7 +102,7 @@ in
                   (.[]
                     | select(.ifname != "lo" and (.ifname | test("^(docker|veth|br-|tailscale|utun)") | not))
                     | .addr_info[]
-                    | select(.family == "inet6" and .scope == "global")
+                    | select(.family == "inet6" and .scope == "global" and .temporary != true)
                     | .local
                     | select((startswith("fc") or startswith("fd")) and (startswith("fe80:") | not)))
                   ${lib.optionalString tsEnabled ''
