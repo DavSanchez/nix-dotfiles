@@ -5,11 +5,11 @@
   ...
 }:
 let
-  cfg = config.services.gandi-ddns;
+  cfg = config.services.gandi-livedns;
   tsEnabled = config.services.tailscale.enable;
 in
 {
-  options.services.gandi-ddns = {
+  options.services.gandi-livedns = {
     enable = lib.mkEnableOption "Gandi LiveDNS dynamic DNS updater for private and Tailscale IPs";
 
     tokenFile = lib.mkOption {
@@ -27,12 +27,14 @@ in
     };
 
     subdomain = lib.mkOption {
-      type = lib.types.str;
+      type = with lib.types; either str (listOf str);
+      apply = x: if lib.isList x then x else [ x ];
       description = ''
-        Subdomain to update (e.g. "*.mora" or "mora").
+        Subdomain(s) to update (e.g. [ "*.mora" "mora" ] or "mora").
+        Can be a single string or a list of strings.
         The record will point to this host's private local IPs and Tailscale IP(s).
       '';
-      example = "*.mora";
+      example = [ "*.mora" "mora" ];
     };
 
     interval = lib.mkOption {
@@ -44,7 +46,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    systemd.services.gandi-ddns = {
+    systemd.services.gandi-livedns = {
       description = "Gandi LiveDNS Private IP Updater";
       after = [ "network-online.target" ] ++ lib.optional tsEnabled "tailscaled.service";
       wants = [ "network-online.target" ] ++ lib.optional tsEnabled "tailscaled.service";
@@ -54,7 +56,7 @@ in
         LoadCredential = [ "gandi_token:${cfg.tokenFile}" ];
         ExecStart = lib.getExe (
           pkgs.writeShellApplication {
-            name = "gandi-ddns";
+            name = "gandi-livedns";
             runtimeInputs = [
               pkgs.curl
               pkgs.jq
@@ -71,13 +73,10 @@ in
 
               all_addrs=$(ip -json addr show)
 
-              ifaceFilter=".ifname != "lo" and (.ifname | test("^(docker|veth|br-|tailscale|utun)") | not)"
-              tsFilter=".ifname == \"tailscale0\""
-
               mapfile -t ipv4_addrs < <(echo "$all_addrs" | jq -r '
                 [
                   (.[] 
-                    | select($ifaceFilter)
+                    | select(.ifname != "lo" and (.ifname | test("^(docker|veth|br-|tailscale|utun)") | not))
                     | .addr_info[]
                     | select(.family == "inet" and .scope == "global")
                     | .local
@@ -89,7 +88,7 @@ in
                   ${lib.optionalString tsEnabled ''
                     ,
                     (.[]
-                      | select($tsFilter)
+                      | select(.ifname == "tailscale0")
                       | .addr_info[]
                       | select(.family == "inet" and .scope == "global")
                       | .local
@@ -103,7 +102,7 @@ in
               mapfile -t ipv6_addrs < <(echo "$all_addrs" | jq -r '
                 [
                   (.[]
-                    | select($ifaceFilter)
+                    | select(.ifname != "lo" and (.ifname | test("^(docker|veth|br-|tailscale|utun)") | not))
                     | .addr_info[]
                     | select(.family == "inet6" and .scope == "global")
                     | .local
@@ -111,7 +110,7 @@ in
                   ${lib.optionalString tsEnabled ''
                     ,
                     (.[]
-                      | select($tsFilter)
+                      | select(.ifname == "tailscale0")
                       | .addr_info[]
                       | select(.family == "inet6" and .scope == "global")
                       | .local
@@ -121,11 +120,11 @@ in
               ' 2>/dev/null)
 
               update_record() {
-                local record_type="$1"
-                shift
+                local subdomain="$1"
+                local record_type="$2"
+                shift 2
                 local ips=("$@")
-                local subdomain="${cfg.subdomain}"
-                local url="$API_BASE/$subdomain/$record_type"
+                local url="$API_BASE/records/$subdomain/$record_type"
 
                 if [[ ''${#ips[@]} -eq 0 ]]; then
                   echo "WARN: No $record_type IPs found, skipping $subdomain" >&2
@@ -135,7 +134,7 @@ in
                 local values_json new_values payload
                 values_json=$(printf '%s\n' "''${ips[@]}" | jq -Rs 'split("\n") | map(select(length > 0))')
                 new_values=$(echo "$values_json" | jq -c 'sort')
-                payload=$(echo "$values_json" | jq '{rrset_ttl: 300, rrset_values: .}')
+                payload=$(echo "$values_json" | jq '{rrset_ttl: 10800, rrset_values: .}')
 
                 local current_response
                 current_response=$(curl -s -w "\n%{http_code}" \
@@ -174,15 +173,19 @@ in
                 fi
               }
 
-              update_record "A" "''${ipv4_addrs[@]}"
-              update_record "AAAA" "''${ipv6_addrs[@]}"
+              subdomains=(${lib.escapeShellArgs cfg.subdomain})
+
+              for subdomain in "''${subdomains[@]}"; do
+                update_record "$subdomain" "A" "''${ipv4_addrs[@]}"
+                update_record "$subdomain" "AAAA" "''${ipv6_addrs[@]}"
+              done
             '';
           }
         );
       };
     };
 
-    systemd.timers.gandi-ddns = {
+    systemd.timers.gandi-livedns = {
       description = "Gandi LiveDNS Private IP Updater Timer";
       wantedBy = [ "timers.target" ];
       timerConfig = {
