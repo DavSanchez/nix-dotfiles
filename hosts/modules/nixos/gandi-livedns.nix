@@ -75,15 +75,13 @@ in
 
               mapfile -t ipv4_addrs < <(echo "$all_addrs" | jq -r '
                 [
-                  (.[] 
+                  (.[]
                     | select(.ifname != "lo" and (.ifname | test("^(docker|veth|br-|tailscale|utun)") | not))
                     | .addr_info[]
                     | select(.family == "inet" and .scope == "global")
                     | .local
                     | split(".")
-                    | select(.[0] == "10" 
-                      or (.[0] == "172" and (.[1] | tonumber) >= 16 and (.[1] | tonumber) <= 31)
-                      or (.[0] == "192" and .[1] == "168"))
+                    | select(.[0] == "192" and .[1] == "168")
                     | join("."))
                   ${lib.optionalString tsEnabled ''
                     ,
@@ -97,7 +95,7 @@ in
                       | join("."))
                   ''}
                 ] | unique | .[]
-              ' 2>/dev/null)
+              ')
 
               mapfile -t ipv6_addrs < <(echo "$all_addrs" | jq -r '
                 [
@@ -117,7 +115,7 @@ in
                       | select(startswith("fd7a:115c:a1e0")))
                   ''}
                 ] | unique | .[]
-              ' 2>/dev/null)
+              ')
 
               update_record() {
                 local subdomain="$1"
@@ -137,9 +135,9 @@ in
                 payload=$(echo "$values_json" | jq '{rrset_ttl: 10800, rrset_values: .}')
 
                 local current_response
-                current_response=$(curl -s -w "\n%{http_code}" \
+                current_response=$(curl -s --show-error -w "\n%{http_code}" \
                   -H "Authorization: Bearer $GANDI_TOKEN" \
-                  "$url" 2>/dev/null || true)
+                  "$url")
 
                 local http_code body current_values
                 http_code=$(echo "$current_response" | tail -n 1)
@@ -161,14 +159,19 @@ in
 
                 echo "INFO: Updating $subdomain $record_type: $current_values -> $new_values"
 
-                if curl -s --fail -X PUT \
+                local update_response update_http_code update_body
+                update_response=$(curl -s --show-error -w "\n%{http_code}" -X PUT \
                   -H "Content-Type: application/json" \
                   -H "Authorization: Bearer $GANDI_TOKEN" \
                   -d "$payload" \
-                  "$url" >/dev/null 2>&1; then
+                  "$url")
+                update_http_code=$(echo "$update_response" | tail -n 1)
+                update_body=$(echo "$update_response" | head -n -1)
+
+                if [[ "$update_http_code" =~ ^2 ]]; then
                   echo "INFO: Successfully updated $subdomain $record_type"
                 else
-                  echo "ERROR: Failed to update $subdomain $record_type" >&2
+                  echo "ERROR: Failed to update $subdomain $record_type (HTTP $update_http_code): $update_body" >&2
                   return 1
                 fi
               }
