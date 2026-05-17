@@ -122,7 +122,7 @@ in
                 local record_type="$2"
                 shift 2
                 local ips=("$@")
-                local url="$API_BASE/records/$subdomain/$record_type"
+                local url="$API_BASE/$subdomain/$record_type"
 
                 if [[ ''${#ips[@]} -eq 0 ]]; then
                   echo "WARN: No $record_type IPs found, skipping $subdomain" >&2
