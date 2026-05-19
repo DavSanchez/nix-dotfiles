@@ -12,6 +12,7 @@
     ./modules/aws.nix
     ./modules/cli
     ./modules/dev
+    ./modules/dev/java.nix
     ./modules/direnv.nix
     # ./modules/emacs
     ./modules/git
