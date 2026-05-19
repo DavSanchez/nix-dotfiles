@@ -41,10 +41,15 @@
         name = "newrelic/commune";
         clone_target = "git@source.datanerd.us:commune/newrelic-homebrew";
       }
+      {
+        name = "hashicorp/tap";
+        clone_target = "git@github.com:hashicorp/homebrew-tap";
+      }
     ];
     brews = [
       "mole"
       "newrelic/commune/claude-nerd-completion"
+      "newrelic/commune/newrelic-vault"
       "newrelic/commune/selfserve"
     ];
     casks = [
