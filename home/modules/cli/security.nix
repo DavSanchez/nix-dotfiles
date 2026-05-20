@@ -32,15 +32,13 @@
         "~/.config/colima/ssh_config" # Colima package (containers)
       ];
 
-      matchBlocks = {
+      settings = {
         "github.com" = {
-          addKeysToAgent = "yes";
-          identityFile = "~/.ssh/id_ed25519";
+          AddKeysToAgent = "yes";
+          IdentityFile = "~/.ssh/id_ed25519";
         }
         // lib.optionalAttrs pkgs.stdenv.isDarwin {
-          extraOptions = {
-            UseKeychain = "yes";
-          };
+          UseKeychain = "yes";
         };
       };
     };
