@@ -21,7 +21,7 @@
     ./modules/nu.nix
     ./modules/starship.nix
     ./modules/vscode
-    ./modules/zed.nix
+    # ./modules/zed.nix
     ./modules/zsh
     ./modules/bash.nix
     ./modules/fish.nix
