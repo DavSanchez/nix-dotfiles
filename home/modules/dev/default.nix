@@ -12,6 +12,7 @@
     # ./kafka.nix
     ./rust.nix
     ./api.nix
+    ./python.nix
   ];
 
   ## Other packages
