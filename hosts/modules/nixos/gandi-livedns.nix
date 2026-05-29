@@ -34,7 +34,10 @@ in
         Can be a single string or a list of strings.
         The record will point to this host's private local IPs and Tailscale IP(s).
       '';
-      example = [ "*.mora" "mora" ];
+      example = [
+        "*.mora"
+        "mora"
+      ];
     };
 
     interval = lib.mkOption {
