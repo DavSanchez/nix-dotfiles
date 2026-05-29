@@ -76,7 +76,8 @@
   services = {
     hermes-agent = {
       enable = true;
-      settings.model.default = "qwen/qwen3.6-plus";
+      package = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.hermes-agent;
+      settings.model.default = "deepseek/deepseek-v4-flash";
       environmentFiles = [ config.sops.secrets."hermes/mora/env".path ];
       addToSystemPackages = true;
     };

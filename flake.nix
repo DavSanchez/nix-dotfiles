@@ -40,6 +40,9 @@
     # Hermes Agent
     hermes-agent.url = "github:NousResearch/hermes-agent";
 
+    # Other AI tooling
+    llm-agents.url = "github:numtide/llm-agents.nix";
+
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
