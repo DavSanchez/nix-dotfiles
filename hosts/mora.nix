@@ -76,6 +76,7 @@
   services = {
     hermes-agent = {
       enable = true;
+      package = inputs.hermes-agent.packages.${pkgs.stdenv.hostPlatform.system}.full;
       settings.model.default = "qwen/qwen3.6-plus";
       environmentFiles = [ config.sops.secrets."hermes/mora/env".path ];
       addToSystemPackages = true;
