@@ -38,6 +38,6 @@
     ]
     ++ (with inputs.hermes-agent.packages.${pkgs.stdenv.hostPlatform.system}; [
       full
-      # desktop # not yet ready
+      desktop
     ]);
 }
