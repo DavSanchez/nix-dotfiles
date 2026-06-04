@@ -63,9 +63,7 @@ jobs:
       - name: Smoke test Linux builder VM
         run: |
           set +e
-
-          sleep 30
-
+          sleep 30 # give it time to the VM to spawn (software emulated)
           for i in $(seq 1 12); do
             echo "Attempt $i/12: building trivial aarch64-linux derivation..."
             nix build --system aarch64-linux \
