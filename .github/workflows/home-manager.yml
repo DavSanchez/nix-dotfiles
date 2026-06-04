@@ -9,6 +9,7 @@ on:
       - 'home/**'
       - 'flake.nix'
       - 'flake.lock'
+      - '.github/workflows/home-manager.yml'
   pull_request:
     branches:
       - master
@@ -16,6 +17,7 @@ on:
       - 'home/**'
       - 'flake.nix'
       - 'flake.lock'
+      - '.github/workflows/home-manager.yml'
 
 jobs:
   solio:
