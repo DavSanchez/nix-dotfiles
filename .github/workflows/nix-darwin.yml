@@ -11,8 +11,6 @@ on:
       - 'flake.lock'
       - '.github/workflows/nix-darwin.yml'
   pull_request:
-    branches:
-      - master
     paths:
       - 'hosts/**'
       - 'flake.nix'

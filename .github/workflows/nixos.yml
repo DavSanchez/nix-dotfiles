@@ -11,8 +11,6 @@ on:
       - 'flake.lock'
       - '.github/workflows/nixos.yml'
   pull_request:
-    branches:
-      - master
     paths:
       - 'hosts/**'
       - 'flake.nix'

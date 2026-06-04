@@ -11,8 +11,6 @@ on:
       - 'flake.lock'
       - '.github/workflows/home-manager.yml'
   pull_request:
-    branches:
-      - master
     paths:
       - 'home/**'
       - 'flake.nix'
