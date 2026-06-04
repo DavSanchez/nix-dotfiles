@@ -124,6 +124,7 @@
           system = "aarch64-darwin";
           modules = [
             {
+              nix.settings.experimental-features = "nix-command flakes";
               nix.linux-builder = {
                 enable = true;
                 ephemeral = true;
