@@ -21,6 +21,9 @@ jobs:
   build:
     name: Build nix-darwin configs (with Linux builder smoke test)
     runs-on: macos-latest
+    strategy:
+      matrix:
+        host: [solio, sierpe]
     steps:
       - uses: actions/checkout@v6
 
@@ -113,14 +116,8 @@ jobs:
       #       ".#darwinConfigurations.linux-builder-test.config.nix.linux-builder.package.nixosConfig.system.build.toplevel" \
       #       | cachix push davsanchez
 
-      # These builds require the Linux builder VM activated above, because solio/sierpe
-      # configure their own linux-builder with x86_64 emulation (binfmt).
-      # The bootstrap builder handles building those x86_64-linux dependencies.
-      - name: Build nix-darwin (solio)
-        run: nix run github:nix-darwin/nix-darwin/master#darwin-rebuild -- build --flake .#solio
-
-      - name: Build nix-darwin (sierpe)
-        run: nix run github:nix-darwin/nix-darwin/master#darwin-rebuild -- build --flake .#sierpe
+      - name: Build nix-darwin (${{ matrix.host }})
+        run: nix run github:nix-darwin/nix-darwin/master#darwin-rebuild -- build --flake .#${{ matrix.host }}
 
   check:
     name: 🟢 Decide whether the needed jobs succeeded or failed
