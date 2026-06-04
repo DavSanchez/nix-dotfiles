@@ -64,6 +64,8 @@ jobs:
         run: |
           set +e
 
+          sleep 60
+
           echo "=== QEMU process ==="
           pgrep -fl qemu || echo "No QEMU process found"
 
@@ -71,7 +73,7 @@ jobs:
           lsof -i :31022 2>&1 || echo "Nothing listening on 31022"
 
           echo "=== launchd service ==="
-          sudo launchctl print system/org.nixos.linux-builder 2>&1 | head -20 || true
+          sudo launchctl print system/org.nixos.linux-builder 2>&1 || true
 
           for i in $(seq 1 24); do
             echo "Attempt $i/24: building trivial aarch64-linux derivation..."
