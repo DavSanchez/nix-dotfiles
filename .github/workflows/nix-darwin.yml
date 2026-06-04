@@ -76,8 +76,8 @@ jobs:
 
           for i in $(seq 1 12); do
             echo "Attempt $i/12: building trivial aarch64-linux derivation..."
-            nix build --system aarch64-linux \
-              --impure \ # so it sees $NIX_SSHOPTS?
+            # building with --impure so $NIX_SSHOPTS is seen, not sure if this is needed
+            nix build --impure --system aarch64-linux \
               --access-tokens "github.com=${{ secrets.GITHUB_TOKEN }}" \
               --expr 'builtins.derivation { name = "smoke-test"; system = "aarch64-linux"; builder = "/bin/sh"; args = ["-c" "echo ok > $out"]; }' \
               --no-link 2>&1
@@ -152,10 +152,10 @@ jobs:
             ls -la /etc/ssh/ssh_config.d/ 2>&1 || true
           fi
           
+          # building with --impure so $NIX_SSHOPTS is seen, not sure if this is needed
           nix run github:nix-darwin/nix-darwin/master#darwin-rebuild \
             --access-tokens "github.com=${{ secrets.GITHUB_TOKEN }}" \
-            --impure \ # so it sees $NIX_SSHOPTS?
-            -- build --flake .#${{ matrix.host }}
+            -- build --flake .#${{ matrix.host }} --impure
 
   check:
     name: 🟢 Decide whether the needed jobs succeeded or failed
