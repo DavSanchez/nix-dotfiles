@@ -73,7 +73,13 @@ jobs:
           lsof -i :31022 2>&1 || echo "Nothing listening on 31022"
 
           echo "=== launchd service ==="
-          sudo launchctl print system/org.nixos.linux-builder 2>&1 || true
+          sudo launchctl print system/org.nixos.linux-builder 2>&1 | head -40 || true
+
+          echo "=== Recent crash reports ==="
+          ls -lt /Library/Logs/DiagnosticReports/qemu*.ips 2>/dev/null | head -3 || echo "No QEMU crash reports"
+
+          echo "=== System log (last 50 QEMU-related) ==="
+          log show --predicate 'process CONTAINS "qemu" OR process CONTAINS "linux-builder"' --last 5m --style compact 2>&1 | tail -50 || true
 
           for i in $(seq 1 24); do
             echo "Attempt $i/24: building trivial aarch64-linux derivation..."
