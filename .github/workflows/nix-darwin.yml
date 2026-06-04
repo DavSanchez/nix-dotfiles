@@ -64,21 +64,24 @@ jobs:
         run: |
           set +e
 
+          echo "=== /etc/ssh/ssh_config ==="
+          cat /etc/ssh/ssh_config 2>&1 || true
+
           SSH_CFG="/etc/ssh/ssh_config.d/100-linux-builder.conf"
           if [ -f "$SSH_CFG" ]; then
-            echo "Found SSH config: $SSH_CFG"
+            echo "=== $SSH_CFG ==="
             cat "$SSH_CFG"
-            export NIX_SSHOPTS="-F $SSH_CFG"
           else
             echo "WARNING: $SSH_CFG not found"
             ls -la /etc/ssh/ssh_config.d/ 2>&1 || true
           fi
 
+          echo "=== Direct SSH test ==="
+          ssh linux-builder echo hello 2>&1 || true
+
           for i in $(seq 1 12); do
             echo "Attempt $i/12: building trivial aarch64-linux derivation..."
-            # building with --impure so $NIX_SSHOPTS is seen, not sure if this is needed
-            nix build --impure --system aarch64-linux \
-              --access-tokens "github.com=${{ secrets.GITHUB_TOKEN }}" \
+            nix build --system aarch64-linux \
               --expr 'builtins.derivation { name = "smoke-test"; system = "aarch64-linux"; builder = "/bin/sh"; args = ["-c" "echo ok > $out"]; }' \
               --no-link 2>&1
             if [ $? -eq 0 ]; then
@@ -140,7 +143,6 @@ jobs:
       - name: Build nix-darwin (${{ matrix.host }})
         run: |
           set +e
-
           
           SSH_CFG="/etc/ssh/ssh_config.d/100-linux-builder.conf"
           if [ -f "$SSH_CFG" ]; then
