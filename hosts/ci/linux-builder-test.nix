@@ -16,7 +16,8 @@
 # 2. The `accel=hvf:tcg` syntax means "try HVF, fall back to TCG if unavailable"
 #
 # 3. However, QEMU's `hvf_accel_init` calls `abort()` when `hvf_arm_get_max_ipa_bit_size`
-#    fails, instead of gracefully falling back to TCG. This is (is it?) a QEMU bug.
+#    fails, instead of gracefully falling back to TCG. This is a QEMU bug
+#    (see https://gitlab.com/qemu-project/qemu/-/work_items/2981).
 #
 # 4. GitHub Actions macOS runners are themselves VMs and may not fully support
 #    nested virtualization via HVF, triggering this crash path.
