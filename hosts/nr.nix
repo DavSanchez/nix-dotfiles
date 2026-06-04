@@ -34,7 +34,7 @@
     global.brewfile = true;
     onActivation.autoUpdate = true;
     onActivation.upgrade = true;
-    onActivation.cleanup = "zap";
+    # onActivation.cleanup = "zap";
 
     taps = [
       {
