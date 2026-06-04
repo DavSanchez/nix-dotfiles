@@ -32,7 +32,7 @@
 { pkgs, inputs, ... }:
 
 let
-  realQemu = pkgs.stable.qemu;
+  realQemu = pkgs.qemu;
 
   # Wrapper that forces TCG (software emulation) by rewriting QEMU's -machine argument.
   # This avoids the HVF crash on GitHub Actions runners while maintaining compatibility
