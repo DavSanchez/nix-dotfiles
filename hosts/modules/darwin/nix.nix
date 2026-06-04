@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }:
+{ inputs, ... }:
 {
   nixpkgs = {
     overlays = [
@@ -24,7 +24,6 @@
 
     linux-builder = {
       enable = true;
-      package = pkgs.stable.darwin.linux-builder;
       ephemeral = true;
       systems = [
         "x86_64-linux"
