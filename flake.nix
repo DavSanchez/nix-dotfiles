@@ -120,6 +120,20 @@
           };
           modules = [ ./hosts/nr.nix ];
         };
+        linux-builder-test = darwin.lib.darwinSystem {
+          system = "aarch64-darwin";
+          modules = [
+            {
+              nix.linux-builder = {
+                enable = true;
+                ephemeral = true;
+                systems = [ "aarch64-linux" ];
+              };
+              system.stateVersion = 6;
+              system.primaryUser = "runner";
+            }
+          ];
+        };
       };
 
       homeConfigurations = {

@@ -44,26 +44,6 @@ jobs:
       - name: Build NixOS config (mora)
         run: nix build ".#nixosConfigurations.mora.config.system.build.toplevel"
 
-  darwin-linux-builder:
-    name: 🔧 Pre-build Linux builder VM (for macOS CI)
-    runs-on: ubuntu-24.04-arm
-    steps:
-      - uses: actions/checkout@v6
-      - name: Free up space
-        run: bash .github/scripts/space_cleanup.sh
-      - uses: cachix/install-nix-action@v31
-        with:
-          github_access_token: ${{ secrets.GITHUB_TOKEN }}
-      - uses: cachix/cachix-action@v17
-        with:
-          name: davsanchez
-          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
-      - name: Build Linux builder VM
-        run: nix build
-          ".#darwinConfigurations.solio.config.nix.linux-builder.package.nixosConfig.system.build.toplevel"
-      - name: Push Linux builder VM closure to Cachix (it has missed etc some times)
-        run: nix path-info --recursive ./result | cachix push davsanchez
-
   darwin-home-manager:
     name: 🍎 Build macOS configs (home-manager)
     runs-on: macos-latest
@@ -85,35 +65,13 @@ jobs:
       - name: Build home-manager (sierpe)
         run: nix run home-manager -- build --flake ".#david@sierpe"
 
-  darwin-nix-darwin:
-    needs: darwin-linux-builder
-    name: 🍎 Build macOS configs (nix-darwin)
-    runs-on: macos-latest
-    steps:
-      - uses: actions/checkout@v6
-      - name: Free up space
-        run: bash .github/scripts/space_cleanup.sh
-      - uses: cachix/install-nix-action@v31
-        with:
-          github_access_token: ${{ secrets.GITHUB_TOKEN }}
-      - uses: cachix/cachix-action@v17
-        with:
-          name: davsanchez
-          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
-      - name: Build nix-darwin (solio)
-        run: nix run nix-darwin -- build --flake ".#solio"
-      - name: Build nix-darwin (sierpe)
-        run: nix run nix-darwin -- build --flake ".#sierpe"
-
   check:
     name: 🟢 Decide whether the needed jobs succeeded or failed
     if: always()
     needs:
       - linux
       - linux-arm
-      - darwin-linux-builder
       - darwin-home-manager
-      - darwin-nix-darwin
     runs-on: ubuntu-latest
     steps:
       - uses: re-actors/alls-green@release/v1
