@@ -47,7 +47,9 @@ let
     for arg in "$@"; do
       case "$arg" in
         *accel=hvf*)
-          arg=$(printf '%s' "$arg" | sed 's/accel=hvf:tcg/accel=tcg/;s/accel=hvf/accel=tcg/')
+          # Strip HVF acceleration, forcing TCG software emulation, via shell param expansion
+          arg="''${arg//accel=hvf:tcg/accel=tcg}"
+          arg="''${arg//accel=hvf/accel=tcg}"
           ;;
       esac
       args+=("$arg")
