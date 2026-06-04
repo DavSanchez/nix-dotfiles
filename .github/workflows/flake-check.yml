@@ -1,4 +1,4 @@
-name: Home Manager
+name: Flake Check
 on:
   workflow_dispatch:
   push:
@@ -6,24 +6,28 @@ on:
       - master
       - renovate/**
     paths:
-      - 'home/**'
-      - 'flake.nix'
+      - '**.nix'
       - 'flake.lock'
-      - '.github/workflows/home-manager.yml'
+      - '.github/workflows/flake-check.yml'
   pull_request:
     paths:
-      - 'home/**'
-      - 'flake.nix'
+      - '**.nix'
       - 'flake.lock'
-      - '.github/workflows/home-manager.yml'
+      - '.github/workflows/flake-check.yml'
 
 jobs:
-  build:
-    name: Build Home Manager (${{ matrix.host }})
+  flake-check:
+    name: nix flake check (${{ matrix.system }})
     strategy:
       matrix:
-        host: [solio, sierpe]
-    runs-on: macos-latest
+        include:
+          - system: x86_64-linux
+            runner: ubuntu-latest
+          - system: aarch64-linux
+            runner: ubuntu-24.04-arm
+          - system: aarch64-darwin
+            runner: macos-latest
+    runs-on: ${{ matrix.runner }}
     steps:
       - uses: actions/checkout@v6
       - name: Free up space
@@ -35,14 +39,14 @@ jobs:
         with:
           name: davsanchez
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
-      - name: Build Home Manager (${{ matrix.host }})
-        run: nix run home-manager -- build --flake ".#david@${{ matrix.host }}"
+      - name: Run nix flake check
+        run: nix flake check -L
 
   check:
     name: 🟢 Decide whether the needed jobs succeeded or failed
     if: always()
     needs:
-      - build
+      - flake-check
     runs-on: ubuntu-latest
     steps:
       - uses: re-actors/alls-green@release/v1

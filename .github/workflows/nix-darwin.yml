@@ -36,6 +36,15 @@ jobs:
           name: davsanchez
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
+      - name: Backup existing system files
+        run: |
+          for f in /etc/nix/nix.conf /etc/bashrc /etc/zshrc; do
+            if [ -f "$f" ]; then
+              sudo mv "$f" "${f}.before-nix-darwin"
+              echo "Renamed $f to ${f}.before-nix-darwin"
+            fi
+          done
+
       # Activate a minimal nix-darwin config that only enables the Linux builder VM.
       # This bootstrap builder is needed by our real nix-darwin configs (solio/sierpe)
       # which configure their own Linux builder with x86_64 emulation support.
