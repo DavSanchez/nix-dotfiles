@@ -117,44 +117,7 @@
         linux-builder-test = darwin.lib.darwinSystem {
           system = "aarch64-darwin";
           specialArgs = { inherit inputs; };
-          modules = [
-            ({ pkgs, inputs, ... }:
-              let
-                realQemu = pkgs.stable.qemu;
-                qemuTCG = pkgs.stable.runCommand "qemu-tcg" { } ''
-                  mkdir -p $out/bin
-                  ln -s ${realQemu}/bin/* $out/bin/
-                  rm $out/bin/qemu-system-aarch64
-                  cat > $out/bin/qemu-system-aarch64 << 'EOF'
-                  #!/bin/bash
-                  args=()
-                  for arg in "$@"; do
-                    case "$arg" in
-                      *accel=hvf*)
-                        arg=$(printf '%s' "$arg" | sed 's/accel=hvf:tcg/accel=tcg/;s/accel=hvf/accel=tcg/')
-                        ;;
-                    esac
-                    args+=("$arg")
-                  done
-                  exec ${realQemu}/bin/qemu-system-aarch64 "''${args[@]}"
-                  EOF
-                  chmod +x $out/bin/qemu-system-aarch64
-                '';
-              in
-              {
-                nixpkgs.overlays = [ inputs.self.overlays.stable-packages ];
-                nix.settings.experimental-features = "nix-command flakes";
-                nix.linux-builder = {
-                  enable = true;
-                  package = pkgs.stable.darwin.linux-builder;
-                  ephemeral = true;
-                  systems = [ "aarch64-linux" ];
-                  config.virtualisation.qemu.package = qemuTCG;
-                };
-                system.stateVersion = 6;
-                system.primaryUser = "runner";
-              })
-          ];
+          modules = [ ./hosts/ci/linux-builder-test.nix ];
         };
       };
 

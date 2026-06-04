@@ -63,42 +63,8 @@ jobs:
       - name: Smoke test Linux builder VM
         run: |
           set +e
-
-          sleep 60
-
-          echo "=== QEMU process ==="
-          pgrep -fl qemu || echo "No QEMU process found"
-
-          echo "=== Port 31022 ==="
-          lsof -i :31022 2>&1 || echo "Nothing listening on 31022"
-
-          echo "=== launchd service ==="
-          sudo launchctl print system/org.nixos.linux-builder 2>&1 | head -40 || true
-
-          echo "=== Recent crash reports ==="
-          for f in $(ls -t /Library/Logs/DiagnosticReports/qemu-system-aarch64*.ips 2>/dev/null | head -2); do
-            echo "--- $f ---"
-            sudo python3 -c "
-          import json
-          with open('$f') as fh:
-              fh.readline()
-              data = json.load(fh)
-          print('Exception:', json.dumps(data.get('exception', {}), indent=2))
-          print('Termination:', json.dumps(data.get('termination', {}), indent=2))
-          ft = data.get('faultingThread', -1)
-          if ft >= 0:
-              thread = data['threads'][ft]
-              print(f'Faulting thread: {ft} ({thread.get(\"name\", \"unknown\")})')
-              for i, frame in enumerate(thread.get('frames', [])[:10]):
-                  print(f'  {i}: {frame.get(\"symbol\", \"\")} (offset {frame.get(\"imageOffset\", \"\")})')
-          " 2>&1 || sudo cat "$f" 2>&1 || echo "Could not read $f"
-          done
-
-          echo "=== System log (last 50 QEMU-related) ==="
-          log show --predicate 'process CONTAINS "qemu" OR process CONTAINS "linux-builder"' --last 5m --style compact 2>&1 | tail -50 || true
-
-          for i in $(seq 1 24); do
-            echo "Attempt $i/24: building trivial aarch64-linux derivation..."
+          for i in $(seq 1 12); do
+            echo "Attempt $i/12: building trivial aarch64-linux derivation..."
             nix build --system aarch64-linux \
               --expr 'builtins.derivation { name = "smoke-test"; system = "aarch64-linux"; builder = "/bin/sh"; args = ["-c" "echo ok > $out"]; }' \
               --no-link 2>&1
@@ -109,73 +75,14 @@ jobs:
             echo "Attempt $i failed, waiting 5s for VM to boot..."
             sleep 5
           done
-          echo "Linux builder failed to become responsive after 120s"
+          echo "Linux builder failed to become responsive after 60s"
           exit 1
 
-      - name: Capture diagnostics on failure
-        if: failure()
-        run: |
-          mkdir -p diagnostics
-
-          echo "=== launchctl print ===" > diagnostics/launchctl.txt
-          sudo launchctl print system/org.nixos.linux-builder >> diagnostics/launchctl.txt 2>&1 || true
-
-          echo "=== system logs ===" > diagnostics/logs.txt
-          log show --predicate 'process CONTAINS "qemu" OR process CONTAINS "linux-builder" OR process CONTAINS "create-builder"' --last 10m --style compact >> diagnostics/logs.txt 2>&1 || true
-
-          echo "=== crash reports ===" > diagnostics/crashes.txt
-          for f in $(ls -t /Library/Logs/DiagnosticReports/qemu-system-aarch64*.ips 2>/dev/null | head -3); do
-            echo "--- $f ---" >> diagnostics/crashes.txt
-            python3 -c "
-          import json
-          with open('$f') as fh:
-              fh.readline()
-              data = json.load(fh)
-          print('Exception:', json.dumps(data.get('exception', {}), indent=2))
-          print('Termination:', json.dumps(data.get('termination', {}), indent=2))
-          print('ASI:', json.dumps(data.get('asi', {}), indent=2))
-          ft = data.get('faultingThread', -1)
-          if ft >= 0:
-              thread = data['threads'][ft]
-              print(f'Faulting thread: {ft} ({thread.get(\"name\", \"unknown\")})')
-              for i, frame in enumerate(thread.get('frames', [])[:10]):
-                  print(f'  {i}: {frame.get(\"symbol\", \"\")} (offset {frame.get(\"imageOffset\", \"\")})')
-          " >> diagnostics/crashes.txt 2>&1 || true
-          done
-        continue-on-error: true
-
-      - name: Upload diagnostics
-        if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: linux-builder-diagnostics
-          path: diagnostics/
-        continue-on-error: true
-
-      # - name: Push Linux builder VM closure to Cachix
-      #   run: |
-      #     nix path-info --recursive \
-      #       ".#darwinConfigurations.linux-builder-test.config.nix.linux-builder.package.nixosConfig.system.build.toplevel" \
-      #       | cachix push davsanchez
-
       - name: Build nix-darwin (${{ matrix.host }})
-        run: |
-          set +e
-          
-          SSH_CFG="/etc/ssh/ssh_config.d/100-linux-builder.conf"
-          if [ -f "$SSH_CFG" ]; then
-            echo "Found SSH config: $SSH_CFG"
-            cat "$SSH_CFG"
-            export NIX_SSHOPTS="-F $SSH_CFG"
-          else
-            echo "WARNING: $SSH_CFG not found"
-            ls -la /etc/ssh/ssh_config.d/ 2>&1 || true
-          fi
-          
-          # building with --impure so $NIX_SSHOPTS is seen, not sure if this is needed
-          nix run github:nix-darwin/nix-darwin/master#darwin-rebuild \
-            --access-tokens "github.com=${{ secrets.GITHUB_TOKEN }}" \
-            -- build --flake .#${{ matrix.host }} --impure
+        run: >
+          nix run github:nix-darwin/nix-darwin/master#darwin-rebuild
+          --access-tokens "github.com=${{ secrets.GITHUB_TOKEN }}"
+          -- build --flake .#${{ matrix.host }}
 
   check:
     name: 🟢 Decide whether the needed jobs succeeded or failed
