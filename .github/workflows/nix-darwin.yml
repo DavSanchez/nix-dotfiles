@@ -76,7 +76,23 @@ jobs:
           sudo launchctl print system/org.nixos.linux-builder 2>&1 | head -40 || true
 
           echo "=== Recent crash reports ==="
-          ls -lt /Library/Logs/DiagnosticReports/qemu*.ips 2>/dev/null | head -3 || echo "No QEMU crash reports"
+          for f in $(ls -t /Library/Logs/DiagnosticReports/qemu-system-aarch64*.ips 2>/dev/null | head -2); do
+            echo "--- $f ---"
+            sudo python3 -c "
+          import json
+          with open('$f') as fh:
+              fh.readline()
+              data = json.load(fh)
+          print('Exception:', json.dumps(data.get('exception', {}), indent=2))
+          print('Termination:', json.dumps(data.get('termination', {}), indent=2))
+          ft = data.get('faultingThread', -1)
+          if ft >= 0:
+              thread = data['threads'][ft]
+              print(f'Faulting thread: {ft} ({thread.get(\"name\", \"unknown\")})')
+              for i, frame in enumerate(thread.get('frames', [])[:10]):
+                  print(f'  {i}: {frame.get(\"symbol\", \"\")} (offset {frame.get(\"imageOffset\", \"\")})')
+          " 2>&1 || sudo cat "$f" 2>&1 || echo "Could not read $f"
+          done
 
           echo "=== System log (last 50 QEMU-related) ==="
           log show --predicate 'process CONTAINS "qemu" OR process CONTAINS "linux-builder"' --last 5m --style compact 2>&1 | tail -50 || true
