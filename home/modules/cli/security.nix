@@ -3,6 +3,7 @@
   home.packages =
     with pkgs;
     [
+      secretspec
       cotp
       # oath-toolkit
       sops
