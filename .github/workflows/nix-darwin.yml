@@ -1,0 +1,97 @@
+name: Nix Darwin
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+      - renovate/**
+    paths:
+      - 'hosts/**'
+      - 'flake.nix'
+      - 'flake.lock'
+      - '.github/workflows/nix-darwin.yml'
+  pull_request:
+    paths:
+      - 'hosts/**'
+      - 'flake.nix'
+      - 'flake.lock'
+      - '.github/workflows/nix-darwin.yml'
+
+jobs:
+  build:
+    name: Build nix-darwin configs (with Linux builder smoke test)
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        host: [solio, sierpe]
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Free up space
+        run: bash .github/scripts/space_cleanup.sh
+
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: cachix/cachix-action@v17
+        with:
+          name: davsanchez
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+
+      - name: Backup existing system files
+        run: |
+          for f in /etc/nix/nix.conf /etc/bashrc /etc/zshrc; do
+            if [ -f "$f" ]; then
+              sudo mv "$f" "${f}.before-nix-darwin"
+              echo "Renamed $f to ${f}.before-nix-darwin"
+            fi
+          done
+
+      # Activate a minimal nix-darwin config that only enables the Linux builder VM.
+      # This bootstrap builder is needed by our real nix-darwin configs (solio/sierpe)
+      # which configure their own Linux builder with x86_64 emulation support.
+      - name: Activate bootstrap Linux builder
+        run: >
+          sudo nix run
+          --access-tokens "github.com=${{ secrets.GITHUB_TOKEN }}"
+          --extra-experimental-features 'nix-command flakes'
+          github:nix-darwin/nix-darwin/master#darwin-rebuild
+          --
+          switch --flake .#linux-builder-test
+
+      - name: Smoke test Linux builder VM
+        run: |
+          set +e
+          sleep 30 # give it time to the VM to spawn (software emulated)
+          for i in $(seq 1 12); do
+            echo "Attempt $i/12: building trivial aarch64-linux derivation..."
+            nix build --system aarch64-linux \
+              --expr 'builtins.derivation { name = "smoke-test"; system = "aarch64-linux"; builder = "/bin/sh"; args = ["-c" "echo ok > $out"]; }' \
+              --no-link 2>&1
+            if [ $? -eq 0 ]; then
+              echo "Linux builder is responsive"
+              exit 0
+            fi
+            echo "Attempt $i failed, waiting 5s for VM to boot..."
+            sleep 5
+          done
+          echo "Linux builder failed to become responsive after 60s"
+          exit 1
+
+      - name: Build nix-darwin (${{ matrix.host }})
+        run: >
+          nix run github:nix-darwin/nix-darwin/master#darwin-rebuild
+          --access-tokens "github.com=${{ secrets.GITHUB_TOKEN }}"
+          -- build --flake .#${{ matrix.host }}
+
+  check:
+    name: 🟢 Decide whether the needed jobs succeeded or failed
+    if: always()
+    needs:
+      - build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: re-actors/alls-green@release/v1
+        with:
+          jobs: ${{ toJSON(needs) }}

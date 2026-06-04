@@ -1,0 +1,50 @@
+name: Home Manager
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+      - renovate/**
+    paths:
+      - 'home/**'
+      - 'flake.nix'
+      - 'flake.lock'
+      - '.github/workflows/home-manager.yml'
+  pull_request:
+    paths:
+      - 'home/**'
+      - 'flake.nix'
+      - 'flake.lock'
+      - '.github/workflows/home-manager.yml'
+
+jobs:
+  build:
+    name: Build Home Manager (${{ matrix.host }})
+    strategy:
+      matrix:
+        host: [solio, sierpe]
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Free up space
+        run: bash .github/scripts/space_cleanup.sh
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: cachix/cachix-action@v17
+        with:
+          name: davsanchez
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+      - name: Build Home Manager (${{ matrix.host }})
+        run: nix run github:nix-community/home-manager/master -- build --flake ".#david@${{ matrix.host }}"
+
+  check:
+    name: 🟢 Decide whether the needed jobs succeeded or failed
+    if: always()
+    needs:
+      - build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: re-actors/alls-green@release/v1
+        with:
+          jobs: ${{ toJSON(needs) }}

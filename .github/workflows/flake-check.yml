@@ -1,0 +1,55 @@
+name: Flake Check
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+      - renovate/**
+    paths:
+      - '**.nix'
+      - 'flake.lock'
+      - '.github/workflows/flake-check.yml'
+  pull_request:
+    paths:
+      - '**.nix'
+      - 'flake.lock'
+      - '.github/workflows/flake-check.yml'
+
+jobs:
+  if: false  # workflow disabled for now
+  flake-check:
+    name: nix flake check (${{ matrix.system }})
+    strategy:
+      matrix:
+        include:
+          - system: x86_64-linux
+            runner: ubuntu-latest
+          - system: aarch64-linux
+            runner: ubuntu-24.04-arm
+          - system: aarch64-darwin
+            runner: macos-latest
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - uses: actions/checkout@v6
+      - name: Free up space
+        run: bash .github/scripts/space_cleanup.sh
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: cachix/cachix-action@v17
+        with:
+          name: davsanchez
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+      - name: Run nix flake check
+        run: nix flake check -L
+
+  check:
+    name: 🟢 Decide whether the needed jobs succeeded or failed
+    if: always()
+    needs:
+      - flake-check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: re-actors/alls-green@release/v1
+        with:
+          jobs: ${{ toJSON(needs) }}

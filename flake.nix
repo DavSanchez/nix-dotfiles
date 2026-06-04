@@ -101,38 +101,23 @@
       darwinConfigurations = {
         sierpe = darwin.lib.darwinSystem {
           system = "aarch64-darwin";
-          specialArgs = {
-            inherit inputs;
-          };
+          specialArgs = { inherit inputs; };
           modules = [ ./hosts/sierpe.nix ];
         };
         solio = darwin.lib.darwinSystem {
           system = "aarch64-darwin";
-          specialArgs = {
-            inherit inputs;
-          };
+          specialArgs = { inherit inputs; };
           modules = [ ./hosts/solio.nix ];
         };
         V9X576T260 = darwin.lib.darwinSystem {
           system = "aarch64-darwin";
-          specialArgs = {
-            inherit inputs;
-          };
+          specialArgs = { inherit inputs; };
           modules = [ ./hosts/nr.nix ];
         };
         linux-builder-test = darwin.lib.darwinSystem {
           system = "aarch64-darwin";
-          modules = [
-            {
-              nix.linux-builder = {
-                enable = true;
-                ephemeral = true;
-                systems = [ "aarch64-linux" ];
-              };
-              system.stateVersion = 6;
-              system.primaryUser = "runner";
-            }
-          ];
+          specialArgs = { inherit inputs; };
+          modules = [ ./hosts/ci/linux-builder-test.nix ];
         };
       };
 
