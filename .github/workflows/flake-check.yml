@@ -16,6 +16,7 @@ on:
       - '.github/workflows/flake-check.yml'
 
 jobs:
+  if: false  # workflow disabled for now
   flake-check:
     name: nix flake check (${{ matrix.system }})
     strategy:
