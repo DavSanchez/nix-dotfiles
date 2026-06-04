@@ -1,0 +1,83 @@
+name: NixOS
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+      - renovate/**
+    paths:
+      - 'hosts/**'
+      - 'flake.nix'
+      - 'flake.lock'
+  pull_request:
+    branches:
+      - master
+    paths:
+      - 'hosts/**'
+      - 'flake.nix'
+      - 'flake.lock'
+
+jobs:
+  nixos-eter:
+    name: 🫧 Build NixOS config (eter)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Free up space
+        run: bash .github/scripts/space_cleanup.sh
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: cachix/cachix-action@v17
+        with:
+          name: davsanchez
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+      - name: Build NixOS config (eter)
+        run: nix build ".#nixosConfigurations.eter.config.system.build.toplevel"
+
+  nixos-mora:
+    name: 🫐 Build NixOS config (mora)
+    runs-on: ubuntu-24.04-arm
+    steps:
+      - uses: actions/checkout@v6
+      - name: Free up space
+        run: bash .github/scripts/space_cleanup.sh
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: cachix/cachix-action@v17
+        with:
+          name: davsanchez
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+      - name: Build NixOS config (mora)
+        run: nix build ".#nixosConfigurations.mora.config.system.build.toplevel"
+
+  deploy-check:
+    name: 🚀 Deploy dry-run (deploy-rs checks)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Free up space
+        run: bash .github/scripts/space_cleanup.sh
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: cachix/cachix-action@v17
+        with:
+          name: davsanchez
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+      - name: Run deploy-rs checks
+        run: nix flake check
+
+  check:
+    name: 🟢 Decide whether the needed jobs succeeded or failed
+    if: always()
+    needs:
+      - nixos-eter
+      - nixos-mora
+      - deploy-check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: re-actors/alls-green@release/v1
+        with:
+          jobs: ${{ toJSON(needs) }}

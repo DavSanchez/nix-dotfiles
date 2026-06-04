@@ -1,51 +1,25 @@
-name: CI
+name: Home Manager
 on:
-  workflow_dispatch: # allows manual triggering
+  workflow_dispatch:
   push:
     branches:
       - master
       - renovate/**
+    paths:
+      - 'home/**'
+      - 'flake.nix'
+      - 'flake.lock'
   pull_request:
     branches:
       - master
+    paths:
+      - 'home/**'
+      - 'flake.nix'
+      - 'flake.lock'
 
 jobs:
-  linux:
-    name: 🫧 Build Linux configs (eter)
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v6
-      - name: Free up space
-        run: bash .github/scripts/space_cleanup.sh
-      - uses: cachix/install-nix-action@v31
-        with:
-          github_access_token: ${{ secrets.GITHUB_TOKEN }}
-      - uses: cachix/cachix-action@v17
-        with:
-          name: davsanchez
-          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
-      - name: Build NixOS config (eter)
-        run: nix build ".#nixosConfigurations.eter.config.system.build.toplevel"
-
-  linux-arm:
-    name: 🫐 Build Linux configs (mora)
-    runs-on: ubuntu-24.04-arm
-    steps:
-      - uses: actions/checkout@v6
-      - name: Free up space
-        run: bash .github/scripts/space_cleanup.sh
-      - uses: cachix/install-nix-action@v31
-        with:
-          github_access_token: ${{ secrets.GITHUB_TOKEN }}
-      - uses: cachix/cachix-action@v17
-        with:
-          name: davsanchez
-          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
-      - name: Build NixOS config (mora)
-        run: nix build ".#nixosConfigurations.mora.config.system.build.toplevel"
-
-  darwin-home-manager:
-    name: 🍎 Build macOS configs (home-manager)
+  solio:
+    name: 🍎 Build Home Manager (solio)
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v6
@@ -58,20 +32,32 @@ jobs:
         with:
           name: davsanchez
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
-      # - name: Check flake
-      #   run: nix flake check -L
-      - name: Build home-manager (solio)
+      - name: Build Home Manager (solio)
         run: nix run home-manager -- build --flake ".#david@solio"
-      - name: Build home-manager (sierpe)
+
+  sierpe:
+    name: 🍎 Build Home Manager (sierpe)
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Free up space
+        run: bash .github/scripts/space_cleanup.sh
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: cachix/cachix-action@v17
+        with:
+          name: davsanchez
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+      - name: Build Home Manager (sierpe)
         run: nix run home-manager -- build --flake ".#david@sierpe"
 
   check:
     name: 🟢 Decide whether the needed jobs succeeded or failed
     if: always()
     needs:
-      - linux
-      - linux-arm
-      - darwin-home-manager
+      - solio
+      - sierpe
     runs-on: ubuntu-latest
     steps:
       - uses: re-actors/alls-green@release/v1
