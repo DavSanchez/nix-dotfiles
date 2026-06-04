@@ -11,12 +11,12 @@
 #
 # 1. The nixpkgs `qemu-common.nix` generates QEMU invocations with
 #    `-machine virt,gic-version=2,accel=hvf:tcg` for aarch64-darwin hosts
-#    (see: https://github.com/NixOS/nixpkgs/blob/master/nixos/lib/qemu-common.nix)
+#    (see: https://github.com/Mic92/nixpkgs/blob/8c69eeeb3d38b4b53c5b990436fb9ec4574b05c6/nixos/lib/qemu-common.nix#L53)
 #
 # 2. The `accel=hvf:tcg` syntax means "try HVF, fall back to TCG if unavailable"
 #
 # 3. However, QEMU's `hvf_accel_init` calls `abort()` when `hvf_arm_get_max_ipa_bit_size`
-#    fails, instead of gracefully falling back to TCG. This is a QEMU bug.
+#    fails, instead of gracefully falling back to TCG. This is (is it?) a QEMU bug.
 #
 # 4. GitHub Actions macOS runners are themselves VMs and may not fully support
 #    nested virtualization via HVF, triggering this crash path.
