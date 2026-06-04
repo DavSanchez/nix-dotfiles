@@ -123,16 +123,18 @@
         linux-builder-test = darwin.lib.darwinSystem {
           system = "aarch64-darwin";
           modules = [
-            {
+            ({ pkgs, inputs, ... }: {
+              nixpkgs.overlays = [ inputs.self.overlays.stable-packages ];
               nix.settings.experimental-features = "nix-command flakes";
               nix.linux-builder = {
                 enable = true;
+                package = pkgs.stable.darwin.linux-builder;
                 ephemeral = true;
                 systems = [ "aarch64-linux" ];
               };
               system.stateVersion = 6;
               system.primaryUser = "runner";
-            }
+            })
           ];
         };
       };
