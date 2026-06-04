@@ -64,23 +64,17 @@ jobs:
         run: |
           set +e
 
-          echo "=== /etc/ssh/ssh_config ==="
-          cat /etc/ssh/ssh_config 2>&1 || true
+          echo "=== QEMU process ==="
+          pgrep -fl qemu || echo "No QEMU process found"
 
-          SSH_CFG="/etc/ssh/ssh_config.d/100-linux-builder.conf"
-          if [ -f "$SSH_CFG" ]; then
-            echo "=== $SSH_CFG ==="
-            cat "$SSH_CFG"
-          else
-            echo "WARNING: $SSH_CFG not found"
-            ls -la /etc/ssh/ssh_config.d/ 2>&1 || true
-          fi
+          echo "=== Port 31022 ==="
+          lsof -i :31022 2>&1 || echo "Nothing listening on 31022"
 
-          echo "=== Direct SSH test ==="
-          ssh linux-builder echo hello 2>&1 || true
+          echo "=== launchd service ==="
+          sudo launchctl print system/org.nixos.linux-builder 2>&1 | head -20 || true
 
-          for i in $(seq 1 12); do
-            echo "Attempt $i/12: building trivial aarch64-linux derivation..."
+          for i in $(seq 1 24); do
+            echo "Attempt $i/24: building trivial aarch64-linux derivation..."
             nix build --system aarch64-linux \
               --expr 'builtins.derivation { name = "smoke-test"; system = "aarch64-linux"; builder = "/bin/sh"; args = ["-c" "echo ok > $out"]; }' \
               --no-link 2>&1
@@ -88,10 +82,10 @@ jobs:
               echo "Linux builder is responsive"
               exit 0
             fi
-            echo "Attempt $i failed, waiting 5s for VM to start..."
+            echo "Attempt $i failed, waiting 5s for VM to boot..."
             sleep 5
           done
-          echo "Linux builder failed to become responsive after 60s"
+          echo "Linux builder failed to become responsive after 120s"
           exit 1
 
       - name: Capture diagnostics on failure
