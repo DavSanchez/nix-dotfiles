@@ -53,7 +53,8 @@ jobs:
       # which configure their own Linux builder with x86_64 emulation support.
       - name: Activate bootstrap Linux builder
         run: >
-          nix run --extra-experimental-features 'nix-command flakes'
+          sudo nix run
+          --extra-experimental-features 'nix-command flakes'
           github:nix-darwin/nix-darwin/master#darwin-rebuild
           --
           switch --flake .#linux-builder-test
