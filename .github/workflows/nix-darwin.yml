@@ -1,4 +1,4 @@
-name: nix-darwin
+name: Nix Darwin
 on:
   workflow_dispatch:
   push:
@@ -19,7 +19,7 @@ on:
 
 jobs:
   build:
-    name: 🍎 Build nix-darwin configs (with Linux builder smoke test)
+    name: Build nix-darwin configs (with Linux builder smoke test)
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v6
@@ -49,7 +49,7 @@ jobs:
       # This bootstrap builder is needed by our real nix-darwin configs (solio/sierpe)
       # which configure their own Linux builder with x86_64 emulation support.
       - name: Activate bootstrap Linux builder
-        run: sudo nix run nix-darwin -- switch --flake .#linux-builder-test
+        run: nix run nix-darwin -- switch --flake .#linux-builder-test
 
       - name: Smoke test Linux builder VM
         run: |
@@ -107,11 +107,11 @@ jobs:
           path: diagnostics/
         continue-on-error: true
 
-      - name: Push Linux builder VM closure to Cachix
-        run: |
-          nix path-info --recursive \
-            ".#darwinConfigurations.linux-builder-test.config.nix.linux-builder.package.nixosConfig.system.build.toplevel" \
-            | cachix push davsanchez
+      # - name: Push Linux builder VM closure to Cachix
+      #   run: |
+      #     nix path-info --recursive \
+      #       ".#darwinConfigurations.linux-builder-test.config.nix.linux-builder.package.nixosConfig.system.build.toplevel" \
+      #       | cachix push davsanchez
 
       # These builds require the Linux builder VM activated above, because solio/sierpe
       # configure their own linux-builder with x86_64 emulation (binfmt).
