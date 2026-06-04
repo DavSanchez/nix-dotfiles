@@ -67,16 +67,15 @@ jobs:
           if [ -f "$SSH_CFG" ]; then
             echo "Found SSH config: $SSH_CFG"
             cat "$SSH_CFG"
+            export NIX_SSHOPTS="-F $SSH_CFG"
           else
             echo "WARNING: $SSH_CFG not found"
             ls -la /etc/ssh/ssh_config.d/ 2>&1 || true
           fi
 
-          NIX_OPTS="--option ssh-config-file $SSH_CFG"
-
           for i in $(seq 1 12); do
             echo "Attempt $i/12: building trivial aarch64-linux derivation..."
-            nix build --system aarch64-linux $NIX_OPTS \
+            nix build --system aarch64-linux \
               --expr 'builtins.derivation { name = "smoke-test"; system = "aarch64-linux"; builder = "/bin/sh"; args = ["-c" "echo ok > $out"]; }' \
               --no-link 2>&1
             if [ $? -eq 0 ]; then
