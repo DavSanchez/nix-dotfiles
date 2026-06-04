@@ -49,7 +49,7 @@ jobs:
       # This bootstrap builder is needed by our real nix-darwin configs (solio/sierpe)
       # which configure their own Linux builder with x86_64 emulation support.
       - name: Activate bootstrap Linux builder
-        run: nix run nix-darwin -- switch --flake .#linux-builder-test
+        run: nix run github:nix-darwin/nix-darwin/master#darwin-rebuild -- switch --flake .#linux-builder-test
 
       - name: Smoke test Linux builder VM
         run: |
@@ -117,10 +117,10 @@ jobs:
       # configure their own linux-builder with x86_64 emulation (binfmt).
       # The bootstrap builder handles building those x86_64-linux dependencies.
       - name: Build nix-darwin (solio)
-        run: nix run nix-darwin -- build --flake .#solio
+        run: nix run github:nix-darwin/nix-darwin/master#darwin-rebuild -- build --flake .#solio
 
       - name: Build nix-darwin (sierpe)
-        run: nix run nix-darwin -- build --flake .#sierpe
+        run: nix run github:nix-darwin/nix-darwin/master#darwin-rebuild -- build --flake .#sierpe
 
   check:
     name: 🟢 Decide whether the needed jobs succeeded or failed

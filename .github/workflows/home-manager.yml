@@ -36,7 +36,7 @@ jobs:
           name: davsanchez
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
       - name: Build Home Manager (${{ matrix.host }})
-        run: nix run home-manager -- build --flake ".#david@${{ matrix.host }}"
+        run: nix run github:nix-community/home-manager/master -- build --flake ".#david@${{ matrix.host }}"
 
   check:
     name: 🟢 Decide whether the needed jobs succeeded or failed
