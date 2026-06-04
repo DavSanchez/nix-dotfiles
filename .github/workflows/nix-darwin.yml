@@ -62,9 +62,23 @@ jobs:
       - name: Smoke test Linux builder VM
         run: |
           set +e
+
+          SSH_CFG="/etc/ssh/ssh_config.d/100-linux-builder.conf"
+          if [ -f "$SSH_CFG" ]; then
+            echo "Found SSH config: $SSH_CFG"
+            cat "$SSH_CFG"
+          else
+            echo "WARNING: $SSH_CFG not found"
+            ls -la /etc/ssh/ssh_config.d/ 2>&1 || true
+          fi
+
+          NIX_OPTS="--option ssh-config-file $SSH_CFG"
+
           for i in $(seq 1 12); do
             echo "Attempt $i/12: building trivial aarch64-linux derivation..."
-            sudo nix build --system aarch64-linux --impure --expr 'builtins.derivation { name = "smoke-test"; system = "aarch64-linux"; builder = "/bin/sh"; args = ["-c" "echo ok > $out"]; }' --no-link 2>&1
+            nix build --system aarch64-linux $NIX_OPTS \
+              --expr 'builtins.derivation { name = "smoke-test"; system = "aarch64-linux"; builder = "/bin/sh"; args = ["-c" "echo ok > $out"]; }' \
+              --no-link 2>&1
             if [ $? -eq 0 ]; then
               echo "Linux builder is responsive"
               exit 0
@@ -122,7 +136,7 @@ jobs:
       #       | cachix push davsanchez
 
       - name: Build nix-darwin (${{ matrix.host }})
-        run: sudo nix run github:nix-darwin/nix-darwin/master#darwin-rebuild -- build --flake .#${{ matrix.host }}
+        run: nix run github:nix-darwin/nix-darwin/master#darwin-rebuild -- build --flake .#${{ matrix.host }}
 
   check:
     name: 🟢 Decide whether the needed jobs succeeded or failed
