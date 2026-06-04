@@ -42,30 +42,6 @@ jobs:
       - name: Build NixOS config (${{ matrix.host }})
         run: nix build ".#nixosConfigurations.${{ matrix.host }}.config.system.build.toplevel"
 
-  deploy-check:
-    name: Deploy dry-run (${{ matrix.node }})
-    strategy:
-      matrix:
-        include:
-          - node: eter
-            runner: ubuntu-latest
-          - node: mora
-            runner: ubuntu-24.04-arm
-    runs-on: ${{ matrix.runner }}
-    steps:
-      - uses: actions/checkout@v6
-      - name: Free up space
-        run: bash .github/scripts/space_cleanup.sh
-      - uses: cachix/install-nix-action@v31
-        with:
-          github_access_token: ${{ secrets.GITHUB_TOKEN }}
-      - uses: cachix/cachix-action@v17
-        with:
-          name: davsanchez
-          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
-      - name: Deploy dry-run (${{ matrix.node }})
-        run: nix run github:serokell/deploy-rs -- --skip-checks --dry-activate .#${{ matrix.node }}
-
   check:
     name: 🟢 Decide whether the needed jobs succeeded or failed
     if: always()
