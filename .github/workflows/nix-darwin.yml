@@ -76,7 +76,30 @@ jobs:
             echo "Attempt $i failed, waiting 5s for VM to boot..."
             sleep 5
           done
-          echo "Linux builder failed to become responsive after 60s"
+          
+          echo "=== Linux builder failed to become responsive after 60s ==="
+          echo ""
+          echo "=== Launchd service status ==="
+          sudo launchctl print system/org.nixos.linux-builder 2>&1 || true
+          echo ""
+          echo "=== Crash reports ==="
+          for f in $(ls -t /Library/Logs/DiagnosticReports/qemu-system-aarch64*.ips 2>/dev/null | head -3); do
+            echo "--- $f ---"
+            sudo python3 -c "
+          import json
+          with open('$f') as fh:
+              fh.readline()
+              data = json.load(fh)
+          print('Exception:', json.dumps(data.get('exception', {}), indent=2))
+          print('Termination:', json.dumps(data.get('termination', {}), indent=2))
+          ft = data.get('faultingThread', -1)
+          if ft >= 0:
+              thread = data['threads'][ft]
+              print(f'Faulting thread: {ft} ({thread.get(\"name\", \"unknown\")})')
+              for i, frame in enumerate(thread.get('frames', [])[:10]):
+                  print(f'  {i}: {frame.get(\"symbol\", \"\")} (offset {frame.get(\"imageOffset\", \"\")})')
+          " 2>&1 || sudo cat "$f" 2>&1 || echo "Could not read $f"
+          done
           exit 1
 
       - name: Build nix-darwin (${{ matrix.host }})
