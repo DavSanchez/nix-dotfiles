@@ -24,7 +24,6 @@
       source ${pkgs.nu_scripts}/share/nu_scripts/aliases/git/git-aliases.nu
 
       # Custom completions
-      # TODO
     '';
     # extraEnv = ...;
     # extraLogin = ...;
