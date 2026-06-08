@@ -1,29 +1,18 @@
 {
   inputs,
   pkgs,
-  lib,
   ...
 }:
 {
-  # Starting simple
-  services = {
-    ollama.enable = true;
-  };
+  services.ollama.enable = false;
 
   programs = {
-    codex = {
-      enable = true;
-    };
-    claude-code = {
-      enable = true;
-    };
+    codex.enable = true;
+    claude-code.enable = true;
 
     opencode = {
       enable = true;
-      settings = {
-        autoupdate = false;
-        plugin = [ "opencode-gemini-auth@latest" ];
-      };
+      settings.autoupdate = false;
     };
   };
 
