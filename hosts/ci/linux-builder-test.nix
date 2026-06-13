@@ -61,16 +61,26 @@ let
 in
 {
   nixpkgs.overlays = [ inputs.self.overlays.stable-packages ];
-  nix.settings.experimental-features = "nix-command flakes";
+  nix = {
+    settings = {
+      trusted-users = [
+        "root"
+        "runner"
+      ];
+      experimental-features = "nix-command flakes";
+    };
 
-  nix.linux-builder = {
-    enable = true;
-    package = pkgs.stable.darwin.linux-builder;
-    ephemeral = true;
-    systems = [ "aarch64-linux" ];
-    config.virtualisation.qemu.package = qemuTCG;
+    linux-builder = {
+      enable = true;
+      package = pkgs.stable.darwin.linux-builder;
+      ephemeral = true;
+      systems = [ "aarch64-linux" ];
+      config.virtualisation.qemu.package = qemuTCG;
+    };
   };
 
-  system.stateVersion = 6;
-  system.primaryUser = "runner";
+  system = {
+    stateVersion = 6;
+    primaryUser = "runner";
+  };
 }
