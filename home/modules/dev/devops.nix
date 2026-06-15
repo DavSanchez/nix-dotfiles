@@ -60,6 +60,7 @@
     ++ lib.optionals pkgs.stdenv.isDarwin (
       with pkgs;
       [
+        container
         tart # VMs (Apple hypervisor framework)
         softnet # VM networking for tart
       ]
