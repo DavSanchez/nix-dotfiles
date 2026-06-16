@@ -27,6 +27,7 @@
       tlrc
 
       hwatch
+      viddy
     ]
     ++ lib.optionals pkgs.stdenv.isDarwin [ m-cli ]
     ++ lib.optionals pkgs.stdenv.isLinux [
