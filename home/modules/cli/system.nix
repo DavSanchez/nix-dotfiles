@@ -9,7 +9,6 @@
     ]
     ++ lib.optionals pkgs.stdenv.isLinux [
       kmon
-      uutils-uutils-procps
     ];
 
   programs = {

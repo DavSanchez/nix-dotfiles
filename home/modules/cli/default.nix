@@ -25,10 +25,13 @@
       w3m
 
       tlrc
+
+      hwatch
     ]
     ++ lib.optionals pkgs.stdenv.isDarwin [ m-cli ]
     ++ lib.optionals pkgs.stdenv.isLinux [
       elfutils
+      uutils-procps
       # patchelf # present in ./nix.nix
     ];
 
