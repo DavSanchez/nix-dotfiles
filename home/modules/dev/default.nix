@@ -5,6 +5,7 @@
     ./c-cpp.nix
     ./devops.nix
     ./digital-design.nix
+    ./formal.nix
     ./fp.nix
     ./go.nix
     ./haskell.nix
