@@ -7,12 +7,10 @@ _: {
     global.brewfile = true;
     onActivation.autoUpdate = true;
     onActivation.upgrade = true;
-    # onActivation.cleanup = "zap";
+    onActivation.cleanup = "zap";
 
     taps = [ ];
-    brews = [
-      "mole"
-    ];
+    brews = [ ];
     casks = [
       "adobe-acrobat-reader"
       "affinity"

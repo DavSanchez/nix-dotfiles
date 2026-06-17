@@ -34,20 +34,20 @@
     global.brewfile = true;
     onActivation.autoUpdate = true;
     onActivation.upgrade = true;
-    # onActivation.cleanup = "zap";
+    onActivation.cleanup = "zap";
 
     taps = [
       {
         name = "newrelic/commune";
         clone_target = "git@source.datanerd.us:commune/newrelic-homebrew";
+        trusted = true;
       }
       {
-        name = "hashicorp/tap";
-        clone_target = "git@github.com:hashicorp/homebrew-tap";
+        name = "hashicorp/homebrew-tap";
+        trusted = true;
       }
     ];
     brews = [
-      "mole"
       "newrelic/commune/claude-nerd-completion"
       "newrelic/commune/newrelic-vault"
       "newrelic/commune/selfserve"
