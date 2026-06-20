@@ -25,7 +25,7 @@ jobs:
       matrix:
         host: [solio, sierpe]
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Free up space
         run: bash .github/scripts/space_cleanup.sh

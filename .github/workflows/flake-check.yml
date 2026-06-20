@@ -30,7 +30,7 @@ jobs:
             runner: macos-latest
     runs-on: ${{ matrix.runner }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Free up space
         run: bash .github/scripts/space_cleanup.sh
       - uses: cachix/install-nix-action@v31
