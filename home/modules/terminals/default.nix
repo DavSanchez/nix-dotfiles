@@ -2,10 +2,8 @@
 {
   imports = [
     ./ghostty # main
-    # ./warp.nix
+    ./rio.nix
+    ./warp.nix
     # ./wezterm.nix
-    # ./rio.nix
   ];
-
-  home.packages = [ pkgs.cmux ];
 }
