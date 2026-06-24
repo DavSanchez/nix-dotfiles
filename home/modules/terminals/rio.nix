@@ -4,7 +4,7 @@ _: {
     settings = {
       # theme = "rose-pine-moon";
       window = {
-        decorations = "Disabled";
+        # decorations = "Disabled";
         opacity = 0.80;
         blur = true;
       };
