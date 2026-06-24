@@ -7,8 +7,8 @@
     # agda # FP with dependent types, compiles to Haskell
     # haskellPackages.agda-language-server # Langserver
 
-    elixir # Dynamic FP for the Erlang VM
-    elixir-ls # Langserver
+    beamPackages.elixir # Dynamic FP for the Erlang VM
+    beamPackages.elixir-ls # Langserver
 
     # dotnet-sdk # For F-sharp: FP for .NET
     # fstar # ML-like FP language aimed at program verification
