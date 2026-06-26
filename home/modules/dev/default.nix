@@ -16,13 +16,11 @@
     ./python.nix
   ];
 
+  programs.devenv.enable = true;
+
   ## Other packages
   home.packages =
     (with pkgs; [
-      devenv
-      devcontainer
-
-      ## Other
       gnumake
       just
       just-lsp
