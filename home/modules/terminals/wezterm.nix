@@ -12,7 +12,6 @@ _: {
         color_scheme = 'Catppuccin Mocha',
         term = "wezterm",
         font = wezterm.font 'Iosevka Term Slab',
-        -- font = wezterm.font 'JetBrainsMono Nerd Font',
         window_decorations = "RESIZE",
         front_end = "WebGpu",
       }

@@ -6,12 +6,9 @@
     iosevka-bin
     (iosevka-bin.override { variant = "Slab"; })
     nerd-fonts.iosevka
-
-    jetbrains-mono
-
+    # jetbrains-mono
     monaspace
     maple-mono.NF
-
     # For sketchybar
     # sketchybar-app-font
   ];
