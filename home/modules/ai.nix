@@ -26,7 +26,7 @@
       llm
     ]
     ++ (with inputs.hermes-agent.packages.${pkgs.stdenv.hostPlatform.system}; [
-      full
-      (desktop.override { hermesAgent = full; })
+      default
+      desktop
     ]);
 }
