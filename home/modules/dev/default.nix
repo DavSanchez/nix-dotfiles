@@ -4,7 +4,7 @@
   imports = [
     ./c-cpp.nix
     ./devops.nix
-    ./digital-design.nix
+    # ./digital-design.nix # TODO review ecosystem
     ./formal.nix
     ./fp.nix
     ./go.nix
