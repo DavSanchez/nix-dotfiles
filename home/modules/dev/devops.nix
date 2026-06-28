@@ -7,7 +7,6 @@
       docker-compose
       podman
       podman-compose
-      colima
 
       act # GH Actions locally
       ctop # Monitor containers
@@ -50,19 +49,15 @@
       # Monitoring
       # netdata # broken
 
-      # cirrus-cli # Related to tart/orchard
       process-compose
-
-      orchard # VM orchestrator for macOS clusters
 
       shellcheck # always shell scripts
     ])
     ++ lib.optionals pkgs.stdenv.isDarwin (
       with pkgs;
       [
+        colima
         container
-        tart # VMs (Apple hypervisor framework)
-        softnet # VM networking for tart
       ]
     )
     ++ lib.optionals pkgs.stdenv.isLinux [ pkgs.nerdctl ];
