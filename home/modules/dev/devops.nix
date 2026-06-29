@@ -27,7 +27,8 @@
       tilt
 
       # ansible
-      vagrant
+      # vagrant
+      qemu_full
       lima-full
 
       ## Terraform
