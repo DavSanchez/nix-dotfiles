@@ -19,7 +19,7 @@
   home.packages =
     with pkgs;
     [
-      llama-cpp
+      # llama-cpp # broken for now (nodejs)
       llama-swap
       python313Packages.huggingface-hub
 
