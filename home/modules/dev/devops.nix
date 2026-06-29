@@ -5,8 +5,8 @@
       ## Containers
       docker
       docker-compose
-      podman
-      podman-compose
+      # podman
+      # podman-compose
 
       act # GH Actions locally
       ctop # Monitor containers
