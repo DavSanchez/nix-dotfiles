@@ -5,7 +5,6 @@
 }:
 {
   imports = [
-    inputs.nixvim.homeModules.nixvim
     inputs.catppuccin.homeModules.catppuccin
 
     ./modules/ai.nix

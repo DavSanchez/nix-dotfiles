@@ -26,8 +26,8 @@
 
     # Editors
     ## NixVim
-    nixvim.url = "github:nix-community/nixvim";
-    nixvim.inputs.nixpkgs.follows = "nixpkgs";
+    # nixvim.url = "github:nix-community/nixvim";
+    # nixvim.inputs.nixpkgs.follows = "nixpkgs";
     # nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
 
     # Uniform colors across all apps
