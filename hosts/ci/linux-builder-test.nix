@@ -29,7 +29,7 @@
 # This wrapper is set as the QEMU package via `virtualisation.qemu.package` in the
 # linux-builder's NixOS configuration.
 
-{ pkgs, inputs, ... }:
+{ pkgs, ... }:
 
 let
   realQemu = pkgs.qemu;
@@ -37,7 +37,7 @@ let
   # Wrapper that forces TCG (software emulation) by rewriting QEMU's -machine argument.
   # This avoids the HVF crash on GitHub Actions runners while maintaining compatibility
   # with the nixpkgs-generated QEMU invocation.
-  qemuTCG = pkgs.stable.runCommand "qemu-tcg" { } ''
+  qemuTCG = pkgs.runCommand "qemu-tcg" { } ''
     mkdir -p $out/bin
     ln -s ${realQemu}/bin/* $out/bin/
     rm $out/bin/qemu-system-aarch64
@@ -60,7 +60,6 @@ let
   '';
 in
 {
-  nixpkgs.overlays = [ inputs.self.overlays.stable-packages ];
   nix = {
     settings = {
       trusted-users = [
@@ -72,7 +71,6 @@ in
 
     linux-builder = {
       enable = true;
-      package = pkgs.stable.darwin.linux-builder;
       ephemeral = true;
       systems = [ "aarch64-linux" ];
       config.virtualisation.qemu.package = qemuTCG;
