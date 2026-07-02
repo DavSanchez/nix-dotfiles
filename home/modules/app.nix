@@ -46,37 +46,9 @@ lib.mkMerge [
       alt-tab-macos
       stats
     ];
-
-    # This depends on having `alt-tab-macos` installed. See `home.packages` above.
-    launchd.agents.alt-tab = {
-      enable = true;
-      config = {
-        Program = toString (
-          lib.path.append (
-            /. + config.home.homeDirectory
-          ) "Applications/Home Manager Apps/AltTab.app/Contents/MacOS/AltTab"
-        );
-        RunAtLoad = true;
-        KeepAlive = true;
-        StandardOutPath = "/tmp/alt-tab.log";
-        StandardErrPath = "/tmp/alt-tab.err.log";
-      };
-    };
-
-    # This depends on having `stats` installed. See `home.packages` above.
-    launchd.agents.stats = {
-      enable = true;
-      config = {
-        Program = toString (
-          lib.path.append (
-            /. + config.home.homeDirectory
-          ) "Applications/Home Manager Apps/Stats.app/Contents/MacOS/Stats"
-        );
-        RunAtLoad = true;
-        KeepAlive = true;
-        StandardOutPath = "/tmp/stats.log";
-        StandardErrPath = "/tmp/stats.err.log";
-      };
-    };
+    # Autostart for `alt-tab-macos` and `stats` is handled in-app via
+    # SMAppService ("Launch at login"), not by home-manager-managed launchd
+    # agents. This avoids restarts on every `home-manager switch` and lets
+    # both apps go through LaunchServices on launch.
   })
 ]
