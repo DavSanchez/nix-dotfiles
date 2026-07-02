@@ -16,7 +16,7 @@
     # ./modules/emacs
     ./modules/git
     ./modules/git/signing-nr.nix
-    ./modules/neovim
+    # ./modules/neovim
     ./modules/nu.nix
     ./modules/starship.nix
     ./modules/vscode

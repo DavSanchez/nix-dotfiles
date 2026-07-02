@@ -13,7 +13,7 @@
     # ./modules/emacs
     ./modules/git
     ./modules/git/signing-sierpe.nix
-    ./modules/neovim
+    # ./modules/neovim
     ./modules/nu.nix
     ./modules/starship.nix
     ./modules/vscode
