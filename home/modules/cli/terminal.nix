@@ -47,8 +47,10 @@
 
     fzf = {
       enable = false;
-      changeDirWidgetCommand = "fd --type d";
-      changeDirWidgetOptions = [ "--preview 'tree -C {} | head 200'" ];
+      changeDirWidget = {
+        command = "fd --type d";
+        options = [ "--preview 'tree -C {} | head 200'" ];
+      };
       defaultCommand = "fd --type f";
       defaultOptions = [
         "--height 40%"
@@ -56,7 +58,7 @@
       ];
       # fileWidgetCommand = "fd --type f";
       # fileWidgetOptions = [ "--preview 'bat --color=always --style=numbers --line-range=:500 {}'" ];
-      historyWidgetOptions = [
+      historyWidget.options = [
         "--sort"
         "--exact"
       ];
