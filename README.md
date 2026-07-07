@@ -2,7 +2,7 @@
 
 ## [![built with nix](https://builtwithnix.org/badge.svg)](https://builtwithnix.org)
 
-[![CI](https://github.com/DavSanchez/nix-dotfiles/actions/workflows/builds.yml/badge.svg)](https://github.com/DavSanchez/nix-dotfiles/actions/workflows/builds.yml) [![NixOS Unstable](https://img.shields.io/badge/nixpkgs-unstable-blue.svg)](https://nixos.org)
+[![NixOS](https://github.com/DavSanchez/nix-dotfiles/actions/workflows/nixos.yml/badge.svg)](https://github.com/DavSanchez/nix-dotfiles/actions/workflows/nixos.yml) [![Nix Darwin](https://github.com/DavSanchez/nix-dotfiles/actions/workflows/nix-darwin.yml/badge.svg)](https://github.com/DavSanchez/nix-dotfiles/actions/workflows/nix-darwin.yml) [![Home Manager](https://github.com/DavSanchez/nix-dotfiles/actions/workflows/home-manager.yml/badge.svg)](https://github.com/DavSanchez/nix-dotfiles/actions/workflows/home-manager.yml) [![NixOS Unstable](https://img.shields.io/badge/nixpkgs-unstable-blue.svg)](https://nixos.org)
 
 ## First-time setup
 
