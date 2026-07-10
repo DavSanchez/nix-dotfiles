@@ -32,7 +32,7 @@
     ./modules/mail.nix
 
     # Darwin specifics
-    ./modules/darwin/aerospace.nix
+    ./modules/darwin/omniwm.nix
     ./modules/nixpkgs.nix
     ./modules/theme.nix
   ];
@@ -47,6 +47,17 @@
     };
     # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
     stateVersion = "25.11";
+  };
+
+  programs.omniwm.enable = true;
+
+  services.jankyborders = {
+    enable = true;
+    settings = {
+      active_color = "0xffe1e3e4";
+      inactive_color = "0xff494d64";
+      width = 5.0;
+    };
   };
 
   programs.home-manager.enable = true;

@@ -1,7 +1,7 @@
 { lib, pkgs, ... }:
 {
   programs.aerospace = {
-    enable = true;
+    enable = false;
     launchd.enable = true;
     settings = {
       # Place a copy of this config to ~/.aerospace.toml
