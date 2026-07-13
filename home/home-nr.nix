@@ -33,7 +33,7 @@
     ./modules/theme.nix
 
     # Darwin specifics
-    ./modules/darwin/omniwm.nix
+    ./modules/darwin/window-management.nix
   ];
 
   home = {
@@ -79,17 +79,6 @@
     vscjava.vscode-java-test
     vscjava.vscode-maven
   ];
-
-  programs.omniwm.enable = true;
-
-  services.jankyborders = {
-    enable = true;
-    settings = {
-      active_color = "0xffe1e3e4";
-      inactive_color = "0xff494d64";
-      width = 5.0;
-    };
-  };
 
   programs.home-manager.enable = true;
 
