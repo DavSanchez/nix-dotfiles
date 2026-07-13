@@ -6,6 +6,7 @@
 }:
 let
   cfg = config.programs.omniwm;
+  tomlFormat = pkgs.formats.toml { };
 in
 {
   options.programs.omniwm = {
@@ -28,18 +29,24 @@ in
     };
 
     settings = lib.mkOption {
-      type = with lib.types; attrsOf anything;
+      type = with lib.types; either path tomlFormat.type;
       default = { };
       example = lib.literalExpression ''
+        # Attrset (serialized to TOML)
         {
           general = {
             updateChecksEnabled = false;
           };
         }
+
+        # Or a path to an existing TOML file
+        ./omniwm-settings.toml
       '';
       description = ''
         OmniWM settings written to
         {file}`$XDG_CONFIG_HOME/omniwm/settings.toml`.
+        Either a path to a TOML file or an attrset that will be
+        serialized to TOML.
         See <https://github.com/BarutSRB/OmniWM> for configuration details.
       '';
     };
@@ -64,7 +71,11 @@ in
     };
 
     xdg.configFile."omniwm/settings.toml" = lib.mkIf (cfg.settings != { }) {
-      source = (pkgs.formats.toml { }).generate "omniwm-settings.toml" cfg.settings;
+      source =
+        if lib.hm.strings.isPathLike cfg.settings then
+          cfg.settings
+        else
+          tomlFormat.generate "omniwm-settings.toml" cfg.settings;
     };
   };
 }
