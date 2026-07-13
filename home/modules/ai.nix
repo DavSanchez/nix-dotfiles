@@ -14,6 +14,10 @@
       enable = true;
       settings.autoupdate = false;
     };
+
+    herdr = {
+      enable = true;
+    };
   };
 
   home.packages =
