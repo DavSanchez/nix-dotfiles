@@ -4,5 +4,6 @@
 {
   # example = pkgs.callPackage ./example { };
   kontroll = pkgs.callPackage ./kontroll.nix { };
+  omniwm = pkgs.callPackage ./omniwm.nix { };
   prism-cli = pkgs.callPackage ./prism.nix { };
 }

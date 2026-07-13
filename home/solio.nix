@@ -32,7 +32,7 @@
     ./modules/mail.nix
 
     # Darwin specifics
-    ./modules/darwin/aerospace.nix
+    ./modules/darwin/window-management.nix
     ./modules/nixpkgs.nix
     ./modules/theme.nix
   ];

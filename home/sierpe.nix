@@ -29,7 +29,7 @@
     ./modules/tmux.nix
     ./modules/cava.nix
     # Darwin specifics
-    ./modules/darwin/aerospace.nix
+    ./modules/darwin/window-management.nix
     ./modules/nixpkgs.nix
     ./modules/theme.nix
     ./modules/mail.nix

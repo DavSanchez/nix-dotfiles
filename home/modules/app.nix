@@ -43,12 +43,11 @@ lib.mkMerge [
       utm
       iina
       # ice-bar # Waiting for Tahoe compat
-      alt-tab-macos
       stats
     ];
-    # Autostart for `alt-tab-macos` and `stats` is handled in-app via
-    # SMAppService ("Launch at login"), not by home-manager-managed launchd
-    # agents. This avoids restarts on every `home-manager switch` and lets
-    # both apps go through LaunchServices on launch.
+    # Autostart for `stats` is handled in-app via SMAppService ("Launch at
+    # login"), not by home-manager-managed launchd agents. This avoids
+    # restarts on every `home-manager switch` and lets the app go through
+    # LaunchServices on launch.
   })
 ]

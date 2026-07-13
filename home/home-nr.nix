@@ -33,7 +33,7 @@
     ./modules/theme.nix
 
     # Darwin specifics
-    ./modules/darwin/aerospace.nix
+    ./modules/darwin/window-management.nix
   ];
 
   home = {
