@@ -90,12 +90,15 @@
             };
           };
         };
-        nil = {
-          flake.autoArchive = true;
-        };
       };
 
       agent_servers = {
+        opencode = {
+          default_config_options = {
+            model = "opencode-go/qwen3.7-max";
+          };
+          type = "registry";
+        };
         hermes-agent = {
           type = "custom";
           command = "hermes";
