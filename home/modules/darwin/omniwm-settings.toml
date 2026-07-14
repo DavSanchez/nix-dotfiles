@@ -235,75 +235,75 @@ minHeight = 320.0
 minWidth = 660.0
 
 [[hotkeys]]
-binding = "Option+Shift+1"
+binding = "Control+1"
 id = "switchWorkspace.0"
 
 [[hotkeys]]
-binding = "Control+Option+Shift+1"
+binding = "Control+Shift+1"
 id = "moveToWorkspace.0"
 
 [[hotkeys]]
-binding = "Option+Shift+2"
+binding = "Control+2"
 id = "switchWorkspace.1"
 
 [[hotkeys]]
-binding = "Control+Option+Shift+2"
+binding = "Control+Shift+2"
 id = "moveToWorkspace.1"
 
 [[hotkeys]]
-binding = "Option+Shift+3"
+binding = "Control+3"
 id = "switchWorkspace.2"
 
 [[hotkeys]]
-binding = "Control+Option+Shift+3"
+binding = "Control+Shift+3"
 id = "moveToWorkspace.2"
 
 [[hotkeys]]
-binding = "Option+Shift+4"
+binding = "Control+4"
 id = "switchWorkspace.3"
 
 [[hotkeys]]
-binding = "Control+Option+Shift+4"
+binding = "Control+Shift+4"
 id = "moveToWorkspace.3"
 
 [[hotkeys]]
-binding = "Option+Shift+5"
+binding = "Control+5"
 id = "switchWorkspace.4"
 
 [[hotkeys]]
-binding = "Control+Option+Shift+5"
+binding = "Control+Shift+5"
 id = "moveToWorkspace.4"
 
 [[hotkeys]]
-binding = "Option+Shift+6"
+binding = "Control+6"
 id = "switchWorkspace.5"
 
 [[hotkeys]]
-binding = "Control+Option+Shift+6"
+binding = "Control+Shift+6"
 id = "moveToWorkspace.5"
 
 [[hotkeys]]
-binding = "Option+Shift+7"
+binding = "Control+7"
 id = "switchWorkspace.6"
 
 [[hotkeys]]
-binding = "Control+Option+Shift+7"
+binding = "Control+Shift+7"
 id = "moveToWorkspace.6"
 
 [[hotkeys]]
-binding = "Option+Shift+8"
+binding = "Control+8"
 id = "switchWorkspace.7"
 
 [[hotkeys]]
-binding = "Control+Option+Shift+8"
+binding = "Control+Shift+8"
 id = "moveToWorkspace.7"
 
 [[hotkeys]]
-binding = "Option+Shift+9"
+binding = "Control+9"
 id = "switchWorkspace.8"
 
 [[hotkeys]]
-binding = "Control+Option+Shift+9"
+binding = "Control+Shift+9"
 id = "moveToWorkspace.8"
 
 [[hotkeys]]
@@ -319,19 +319,19 @@ binding = "Unassigned"
 id = "switchWorkspace.previous"
 
 [[hotkeys]]
-binding = "Option+Left Arrow"
+binding = "Control+Option+Left Arrow"
 id = "focus.left"
 
 [[hotkeys]]
-binding = "Option+Down Arrow"
+binding = "Control+Option+Down Arrow"
 id = "focus.down"
 
 [[hotkeys]]
-binding = "Option+Up Arrow"
+binding = "Control+Option+Up Arrow"
 id = "focus.up"
 
 [[hotkeys]]
-binding = "Option+Right Arrow"
+binding = "Control+Option+Right Arrow"
 id = "focus.right"
 
 [[hotkeys]]
