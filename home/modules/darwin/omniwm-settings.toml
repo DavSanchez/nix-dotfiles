@@ -815,7 +815,7 @@ binding = "Unassigned"
 id = "toggleHiddenBarPanel"
 
 [[hotkeys]]
-binding = "Option+Left Bracket"
+binding = "Control+Left Bracket"
 id = "toggleQuakeTerminal"
 
 [[hotkeys]]
