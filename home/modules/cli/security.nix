@@ -20,55 +20,55 @@
   programs = {
     gpg = {
       enable = true;
-      # homedir = "${config.xdg.configHome}/gnupg";
+      settings = {
+        keyid-format = "long";
+        with-fingerprint = true;
+        personal-cipher-preferences = "AES256 AES192";
+        personal-digest-preferences = "SHA512 SHA384";
+      };
     };
     ssh = {
       enable = true;
       enableDefaultConfig = false;
       includes = [
-        "~/.lima/*/ssh.config" # Lima package (VMs)
+        "~/.lima/*/ssh.config"
         "~/.ssh/dynamic_ssh_config"
       ]
       ++ lib.optionals pkgs.stdenv.isDarwin [
-        "~/.config/colima/ssh_config" # Colima package (containers)
+        "~/.config/colima/ssh_config"
       ];
 
       settings = {
-        "github.com" = {
+        "*" = {
           AddKeysToAgent = "yes";
-          IdentityFile = "~/.ssh/id_ed25519";
+          ServerAliveInterval = 60;
         }
         // lib.optionalAttrs pkgs.stdenv.isDarwin {
           UseKeychain = "yes";
         };
+        "github.com" = {
+          IdentityFile = "~/.ssh/id_ed25519";
+        };
       };
     };
 
-    password-store.enable = true;
-
     keychain = {
-      enable = true;
-
-      keys = [
-        "id_rsa"
-        "id_ed25519"
-      ];
+      enable = pkgs.stdenv.isLinux;
+      keys = [ "id_ed25519" ];
     };
   };
 
   services = {
-    ssh-agent.enable = true;
+    ssh-agent.enable = pkgs.stdenv.isLinux;
     gpg-agent = {
       enable = true;
       enableScDaemon = true;
-      defaultCacheTtl = 14400;
-      maxCacheTtl = 86400;
+      defaultCacheTtl = 1800;
+      maxCacheTtl = 3600;
       pinentry.package = if pkgs.stdenv.isDarwin then pkgs.pinentry_mac else pkgs.pinentry-tty;
-      defaultCacheTtlSsh = 14400;
-      maxCacheTtlSsh = 86400;
+      defaultCacheTtlSsh = 1800;
+      maxCacheTtlSsh = 3600;
       sshKeys = null;
     };
-    proton-pass-agent.enable = false;
-    yubikey-agent.enable = false;
   };
 }
