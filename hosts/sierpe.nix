@@ -1,6 +1,7 @@
 { inputs, config, ... }:
 {
   imports = [
+    inputs.self.darwinModules.networking
     inputs.self.darwinModules.stevenBlack
     inputs.sops-nix.darwinModules.sops
 
@@ -9,6 +10,7 @@
     ./modules/darwin/system.nix
     ./modules/darwin/user.nix
     ./modules/darwin/shells.nix
+    ./modules/darwin/networking.nix
     ./modules/darwin/services.nix
   ];
 

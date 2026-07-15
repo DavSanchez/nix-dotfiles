@@ -164,6 +164,23 @@
         };
       };
 
-      checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
+      checks =
+        let
+          darwinTests = import ./lib/darwin-tests.nix {
+            inherit (nixpkgs) lib;
+            inherit darwin;
+          };
+        in
+        builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib
+        // {
+          aarch64-darwin = darwinTests.makeTestSuite {
+            system = "aarch64-darwin";
+            modules = [
+              self.darwinModules.networking
+              self.darwinModules.stevenBlack
+            ];
+            dir = ./tests/darwin;
+          };
+        };
     };
 }
