@@ -2,7 +2,11 @@
   networking = {
     stevenBlack = {
       enable = true;
-      block = [ ];
+      block = [
+        "fakenews"
+        "gambling"
+        "porn"
+      ];
     };
   };
 }
