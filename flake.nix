@@ -68,7 +68,16 @@
     {
       # Custom packages
       # Acessible through 'nix build', 'nix shell', etc
-      packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
+      packages = forAllSystems (
+        system:
+        let
+          pkgs = nixpkgs.legacyPackages.${system};
+          allPkgs = import ./pkgs { inherit pkgs; };
+        in
+        nixpkgs.lib.filterAttrs (
+          _: pkg: !(pkg ? meta.platforms) || nixpkgs.lib.elem system pkg.meta.platforms
+        ) allPkgs
+      );
 
       # Formatter for the nix files, available through 'nix fmt'
       formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt-tree);
@@ -171,9 +180,8 @@
             inherit darwin;
           };
         in
-        {
-          x86_64-linux = deploy-rs.lib.x86_64-linux.deployChecks self.deploy;
-          aarch64-linux = deploy-rs.lib.aarch64-linux.deployChecks self.deploy;
+        builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib
+        // {
           aarch64-darwin = darwinTests.makeTestSuite {
             system = "aarch64-darwin";
             modules = [
