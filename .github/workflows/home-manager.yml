@@ -6,13 +6,19 @@ on:
       - master
       - renovate/**
     paths:
-      - 'home/**'
+      - 'home/darwin/**'
+      - 'home/modules/**'
+      - 'modules/home/**'
+      - 'lib/**'
       - 'flake.nix'
       - 'flake.lock'
       - '.github/workflows/home-manager.yml'
   pull_request:
     paths:
-      - 'home/**'
+      - 'home/darwin/**'
+      - 'home/modules/**'
+      - 'modules/home/**'
+      - 'lib/**'
       - 'flake.nix'
       - 'flake.lock'
       - '.github/workflows/home-manager.yml'

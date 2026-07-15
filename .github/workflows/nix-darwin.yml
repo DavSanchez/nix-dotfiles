@@ -6,13 +6,19 @@ on:
       - master
       - renovate/**
     paths:
-      - 'hosts/**'
+      - 'hosts/darwin/**'
+      - 'modules/darwin/**'
+      - 'lib/**'
+      - 'tests/darwin/**'
       - 'flake.nix'
       - 'flake.lock'
       - '.github/workflows/nix-darwin.yml'
   pull_request:
     paths:
-      - 'hosts/**'
+      - 'hosts/darwin/**'
+      - 'modules/darwin/**'
+      - 'lib/**'
+      - 'tests/darwin/**'
       - 'flake.nix'
       - 'flake.lock'
       - '.github/workflows/nix-darwin.yml'

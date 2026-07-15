@@ -1,7 +1,7 @@
 { config, ... }:
 {
   imports = [
-    ../modules/nixos/gandi-livedns.nix
+    ../modules/gandi-livedns.nix
   ];
 
   services.gandi-livedns = {

@@ -89,12 +89,12 @@
       nixosConfigurations = {
         mora = nixos-raspberrypi.lib.nixosSystem {
           specialArgs = { inherit inputs; };
-          modules = [ ./hosts/mora.nix ];
+          modules = [ ./hosts/nixos/mora.nix ];
         };
         eter = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = { inherit inputs; };
-          modules = [ ./hosts/eter.nix ];
+          modules = [ ./hosts/nixos/eter.nix ];
         };
       };
       # macOS systems using nix-darwin
@@ -102,22 +102,22 @@
         sierpe = darwin.lib.darwinSystem {
           system = "aarch64-darwin";
           specialArgs = { inherit inputs; };
-          modules = [ ./hosts/sierpe.nix ];
+          modules = [ ./hosts/darwin/sierpe.nix ];
         };
         solio = darwin.lib.darwinSystem {
           system = "aarch64-darwin";
           specialArgs = { inherit inputs; };
-          modules = [ ./hosts/solio.nix ];
+          modules = [ ./hosts/darwin/solio.nix ];
         };
         V9X576T260 = darwin.lib.darwinSystem {
           system = "aarch64-darwin";
           specialArgs = { inherit inputs; };
-          modules = [ ./hosts/nr.nix ];
+          modules = [ ./hosts/darwin/nr.nix ];
         };
         linux-builder-test = darwin.lib.darwinSystem {
           system = "aarch64-darwin";
           specialArgs = { inherit inputs; };
-          modules = [ ./hosts/ci/linux-builder-test.nix ];
+          modules = [ ./hosts/darwin/ci/linux-builder-test.nix ];
         };
       };
 
@@ -127,21 +127,21 @@
           extraSpecialArgs = {
             inherit inputs;
           };
-          modules = [ ./home/sierpe.nix ];
+          modules = [ ./home/darwin/sierpe.nix ];
         };
         "david@solio" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.aarch64-darwin;
           extraSpecialArgs = {
             inherit inputs;
           };
-          modules = [ ./home/solio.nix ];
+          modules = [ ./home/darwin/solio.nix ];
         };
         "davidsanchez@V9X576T260" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.aarch64-darwin;
           extraSpecialArgs = {
             inherit inputs;
           };
-          modules = [ ./home/home-nr.nix ];
+          modules = [ ./home/darwin/home-nr.nix ];
         };
       };
 
@@ -171,8 +171,9 @@
             inherit darwin;
           };
         in
-        builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib
-        // {
+        {
+          x86_64-linux = deploy-rs.lib.x86_64-linux.deployChecks self.deploy;
+          aarch64-linux = deploy-rs.lib.aarch64-linux.deployChecks self.deploy;
           aarch64-darwin = darwinTests.makeTestSuite {
             system = "aarch64-darwin";
             modules = [
