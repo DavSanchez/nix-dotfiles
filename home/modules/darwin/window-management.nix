@@ -1,7 +1,6 @@
 {
   imports = [
     ./aerospace.nix
-    ./omniwm.nix
   ];
 
   programs.omniwm = {
