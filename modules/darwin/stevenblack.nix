@@ -33,18 +33,20 @@ in
       '';
     };
 
-    stevenblack = {
+    stevenBlack = {
       enable = lib.mkEnableOption "the stevenblack hosts file blocklist";
 
       package = lib.mkPackageOption pkgs "stevenblack-blocklist" { };
 
       block = lib.mkOption {
-        type = lib.types.listOf (lib.types.enum [
-          "fakenews"
-          "gambling"
-          "porn"
-          "social"
-        ]);
+        type = lib.types.listOf (
+          lib.types.enum [
+            "fakenews"
+            "gambling"
+            "porn"
+            "social"
+          ]
+        );
         default = [ ];
         description = "Additional blocklist extensions.";
       };
@@ -60,9 +62,7 @@ in
 
   config = lib.mkIf (config.networking.hostFiles != [ ] || cfg.enable) {
     networking.hostFiles = lib.mkIf cfg.enable (
-      map (x: filterHostsFile "${lib.getOutput x cfg.package}/hosts") (
-        [ "ads" ] ++ cfg.block
-      )
+      map (x: filterHostsFile "${lib.getOutput x cfg.package}/hosts") ([ "ads" ] ++ cfg.block)
     );
 
     environment.etc."hosts".source = lib.mkIf (config.networking.hostFiles != [ ]) (
@@ -70,16 +70,5 @@ in
         cat ${lib.escapeShellArgs config.networking.hostFiles} > $out
       ''
     );
-
-    # Workaround: The upstream nix-darwin networking activation script
-    # restores /etc/hosts from a .before-nix-darwin backup, which would
-    # clobber our environment.etc."hosts" symlink. By removing the symlink
-    # before the networking script runs, we prevent the restore logic
-    # from triggering (since the -e check will fail).
-    system.activationScripts.networking.text = lib.mkBefore ''
-      if [ -L /etc/hosts ]; then
-        rm -f /etc/hosts
-      fi
-    '';
   };
 }

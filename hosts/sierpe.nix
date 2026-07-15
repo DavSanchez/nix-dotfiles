@@ -1,6 +1,7 @@
 { inputs, config, ... }:
 {
   imports = [
+    inputs.self.darwinModules.stevenBlack
     inputs.sops-nix.darwinModules.sops
 
     ./modules/darwin/nix.nix
