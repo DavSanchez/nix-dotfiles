@@ -17,6 +17,7 @@
 
     herdr = {
       enable = true;
+      settings.keys.prefix = "ctrl+a"; # default (ctrl+b) clashes with ghostty
     };
   };
 
