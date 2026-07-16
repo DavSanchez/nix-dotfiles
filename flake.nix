@@ -68,7 +68,16 @@
     {
       # Custom packages
       # Acessible through 'nix build', 'nix shell', etc
-      packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
+      packages = forAllSystems (
+        system:
+        let
+          pkgs = nixpkgs.legacyPackages.${system};
+          allPkgs = import ./pkgs { inherit pkgs; };
+        in
+        nixpkgs.lib.filterAttrs (
+          _: pkg: !(pkg ? meta.platforms) || nixpkgs.lib.elem system pkg.meta.platforms
+        ) allPkgs
+      );
 
       # Formatter for the nix files, available through 'nix fmt'
       formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt-tree);
@@ -89,12 +98,12 @@
       nixosConfigurations = {
         mora = nixos-raspberrypi.lib.nixosSystem {
           specialArgs = { inherit inputs; };
-          modules = [ ./hosts/mora.nix ];
+          modules = [ ./hosts/nixos/mora.nix ];
         };
         eter = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = { inherit inputs; };
-          modules = [ ./hosts/eter.nix ];
+          modules = [ ./hosts/nixos/eter.nix ];
         };
       };
       # macOS systems using nix-darwin
@@ -102,22 +111,27 @@
         sierpe = darwin.lib.darwinSystem {
           system = "aarch64-darwin";
           specialArgs = { inherit inputs; };
-          modules = [ ./hosts/sierpe.nix ];
+          modules = [ ./hosts/darwin/sierpe.nix ];
         };
         solio = darwin.lib.darwinSystem {
           system = "aarch64-darwin";
           specialArgs = { inherit inputs; };
-          modules = [ ./hosts/solio.nix ];
+          modules = [ ./hosts/darwin/solio.nix ];
         };
         V9X576T260 = darwin.lib.darwinSystem {
           system = "aarch64-darwin";
           specialArgs = { inherit inputs; };
-          modules = [ ./hosts/nr.nix ];
+          modules = [ ./hosts/darwin/nr.nix ];
         };
-        linux-builder-test = darwin.lib.darwinSystem {
+        linux-builder-bootstrap = darwin.lib.darwinSystem {
           system = "aarch64-darwin";
           specialArgs = { inherit inputs; };
-          modules = [ ./hosts/ci/linux-builder-test.nix ];
+          modules = [ ./hosts/darwin/ci/linux-builder-bootstrap.nix ];
+        };
+        linux-builder-with-x86_64 = darwin.lib.darwinSystem {
+          system = "aarch64-darwin";
+          specialArgs = { inherit inputs; };
+          modules = [ ./hosts/darwin/ci/linux-builder-with-x86_64.nix ];
         };
       };
 
@@ -127,21 +141,21 @@
           extraSpecialArgs = {
             inherit inputs;
           };
-          modules = [ ./home/sierpe.nix ];
+          modules = [ ./home/darwin/sierpe.nix ];
         };
         "david@solio" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.aarch64-darwin;
           extraSpecialArgs = {
             inherit inputs;
           };
-          modules = [ ./home/solio.nix ];
+          modules = [ ./home/darwin/solio.nix ];
         };
         "davidsanchez@V9X576T260" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.aarch64-darwin;
           extraSpecialArgs = {
             inherit inputs;
           };
-          modules = [ ./home/home-nr.nix ];
+          modules = [ ./home/darwin/home-nr.nix ];
         };
       };
 
@@ -164,6 +178,24 @@
         };
       };
 
-      checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
+      checks =
+        builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib
+        // {
+          aarch64-darwin =
+            let
+              darwinTests = import ./lib/darwin-tests.nix {
+                inherit (nixpkgs) lib;
+                inherit darwin;
+              };
+            in
+            darwinTests.makeTestSuite {
+              system = "aarch64-darwin";
+              modules = [
+                self.darwinModules.networking
+                self.darwinModules.stevenBlack
+              ];
+              dir = ./tests/darwin;
+            };
+        };
     };
 }

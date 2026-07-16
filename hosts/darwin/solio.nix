@@ -1,14 +1,17 @@
 { inputs, config, ... }:
 {
   imports = [
+    inputs.self.darwinModules.networking
+    inputs.self.darwinModules.stevenBlack
     inputs.sops-nix.darwinModules.sops
 
-    ./modules/darwin/nix.nix
-    ./modules/darwin/homebrew.nix
-    ./modules/darwin/system.nix
-    ./modules/darwin/user.nix
-    ./modules/darwin/shells.nix
-    ./modules/darwin/services.nix
+    ./modules/nix.nix
+    ./modules/homebrew.nix
+    ./modules/system.nix
+    ./modules/user.nix
+    ./modules/shells.nix
+    ./modules/networking.nix
+    ./modules/services.nix
   ];
 
   networking.hostName = "solio";

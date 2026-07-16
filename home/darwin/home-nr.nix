@@ -7,33 +7,33 @@
   imports = [
     inputs.catppuccin.homeModules.catppuccin
 
-    ./modules/ai.nix
-    ./modules/aws.nix
-    ./modules/cli
-    ./modules/dev
-    ./modules/dev/java.nix
-    ./modules/direnv.nix
-    # ./modules/emacs
-    ./modules/git
-    ./modules/git/signing-nr.nix
-    # ./modules/neovim
-    ./modules/nu.nix
-    ./modules/starship.nix
-    ./modules/vscode
-    # ./modules/zed.nix
-    ./modules/zsh
-    ./modules/bash.nix
-    ./modules/fish.nix
-    ./modules/zellij
-    ./modules/terminals
-    ./modules/fonts.nix
-    ./modules/helix.nix
-    ./modules/tmux.nix
-    ./modules/nixpkgs.nix
-    ./modules/theme.nix
+    ../modules/ai.nix
+    ../modules/aws.nix
+    ../modules/cli
+    ../modules/dev
+    ../modules/dev/java.nix
+    ../modules/direnv.nix
+    # ../modules/emacs
+    ../modules/git
+    ../modules/git/signing-nr.nix
+    # ../modules/neovim
+    ../modules/nu.nix
+    ../modules/starship.nix
+    ../modules/vscode
+    # ../modules/zed.nix
+    ../modules/zsh
+    ../modules/bash.nix
+    ../modules/fish.nix
+    ../modules/zellij
+    ../modules/terminals
+    ../modules/fonts.nix
+    ../modules/helix.nix
+    ../modules/tmux.nix
+    ../modules/nixpkgs.nix
+    ../modules/theme.nix
 
     # Darwin specifics
-    ./modules/darwin/window-management.nix
+    ./modules/window-management.nix
   ];
 
   home = {

@@ -9,12 +9,12 @@
   imports = [
     inputs.sops-nix.nixosModules.sops
 
-    ./modules/nixos/deploy.nix
-    ./modules/nixos/locale.nix
-    ./modules/nixos/network.nix
-    ./modules/nixos/nix.nix
-    ./modules/nixos/ssh.nix
-    ./modules/nixos/user.nix
+    ./modules/deploy.nix
+    ./modules/locale.nix
+    ./modules/network.nix
+    ./modules/nix.nix
+    ./modules/ssh.nix
+    ./modules/user.nix
 
     ./eter/hardware-configuration.nix
     ./eter/fs_share.nix
@@ -78,7 +78,7 @@
   programs.yazi.enable = true;
 
   sops = {
-    defaultSopsFile = ../secrets/secrets.yaml;
+    defaultSopsFile = ../../secrets/secrets.yaml;
     age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
     secrets = {
       zfs_mail_pass_file = { };

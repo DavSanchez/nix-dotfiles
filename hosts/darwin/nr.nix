@@ -8,10 +8,10 @@
   imports = [
     inputs.sops-nix.darwinModules.sops
 
-    ./modules/darwin/nix.nix
-    ./modules/darwin/system.nix
-    ./modules/darwin/shells.nix
-    ./modules/darwin/services.nix
+    ./modules/nix.nix
+    ./modules/system.nix
+    ./modules/shells.nix
+    ./modules/services.nix
   ];
 
   users.users.david = {

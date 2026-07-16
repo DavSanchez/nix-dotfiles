@@ -6,13 +6,17 @@ on:
       - master
       - renovate/**
     paths:
-      - 'hosts/**'
+      - 'hosts/nixos/**'
+      - 'modules/nixos/**'
+      - 'lib/**'
       - 'flake.nix'
       - 'flake.lock'
       - '.github/workflows/nixos.yml'
   pull_request:
     paths:
-      - 'hosts/**'
+      - 'hosts/nixos/**'
+      - 'modules/nixos/**'
+      - 'lib/**'
       - 'flake.nix'
       - 'flake.lock'
       - '.github/workflows/nixos.yml'

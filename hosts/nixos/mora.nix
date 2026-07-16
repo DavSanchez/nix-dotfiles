@@ -15,12 +15,12 @@
     inputs.sops-nix.nixosModules.sops
     inputs.hermes-agent.nixosModules.default
 
-    ./modules/nixos/deploy.nix
-    ./modules/nixos/locale.nix
-    ./modules/nixos/network.nix
-    ./modules/nixos/nix.nix
-    ./modules/nixos/ssh.nix
-    ./modules/nixos/user.nix
+    ./modules/deploy.nix
+    ./modules/locale.nix
+    ./modules/network.nix
+    ./modules/nix.nix
+    ./modules/ssh.nix
+    ./modules/user.nix
 
     ./mora/services.nix
     ./mora/livedns.nix
@@ -83,7 +83,7 @@
   };
 
   sops = {
-    defaultSopsFile = ../secrets/secrets.yaml;
+    defaultSopsFile = ../../secrets/secrets.yaml;
     age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
     secrets = {
       dome_wifi = { };
