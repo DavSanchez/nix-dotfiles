@@ -1,6 +1,6 @@
 {
   networking = {
-    stevenBlack = {
+    stevenblack = {
       enable = true;
       block = [
         "fakenews"

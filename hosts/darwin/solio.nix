@@ -2,7 +2,7 @@
 {
   imports = [
     inputs.self.darwinModules.networking
-    inputs.self.darwinModules.stevenBlack
+    inputs.self.darwinModules.stevenblack
     inputs.sops-nix.darwinModules.sops
 
     ./modules/nix.nix

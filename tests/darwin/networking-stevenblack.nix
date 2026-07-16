@@ -1,7 +1,7 @@
 { config, ... }:
 
 {
-  networking.stevenBlack = {
+  networking.stevenblack = {
     enable = true;
     block = [ "gambling" ];
     whitelist = [ "example.com" ];

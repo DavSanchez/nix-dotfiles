@@ -5,7 +5,7 @@
   ...
 }:
 let
-  cfg = config.networking.stevenBlack;
+  cfg = config.networking.stevenblack;
 
   filterHostsFile =
     hostsFile:
@@ -20,7 +20,7 @@ let
       '';
 in
 {
-  options.networking.stevenBlack = {
+  options.networking.stevenblack = {
     enable = lib.mkEnableOption "the stevenblack hosts file blocklist";
 
     package = lib.mkPackageOption pkgs "stevenblack-blocklist" { };

@@ -192,7 +192,7 @@
               system = "aarch64-darwin";
               modules = [
                 self.darwinModules.networking
-                self.darwinModules.stevenBlack
+                self.darwinModules.stevenblack
               ];
               dir = ./tests/darwin;
             };

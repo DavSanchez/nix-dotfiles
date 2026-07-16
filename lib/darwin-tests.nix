@@ -7,7 +7,7 @@
 #   in {
 #     checks.aarch64-darwin = darwinTests.makeTestSuite {
 #       system = "aarch64-darwin";
-#       modules = [ self.darwinModules.networking self.darwinModules.stevenBlack ];
+#       modules = [ self.darwinModules.networking self.darwinModules.stevenblack ];
 #       dir = ./tests/darwin;
 #     };
 #   }

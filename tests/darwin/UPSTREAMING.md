@@ -64,5 +64,3 @@ The `postActivation` script:
 2. **Activation script ordering**: We rely on `postActivation` running after `networking`. This is guaranteed by the hardcoded order in `activation-scripts.nix`, but there's no declarative dependency mechanism for activation scripts in nix-darwin.
 
 3. **Opt-out**: Users who don't want nix-darwin to manage `/etc/hosts` at all (e.g., Docker Desktop modifies it) currently have no way to disable this if `networking.hosts` or similar options are set. Consider adding a `networking.hosts.enable` option.
-
-4. **`stevenBlack` vs `stevenblack`**: NixOS uses lowercase `networking.stevenblack`. The nix-darwin ecosystem sometimes uses `stevenBlack` (camelCase). Align with NixOS for consistency.
