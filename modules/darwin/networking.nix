@@ -36,12 +36,12 @@ in
       type = lib.types.bool;
       default = false;
       description = ''
-        Whether to manage {file}`/etc/hosts` via activation script.
-        When enabled, the activation script preserves non-Nix content and
-        wraps Nix-managed entries between `# BEGIN Nix-managed` and
-        `# END Nix-managed` markers. Disable this to let other tools
-        (e.g., Docker Desktop) manage {file}`/etc/hosts` without
-        interference.
+        Whether to add Nix-managed entries to {file}`/etc/hosts`.
+        When enabled, the activation script wraps generated entries between
+        `# BEGIN Nix-managed` and `# END Nix-managed` markers, preserving
+        any existing non-Nix content. When disabled, the activation script
+        still runs but only strips any stale Nix-managed block left from a
+        previous activation — no new content is added.
       '';
     };
 
@@ -79,7 +79,7 @@ in
     };
   };
 
-  config = lib.mkIf config.networking.enableHosts {
+  config = {
     system.activationScripts.postActivation.text =
       let
         hasHostsContent =
@@ -96,7 +96,7 @@ in
         fi
 
         ${
-          if hasHostsContent then
+          if config.networking.enableHosts && hasHostsContent then
             ''
               {
                 if [[ -n "$hostsOriginal" ]]; then

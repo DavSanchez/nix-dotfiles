@@ -1,42 +1,48 @@
 { config, ... }:
 
-# Tests that the default networking.enableHosts = false state generates NO
-# /etc/hosts activation code at all.
+# Tests that when networking.enableHosts = false, the activation script
+# still runs (cleanup) but does NOT write any Nix-managed content,
+# even if networking.hosts, extraHosts, or hostFiles are populated.
 #
-# This is the safety guarantee: importing the module without explicit opt-in
-# must leave /etc/hosts completely untouched. Any other tool (Docker Desktop,
-# VPN clients, etc.) can manage the file without interference.
+# This is the opt-in safety guarantee: content is ignored when the
+# toggle is off, but any stale Nix-managed block from a previous
+# activation is still stripped.
 
 {
-  # Deliberately NOT setting networking.enableHosts (defaults to false)
+  networking.enableHosts = false;
+  networking.hosts = {
+    "192.168.1.1" = [ "should-not-appear.local" ];
+  };
+  networking.extraHosts = ''
+    172.16.0.1 should-not-appear-either
+  '';
 
   test = ''
-    echo "checking NO /etc/hosts activation code is present" >&2
-    if grep "setting up /etc/hosts" ${config.out}/activate 2>/dev/null; then
-      echo "FAIL: hosts activation code present despite enableHosts=false" >&2
-      exit 1
-    fi
-    echo "ok: no hosts activation code" >&2
+    echo "checking activation script is present (cleanup always runs)" >&2
+    grep "setting up /etc/hosts" ${config.out}/activate
 
-    echo "checking NO Nix-managed markers are written" >&2
-    if grep "BEGIN Nix-managed" ${config.out}/activate 2>/dev/null; then
-      echo "FAIL: Nix-managed block markers present despite enableHosts=false" >&2
-      exit 1
-    fi
-    echo "ok: no Nix-managed markers" >&2
+    echo "checking sed stripping logic is present" >&2
+    grep -F "sed '/^# BEGIN Nix-managed\$/,/^# END Nix-managed\$/d'" ${config.out}/activate
 
-    echo "checking NO sed stripping logic is present" >&2
-    if grep "Nix-managed" ${config.out}/activate 2>/dev/null; then
-      echo "FAIL: sed stripping logic present despite enableHosts=false" >&2
+    echo "checking no Nix-managed markers are written despite content being set" >&2
+    if grep -F "printf '# BEGIN Nix-managed\n'" ${config.out}/activate; then
+      echo "FAIL: Nix-managed block written despite enableHosts=false" >&2
       exit 1
     fi
-    echo "ok: no sed stripping logic" >&2
+    if grep -F "printf '# END Nix-managed\n'" ${config.out}/activate; then
+      echo "FAIL: Nix-managed END marker written despite enableHosts=false" >&2
+      exit 1
+    fi
 
-    echo "checking NO generated hosts file reference" >&2
-    if grep "generatedHosts\|string-hosts\|extra-hosts\|localhost-hosts" ${config.out}/activate 2>/dev/null; then
-      echo "FAIL: generated hosts file referenced despite enableHosts=false" >&2
+    echo "checking hosts content is NOT referenced in activation script" >&2
+    if grep "should-not-appear" ${config.out}/activate 2>/dev/null; then
+      echo "FAIL: hosts content referenced despite enableHosts=false" >&2
       exit 1
     fi
-    echo "ok: no generated hosts references" >&2
+
+    echo "checking restore path writes original back (no Nix block)" >&2
+    grep "hostsOriginal.*> /etc/hosts" ${config.out}/activate
+
+    echo "ok: enableHosts=false path verified" >&2
   '';
 }
