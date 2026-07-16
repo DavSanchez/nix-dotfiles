@@ -47,6 +47,16 @@ jobs:
         with:
           name: davsanchez
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+      - name: Backup existing system files
+        if: matrix.system == 'aarch64-darwin'
+        run: |
+          for f in /etc/nix/nix.conf /etc/bashrc /etc/zshrc; do
+            if [ -f "$f" ]; then
+              sudo mv "$f" "${f}.before-nix-darwin"
+              echo "Renamed $f to ${f}.before-nix-darwin"
+            fi
+          done
+
       - name: Activate bootstrap Linux builder
         if: matrix.system == 'aarch64-darwin'
         run: >
