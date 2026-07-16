@@ -16,7 +16,7 @@
     grep "setting up /etc/hosts" ${config.out}/activate
 
     echo "checking sed stripping logic is present" >&2
-    grep 'sed.*BEGIN Nix-managed.*END Nix-managed' ${config.out}/activate
+    grep -F "sed '/^# BEGIN Nix-managed\$/,/^# END Nix-managed\$/d'" ${config.out}/activate
 
     echo "checking original content preservation is in the script" >&2
     grep "hostsOriginal" ${config.out}/activate
@@ -25,13 +25,13 @@
     grep "hostsOriginal.*> /etc/hosts" ${config.out}/activate
 
     echo "checking Nix-managed markers are NOT written to hosts file" >&2
-    if grep "printf '# BEGIN Nix-managed\\\\n'" ${config.out}/activate; then
+    if grep -F "printf '# BEGIN Nix-managed\n'" ${config.out}/activate; then
       echo "FAIL: Nix-managed block should not be written when no content" >&2
       exit 1
     fi
 
     echo "checking Nix-managed END marker is also not written" >&2
-    if grep "printf '# END Nix-managed\\\\n'" ${config.out}/activate; then
+    if grep -F "printf '# END Nix-managed\n'" ${config.out}/activate; then
       echo "FAIL: Nix-managed END marker should not be written" >&2
       exit 1
     fi

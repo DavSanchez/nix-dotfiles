@@ -27,11 +27,11 @@
     grep "10.0.0.1 gateway.local" "$hostsFile"
     grep "172.16.0.1 docker-host" "$hostsFile"
 
-    echo "checking Nix-managed markers in activation script" >&2
-    grep "BEGIN Nix-managed" ${config.out}/activate
-    grep "END Nix-managed" ${config.out}/activate
+    echo "checking Nix-managed output markers in activation script" >&2
+    grep -F "printf '# BEGIN Nix-managed\n'" ${config.out}/activate
+    grep -F "printf '# END Nix-managed\n'" ${config.out}/activate
 
     echo "checking original /etc/hosts preservation logic" >&2
-    grep 'sed.*BEGIN Nix-managed.*END Nix-managed' ${config.out}/activate
+    grep -F "sed '/^# BEGIN Nix-managed\$/,/^# END Nix-managed\$/d'" ${config.out}/activate
   '';
 }
