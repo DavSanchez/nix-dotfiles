@@ -32,6 +32,19 @@ let
 in
 {
   options.networking = {
+    enableHosts = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = ''
+        Whether to manage {file}`/etc/hosts` via activation script.
+        When enabled, the activation script preserves non-Nix content and
+        wraps Nix-managed entries between `# BEGIN Nix-managed` and
+        `# END Nix-managed` markers. Disable this to let other tools
+        (e.g., Docker Desktop) manage {file}`/etc/hosts` without
+        interference.
+      '';
+    };
+
     hosts = lib.mkOption {
       type = lib.types.attrsOf (lib.types.listOf lib.types.str);
       default = { };
@@ -66,7 +79,7 @@ in
     };
   };
 
-  config = {
+  config = lib.mkIf config.networking.enableHosts {
     system.activationScripts.postActivation.text =
       let
         hasHostsContent =

@@ -47,6 +47,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    networking.enableHosts = true;
     networking.hostFiles = map (x: filterHostsFile "${lib.getOutput x cfg.package}/hosts") (
       [ "ads" ] ++ cfg.block
     );

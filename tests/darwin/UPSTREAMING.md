@@ -17,10 +17,11 @@ This implementation uses an **activation script** (`system.activationScripts.pos
 ### New module: `modules/networking/hosts.nix`
 
 Contains:
+- `networking.enableHosts` (`bool`, default `false`) — opt-in toggle to manage `/etc/hosts`
 - `networking.hosts` (`attrsOf (listOf str)`) — IP-to-hostnames map
 - `networking.extraHosts` (`lines`) — verbatim text entries
 - `networking.hostFiles` (`listOf path`) — files to concatenate
-- Activation script that merges the original macOS `/etc/hosts` content with generated entries and writes a regular file to `/etc/hosts`
+- Activation script (gated by `enableHosts`) that merges the original macOS `/etc/hosts` content with generated entries and writes a regular file to `/etc/hosts`
 
 ### New module: `modules/config/stevenblack.nix`
 
@@ -33,7 +34,7 @@ Mirrors [NixOS's `nixos/modules/config/stevenblack.nix`](https://github.com/NixO
 
 ### Tests
 
-Drop `tests/darwin/networking-hosts.nix` and `tests/darwin/networking-stevenblack.nix` into `tests/` and register them in `release.nix`:
+Drop the relevant tests into `tests/` and register them in `release.nix`:
 
 ```nix
 tests.networking-hosts = makeTest ./tests/networking-hosts.nix;
@@ -57,10 +58,14 @@ The `postActivation` script:
 2. Strips any previous `# BEGIN Nix-managed` ... `# END Nix-managed` block (idempotency)
 3. Writes: `[original macOS content] + [# BEGIN Nix-managed] + [generated] + [# END Nix-managed]`
 
-## Known Limitations / Discussion Points for Upstream PR
+## Opting-in
+
+`networking.enableHosts` (default `false`) provides an explicit opt-in mechanism. Users who don't want nix-darwin to manage `/etc/hosts` at all (e.g., Docker Desktop modifies it) simply leave it unset.
+
+When a dependent feature like `networking.stevenblack` is enabled, it forces `enableHosts = true` automatically — users don't need to set both.
+
+## Known Limitations for Upstream PR
 
 1. **Duplicate localhost entries**: The stock macOS `/etc/hosts` already contains `127.0.0.1 localhost` and `::1 localhost`. The generated Nix content also includes them. Harmless (first match wins) but visually redundant. Could be addressed by detecting existing entries at build time or omitting them from the generated content when merging.
 
 2. **Activation script ordering**: We rely on `postActivation` running after `networking`. This is guaranteed by the hardcoded order in `activation-scripts.nix`, but there's no declarative dependency mechanism for activation scripts in nix-darwin.
-
-3. **Opt-out**: Users who don't want nix-darwin to manage `/etc/hosts` at all (e.g., Docker Desktop modifies it) currently have no way to disable this if `networking.hosts` or similar options are set. Consider adding a `networking.hosts.enable` option.

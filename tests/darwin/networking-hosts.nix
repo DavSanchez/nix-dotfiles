@@ -1,6 +1,10 @@
-{ config, ... }:
+{
+  config, ...
+}:
 
 {
+  networking.enableHosts = true;
+
   networking.hosts = {
     "192.168.1.1" = [
       "myhost.local"

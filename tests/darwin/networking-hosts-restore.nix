@@ -1,15 +1,16 @@
 { config, ... }:
 
-# Tests that disabling networking options correctly restores /etc/hosts.
+# Tests that enabling the module without host content correctly restores /etc/hosts.
 #
-# When all networking.hosts, networking.extraHosts, and networking.hostFiles
-# are empty, the activation script should still run and strip any existing
-# Nix-managed block, but should NOT add a new one — effectively restoring
-# the original /etc/hosts content.
+# When networking.enableHosts is true but networking.hosts, extraHosts, and
+# hostFiles are all empty/default, the activation script should still run
+# and strip any existing Nix-managed block, but should NOT add a new one —
+# effectively restoring the original /etc/hosts content.
 
 {
+  networking.enableHosts = true;
   # Deliberately no networking.hosts, extraHosts, or hostFiles set
-  # (tests the "disabled / nothing to add" path)
+  # (tests the "content is empty / restore" path)
 
   test = ''
     echo "checking activation script runs even without host content" >&2
