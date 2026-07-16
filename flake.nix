@@ -180,8 +180,9 @@
             inherit darwin;
           };
         in
-        builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib
-        // {
+        {
+          x86_64-linux = deploy-rs.lib.x86_64-linux.deployChecks self.deploy;
+          aarch64-linux = deploy-rs.lib.aarch64-linux.deployChecks self.deploy;
           aarch64-darwin = darwinTests.makeTestSuite {
             system = "aarch64-darwin";
             modules = [
