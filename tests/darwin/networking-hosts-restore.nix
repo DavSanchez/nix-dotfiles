@@ -22,16 +22,16 @@
     grep "hostsOriginal" ${config.out}/activate
 
     echo "checking restore path writes original back (no Nix block)" >&2
-    grep "printf '%s\\'n.*hostsOriginal.*> /etc/hosts" ${config.out}/activate
+    grep "hostsOriginal.*> /etc/hosts" ${config.out}/activate
 
-    echo "checking Nix-managed markers are NOT added" >&2
-    if grep "BEGIN Nix-managed" ${config.out}/activate; then
+    echo "checking Nix-managed markers are NOT written to hosts file" >&2
+    if grep "printf '# BEGIN Nix-managed\\\\n'" ${config.out}/activate; then
       echo "FAIL: Nix-managed block should not be written when no content" >&2
       exit 1
     fi
 
-    echo "checking Nix-managed END marker is also absent" >&2
-    if grep "END Nix-managed" ${config.out}/activate; then
+    echo "checking Nix-managed END marker is also not written" >&2
+    if grep "printf '# END Nix-managed\\\\n'" ${config.out}/activate; then
       echo "FAIL: Nix-managed END marker should not be written" >&2
       exit 1
     fi
