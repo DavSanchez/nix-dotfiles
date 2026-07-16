@@ -14,7 +14,14 @@
     ./modules/services.nix
   ];
 
-  networking.hostName = "solio";
+  networking =
+    let
+      name = "solio";
+    in
+    {
+      hostName = name;
+      computerName = name;
+    };
 
   # Enable sudo authentication with Apple Watch
   security.pam.services.sudo_local.watchIdAuth = true;

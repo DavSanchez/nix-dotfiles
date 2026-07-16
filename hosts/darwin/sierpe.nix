@@ -14,7 +14,14 @@
     ./modules/services.nix
   ];
 
-  networking.hostName = "sierpe";
+  networking =
+    let
+      name = "sierpe";
+    in
+    {
+      hostName = name;
+      computerName = name;
+    };
 
   # Enable sudo authentication with Touch ID
   security.pam.services.sudo_local.touchIdAuth = true;
