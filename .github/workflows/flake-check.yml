@@ -47,6 +47,46 @@ jobs:
         with:
           name: davsanchez
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+      - name: Activate bootstrap Linux builder
+        if: matrix.system == 'aarch64-darwin'
+        run: >
+          sudo nix run
+          --access-tokens "${{ secrets.GITHUB_TOKEN }}"
+          --extra-experimental-features 'nix-command flakes'
+          github:nix-darwin/nix-darwin/master#darwin-rebuild
+          --
+          switch --flake .#linux-builder-bootstrap
+
+      - name: Wait for Linux builder
+        if: matrix.system == 'aarch64-darwin'
+        run: |
+          set +e
+          sleep 30
+          for i in $(seq 1 12); do
+            echo "Attempt $i/12: building trivial aarch64-linux derivation..."
+            nix build --system aarch64-linux \
+              --expr 'builtins.derivation { name = "smoke-test"; system = "aarch64-linux"; builder = "/bin/sh"; args = ["-c" "echo ok > $out"]; }' \
+              --no-link 2>&1
+            if [ $? -eq 0 ]; then
+              echo "Linux builder is responsive"
+              exit 0
+            fi
+            echo "Attempt $i failed, waiting 5s for VM to boot..."
+            sleep 5
+          done
+          echo "Linux builder failed to become responsive"
+          exit 1
+
+      - name: Upgrade Linux builder with x86_64 support
+        if: matrix.system == 'aarch64-darwin'
+        run: >
+          sudo nix run
+          --access-tokens "${{ secrets.GITHUB_TOKEN }}"
+          --extra-experimental-features 'nix-command flakes'
+          github:nix-darwin/nix-darwin/master#darwin-rebuild
+          --
+          switch --flake .#linux-builder-with-x86_64
+
       - name: Run nix flake check
         run: nix flake check -L
 

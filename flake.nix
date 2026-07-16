@@ -123,10 +123,15 @@
           specialArgs = { inherit inputs; };
           modules = [ ./hosts/darwin/nr.nix ];
         };
-        linux-builder-test = darwin.lib.darwinSystem {
+        linux-builder-bootstrap = darwin.lib.darwinSystem {
           system = "aarch64-darwin";
           specialArgs = { inherit inputs; };
-          modules = [ ./hosts/darwin/ci/linux-builder-test.nix ];
+          modules = [ ./hosts/darwin/ci/linux-builder-bootstrap.nix ];
+        };
+        linux-builder-with-x86_64 = darwin.lib.darwinSystem {
+          system = "aarch64-darwin";
+          specialArgs = { inherit inputs; };
+          modules = [ ./hosts/darwin/ci/linux-builder-with-x86_64.nix ];
         };
       };
 
@@ -174,23 +179,23 @@
       };
 
       checks =
-        let
-          darwinTests = import ./lib/darwin-tests.nix {
-            inherit (nixpkgs) lib;
-            inherit darwin;
-          };
-        in
-        {
-          x86_64-linux = deploy-rs.lib.x86_64-linux.deployChecks self.deploy;
-          aarch64-linux = deploy-rs.lib.aarch64-linux.deployChecks self.deploy;
-          aarch64-darwin = darwinTests.makeTestSuite {
-            system = "aarch64-darwin";
-            modules = [
-              self.darwinModules.networking
-              self.darwinModules.stevenBlack
-            ];
-            dir = ./tests/darwin;
-          };
+        builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib
+        // {
+          aarch64-darwin =
+            let
+              darwinTests = import ./lib/darwin-tests.nix {
+                inherit (nixpkgs) lib;
+                inherit darwin;
+              };
+            in
+            darwinTests.makeTestSuite {
+              system = "aarch64-darwin";
+              modules = [
+                self.darwinModules.networking
+                self.darwinModules.stevenBlack
+              ];
+              dir = ./tests/darwin;
+            };
         };
     };
 }

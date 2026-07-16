@@ -64,7 +64,7 @@ jobs:
           --extra-experimental-features 'nix-command flakes'
           github:nix-darwin/nix-darwin/master#darwin-rebuild
           --
-          switch --flake .#linux-builder-test
+          switch --flake .#linux-builder-bootstrap
 
       - name: Smoke test Linux builder VM
         run: |
