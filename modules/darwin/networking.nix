@@ -66,30 +66,41 @@ in
     };
   };
 
-  config =
-    lib.mkIf
-      (
-        config.networking.hosts != { }
-        || config.networking.extraHosts != ""
-        || config.networking.hostFiles != [ ]
-      )
-      {
-        system.activationScripts.postActivation.text = ''
-          printf >&2 'setting up /etc/hosts...\n'
+  config = {
+    system.activationScripts.postActivation.text =
+      let
+        hasHostsContent =
+          config.networking.hosts != { }
+          || config.networking.extraHosts != ""
+          || config.networking.hostFiles != [ ];
+      in
+      ''
+        printf >&2 'setting up /etc/hosts...\n'
 
-          hostsOriginal=""
-          if [[ -f /etc/hosts ]]; then
-            hostsOriginal="$(sed '/^# BEGIN Nix-managed$/,/^# END Nix-managed$/d' /etc/hosts)"
-          fi
+        hostsOriginal=""
+        if [[ -f /etc/hosts ]]; then
+          hostsOriginal="$(sed '/^# BEGIN Nix-managed$/,/^# END Nix-managed$/d' /etc/hosts)"
+        fi
 
-          {
-            if [[ -n "$hostsOriginal" ]]; then
-              printf '%s\n' "$hostsOriginal"
-            fi
-            printf '# BEGIN Nix-managed\n'
-            cat ${generatedHosts}
-            printf '# END Nix-managed\n'
-          } > /etc/hosts
-        '';
-      };
+        ${
+          if hasHostsContent then
+            ''
+              {
+                if [[ -n "$hostsOriginal" ]]; then
+                  printf '%s\n' "$hostsOriginal"
+                fi
+                printf '# BEGIN Nix-managed\n'
+                cat ${generatedHosts}
+                printf '# END Nix-managed\n'
+              } > /etc/hosts
+            ''
+          else
+            ''
+              if [[ -n "$hostsOriginal" ]]; then
+                printf '%s\n' "$hostsOriginal" > /etc/hosts
+              fi
+            ''
+        }
+      '';
+  };
 }
