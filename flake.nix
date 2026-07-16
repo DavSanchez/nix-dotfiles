@@ -185,7 +185,7 @@
             system:
             self.deploy
             // {
-              nodes = builtins.filterAttrs (
+              nodes = nixpkgs.lib.filterAttrs (
                 _: node: node.profiles.system.path.system == system
               ) self.deploy.nodes;
             };
