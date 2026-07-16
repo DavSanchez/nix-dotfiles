@@ -15,6 +15,15 @@
     ];
     # userKeymaps = { };
     userSettings = {
+      cli_default_open_behavior = "existing_window";
+      project_panel.dock = "left";
+      outline_panel.dock = "left";
+      collaboration_panel.dock = "left";
+      agent = {
+        dock = "right";
+        favorite_models = [ ];
+        model_parameters = [ ];
+      };
       terminal = {
         # font_size= 14.0;
         font_family = "Iosevka Term Slab";
@@ -90,12 +99,15 @@
             };
           };
         };
+        nil = {
+          nix.flake.autoArchive = true;
+        };
       };
 
       agent_servers = {
         opencode = {
           default_config_options = {
-            model = "opencode-go/qwen3.7-max";
+            model = "opencode-go/deepseek-v4-flash";
           };
           type = "registry";
         };
