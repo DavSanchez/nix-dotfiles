@@ -181,11 +181,14 @@
           };
           # Only pass deploy nodes that match the given system to avoid
           # trying to build e.g. aarch64-linux activation scripts on x86_64-linux
-          filterDeploy = system: self.deploy // {
-            nodes = builtins.filterAttrs (_: node:
-              node.profiles.system.path.system == system
-            ) self.deploy.nodes;
-          };
+          filterDeploy =
+            system:
+            self.deploy
+            // {
+              nodes = builtins.filterAttrs (
+                _: node: node.profiles.system.path.system == system
+              ) self.deploy.nodes;
+            };
         in
         {
           x86_64-linux = deploy-rs.lib.x86_64-linux.deployChecks (filterDeploy "x86_64-linux");
