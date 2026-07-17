@@ -53,6 +53,7 @@
         ./shaders/crt.glsl
       ];
       # custom-shader-animation = "always"; # if unfocus behavior is weird with the shaders
+      shell-integration-features = true;
     }
     // lib.optionalAttrs pkgs.stdenv.isDarwin {
       # keybind = [
