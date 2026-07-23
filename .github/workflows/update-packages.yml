@@ -105,21 +105,26 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git checkout -b update/${{ matrix.package }}
+          git checkout -B update/${{ matrix.package }}
           git add -A
           git commit -m "pkg: update ${{ matrix.package }}"
-          git push -u origin update/${{ matrix.package }}
+          git push -f origin update/${{ matrix.package }}
 
       - name: Create Pull Request
         if: steps.changes.outputs.has_changes == 'true'
         run: |
-          gh pr create \
-            --title "pkg: update ${{ matrix.package }}" \
-            --body "Automated update of \`${{ matrix.package }}\` via [nix-update](https://github.com/Mic92/nix-update).
+          EXISTING_PR=$(gh pr list --head "update/${{ matrix.package }}" --json number --jq '.[0].number' 2>/dev/null || echo "")
+          if [ -n "$EXISTING_PR" ]; then
+            echo "PR #$EXISTING_PR already exists for update/${{ matrix.package }}"
+          else
+            gh pr create \
+              --title "pkg: update ${{ matrix.package }}" \
+              --body "Automated update of \`${{ matrix.package }}\` via [nix-update](https://github.com/Mic92/nix-update).
 
           The \`flake-check\` workflow will validate the build. If all checks pass, this PR will be auto-merged." \
-            --base master \
-            --head "update/${{ matrix.package }}"
+              --base master \
+              --head "update/${{ matrix.package }}"
+          fi
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
