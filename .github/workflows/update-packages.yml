@@ -16,7 +16,7 @@ jobs:
   discover:
     runs-on: ubuntu-latest
     outputs:
-      packages: ${{ steps.discover.outputs.packages }}
+      matrix: ${{ steps.discover.outputs.matrix }}
     steps:
       - uses: actions/checkout@v7
 
@@ -37,18 +37,36 @@ jobs:
             FILTERED="$ALL_PKGS"
           fi
 
-          JSON=$(echo "$FILTERED" | jq -R -s -c 'split("\n") | map(select(. != ""))')
-          echo "packages=$JSON" >> "$GITHUB_OUTPUT"
-          echo "Discovered packages: $JSON"
+          MATRIX="[]"
+          for pkg in $FILTERED; do
+            PLATFORMS=$(nix eval --json ".#packages.x86_64-linux.${pkg}.meta.platforms" 2>/dev/null || echo 'null')
+            
+            if [ "$PLATFORMS" = "null" ]; then
+              PLATFORMS=$(nix eval --json ".#packages.aarch64-darwin.${pkg}.meta.platforms" 2>/dev/null || echo '[]')
+            fi
+            
+            if echo "$PLATFORMS" | jq -e 'any(. == "aarch64-darwin" or . == "x86_64-darwin")' > /dev/null; then
+              RUNNER="macos-latest"
+            elif echo "$PLATFORMS" | jq -e 'any(. == "aarch64-linux") and (all(. == "aarch64-linux" or startswith("aarch64")))' > /dev/null; then
+              RUNNER="ubuntu-24.04-arm"
+            else
+              RUNNER="ubuntu-latest"
+            fi
+            
+            MATRIX=$(echo "$MATRIX" | jq -c --arg pkg "$pkg" --arg runner "$RUNNER" '. + [{"package": $pkg, "runner": $runner}]')
+          done
+
+          echo "matrix=$MATRIX" >> "$GITHUB_OUTPUT"
+          echo "Discovered matrix: $MATRIX"
 
   update:
     needs: discover
-    if: needs.discover.outputs.packages != '[]'
-    runs-on: macos-latest
+    if: needs.discover.outputs.matrix != '[]'
     strategy:
       fail-fast: false
       matrix:
-        package: ${{ fromJson(needs.discover.outputs.packages) }}
+        include: ${{ fromJson(needs.discover.outputs.matrix) }}
+    runs-on: ${{ matrix.runner }}
     steps:
       - uses: actions/checkout@v7
 
@@ -60,7 +78,13 @@ jobs:
         run: nix profile add nixpkgs#nix-update
 
       - name: Update ${{ matrix.package }}
-        run: nix-update --flake --build ${{ matrix.package }}
+        run: |
+          SYSTEM=$(case "${{ matrix.runner }}" in
+            macos-latest) echo "aarch64-darwin" ;;
+            ubuntu-24.04-arm) echo "aarch64-linux" ;;
+            *) echo "x86_64-linux" ;;
+          esac)
+          nix-update --flake --system "$SYSTEM" --build ${{ matrix.package }}
 
       - name: Check for changes
         id: changes
