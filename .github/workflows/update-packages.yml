@@ -44,7 +44,7 @@ jobs:
   update:
     needs: discover
     if: needs.discover.outputs.packages != '[]'
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     strategy:
       fail-fast: false
       matrix:
@@ -60,12 +60,9 @@ jobs:
         run: nix profile add nixpkgs#nix-update
 
       - name: Update ${{ matrix.package }}
-        id: update
-        continue-on-error: true
         run: nix-update --flake --build ${{ matrix.package }}
 
       - name: Check for changes
-        if: steps.update.outcome == 'success'
         id: changes
         run: |
           if git diff --quiet; then
