@@ -16,7 +16,7 @@ jobs:
   discover:
     runs-on: ubuntu-latest
     outputs:
-      packages: ${{ steps.discover.outputs.packages }}
+      matrix: ${{ steps.discover.outputs.matrix }}
     steps:
       - uses: actions/checkout@v7
 
@@ -37,18 +37,38 @@ jobs:
             FILTERED="$ALL_PKGS"
           fi
 
-          JSON=$(echo "$FILTERED" | jq -R -s -c 'split("\n") | map(select(. != ""))')
-          echo "packages=$JSON" >> "$GITHUB_OUTPUT"
-          echo "Discovered packages: $JSON"
+          MATRIX="[]"
+          for pkg in $FILTERED; do
+            PLATFORMS=$(nix eval --json ".#packages.x86_64-linux.${pkg}.meta.platforms" 2>/dev/null || echo 'null')
+            
+            if [ "$PLATFORMS" = "null" ]; then
+              PLATFORMS=$(nix eval --json ".#packages.aarch64-darwin.${pkg}.meta.platforms" 2>/dev/null || echo '[]')
+            fi
+            
+            if echo "$PLATFORMS" | jq -e 'any(startswith("x86_64-linux") or startswith("aarch64-linux") or startswith("armv") or startswith("i686-linux"))' > /dev/null; then
+              if echo "$PLATFORMS" | jq -e 'any(startswith("x86_64-linux") or startswith("i686-linux"))' > /dev/null; then
+                RUNNER="ubuntu-latest"
+              else
+                RUNNER="ubuntu-24.04-arm"
+              fi
+            else
+              RUNNER="macos-latest"
+            fi
+            
+            MATRIX=$(echo "$MATRIX" | jq -c --arg pkg "$pkg" --arg runner "$RUNNER" '. + [{"package": $pkg, "runner": $runner}]')
+          done
+
+          echo "matrix=$MATRIX" >> "$GITHUB_OUTPUT"
+          echo "Discovered matrix: $MATRIX"
 
   update:
     needs: discover
-    if: needs.discover.outputs.packages != '[]'
-    runs-on: ubuntu-latest
+    if: needs.discover.outputs.matrix != '[]'
     strategy:
       fail-fast: false
       matrix:
-        package: ${{ fromJson(needs.discover.outputs.packages) }}
+        include: ${{ fromJson(needs.discover.outputs.matrix) }}
+    runs-on: ${{ matrix.runner }}
     steps:
       - uses: actions/checkout@v7
 
@@ -60,12 +80,18 @@ jobs:
         run: nix profile add nixpkgs#nix-update
 
       - name: Update ${{ matrix.package }}
-        id: update
-        continue-on-error: true
-        run: nix-update --flake --build ${{ matrix.package }}
+        run: |
+          if [ "${{ matrix.runner }}" = "macos-latest" ]; then
+            SYSTEM="aarch64-darwin"
+          elif [ "${{ matrix.runner }}" = "ubuntu-24.04-arm" ]; then
+            SYSTEM="aarch64-linux"
+          else
+            SYSTEM="x86_64-linux"
+          fi
+          echo "Updating ${{ matrix.package }} for system $SYSTEM"
+          nix-update --flake --system "$SYSTEM" --build ${{ matrix.package }}
 
       - name: Check for changes
-        if: steps.update.outcome == 'success'
         id: changes
         run: |
           if git diff --quiet; then
@@ -79,22 +105,26 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git checkout -b update/${{ matrix.package }}
+          git checkout -B update/${{ matrix.package }}
           git add -A
           git commit -m "pkg: update ${{ matrix.package }}"
-          git push -u origin update/${{ matrix.package }}
+          git push -f origin update/${{ matrix.package }}
 
       - name: Create Pull Request
         if: steps.changes.outputs.has_changes == 'true'
         run: |
-          gh pr create \
-            --title "pkg: update ${{ matrix.package }}" \
-            --body "Automated update of \`${{ matrix.package }}\` via [nix-update](https://github.com/Mic92/nix-update).
+          EXISTING_PR=$(gh pr list --head "update/${{ matrix.package }}" --json number --jq '.[0].number' 2>/dev/null || echo "")
+          if [ -n "$EXISTING_PR" ]; then
+            echo "PR #$EXISTING_PR already exists for update/${{ matrix.package }}"
+          else
+            gh pr create \
+              --title "pkg: update ${{ matrix.package }}" \
+              --body "Automated update of \`${{ matrix.package }}\` via [nix-update](https://github.com/Mic92/nix-update).
 
           The \`flake-check\` workflow will validate the build. If all checks pass, this PR will be auto-merged." \
-            --label "auto-merge" \
-            --base master \
-            --head "update/${{ matrix.package }}"
+              --base master \
+              --head "update/${{ matrix.package }}"
+          fi
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
