@@ -1,0 +1,92 @@
+name: Update packages
+
+on:
+  schedule:
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+
+env:
+  EXCLUDE_PACKAGES: ''
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    outputs:
+      packages: ${{ steps.discover.outputs.packages }}
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Discover packages
+        id: discover
+        run: |
+          ALL_PKGS=$(nix flake show --json 2>/dev/null \
+            | jq -r '[.packages | to_entries[] | .value | keys[]] | unique | .[]')
+
+          EXCLUDE="${{ env.EXCLUDE_PACKAGES }}"
+          if [ -n "$EXCLUDE" ]; then
+            FILTERED=$(echo "$ALL_PKGS" | grep -vxF <(echo "$EXCLUDE" | tr ',' '\n') || true)
+          else
+            FILTERED="$ALL_PKGS"
+          fi
+
+          JSON=$(echo "$FILTERED" | jq -R -s -c 'split("\n") | map(select(. != ""))')
+          echo "packages=$JSON" >> "$GITHUB_OUTPUT"
+          echo "Discovered packages: $JSON"
+
+  update:
+    needs: discover
+    if: needs.discover.outputs.packages != '[]'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        package: ${{ fromJson(needs.discover.outputs.packages) }}
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install nix-update
+        run: nix profile install nixpkgs#nix-update
+
+      - name: Update ${{ matrix.package }}
+        run: nix-update --flake ${{ matrix.package }}
+
+      - name: Check for changes
+        id: changes
+        run: |
+          if git diff --quiet; then
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_changes=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Create Pull Request
+        if: steps.changes.outputs.has_changes == 'true'
+        id: cpr
+        uses: peter-evans/create-pull-request@v8
+        with:
+          branch: update/${{ matrix.package }}
+          title: "pkg: update ${{ matrix.package }}"
+          commit-message: "pkg: update ${{ matrix.package }}"
+          body: |
+            Automated update of `${{ matrix.package }}` via [nix-update](https://github.com/Mic92/nix-update).
+
+            The `flake-check` workflow will validate the build. If all checks pass, this PR will be auto-merged.
+          labels: auto-merge
+
+      - name: Enable automerge
+        if: steps.changes.outputs.has_changes == 'true' && steps.cpr.outputs.pull-request-operation == 'created'
+        run: gh pr merge --auto --squash "${{ steps.cpr.outputs.pull-request-url }}"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
