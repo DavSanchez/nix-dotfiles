@@ -81,12 +81,17 @@ jobs:
 
       - name: Update ${{ matrix.package }}
         run: |
+          set -x
           SYSTEM=$(case "${{ matrix.runner }}" in
             macos-latest) echo "aarch64-darwin" ;;
             ubuntu-24.04-arm) echo "aarch64-linux" ;;
             *) echo "x86_64-linux" ;;
           esac)
-          nix-update --flake --system "$SYSTEM" --build ${{ matrix.package }}
+          echo "Updating ${{ matrix.package }} for system $SYSTEM"
+          nix-update --flake --system "$SYSTEM" --build ${{ matrix.package }} || {
+            echo "nix-update failed with exit code $?"
+            exit 1
+          }
 
       - name: Check for changes
         id: changes
