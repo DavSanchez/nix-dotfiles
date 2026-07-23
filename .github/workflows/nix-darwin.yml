@@ -112,7 +112,7 @@ jobs:
         run: >
           nix run github:nix-darwin/nix-darwin/master#darwin-rebuild
           --access-tokens "github.com=${{ secrets.GITHUB_TOKEN }}"
-          -- build --flake .#${{ matrix.host }}
+          -- build --keep-going --flake .#${{ matrix.host }}
 
   check:
     name: 🟢 Decide whether the needed jobs succeeded or failed
