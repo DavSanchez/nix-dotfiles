@@ -81,12 +81,13 @@ jobs:
 
       - name: Update ${{ matrix.package }}
         run: |
-          set -x
-          SYSTEM=$(case "${{ matrix.runner }}" in
-            macos-latest) echo "aarch64-darwin" ;;
-            ubuntu-24.04-arm) echo "aarch64-linux" ;;
-            *) echo "x86_64-linux" ;;
-          esac)
+          if [ "${{ matrix.runner }}" = "macos-latest" ]; then
+            SYSTEM="aarch64-darwin"
+          elif [ "${{ matrix.runner }}" = "ubuntu-24.04-arm" ]; then
+            SYSTEM="aarch64-linux"
+          else
+            SYSTEM="x86_64-linux"
+          fi
           echo "Updating ${{ matrix.package }} for system $SYSTEM"
           nix-update --flake --system "$SYSTEM" --build ${{ matrix.package }}
 
