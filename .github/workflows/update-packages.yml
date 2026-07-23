@@ -45,12 +45,14 @@ jobs:
               PLATFORMS=$(nix eval --json ".#packages.aarch64-darwin.${pkg}.meta.platforms" 2>/dev/null || echo '[]')
             fi
             
-            if echo "$PLATFORMS" | jq -e 'any(. == "aarch64-darwin" or . == "x86_64-darwin")' > /dev/null; then
-              RUNNER="macos-latest"
-            elif echo "$PLATFORMS" | jq -e 'any(. == "aarch64-linux") and (all(. == "aarch64-linux" or startswith("aarch64")))' > /dev/null; then
-              RUNNER="ubuntu-24.04-arm"
+            if echo "$PLATFORMS" | jq -e 'any(startswith("x86_64-linux") or startswith("aarch64-linux") or startswith("armv") or startswith("i686-linux"))' > /dev/null; then
+              if echo "$PLATFORMS" | jq -e 'any(startswith("x86_64-linux") or startswith("i686-linux"))' > /dev/null; then
+                RUNNER="ubuntu-latest"
+              else
+                RUNNER="ubuntu-24.04-arm"
+              fi
             else
-              RUNNER="ubuntu-latest"
+              RUNNER="macos-latest"
             fi
             
             MATRIX=$(echo "$MATRIX" | jq -c --arg pkg "$pkg" --arg runner "$RUNNER" '. + [{"package": $pkg, "runner": $runner}]')
