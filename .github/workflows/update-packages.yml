@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 env:
-  EXCLUDE_PACKAGES: ''
+  EXCLUDE_PACKAGES: 'prism-cli'
 
 permissions:
   contents: write
