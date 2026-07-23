@@ -57,12 +57,15 @@ jobs:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Install nix-update
-        run: nix profile install nixpkgs#nix-update
+        run: nix profile add nixpkgs#nix-update
 
       - name: Update ${{ matrix.package }}
-        run: nix-update --flake ${{ matrix.package }}
+        id: update
+        continue-on-error: true
+        run: nix-update --flake --build ${{ matrix.package }}
 
       - name: Check for changes
+        if: steps.update.outcome == 'success'
         id: changes
         run: |
           if git diff --quiet; then
@@ -71,22 +74,32 @@ jobs:
             echo "has_changes=true" >> "$GITHUB_OUTPUT"
           fi
 
+      - name: Create branch and commit
+        if: steps.changes.outputs.has_changes == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout -b update/${{ matrix.package }}
+          git add -A
+          git commit -m "pkg: update ${{ matrix.package }}"
+          git push -u origin update/${{ matrix.package }}
+
       - name: Create Pull Request
         if: steps.changes.outputs.has_changes == 'true'
-        id: cpr
-        uses: peter-evans/create-pull-request@v8
-        with:
-          branch: update/${{ matrix.package }}
-          title: "pkg: update ${{ matrix.package }}"
-          commit-message: "pkg: update ${{ matrix.package }}"
-          body: |
-            Automated update of `${{ matrix.package }}` via [nix-update](https://github.com/Mic92/nix-update).
+        run: |
+          gh pr create \
+            --title "pkg: update ${{ matrix.package }}" \
+            --body "Automated update of \`${{ matrix.package }}\` via [nix-update](https://github.com/Mic92/nix-update).
 
-            The `flake-check` workflow will validate the build. If all checks pass, this PR will be auto-merged.
-          labels: auto-merge
+          The \`flake-check\` workflow will validate the build. If all checks pass, this PR will be auto-merged." \
+            --label "auto-merge" \
+            --base master \
+            --head "update/${{ matrix.package }}"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Enable automerge
-        if: steps.changes.outputs.has_changes == 'true' && steps.cpr.outputs.pull-request-operation == 'created'
-        run: gh pr merge --auto --squash "${{ steps.cpr.outputs.pull-request-url }}"
+        if: steps.changes.outputs.has_changes == 'true'
+        run: gh pr merge --auto --squash "update/${{ matrix.package }}"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
