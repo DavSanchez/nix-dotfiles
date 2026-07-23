@@ -118,7 +118,6 @@ jobs:
             --body "Automated update of \`${{ matrix.package }}\` via [nix-update](https://github.com/Mic92/nix-update).
 
           The \`flake-check\` workflow will validate the build. If all checks pass, this PR will be auto-merged." \
-            --label "auto-merge" \
             --base master \
             --head "update/${{ matrix.package }}"
         env:
