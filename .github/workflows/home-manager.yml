@@ -45,7 +45,7 @@ jobs:
         run: nix run github:nix-community/home-manager/master -- build --keep-going --flake ".#david@${{ matrix.host }}"
 
   check:
-    name: 🟢 Decide whether the needed jobs succeeded or failed
+    name: 🟢 Home Manager builds successes required
     if: always()
     needs:
       - build

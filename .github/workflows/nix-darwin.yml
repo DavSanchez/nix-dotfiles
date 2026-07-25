@@ -115,7 +115,7 @@ jobs:
           -- build --keep-going --flake .#${{ matrix.host }}
 
   check:
-    name: 🟢 Decide whether the needed jobs succeeded or failed
+    name: 🟢 Nix-Darwin builds successes required
     if: always()
     needs:
       - build

@@ -101,7 +101,7 @@ jobs:
         run: nix flake check -L --keep-going
 
   check:
-    name: 🟢 Decide whether the needed jobs succeeded or failed
+    name: 🟢 Flake Checks successes required
     if: always()
     needs:
       - flake-check

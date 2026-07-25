@@ -47,7 +47,7 @@ jobs:
         run: nix build --keep-going ".#nixosConfigurations.${{ matrix.host }}.config.system.build.toplevel"
 
   check:
-    name: 🟢 Decide whether the needed jobs succeeded or failed
+    name: 🟢 NixOS builds successes required
     if: always()
     needs:
       - build
