@@ -14,6 +14,11 @@
     ./modules/services.nix
   ];
 
+  users.users."david".openssh.authorizedKeys.keys = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILvM06bcMBkqNyadDKDGQXl4ztggBM1mgg5/CLqnqNvn davidslt+ssh@pm.me
+"
+  ];
+
   networking =
     let
       name = "solio";
