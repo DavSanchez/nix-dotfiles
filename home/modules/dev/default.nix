@@ -12,7 +12,7 @@
     # ./java.nix
     # ./kafka.nix
     ./rust.nix
-    ./api.nix
+    # ./api.nix
     ./python.nix
   ];
 

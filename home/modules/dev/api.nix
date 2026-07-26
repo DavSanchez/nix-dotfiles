@@ -6,7 +6,7 @@
     [
       # Testing APIs
       openapi-tui
-      prism-cli
+      # prism-cli # not packaged
     ]
   );
 }
