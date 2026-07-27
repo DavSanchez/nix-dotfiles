@@ -48,6 +48,7 @@ _: {
     masApps = {
       "Amperfy" = 1530145038;
       "Amphetamine" = 937984704;
+      "Draw Things" = 6444050820;
       "iMovie" = 408981434;
       "Keynote" = 409183694;
       "Logic Pro" = 634148309;
