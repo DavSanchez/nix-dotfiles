@@ -97,6 +97,26 @@ jobs:
           --
           switch --flake .#linux-builder-with-x86_64
 
+      - name: Wait for upgraded Linux builder
+        if: matrix.system == 'aarch64-darwin'
+        run: |
+          set +e
+          sleep 30
+          for i in $(seq 1 12); do
+            echo "Attempt $i/12: building trivial aarch64-linux derivation..."
+            nix build --system aarch64-linux \
+              --expr 'builtins.derivation { name = "smoke-test"; system = "aarch64-linux"; builder = "/bin/sh"; args = ["-c" "echo ok > $out"]; }' \
+              --no-link 2>&1
+            if [ $? -eq 0 ]; then
+              echo "Linux builder is responsive after upgrade"
+              exit 0
+            fi
+            echo "Attempt $i failed, waiting 5s..."
+            sleep 5
+          done
+          echo "Linux builder failed to become responsive after upgrade"
+          exit 1
+
       - name: Run nix flake check
         run: nix flake check -L --keep-going
 
