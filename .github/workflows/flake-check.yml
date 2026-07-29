@@ -31,7 +31,6 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - name: Free up space
-        if: runner.os == 'Linux'
         run: bash .github/scripts/space_cleanup.sh
       - name: Set up QEMU binfmt for cross-build
         if: runner.os == 'Linux'
@@ -65,7 +64,7 @@ jobs:
           --extra-experimental-features 'nix-command flakes'
           github:nix-darwin/nix-darwin/master#darwin-rebuild
           --
-          switch --flake .#linux-builder-bootstrap
+          switch --max-jobs 1 --flake .#linux-builder-bootstrap
 
       - name: Wait for Linux builder
         if: matrix.system == 'aarch64-darwin'
@@ -95,7 +94,7 @@ jobs:
           --extra-experimental-features 'nix-command flakes'
           github:nix-darwin/nix-darwin/master#darwin-rebuild
           --
-          switch --flake .#linux-builder-with-x86_64
+          switch --max-jobs 1 --flake .#linux-builder-with-x86_64
 
       - name: Wait for upgraded Linux builder
         if: matrix.system == 'aarch64-darwin'

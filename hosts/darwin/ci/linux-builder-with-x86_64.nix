@@ -17,10 +17,5 @@
     "aarch64-linux"
   ];
 
-  nix.linux-builder.config = {
-    boot.binfmt.emulatedSystems = [ "x86_64-linux" ];
-    virtualisation.darwin-builder.memorySize = lib.mkForce 4096;
-    nix.settings.max-jobs = 1;
-    nix.settings.cores = 1;
-  };
+  nix.linux-builder.config.boot.binfmt.emulatedSystems = [ "x86_64-linux" ];
 }
