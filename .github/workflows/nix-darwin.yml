@@ -64,7 +64,7 @@ jobs:
           --extra-experimental-features 'nix-command flakes'
           github:nix-darwin/nix-darwin/master#darwin-rebuild
           --
-          switch --flake .#linux-builder-bootstrap
+          switch --max-jobs 1 --flake .#linux-builder-bootstrap
 
       - name: Smoke test Linux builder VM
         run: |
@@ -112,7 +112,7 @@ jobs:
         run: >
           nix run github:nix-darwin/nix-darwin/master#darwin-rebuild
           --access-tokens "github.com=${{ secrets.GITHUB_TOKEN }}"
-          -- build --keep-going --flake .#${{ matrix.host }}
+          -- build --max-jobs 1 --keep-going --flake .#${{ matrix.host }}
 
   check:
     name: 🟢 Nix-Darwin builds successes required
