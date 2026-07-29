@@ -16,7 +16,7 @@
     ./python.nix
   ];
 
-  programs.devenv.enable = true;
+  programs.devenv.enable = false;
 
   ## Other packages
   home.packages =
