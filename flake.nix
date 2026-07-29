@@ -128,11 +128,6 @@
           specialArgs = { inherit inputs; };
           modules = [ ./hosts/darwin/ci/linux-builder-bootstrap.nix ];
         };
-        linux-builder-with-x86_64 = darwin.lib.darwinSystem {
-          system = "aarch64-darwin";
-          specialArgs = { inherit inputs; };
-          modules = [ ./hosts/darwin/ci/linux-builder-with-x86_64.nix ];
-        };
       };
 
       homeConfigurations = {
@@ -179,9 +174,11 @@
       };
 
       checks =
-        builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib
-        // {
-          aarch64-darwin =
+        let
+          deployChecks = builtins.mapAttrs (
+            system: deployLib: deployLib.deployChecks self.deploy
+          ) deploy-rs.lib;
+          darwinTestSuite =
             let
               darwinTests = import ./lib/darwin-tests.nix {
                 inherit (nixpkgs) lib;
@@ -196,6 +193,10 @@
               ];
               dir = ./tests/darwin;
             };
+        in
+        deployChecks
+        // {
+          aarch64-darwin = deployChecks.aarch64-darwin or { } // darwinTestSuite;
         };
     };
 }
