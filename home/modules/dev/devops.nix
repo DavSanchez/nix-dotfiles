@@ -14,7 +14,7 @@
       ## K8s
       minikube
       kind
-      kubectl
+      # kubectl # provided by minikube already 
       kubernetes-helm
       helm-docs
       kops
