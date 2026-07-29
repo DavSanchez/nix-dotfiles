@@ -39,7 +39,7 @@
         # units # currently broken (not compatible with nu version)
         query
         gstat
-        polars
+        # polars
         # semver # currently broken (not compatible with nu version)
         formats
         # highlight # currently broken (not compatible with nu version)
