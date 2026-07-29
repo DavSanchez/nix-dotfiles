@@ -61,7 +61,7 @@ jobs:
         if: matrix.system == 'aarch64-darwin'
         run: >
           sudo nix run
-          --access-tokens "${{ secrets.GITHUB_TOKEN }}"
+          --access-tokens "github.com=${{ secrets.GITHUB_TOKEN }}"
           --extra-experimental-features 'nix-command flakes'
           github:nix-darwin/nix-darwin/master#darwin-rebuild
           --
@@ -91,7 +91,7 @@ jobs:
         if: matrix.system == 'aarch64-darwin'
         run: >
           sudo nix run
-          --access-tokens "${{ secrets.GITHUB_TOKEN }}"
+          --access-tokens "github.com=${{ secrets.GITHUB_TOKEN }}"
           --extra-experimental-features 'nix-command flakes'
           github:nix-darwin/nix-darwin/master#darwin-rebuild
           --
