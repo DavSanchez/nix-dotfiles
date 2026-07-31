@@ -175,9 +175,9 @@
 
       checks =
         let
-          deployChecks = builtins.mapAttrs (
-            system: deployLib: deployLib.deployChecks self.deploy
-          ) deploy-rs.lib;
+          deployChecks = nixpkgs.lib.genAttrs systems (
+            system: deploy-rs.lib.${system}.deployChecks self.deploy
+          );
           darwinTestSuite =
             let
               darwinTests = import ./lib/darwin-tests.nix {
