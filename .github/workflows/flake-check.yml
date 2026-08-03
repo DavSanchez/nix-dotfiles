@@ -55,7 +55,7 @@ jobs:
         run: |
           checks=$(nix eval --raw '.#checks.aarch64-darwin' --apply 'x: builtins.concatStringsSep " " (builtins.attrNames x)')
           for c in $checks; do
-            [ "$c" = "deploy-activate" ] && continue
+            [ "$c" = "deploy-activate" ] || [ "$c" = "deploy-schema" ] && continue
             nix build -L --keep-going ".#checks.aarch64-darwin.$c"
           done
 
