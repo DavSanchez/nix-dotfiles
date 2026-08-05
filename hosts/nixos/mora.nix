@@ -13,7 +13,6 @@
     raspberry-pi-5.display-vc4 # "regular" display connected
 
     inputs.sops-nix.nixosModules.sops
-    inputs.hermes-agent.nixosModules.default
 
     ./modules/deploy.nix
     ./modules/locale.nix
@@ -73,21 +72,11 @@
     config.boot.kernelPackages.kernel.version
   ];
 
-  services = {
-    hermes-agent = {
-      enable = true;
-      settings.model.default = "deepseek/deepseek-v4-flash";
-      environmentFiles = [ config.sops.secrets."hermes/mora/env".path ];
-      addToSystemPackages = true;
-    };
-  };
-
   sops = {
     defaultSopsFile = ../../secrets/secrets.yaml;
     age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
     secrets = {
       dome_wifi = { };
-      "hermes/mora/env" = { };
     };
   };
 
