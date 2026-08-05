@@ -13,7 +13,13 @@
 
     herdr = {
       enable = true;
-      settings.keys.prefix = "ctrl+a"; # default (ctrl+b) clashes with ghostty
+      settings = {
+        keys.prefix = "ctrl+a"; # default (ctrl+b) clashes with ghostty
+        ui = {
+          sound.enabled = true;
+          toast.delivery = "system";
+        };
+      };
     };
   };
 
