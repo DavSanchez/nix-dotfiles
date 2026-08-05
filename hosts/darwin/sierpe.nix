@@ -24,7 +24,10 @@
     };
 
   # Enable sudo authentication with Touch ID
-  security.pam.services.sudo_local.touchIdAuth = true;
+  security.pam.services.sudo_local = {
+    touchIdAuth = true;
+    watchIdAuth = true;
+  };
 
   homebrew.casks = [ "synthesia" ];
   homebrew.masApps = {

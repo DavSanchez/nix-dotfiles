@@ -28,8 +28,11 @@
       computerName = name;
     };
 
-  # Enable sudo authentication with Apple Watch
-  security.pam.services.sudo_local.watchIdAuth = true;
+  # Enable sudo authentication with Touch ID
+  security.pam.services.sudo_local = {
+    touchIdAuth = true;
+    watchIdAuth = true;
+  };
 
   homebrew.casks = [
     "libreoffice"
