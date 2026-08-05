@@ -27,6 +27,7 @@
     ../modules/fish.nix
     ../modules/zellij
     ../modules/terminals
+    ../modules/app.nix
     ../modules/fonts.nix
     ../modules/helix.nix
     ../modules/tmux.nix
