@@ -11,7 +11,7 @@ in
     radicle = {
       enable = false; # preparing
       publicKey = config.sops.secrets."radicle/mora/pub_key".path;
-      privateKeyFile = config.sops.secrets."radicle/mora/priv_key".path;
+      privateKey = config.sops.secrets."radicle/mora/priv_key".path;
       httpd = {
         enable = true;
         listenPort = 8888; # default 8080 picked by qbittorrent
