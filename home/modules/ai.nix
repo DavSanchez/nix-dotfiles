@@ -3,7 +3,7 @@
   services.ollama.enable = true;
 
   programs = {
-    codex.enable = true;
+    codex.enable = false;
     claude-code.enable = true;
 
     opencode = {
