@@ -79,6 +79,26 @@ jobs:
       - name: Install nix-update
         run: nix profile add nixpkgs#nix-update
 
+      - name: Capture current package revision
+        id: previous
+        run: |
+          if [ "${{ matrix.runner }}" = "macos-latest" ]; then
+            SYSTEM="aarch64-darwin"
+          elif [ "${{ matrix.runner }}" = "ubuntu-24.04-arm" ]; then
+            SYSTEM="aarch64-linux"
+          else
+            SYSTEM="x86_64-linux"
+          fi
+
+          PACKAGE="${{ matrix.package }}"
+          VERSION=$(nix eval --raw ".#packages.${SYSTEM}.${PACKAGE}.version")
+          REVISION=$(nix eval --raw ".#packages.${SYSTEM}.${PACKAGE}.src.rev" 2>/dev/null || echo "$VERSION")
+          HOMEPAGE=$(nix eval --raw ".#packages.${SYSTEM}.${PACKAGE}.meta.homepage" 2>/dev/null || true)
+
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "revision=$REVISION" >> "$GITHUB_OUTPUT"
+          echo "homepage=$HOMEPAGE" >> "$GITHUB_OUTPUT"
+
       - name: Update ${{ matrix.package }}
         run: |
           if [ "${{ matrix.runner }}" = "macos-latest" ]; then
@@ -100,6 +120,52 @@ jobs:
             echo "has_changes=true" >> "$GITHUB_OUTPUT"
           fi
 
+      - name: Prepare pull request description
+        if: steps.changes.outputs.has_changes == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PACKAGE: ${{ matrix.package }}
+          OLD_VERSION: ${{ steps.previous.outputs.version }}
+          OLD_REVISION: ${{ steps.previous.outputs.revision }}
+          HOMEPAGE: ${{ steps.previous.outputs.homepage }}
+        run: |
+          if [ "${{ matrix.runner }}" = "macos-latest" ]; then
+            SYSTEM="aarch64-darwin"
+          elif [ "${{ matrix.runner }}" = "ubuntu-24.04-arm" ]; then
+            SYSTEM="aarch64-linux"
+          else
+            SYSTEM="x86_64-linux"
+          fi
+
+          NEW_VERSION=$(nix eval --raw ".#packages.${SYSTEM}.${PACKAGE}.version")
+          NEW_REVISION=$(nix eval --raw ".#packages.${SYSTEM}.${PACKAGE}.src.rev" 2>/dev/null || echo "$NEW_VERSION")
+          COMMITS=""
+
+          # Compare source revisions when the package points at a GitHub repository.
+          if [[ "$HOMEPAGE" =~ github\.com/([^/]+)/([^/?]+) ]]; then
+            REPO="${BASH_REMATCH[1]}/${BASH_REMATCH[2]}"
+            for OLD_REF in "$OLD_REVISION" "v$OLD_REVISION"; do
+              for NEW_REF in "$NEW_REVISION" "v$NEW_REVISION"; do
+                if COMMITS=$(gh api "repos/${REPO}/compare/${OLD_REF}...${NEW_REF}" \
+                  --jq '.commits[-10:] | reverse | .[] | "- [`\(.sha[0:7])`](\(.html_url)) \(.commit.message | split("\n")[0])"' 2>/dev/null); then
+                  break 2
+                fi
+                COMMITS=""
+              done
+            done
+          fi
+
+          if [ -z "$COMMITS" ]; then
+            COMMITS="- Commit details are unavailable for this source."
+          fi
+
+          {
+            printf 'Automated update of `%s` via [nix-update](https://github.com/Mic92/nix-update).\n\n' "$PACKAGE"
+            printf '**Version:** `%s` -> `%s`\n\n' "$OLD_VERSION" "$NEW_VERSION"
+            printf '**Recent commits:**\n%s\n\n' "$COMMITS"
+            printf 'The `flake-check` workflow will validate the build. If all checks pass, this PR will be auto-merged.\n'
+          } > pr-body.md
+
       - name: Create branch and commit
         if: steps.changes.outputs.has_changes == 'true'
         run: |
@@ -115,15 +181,14 @@ jobs:
         run: |
           EXISTING_PR=$(gh pr list --head "update/${{ matrix.package }}" --json number --jq '.[0].number' 2>/dev/null || echo "")
           if [ -n "$EXISTING_PR" ]; then
-            echo "PR #$EXISTING_PR already exists for update/${{ matrix.package }}"
+            gh pr edit "$EXISTING_PR" --body-file pr-body.md
+            echo "Updated PR #$EXISTING_PR for update/${{ matrix.package }}"
           else
             gh pr create \
-              --title "pkg: update ${{ matrix.package }}" \
-              --body "Automated update of \`${{ matrix.package }}\` via [nix-update](https://github.com/Mic92/nix-update).
-
-          The \`flake-check\` workflow will validate the build. If all checks pass, this PR will be auto-merged." \
-              --base master \
-              --head "update/${{ matrix.package }}"
+               --title "pkg: update ${{ matrix.package }}" \
+               --body-file pr-body.md \
+               --base master \
+               --head "update/${{ matrix.package }}"
           fi
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
