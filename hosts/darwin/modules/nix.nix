@@ -25,6 +25,7 @@
     linux-builder = {
       enable = true;
       ephemeral = true;
+      # Read more at <https://nixcademy.com/posts/rosetta-linux-builder-macos/>
       package = pkgs.darwin.linux-builder-vz;
       systems = [
         "x86_64-linux"
