@@ -14,6 +14,23 @@
     ./modules/services.nix
   ];
 
+  # Linux builder's performance/tuning settings
+  nix.linux-builder = {
+    maxJobs = 4;
+    config = {
+      virtualisation = {
+        darwin-builder = {
+          diskSize = 40 * 1024;
+          memorySize = 8 * 1024;
+        };
+        cores = 4;
+      };
+    };
+
+    # M3 chip or newer?
+    # config.virtualisation.vz.nestedVirtualization = true;
+  };
+
   networking =
     let
       name = "sierpe";

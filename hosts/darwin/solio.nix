@@ -18,6 +18,20 @@
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILvM06bcMBkqNyadDKDGQXl4ztggBM1mgg5/CLqnqNvn davidslt+ssh@pm.me"
   ];
 
+  # Performance/tuning settings
+  nix.linux-builder = {
+    maxJobs = 4;
+    config = {
+      virtualisation = {
+        darwin-builder = {
+          diskSize = 40 * 1024;
+          memorySize = 4 * 1024;
+        };
+        cores = 4;
+      };
+    };
+  };
+
   networking =
     let
       name = "solio";
