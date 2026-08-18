@@ -77,7 +77,7 @@ rehideIntervalSeconds = 5.0
 
 [mouseWarp]
 constrainToArrangement = false
-enabled = false
+enabled = true
 margin = 1
 
 [niri]
