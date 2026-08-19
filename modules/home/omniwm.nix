@@ -70,12 +70,18 @@ in
       };
     };
 
+    # OmniWM rewrites `settings.toml` from the GUI, replacing this symlink
+    # with a regular file. `force = true` makes the next switch re-link the
+    # declarative template (from the Nix store) over that file instead of
+    # failing with a clobber error. The template is the source of truth: any
+    # GUI change you want to keep must be mirrored into it.
     xdg.configFile."omniwm/settings.toml" = lib.mkIf (cfg.settings != { }) {
       source =
         if lib.hm.strings.isPathLike cfg.settings then
           cfg.settings
         else
           tomlFormat.generate "omniwm-settings.toml" cfg.settings;
+      force = true;
     };
   };
 }
