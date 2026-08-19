@@ -18,13 +18,6 @@
     enable = true;
     installPackage = true;
 
-    gateway.enable = true;
-    backend = {
-      mode = "serve";
-      host = "127.0.0.1";
-      port = 9119;
-    };
-
     environmentFiles = [ config.sops.secrets."hermes_env".path ];
 
     settings = {
