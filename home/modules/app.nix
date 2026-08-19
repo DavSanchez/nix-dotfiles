@@ -16,7 +16,7 @@ lib.mkMerge [
         obsidian-export
         motrix-next # Download manager
       ])
-      ++ lib.optionals pkgs.stdenv.isLinux (
+      ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux (
         with pkgs;
         [
           handbrake
@@ -38,7 +38,7 @@ lib.mkMerge [
       zathura.enable = false;
     };
   }
-  (lib.mkIf pkgs.stdenv.isDarwin {
+  (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
     home.packages = with pkgs; [
       utm
       iina

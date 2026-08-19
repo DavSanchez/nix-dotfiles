@@ -44,7 +44,7 @@ in
           "fish-you-should-use" # Fish plugin that reminds you to use your aliases
           "puffer" # Text Expansions for Fish
         ]
-        ++ lib.optionals pkgs.stdenv.isDarwin [
+        ++ lib.optionals pkgs.stdenv.hostPlatform.isDarwin [
           "macos"
         ]
       )

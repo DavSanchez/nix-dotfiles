@@ -39,7 +39,7 @@
 
         "super+r=reload_config"
       ]
-      ++ lib.optionals (!pkgs.stdenv.isDarwin) [
+      ++ lib.optionals (!pkgs.stdenv.hostPlatform.isDarwin) [
         "ctrl+n=new_window"
         "global:cmd+grave_accent=toggle_quick_terminal"
       ];
@@ -55,7 +55,7 @@
       # custom-shader-animation = "always"; # if unfocus behavior is weird with the shaders
       shell-integration-features = true;
     }
-    // lib.optionalAttrs pkgs.stdenv.isDarwin {
+    // lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin {
       # keybind = [
       #   "alt+left=unbind"
       #   "alt+right=unbind"
@@ -66,7 +66,7 @@
       command = lib.getExe config.programs.fish.package;
     };
   }
-  // lib.optionalAttrs pkgs.stdenv.isDarwin {
+  // lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin {
     package = pkgs.ghostty-bin;
   };
 }

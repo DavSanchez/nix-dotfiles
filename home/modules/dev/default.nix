@@ -26,5 +26,5 @@
       just-lsp
       # protobuf
     ])
-    ++ lib.optionals pkgs.stdenv.isLinux [ pkgs.rr ];
+    ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux [ pkgs.rr ];
 }

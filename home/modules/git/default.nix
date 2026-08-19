@@ -24,7 +24,7 @@
         "*.local"
         ".envrc"
       ]
-      ++ lib.optionals pkgs.stdenv.isDarwin [
+      ++ lib.optionals pkgs.stdenv.hostPlatform.isDarwin [
         ".DS_Store"
       ];
 

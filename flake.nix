@@ -39,6 +39,9 @@
 
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Hermes Agent
+    hermes-agent.url = "github:NousResearch/hermes-agent";
   };
 
   outputs =
@@ -160,14 +163,14 @@
             path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.eter;
           };
         };
-        mora = {
-          hostname = "mora.local";
-          sshUser = "david";
-          profiles.system = {
-            user = "root";
-            path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.mora;
-          };
-        };
+        # mora = {
+        #   hostname = "mora.local";
+        #   sshUser = "david";
+        #   profiles.system = {
+        #     user = "root";
+        #     path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.mora;
+        #   };
+        # };
       };
 
       checks =

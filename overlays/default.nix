@@ -14,7 +14,7 @@
   };
 
   # rosetta-packages = final: _prev: {
-  #   rosetta = if final.stdenv.isDarwin && final.stdenv.isAarch64 then final.pkgsx86_64Darwin else final;
+  #   rosetta = if final.stdenv.hostPlatform.isDarwin && final.stdenv.isAarch64 then final.pkgsx86_64Darwin else final;
   # };
 
   # This one contains whatever you want to overlay

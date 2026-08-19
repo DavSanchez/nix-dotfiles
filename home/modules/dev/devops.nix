@@ -14,7 +14,7 @@
       ## K8s
       minikube
       kind
-      # kubectl # provided by minikube already 
+      # kubectl # provided by minikube already
       kubernetes-helm
       helm-docs
       kops
@@ -54,14 +54,14 @@
 
       shellcheck # always shell scripts
     ])
-    ++ lib.optionals pkgs.stdenv.isDarwin (
+    ++ lib.optionals pkgs.stdenv.hostPlatform.isDarwin (
       with pkgs;
       [
         colima
         container
       ]
     )
-    ++ lib.optionals pkgs.stdenv.isLinux [ pkgs.nerdctl ];
+    ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux [ pkgs.nerdctl ];
 
   programs.k9s.enable = true;
 }

@@ -7,6 +7,7 @@
     inputs.sops-nix.homeManagerModules.sops
 
     ../modules/ai.nix
+    ../modules/hermes.nix
     ../modules/aws.nix
     ../modules/cli
     ../modules/dev

@@ -44,7 +44,7 @@
         formats
         # highlight # currently broken (not compatible with nu version)
       ]
-      ++ lib.optionals pkgs.stdenv.isLinux [ dbus ];
+      ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux [ dbus ];
   };
 
   home.packages = with pkgs; [ nufmt ];

@@ -26,8 +26,8 @@
 
       tlrc
     ]
-    ++ lib.optionals pkgs.stdenv.isDarwin [ m-cli ]
-    ++ lib.optionals pkgs.stdenv.isLinux [
+    ++ lib.optionals pkgs.stdenv.hostPlatform.isDarwin [ m-cli ]
+    ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux [
       elfutils
       uutils-procps
       # patchelf # present in ./nix.nix

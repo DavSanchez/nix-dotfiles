@@ -24,7 +24,7 @@
     accounts = {
       zed = {
         host = "smtp.gmail.com";
-        passwordeval = "cat ${config.sops.secrets.zfs_mail_pass_file.path}";
+        passwordeval = "cat ${config.sops.secrets.zfs_mail_pass.path}";
         user = "d.vinternatt@gmail.com";
         from = "zed@eter.local";
       };

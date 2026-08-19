@@ -6,7 +6,7 @@
 
   services.gandi-livedns = {
     enable = true;
-    tokenFile = config.sops.secrets.gandi_livedns_env_file.path;
+    tokenFile = config.sops.secrets.gandi_pat.path;
     domain = "davidslt.es";
     subdomain = [
       "mora"
@@ -15,5 +15,5 @@
     interval = "30m";
   };
 
-  sops.secrets.gandi_livedns_env_file = { };
+  sops.secrets.gandi_pat = { };
 }

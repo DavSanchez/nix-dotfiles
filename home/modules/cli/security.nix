@@ -12,7 +12,7 @@
       proton-pass
       proton-pass-cli
     ]
-    ++ lib.optionals pkgs.stdenv.isLinux [
+    ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux [
       proton-vpn
       proton-proton-vpn-cli
     ];
@@ -34,7 +34,7 @@
         "~/.lima/*/ssh.config"
         "~/.ssh/dynamic_ssh_config"
       ]
-      ++ lib.optionals pkgs.stdenv.isDarwin [
+      ++ lib.optionals pkgs.stdenv.hostPlatform.isDarwin [
         "~/.config/colima/ssh_config"
       ];
 
@@ -43,7 +43,7 @@
           AddKeysToAgent = "yes";
           ServerAliveInterval = 60;
         }
-        // lib.optionalAttrs pkgs.stdenv.isDarwin {
+        // lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin {
           UseKeychain = "yes";
         };
         "github.com" = {
@@ -53,19 +53,20 @@
     };
 
     keychain = {
-      enable = pkgs.stdenv.isLinux;
+      enable = pkgs.stdenv.hostPlatform.isLinux;
       keys = [ "id_ed25519" ];
     };
   };
 
   services = {
-    ssh-agent.enable = pkgs.stdenv.isLinux;
+    ssh-agent.enable = pkgs.stdenv.hostPlatform.isLinux;
     gpg-agent = {
       enable = true;
       enableScDaemon = true;
       defaultCacheTtl = 1800;
       maxCacheTtl = 3600;
-      pinentry.package = if pkgs.stdenv.isDarwin then pkgs.pinentry_mac else pkgs.pinentry-tty;
+      pinentry.package =
+        if pkgs.stdenv.hostPlatform.isDarwin then pkgs.pinentry_mac else pkgs.pinentry-tty;
       defaultCacheTtlSsh = 1800;
       maxCacheTtlSsh = 3600;
       sshKeys = null;

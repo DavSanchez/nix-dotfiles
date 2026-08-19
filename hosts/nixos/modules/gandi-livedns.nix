@@ -15,7 +15,7 @@ in
     tokenFile = lib.mkOption {
       type = lib.types.path;
       description = ''
-        Path to a file containing GANDI_TOKEN=your_pat.
+        Path to a file containing GANDIV5_PERSONAL_ACCESS_TOKEN=your_pat.
         The file is sourced at runtime so the token is never baked into the Nix store.
       '';
     };
@@ -66,9 +66,9 @@ in
               pkgs.iproute2
             ];
             text = ''
-              GANDI_TOKEN=$(sed -n 's/^GANDI_TOKEN=//p' "''${CREDENTIALS_DIRECTORY}/gandi_token")
-              if [[ -z "''${GANDI_TOKEN:-}" ]]; then
-                echo "ERROR: GANDI_TOKEN not found in credential file" >&2
+              GANDIV5_PERSONAL_ACCESS_TOKEN=$(sed -n 's/^GANDIV5_PERSONAL_ACCESS_TOKEN=//p' "''${CREDENTIALS_DIRECTORY}/gandi_token")
+              if [[ -z "''${GANDIV5_PERSONAL_ACCESS_TOKEN:-}" ]]; then
+                echo "ERROR: GANDIV5_PERSONAL_ACCESS_TOKEN not found in credential file" >&2
                 exit 1
               fi
 
@@ -139,7 +139,7 @@ in
 
                 local current_response
                 current_response=$(curl -s --show-error -w "\n%{http_code}" \
-                  -H "Authorization: Bearer $GANDI_TOKEN" \
+                  -H "Authorization: Bearer $GANDIV5_PERSONAL_ACCESS_TOKEN" \
                   "$url")
 
                 local http_code body current_values
@@ -157,7 +157,7 @@ in
 
                   create_response=$(curl -s --show-error -w "\n%{http_code}" -X POST \
                     -H "Content-Type: application/json" \
-                    -H "Authorization: Bearer $GANDI_TOKEN" \
+                    -H "Authorization: Bearer $GANDIV5_PERSONAL_ACCESS_TOKEN" \
                     -d "$create_payload" \
                     "$url")
                   create_http_code=$(echo "$create_response" | tail -n 1)
@@ -187,7 +187,7 @@ in
                 local update_response update_http_code update_body
                 update_response=$(curl -s --show-error -w "\n%{http_code}" -X PUT \
                   -H "Content-Type: application/json" \
-                  -H "Authorization: Bearer $GANDI_TOKEN" \
+                  -H "Authorization: Bearer $GANDIV5_PERSONAL_ACCESS_TOKEN" \
                   -d "$payload" \
                   "$url")
                 update_http_code=$(echo "$update_response" | tail -n 1)

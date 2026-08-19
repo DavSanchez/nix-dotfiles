@@ -16,7 +16,7 @@ in
       inherit domain;
       group = config.services.caddy.group;
       dnsProvider = "gandiv5";
-      environmentFile = config.sops.secrets.acme_gandi_env_file.path;
+      environmentFile = config.sops.secrets.gandi_pat.path;
       extraDomainNames = [
         "grafana.${domain}"
         "prometheus.${domain}"
