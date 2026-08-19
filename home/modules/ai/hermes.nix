@@ -1,7 +1,6 @@
 {
   inputs,
   config,
-  lib,
   ...
 }:
 {
@@ -10,7 +9,7 @@
   ];
 
   sops = {
-    defaultSopsFile = ../../secrets/secrets.yaml;
+    defaultSopsFile = ../../../secrets/secrets.yaml;
     age.keyFile = "/Users/david/.config/sops/age/keys.txt";
     secrets."hermes_env" = { };
   };

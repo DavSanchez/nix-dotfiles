@@ -8,7 +8,7 @@
     inputs.catppuccin.homeModules.catppuccin
     inputs.self.homeModules.omniwm
 
-    ../modules/ai.nix
+    ../modules/ai
     ../modules/aws.nix
     ../modules/cli
     ../modules/dev
