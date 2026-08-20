@@ -96,10 +96,10 @@
       # templates = import ./templates;
 
       nixosConfigurations = {
-        mora = nixos-raspberrypi.lib.nixosSystem {
-          specialArgs = { inherit inputs; };
-          modules = [ ./hosts/nixos/mora.nix ];
-        };
+        # mora = nixos-raspberrypi.lib.nixosSystem {
+        #   specialArgs = { inherit inputs; };
+        #   modules = [ ./hosts/nixos/mora.nix ];
+        # };
         eter = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = { inherit inputs; };

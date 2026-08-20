@@ -29,8 +29,8 @@ jobs:
         include:
           - host: eter
             runner: ubuntu-latest
-          - host: mora
-            runner: ubuntu-24.04-arm
+          # - host: mora
+          #   runner: ubuntu-24.04-arm
     runs-on: ${{ matrix.runner }}
     steps:
       - uses: actions/checkout@v7
