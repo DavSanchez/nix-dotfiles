@@ -5,14 +5,18 @@
     "schedule:daily"
   ],
   "lockFileMaintenance": {
-    "enabled": false
-  },
-  "nix": {
-    "enabled": true
+    "enabled": true,
+    "automerge": true,
+    "automergeType": "branch"
   },
   "packageRules": [
     {
       "matchManagers": ["nix"],
+      "automerge": true,
+      "automergeType": "branch"
+    },
+    {
+      "matchManagers": ["github-actions"],
       "automerge": true,
       "automergeType": "branch"
     }
