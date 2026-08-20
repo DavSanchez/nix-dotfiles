@@ -1,36 +1,71 @@
 name: NixOS
 on:
   workflow_dispatch:
+  pull_request:
   push:
     branches:
       - master
       - renovate/**
-    paths:
-      - 'hosts/nixos/**'
-      - 'modules/nixos/**'
-      - 'lib/**'
-      - 'flake.nix'
-      - 'flake.lock'
-      - '.github/workflows/nixos.yml'
-  pull_request:
-    paths:
-      - 'hosts/nixos/**'
-      - 'modules/nixos/**'
-      - 'lib/**'
-      - 'flake.nix'
-      - 'flake.lock'
-      - '.github/workflows/nixos.yml'
 
 jobs:
+  discover:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.matrix.outputs.matrix }}
+      changed: ${{ steps.changed.outputs.changed }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Check for relevant changes
+        id: changed
+        run: |
+          # Manual dispatch always builds.
+          if [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          PATTERN='^(hosts/nixos|modules/nixos|lib|pkgs|overlays)/|^flake\.(nix|lock)$'
+          if [ "$GITHUB_EVENT_NAME" = "pull_request" ]; then
+            BASE="${{ github.event.pull_request.base.sha }}"
+          else
+            BASE="$(git rev-parse HEAD^ 2>/dev/null || echo '')"
+          fi
+          if [ -z "$BASE" ]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          if git diff --name-only "$BASE" HEAD | grep -Eq "$PATTERN"; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Discover NixOS configs
+        id: matrix
+        run: |
+          nix eval --json '.#nixosConfigurations' \
+            --apply 'x: builtins.mapAttrs (n: v: v.pkgs.system) x' \
+          | jq -c 'to_entries | map(
+              .key as $host | .value as $system |
+              { host: $host, system: $system, runner: (
+                if $system == "x86_64-linux" then "ubuntu-latest"
+                elif $system == "aarch64-linux" then "ubuntu-24.04-arm"
+                elif $system == "aarch64-darwin" then "macos-latest"
+                else error("unsupported system: " + $system)
+                end
+              )})' > matrix.json
+          echo "matrix=$(cat matrix.json)" >> "$GITHUB_OUTPUT"
+
   build:
-    name: Build NixOS config (${{ matrix.host }})
+    needs: discover
+    if: needs.discover.outputs.changed == 'true'
+    name: Build NixOS (${{ matrix.host }} · ${{ matrix.system }})
     strategy:
       matrix:
-        include:
-          - host: eter
-            runner: ubuntu-latest
-          # - host: mora
-          #   runner: ubuntu-24.04-arm
+        include: ${{ fromJSON(needs.discover.outputs.matrix) }}
     runs-on: ${{ matrix.runner }}
     steps:
       - uses: actions/checkout@v7
@@ -56,3 +91,6 @@ jobs:
       - uses: re-actors/alls-green@release/v1
         with:
           jobs: ${{ toJSON(needs) }}
+          # build is skipped when no relevant files changed (git-diff gate);
+          # that's a legitimate "nothing to build" state, not a failure.
+          allowed-skips: build
