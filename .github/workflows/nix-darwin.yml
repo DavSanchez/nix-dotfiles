@@ -54,8 +54,8 @@ jobs:
               | map(.key as $host | .value as $system |
                 { host: $host, system: $system, runner: (
                   if $system == "aarch64-darwin" then "macos-latest"
-                  elif $system == "x86_64-darwin" then "macos-13"
-                  else "ubuntu-latest" end
+                  else error("unsupported system for nix-darwin: " + $system)
+                  end
                 )})' > matrix.json
           echo "matrix=$(cat matrix.json)" >> "$GITHUB_OUTPUT"
 

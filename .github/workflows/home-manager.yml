@@ -54,7 +54,8 @@ jobs:
                 if $system == "x86_64-linux" then "ubuntu-latest"
                 elif $system == "aarch64-linux" then "ubuntu-24.04-arm"
                 elif $system == "aarch64-darwin" then "macos-latest"
-                else "macos-13" end
+                else error("unsupported system: " + $system)
+                end
               )})' > matrix.json
           echo "matrix=$(cat matrix.json)" >> "$GITHUB_OUTPUT"
 
