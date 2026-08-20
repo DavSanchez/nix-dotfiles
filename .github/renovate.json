@@ -10,18 +10,18 @@
   "lockFileMaintenance": {
     "enabled": true,
     "automerge": true,
-    "automergeType": "branch"
+    "automergeType": "pr"
   },
   "packageRules": [
     {
       "matchManagers": ["nix"],
       "automerge": true,
-      "automergeType": "branch"
+      "automergeType": "pr"
     },
     {
       "matchManagers": ["github-actions"],
       "automerge": true,
-      "automergeType": "branch"
+      "automergeType": "pr"
     }
   ]
 }
