@@ -4,6 +4,9 @@
     "config:recommended",
     "schedule:daily"
   ],
+  "nix": {
+    "enabled": true
+  },
   "lockFileMaintenance": {
     "enabled": true,
     "automerge": true,
