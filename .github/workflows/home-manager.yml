@@ -9,7 +9,9 @@ on:
 
 jobs:
   discover:
-    runs-on: ubuntu-latest
+    # Home configs are all aarch64-darwin; evaluating them builds the darwin
+    # host pkgs (e.g. catppuccin-build-hook), which can't build on x86_64-linux.
+    runs-on: macos-latest
     outputs:
       matrix: ${{ steps.matrix.outputs.matrix }}
       changed: ${{ steps.changed.outputs.changed }}
