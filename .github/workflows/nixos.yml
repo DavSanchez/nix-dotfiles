@@ -90,3 +90,6 @@ jobs:
       - uses: re-actors/alls-green@release/v1
         with:
           jobs: ${{ toJSON(needs) }}
+          # build is skipped when no relevant files changed (git-diff gate);
+          # that's a legitimate "nothing to build" state, not a failure.
+          allowed-skips: build
