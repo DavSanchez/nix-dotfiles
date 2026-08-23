@@ -4,10 +4,17 @@
 # admin panel on the same port) — worth having since host stays 127.0.0.1,
 # so it adds no exposure, just a browser fallback when the desktop app isn't
 # installed/reachable.
+#
+# This module turns ON the `services.hermes-agent` daemon (state, config and
+# the gateway/backend launchd agents). It is imported only by the host that
+# should actually run the service — solio. Hosts that want just the CLI /
+# desktop import `hermes-common.nix` instead, which provides the programs
+# without enabling any daemon.
 {
   imports = [ ./hermes-common.nix ];
 
   services.hermes-agent = {
+    enable = true;
     gateway.enable = true;
     backend = {
       mode = "dashboard";

@@ -14,10 +14,13 @@
     secrets."hermes_env" = { };
   };
 
-  services.hermes-agent = {
-    enable = true;
-    installPackage = true;
+  # The Hermes CLI on PATH (and HERMES_HOME for shells). This is the
+  # "programs" half of the split introduced upstream: `services.hermes-agent`
+  # now only owns the daemon/state/config, and `programs.hermes-agent.enable`
+  # installs the command line. Every host with this module gets the CLI.
+  programs.hermes-agent.enable = true;
 
+  services.hermes-agent = {
     environmentFiles = [ config.sops.secrets."hermes_env".path ];
 
     settings = {
