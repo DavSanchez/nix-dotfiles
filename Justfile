@@ -6,6 +6,11 @@ _default:
 update-sops:
     sops updatekeys secrets/secrets.yaml
 
+# Open a PR (with automerge) per nix flake input that has an upstream update
+# e.g. just update-input nixpkgs | just update-input --all | just update-input --check
+update-input args="--all":
+    scripts/update-flake-inputs.sh {{args}}
+
 # Compare home-manager config.home.path between two branches with dix
 dix-home config branch base="master":
     dix \
