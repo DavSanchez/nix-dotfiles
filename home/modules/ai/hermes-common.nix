@@ -11,10 +11,7 @@
   sops = {
     defaultSopsFile = ../../../secrets/secrets.yaml;
     age.keyFile = "/Users/david/.config/sops/age/keys.txt";
-    secrets = {
-      "hermes/env" = { };
-      "hermes/desktop_token" = { };
-    };
+    secrets."hermes/env" = { };
   };
 
   programs.hermes-agent.enable = true;

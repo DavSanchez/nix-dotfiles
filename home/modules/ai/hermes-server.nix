@@ -11,6 +11,8 @@
 {
   imports = [ ./hermes-common.nix ];
 
+  sops.secrets."hermes/desktop_token" = { };
+
   services.hermes-agent = {
     enable = true;
     gateway.enable = true;
