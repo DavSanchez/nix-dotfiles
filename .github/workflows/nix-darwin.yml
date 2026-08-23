@@ -45,6 +45,7 @@ jobs:
       - name: Discover nix-darwin configs
         id: matrix
         run: |
+          set -euo pipefail
           # Exclude CI helper configs (linux-builder bootstrap) from the build matrix.
           nix eval --json '.#darwinConfigurations' \
             --apply 'x: builtins.mapAttrs (n: v: v.pkgs.system) x' \
@@ -56,6 +57,7 @@ jobs:
                   else error("unsupported system for nix-darwin: " + $system)
                   end
                 )})' > matrix.json
+          [ -s matrix.json ] || { echo "matrix is empty — nix eval failed" >&2; exit 1; }
           echo "matrix=$(cat matrix.json)" >> "$GITHUB_OUTPUT"
 
   build:

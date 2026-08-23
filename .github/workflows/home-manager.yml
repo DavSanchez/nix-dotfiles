@@ -47,6 +47,7 @@ jobs:
       - name: Discover Home Manager configs
         id: matrix
         run: |
+          set -euo pipefail
           nix eval --json '.#homeConfigurations' \
             --apply 'x: builtins.mapAttrs (n: v: v.pkgs.system) x' \
           | jq -c 'to_entries | map(
@@ -58,6 +59,7 @@ jobs:
                 else error("unsupported system: " + $system)
                 end
               )})' > matrix.json
+          [ -s matrix.json ] || { echo "matrix is empty — nix eval failed" >&2; exit 1; }
           echo "matrix=$(cat matrix.json)" >> "$GITHUB_OUTPUT"
 
   build:
