@@ -11,7 +11,10 @@
   sops = {
     defaultSopsFile = ../../../secrets/secrets.yaml;
     age.keyFile = "/Users/david/.config/sops/age/keys.txt";
-    secrets."hermes_env" = { };
+    secrets = {
+      "hermes/env" = { };
+      "hermes/desktop_token" = { };
+    };
   };
 
   # The Hermes CLI on PATH (and HERMES_HOME for shells). This is the
@@ -21,7 +24,7 @@
   programs.hermes-agent.enable = true;
 
   services.hermes-agent = {
-    environmentFiles = [ config.sops.secrets."hermes_env".path ];
+    environmentFiles = [ config.sops.secrets."hermes/env".path ];
 
     settings = {
       model = {

@@ -11,6 +11,10 @@
 # desktop import `hermes-common.nix` instead, which provides the programs
 # without enabling any daemon.
 {
+  config,
+  ...
+}:
+{
   imports = [ ./hermes-common.nix ];
 
   services.hermes-agent = {
@@ -20,6 +24,10 @@
       mode = "dashboard";
       host = "127.0.0.1";
       port = 9119;
+      # Let Hermes Desktop connect to this backend instead of starting a
+      # second one. The token is a sops runtime path (never a Nix store
+      # path), so only the owning user can read it.
+      sessionTokenFile = config.sops.secrets."hermes/desktop_token".path;
     };
   };
 }
