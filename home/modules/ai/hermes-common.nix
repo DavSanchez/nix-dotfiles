@@ -19,6 +19,7 @@
 
   programs.hermes-agent.enable = true;
 
+  # Config only — the service itself is enabled by hermes-server.nix (solio).
   services.hermes-agent = {
     environmentFiles = [ config.sops.secrets."hermes/env".path ];
 
