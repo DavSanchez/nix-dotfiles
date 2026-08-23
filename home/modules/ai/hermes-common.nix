@@ -11,14 +11,20 @@
   sops = {
     defaultSopsFile = ../../../secrets/secrets.yaml;
     age.keyFile = "/Users/david/.config/sops/age/keys.txt";
-    secrets."hermes_env" = { };
+    secrets = {
+      "hermes/env" = { };
+      "hermes/desktop_token" = { };
+    };
   };
 
-  services.hermes-agent = {
-    enable = true;
-    installPackage = true;
+  # The Hermes CLI on PATH (and HERMES_HOME for shells). This is the
+  # "programs" half of the split introduced upstream: `services.hermes-agent`
+  # now only owns the daemon/state/config, and `programs.hermes-agent.enable`
+  # installs the command line. Every host with this module gets the CLI.
+  programs.hermes-agent.enable = true;
 
-    environmentFiles = [ config.sops.secrets."hermes_env".path ];
+  services.hermes-agent = {
+    environmentFiles = [ config.sops.secrets."hermes/env".path ];
 
     settings = {
       model = {
