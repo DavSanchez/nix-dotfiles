@@ -21,6 +21,21 @@
 
   nix.settings.trusted-users = [ "davidsanchez" ];
 
+  # Was falling through to the upstream default (1 core / 3 GiB / 20 GiB) —
+  # this host has 64 GB RAM / 10 cores, so match sierpe's allocation instead.
+  nix.linux-builder = {
+    maxJobs = 4;
+    config = {
+      virtualisation = {
+        darwin-builder = {
+          diskSize = 40 * 1024;
+          memorySize = 8 * 1024;
+        };
+        cores = 4;
+      };
+    };
+  };
+
   system.primaryUser = lib.mkForce "davidsanchez";
 
   system.configurationRevision = config.rev or config.dirtyRev or null;
