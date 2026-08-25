@@ -164,7 +164,7 @@ jobs:
             printf '**Version:** `%s` -> `%s`\n\n' "$OLD_VERSION" "$NEW_VERSION"
             printf '**Recent commits:**\n%s\n\n' "$COMMITS"
             printf 'The `flake-check` workflow will validate the build. If all checks pass, this PR will be auto-merged.\n'
-          } > pr-body.md
+          } > "$RUNNER_TEMP/pr-body.md"
 
       - name: Create branch and commit
         if: steps.changes.outputs.has_changes == 'true'
@@ -181,12 +181,12 @@ jobs:
         run: |
           EXISTING_PR=$(gh pr list --head "update/${{ matrix.package }}" --json number --jq '.[0].number' 2>/dev/null || echo "")
           if [ -n "$EXISTING_PR" ]; then
-            gh pr edit "$EXISTING_PR" --body-file pr-body.md
+            gh pr edit "$EXISTING_PR" --body-file "$RUNNER_TEMP/pr-body.md"
             echo "Updated PR #$EXISTING_PR for update/${{ matrix.package }}"
           else
             gh pr create \
                --title "pkg: update ${{ matrix.package }}" \
-               --body-file pr-body.md \
+               --body-file "$RUNNER_TEMP/pr-body.md" \
                --base master \
                --head "update/${{ matrix.package }}"
           fi
