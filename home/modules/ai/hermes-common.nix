@@ -57,6 +57,15 @@
       };
 
       plugins.enabled = [ "herdr-agent-state" ];
+
+      # Upstream module defaults workingDirectory to $HOME and writes it into
+      # config.yaml as terminal.cwd, which pins interactive CLI/TUI sessions
+      # to $HOME even when launched from a project directory ("cd is the
+      # configuration" — see NousResearch/hermes-agent#19214, #86411).
+      # "." is a placeholder: the gateway resolves it per-backend and local
+      # sessions fall back to os.getcwd(). Revisit if the solio gateway
+      # daemon's Telegram sessions start in a wrong directory.
+      terminal.cwd = ".";
     };
   };
 }
