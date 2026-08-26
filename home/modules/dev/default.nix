@@ -3,6 +3,7 @@
   ## Main features
   imports = [
     ./c-cpp.nix
+    ./db.nix
     ./devops.nix
     # ./digital-design.nix # TODO review ecosystem
     ./formal.nix
