@@ -1,6 +1,5 @@
 {
   inputs,
-  lib,
   pkgs,
   ...
 }:
@@ -8,9 +7,6 @@
   imports = [
     inputs.paneru.homeModules.paneru
   ];
-
-  # Disable OmniWM while trialling Paneru (see try/paneru branch).
-  programs.omniwm.enable = lib.mkForce false;
 
   services.paneru = {
     enable = true;
