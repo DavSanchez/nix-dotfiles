@@ -63,6 +63,12 @@
         window_swap_west = "ctrl + alt + shift - leftarrow";
         window_swap_east = "ctrl + alt + shift - rightarrow";
 
+        # Reorder windows *within a stack* (app a up / app b down -> swapped).
+        # North/south on a stack swaps the focused window with the one
+        # above/below it in the same column.
+        window_swap_north = "ctrl + alt + shift - uparrow";
+        window_swap_south = "ctrl + alt + shift - downarrow";
+
         # Width cycling (was resizeGrow/Shrink).
         window_resize = "ctrl + alt - equal";
         window_shrink = "ctrl + alt - minus";
@@ -91,10 +97,10 @@
 
         # Virtual workspace rows (experimental): slide between stacked window
         # rows within a single macOS Space.
-        window_virtual_north = "ctrl + alt + shift - uparrow";
-        window_virtual_south = "ctrl + alt + shift - downarrow";
-        window_virtualmove_north = "ctrl + alt + shift + cmd - uparrow";
-        window_virtualmove_south = "ctrl + alt + shift + cmd - downarrow";
+        window_virtual_north = "ctrl + alt + cmd - uparrow";
+        window_virtual_south = "ctrl + alt + cmd - downarrow";
+        window_virtualmove_north = "ctrl + alt + cmd + shift - uparrow";
+        window_virtualmove_south = "ctrl + alt + cmd + shift - downarrow";
       };
     };
   };
