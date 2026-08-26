@@ -88,6 +88,13 @@
         window_nextdisplay = "ctrl + alt + shift - n";
         window_nextdisplaysend = "ctrl + alt + shift - j";
         mouse_nextdisplay = "ctrl + alt + shift - m";
+
+        # Virtual workspace rows (experimental): slide between stacked window
+        # rows within a single macOS Space.
+        window_virtual_north = "ctrl + alt + shift - uparrow";
+        window_virtual_south = "ctrl + alt + shift - downarrow";
+        window_virtualmove_north = "ctrl + alt + shift + cmd - uparrow";
+        window_virtualmove_south = "ctrl + alt + shift + cmd - downarrow";
       };
     };
   };
