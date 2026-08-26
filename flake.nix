@@ -42,6 +42,12 @@
 
     # Hermes Agent
     hermes-agent.url = "github:NousResearch/hermes-agent";
+
+    # Paneru (sliding tiling WM for macOS) — try/paneru experiment
+    paneru = {
+      url = "github:karinushka/paneru";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =

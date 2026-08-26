@@ -35,7 +35,7 @@
     ../modules/mail.nix
 
     # Darwin specifics
-    ./modules/window-management.nix
+    ./modules/window-management-paneru.nix
     ../modules/nixpkgs.nix
     ../modules/theme.nix
   ];

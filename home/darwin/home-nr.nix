@@ -35,7 +35,7 @@
     ../modules/theme.nix
 
     # Darwin specifics
-    ./modules/window-management.nix
+    ./modules/window-management-paneru.nix
   ];
 
   home = {
