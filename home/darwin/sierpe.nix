@@ -2,7 +2,6 @@
 {
   imports = [
     inputs.catppuccin.homeModules.catppuccin
-    inputs.self.homeModules.omniwm
 
     inputs.sops-nix.homeManagerModules.sops
 
@@ -32,7 +31,7 @@
     ../modules/tmux.nix
     ../modules/cava.nix
     # Darwin specifics
-    ./modules/window-management.nix
+    ./modules/window-management-paneru.nix
     ../modules/nixpkgs.nix
     ../modules/theme.nix
     ../modules/mail.nix

@@ -6,7 +6,6 @@
 {
   imports = [
     inputs.catppuccin.homeModules.catppuccin
-    inputs.self.homeModules.omniwm
 
     ../modules/ai
     ../modules/aws.nix
@@ -35,7 +34,7 @@
     ../modules/theme.nix
 
     # Darwin specifics
-    ./modules/window-management.nix
+    ./modules/window-management-paneru.nix
   ];
 
   home = {
