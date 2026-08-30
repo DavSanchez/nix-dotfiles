@@ -39,7 +39,7 @@
         ];
         max_scroll_history_lines = 5000;
 
-        shell = {
+        shell = lib.mkIf config.programs.nushell.enable {
           program = lib.getExe config.programs.nushell.package;
         };
         # scroll_multiplier = 3.0;

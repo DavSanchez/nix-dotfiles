@@ -1,4 +1,9 @@
-{ pkgs, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 {
   programs.vscode.profiles.default.userSettings = {
     "breadcrumbs.enabled" = true;
@@ -46,14 +51,14 @@
       "**/.direnv" = true;
     };
     "terminal.external.osxExec" = "Ghostty.app";
-    "terminal.integrated.defaultProfile.linux" = "nu";
-    "terminal.integrated.defaultProfile.osx" = "nu";
-    "terminal.integrated.profiles.linux" = {
+    "terminal.integrated.defaultProfile.linux" = lib.mkIf config.programs.nushell.enable "nu";
+    "terminal.integrated.defaultProfile.osx" = lib.mkIf config.programs.nushell.enable "nu";
+    "terminal.integrated.profiles.linux" = lib.mkIf config.programs.nushell.enable {
       "nu" = {
         path = "nu";
       };
     };
-    "terminal.integrated.profiles.osx" = {
+    "terminal.integrated.profiles.osx" = lib.mkIf config.programs.nushell.enable {
       "nu" = {
         path = "nu";
       };
