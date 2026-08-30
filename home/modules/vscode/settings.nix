@@ -51,18 +51,6 @@
       "**/.direnv" = true;
     };
     "terminal.external.osxExec" = "Ghostty.app";
-    "terminal.integrated.defaultProfile.linux" = lib.mkIf config.programs.nushell.enable "nu";
-    "terminal.integrated.defaultProfile.osx" = lib.mkIf config.programs.nushell.enable "nu";
-    "terminal.integrated.profiles.linux" = lib.mkIf config.programs.nushell.enable {
-      "nu" = {
-        path = "nu";
-      };
-    };
-    "terminal.integrated.profiles.osx" = lib.mkIf config.programs.nushell.enable {
-      "nu" = {
-        path = "nu";
-      };
-    };
     "terminal.integrated.fontFamily" =
       "'Iosevka Term Slab', FiraCode, Menlo, Monaco, 'Courier New', monospace";
     "terminal.integrated.fontSize" = 14;
@@ -99,5 +87,19 @@
       };
     };
     "acp.defaultProvider" = "hermes";
+  }
+  // lib.optionalAttrs config.programs.nushell.enable {
+    "terminal.integrated.defaultProfile.linux" = "nu";
+    "terminal.integrated.defaultProfile.osx" = "nu";
+    "terminal.integrated.profiles.linux" = {
+      "nu" = {
+        path = "nu";
+      };
+    };
+    "terminal.integrated.profiles.osx" = {
+      "nu" = {
+        path = "nu";
+      };
+    };
   };
 }

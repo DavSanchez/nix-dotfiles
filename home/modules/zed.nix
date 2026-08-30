@@ -38,12 +38,13 @@
           "Courier New"
         ];
         max_scroll_history_lines = 5000;
-
-        shell = lib.mkIf config.programs.nushell.enable {
-          program = lib.getExe config.programs.nushell.package;
-        };
         # scroll_multiplier = 3.0;
         # option_as_meta = true; # `true` prevents writing `#` on term as it applies to both sides
+      }
+      // lib.optionalAttrs config.programs.nushell.enable {
+        shell = {
+          program = lib.getExe config.programs.nushell.package;
+        };
       };
       git = {
         inline_blame = {
