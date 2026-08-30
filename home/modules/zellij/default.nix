@@ -8,7 +8,7 @@
     }
     # Let's use nushell as the default shell (if enabled)
     // lib.optionalAttrs config.programs.nushell.enable {
-      default_shell = "${config.programs.nushell.package}/bin/nu";
+      default_shell = lib.getExe config.programs.nushell.package;
     };
   };
 
