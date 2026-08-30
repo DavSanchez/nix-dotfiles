@@ -1,4 +1,9 @@
-{ pkgs, lib, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 {
   programs.zed-editor = {
     enable = true;
@@ -35,7 +40,7 @@
         max_scroll_history_lines = 5000;
 
         shell = {
-          program = "${lib.getExe pkgs.fish}";
+          program = lib.getExe config.programs.nushell.package;
         };
         # scroll_multiplier = 3.0;
         # option_as_meta = true; # `true` prevents writing `#` on term as it applies to both sides

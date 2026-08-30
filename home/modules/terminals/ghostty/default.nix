@@ -62,8 +62,8 @@
       # ];
       macos-option-as-alt = "left";
     }
-    // lib.optionalAttrs config.programs.fish.enable {
-      command = lib.getExe config.programs.fish.package;
+    // lib.optionalAttrs config.programs.nushell.enable {
+      command = lib.getExe config.programs.nushell.package;
     };
   }
   // lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin {

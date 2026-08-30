@@ -6,9 +6,9 @@
     settings = {
       ui.pane_frames.rounded_corners = true;
     }
-    # Let's use fish as the default shell (if enabled)
-    // lib.optionalString config.programs.fish.enable {
-      default_shell = "${config.programs.fish.package}/bin/fish";
+    # Let's use nushell as the default shell (if enabled)
+    // lib.optionalAttrs config.programs.nushell.enable {
+      default_shell = "${config.programs.nushell.package}/bin/nu";
     };
   };
 
