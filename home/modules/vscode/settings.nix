@@ -1,4 +1,9 @@
-{ pkgs, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 {
   programs.vscode.profiles.default.userSettings = {
     "breadcrumbs.enabled" = true;
@@ -46,8 +51,6 @@
       "**/.direnv" = true;
     };
     "terminal.external.osxExec" = "Ghostty.app";
-    "terminal.integrated.defaultProfile.linux" = "fish";
-    "terminal.integrated.defaultProfile.osx" = "fish";
     "terminal.integrated.fontFamily" =
       "'Iosevka Term Slab', FiraCode, Menlo, Monaco, 'Courier New', monospace";
     "terminal.integrated.fontSize" = 14;
@@ -84,5 +87,19 @@
       };
     };
     "acp.defaultProvider" = "hermes";
+  }
+  // lib.optionalAttrs config.programs.nushell.enable {
+    "terminal.integrated.defaultProfile.linux" = "nu";
+    "terminal.integrated.defaultProfile.osx" = "nu";
+    "terminal.integrated.profiles.linux" = {
+      "nu" = {
+        path = "nu";
+      };
+    };
+    "terminal.integrated.profiles.osx" = {
+      "nu" = {
+        path = "nu";
+      };
+    };
   };
 }

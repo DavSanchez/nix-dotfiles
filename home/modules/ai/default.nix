@@ -1,4 +1,9 @@
-{ pkgs, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 {
   services.ollama.enable = true;
 
@@ -18,6 +23,11 @@
         ui = {
           sound.enabled = true;
           toast.delivery = "system";
+        };
+      }
+      // lib.optionalAttrs config.programs.nushell.enable {
+        terminal = {
+          default_shell = "nu";
         };
       };
     };
