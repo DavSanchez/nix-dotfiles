@@ -4,6 +4,14 @@
   config,
   ...
 }:
+let
+  # Bootstrap nushell from fish so it inherits the nix-darwin environment
+  # (nix-darwin has no nushell shell-init to source; fish loads it even as a script).
+  nu-bootstrap = pkgs.writeScriptBin "nu-bootstrap" ''
+    #!${lib.getExe config.programs.fish.package}
+    exec ${lib.getExe config.programs.nushell.package} $argv
+  '';
+in
 {
   programs.ghostty = {
     enable = true;
@@ -62,8 +70,8 @@
       # ];
       macos-option-as-alt = "left";
     }
-    // lib.optionalAttrs config.programs.nushell.enable {
-      command = lib.getExe config.programs.nushell.package;
+    // lib.optionalAttrs (config.programs.nushell.enable && config.programs.fish.enable) {
+      command = "${nu-bootstrap}/bin/nu-bootstrap";
     };
   }
   // lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin {
