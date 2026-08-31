@@ -18,74 +18,15 @@
     # envFile = ...;
     # loginFile = ...;
 
-    extraConfig = lib.mkMerge [
-      ''
-        # Aliases from nu_scripts
-        source ${pkgs.nu_scripts}/share/nu_scripts/aliases/bat/bat-aliases.nu
-        source ${pkgs.nu_scripts}/share/nu_scripts/aliases/eza/eza-aliases.nu
-        source ${pkgs.nu_scripts}/share/nu_scripts/aliases/docker/docker-aliases.nu
-        source ${pkgs.nu_scripts}/share/nu_scripts/aliases/git/git-aliases.nu
+    extraConfig = ''
+      # Aliases from nu_scripts
+      source ${pkgs.nu_scripts}/share/nu_scripts/aliases/bat/bat-aliases.nu
+      source ${pkgs.nu_scripts}/share/nu_scripts/aliases/eza/eza-aliases.nu
+      source ${pkgs.nu_scripts}/share/nu_scripts/aliases/docker/docker-aliases.nu
+      source ${pkgs.nu_scripts}/share/nu_scripts/aliases/git/git-aliases.nu
 
-        # Custom completions
-      ''
-      # navi cheat-sheet widget (ctrl+g), matching the fish `navi widget` integration
-      (lib.mkIf config.programs.navi.enable ''
-        source ${
-          pkgs.runCommand "navi-nushell-config.nu" { } ''
-            ${lib.getExe config.programs.navi.package} widget nushell > "$out"
-          ''
-        }
-      '')
-      # Toggle `sudo` at the start of the line with ctrl+x (fish had `plugin-sudope`)
-      ''
-        def _sudo_helix [] {
-          let line = (commandline)
-          let new = (if ($line | str starts-with "sudo ") {
-            $line | str substring 5..
-          } else {
-            $"sudo ($line)"
-          })
-          commandline edit --replace $new
-          commandline set-cursor --end
-        }
-
-        $env.config.keybindings = ($env.config.keybindings | append {
-          name: sudo_helix
-          modifier: control
-          keycode: char_x
-          mode: [helix_normal, helix_insert, helix_select]
-          event: { send: executehostcommand, cmd: _sudo_helix }
-        })
-      ''
-      # atuin/navi register their keybindings for emacs/vi modes only, so they
-      # don't fire in helix mode. Re-register them for helix (this must run
-      # after the atuin integration, which is injected at order 2000).
-      (lib.mkOrder 3000 ''
-        ${lib.optionalString config.programs.navi.enable ''
-          $env.config.keybindings = ($env.config.keybindings | append {
-            name: navi_helix
-            modifier: control
-            keycode: char_g
-            mode: [helix_normal, helix_insert, helix_select]
-            event: { send: executehostcommand, cmd: navi_widget }
-          })
-        ''}
-        ${lib.optionalString config.programs.atuin.enable ''
-          $env.config.keybindings = ($env.config.keybindings | append {
-            name: atuin_helix
-            modifier: none
-            keycode: up
-            mode: [helix_normal, helix_insert, helix_select]
-            event: {
-              until: [
-                { send: menuup }
-                { send: executehostcommand cmd: (_atuin_search_cmd '--shell-up-key-binding') }
-              ]
-            }
-          })
-        ''}
-      '')
-    ];
+      # Custom completions
+    '';
     # extraEnv = ...;
     # extraLogin = ...;
 
