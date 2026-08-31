@@ -10,6 +10,8 @@
     environmentVariables = {
       DOTFILES = "${config.home.homeDirectory}/.dotfiles";
       EDITOR = "${pkgs.helix}/bin/hx";
+      # Colored man pages via bat (fish had `colored-man-pages`)
+      MANPAGER = "sh -c 'col -bx | bat -l man -p'";
     };
 
     # configFile = ...;
@@ -34,6 +36,27 @@
           ''
         }
       '')
+      # Toggle `sudo` at the start of the line with ctrl+x (fish had `plugin-sudope`)
+      ''
+        def _sudo_helix [] {
+          let line = (commandline)
+          let new = (if ($line | str starts-with "sudo ") {
+            $line | str substring 5..
+          } else {
+            $"sudo ($line)"
+          })
+          commandline edit --replace $new
+          commandline set-cursor --end
+        }
+
+        $env.config.keybindings = ($env.config.keybindings | append {
+          name: sudo_helix
+          modifier: control
+          keycode: char_x
+          mode: [helix_normal, helix_insert, helix_select]
+          event: { send: executehostcommand, cmd: _sudo_helix }
+        })
+      ''
       # atuin/navi register their keybindings for emacs/vi modes only, so they
       # don't fire in helix mode. Re-register them for helix (this must run
       # after the atuin integration, which is injected at order 2000).

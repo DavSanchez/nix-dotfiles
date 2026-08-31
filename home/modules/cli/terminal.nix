@@ -1,5 +1,10 @@
 { pkgs, ... }:
 {
+  home.sessionVariables = {
+    # Colored man pages via bat (fish had `colored-man-pages`); nu sets this in its own env
+    MANPAGER = "sh -c 'col -bx | bat -l man -p'";
+  };
+
   home.packages = with pkgs; [
     # Searching/Movement helpers and other replacements
     dua
