@@ -6,6 +6,17 @@ _default:
 update-sops:
     sops updatekeys secrets/secrets.yaml
 
+# Restart the linux-builder VM and wait for its SSH port to accept connections again
+restart-linux-builder port="31022":
+    sudo launchctl kickstart -k system/org.nixos.linux-builder
+    @echo "linux-builder: restarted, waiting for port {{port}} to accept connections..."
+    @for i in $(seq 1 120); do \
+      nc -z -w 1 localhost "{{port}}" 2>/dev/null && { echo "linux-builder is up on port {{port}}"; exit 0; }; \
+      sleep 1; \
+    done
+    @echo "error: linux-builder did not come up on port {{port}} within 120s" >&2
+    @exit 1
+
 # Compare home-manager config.home.path between two branches with dix
 dix-home config branch base="master":
     dix \
