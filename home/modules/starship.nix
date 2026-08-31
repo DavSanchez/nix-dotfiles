@@ -6,13 +6,11 @@
     settings = {
       format = lib.concatStrings [
         "[>>-](lavender) $all"
-        "$fill"
-        "$shell$shlvl"
         "$line_break"
         "[>>-](lavender) $character"
       ];
+      right_format = "$shell$shlvl";
       add_newline = true;
-      fill.symbol = " ";
       shell = {
         style = "cyan bold";
         disabled = false;

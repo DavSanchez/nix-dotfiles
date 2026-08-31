@@ -32,6 +32,10 @@
     };
 
     initContent = lib.mkOrder 500 ''
+      # Remove zsh's default 1-column gap between the right prompt and the edge
+      # (see starship advanced-config docs: ZLE_RPROMPT_INDENT)
+      export ZLE_RPROMPT_INDENT=0
+
       ${builtins.readFile ./functions.zsh}
 
       bindkey -M vicmd 'k' history-beginning-search-backward
