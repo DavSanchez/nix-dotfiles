@@ -119,6 +119,34 @@
             ];
           };
         }
+        # television's own integration binds these for vi/emacs only; re-bind for
+        # helix tables (nushell 0.115+ keeps separate keybinding tables per mode)
+        {
+          name = "tv_completion";
+          modifier = "control";
+          keycode = "char_t";
+          mode = [
+            "helix_insert"
+            "helix_normal"
+          ];
+          event = {
+            send = "executehostcommand";
+            cmd = "tv_smart_autocomplete";
+          };
+        }
+        {
+          name = "tv_history";
+          modifier = "control";
+          keycode = "char_r";
+          mode = [
+            "helix_insert"
+            "helix_normal"
+          ];
+          event = {
+            send = "executehostcommand";
+            cmd = "tv_shell_history";
+          };
+        }
       ];
       # OSC 133 for ghostty shell integration (cwd + command marks)
       shell_integration = {
