@@ -75,7 +75,7 @@
           };
         }
         {
-          name = "move_word_left";
+          name = "move_word_left_arrow";
           modifier = "alt";
           keycode = "left";
           mode = [
@@ -88,7 +88,7 @@
           };
         }
         {
-          name = "move_word_right";
+          name = "move_word_right_arrow";
           modifier = "alt";
           keycode = "right";
           mode = [
@@ -102,7 +102,7 @@
         }
         # Up arrow opens the television history picker (replacing atuin's up binding)
         {
-          name = "tv_history";
+          name = "tv_history_up";
           modifier = "none";
           keycode = "up";
           mode = [
@@ -135,7 +135,7 @@
           };
         }
         {
-          name = "tv_history";
+          name = "tv_history_ctrl_r";
           modifier = "control";
           keycode = "char_r";
           mode = [
