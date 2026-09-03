@@ -53,6 +53,10 @@ diff-nixos config branch base="master":
       $(nix build "{{flake}}/{{base}}#nixosConfigurations.\"{{config}}\".config.system.build.toplevel" --no-link --print-out-paths) \
       $(nix build "{{flake}}/{{branch}}#nixosConfigurations.\"{{config}}\".config.system.build.toplevel" --no-link --print-out-paths)
 
+# Search the exact nixpkgs revision pinned by this flake — e.g. just search-nixpkgs firefox
+search-nixpkgs term:
+    nix search "github:nixos/nixpkgs/$(nix flake metadata --json | jq -r '.locks.nodes.nixpkgs.locked.rev')" '{{term}}'
+
 # Build any flake attribute verbatim (escape hatch) — e.g. just build-attr nixosConfigurations.mora.pkgs.hermes-agent
 build-attr attr:
     nix build '.#{{attr}}' --no-link --print-out-paths
