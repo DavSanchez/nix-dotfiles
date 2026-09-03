@@ -46,6 +46,61 @@
         helix_select = "block";
         helix_insert = "line";
       };
+      # Emacs-style word movements in helix mode (not bound by default in 0.115+)
+      keybindings = [
+        {
+          name = "move_word_left";
+          modifier = "alt";
+          keycode = "char_b";
+          mode = [
+            "helix_insert"
+            "helix_normal"
+            "helix_select"
+          ];
+          event = {
+            edit = "MoveWordLeft";
+          };
+        }
+        {
+          name = "move_word_right";
+          modifier = "alt";
+          keycode = "char_f";
+          mode = [
+            "helix_insert"
+            "helix_normal"
+            "helix_select"
+          ];
+          event = {
+            edit = "MoveWordRight";
+          };
+        }
+        {
+          name = "move_word_left";
+          modifier = "alt";
+          keycode = "left";
+          mode = [
+            "helix_insert"
+            "helix_normal"
+            "helix_select"
+          ];
+          event = {
+            edit = "MoveWordLeft";
+          };
+        }
+        {
+          name = "move_word_right";
+          modifier = "alt";
+          keycode = "right";
+          mode = [
+            "helix_insert"
+            "helix_normal"
+            "helix_select"
+          ];
+          event = {
+            edit = "MoveWordRight";
+          };
+        }
+      ];
       # OSC 133 for ghostty shell integration (cwd + command marks)
       shell_integration = {
         osc133 = true;
