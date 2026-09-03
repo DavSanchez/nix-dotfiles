@@ -10,6 +10,7 @@
     ./security.nix
     ./social.nix
     ./system.nix
+    ./television.nix
     ./terminal.nix
   ];
 

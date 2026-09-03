@@ -34,22 +34,6 @@
       colors = "auto";
     };
 
-    television.enable = true;
-
-    nix-search-tv = {
-      enable = true;
-      settings = {
-        indexes = [
-          "nixpkgs"
-          "home-manager"
-          "nixos"
-          "darwin"
-          "nur"
-          "noogle"
-        ];
-      };
-    };
-
     fzf = {
       enable = false;
       changeDirWidget = {
