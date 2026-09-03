@@ -108,11 +108,6 @@
 
     navi.enable = true;
 
-    atuin = {
-      enable = true;
-      flags = [ "--disable-ctrl-r" ]; # Using `television`, see above
-    };
-
     carapace.enable = true;
   };
 }

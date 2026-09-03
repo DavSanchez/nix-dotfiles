@@ -100,6 +100,25 @@
             edit = "MoveWordRight";
           };
         }
+        # Up arrow opens the television history picker (replacing atuin's up binding)
+        {
+          name = "tv_history";
+          modifier = "none";
+          keycode = "up";
+          mode = [
+            "helix_insert"
+            "helix_normal"
+          ];
+          event = {
+            until = [
+              { send = "menuup"; }
+              {
+                send = "executehostcommand";
+                cmd = "tv_shell_history";
+              }
+            ];
+          };
+        }
       ];
       # OSC 133 for ghostty shell integration (cwd + command marks)
       shell_integration = {
