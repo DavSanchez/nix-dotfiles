@@ -6,6 +6,8 @@
 # installed/reachable.
 {
   config,
+  inputs,
+  pkgs,
   ...
 }:
 {
@@ -16,6 +18,24 @@
   services.hermes-agent = {
     enable = true;
     gateway.enable = true;
+    # TODO: remove once NousResearch/hermes-agent#102142 / #100585 land —
+    # upstream py-modules omits these two modules from the sealed venv, so
+    # the backend crashes at startup with ModuleNotFoundError. Shim carries
+    # them on PYTHONPATH until an input bump ships the fix.
+    extraPythonPackages = [
+      (
+        let
+          hpkgs = inputs.hermes-agent.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+        in
+        hpkgs.python312.pkgs.toPythonModule (
+          hpkgs.runCommand "hermes-state-shim" { } ''
+            mkdir -p $out/${hpkgs.python312.sitePackages}
+            cp ${inputs.hermes-agent}/hermes_state_holders.py $out/${hpkgs.python312.sitePackages}/
+            cp ${inputs.hermes-agent}/hermes_state_registry.py $out/${hpkgs.python312.sitePackages}/
+          ''
+        )
+      )
+    ];
     backend = {
       mode = "dashboard";
       host = "127.0.0.1";
