@@ -24,6 +24,19 @@
       source ${pkgs.nu_scripts}/share/nu_scripts/aliases/eza/eza-aliases.nu
       source ${pkgs.nu_scripts}/share/nu_scripts/aliases/docker/docker-aliases.nu
       source ${pkgs.nu_scripts}/share/nu_scripts/aliases/git/git-aliases.nu
+
+      # Fetch a gitignore template from gitignore.io
+      def gi [...targets: string] {
+          if ($targets | is-empty) {
+              print "Usage: gi <target1> <target2> ..."
+              return
+          }
+
+          let query = $targets | str join ","
+          let url = $"https://www.gitignore.io/api/($query)"
+
+          http get --raw $url
+      }
     '';
     # extraEnv = ...;
     # extraLogin = ...;
