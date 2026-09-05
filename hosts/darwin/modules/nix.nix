@@ -13,7 +13,10 @@
   nix = {
     settings = {
       trusted-users = [ "root" ];
-      experimental-features = "nix-command flakes";
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
       extra-platforms = "x86_64-darwin aarch64-darwin";
     };
 
