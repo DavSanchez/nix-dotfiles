@@ -19,8 +19,12 @@
     herdr = {
       enable = true;
       settings = {
+        onboarding = false;
         keys.prefix = "ctrl+a"; # default (ctrl+b) clashes with ghostty
+        theme.name = "catppuccin";
+        experimental.pane_history = false;
         ui = {
+          agent_panel_sort = "spaces";
           sound.enabled = true;
           toast.delivery = "system";
         };
