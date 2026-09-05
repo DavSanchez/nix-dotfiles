@@ -2,7 +2,6 @@
 {
   imports = [
     inputs.catppuccin.homeModules.catppuccin
-    inputs.self.homeModules.omniwm
 
     inputs.sops-nix.homeManagerModules.sops
 

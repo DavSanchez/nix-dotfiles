@@ -6,7 +6,6 @@
 {
   imports = [
     inputs.catppuccin.homeModules.catppuccin
-    inputs.self.homeModules.omniwm
 
     ../modules/ai
     ../modules/aws.nix

@@ -7,7 +7,7 @@ Nix flake managing NixOS, nix-darwin, and Home Manager configs (repo `DavSanchez
 - `hosts/nixos/<host>.nix` / `hosts/darwin/<host>.nix` — machine entrypoints. `eter` is x86_64-linux; all darwin hosts are aarch64-darwin. `eter` also has a per-host dir `hosts/nixos/eter/` (`fs_share.nix`, `media.nix`, `monitoring.nix`, `zfs.nix`, …) imported alongside shared `hosts/nixos/modules/`.
 - `mora` (Raspberry Pi 5, aarch64) is currently disabled/commented in `flake.nix` — but keep `hosts/nixos/mora.nix` + `hosts/nixos/mora/` up to date; it's maintained even though unbuilt.
 - `home/darwin/*.nix` — Home Manager entrypoints (`sierpe`, `solio`, `home-nr.nix`). All are aarch64-darwin only.
-- `home/modules/` — per-user Home Manager modules (internal to this machine set). `modules/{nixos,darwin,home}/` — reusable modules exported from the flake (`self.*Modules`); `self.darwinModules.networking` and `self.darwinModules.stevenblack` are custom and power the `/etc/hosts` tests.
+- `home/modules/` — per-user Home Manager modules (internal to this machine set). `modules/{nixos,darwin}/` — reusable modules exported from the flake (`self.nixosModules`, `self.darwinModules`); `self.darwinModules.networking` and `self.darwinModules.stevenblack` are custom and power the `/etc/hosts` tests.
 - `pkgs/` — custom packages (`kontroll`, `omniwm`); `overlays/`; `tests/darwin/` + `lib/darwin-tests.nix` — module test harness.
 - The `nr` machine is keyed by Apple serial: darwin config name is `V9X576T260`, home config is `davidsanchez@V9X576T260` (host file is `hosts/darwin/nr.nix`).
 
