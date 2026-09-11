@@ -22,7 +22,7 @@
 
     settings = {
       model = {
-        default = "deepseek/deepseek-v4-flash-0731";
+        default = "deepseek/deepseek-v4.1-flash";
         provider = "nous";
         base_url = "https://inference-api.nousresearch.com/v1";
       };
