@@ -47,7 +47,7 @@
 
       image_gen = {
         provider = "fal";
-        model = "openai/gpt-image-2.5/flare/text-to-image";
+        model = "fal-ai/gpt-image-2";
         use_gateway = true;
       };
       video_gen = {
