@@ -30,10 +30,12 @@
           # matters now that build trees live here: a kernel tree is ~6G and the
           # SD-image assembly needs ~8G of scratch.
           diskSize = 80 * 1024;
-          # 4G is not enough: a -j4 kernel compile peaks around 3G (it will get
-          # OOM-killed mid-build), and this Mac has 16G total, so 6G is the
-          # compromise between build reliability and keeping the host usable.
-          memorySize = 6 * 1024;
+          # The VM runs whenever the daemon does (KeepAlive) and has no balloon
+          # driver, so every MiB here is one this 16G Mac can't get back — after a
+          # build the guest's page cache holds most of it. Stay at 4G and cap the
+          # compile jobs below instead; 8G would have been comfortable for the
+          # build but pushed this host into swap.
+          memorySize = 4 * 1024;
         };
         cores = 4;
       };
@@ -41,6 +43,11 @@
       # Keep them on the store disk instead, or kernel/image builds run the
       # RAM-backed root filesystem out of space.
       nix.settings.build-dir = "/nix/var/nix/builds";
+      # Remote builds take their job count from the builder, not the client (a
+      # `--cores 3` on the client still arrives as the guest's nproc), so this is
+      # the knob that caps a kernel compile's peak memory: -j2 needs ~2G, where
+      # -j4 peaks around 3G and gets OOM-killed in a 4G guest.
+      nix.settings.cores = 2;
     };
   };
 
