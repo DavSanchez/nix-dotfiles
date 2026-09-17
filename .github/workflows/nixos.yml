@@ -65,6 +65,8 @@ jobs:
     if: needs.discover.outputs.changed == 'true'
     name: Build NixOS (${{ matrix.host }} · ${{ matrix.system }})
     strategy:
+      # One host failing used to cancel the others, hiding whether they build.
+      fail-fast: false
       matrix:
         include: ${{ fromJSON(needs.discover.outputs.matrix) }}
     runs-on: ${{ matrix.runner }}
