@@ -122,7 +122,14 @@ eval-config config subpath:
       nix eval --json ".#homeConfigurations.\"{{config}}\".{{subpath}}"; \
     fi
 
-# Flash a NixOS SD-card image (e.g. the official aarch64 image from Hydra) onto a raw disk.
+# Build the official aarch64 SD-card image locally, from this flake's pinned nixpkgs — e.g. just sd-image
+# Same module Hydra uses for `nixos.sd_image.aarch64-linux` (installer flavour: root/nixos with
+# empty passwords, sshd on), so no Hydra download is needed. Prints the store path; write it with
+# `just flash-image <path> <disk>`.
+sd-image:
+    @nix build --impure --no-link --print-out-paths --file ./lib/sd-image.nix
+
+# Flash a NixOS SD-card image (e.g. the one `just sd-image` prints, or the official aarch64 image from Hydra) onto a raw disk.
 # macOS-only (diskutil + /dev/rdiskN). ERASES the disk — e.g. just flash-image ~/Downloads/nixos-image-*.aarch64-linux.img.zst disk4
 flash-image image device:
     #!/usr/bin/env bash
@@ -156,10 +163,15 @@ flash-image image device:
     [[ "$answer" == yes ]] || { echo "aborted"; exit 1; }
 
     diskutil unmountDisk "$disk"
-    case "$image" in
-      *.zst) nix run --inputs-from . nixpkgs#zstd -- -dc "$image" | sudo dd of="$rdisk" bs=4m ;;
-      *) sudo dd if="$image" of="$rdisk" bs=4m ;;
-    esac
+    if [[ "$image" == *.zst ]]; then
+      if command -v zstd >/dev/null 2>&1; then
+        zstd -dc "$image" | sudo dd of="$rdisk" bs=4m
+      else
+        nix run --inputs-from . nixpkgs#zstd -- -dc "$image" | sudo dd of="$rdisk" bs=4m
+      fi
+    else
+      sudo dd if="$image" of="$rdisk" bs=4m
+    fi
     sync
     diskutil eject "$disk"
     echo "done: $disk"
