@@ -122,12 +122,13 @@ eval-config config subpath:
       nix eval --json ".#homeConfigurations.\"{{config}}\".{{subpath}}"; \
     fi
 
-# Build the official aarch64 SD-card image locally, from this flake's pinned nixpkgs — e.g. just sd-image
 # Same module Hydra uses for `nixos.sd_image.aarch64-linux` (installer flavour: root/nixos with
 # empty passwords, sshd on), so no Hydra download is needed. Prints the store path; write it with
-# `just flash-image <path> <disk>`.
+# `just flash-image <path> <disk>`. `--impure` only lets the expression read this working directory;
+# the nixpkgs it uses is the one pinned in flake.lock.
+# Build the official aarch64 SD-card image locally, from this flake's pinned nixpkgs — e.g. just sd-image
 sd-image:
-    @nix build --impure --no-link --print-out-paths --file ./lib/sd-image.nix
+    @nix build --impure --no-link --print-out-paths --expr 'let pkgs = (builtins.getFlake (toString ./.)).inputs.nixpkgs; in (pkgs.lib.nixosSystem { system = "aarch64-linux"; modules = [ "${pkgs}/nixos/modules/installer/sd-card/sd-image-aarch64-installer.nix" ({ config, ... }: { system.stateVersion = config.system.nixos.release; }) ]; }).config.system.build.sdImage'
 
 # Flash a NixOS SD-card image (e.g. the one `just sd-image` prints, or the official aarch64 image from Hydra) onto a raw disk.
 # macOS-only (diskutil + /dev/rdiskN). ERASES the disk — e.g. just flash-image ~/Downloads/nixos-image-*.aarch64-linux.img.zst disk4
