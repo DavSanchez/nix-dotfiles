@@ -20,11 +20,18 @@
     config = {
       virtualisation = {
         darwin-builder = {
-          diskSize = 40 * 1024;
+          # Disk holds the store *and*, with build-dir set below, kernel build
+          # trees (~6G) and SD-image scratch (~8G).
+          diskSize = 80 * 1024;
           memorySize = 8 * 1024;
         };
         cores = 4;
       };
+      # The guest's / is a RAM-backed tmpfs (default cap: half its RAM) and Nix
+      # unpacks sources and builds under $TMPDIR by default, which the
+      # nixos-hardware Raspberry Pi kernel (1.7G source, ~6G build tree) blows
+      # straight through. Keep build trees on the store disk.
+      nix.settings.build-dir = "/nix/var/nix/builds";
     };
 
     # M3 chip or newer?
