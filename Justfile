@@ -15,6 +15,27 @@ restart-linux-builder port="31022":
     @echo "linux-builder: restarted, waiting for port {{port}} to accept connections..."
     @for i in $(seq 1 120); do nc -z -w 1 localhost "{{port}}" 2>/dev/null && { echo "linux-builder is up on port {{port}}"; exit 0; }; sleep 1; done; echo "error: linux-builder did not come up on port {{port}} within 120s" >&2; exit 1
 
+# Start the linux-builder VM again and wait for its SSH port — e.g. just start-linux-builder
+# No-op when it is already loaded.
+start-linux-builder port="31022":
+    @if sudo launchctl print system/org.nixos.linux-builder >/dev/null 2>&1; then \
+      echo "linux-builder: already running"; \
+    else \
+      sudo launchctl bootstrap system /Library/LaunchDaemons/org.nixos.linux-builder.plist; \
+      echo "linux-builder: started, waiting for port {{port}} to accept connections..."; \
+    fi
+    @for i in $(seq 1 120); do nc -z -w 1 localhost "{{port}}" 2>/dev/null && { echo "linux-builder is up on port {{port}}"; exit 0; }; sleep 1; done; echo "error: linux-builder did not come up on port {{port}} within 120s" >&2; exit 1
+
+# Stop the linux-builder VM when no Linux builds are needed: releases its RAM and disk to the host.
+# It comes back on the next login/reboot (launchd RunAtLoad), and because the builder is ephemeral
+# its store is rebuilt from scratch on the next start, so the first build after it hurts more.
+stop-linux-builder:
+    @if sudo launchctl print system/org.nixos.linux-builder >/dev/null 2>&1; then \
+      sudo launchctl bootout system/org.nixos.linux-builder && echo "linux-builder: stopped (RAM/disk released; Linux builds fail until 'just start-linux-builder')"; \
+    else \
+      echo "linux-builder: not running"; \
+    fi
+
 # Compare home-manager config.home.path between two branches with dix
 dix-home config branch base="master":
     dix \
