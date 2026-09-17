@@ -24,11 +24,23 @@
     config = {
       virtualisation = {
         darwin-builder = {
-          diskSize = 40 * 1024;
-          memorySize = 4 * 1024;
+          # Disk is not what the kernel build ran out of (the store disk was only
+          # ~9G/40G used): the guest's / is a RAM-backed tmpfs, and Nix puts build
+          # trees under it by default — see build-dir below. This size still
+          # matters now that build trees live here: a kernel tree is ~6G and the
+          # SD-image assembly needs ~8G of scratch.
+          diskSize = 80 * 1024;
+          # 4G is not enough: a -j4 kernel compile peaks around 3G (it will get
+          # OOM-killed mid-build), and this Mac has 16G total, so 6G is the
+          # compromise between build reliability and keeping the host usable.
+          memorySize = 6 * 1024;
         };
         cores = 4;
       };
+      # Nix puts build trees under $TMPDIR (/build on the tmpfs root by default).
+      # Keep them on the store disk instead, or kernel/image builds run the
+      # RAM-backed root filesystem out of space.
+      nix.settings.build-dir = "/nix/var/nix/builds";
     };
   };
 
