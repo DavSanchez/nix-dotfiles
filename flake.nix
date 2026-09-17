@@ -19,7 +19,6 @@
     darwin.inputs.nixpkgs.follows = "nixpkgs";
 
     hardware.url = "github:nixos/nixos-hardware";
-    nixos-raspberrypi.url = "github:nvmd/nixos-raspberrypi/main";
 
     nix-relic.url = "github:DavSanchez/Nix-Relic";
     nix-relic.inputs.nixpkgs.follows = "nixpkgs";
@@ -50,7 +49,6 @@
       nixpkgs,
       home-manager,
       darwin,
-      nixos-raspberrypi,
       deploy-rs,
       ...
     }@inputs:
@@ -93,10 +91,20 @@
       # templates = import ./templates;
 
       nixosConfigurations = {
-        # mora = nixos-raspberrypi.lib.nixosSystem {
-        #   specialArgs = { inherit inputs; };
-        #   modules = [ ./hosts/nixos/mora.nix ];
-        # };
+        # Raspberry Pi boards: `inputs.hardware.nixosModules.raspberry-pi-<n>`
+        # (nixos-hardware) provides the downstream kernel + config.txt, while
+        # hosts/nixos/modules/raspberry-pi-sd-image.nix adds the generic aarch64
+        # SD-card image. Boot path: firmware -> U-Boot -> extlinux.conf.
+        mora = nixpkgs.lib.nixosSystem {
+          system = "aarch64-linux";
+          specialArgs = { inherit inputs; };
+          modules = [ ./hosts/nixos/mora.nix ];
+        };
+        bruma = nixpkgs.lib.nixosSystem {
+          system = "aarch64-linux";
+          specialArgs = { inherit inputs; };
+          modules = [ ./hosts/nixos/bruma.nix ];
+        };
         eter = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = { inherit inputs; };
@@ -160,20 +168,41 @@
             path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.eter;
           };
         };
-        # mora = {
-        #   hostname = "mora.local";
-        #   sshUser = "david";
-        #   profiles.system = {
-        #     user = "root";
-        #     path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.mora;
-        #   };
-        # };
+        mora = {
+          hostname = "mora.local";
+          sshUser = "david";
+          profiles.system = {
+            user = "root";
+            path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.mora;
+          };
+        };
+        bruma = {
+          hostname = "bruma.local";
+          sshUser = "david";
+          profiles.system = {
+            user = "root";
+            path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.bruma;
+          };
+        };
       };
 
       checks =
         let
+          # deploy-rs' deployChecks walk every deploy node, and each one builds
+          # that node's activation script — i.e. its whole system. Keep only the
+          # nodes whose activation script was built for the system under check,
+          # so e.g. the aarch64-linux checks don't drag the x86_64-linux (eter)
+          # closure in and vice versa.
+          filterDeploy =
+            system:
+            self.deploy
+            // {
+              nodes = nixpkgs.lib.filterAttrs (
+                _: node: node.profiles.system.path.system == system
+              ) self.deploy.nodes;
+            };
           deployChecks = nixpkgs.lib.genAttrs systems (
-            system: deploy-rs.lib.${system}.deployChecks self.deploy
+            system: deploy-rs.lib.${system}.deployChecks (filterDeploy system)
           );
           darwinTestSuite =
             let
