@@ -22,6 +22,12 @@
   # need a plaintext PSK; add the host to `.sops.yaml` and its own module when needed.
   networking.hostName = "bruma";
 
+  # The wiki's Raspberry Pi 3 page warns that 512 MB–1 GB of RAM can be exhausted by a
+  # large local derivation and suggests "disk or compressed-RAM swap, or an AArch64
+  # remote builder": builds happen on a builder (CI's ARM runner) or on a Mac and are
+  # copied over by deploy-rs, and this adds the swap side for headroom.
+  zramSwap.enable = true;
+
   users.users.david = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
