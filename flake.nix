@@ -91,10 +91,11 @@
       # templates = import ./templates;
 
       nixosConfigurations = {
-        # Raspberry Pi boards: `inputs.hardware.nixosModules.raspberry-pi-<n>`
-        # (nixos-hardware) provides the downstream kernel + config.txt, while
-        # hosts/nixos/modules/raspberry-pi-sd-image.nix adds the generic aarch64
-        # SD-card image. Boot path: firmware -> U-Boot -> extlinux.conf.
+        # Raspberry Pi boards: the `nixos-hardware` board profile provides the
+        # downstream kernel + config.txt, and hosts/nixos/modules/raspberry-pi.nix
+        # matches the layout of the official aarch64 SD image the cards are flashed
+        # with (this flake builds no image). Boot path: firmware -> U-Boot ->
+        # extlinux.conf.
         mora = nixpkgs.lib.nixosSystem {
           system = "aarch64-linux";
           specialArgs = { inherit inputs; };
@@ -188,21 +189,8 @@
 
       checks =
         let
-          # deploy-rs' deployChecks walk every deploy node, and each one builds
-          # that node's activation script — i.e. its whole system. Keep only the
-          # nodes whose activation script was built for the system under check,
-          # so e.g. the aarch64-linux checks don't drag the x86_64-linux (eter)
-          # closure in and vice versa.
-          filterDeploy =
-            system:
-            self.deploy
-            // {
-              nodes = nixpkgs.lib.filterAttrs (
-                _: node: node.profiles.system.path.system == system
-              ) self.deploy.nodes;
-            };
           deployChecks = nixpkgs.lib.genAttrs systems (
-            system: deploy-rs.lib.${system}.deployChecks (filterDeploy system)
+            system: deploy-rs.lib.${system}.deployChecks self.deploy
           );
           darwinTestSuite =
             let
