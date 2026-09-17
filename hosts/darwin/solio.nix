@@ -24,29 +24,19 @@
     config = {
       virtualisation = {
         darwin-builder = {
-          # Disk is not what the kernel build ran out of (the store disk was only
-          # ~9G/40G used): the guest's / is a RAM-backed tmpfs, and Nix puts build
-          # trees under it by default — see build-dir below. This size still
-          # matters now that build trees live here: a kernel tree is ~6G and the
-          # SD-image assembly needs ~8G of scratch.
+          # Store plus build trees and image scratch (see build-dir below).
           diskSize = 80 * 1024;
-          # The VM runs whenever the daemon does (KeepAlive) and has no balloon
-          # driver, so every MiB here is one this 16G Mac can't get back — after a
-          # build the guest's page cache holds most of it. Stay at 4G and cap the
-          # compile jobs below instead; 8G would have been comfortable for the
-          # build but pushed this host into swap.
+          # The VM is always up (KeepAlive) and has no balloon driver, so this is
+          # RAM the 16 GB host never gets back; compile jobs are capped below instead.
           memorySize = 4 * 1024;
         };
         cores = 4;
       };
-      # Nix puts build trees under $TMPDIR (/build on the tmpfs root by default).
-      # Keep them on the store disk instead, or kernel/image builds run the
-      # RAM-backed root filesystem out of space.
+      # The guest's / is a RAM-backed tmpfs and Nix builds under $TMPDIR by default;
+      # keep build trees on the store disk.
       nix.settings.build-dir = "/nix/var/nix/builds";
-      # Remote builds take their job count from the builder, not the client (a
-      # `--cores 3` on the client still arrives as the guest's nproc), so this is
-      # the knob that caps a kernel compile's peak memory: -j2 needs ~2G, where
-      # -j4 peaks around 3G and gets OOM-killed in a 4G guest.
+      # Remote builds take the job count from the builder, not the client, so this is
+      # what caps a kernel compile: -j2 ~2G, -j4 ~3G and OOM in a 4G guest.
       nix.settings.cores = 2;
     };
   };

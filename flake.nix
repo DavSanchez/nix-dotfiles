@@ -91,11 +91,8 @@
       # templates = import ./templates;
 
       nixosConfigurations = {
-        # Raspberry Pi boards: the `nixos-hardware` board profile provides the
-        # downstream kernel + config.txt, and hosts/nixos/modules/raspberry-pi.nix
-        # matches the layout of the official aarch64 SD image the cards are flashed
-        # with (this flake builds no image). Boot path: firmware -> U-Boot ->
-        # extlinux.conf.
+        # Raspberry Pi boards: `nixos-hardware` board profile (kernel + config.txt) plus
+        # hosts/nixos/modules/raspberry-pi.nix, which matches the official SD image's layout.
         mora = nixpkgs.lib.nixosSystem {
           system = "aarch64-linux";
           specialArgs = { inherit inputs; };

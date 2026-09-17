@@ -44,8 +44,7 @@ jobs:
     if: needs.changed.outputs.changed == 'true'
     name: nix flake check (${{ matrix.system }})
     strategy:
-      # One system failing used to cancel its siblings, which hid their result
-      # (e.g. whether the Raspberry Pi systems built at all).
+      # Let every system report its own result instead of cancelling the rest.
       fail-fast: false
       matrix:
         include:

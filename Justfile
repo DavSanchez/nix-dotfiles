@@ -15,8 +15,7 @@ restart-linux-builder port="31022":
     @echo "linux-builder: restarted, waiting for port {{port}} to accept connections..."
     @for i in $(seq 1 120); do nc -z -w 1 localhost "{{port}}" 2>/dev/null && { echo "linux-builder is up on port {{port}}"; exit 0; }; sleep 1; done; echo "error: linux-builder did not come up on port {{port}} within 120s" >&2; exit 1
 
-# Start the linux-builder VM again and wait for its SSH port — e.g. just start-linux-builder
-# No-op when it is already loaded.
+# Start the linux-builder VM and wait for its SSH port (no-op when already loaded).
 start-linux-builder port="31022":
     @if sudo launchctl print system/org.nixos.linux-builder >/dev/null 2>&1; then \
       echo "linux-builder: already running"; \
@@ -26,9 +25,8 @@ start-linux-builder port="31022":
     fi
     @for i in $(seq 1 120); do nc -z -w 1 localhost "{{port}}" 2>/dev/null && { echo "linux-builder is up on port {{port}}"; exit 0; }; sleep 1; done; echo "error: linux-builder did not come up on port {{port}} within 120s" >&2; exit 1
 
-# Stop the linux-builder VM when no Linux builds are needed: releases its RAM and disk to the host.
-# It comes back on the next login/reboot (launchd RunAtLoad), and because the builder is ephemeral
-# its store is rebuilt from scratch on the next start, so the first build after it hurts more.
+# It returns on the next login/reboot with an empty store.
+# Stop the linux-builder VM to give its RAM and disk back to the host — e.g. just stop-linux-builder
 stop-linux-builder:
     @if sudo launchctl print system/org.nixos.linux-builder >/dev/null 2>&1; then \
       sudo launchctl bootout system/org.nixos.linux-builder && echo "linux-builder: stopped (RAM/disk released; Linux builds fail until 'just start-linux-builder')"; \
@@ -122,16 +120,14 @@ eval-config config subpath:
       nix eval --json ".#homeConfigurations.\"{{config}}\".{{subpath}}"; \
     fi
 
-# Same module Hydra uses for `nixos.sd_image.aarch64-linux` (installer flavour: root/nixos with
-# empty passwords, sshd on), so no Hydra download is needed. Prints the store path; write it with
-# `just flash-image <path> <disk>`. `--impure` only lets the expression read this working directory;
-# the nixpkgs it uses is the one pinned in flake.lock.
-# Build the official aarch64 SD-card image locally, from this flake's pinned nixpkgs — e.g. just sd-image
+# The official installer image (the same nixpkgs module as Hydra's `nixos.sd_image.aarch64-linux`),
+# built from this flake's pinned nixpkgs. Prints the store path for `just flash-image <path> <disk>`.
+# Build the official aarch64 SD-card image locally — e.g. just sd-image
 sd-image:
     @nix build --impure --no-link --print-out-paths --expr 'let pkgs = (builtins.getFlake (toString ./.)).inputs.nixpkgs; in (pkgs.lib.nixosSystem { system = "aarch64-linux"; modules = [ "${pkgs}/nixos/modules/installer/sd-card/sd-image-aarch64-installer.nix" ({ config, ... }: { system.stateVersion = config.system.nixos.release; }) ]; }).config.system.build.sdImage'
 
-# Flash a NixOS SD-card image (e.g. the one `just sd-image` prints, or the official aarch64 image from Hydra) onto a raw disk.
-# macOS-only (diskutil + /dev/rdiskN). ERASES the disk — e.g. just flash-image ~/Downloads/nixos-image-*.aarch64-linux.img.zst disk4
+# Write an SD-card image (from `just sd-image` or Hydra) onto a raw disk. macOS-only; ERASES the disk.
+# Flash an image to an SD card — e.g. just flash-image ~/Downloads/nixos-image-*.aarch64-linux.img.zst disk4
 flash-image image device:
     #!/usr/bin/env bash
     set -euo pipefail
