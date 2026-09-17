@@ -14,7 +14,7 @@
     ./modules/locale.nix
     ./modules/network.nix
     ./modules/nix.nix
-    ./modules/raspberry-pi-sd-image.nix
+    ./modules/raspberry-pi.nix
     ./modules/ssh.nix
     ./modules/user.nix
 
