@@ -122,25 +122,21 @@ eval-config config subpath:
       nix eval --json ".#homeConfigurations.\"{{config}}\".{{subpath}}"; \
     fi
 
-# Build the SD-card image of a Raspberry Pi host and print its store path — e.g. just sd-image mora
-# The flashable file is <out>/sd-image/*.img.zst; write it with `just flash-sd`.
-sd-image host:
-    @img="$(nix build --no-link --print-out-paths '.#nixosConfigurations.{{host}}.config.system.build.sdImage')"; \
-    echo "$img"; ls -lh "$img"/sd-image/
-
-# Decompress and write a host's SD-card image to a raw disk. macOS-only (diskutil + /dev/rdiskN). ERASES the disk — e.g. just flash-sd mora disk4
-flash-sd host device:
+# Flash a NixOS SD-card image (e.g. the official aarch64 image from Hydra) onto a raw disk.
+# macOS-only (diskutil + /dev/rdiskN). ERASES the disk — e.g. just flash-image ~/Downloads/nixos-image-*.aarch64-linux.img.zst disk4
+flash-image image device:
     #!/usr/bin/env bash
     set -euo pipefail
 
     if [[ "$(uname -s)" != Darwin ]]; then
-      echo "error: flash-sd is macOS-only — it uses diskutil to identify/unmount the card and /dev/rdiskN to write it" >&2
+      echo "error: flash-image is macOS-only — it uses diskutil to identify/unmount the card and /dev/rdiskN to write it" >&2
       echo "       on Linux: 'lsblk' to find the card, then: zstd -dc <image> | sudo dd of=/dev/sdX bs=4m status=progress && sync" >&2
       exit 1
     fi
 
-    host="{{host}}"
+    image="{{image}}"; image="${image/#\~/$HOME}"
     device="{{device}}"
+    [[ -f "$image" ]] || { echo "error: $image is not a file" >&2; exit 1; }
     num="${device#/dev/}"; num="${num#rdisk}"; num="${num#disk}"
     [[ "$num" =~ ^[0-9]+$ ]] || { echo "error: '$device' is not a disk number, diskN or rdiskN" >&2; exit 1; }
     disk="/dev/disk${num}"
@@ -152,13 +148,6 @@ flash-sd host device:
       echo "error: $disk does not look like a removable/external disk — refusing to write it" >&2
       exit 1
     fi
-
-    out="$(nix build --no-link --print-out-paths ".#nixosConfigurations.${host}.config.system.build.sdImage")"
-    shopt -s nullglob
-    images=("$out"/sd-image/*.img.zst)
-    [[ ${#images[@]} -eq 1 ]] || images=("$out"/sd-image/*.img)
-    [[ ${#images[@]} -eq 1 ]] || { echo "error: expected one image in $out/sd-image, got ${#images[@]}" >&2; exit 1; }
-    image="${images[0]}"
 
     echo
     echo "About to ERASE $disk and write:"
