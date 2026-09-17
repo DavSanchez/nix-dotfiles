@@ -17,15 +17,11 @@
     ./modules/user.nix
   ];
 
-  # Ethernet (100 Mbit on the 3B) is what the official image brings up on first boot
-  # and what `deploy-rs` uses from then on. No sops secrets here yet, so Wi-Fi would
-  # need a plaintext PSK; add the host to `.sops.yaml` and its own module when needed.
+  # Ethernet only for now: Wi-Fi would need a sops secret and this host has none yet,
+  # so it is not in `.sops.yaml`.
   networking.hostName = "bruma";
 
-  # The wiki's Raspberry Pi 3 page warns that 512 MB–1 GB of RAM can be exhausted by a
-  # large local derivation and suggests "disk or compressed-RAM swap, or an AArch64
-  # remote builder": builds happen on a builder (CI's ARM runner) or on a Mac and are
-  # copied over by deploy-rs, and this adds the swap side for headroom.
+  # 1 GB of RAM is tight for local builds (these normally happen on a builder).
   zramSwap.enable = true;
 
   users.users.david = {

@@ -10,10 +10,7 @@ in
   services = {
     radicle = {
       enable = false; # preparing
-      # Commented out: these two keys have no equivalent in `secrets.yaml` (nothing else
-      # in the repo uses them), and sops' build-time manifest check rejected the config
-      # because of them. Restore together with the declarations at the bottom once the
-      # keys exist.
+      # Not in secrets.yaml yet — restore together with the declarations below.
       # publicKey = config.sops.secrets."radicle/mora/pub_key".path;
       # privateKey = config.sops.secrets."radicle/mora/priv_key".path;
       httpd = {
@@ -56,8 +53,7 @@ in
       inherit domain;
       group = config.services.caddy.group;
       dnsProvider = "gandiv5";
-      # The secret `eter` uses for its own Gandi DNS-01 certs: a file holding
-      # GANDIV5_PERSONAL_ACCESS_TOKEN=…, which is also what gandi-livedns reads.
+      # The secret eter uses for its Gandi DNS-01 certs.
       environmentFile = config.sops.secrets.gandi_pat.path;
       extraDomainNames = [ "radicle.${domain}" ];
     };
@@ -69,11 +65,9 @@ in
     443
   ];
 
-  # Secrets required by this module. `gandi_pat` is declared by ./livedns.nix (and used
-  # by eter) — declaring it again here would only duplicate it.
+  # `gandi_pat` is declared in ./livedns.nix.
   sops.secrets = {
-    # The radicle keys go here once that service is ready, and then the two lines that
-    # reference them above come back too:
+    # radicle keys, once they exist:
     # "radicle/mora/pub_key" = { };
     # "radicle/mora/priv_key" = { };
   };

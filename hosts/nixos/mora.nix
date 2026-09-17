@@ -24,9 +24,7 @@
 
   networking = {
     hostName = "mora";
-    # Wi-Fi is the fallback link; Ethernet is what the first boot and the
-    # `deploy-rs` rollout use. The PSK is decrypted by sops, which needs this
-    # host's ssh host key registered in `.sops.yaml` (`just update-sops`).
+    # Wi-Fi is the fallback link; the PSK comes from sops.
     wireless = {
       enable = true;
       secretsFile = config.sops.secrets.dome_wifi.path;
