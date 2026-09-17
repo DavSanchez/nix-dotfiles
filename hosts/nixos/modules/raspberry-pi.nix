@@ -43,4 +43,11 @@
     enable = true;
     uboot.enable = true;
   };
+
+  # NixOS' systemd-initrd TPM2 support asks for tpm-crb/tpm-tis, and the trimmed
+  # Raspberry Pi vendor kernels build neither, so the initrd's modules closure dies on
+  # `modprobe: FATAL: Module tpm-crb not found`. There is no TPM2 on these boards, so
+  # drop the support rather than paper over the missing modules (the Pi 3 profile's
+  # allowMissing workaround, for a different module, is in nixos-hardware upstream).
+  boot.initrd.systemd.tpm2.enable = false;
 }
