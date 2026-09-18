@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "deny": [
+      "Read(./secrets/**)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash '.claude/hooks/block-secrets-decrypt.sh'",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}
