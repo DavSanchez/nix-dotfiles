@@ -120,13 +120,13 @@ eval-config config subpath:
       nix eval --json ".#homeConfigurations.\"{{config}}\".{{subpath}}"; \
     fi
 
-# The official installer image (the same nixpkgs module as Hydra's `nixos.sd_image.aarch64-linux`),
-# built from this flake's pinned nixpkgs. Prints the store path for `just flash-image <path> <disk>`.
-# Build the official aarch64 SD-card image locally — e.g. just sd-image
-sd-image:
-    @nix build --impure --no-link --print-out-paths --expr 'let pkgs = (builtins.getFlake (toString ./.)).inputs.nixpkgs; in (pkgs.lib.nixosSystem { system = "aarch64-linux"; modules = [ "${pkgs}/nixos/modules/installer/sd-card/sd-image-aarch64-installer.nix" ({ config, ... }: { system.stateVersion = config.system.nixos.release; }) ]; }).config.system.build.sdImage'
+# A custom SD image that already boots straight into that host's real config (see
+# lib/nixos-sd-image.nix) — no root/nixos bootstrap deploy needed on first flash.
+# Build a Raspberry Pi host's SD-card image — e.g. just sd-image mora
+sd-image host:
+    @nix build --no-link --print-out-paths ".#packages.aarch64-linux.{{host}}-sd-image"
 
-# Write an SD-card image (from `just sd-image` or Hydra) onto a raw disk. macOS-only; ERASES the disk.
+# Write an SD-card image (from `just sd-image`) onto a raw disk. macOS-only; ERASES the disk.
 # Flash an image to an SD card — e.g. just flash-image ~/Downloads/nixos-image-*.aarch64-linux.img.zst disk4
 flash-image image device:
     #!/usr/bin/env bash

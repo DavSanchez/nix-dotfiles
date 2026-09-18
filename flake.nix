@@ -62,11 +62,15 @@
       # This is a function that generates an attribute by calling a function you
       # pass to it, with each system as an argument
       forAllSystems = nixpkgs.lib.genAttrs systems;
+
+      # Turns a Raspberry Pi nixosConfiguration into a custom, bootable SD image for
+      # its board — see lib/nixos-sd-image.nix.
+      sdImageFor = import ./lib/nixos-sd-image.nix { inherit nixpkgs; };
     in
     {
       # Custom packages
       # Acessible through 'nix build', 'nix shell', etc
-      packages = forAllSystems (
+      packages = nixpkgs.lib.recursiveUpdate (forAllSystems (
         system:
         let
           pkgs = nixpkgs.legacyPackages.${system};
@@ -75,7 +79,13 @@
         nixpkgs.lib.filterAttrs (
           _: pkg: !(pkg ? meta.platforms) || nixpkgs.lib.elem system pkg.meta.platforms
         ) allPkgs
-      );
+      )) {
+        # Custom per-host SD images (`just sd-image <host>`) — see lib/nixos-sd-image.nix.
+        aarch64-linux = {
+          mora-sd-image = (sdImageFor self.nixosConfigurations.mora).config.system.build.sdImage;
+          bruma-sd-image = (sdImageFor self.nixosConfigurations.bruma).config.system.build.sdImage;
+        };
+      };
 
       # Formatter for the nix files, available through 'nix fmt'
       formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt-tree);

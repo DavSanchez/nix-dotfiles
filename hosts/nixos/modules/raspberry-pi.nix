@@ -1,8 +1,9 @@
 # Shared Raspberry Pi bits, layered on top of a `nixos-hardware` board profile
 # (raspberry-pi-3, raspberry-pi-5, ...), which supplies the downstream kernel and
-# `config.txt`. The cards are flashed with the *official* NixOS aarch64 SD image
-# (Hydra: `nixos.sd_image.aarch64-linux`, installer flavour), so this flake builds no
-# image of its own and only has to match that image's layout.
+# `config.txt`. Cards are flashed with a custom per-host SD image (`just sd-image
+# <host>`, built via lib/nixos-sd-image.nix) that boots straight into this
+# configuration, using the same NIXOS_SD/FIRMWARE labels as nixpkgs' own
+# sd-image-aarch64.nix module.
 {
   lib,
   ...
