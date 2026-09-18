@@ -15,6 +15,25 @@ restart-linux-builder port="31022":
     @echo "linux-builder: restarted, waiting for port {{port}} to accept connections..."
     @for i in $(seq 1 120); do nc -z -w 1 localhost "{{port}}" 2>/dev/null && { echo "linux-builder is up on port {{port}}"; exit 0; }; sleep 1; done; echo "error: linux-builder did not come up on port {{port}} within 120s" >&2; exit 1
 
+# Start the linux-builder VM and wait for its SSH port (no-op when already loaded).
+start-linux-builder port="31022":
+    @if sudo launchctl print system/org.nixos.linux-builder >/dev/null 2>&1; then \
+      echo "linux-builder: already running"; \
+    else \
+      sudo launchctl bootstrap system /Library/LaunchDaemons/org.nixos.linux-builder.plist; \
+      echo "linux-builder: started, waiting for port {{port}} to accept connections..."; \
+    fi
+    @for i in $(seq 1 120); do nc -z -w 1 localhost "{{port}}" 2>/dev/null && { echo "linux-builder is up on port {{port}}"; exit 0; }; sleep 1; done; echo "error: linux-builder did not come up on port {{port}} within 120s" >&2; exit 1
+
+# It returns on the next login/reboot with an empty store.
+# Stop the linux-builder VM to give its RAM and disk back to the host — e.g. just stop-linux-builder
+stop-linux-builder:
+    @if sudo launchctl print system/org.nixos.linux-builder >/dev/null 2>&1; then \
+      sudo launchctl bootout system/org.nixos.linux-builder && echo "linux-builder: stopped (RAM/disk released; Linux builds fail until 'just start-linux-builder')"; \
+    else \
+      echo "linux-builder: not running"; \
+    fi
+
 # Compare home-manager config.home.path between two branches with dix
 dix-home config branch base="master":
     dix \
@@ -100,3 +119,56 @@ eval-config config subpath:
     else \
       nix eval --json ".#homeConfigurations.\"{{config}}\".{{subpath}}"; \
     fi
+
+# A custom SD image that already boots straight into that host's real config (see
+# lib/nixos-sd-image.nix) — no root/nixos bootstrap deploy needed on first flash.
+# Build a Raspberry Pi host's SD-card image — e.g. just sd-image mora
+sd-image host:
+    @nix build --no-link --print-out-paths ".#packages.aarch64-linux.{{host}}-sd-image"
+
+# Write an SD-card image (from `just sd-image`) onto a raw disk. macOS-only; ERASES the disk.
+# Flash an image to an SD card — e.g. just flash-image ~/Downloads/nixos-image-*.aarch64-linux.img.zst disk4
+flash-image image device:
+    #!/usr/bin/env bash
+    set -euo pipefail
+
+    if [[ "$(uname -s)" != Darwin ]]; then
+      echo "error: flash-image is macOS-only — it uses diskutil to identify/unmount the card and /dev/rdiskN to write it" >&2
+      echo "       on Linux: 'lsblk' to find the card, then: zstd -dc <image> | sudo dd of=/dev/sdX bs=4m status=progress && sync" >&2
+      exit 1
+    fi
+
+    image="{{image}}"; image="${image/#\~/$HOME}"
+    device="{{device}}"
+    [[ -f "$image" ]] || { echo "error: $image is not a file" >&2; exit 1; }
+    num="${device#/dev/}"; num="${num#rdisk}"; num="${num#disk}"
+    [[ "$num" =~ ^[0-9]+$ ]] || { echo "error: '$device' is not a disk number, diskN or rdiskN" >&2; exit 1; }
+    disk="/dev/disk${num}"
+    rdisk="/dev/rdisk${num}"
+    [[ -b "$disk" || -c "$disk" ]] || { echo "error: $disk is not a disk device" >&2; exit 1; }
+
+    diskutil info "$disk" | grep -E 'Device / Media Name|Volume Name|Disk Size|Removable Media|Whole|Device Location' || true
+    if ! diskutil info "$disk" | grep -qE 'Removable Media: (Removable|Yes)|Ejectable Media: (Yes|Ejectable)|Virtual: Yes|Device Location: External'; then
+      echo "error: $disk does not look like a removable/external disk — refusing to write it" >&2
+      exit 1
+    fi
+
+    echo
+    echo "About to ERASE $disk and write:"
+    echo "  $image"
+    read -r -p 'Type "yes" to continue: ' answer
+    [[ "$answer" == yes ]] || { echo "aborted"; exit 1; }
+
+    diskutil unmountDisk "$disk"
+    if [[ "$image" == *.zst ]]; then
+      if command -v zstd >/dev/null 2>&1; then
+        zstd -dc "$image" | sudo dd of="$rdisk" bs=4m
+      else
+        nix run --inputs-from . nixpkgs#zstd -- -dc "$image" | sudo dd of="$rdisk" bs=4m
+      fi
+    else
+      sudo dd if="$image" of="$rdisk" bs=4m
+    fi
+    sync
+    diskutil eject "$disk"
+    echo "done: $disk"

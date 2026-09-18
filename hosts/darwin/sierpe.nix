@@ -20,11 +20,15 @@
     config = {
       virtualisation = {
         darwin-builder = {
-          diskSize = 40 * 1024;
+          # Store plus build trees and image scratch (see build-dir below).
+          diskSize = 80 * 1024;
           memorySize = 8 * 1024;
         };
         cores = 4;
       };
+      # The guest's / is a RAM-backed tmpfs and Nix builds under $TMPDIR by default;
+      # keep build trees on the store disk.
+      nix.settings.build-dir = "/nix/var/nix/builds";
     };
 
     # M3 chip or newer?

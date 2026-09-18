@@ -5,12 +5,8 @@
   ...
 }:
 {
-  imports = with inputs.nixos-raspberrypi.nixosModules; [
-    usb-gadget-ethernet
-    raspberry-pi-5.base
-    raspberry-pi-5.bluetooth
-    raspberry-pi-5.page-size-16k
-    raspberry-pi-5.display-vc4 # "regular" display connected
+  imports = [
+    inputs.hardware.nixosModules.raspberry-pi-5
 
     inputs.sops-nix.nixosModules.sops
 
@@ -18,6 +14,7 @@
     ./modules/locale.nix
     ./modules/network.nix
     ./modules/nix.nix
+    ./modules/raspberry-pi.nix
     ./modules/ssh.nix
     ./modules/user.nix
 
@@ -27,6 +24,7 @@
 
   networking = {
     hostName = "mora";
+    # Wi-Fi is the fallback link; the PSK comes from sops.
     wireless = {
       enable = true;
       secretsFile = config.sops.secrets.dome_wifi.path;
@@ -46,29 +44,8 @@
 
   programs.yazi.enable = false;
 
-  fileSystems = {
-    "/boot/firmware" = {
-      device = "/dev/disk/by-uuid/2175-794E";
-      fsType = "vfat";
-      options = [
-        "noatime"
-        "noauto"
-        "x-systemd.automount"
-        "x-systemd.idle-timeout=1min"
-      ];
-    };
-    "/" = {
-      device = "/dev/disk/by-uuid/44444444-4444-4444-8888-888888888888";
-      fsType = "ext4";
-      options = [ "noatime" ];
-    };
-  };
-
-  boot.loader.raspberry-pi.bootloader = "kernel";
-
   system.nixos.tags = [
-    "raspberry-pi-${config.boot.loader.raspberry-pi.variant}"
-    config.boot.loader.raspberry-pi.bootloader
+    "raspberry-pi-5"
     config.boot.kernelPackages.kernel.version
   ];
 
@@ -80,5 +57,5 @@
     };
   };
 
-  system.stateVersion = "25.11";
+  system.stateVersion = "26.05";
 }
