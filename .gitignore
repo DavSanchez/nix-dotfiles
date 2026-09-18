@@ -9,3 +9,6 @@ result
 .envrc
 
 # End of https://www.toptal.com/developers/gitignore/api/direnv
+
+# Local Claude Code session config — not part of the repo's own config.
+.claude/
