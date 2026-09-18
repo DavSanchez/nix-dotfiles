@@ -147,10 +147,23 @@ jobs:
           exit 1
 
       - name: Build nix-darwin (${{ matrix.host }})
-        run: >
-          nix run github:nix-darwin/nix-darwin/master#darwin-rebuild
-          --access-tokens "github.com=${{ secrets.GITHUB_TOKEN }}"
-          -- build --max-jobs 1 --keep-going --flake .#${{ matrix.host }}
+        # Under CI's software-emulated (TCG) linux-builder, a large, not-yet-cached
+        # guest NixOS closure can take long enough that the VM stops accepting new
+        # SSH sessions mid-build ("failed to start SSH connection to 'linux-builder'"),
+        # which --keep-going then reports as a wall of unrelated "platform mismatch"
+        # errors. Retry: everything already built is cached, so each retry only
+        # has to redo whatever the dropped connection left unfinished.
+        run: |
+          for i in 1 2 3; do
+            echo "Attempt $i/3: nix run github:nix-darwin/nix-darwin/master#darwin-rebuild -- build --max-jobs 1 --keep-going --flake .#${{ matrix.host }}"
+            if nix run github:nix-darwin/nix-darwin/master#darwin-rebuild \
+              --access-tokens "github.com=${{ secrets.GITHUB_TOKEN }}" \
+              -- build --max-jobs 1 --keep-going --flake .#${{ matrix.host }}; then
+              exit 0
+            fi
+            echo "Attempt $i failed, retrying..."
+          done
+          exit 1
 
   check:
     name: 🟢 Nix-Darwin builds successes required
