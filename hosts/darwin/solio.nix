@@ -34,9 +34,10 @@
       };
       # The guest's / is a RAM-backed tmpfs (~half of memorySize) and Nix builds under
       # $TMPDIR by default; /nix/var isn't its own mount, so it's on that tmpfs too —
-      # confirmed via `df` inside the guest. Only /nix/store is disk-backed (an overlay
-      # over the persistent qcow2), so build-dir has to live under it, not /nix/var.
-      nix.settings.build-dir = "/nix/store/.nix-builds";
+      # confirmed via `df` inside the guest. /nix/.rw-store is the actual disk-backed
+      # mount (the writable overlay layer over the persistent qcow2, per nixpkgs'
+      # vz-vm.nix) — build-dir has to live there, not under /nix/var or /nix/store.
+      nix.settings.build-dir = "/nix/.rw-store/builds";
       # Remote builds take the job count from the builder, not the client, so this is
       # what caps a kernel compile: -j2 ~2G, -j4 ~3G and OOM in a 4G guest.
       nix.settings.cores = 2;
