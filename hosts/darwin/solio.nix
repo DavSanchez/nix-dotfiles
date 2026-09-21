@@ -27,8 +27,10 @@
           # Store plus build trees and image scratch (see build-dir below).
           diskSize = 80 * 1024;
           # The VM is always up (KeepAlive) and has no balloon driver, so this is
-          # RAM the 16 GB host never gets back; compile jobs are capped below instead.
-          memorySize = 4 * 1024;
+          # RAM the 16 GB host never gets back — kept modest given that budget.
+          # Slightly above the old 4G that left ~0 margin against the -j4 OOM noted
+          # below; compile jobs stay capped rather than raising this further.
+          memorySize = 6 * 1024;
         };
         cores = 4;
       };
