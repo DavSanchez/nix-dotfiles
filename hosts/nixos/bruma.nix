@@ -7,6 +7,7 @@
 {
   imports = [
     inputs.hardware.nixosModules.raspberry-pi-3
+    inputs.sops-nix.nixosModules.sops
 
     ./modules/deploy.nix
     ./modules/locale.nix
@@ -15,11 +16,27 @@
     ./modules/raspberry-pi.nix
     ./modules/ssh.nix
     ./modules/user.nix
+
+    ./bruma/livedns.nix
   ];
 
-  # Ethernet only for now: Wi-Fi would need a sops secret and this host has none yet,
-  # so it is not in `.sops.yaml`.
-  networking.hostName = "bruma";
+  networking = {
+    hostName = "bruma";
+    # Reuses mora's `dome_wifi` (the shared home PSK, SSID `TP-Link_83A4`); the age
+    # identity is baked into the SD image by `just host-key bruma` + `just sd-image
+    # bruma`, so it associates on the first boot.
+    wireless = {
+      enable = true;
+      secretsFile = config.sops.secrets.dome_wifi.path;
+      networks."TP-Link_83A4".pskRaw = "ext:dome_psk";
+    };
+  };
+
+  sops = {
+    defaultSopsFile = ../../secrets/secrets.yaml;
+    age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+    secrets.dome_wifi = { };
+  };
 
   # 1 GB of RAM is tight for local builds (these normally happen on a builder).
   zramSwap.enable = true;
