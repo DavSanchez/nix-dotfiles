@@ -84,6 +84,7 @@
         aarch64-linux = {
           mora-sd-image = (sdImageFor self.nixosConfigurations.mora).config.system.build.sdImage;
           bruma-sd-image = (sdImageFor self.nixosConfigurations.bruma).config.system.build.sdImage;
+          duende-sd-image = (sdImageFor self.nixosConfigurations.duende).config.system.build.sdImage;
         };
       };
 
@@ -112,6 +113,11 @@
           system = "aarch64-linux";
           specialArgs = { inherit inputs; };
           modules = [ ./hosts/nixos/bruma.nix ];
+        };
+        duende = nixpkgs.lib.nixosSystem {
+          system = "aarch64-linux";
+          specialArgs = { inherit inputs; };
+          modules = [ ./hosts/nixos/duende.nix ];
         };
         eter = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
@@ -190,6 +196,14 @@
           profiles.system = {
             user = "root";
             path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.bruma;
+          };
+        };
+        duende = {
+          hostname = "duende.local";
+          sshUser = "david";
+          profiles.system = {
+            user = "root";
+            path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.duende;
           };
         };
       };
