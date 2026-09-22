@@ -12,3 +12,7 @@ result
 
 # Local Claude Code session config — not part of the repo's own config.
 .claude/
+
+# Per-host SSH/age private keys baked into SD images by `just sd-image`. Never commit
+# these: the repo is public and they are the sops decryption identities.
+local/

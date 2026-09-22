@@ -17,22 +17,21 @@
     ./modules/ssh.nix
     ./modules/user.nix
 
+    ./duende/livedns.nix
     ./duende/retro-gaming.nix
   ];
 
   networking = {
     hostName = "duende";
     # No Ethernet run to wherever this sits next to the TV, so Wi-Fi is the only link.
-    # Commented out: `duende_wifi` (below) has no matching entry in secrets/secrets.yaml
-    # yet — it can't, until the board boots once and its age key is registered — so
-    # CI's build of the full toplevel fails at sops-install-secrets. Re-enable both this
-    # and the `sops` block below together once that bootstrap step is done and the real
-    # SSID is known.
-    # wireless = {
-    #   enable = true;
-    #   secretsFile = config.sops.secrets.duende_wifi.path;
-    #   networks."REPLACE_ME_SSID".pskRaw = "ext:duende_psk";
-    # };
+    # Reuses mora's `dome_wifi` (the shared home PSK, SSID `TP-Link_83A4`); the age
+    # identity is baked into the SD image by `just host-key duende` + `just sd-image
+    # duende`, so it associates on the first boot.
+    wireless = {
+      enable = true;
+      secretsFile = config.sops.secrets.dome_wifi.path;
+      networks."TP-Link_83A4".pskRaw = "ext:dome_psk";
+    };
   };
 
   # 1 GB of RAM (same as bruma) — tighter here since cage + RetroArch run locally.
@@ -48,16 +47,11 @@
     ];
   };
 
-  # `duende`'s age key (derived from its own SSH host key) has to be added to
-  # .sops.yaml after first boot, then `just update-sops` — the same bootstrap gap
-  # AGENTS.md documents for mora. The actual PSK is added by hand via `sops
-  # secrets/secrets.yaml`, not by an agent. Re-enable alongside the `wireless` block
-  # above once that's done.
-  # sops = {
-  #   defaultSopsFile = ../../secrets/secrets.yaml;
-  #   age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
-  #   secrets.duende_wifi = { };
-  # };
+  sops = {
+    defaultSopsFile = ../../secrets/secrets.yaml;
+    age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+    secrets.dome_wifi = { };
+  };
 
   system.nixos.tags = [
     "raspberry-pi-3"

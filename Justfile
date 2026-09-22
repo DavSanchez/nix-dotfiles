@@ -120,26 +120,79 @@ eval-config config subpath:
       nix eval --json ".#homeConfigurations.\"{{config}}\".{{subpath}}"; \
     fi
 
+# Create a per-host ed25519 host key under the git-ignored local/host-keys/ dir.
+# It becomes the host's SSH identity and, via `sops.age.sshKeyPaths`, its age identity:
+# register its public half in .sops.yaml (`just update-sops`) before `just sd-image`,
+# and the flashed card can decrypt secrets from the first boot.
+# Generate/refresh a Raspberry Pi host key — e.g. just host-key mora
+host-key host:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    # Trace every command with `JUST_TRACE=1 just host-key <host>`.
+    if [[ -n "${JUST_TRACE:-}" ]]; then set -x; fi
+    dir="$PWD/local/host-keys"
+    key="$dir/{{host}}.ed25519"
+    mkdir -p "$dir"
+    if [[ -e "$key" ]]; then
+      echo "reusing existing $key" >&2
+    else
+      ssh-keygen -t ed25519 -N "" -C "{{host}} host key" -f "$key"
+    fi
+    recipient="$(nix run nixpkgs#ssh-to-age -- -i "$key.pub")"
+    printf '\nage recipient for %s: %s\n\n' "{{host}}" "$recipient"
+    echo "Add it to .sops.yaml (both the top-level 'keys:' list and the"
+    echo "'creation_rules' age list), then run: just update-sops"
+
 # A custom SD image that already boots straight into that host's real config (see
 # lib/nixos-sd-image.nix) — no root/nixos bootstrap deploy needed on first flash.
+# When a key from `just host-key <host>` exists it is baked in (impure build), so the
+# image's sops age identity is already in .sops.yaml and secrets work from boot.
 # Build a Raspberry Pi host's SD-card image — e.g. just sd-image mora
 sd-image host:
-    @nix build --no-link --print-out-paths ".#packages.aarch64-linux.{{host}}-sd-image"
+    #!/usr/bin/env bash
+    set -euo pipefail
+    # Trace every command with `JUST_TRACE=1 just sd-image <host>`.
+    if [[ -n "${JUST_TRACE:-}" ]]; then set -x; fi
+    key_dir="$PWD/local/host-keys"
+    key="$key_dir/{{host}}.ed25519"
+    if [[ -f "$key" ]]; then
+      echo "baking $key into the image (SSH host key + sops age identity)" >&2
+      out="$(PI_HOST_KEYS_DIR="$key_dir" nix build --impure --no-link --print-out-paths ".#packages.aarch64-linux.{{host}}-sd-image")"
+    else
+      echo "warning: $key not found — the image will generate its host key (and sops age" >&2
+      echo "         identity) on first boot; run 'just host-key {{host}}' then" >&2
+      echo "         'just update-sops' to pre-seed it before flashing." >&2
+      out="$(nix build --no-link --print-out-paths ".#packages.aarch64-linux.{{host}}-sd-image")"
+    fi
+    # `system.build.sdImage` is a directory holding the compressed image under
+    # sd-image/ (plus nix-support/), so print the file `flash-image` actually wants.
+    image="$(find "$out/sd-image" -maxdepth 1 -type f -print -quit)"
+    [[ -n "$image" ]] || { echo "error: no image file found under $out/sd-image" >&2; exit 1; }
+    echo "$image"
 
 # Write an SD-card image (from `just sd-image`) onto a raw disk. macOS-only; ERASES the disk.
 # Flash an image to an SD card — e.g. just flash-image ~/Downloads/nixos-image-*.aarch64-linux.img.zst disk4
 flash-image image device:
     #!/usr/bin/env bash
     set -euo pipefail
+    # Trace every command with `JUST_TRACE=1 just flash-image <image> <device>`.
+    if [[ -n "${JUST_TRACE:-}" ]]; then set -x; fi
 
     if [[ "$(uname -s)" != Darwin ]]; then
       echo "error: flash-image is macOS-only — it uses diskutil to identify/unmount the card and /dev/rdiskN to write it" >&2
-      echo "       on Linux: 'lsblk' to find the card, then: zstd -dc <image> | sudo dd of=/dev/sdX bs=4m status=progress && sync" >&2
+      echo "       on Linux: 'lsblk' to find the card, then: zstd -dc <image> | sudo dd of=/dev/sdX bs=4M status=progress && sync" >&2
       exit 1
     fi
 
     image="{{image}}"; image="${image/#\~/$HOME}"
     device="{{device}}"
+    # Also accept the sdImage output directory (e.g. a `nix build -o <host>` symlink):
+    # the actual image lives under its sd-image/ subdir.
+    if [[ -d "$image" ]]; then
+      resolved="$(find "$image/sd-image" -maxdepth 1 -type f -print -quit 2>/dev/null || true)"
+      [[ -n "$resolved" ]] || { echo "error: no image file under $image/sd-image" >&2; exit 1; }
+      image="$resolved"
+    fi
     [[ -f "$image" ]] || { echo "error: $image is not a file" >&2; exit 1; }
     num="${device#/dev/}"; num="${num#rdisk}"; num="${num#disk}"
     [[ "$num" =~ ^[0-9]+$ ]] || { echo "error: '$device' is not a disk number, diskN or rdiskN" >&2; exit 1; }
@@ -148,7 +201,9 @@ flash-image image device:
     [[ -b "$disk" || -c "$disk" ]] || { echo "error: $disk is not a disk device" >&2; exit 1; }
 
     diskutil info "$disk" | grep -E 'Device / Media Name|Volume Name|Disk Size|Removable Media|Whole|Device Location' || true
-    if ! diskutil info "$disk" | grep -qE 'Removable Media: (Removable|Yes)|Ejectable Media: (Yes|Ejectable)|Virtual: Yes|Device Location: External'; then
+    # `diskutil` pads the values with spaces, so match whitespace, not a single space.
+    # `Protocol: Secure Digital` covers built-in readers macOS reports as internal.
+    if ! diskutil info "$disk" | grep -qE 'Removable Media:[[:space:]]*(Removable|Yes)|Ejectable Media:[[:space:]]*(Yes|Ejectable)|Protocol:[[:space:]]*Secure Digital|Virtual:[[:space:]]*Yes|Device Location:[[:space:]]*External'; then
       echo "error: $disk does not look like a removable/external disk — refusing to write it" >&2
       exit 1
     fi
@@ -162,12 +217,12 @@ flash-image image device:
     diskutil unmountDisk "$disk"
     if [[ "$image" == *.zst ]]; then
       if command -v zstd >/dev/null 2>&1; then
-        zstd -dc "$image" | sudo dd of="$rdisk" bs=4m
+        zstd -dc "$image" | sudo dd of="$rdisk" bs=4M
       else
-        nix run --inputs-from . nixpkgs#zstd -- -dc "$image" | sudo dd of="$rdisk" bs=4m
+        nix run --inputs-from . nixpkgs#zstd -- -dc "$image" | sudo dd of="$rdisk" bs=4M
       fi
     else
-      sudo dd if="$image" of="$rdisk" bs=4m
+      sudo dd if="$image" of="$rdisk" bs=4M
     fi
     sync
     diskutil eject "$disk"
