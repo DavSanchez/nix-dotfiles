@@ -10,8 +10,9 @@ in
   services = {
     radicle = {
       enable = false; # preparing
-      publicKey = config.sops.secrets."radicle/mora/pub_key".path;
-      privateKey = config.sops.secrets."radicle/mora/priv_key".path;
+      # Not in secrets.yaml yet — restore together with the declarations below.
+      # publicKey = config.sops.secrets."radicle/mora/pub_key".path;
+      # privateKey = config.sops.secrets."radicle/mora/priv_key".path;
       httpd = {
         enable = true;
         listenPort = 8888; # default 8080 picked by qbittorrent
@@ -52,7 +53,8 @@ in
       inherit domain;
       group = config.services.caddy.group;
       dnsProvider = "gandiv5";
-      environmentFile = config.sops.secrets.acme_gandi_env_file.path;
+      # The secret eter uses for its Gandi DNS-01 certs.
+      environmentFile = config.sops.secrets.gandi_pat.path;
       extraDomainNames = [ "radicle.${domain}" ];
     };
   };
@@ -63,10 +65,10 @@ in
     443
   ];
 
-  # Secrets required by this module
+  # `gandi_pat` is declared in ./livedns.nix.
   sops.secrets = {
-    acme_gandi_env_file = { };
-    "radicle/mora/pub_key" = { };
-    "radicle/mora/priv_key" = { };
+    # radicle keys, once they exist:
+    # "radicle/mora/pub_key" = { };
+    # "radicle/mora/priv_key" = { };
   };
 }

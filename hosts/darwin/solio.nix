@@ -24,11 +24,25 @@
     config = {
       virtualisation = {
         darwin-builder = {
-          diskSize = 40 * 1024;
-          memorySize = 4 * 1024;
+          # Store plus build trees and image scratch (see build-dir below).
+          diskSize = 80 * 1024;
+          # The VM is always up (KeepAlive) and has no balloon driver, so this is
+          # RAM the 16 GB host never gets back — kept modest given that budget.
+          # Slightly above the old 4G that left ~0 margin against the -j4 OOM noted
+          # below; compile jobs stay capped rather than raising this further.
+          memorySize = 6 * 1024;
         };
         cores = 4;
       };
+      # The guest's / is a RAM-backed tmpfs (~half of memorySize) and Nix builds under
+      # $TMPDIR by default; /nix/var isn't its own mount, so it's on that tmpfs too —
+      # confirmed via `df` inside the guest. /nix/.rw-store is the actual disk-backed
+      # mount (the writable overlay layer over the persistent qcow2, per nixpkgs'
+      # vz-vm.nix) — build-dir has to live there, not under /nix/var or /nix/store.
+      nix.settings.build-dir = "/nix/.rw-store/builds";
+      # Remote builds take the job count from the builder, not the client, so this is
+      # what caps a kernel compile: -j2 ~2G, -j4 ~3G and OOM in a 4G guest.
+      nix.settings.cores = 2;
     };
   };
 

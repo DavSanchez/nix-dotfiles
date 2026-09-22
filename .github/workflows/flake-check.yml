@@ -44,6 +44,8 @@ jobs:
     if: needs.changed.outputs.changed == 'true'
     name: nix flake check (${{ matrix.system }})
     strategy:
+      # Let every system report its own result instead of cancelling the rest.
+      fail-fast: false
       matrix:
         include:
           - system: x86_64-linux

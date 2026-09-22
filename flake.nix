@@ -19,7 +19,6 @@
     darwin.inputs.nixpkgs.follows = "nixpkgs";
 
     hardware.url = "github:nixos/nixos-hardware";
-    nixos-raspberrypi.url = "github:nvmd/nixos-raspberrypi/main";
 
     nix-relic.url = "github:DavSanchez/Nix-Relic";
     nix-relic.inputs.nixpkgs.follows = "nixpkgs";
@@ -50,7 +49,6 @@
       nixpkgs,
       home-manager,
       darwin,
-      nixos-raspberrypi,
       deploy-rs,
       ...
     }@inputs:
@@ -64,11 +62,15 @@
       # This is a function that generates an attribute by calling a function you
       # pass to it, with each system as an argument
       forAllSystems = nixpkgs.lib.genAttrs systems;
+
+      # Turns a Raspberry Pi nixosConfiguration into a custom, bootable SD image for
+      # its board — see lib/nixos-sd-image.nix.
+      sdImageFor = import ./lib/nixos-sd-image.nix { inherit nixpkgs; };
     in
     {
       # Custom packages
       # Acessible through 'nix build', 'nix shell', etc
-      packages = forAllSystems (
+      packages = nixpkgs.lib.recursiveUpdate (forAllSystems (
         system:
         let
           pkgs = nixpkgs.legacyPackages.${system};
@@ -77,7 +79,13 @@
         nixpkgs.lib.filterAttrs (
           _: pkg: !(pkg ? meta.platforms) || nixpkgs.lib.elem system pkg.meta.platforms
         ) allPkgs
-      );
+      )) {
+        # Custom per-host SD images (`just sd-image <host>`) — see lib/nixos-sd-image.nix.
+        aarch64-linux = {
+          mora-sd-image = (sdImageFor self.nixosConfigurations.mora).config.system.build.sdImage;
+          bruma-sd-image = (sdImageFor self.nixosConfigurations.bruma).config.system.build.sdImage;
+        };
+      };
 
       # Formatter for the nix files, available through 'nix fmt'
       formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt-tree);
@@ -93,10 +101,18 @@
       # templates = import ./templates;
 
       nixosConfigurations = {
-        # mora = nixos-raspberrypi.lib.nixosSystem {
-        #   specialArgs = { inherit inputs; };
-        #   modules = [ ./hosts/nixos/mora.nix ];
-        # };
+        # Raspberry Pi boards: `nixos-hardware` board profile (kernel + config.txt) plus
+        # hosts/nixos/modules/raspberry-pi.nix, which matches the official SD image's layout.
+        mora = nixpkgs.lib.nixosSystem {
+          system = "aarch64-linux";
+          specialArgs = { inherit inputs; };
+          modules = [ ./hosts/nixos/mora.nix ];
+        };
+        bruma = nixpkgs.lib.nixosSystem {
+          system = "aarch64-linux";
+          specialArgs = { inherit inputs; };
+          modules = [ ./hosts/nixos/bruma.nix ];
+        };
         eter = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = { inherit inputs; };
@@ -160,14 +176,22 @@
             path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.eter;
           };
         };
-        # mora = {
-        #   hostname = "mora.local";
-        #   sshUser = "david";
-        #   profiles.system = {
-        #     user = "root";
-        #     path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.mora;
-        #   };
-        # };
+        mora = {
+          hostname = "mora.local";
+          sshUser = "david";
+          profiles.system = {
+            user = "root";
+            path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.mora;
+          };
+        };
+        bruma = {
+          hostname = "bruma.local";
+          sshUser = "david";
+          profiles.system = {
+            user = "root";
+            path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.bruma;
+          };
+        };
       };
 
       checks =
