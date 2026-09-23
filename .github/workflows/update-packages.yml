@@ -27,36 +27,74 @@ jobs:
       - name: Discover packages
         id: discover
         run: |
-          ALL_PKGS=$(nix flake show --json 2>/dev/null \
-            | jq -r '[.packages | to_entries[] | .value | keys[]] | unique | .[]')
+          set -euo pipefail
+
+          # Evaluate each package in one system it is actually exposed for, so
+          # packages that only exist on, say, aarch64-linux are still handled.
+          # `nix flake show` flattens that away; group by name and pick a stable
+          # probe system instead.
+          nix flake show --json 2>/dev/null \
+            | jq -r '
+                .packages as $packages
+                | [ $packages | to_entries[] | .key as $system | .value | keys[] | { name: ., system: $system } ]
+                | group_by(.name)
+                | map(
+                    . as $entries
+                    | ([$entries[].system]
+                       | if index("x86_64-linux") then "x86_64-linux"
+                         elif index("aarch64-linux") then "aarch64-linux"
+                         elif index("aarch64-darwin") then "aarch64-darwin"
+                         else .[0]
+                         end) as $probe
+                    | "\($entries[0].name)\t\($probe)"
+                  )
+                | .[]' > "$RUNNER_TEMP/packages.tsv"
 
           EXCLUDE="${{ env.EXCLUDE_PACKAGES }}"
-          if [ -n "$EXCLUDE" ]; then
-            FILTERED=$(echo "$ALL_PKGS" | grep -vxF <(echo "$EXCLUDE" | tr ',' '\n') || true)
-          else
-            FILTERED="$ALL_PKGS"
-          fi
+          is_excluded() {
+            [ -n "$EXCLUDE" ] || return 1
+            printf '%s\n' "$EXCLUDE" | tr ',' '\n' | tr -d ' ' | grep -qxF "$1"
+          }
 
           MATRIX="[]"
-          for pkg in $FILTERED; do
-            PLATFORMS=$(nix eval --json ".#packages.x86_64-linux.${pkg}.meta.platforms" 2>/dev/null || echo 'null')
-            
-            if [ "$PLATFORMS" = "null" ]; then
-              PLATFORMS=$(nix eval --json ".#packages.aarch64-darwin.${pkg}.meta.platforms" 2>/dev/null || echo '[]')
+          while IFS=$'\t' read -r pkg system; do
+            [ -n "$pkg" ] || continue
+
+            if is_excluded "$pkg"; then
+              echo "skip $pkg: listed in EXCLUDE_PACKAGES" >&2
+              continue
             fi
-            
-            if echo "$PLATFORMS" | jq -e 'any(startswith("x86_64-linux") or startswith("aarch64-linux") or startswith("armv") or startswith("i686-linux"))' > /dev/null; then
-              if echo "$PLATFORMS" | jq -e 'any(startswith("x86_64-linux") or startswith("i686-linux"))' > /dev/null; then
-                RUNNER="ubuntu-latest"
-              else
-                RUNNER="ubuntu-24.04-arm"
-              fi
-            else
+
+            # Only source packages carry a `version` nix-update can bump. Generated
+            # outputs — the per-host *-sd-image builds, for instance — do not, and
+            # would otherwise make the update job fail on a missing attribute.
+            if ! nix eval --raw ".#packages.${system}.${pkg}.version" >/dev/null 2>&1; then
+              echo "skip $pkg: no version attribute (not a nix-update-able package)" >&2
+              continue
+            fi
+
+            # Pick the runner from the package's declared platforms; fall back to the
+            # runner for the system we probed when the package declares none (it is
+            # then buildable everywhere, so either Linux or macOS would do).
+            case "$system" in
+              aarch64-linux) DEFAULT_RUNNER="ubuntu-24.04-arm" ;;
+              x86_64-linux) DEFAULT_RUNNER="ubuntu-latest" ;;
+              *) DEFAULT_RUNNER="macos-latest" ;;
+            esac
+
+            PLATFORMS=$(nix eval --json ".#packages.${system}.${pkg}.meta.platforms" 2>/dev/null || echo '[]')
+            if echo "$PLATFORMS" | jq -e 'any(startswith("x86_64-linux") or startswith("i686-linux"))' > /dev/null; then
+              RUNNER="ubuntu-latest"
+            elif echo "$PLATFORMS" | jq -e 'any(startswith("aarch64-linux") or startswith("armv"))' > /dev/null; then
+              RUNNER="ubuntu-24.04-arm"
+            elif echo "$PLATFORMS" | jq -e 'any(. == "aarch64-darwin" or startswith("x86_64-darwin"))' > /dev/null; then
               RUNNER="macos-latest"
+            else
+              RUNNER="$DEFAULT_RUNNER"
             fi
-            
+
             MATRIX=$(echo "$MATRIX" | jq -c --arg pkg "$pkg" --arg runner "$RUNNER" '. + [{"package": $pkg, "runner": $runner}]')
-          done
+          done < "$RUNNER_TEMP/packages.tsv"
 
           echo "matrix=$MATRIX" >> "$GITHUB_OUTPUT"
           echo "Discovered matrix: $MATRIX"
