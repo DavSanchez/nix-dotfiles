@@ -55,7 +55,10 @@ in
       dnsProvider = "gandiv5";
       # The secret eter uses for its Gandi DNS-01 certs.
       environmentFile = config.sops.secrets.gandi_pat.path;
-      extraDomainNames = [ "radicle.${domain}" ];
+      extraDomainNames = [
+        "radicle.${domain}"
+        "grafana.${domain}"
+      ];
     };
   };
 

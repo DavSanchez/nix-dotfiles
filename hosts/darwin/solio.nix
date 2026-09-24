@@ -12,6 +12,7 @@
     ./modules/shells.nix
     ./modules/networking.nix
     ./modules/services.nix
+    ./modules/prometheus-node.nix
   ];
 
   users.users."david".openssh.authorizedKeys.keys = [

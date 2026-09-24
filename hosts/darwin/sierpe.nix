@@ -12,6 +12,7 @@
     ./modules/shells.nix
     ./modules/networking.nix
     ./modules/services.nix
+    ./modules/prometheus-node.nix
   ];
 
   # Linux builder's performance/tuning settings
