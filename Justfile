@@ -177,7 +177,14 @@ sd-image host:
     echo "injecting $key into a non-store copy of the image (SSH host key + sops age identity)" >&2
     # Keep debugfs paths free of whitespace; its -R request parser splits tokens.
     work="$(mktemp -d /tmp/nixos-sd-image.XXXXXXXX)"
-    trap 'rm -rf "$work"' EXIT
+    output_tmp=""
+    cleanup() {
+      rm -rf "$work"
+      if [[ -n "$output_tmp" ]]; then
+        rm -rf "$output_tmp"
+      fi
+    }
+    trap cleanup EXIT
     nix run --inputs-from . nixpkgs#zstd -- -dc "$image" > "$work/disk.img"
     # MBR partition entry 2: type byte at 466, start LBA at 470, sector count at 474.
     ptype="$(dd if="$work/disk.img" bs=1 skip=466 count=1 2>/dev/null | od -An -tu1 | tr -d '[:space:]')"
@@ -201,8 +208,13 @@ sd-image host:
     mkdir -p "$PWD/local/images"
     chmod 700 "$PWD/local/images"
     injected="$PWD/local/images/{{host}}.img.zst"
-    nix run --inputs-from . nixpkgs#zstd -- -T0 --rm "$work/disk.img" -o "$injected"
-    chmod 600 "$injected"
+    # Compress into a private staging directory, then atomically replace any
+    # previous image. This keeps partial output private and makes rebuilds repeatable.
+    output_tmp="$(mktemp -d "$PWD/local/images/.sd-image.XXXXXXXX")"
+    staged="$output_tmp/{{host}}.img.zst"
+    nix run --inputs-from . nixpkgs#zstd -- -T0 --rm "$work/disk.img" -o "$staged"
+    chmod 600 "$staged"
+    mv -f "$staged" "$injected"
     echo "$injected"
 
 # Write an SD-card image (from `just sd-image`) onto a raw disk. macOS-only; ERASES the disk.
