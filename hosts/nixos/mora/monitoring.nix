@@ -11,16 +11,15 @@
 let
   domain = "mora.davidslt.es";
 
-  # Keep in sync with hosts/nixos/modules/node-exporter.nix.
-  nodeExporterPort = 9100;
-  prometheusPort = 9001;
-  grafanaPort = 2342;
+  # nixpkgs' Grafana module doesn't expose a `user` option (it hard-codes the
+  # `grafana` system user), so read it from the unit the module generates.
+  grafanaUser = config.systemd.services.grafana.serviceConfig.User;
 in
 {
   services.prometheus = {
     enable = true;
+    # Prometheus' own defaults (port 9090, exposed on localhost only here).
     listenAddress = "127.0.0.1";
-    port = prometheusPort;
 
     # 30 days, capped so a runaway can't fill mora's SD card. Scraping every
     # minute rather than the 15s default also cuts the write amplification.
@@ -34,11 +33,13 @@ in
     scrapeConfigs = [
       {
         job_name = "prometheus";
-        static_configs = [ { targets = [ "127.0.0.1:${toString prometheusPort}" ]; } ];
+        static_configs = [ { targets = [ "127.0.0.1:${toString config.services.prometheus.port}" ]; } ];
       }
       {
         job_name = "mora";
-        static_configs = [ { targets = [ "127.0.0.1:${toString nodeExporterPort}" ]; } ];
+        static_configs = [
+          { targets = [ "127.0.0.1:${toString config.services.prometheus.exporters.node.port}" ]; }
+        ];
       }
     ]
     # The other lab hosts, by Tailscale MagicDNS name.
@@ -46,7 +47,9 @@ in
       map
         (host: {
           job_name = host;
-          static_configs = [ { targets = [ "${host}:${toString nodeExporterPort}" ]; } ];
+          static_configs = [
+            { targets = [ "${host}:${toString config.services.prometheus.exporters.node.port}" ]; }
+          ];
         })
         [
           "eter"
@@ -59,10 +62,10 @@ in
 
   services.grafana = {
     enable = true;
+    # Grafana's own defaults (port 3000, exposed on localhost only here).
     settings = {
       server = {
         http_addr = "127.0.0.1";
-        http_port = grafanaPort;
         domain = "grafana.${domain}";
         root_url = "https://grafana.${domain}/";
       };
@@ -84,7 +87,7 @@ in
           type = "prometheus";
           uid = "prometheus";
           access = "proxy";
-          url = "http://127.0.0.1:${toString prometheusPort}";
+          url = "http://127.0.0.1:${toString config.services.prometheus.port}";
           isDefault = true;
           editable = false;
         }
@@ -97,6 +100,8 @@ in
           type = "file";
           disableDeletion = false;
           updateIntervalSeconds = 60;
+          # Vendored from grafana.com dashboard 1860 ("Node Exporter Full"), with
+          # the datasource UID pinned to `prometheus`.
           options.path = ./dashboards;
         }
       ];
@@ -106,16 +111,16 @@ in
   services.caddy.virtualHosts."grafana.${domain}" = {
     useACMEHost = domain;
     extraConfig = ''
-      reverse_proxy http://127.0.0.1:${toString grafanaPort}
+      reverse_proxy http://127.0.0.1:${toString config.services.grafana.settings.server.http_port}
     '';
   };
 
   sops.secrets = {
     grafana_admin_password = {
-      owner = "grafana";
+      owner = grafanaUser;
     };
     grafana_secret_key = {
-      owner = "grafana";
+      owner = grafanaUser;
     };
   };
 }
