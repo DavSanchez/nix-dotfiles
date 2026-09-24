@@ -54,7 +54,9 @@
 
     qbittorrent = {
       enable = true;
-      openFirewall = true;
+      # The WebUI is served with TLS through Caddy (qbittorrent.eter.davidslt.es);
+      # don't also expose the plain-HTTP port on every interface.
+      openFirewall = false;
       profileDir = "/seclusium/zg/qbittorrent";
     };
 
