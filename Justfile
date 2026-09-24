@@ -175,8 +175,7 @@ sd-image host:
     # (see lib/nixos-sd-image.nix): decompress, write /ssh-host-key into the ext4
     # root partition with debugfs, then recompress to local/images/.
     echo "injecting $key into a non-store copy of the image (SSH host key + sops age identity)" >&2
-    # Keep debugfs paths free of whitespace; its -R request parser splits tokens.
-    work="$(mktemp -d /tmp/nixos-sd-image.XXXXXXXX)"
+    work="$(mktemp -d)"
     output_tmp=""
     cleanup() {
       rm -rf "$work"
@@ -193,16 +192,17 @@ sd-image host:
     sectors="$(dd if="$work/disk.img" bs=1 skip=474 count=4 2>/dev/null | od -An -tu4 | tr -d '[:space:]')"
     [[ -n "$lba" && -n "$sectors" ]] || { echo "error: could not read the root partition table" >&2; exit 1; }
     dd if="$work/disk.img" of="$work/root.img" bs=512 skip="$lba" count="$sectors" 2>/dev/null
-    # `debugfs -R` splits its request on whitespace, so stage the key at a path
-    # without spaces (the mktemp dir) before writing it into the image.
+    # Stage the key next to the extracted filesystem; debugfs uses relative paths
+    # in its whitespace-splitting request parser.
     cp "$key" "$work/hostkey"
     nix shell --inputs-from . nixpkgs#e2fsprogs -c bash -c '
       set -euo pipefail
       work="$1"
-      debugfs -w -R "write $work/hostkey /ssh-host-key" "$work/root.img" >/dev/null
-      debugfs -w -R "sif /ssh-host-key mode 0100600" "$work/root.img" >/dev/null
-      debugfs -w -R "sif /ssh-host-key uid 0" "$work/root.img" >/dev/null
-      debugfs -w -R "sif /ssh-host-key gid 0" "$work/root.img" >/dev/null
+      cd "$work"
+      debugfs -w -R "write hostkey /ssh-host-key" root.img >/dev/null
+      debugfs -w -R "sif /ssh-host-key mode 0100600" root.img >/dev/null
+      debugfs -w -R "sif /ssh-host-key uid 0" root.img >/dev/null
+      debugfs -w -R "sif /ssh-host-key gid 0" root.img >/dev/null
     ' _ "$work"
     dd if="$work/root.img" of="$work/disk.img" bs=512 seek="$lba" conv=notrunc 2>/dev/null
     mkdir -p "$PWD/local/images"
