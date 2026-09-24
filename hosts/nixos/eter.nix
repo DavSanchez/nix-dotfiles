@@ -13,6 +13,7 @@
     ./modules/locale.nix
     ./modules/network.nix
     ./modules/nix.nix
+    ./modules/node-exporter.nix
     ./modules/ssh.nix
     ./modules/user.nix
 

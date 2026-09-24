@@ -14,12 +14,14 @@
     ./modules/locale.nix
     ./modules/network.nix
     ./modules/nix.nix
+    ./modules/node-exporter.nix
     ./modules/raspberry-pi.nix
     ./modules/ssh.nix
     ./modules/user.nix
 
     ./mora/services.nix
     ./mora/livedns.nix
+    ./mora/monitoring.nix
   ];
 
   networking = {
