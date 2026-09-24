@@ -177,13 +177,19 @@ sd-image host:
     work="$(mktemp -d)"
     trap 'rm -rf "$work"' EXIT
     nix run --inputs-from . nixpkgs#zstd -- -dc "$image" > "$work/disk.img"
-    # MBR partition entry 2 (type 0x83): start LBA at byte 470, sector count at 474.
+    # MBR partition entry 2: type byte at 466, start LBA at 470, sector count at 474.
+    ptype="$(dd if="$work/disk.img" bs=1 skip=466 count=1 2>/dev/null | od -An -tu1 | tr -d '[:space:]')"
+    [[ "$ptype" == "131" ]] || { echo "error: MBR entry 2 is not a Linux (0x83) partition (type byte $ptype)" >&2; exit 1; }
     lba="$(dd if="$work/disk.img" bs=1 skip=470 count=4 2>/dev/null | od -An -tu4 | tr -d '[:space:]')"
     sectors="$(dd if="$work/disk.img" bs=1 skip=474 count=4 2>/dev/null | od -An -tu4 | tr -d '[:space:]')"
     [[ -n "$lba" && -n "$sectors" ]] || { echo "error: could not read the root partition table" >&2; exit 1; }
     dd if="$work/disk.img" of="$work/root.img" bs=512 skip="$lba" count="$sectors" 2>/dev/null
+    # `debugfs -R` splits its request on whitespace, so stage the key at a path
+    # without spaces (the mktemp dir) before writing it into the image.
+    cp "$key" "$work/hostkey"
     nix shell --inputs-from . nixpkgs#e2fsprogs -c bash -c "
-      debugfs -w -R 'write $key /ssh-host-key' '$work/root.img' >/dev/null
+      set -euo pipefail
+      debugfs -w -R 'write $work/hostkey /ssh-host-key' '$work/root.img' >/dev/null
       debugfs -w -R 'sif /ssh-host-key mode 0100600' '$work/root.img' >/dev/null
       debugfs -w -R 'sif /ssh-host-key uid 0' '$work/root.img' >/dev/null
       debugfs -w -R 'sif /ssh-host-key gid 0' '$work/root.img' >/dev/null
