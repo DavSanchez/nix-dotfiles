@@ -53,8 +53,8 @@ nixosConfig.extendModules {
             text = ''
               if [ -f /ssh-host-key ]; then
                 mkdir -p /etc/ssh
-                ${pkgs.coreutils}/bin/install -m 0600 -o root -g root /ssh-host-key /etc/ssh/ssh_host_ed25519_key
-                rm -f /ssh-host-key
+                ${pkgs.coreutils}/bin/install -m 0600 -o root -g root /ssh-host-key /etc/ssh/ssh_host_ed25519_key &&
+                  rm -f /ssh-host-key
               fi
             '';
           };
