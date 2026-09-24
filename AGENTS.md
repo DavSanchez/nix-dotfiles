@@ -9,12 +9,14 @@ Nix flake managing NixOS, nix-darwin, and Home Manager configs (repo `DavSanchez
 - `home/darwin/*.nix` — Home Manager entrypoints (`sierpe`, `solio`, `home-nr.nix`). All are aarch64-darwin only.
 - `home/modules/` — per-user Home Manager modules (internal to this machine set). `modules/{nixos,darwin}/` — reusable modules exported from the flake (`self.nixosModules`, `self.darwinModules`); `self.darwinModules.networking` and `self.darwinModules.stevenblack` are custom and power the `/etc/hosts` tests.
 - `pkgs/` — custom packages (`kontroll`, `omniwm`); `overlays/`; `tests/darwin/` + `lib/darwin-tests.nix` — module test harness.
+- `scripts/` — bash scripts the Justfile wraps for its multi-step recipes (`sd-image`, `flash-image`, `host-key`, `linux-builder`, `config-diff`, `build-pkg`/`eval-config`); `config-attr.sh` resolves a config name to its flake namespace. They are shellchecked in CI and expect their tools from the dev shell.
 - The `nr` machine is keyed by Apple serial: darwin config name is `V9X576T260`, home config is `davidsanchez@V9X576T260` (host file is `hosts/darwin/nr.nix`).
 
 ## Commands
 
 - Format all Nix: `nix fmt` (formatter is `nixfmt-tree`).
 - Check the flake: `nix flake check -L --keep-going`. Only run this on Linux; darwin configs don't evaluate on Linux. On macOS, build darwin checks individually (see tests) — CI also skips the `deploy-activate`/`deploy-schema` checks there.
+- Dev shell: `nix develop` exposes every tool the Justfile, `scripts/` and CI workflows shell out to (`scriptTools` in `flake.nix`) — `just`, `sops`, `ssh-to-age`, `ssh-keygen`, `jq`, `zstd`, `debugfs`, `nc`, `dix`, `nix-diff`, `shellcheck`, … The same list is built as the `dev-shell` check, so a nixpkgs bump that breaks one of those packages fails CI instead of a recipe at runtime.
 - Darwin module tests: `nix build .#checks.aarch64-darwin.<test>`. Every `.nix` file in `tests/darwin/` becomes a check automatically.
 - Build a package inside a config's `pkgs`: `just build-pkg <host> <pkg>` (auto-detects nixos/darwin/home); `just build-pkg-dry` for dry-run. Raw escape hatch: `just build-attr <attr>`.
 - Eval any config sub-attr as JSON: `just eval-config <host|user@host> <attr-path>` (needed for quoted names like `david@sierpe`).

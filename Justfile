@@ -1,74 +1,45 @@
-flake := "github:DavSanchez/nix-dotfiles"
-
 _default:
     @just --list
-    
+
 update-sops:
     sops updatekeys secrets/secrets.yaml
 
 # Restart the linux-builder VM and wait for its SSH port to accept connections again
-# `launchctl kickstart` fails (exit 113) if the service is already down, so tear
-# down the daemon first (no-op if not loaded) and re-spin it from its plist.
 restart-linux-builder port="31022":
-    sudo launchctl bootout system/org.nixos.linux-builder 2>/dev/null || true
-    sudo launchctl bootstrap system /Library/LaunchDaemons/org.nixos.linux-builder.plist
-    @echo "linux-builder: restarted, waiting for port {{port}} to accept connections..."
-    @for i in $(seq 1 120); do nc -z -w 1 localhost "{{port}}" 2>/dev/null && { echo "linux-builder is up on port {{port}}"; exit 0; }; sleep 1; done; echo "error: linux-builder did not come up on port {{port}} within 120s" >&2; exit 1
+    @bash "$PWD/scripts/linux-builder.sh" restart {{quote(port)}}
 
 # Start the linux-builder VM and wait for its SSH port (no-op when already loaded).
 start-linux-builder port="31022":
-    @if sudo launchctl print system/org.nixos.linux-builder >/dev/null 2>&1; then \
-      echo "linux-builder: already running"; \
-    else \
-      sudo launchctl bootstrap system /Library/LaunchDaemons/org.nixos.linux-builder.plist; \
-      echo "linux-builder: started, waiting for port {{port}} to accept connections..."; \
-    fi
-    @for i in $(seq 1 120); do nc -z -w 1 localhost "{{port}}" 2>/dev/null && { echo "linux-builder is up on port {{port}}"; exit 0; }; sleep 1; done; echo "error: linux-builder did not come up on port {{port}} within 120s" >&2; exit 1
+    @bash "$PWD/scripts/linux-builder.sh" start {{quote(port)}}
 
+# Stop the linux-builder VM to give its RAM and disk back to the host.
 # It returns on the next login/reboot with an empty store.
-# Stop the linux-builder VM to give its RAM and disk back to the host — e.g. just stop-linux-builder
 stop-linux-builder:
-    @if sudo launchctl print system/org.nixos.linux-builder >/dev/null 2>&1; then \
-      sudo launchctl bootout system/org.nixos.linux-builder && echo "linux-builder: stopped (RAM/disk released; Linux builds fail until 'just start-linux-builder')"; \
-    else \
-      echo "linux-builder: not running"; \
-    fi
+    @bash "$PWD/scripts/linux-builder.sh" stop
 
 # Compare home-manager config.home.path between two branches with dix
 dix-home config branch base="master":
-    dix \
-      $(nix build "{{flake}}/{{base}}#homeConfigurations.\"{{config}}\".activationPackage" --no-link --print-out-paths) \
-      $(nix build "{{flake}}/{{branch}}#homeConfigurations.\"{{config}}\".activationPackage" --no-link --print-out-paths)
+    @bash "$PWD/scripts/config-diff.sh" dix {{quote(config)}} {{quote(branch)}} {{quote(base)}}
 
 # Compare home-manager config.home.path between two branches with nix-diff
 diff-home config branch base="master":
-    nix-diff \
-      $(nix build "{{flake}}/{{base}}#homeConfigurations.\"{{config}}\".activationPackage" --no-link --print-out-paths) \
-      $(nix build "{{flake}}/{{branch}}#homeConfigurations.\"{{config}}\".activationPackage" --no-link --print-out-paths)
+    @bash "$PWD/scripts/config-diff.sh" nix-diff {{quote(config)}} {{quote(branch)}} {{quote(base)}}
 
 # Compare nix-darwin toplevel between two branches with dix
 dix-darwin config branch base="master":
-    dix \
-      $(nix build "{{flake}}/{{base}}#darwinConfigurations.\"{{config}}\".config.system.build.toplevel" --no-link --print-out-paths) \
-      $(nix build "{{flake}}/{{branch}}#darwinConfigurations.\"{{config}}\".config.system.build.toplevel" --no-link --print-out-paths)
+    @bash "$PWD/scripts/config-diff.sh" dix {{quote(config)}} {{quote(branch)}} {{quote(base)}}
 
 # Compare nix-darwin toplevel between two branches with nix-diff
 diff-darwin config branch base="master":
-    nix-diff \
-      $(nix build "{{flake}}/{{base}}#darwinConfigurations.\"{{config}}\".config.system.build.toplevel" --no-link --print-out-paths) \
-      $(nix build "{{flake}}/{{branch}}#darwinConfigurations.\"{{config}}\".config.system.build.toplevel" --no-link --print-out-paths)
+    @bash "$PWD/scripts/config-diff.sh" nix-diff {{quote(config)}} {{quote(branch)}} {{quote(base)}}
 
 # Compare NixOS toplevel between two branches with dix
 dix-nixos config branch base="master":
-    dix \
-      $(nix build "{{flake}}/{{base}}#nixosConfigurations.\"{{config}}\".config.system.build.toplevel" --no-link --print-out-paths) \
-      $(nix build "{{flake}}/{{branch}}#nixosConfigurations.\"{{config}}\".config.system.build.toplevel" --no-link --print-out-paths)
+    @bash "$PWD/scripts/config-diff.sh" dix {{quote(config)}} {{quote(branch)}} {{quote(base)}}
 
 # Compare NixOS toplevel between two branches with nix-diff
 diff-nixos config branch base="master":
-    nix-diff \
-      $(nix build "{{flake}}/{{base}}#nixosConfigurations.\"{{config}}\".config.system.build.toplevel" --no-link --print-out-paths) \
-      $(nix build "{{flake}}/{{branch}}#nixosConfigurations.\"{{config}}\".config.system.build.toplevel" --no-link --print-out-paths)
+    @bash "$PWD/scripts/config-diff.sh" nix-diff {{quote(config)}} {{quote(branch)}} {{quote(base)}}
 
 # Search the exact nixpkgs revision pinned by this flake — e.g. just search-nixpkgs firefox
 search-nixpkgs term:
@@ -92,33 +63,15 @@ build-home-pkg config attr:
 
 # Build a package from any config (auto-detects nixos / darwin / home-manager) — e.g. just build-pkg mora hermes-agent
 build-pkg config attr:
-    @if nix eval --json ".#nixosConfigurations" --apply 'c: builtins.hasAttr "{{config}}" c' 2>/dev/null | grep -q true; then \
-      just build-nixos-pkg {{config}} {{attr}}; \
-    elif nix eval --json ".#darwinConfigurations" --apply 'c: builtins.hasAttr "{{config}}" c' 2>/dev/null | grep -q true; then \
-      just build-darwin-pkg {{config}} {{attr}}; \
-    else \
-      just build-home-pkg {{config}} {{attr}}; \
-    fi
+    @bash "$PWD/scripts/build-pkg.sh" {{quote(config)}} {{quote(attr)}}
 
 # Same as build-pkg but only prints the build plan (no actual build) — e.g. just build-pkg-dry mora hermes-agent
 build-pkg-dry config attr:
-    @if nix eval --json ".#nixosConfigurations" --apply 'c: builtins.hasAttr "{{config}}" c' 2>/dev/null | grep -q true; then \
-      nix build --dry-run ".#nixosConfigurations.{{config}}.pkgs.{{attr}}"; \
-    elif nix eval --json ".#darwinConfigurations" --apply 'c: builtins.hasAttr "{{config}}" c' 2>/dev/null | grep -q true; then \
-      nix build --dry-run ".#darwinConfigurations.{{config}}.pkgs.{{attr}}"; \
-    else \
-      nix build --dry-run ".#homeConfigurations.\"{{config}}\".pkgs.{{attr}}"; \
-    fi
+    @bash "$PWD/scripts/build-pkg.sh" --dry-run {{quote(config)}} {{quote(attr)}}
 
 # Evaluate (don't build) a sub-attribute as JSON — e.g. just eval-config "david@sierpe" config.programs.zed-editor.userSettings
 eval-config config subpath:
-    @if nix eval --json ".#nixosConfigurations" --apply 'c: builtins.hasAttr "{{config}}" c' 2>/dev/null | grep -q true; then \
-      nix eval --json ".#nixosConfigurations.{{config}}.{{subpath}}"; \
-    elif nix eval --json ".#darwinConfigurations" --apply 'c: builtins.hasAttr "{{config}}" c' 2>/dev/null | grep -q true; then \
-      nix eval --json ".#darwinConfigurations.{{config}}.{{subpath}}"; \
-    else \
-      nix eval --json ".#homeConfigurations.\"{{config}}\".{{subpath}}"; \
-    fi
+    @bash "$PWD/scripts/eval-config.sh" {{quote(config)}} {{quote(subpath)}}
 
 # Create a per-host ed25519 host key under the git-ignored local/host-keys/ dir.
 # It becomes the host's SSH identity and, via `sops.age.sshKeyPaths`, its age identity:
@@ -126,22 +79,7 @@ eval-config config subpath:
 # and the flashed card can decrypt secrets from the first boot.
 # Create or reuse a Raspberry Pi host key — e.g. just host-key mora
 host-key host:
-    #!/usr/bin/env bash
-    set -euo pipefail
-    # Trace every command with `JUST_TRACE=1 just host-key <host>`.
-    if [[ -n "${JUST_TRACE:-}" ]]; then set -x; fi
-    dir="$PWD/local/host-keys"
-    key="$dir/{{host}}.ed25519"
-    mkdir -p "$dir"
-    if [[ -e "$key" ]]; then
-      echo "reusing existing $key" >&2
-    else
-      ssh-keygen -t ed25519 -N "" -C "{{host}} host key" -f "$key"
-    fi
-    recipient="$(nix run --inputs-from . nixpkgs#ssh-to-age -- -i "$key.pub")"
-    printf '\nage recipient for %s: %s\n\n' "{{host}}" "$recipient"
-    echo "Add it to .sops.yaml (both the top-level 'keys:' list and the"
-    echo "'creation_rules' age list), then run: just update-sops"
+    @bash "$PWD/scripts/host-key.sh" {{quote(host)}}
 
 # A custom SD image that already boots straight into that host's real config (see
 # lib/nixos-sd-image.nix) — no root/nixos bootstrap deploy needed on first flash.
@@ -150,127 +88,9 @@ host-key host:
 # the image's sops age identity is already in .sops.yaml, so secrets work from boot.
 # Build a Raspberry Pi host's SD-card image — e.g. just sd-image mora
 sd-image host:
-    #!/usr/bin/env bash
-    set -euo pipefail
-    umask 077
-    # Trace every command with `JUST_TRACE=1 just sd-image <host>`.
-    if [[ -n "${JUST_TRACE:-}" ]]; then set -x; fi
-
-    # `system.build.sdImage` is a directory holding the compressed image under
-    # sd-image/ (plus nix-support/); the pure build itself carries no key.
-    out="$(nix build --no-link --print-out-paths ".#packages.aarch64-linux.{{host}}-sd-image")"
-    image="$(find "$out/sd-image" -maxdepth 1 -type f -print -quit)"
-    [[ -n "$image" ]] || { echo "error: no image file found under $out/sd-image" >&2; exit 1; }
-
-    key="$PWD/local/host-keys/{{host}}.ed25519"
-    if [[ ! -f "$key" ]]; then
-      echo "warning: $key not found — the image will generate its host key (and sops age" >&2
-      echo "         identity) on first boot; run 'just host-key {{host}}' then" >&2
-      echo "         'just update-sops' to pre-seed it before flashing." >&2
-      echo "$image"
-      exit 0
-    fi
-
-    # Inject the private host key into a copy of the image outside the Nix store
-    # (see lib/nixos-sd-image.nix): decompress, write /ssh-host-key into the ext4
-    # root partition with debugfs, then recompress to local/images/.
-    echo "injecting $key into a non-store copy of the image (SSH host key + sops age identity)" >&2
-    work="$(mktemp -d)"
-    output_tmp=""
-    cleanup() {
-      rm -rf "$work"
-      if [[ -n "$output_tmp" ]]; then
-        rm -rf "$output_tmp"
-      fi
-    }
-    trap cleanup EXIT
-    nix run --inputs-from . nixpkgs#zstd -- -dc "$image" > "$work/disk.img"
-    # MBR partition entry 2: type byte at 466, start LBA at 470, sector count at 474.
-    ptype="$(dd if="$work/disk.img" bs=1 skip=466 count=1 2>/dev/null | od -An -tu1 | tr -d '[:space:]')"
-    [[ "$ptype" == "131" ]] || { echo "error: MBR entry 2 is not a Linux (0x83) partition (type byte $ptype)" >&2; exit 1; }
-    lba="$(dd if="$work/disk.img" bs=1 skip=470 count=4 2>/dev/null | od -An -tu4 | tr -d '[:space:]')"
-    sectors="$(dd if="$work/disk.img" bs=1 skip=474 count=4 2>/dev/null | od -An -tu4 | tr -d '[:space:]')"
-    [[ -n "$lba" && -n "$sectors" ]] || { echo "error: could not read the root partition table" >&2; exit 1; }
-    dd if="$work/disk.img" of="$work/root.img" bs=512 skip="$lba" count="$sectors" 2>/dev/null
-    # Stage the key next to the extracted filesystem; debugfs uses relative paths
-    # in its whitespace-splitting request parser.
-    cp "$key" "$work/hostkey"
-    nix shell --inputs-from . nixpkgs#e2fsprogs -c bash -c '
-      set -euo pipefail
-      work="$1"
-      cd "$work"
-      debugfs -w -R "write hostkey /ssh-host-key" root.img >/dev/null
-      debugfs -w -R "sif /ssh-host-key mode 0100600" root.img >/dev/null
-      debugfs -w -R "sif /ssh-host-key uid 0" root.img >/dev/null
-      debugfs -w -R "sif /ssh-host-key gid 0" root.img >/dev/null
-    ' _ "$work"
-    dd if="$work/root.img" of="$work/disk.img" bs=512 seek="$lba" conv=notrunc 2>/dev/null
-    mkdir -p "$PWD/local/images"
-    chmod 700 "$PWD/local/images"
-    injected="$PWD/local/images/{{host}}.img.zst"
-    # Compress into a private staging directory, then atomically replace any
-    # previous image. This keeps partial output private and makes rebuilds repeatable.
-    output_tmp="$(mktemp -d "$PWD/local/images/.sd-image.XXXXXXXX")"
-    staged="$output_tmp/{{host}}.img.zst"
-    nix run --inputs-from . nixpkgs#zstd -- -T0 --rm "$work/disk.img" -o "$staged"
-    chmod 600 "$staged"
-    mv -f "$staged" "$injected"
-    echo "$injected"
+    @bash "$PWD/scripts/sd-image.sh" {{quote(host)}}
 
 # Write an SD-card image (from `just sd-image`) onto a raw disk. macOS-only; ERASES the disk.
 # Flash an image to an SD card — e.g. just flash-image ~/Downloads/nixos-image-*.aarch64-linux.img.zst disk4
 flash-image image device:
-    #!/usr/bin/env bash
-    set -euo pipefail
-    # Trace every command with `JUST_TRACE=1 just flash-image <image> <device>`.
-    if [[ -n "${JUST_TRACE:-}" ]]; then set -x; fi
-
-    if [[ "$(uname -s)" != Darwin ]]; then
-      echo "error: flash-image is macOS-only — it uses diskutil to identify/unmount the card and /dev/rdiskN to write it" >&2
-      echo "       on Linux: 'lsblk' to find the card, then: zstd -dc <image> | sudo dd of=/dev/sdX bs=4M status=progress && sync" >&2
-      exit 1
-    fi
-
-    image="{{image}}"; image="${image/#\~/$HOME}"
-    device="{{device}}"
-    # Also accept the sdImage output directory (e.g. a `nix build -o <host>` symlink):
-    # the actual image lives under its sd-image/ subdir.
-    if [[ -d "$image" ]]; then
-      resolved="$(find "$image/sd-image" -maxdepth 1 -type f -print -quit 2>/dev/null || true)"
-      [[ -n "$resolved" ]] || { echo "error: no image file under $image/sd-image" >&2; exit 1; }
-      image="$resolved"
-    fi
-    [[ -f "$image" ]] || { echo "error: $image is not a file" >&2; exit 1; }
-    num="${device#/dev/}"; num="${num#rdisk}"; num="${num#disk}"
-    [[ "$num" =~ ^[0-9]+$ ]] || { echo "error: '$device' is not a disk number, diskN or rdiskN" >&2; exit 1; }
-    disk="/dev/disk${num}"
-    rdisk="/dev/rdisk${num}"
-    [[ -b "$disk" || -c "$disk" ]] || { echo "error: $disk is not a disk device" >&2; exit 1; }
-
-    diskutil info "$disk" | grep -E 'Device / Media Name|Volume Name|Disk Size|Removable Media|Whole|Device Location' || true
-    # `diskutil` pads the values with spaces, so match whitespace, not a single space.
-    # `Protocol: Secure Digital` covers built-in readers macOS reports as internal.
-    if ! diskutil info "$disk" | grep -qE 'Removable Media:[[:space:]]*(Removable|Yes)|Ejectable Media:[[:space:]]*(Yes|Ejectable)|Protocol:[[:space:]]*Secure Digital|Virtual:[[:space:]]*Yes|Device Location:[[:space:]]*External'; then
-      echo "error: $disk does not look like a removable/external disk — refusing to write it" >&2
-      exit 1
-    fi
-
-    echo
-    echo "About to ERASE $disk and write:"
-    echo "  $image"
-    read -r -p 'Type "yes" to continue: ' answer
-    [[ "$answer" == yes ]] || { echo "aborted"; exit 1; }
-
-    diskutil unmountDisk "$disk"
-    if [[ "$image" == *.zst ]]; then
-      if command -v zstd >/dev/null 2>&1; then
-        zstd -dc "$image" | sudo dd of="$rdisk" bs=4M
-      else
-        nix run --inputs-from . nixpkgs#zstd -- -dc "$image" | sudo dd of="$rdisk" bs=4M
-      fi
-    else
-      sudo dd if="$image" of="$rdisk" bs=4M
-    fi
-    sync
-    diskutil eject "$disk"
-    echo "done: $disk"
+    @bash "$PWD/scripts/flash-image.sh" {{quote(image)}} {{quote(device)}}
