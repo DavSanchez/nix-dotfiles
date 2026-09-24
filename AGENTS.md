@@ -9,6 +9,7 @@ Nix flake managing NixOS, nix-darwin, and Home Manager configs (repo `DavSanchez
 - `home/darwin/*.nix` — Home Manager entrypoints (`sierpe`, `solio`, `home-nr.nix`). All are aarch64-darwin only.
 - `home/modules/` — per-user Home Manager modules (internal to this machine set). `modules/{nixos,darwin}/` — reusable modules exported from the flake (`self.nixosModules`, `self.darwinModules`); `self.darwinModules.networking` and `self.darwinModules.stevenblack` are custom and power the `/etc/hosts` tests.
 - `pkgs/` — custom packages (`kontroll`, `omniwm`); `overlays/`; `tests/darwin/` + `lib/darwin-tests.nix` — module test harness.
+- `scripts/` — bash scripts the Justfile wraps for its multi-step recipes (`sd-image`, `flash-image`, `host-key`, `linux-builder`, `config-diff`, `build-pkg`/`eval-config`); `config-attr.sh` resolves a config name to its flake namespace. They are shellchecked in CI and expect their tools from the dev shell.
 - The `nr` machine is keyed by Apple serial: darwin config name is `V9X576T260`, home config is `davidsanchez@V9X576T260` (host file is `hosts/darwin/nr.nix`).
 
 ## Commands
