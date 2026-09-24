@@ -124,7 +124,7 @@ eval-config config subpath:
 # It becomes the host's SSH identity and, via `sops.age.sshKeyPaths`, its age identity:
 # register its public half in .sops.yaml (`just update-sops`) before `just sd-image`,
 # and the flashed card can decrypt secrets from the first boot.
-# Generate/refresh a Raspberry Pi host key — e.g. just host-key mora
+# Create or reuse a Raspberry Pi host key — e.g. just host-key mora
 host-key host:
     #!/usr/bin/env bash
     set -euo pipefail
