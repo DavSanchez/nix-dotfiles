@@ -4,6 +4,16 @@
 # Usage:
 #   let sdImageFor = import ./lib/nixos-sd-image.nix { inherit nixpkgs; };
 #   in sdImageFor self.nixosConfigurations.mora
+#
+# The per-host SSH host key (which doubles as the sops age identity, see
+# `sops.age.sshKeyPaths`) is deliberately NOT baked through Nix: `pkgs.writeText`
+# (or inlining the key into a build script) would put the private key in the Nix
+# store, where it is world-readable — and since the encrypted `secrets.yaml` lives
+# in the store too, any local user on the build host or the board could then
+# decrypt that host's secrets. Instead `just sd-image <host>` injects the key into
+# a non-store copy of the image after the build, at `/ssh-host-key` with mode 0600.
+# The activation script below installs it to `/etc/ssh/ssh_host_ed25519_key` on
+# first boot, before sops reads it.
 { nixpkgs }:
 nixosConfig:
 let
@@ -24,16 +34,6 @@ nixosConfig.extendModules {
       hardware.enableAllHardware = lib.mkForce false;
     }
 
-    # Optionally bake a pre-generated SSH host key into the image, so the board has
-    # its sops age identity (derived from that key, see `sops.age.sshKeyPaths`) on the
-    # very first boot instead of generating a key on first boot and only then having
-    # it registered in `.sops.yaml`.
-    #
-    # The key is read from the git-ignored `local/host-keys/<host>.ed25519` dir, and
-    # only when building impurely with `PI_HOST_KEYS_DIR=<abs dir> nix build --impure`
-    # (which `just sd-image <host>` does when a key exists, after `just host-key
-    # <host>`). Pure evaluation — every `nix flake check`, and any ordinary rebuild —
-    # sees an empty `builtins.getEnv` and adds nothing.
     (
       {
         config,
@@ -41,37 +41,30 @@ nixosConfig.extendModules {
         pkgs,
         ...
       }:
-      let
-        keysDir = builtins.getEnv "PI_HOST_KEYS_DIR";
-        key =
-          if keysDir == "" then
-            null
-          else
-            builtins.readFile "${keysDir}/${config.networking.hostName}.ed25519";
-        hostKeyFile = pkgs.writeText "ssh_host_ed25519_key" key;
-      in
-      lib.mkIf (key != null) (
-        lib.mkMerge [
-          {
-            system.activationScripts.install-host-key =
-              # Overwrites any key sshd generated on a previous boot, so re-flashing
-              # keeps the same identity (and thus the same sops access).
-              {
-                text = ''
-                  mkdir -p /etc/ssh
-                  ${pkgs.coreutils}/bin/install -m 0600 -o root -g root ${hostKeyFile} /etc/ssh/ssh_host_ed25519_key
-                '';
-              };
-          }
-          # sops reads the host key during its activation script, so ours has to run
-          # first. Only meaningful when the host actually has secrets configured;
-          # `options ? sops` keeps hosts without the sops-nix module (e.g. bruma)
-          # evaluating.
-          (lib.mkIf (options ? sops && config.sops.secrets != { }) {
-            system.activationScripts.setupSecrets.deps = [ "install-host-key" ];
-          })
-        ]
-      )
+      lib.mkMerge [
+        {
+          # Install the host key that `just sd-image` injected at /ssh-host-key
+          # (see the header). Runs after `etc` so `/etc` exists; sops'
+          # `setupSecrets` runs after this (below) and reads the key as its age
+          # identity. A no-op on images built without a key (the board then
+          # generates one on first boot).
+          system.activationScripts.install-host-key = {
+            deps = [ "etc" ];
+            text = ''
+              if [ -f /ssh-host-key ]; then
+                mkdir -p /etc/ssh
+                ${pkgs.coreutils}/bin/install -m 0600 -o root -g root /ssh-host-key /etc/ssh/ssh_host_ed25519_key &&
+                  rm -f /ssh-host-key
+              fi
+            '';
+          };
+        }
+        # Only meaningful when the host actually has secrets configured;
+        # `options ? sops` keeps hosts without the sops-nix module evaluating.
+        (lib.mkIf (options ? sops && config.sops.secrets != { }) {
+          system.activationScripts.setupSecrets.deps = [ "install-host-key" ];
+        })
+      ]
     )
   ];
 }

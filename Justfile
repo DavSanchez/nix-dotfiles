@@ -124,7 +124,7 @@ eval-config config subpath:
 # It becomes the host's SSH identity and, via `sops.age.sshKeyPaths`, its age identity:
 # register its public half in .sops.yaml (`just update-sops`) before `just sd-image`,
 # and the flashed card can decrypt secrets from the first boot.
-# Generate/refresh a Raspberry Pi host key — e.g. just host-key mora
+# Create or reuse a Raspberry Pi host key — e.g. just host-key mora
 host-key host:
     #!/usr/bin/env bash
     set -euo pipefail
@@ -138,37 +138,84 @@ host-key host:
     else
       ssh-keygen -t ed25519 -N "" -C "{{host}} host key" -f "$key"
     fi
-    recipient="$(nix run nixpkgs#ssh-to-age -- -i "$key.pub")"
+    recipient="$(nix run --inputs-from . nixpkgs#ssh-to-age -- -i "$key.pub")"
     printf '\nage recipient for %s: %s\n\n' "{{host}}" "$recipient"
     echo "Add it to .sops.yaml (both the top-level 'keys:' list and the"
     echo "'creation_rules' age list), then run: just update-sops"
 
 # A custom SD image that already boots straight into that host's real config (see
 # lib/nixos-sd-image.nix) — no root/nixos bootstrap deploy needed on first flash.
-# When a key from `just host-key <host>` exists it is baked in (impure build), so the
-# image's sops age identity is already in .sops.yaml and secrets work from boot.
+# When a key from `just host-key <host>` exists it is injected into a non-store copy
+# of the image under local/images/ (so the private key never enters the Nix store);
+# the image's sops age identity is already in .sops.yaml, so secrets work from boot.
 # Build a Raspberry Pi host's SD-card image — e.g. just sd-image mora
 sd-image host:
     #!/usr/bin/env bash
     set -euo pipefail
+    umask 077
     # Trace every command with `JUST_TRACE=1 just sd-image <host>`.
     if [[ -n "${JUST_TRACE:-}" ]]; then set -x; fi
-    key_dir="$PWD/local/host-keys"
-    key="$key_dir/{{host}}.ed25519"
-    if [[ -f "$key" ]]; then
-      echo "baking $key into the image (SSH host key + sops age identity)" >&2
-      out="$(PI_HOST_KEYS_DIR="$key_dir" nix build --impure --no-link --print-out-paths ".#packages.aarch64-linux.{{host}}-sd-image")"
-    else
+
+    # `system.build.sdImage` is a directory holding the compressed image under
+    # sd-image/ (plus nix-support/); the pure build itself carries no key.
+    out="$(nix build --no-link --print-out-paths ".#packages.aarch64-linux.{{host}}-sd-image")"
+    image="$(find "$out/sd-image" -maxdepth 1 -type f -print -quit)"
+    [[ -n "$image" ]] || { echo "error: no image file found under $out/sd-image" >&2; exit 1; }
+
+    key="$PWD/local/host-keys/{{host}}.ed25519"
+    if [[ ! -f "$key" ]]; then
       echo "warning: $key not found — the image will generate its host key (and sops age" >&2
       echo "         identity) on first boot; run 'just host-key {{host}}' then" >&2
       echo "         'just update-sops' to pre-seed it before flashing." >&2
-      out="$(nix build --no-link --print-out-paths ".#packages.aarch64-linux.{{host}}-sd-image")"
+      echo "$image"
+      exit 0
     fi
-    # `system.build.sdImage` is a directory holding the compressed image under
-    # sd-image/ (plus nix-support/), so print the file `flash-image` actually wants.
-    image="$(find "$out/sd-image" -maxdepth 1 -type f -print -quit)"
-    [[ -n "$image" ]] || { echo "error: no image file found under $out/sd-image" >&2; exit 1; }
-    echo "$image"
+
+    # Inject the private host key into a copy of the image outside the Nix store
+    # (see lib/nixos-sd-image.nix): decompress, write /ssh-host-key into the ext4
+    # root partition with debugfs, then recompress to local/images/.
+    echo "injecting $key into a non-store copy of the image (SSH host key + sops age identity)" >&2
+    work="$(mktemp -d)"
+    output_tmp=""
+    cleanup() {
+      rm -rf "$work"
+      if [[ -n "$output_tmp" ]]; then
+        rm -rf "$output_tmp"
+      fi
+    }
+    trap cleanup EXIT
+    nix run --inputs-from . nixpkgs#zstd -- -dc "$image" > "$work/disk.img"
+    # MBR partition entry 2: type byte at 466, start LBA at 470, sector count at 474.
+    ptype="$(dd if="$work/disk.img" bs=1 skip=466 count=1 2>/dev/null | od -An -tu1 | tr -d '[:space:]')"
+    [[ "$ptype" == "131" ]] || { echo "error: MBR entry 2 is not a Linux (0x83) partition (type byte $ptype)" >&2; exit 1; }
+    lba="$(dd if="$work/disk.img" bs=1 skip=470 count=4 2>/dev/null | od -An -tu4 | tr -d '[:space:]')"
+    sectors="$(dd if="$work/disk.img" bs=1 skip=474 count=4 2>/dev/null | od -An -tu4 | tr -d '[:space:]')"
+    [[ -n "$lba" && -n "$sectors" ]] || { echo "error: could not read the root partition table" >&2; exit 1; }
+    dd if="$work/disk.img" of="$work/root.img" bs=512 skip="$lba" count="$sectors" 2>/dev/null
+    # Stage the key next to the extracted filesystem; debugfs uses relative paths
+    # in its whitespace-splitting request parser.
+    cp "$key" "$work/hostkey"
+    nix shell --inputs-from . nixpkgs#e2fsprogs -c bash -c '
+      set -euo pipefail
+      work="$1"
+      cd "$work"
+      debugfs -w -R "write hostkey /ssh-host-key" root.img >/dev/null
+      debugfs -w -R "sif /ssh-host-key mode 0100600" root.img >/dev/null
+      debugfs -w -R "sif /ssh-host-key uid 0" root.img >/dev/null
+      debugfs -w -R "sif /ssh-host-key gid 0" root.img >/dev/null
+    ' _ "$work"
+    dd if="$work/root.img" of="$work/disk.img" bs=512 seek="$lba" conv=notrunc 2>/dev/null
+    mkdir -p "$PWD/local/images"
+    chmod 700 "$PWD/local/images"
+    injected="$PWD/local/images/{{host}}.img.zst"
+    # Compress into a private staging directory, then atomically replace any
+    # previous image. This keeps partial output private and makes rebuilds repeatable.
+    output_tmp="$(mktemp -d "$PWD/local/images/.sd-image.XXXXXXXX")"
+    staged="$output_tmp/{{host}}.img.zst"
+    nix run --inputs-from . nixpkgs#zstd -- -T0 --rm "$work/disk.img" -o "$staged"
+    chmod 600 "$staged"
+    mv -f "$staged" "$injected"
+    echo "$injected"
 
 # Write an SD-card image (from `just sd-image`) onto a raw disk. macOS-only; ERASES the disk.
 # Flash an image to an SD card — e.g. just flash-image ~/Downloads/nixos-image-*.aarch64-linux.img.zst disk4
