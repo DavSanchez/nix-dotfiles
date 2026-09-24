@@ -15,6 +15,7 @@ Nix flake managing NixOS, nix-darwin, and Home Manager configs (repo `DavSanchez
 
 - Format all Nix: `nix fmt` (formatter is `nixfmt-tree`).
 - Check the flake: `nix flake check -L --keep-going`. Only run this on Linux; darwin configs don't evaluate on Linux. On macOS, build darwin checks individually (see tests) — CI also skips the `deploy-activate`/`deploy-schema` checks there.
+- Dev shell: `nix develop` exposes every tool the Justfile, `scripts/` and CI workflows shell out to (`scriptTools` in `flake.nix`) — `just`, `sops`, `ssh-to-age`, `ssh-keygen`, `jq`, `zstd`, `debugfs`, `nc`, `dix`, `nix-diff`, `shellcheck`, … The same list is built as the `dev-shell` check, so a nixpkgs bump that breaks one of those packages fails CI instead of a recipe at runtime.
 - Darwin module tests: `nix build .#checks.aarch64-darwin.<test>`. Every `.nix` file in `tests/darwin/` becomes a check automatically.
 - Build a package inside a config's `pkgs`: `just build-pkg <host> <pkg>` (auto-detects nixos/darwin/home); `just build-pkg-dry` for dry-run. Raw escape hatch: `just build-attr <attr>`.
 - Eval any config sub-attr as JSON: `just eval-config <host|user@host> <attr-path>` (needed for quoted names like `david@sierpe`).

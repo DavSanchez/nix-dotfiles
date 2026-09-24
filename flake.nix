@@ -66,6 +66,29 @@
       # Turns a Raspberry Pi nixosConfiguration into a custom, bootable SD image for
       # its board — see lib/nixos-sd-image.nix.
       sdImageFor = import ./lib/nixos-sd-image.nix { inherit nixpkgs; };
+
+      # Every tool the Justfile recipes, `scripts/` and CI workflows shell out
+      # to. Exposed as the default devShell (so `nix develop` puts them on PATH)
+      # and built by a `checks` entry, so a nixpkgs bump that breaks any of them
+      # fails CI instead of a recipe or workflow at runtime.
+      scriptTools =
+        pkgs: with pkgs; [
+          bashInteractive
+          coreutils
+          findutils
+          gnugrep
+          just
+          jq
+          sops
+          ssh-to-age
+          openssh
+          zstd
+          e2fsprogs
+          netcat
+          dix
+          nix-diff
+          shellcheck
+        ];
     in
     {
       # Custom packages
@@ -90,6 +113,19 @@
               duende-sd-image = (sdImageFor self.nixosConfigurations.duende).config.system.build.sdImage;
             };
           };
+
+      # `nix develop` shell with every tool the Justfile, `scripts/` and CI use.
+      # `mkShellNoCC` keeps the closure (and the `dev-shell` check below) lean:
+      # these recipes run tools, they don't compile anything.
+      devShells = forAllSystems (
+        system:
+        let
+          pkgs = nixpkgs.legacyPackages.${system};
+        in
+        {
+          default = pkgs.mkShellNoCC { packages = scriptTools pkgs; };
+        }
+      );
 
       # Formatter for the nix files, available through 'nix fmt'
       formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt-tree);
@@ -235,10 +271,20 @@
               ];
               dir = ./tests/darwin;
             };
+          perSystem = nixpkgs.lib.genAttrs systems (
+            system:
+            (deployChecks.${system} or { })
+            // {
+              # Building the devShell realises every package in `scriptTools`, so
+              # a nixpkgs revision that breaks one fails here rather than in a
+              # recipe.
+              dev-shell = self.devShells.${system}.default;
+            }
+          );
         in
-        deployChecks
+        perSystem
         // {
-          aarch64-darwin = deployChecks.aarch64-darwin or { } // darwinTestSuite;
+          aarch64-darwin = perSystem.aarch64-darwin // darwinTestSuite;
         };
     };
 }
