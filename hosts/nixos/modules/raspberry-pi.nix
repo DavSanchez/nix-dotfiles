@@ -20,7 +20,10 @@
       device = "/dev/disk/by-label/FIRMWARE";
       fsType = "vfat";
       # The firmware module only refreshes the partition while it is mounted.
-      options = [
+      # sd-image.nix sets `noauto` on this partition (its generic installer image
+      # never needs it at runtime); list options concatenate, so force the list
+      # to drop it and let the partition mount at boot.
+      options = lib.mkForce [
         "nofail"
         "noatime"
       ];
