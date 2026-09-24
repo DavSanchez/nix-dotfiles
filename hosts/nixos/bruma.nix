@@ -35,7 +35,11 @@
   sops = {
     defaultSopsFile = ../../secrets/secrets.yaml;
     age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
-    secrets.dome_wifi = { };
+    secrets.dome_wifi = {
+      owner = "wpa_supplicant";
+      group = "wpa_supplicant";
+      mode = "0440";
+    };
   };
 
   # 1 GB of RAM is tight for local builds (these normally happen on a builder).

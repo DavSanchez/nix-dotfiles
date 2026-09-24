@@ -53,7 +53,11 @@
     defaultSopsFile = ../../secrets/secrets.yaml;
     age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
     secrets = {
-      dome_wifi = { };
+      dome_wifi = {
+        owner = "wpa_supplicant";
+        group = "wpa_supplicant";
+        mode = "0440";
+      };
     };
   };
 
