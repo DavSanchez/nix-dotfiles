@@ -70,23 +70,26 @@
     {
       # Custom packages
       # Acessible through 'nix build', 'nix shell', etc
-      packages = nixpkgs.lib.recursiveUpdate (forAllSystems (
-        system:
-        let
-          pkgs = nixpkgs.legacyPackages.${system};
-          allPkgs = import ./pkgs { inherit pkgs; };
-        in
-        nixpkgs.lib.filterAttrs (
-          _: pkg: !(pkg ? meta.platforms) || nixpkgs.lib.elem system pkg.meta.platforms
-        ) allPkgs
-      )) {
-        # Custom per-host SD images (`just sd-image <host>`) — see lib/nixos-sd-image.nix.
-        aarch64-linux = {
-          mora-sd-image = (sdImageFor self.nixosConfigurations.mora).config.system.build.sdImage;
-          bruma-sd-image = (sdImageFor self.nixosConfigurations.bruma).config.system.build.sdImage;
-          duende-sd-image = (sdImageFor self.nixosConfigurations.duende).config.system.build.sdImage;
-        };
-      };
+      packages =
+        nixpkgs.lib.recursiveUpdate
+          (forAllSystems (
+            system:
+            let
+              pkgs = nixpkgs.legacyPackages.${system};
+              allPkgs = import ./pkgs { inherit pkgs; };
+            in
+            nixpkgs.lib.filterAttrs (
+              _: pkg: !(pkg ? meta.platforms) || nixpkgs.lib.elem system pkg.meta.platforms
+            ) allPkgs
+          ))
+          {
+            # Custom per-host SD images (`just sd-image <host>`) — see lib/nixos-sd-image.nix.
+            aarch64-linux = {
+              mora-sd-image = (sdImageFor self.nixosConfigurations.mora).config.system.build.sdImage;
+              bruma-sd-image = (sdImageFor self.nixosConfigurations.bruma).config.system.build.sdImage;
+              duende-sd-image = (sdImageFor self.nixosConfigurations.duende).config.system.build.sdImage;
+            };
+          };
 
       # Formatter for the nix files, available through 'nix fmt'
       formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt-tree);
@@ -173,9 +176,13 @@
         };
       };
 
+      # Targets are addressed by Tailscale MagicDNS name, so `deploy .#<host>`
+      # works from anywhere the tailnet is up (not just the home LAN). On first
+      # boot, before a host has joined the tailnet, use
+      # `deploy --hostname <host>.local .#<host>` (or `--hostname <ip>`).
       deploy.nodes = {
         eter = {
-          hostname = "eter.local";
+          hostname = "eter";
           sshUser = "david";
           profiles.system = {
             user = "root";
@@ -183,7 +190,7 @@
           };
         };
         mora = {
-          hostname = "mora.local";
+          hostname = "mora";
           sshUser = "david";
           profiles.system = {
             user = "root";
@@ -191,7 +198,7 @@
           };
         };
         bruma = {
-          hostname = "bruma.local";
+          hostname = "bruma";
           sshUser = "david";
           profiles.system = {
             user = "root";
@@ -199,7 +206,7 @@
           };
         };
         duende = {
-          hostname = "duende.local";
+          hostname = "duende";
           sshUser = "david";
           profiles.system = {
             user = "root";

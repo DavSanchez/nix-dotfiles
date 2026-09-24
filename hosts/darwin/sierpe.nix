@@ -13,6 +13,7 @@
     ./modules/networking.nix
     ./modules/services.nix
     ./modules/prometheus-node.nix
+    ./modules/application-firewall.nix
   ];
 
   # Linux builder's performance/tuning settings
