@@ -152,6 +152,7 @@ host-key host:
 sd-image host:
     #!/usr/bin/env bash
     set -euo pipefail
+    umask 077
     # Trace every command with `JUST_TRACE=1 just sd-image <host>`.
     if [[ -n "${JUST_TRACE:-}" ]]; then set -x; fi
 
@@ -196,8 +197,10 @@ sd-image host:
     "
     dd if="$work/root.img" of="$work/disk.img" bs=512 seek="$lba" conv=notrunc 2>/dev/null
     mkdir -p "$PWD/local/images"
+    chmod 700 "$PWD/local/images"
     injected="$PWD/local/images/{{host}}.img.zst"
     nix run --inputs-from . nixpkgs#zstd -- -T0 --rm "$work/disk.img" -o "$injected"
+    chmod 600 "$injected"
     echo "$injected"
 
 # Write an SD-card image (from `just sd-image`) onto a raw disk. macOS-only; ERASES the disk.
