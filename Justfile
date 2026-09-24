@@ -145,30 +145,54 @@ host-key host:
 
 # A custom SD image that already boots straight into that host's real config (see
 # lib/nixos-sd-image.nix) — no root/nixos bootstrap deploy needed on first flash.
-# When a key from `just host-key <host>` exists it is baked in (impure build), so the
-# image's sops age identity is already in .sops.yaml and secrets work from boot.
+# When a key from `just host-key <host>` exists it is injected into a non-store copy
+# of the image under local/images/ (so the private key never enters the Nix store);
+# the image's sops age identity is already in .sops.yaml, so secrets work from boot.
 # Build a Raspberry Pi host's SD-card image — e.g. just sd-image mora
 sd-image host:
     #!/usr/bin/env bash
     set -euo pipefail
     # Trace every command with `JUST_TRACE=1 just sd-image <host>`.
     if [[ -n "${JUST_TRACE:-}" ]]; then set -x; fi
-    key_dir="$PWD/local/host-keys"
-    key="$key_dir/{{host}}.ed25519"
-    if [[ -f "$key" ]]; then
-      echo "baking $key into the image (SSH host key + sops age identity)" >&2
-      out="$(PI_HOST_KEYS_DIR="$key_dir" nix build --impure --no-link --print-out-paths ".#packages.aarch64-linux.{{host}}-sd-image")"
-    else
+
+    # `system.build.sdImage` is a directory holding the compressed image under
+    # sd-image/ (plus nix-support/); the pure build itself carries no key.
+    out="$(nix build --no-link --print-out-paths ".#packages.aarch64-linux.{{host}}-sd-image")"
+    image="$(find "$out/sd-image" -maxdepth 1 -type f -print -quit)"
+    [[ -n "$image" ]] || { echo "error: no image file found under $out/sd-image" >&2; exit 1; }
+
+    key="$PWD/local/host-keys/{{host}}.ed25519"
+    if [[ ! -f "$key" ]]; then
       echo "warning: $key not found — the image will generate its host key (and sops age" >&2
       echo "         identity) on first boot; run 'just host-key {{host}}' then" >&2
       echo "         'just update-sops' to pre-seed it before flashing." >&2
-      out="$(nix build --no-link --print-out-paths ".#packages.aarch64-linux.{{host}}-sd-image")"
+      echo "$image"
+      exit 0
     fi
-    # `system.build.sdImage` is a directory holding the compressed image under
-    # sd-image/ (plus nix-support/), so print the file `flash-image` actually wants.
-    image="$(find "$out/sd-image" -maxdepth 1 -type f -print -quit)"
-    [[ -n "$image" ]] || { echo "error: no image file found under $out/sd-image" >&2; exit 1; }
-    echo "$image"
+
+    # Inject the private host key into a copy of the image outside the Nix store
+    # (see lib/nixos-sd-image.nix): decompress, write /ssh-host-key into the ext4
+    # root partition with debugfs, then recompress to local/images/.
+    echo "injecting $key into a non-store copy of the image (SSH host key + sops age identity)" >&2
+    work="$(mktemp -d)"
+    trap 'rm -rf "$work"' EXIT
+    nix run --inputs-from . nixpkgs#zstd -- -dc "$image" > "$work/disk.img"
+    # MBR partition entry 2 (type 0x83): start LBA at byte 470, sector count at 474.
+    lba="$(dd if="$work/disk.img" bs=1 skip=470 count=4 2>/dev/null | od -An -tu4 | tr -d '[:space:]')"
+    sectors="$(dd if="$work/disk.img" bs=1 skip=474 count=4 2>/dev/null | od -An -tu4 | tr -d '[:space:]')"
+    [[ -n "$lba" && -n "$sectors" ]] || { echo "error: could not read the root partition table" >&2; exit 1; }
+    dd if="$work/disk.img" of="$work/root.img" bs=512 skip="$lba" count="$sectors" 2>/dev/null
+    nix shell --inputs-from . nixpkgs#e2fsprogs -c bash -c "
+      debugfs -w -R 'write $key /ssh-host-key' '$work/root.img' >/dev/null
+      debugfs -w -R 'sif /ssh-host-key mode 0100600' '$work/root.img' >/dev/null
+      debugfs -w -R 'sif /ssh-host-key uid 0' '$work/root.img' >/dev/null
+      debugfs -w -R 'sif /ssh-host-key gid 0' '$work/root.img' >/dev/null
+    "
+    dd if="$work/root.img" of="$work/disk.img" bs=512 seek="$lba" conv=notrunc 2>/dev/null
+    mkdir -p "$PWD/local/images"
+    injected="$PWD/local/images/{{host}}.img.zst"
+    nix run --inputs-from . nixpkgs#zstd -- -T0 --rm "$work/disk.img" -o "$injected"
+    echo "$injected"
 
 # Write an SD-card image (from `just sd-image`) onto a raw disk. macOS-only; ERASES the disk.
 # Flash an image to an SD card — e.g. just flash-image ~/Downloads/nixos-image-*.aarch64-linux.img.zst disk4
