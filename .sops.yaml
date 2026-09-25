@@ -3,8 +3,8 @@ keys:
   - &sierpe age1l5vsge04vuck7lk6rt2ms6z5crxek7rj7v3x02ulndht4qya8y9qxljse3
   - &eter age1h807c82a93e2qyhrd3thd664q0xrc8c8wfyzdplajpvzfpxejvksuu9sxx
   - &mora age13am6zgu5trm4t3fg3wn0y9n3nxa6dfv5tvfk48rsg6pk0yl8z3eqkse6m3
-  - &bruma age1wy6w7hdvz65fhx24kyxkeaf02uhwf4anjkct260774ucal008yfq4dp5s0
-  - &duende age1drdklq5804etwq266qh7pttzme55hf5junj27fmxhpx0ctsjlquqa3tdrt
+  - &bruma age1wjmytmhppvhm6xg0munwngr90mxk4krhw773vj3nyaad646uvqrqhyeges
+  - &duende age12m59fh9yf9q0v4aauwyhqvk8tzqswcuxyhge8k9eznhmsg4anffq0raf7s
 creation_rules:
   - path_regex: secrets/secrets.yaml$
     key_groups:
