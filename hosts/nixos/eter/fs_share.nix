@@ -1,13 +1,11 @@
 _: {
   services.samba = {
     enable = true;
-    # Don't open the Samba ports on every interface; only the private LAN and
-    # tailnet may reach them (and `hosts allow` remains a second layer).
-    openFirewall = false;
+    openFirewall = true;
     settings = {
       global = {
-        "hosts allow" = "192.168.0. 127.0.0.1 localhost";
-        "hosts deny" = "0.0.0.0/0";
+        "hosts allow" = "192.168.0. 127.0.0.1 localhost 100.64.0.0/10 fc00::/7";
+        "hosts deny" = "0.0.0.0/0 ::/0";
         # "mangled names" = "no";
         # "dos charset" = "CP850";
         # "unix charset" = "UTF-8";
@@ -30,9 +28,4 @@ _: {
       };
     };
   };
-
-  networking.firewall.extraInputRules = ''
-    ip saddr { 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, 100.64.0.0/10 } tcp dport { 139, 445 } accept
-    ip saddr { 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, 100.64.0.0/10 } udp dport { 137, 138 } accept
-  '';
 }
