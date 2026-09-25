@@ -20,5 +20,16 @@
   # This one contains whatever you want to overlay
   # You can change versions, add patches, set compilation flags, anything really.
   # https://nixos.wiki/wiki/Overlays
-  modifications = _final: _prev: { };
+  modifications = _final: prev: {
+    # secretspec 0.21.0's `claude_integration` tests assert on substrings of
+    # miette-wrapped error messages, so they fail once the message wraps inside
+    # the build sandbox. The guards under test work correctly; skip just those
+    # two tests until upstream makes the assertions wrapping-insensitive.
+    secretspec = prev.secretspec.overrideAttrs (old: {
+      checkFlags = (old.checkFlags or [ ]) ++ [
+        "--skip=configure_refuses_to_replace_an_unmanaged_helper"
+        "--skip=unconfigure_refuses_to_remove_an_edited_managed_helper"
+      ];
+    });
+  };
 }
