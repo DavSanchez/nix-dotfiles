@@ -15,6 +15,7 @@
     ./modules/nix.nix
     ./modules/node-exporter.nix
     ./modules/raspberry-pi.nix
+    ./modules/retro-gaming.nix
     ./modules/ssh.nix
     ./modules/user.nix
 
