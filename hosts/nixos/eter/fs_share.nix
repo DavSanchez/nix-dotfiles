@@ -4,7 +4,9 @@ _: {
     openFirewall = true;
     settings = {
       global = {
-        "hosts allow" = "192.168.0. 127.0.0.1 localhost 100.64.0.0/10 fc00::/7";
+        # LAN is IPv4; the tailnet is 100.64.0.0/10 (IPv4 CGNAT) plus its
+        # IPv6 ULA fd7a:115c:a1e0::/48. Everything else, IPv6 included, is denied.
+        "hosts allow" = "192.168.0. 127.0.0.1 localhost 100.64.0.0/10 fd7a:115c:a1e0::/48";
         "hosts deny" = "0.0.0.0/0 ::/0";
         # "mangled names" = "no";
         # "dos charset" = "CP850";
