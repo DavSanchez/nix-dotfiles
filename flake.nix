@@ -241,14 +241,15 @@
             path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.bruma;
           };
         };
-        duende = {
-          hostname = "duende";
-          sshUser = "david";
-          profiles.system = {
-            user = "root";
-            path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.duende;
-          };
-        };
+        # duende is currently disabled.
+        # duende = {
+        #   hostname = "duende";
+        #   sshUser = "david";
+        #   profiles.system = {
+        #     user = "root";
+        #     path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.duende;
+        #   };
+        # };
       };
 
       checks =

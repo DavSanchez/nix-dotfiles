@@ -54,7 +54,8 @@ in
         [
           "eter"
           "bruma"
-          "duende"
+          # duende is currently disabled.
+          # "duende"
           "sierpe"
           "solio"
         ];
