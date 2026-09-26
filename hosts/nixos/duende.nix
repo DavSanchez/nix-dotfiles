@@ -25,13 +25,13 @@
   networking = {
     hostName = "duende";
     # No Ethernet run to wherever this sits next to the TV, so Wi-Fi is the only link.
-    # Reuses mora's `dome_wifi` (the shared home PSK, SSID `TP-Link_83A4`); the age
-    # identity is baked into the SD image by `just host-key duende` + `just sd-image
-    # duende`, so it associates on the first boot.
+    # duende sits on the hall AP (`TP-Link_0498`) with its own `hall_wifi` sops secret,
+    # not the shared `dome_wifi`; the age identity is baked into the SD image by
+    # `just host-key duende` + `just sd-image duende`, so it associates on the first boot.
     wireless = {
       enable = true;
-      secretsFile = config.sops.secrets.dome_wifi.path;
-      networks."TP-Link_83A4".pskRaw = "ext:dome_psk";
+      secretsFile = config.sops.secrets.hall_wifi.path;
+      networks."TP-Link_0498".pskRaw = "ext:hall_psk";
     };
   };
 
@@ -51,7 +51,7 @@
   sops = {
     defaultSopsFile = ../../secrets/secrets.yaml;
     age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
-    secrets.dome_wifi = {
+    secrets.hall_wifi = {
       owner = "wpa_supplicant";
       group = "wpa_supplicant";
       mode = "0440";
