@@ -32,6 +32,13 @@ nixosConfig.extendModules {
       # closure. Not needed here: the nixos-hardware profile already declares
       # exactly what this specific, known board needs.
       hardware.enableAllHardware = lib.mkForce false;
+      # The nixos-hardware firmware module copies the whole Pi firmware payload —
+      # every `start*.elf` variant (~22 MB on its own), ~371 overlays, the DTBs
+      # and u-boot — into the FAT firmware partition on each switch. That is
+      # ~26 MB, so the stock 30 MB partition is left all but full and a switch
+      # fails with `No space left on device` (and leaves a half-written `.tmp`
+      # behind). Give it real headroom. Only affects freshly flashed cards.
+      sdImage.firmwareSize = 128;
     }
 
     (
