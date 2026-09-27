@@ -94,9 +94,5 @@
     git-cliff = {
       enable = true;
     };
-
-    radicle = {
-      enable = true;
-    };
   };
 }
