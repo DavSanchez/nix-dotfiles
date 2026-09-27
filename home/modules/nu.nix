@@ -28,7 +28,6 @@
       # Fish-style abbreviations from nu_scripts (nushell 0.113+), expanded on
       # space/enter. Sourced after the aliases because composed abbreviations
       # (e.g. `gstu`) expand to text that still relies on the plain aliases.
-      # Requires nu_scripts >= the commit adding abbreviations/ (nushell/nu_scripts#1275).
       source ${pkgs.nu_scripts}/share/nu_scripts/abbreviations/bat/bat-abbreviations.nu
       source ${pkgs.nu_scripts}/share/nu_scripts/abbreviations/eza/eza-abbreviations.nu
       source ${pkgs.nu_scripts}/share/nu_scripts/abbreviations/docker/docker-abbreviations.nu
