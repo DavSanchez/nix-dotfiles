@@ -20,5 +20,19 @@
   # This one contains whatever you want to overlay
   # You can change versions, add patches, set compilation flags, anything really.
   # https://nixos.wiki/wiki/Overlays
-  modifications = _final: _prev: { };
+  modifications = _final: prev: {
+    # Temporary: carry nu_scripts ahead of the pending nixpkgs update
+    # (NixOS/nixpkgs#558481) so the abbreviations in home/modules/nu.nix exist.
+    # Drop this once a nixpkgs bump ships nu_scripts >= the commit that added
+    # share/nu_scripts/abbreviations/ (nushell/nu_scripts#1275, 2026-09-27).
+    nu_scripts = prev.nu_scripts.overrideAttrs (_: {
+      version = "0-unstable-2026-10-02";
+      src = prev.fetchFromGitHub {
+        owner = "nushell";
+        repo = "nu_scripts";
+        rev = "3ffc5aa43194bb4d5295dec9fbf0a18b3a2dddfc";
+        hash = "sha256-/6nbTNfpkNRUJcXnQKw9yrm3UAvgfUoyKbNRUkQAfPY=";
+      };
+    });
+  };
 }

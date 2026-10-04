@@ -25,6 +25,14 @@
       source ${pkgs.nu_scripts}/share/nu_scripts/aliases/docker/docker-aliases.nu
       source ${pkgs.nu_scripts}/share/nu_scripts/aliases/git/git-aliases.nu
 
+      # Fish-style abbreviations from nu_scripts (nushell 0.113+), expanded on
+      # space/enter. Sourced after the aliases because composed abbreviations
+      # (e.g. `gstu`) expand to text that still relies on the plain aliases.
+      source ${pkgs.nu_scripts}/share/nu_scripts/abbreviations/bat/bat-abbreviations.nu
+      source ${pkgs.nu_scripts}/share/nu_scripts/abbreviations/eza/eza-abbreviations.nu
+      source ${pkgs.nu_scripts}/share/nu_scripts/abbreviations/docker/docker-abbreviations.nu
+      source ${pkgs.nu_scripts}/share/nu_scripts/abbreviations/git/git-abbreviations.nu
+
       # Fetch a gitignore template from gitignore.io
       def gi [...targets: string] {
           if ($targets | is-empty) {
@@ -112,83 +120,6 @@
       # OSC 133 for ghostty shell integration (cwd + command marks)
       shell_integration = {
         osc133 = true;
-      };
-      # Fish-style abbreviations (nushell 0.113+), expanded on space/enter
-      abbreviations = {
-        # ls family (mirrors the fish aliases; `eza` itself is aliased by home-manager)
-        ls = "eza";
-        la = "eza -a";
-        ll = "eza -l";
-        lla = "eza -la";
-        lt = "eza --tree";
-
-        # git (curated from fish's plugin-git; `gcm` intentionally differs from
-        # nu_scripts' alias so it matches fish's `git commit -m`)
-        g = "git";
-        ga = "git add";
-        gaa = "git add --all";
-        gau = "git add --update";
-        gapa = "git add --patch";
-        gb = "git branch";
-        gba = "git branch --all";
-        gbl = "git blame -b -w";
-        gbd = "git branch -d";
-        gco = "git checkout";
-        gcb = "git checkout -b";
-        gc = "git commit --verbose";
-        gca = "git commit --verbose --all";
-        gcm = "git commit -m";
-        gcam = "git commit --all -m";
-        gcl = "git clone";
-        gclean = "git clean -di";
-        gcp = "git cherry-pick";
-        gd = "git diff";
-        gdca = "git diff --cached";
-        gds = "git diff --stat";
-        gdt = "git diff-tree --no-commit-id --name-only -r";
-        gf = "git fetch";
-        gfa = "git fetch --all --prune";
-        gfo = "git fetch origin";
-        gl = "git pull";
-        gll = "git pull origin";
-        glr = "git pull --rebase";
-        glo = "git log --oneline --decorate --color";
-        glg = "git log --stat";
-        glgg = "git log --graph";
-        gm = "git merge";
-        gma = "git merge --abort";
-        gp = "git push";
-        gpo = "git push origin";
-        gpu = "git push origin (git branch --show-current) --set-upstream";
-        gr = "git remote --verbose";
-        gra = "git remote add";
-        grb = "git rebase";
-        grba = "git rebase --abort";
-        grbc = "git rebase --continue";
-        grbi = "git rebase --interactive";
-        grbs = "git rebase --skip";
-        grev = "git revert";
-        grh = "git reset";
-        grhh = "git reset --hard";
-        grm = "git rm";
-        grs = "git restore";
-        grst = "git restore --staged";
-        gsh = "git show";
-        gsb = "git status --short --branch";
-        gss = "git status --short";
-        gst = "git status";
-        gsta = "git stash push";
-        gstaa = "git stash apply";
-        gstd = "git stash drop";
-        gstl = "git stash list";
-        gstp = "git stash pop";
-        gsw = "git switch";
-        gswc = "git switch --create";
-        gignore = "git update-index --assume-unchanged";
-        gunignore = "git update-index --no-assume-unchanged";
-        gup = "git pull --rebase";
-        gwt = "git worktree";
-        gwta = "git worktree add";
       };
     };
 
