@@ -32,6 +32,7 @@
       git = true;
       icons = "auto";
       colors = "auto";
+      enableNushellIntegration = true;
     };
 
     fzf = {
