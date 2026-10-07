@@ -17,10 +17,32 @@ is_running() {
   sudo launchctl print "$label" >/dev/null 2>&1
 }
 
+port_open() {
+  nc -z -w 1 localhost "$port" 2>/dev/null
+}
+
+# A bare TCP connect is not enough: QEMU's port forward accepts connections as
+# soon as the process starts, before the guest's sshd is up. Wait for the banner.
+ssh_ready() {
+  local banner
+  banner=$(nc -w 2 localhost "$port" </dev/null 2>/dev/null || true)
+  [[ $banner == SSH-* ]]
+}
+
+# `launchctl bootout` can return before QEMU has exited and released the port.
+wait_for_port_down() {
+  for _ in $(seq 1 60); do
+    port_open || return 0
+    sleep 1
+  done
+  echo "error: port $port still in use 60s after stopping linux-builder" >&2
+  return 1
+}
+
 wait_for_port() {
-  echo "linux-builder: waiting for port $port to accept connections..."
+  echo "linux-builder: waiting for sshd on port $port..."
   for _ in $(seq 1 120); do
-    if nc -z -w 1 localhost "$port" 2>/dev/null; then
+    if ssh_ready; then
       echo "linux-builder is up on port $port"
       return 0
     fi
@@ -52,6 +74,7 @@ case "$action" in
     # `launchctl kickstart` fails (exit 113) if the service is already down, so
     # tear down the daemon first (no-op if not loaded) and re-spin it from its plist.
     sudo launchctl bootout "$label" 2>/dev/null || true
+    wait_for_port_down
     sudo launchctl bootstrap system "$plist"
     echo "linux-builder: restarted"
     wait_for_port
