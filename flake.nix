@@ -19,6 +19,7 @@
     darwin.inputs.nixpkgs.follows = "nixpkgs";
 
     hardware.url = "github:nixos/nixos-hardware";
+    hardware.inputs.nixpkgs.follows = "nixpkgs";
 
     nix-relic.url = "github:DavSanchez/Nix-Relic";
     nix-relic.inputs.nixpkgs.follows = "nixpkgs";
