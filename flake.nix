@@ -43,6 +43,11 @@
 
     # Hermes Agent
     hermes-agent.url = "github:NousResearch/hermes-agent";
+
+    # Agent CLIs that nixpkgs does not carry. home/modules/ai/default.nix takes
+    # autolith and prime-agent from here, built against the nixpkgs revision
+    # this input pins — it is deliberately not followed.
+    llm-agents.url = "github:numtide/llm-agents.nix";
   };
 
   outputs =

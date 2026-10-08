@@ -2,8 +2,15 @@
   pkgs,
   config,
   lib,
+  inputs,
   ...
 }:
+let
+  # Agent CLIs that nixpkgs does not carry. Taken from llm-agents' own package
+  # set: this flake does not follow that input, so these build against the
+  # nixpkgs revision it pins, not ours.
+  agents = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
+in
 {
   services.ollama.enable = true;
 
@@ -37,11 +44,17 @@
     };
   };
 
-  home.packages = with pkgs; [
-    # llama-cpp # broken for now (nodejs)
-    llama-swap
-    python313Packages.huggingface-hub
+  home.packages =
+    (with pkgs; [
+      # llama-cpp # broken for now (nodejs)
+      llama-swap
+      python313Packages.huggingface-hub
 
-    llm
-  ];
+      llm
+      pi-coding-agent
+    ])
+    ++ (with agents; [
+      autolith
+      prime-agent
+    ]);
 }
