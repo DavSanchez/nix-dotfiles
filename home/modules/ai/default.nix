@@ -51,6 +51,7 @@ in
       python313Packages.huggingface-hub
 
       llm
+      pi-coding-agent
     ])
     ++ (with agents; [
       autolith
