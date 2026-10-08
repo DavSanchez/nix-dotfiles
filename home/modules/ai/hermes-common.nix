@@ -23,48 +23,58 @@
     environmentFiles = [ config.sops.secrets."hermes/env".path ];
 
     settings = {
+      # This block is deep-merged into the existing config.yaml, so a key
+      # removed here survives on disk: every value that used to point at the
+      # Nous Portal Tool Gateway is overwritten, never deleted.
+      # `use_gateway = false` is that same constraint — it was the legacy
+      # spelling of the "Nous Subscription" selection and a stale `true`
+      # outranks the provider key (tools/tool_backend_helpers.read_selection).
+      # Inference runs on the OpenCode Go subscription; the relay is pinned
+      # explicitly because `base_url` cannot be dropped from the merge either.
       model = {
-        default = "deepseek/deepseek-v4.1-flash-1017";
-        provider = "nous";
+        default = "deepseek-v4.1-flash";
+        provider = "opencode-go";
+        base_url = "https://opencode.ai/zen/go/v1";
       };
 
+      # OpenCode Go is the primary now and only OpenRouter is kept alongside
+      # it, so the chain loses its old opencode-go rung. There is also no
+      # managed Tool Gateway left to fall back to: every tool category below
+      # names a direct or keyless provider instead.
       fallback_providers = [
-        {
-          provider = "opencode-go";
-          model = "deepseek-v4.1-flash";
-        }
         {
           provider = "openrouter";
           model = "~deepseek/deepseek-flash-latest";
         }
       ];
+
       web = {
-        backend = "firecrawl";
-        use_gateway = true;
+        backend = "firecrawl"; # keyless when explicitly selected
+        use_gateway = false;
       };
       browser = {
-        cloud_provider = "browser-use";
-        use_gateway = true;
+        cloud_provider = "local";
+        use_gateway = false;
       };
 
       tts = {
-        provider = "openai";
-        use_gateway = true;
+        provider = "edge";
+        use_gateway = false;
       };
       stt = {
-        provider = "openai";
-        use_gateway = true;
+        provider = "local";
+        use_gateway = false;
       };
 
       image_gen = {
-        provider = "fal";
-        model = "openai/gpt-image-2.5/flare/text-to-image"; # "fal-ai/gpt-image-2";
-        use_gateway = true;
+        provider = "openrouter";
+        model = "openai/gpt-image-2.5-flare";
+        use_gateway = false;
       };
       video_gen = {
-        provider = "fal";
-        model = "seedance-2.0";
-        use_gateway = true;
+        provider = "openrouter";
+        model = "bytedance/seedance-2.0";
+        use_gateway = false;
       };
 
       plugins.enabled = [ "herdr-agent-state" ];
