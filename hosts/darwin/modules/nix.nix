@@ -4,6 +4,7 @@
     overlays = [
       inputs.self.overlays.additions
       inputs.self.overlays.stable-packages
+      inputs.self.overlays.llm-agents
       inputs.self.overlays.modifications
     ];
     config.allowUnfree = true;
@@ -18,6 +19,12 @@
         "flakes"
       ];
       extra-platforms = "x86_64-darwin aarch64-darwin";
+      # numtide's binary cache for the llm-agents packages. Without it every
+      # one of them builds from source.
+      extra-substituters = [ "https://cache.numtide.com" ];
+      extra-trusted-public-keys = [
+        "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g="
+      ];
     };
 
     gc = {
