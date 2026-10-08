@@ -17,11 +17,11 @@ start-linux-builder port="31022":
 stop-linux-builder:
     @bash "$PWD/scripts/linux-builder.sh" stop
 
-# Compare home-manager config.home.path between two branches with dix
+# Compare home-manager activation packages between two branches with dix
 dix-home config branch base="master":
     @bash "$PWD/scripts/config-diff.sh" dix {{quote(config)}} {{quote(branch)}} {{quote(base)}}
 
-# Compare home-manager config.home.path between two branches with nix-diff
+# Compare home-manager activation packages between two branches with nix-diff
 diff-home config branch base="master":
     @bash "$PWD/scripts/config-diff.sh" nix-diff {{quote(config)}} {{quote(branch)}} {{quote(base)}}
 

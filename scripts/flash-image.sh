@@ -42,7 +42,8 @@ rdisk="/dev/rdisk${num}"
 diskutil info "$disk" | grep -E 'Device / Media Name|Volume Name|Disk Size|Removable Media|Whole|Device Location' || true
 # `diskutil` pads the values with spaces, so match whitespace, not a single space.
 # `Protocol: Secure Digital` covers built-in readers macOS reports as internal.
-if ! diskutil info "$disk" | grep -qE 'Removable Media:[[:space:]]*(Removable|Yes)|Ejectable Media:[[:space:]]*(Yes|Ejectable)|Protocol:[[:space:]]*Secure Digital|Virtual:[[:space:]]*Yes|Device Location:[[:space:]]*External'; then
+# Don't accept `Virtual: Yes`: the internal APFS container (e.g. disk3) reports it too.
+if ! diskutil info "$disk" | grep -qE 'Removable Media:[[:space:]]*(Removable|Yes)|Ejectable Media:[[:space:]]*(Yes|Ejectable)|Protocol:[[:space:]]*Secure Digital|Device Location:[[:space:]]*External'; then
   echo "error: $disk does not look like a removable/external disk — refusing to write it" >&2
   exit 1
 fi
