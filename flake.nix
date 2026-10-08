@@ -45,8 +45,9 @@
     hermes-agent.url = "github:NousResearch/hermes-agent";
 
     # AI coding agents and dev tool utilities (autolith, pi, prime-agent,
-    # opencode, claude-code, codex, ...). Its shared-nixpkgs overlay builds
-    # them against this flake's own nixpkgs instance, so no `follows` here.
+    # opencode, claude-code, codex, ...). Consumed only through
+    # `overlays.llm-agents`, which is where they are exposed; nothing is
+    # installed and nothing is re-exported from this flake.
     llm-agents.url = "github:numtide/llm-agents.nix";
   };
 
@@ -107,16 +108,10 @@
             let
               pkgs = nixpkgs.legacyPackages.${system};
               allPkgs = import ./pkgs { inherit pkgs; };
-              # Agents from numtide/llm-agents.nix, so `nix run .#pi` works from
-              # here and off-fleet (`nix run github:DavSanchez/nix-dotfiles#pi`).
-              # `flake-inputs` in that set is not a package.
-              agentPkgs =
-                nixpkgs.lib.removeAttrs (pkgs.extend inputs.llm-agents.overlays.shared-nixpkgs).llm-agents
-                  [ "flake-inputs" ];
             in
             nixpkgs.lib.filterAttrs (
               _: pkg: !(pkg ? meta.platforms) || nixpkgs.lib.elem system pkg.meta.platforms
-            ) (allPkgs // agentPkgs)
+            ) allPkgs
           ))
           {
             # Custom per-host SD images (`just sd-image <host>`) — see lib/nixos-sd-image.nix.
