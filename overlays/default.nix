@@ -17,14 +17,6 @@
   #   rosetta = if final.stdenv.hostPlatform.isDarwin && final.stdenv.isAarch64 then final.pkgsx86_64Darwin else final;
   # };
 
-  # AI coding agents from numtide/llm-agents.nix, namespaced as
-  # `pkgs.llm-agents.<name>` so nothing collides with a nixpkgs attribute name.
-  # Re-exported unchanged: the upstream overlay builds each package against the
-  # consumer's own pkgs instance, so allowUnfree and its predicates still apply.
-  # No binary cache is configured for this set, so a package builds from source
-  # the first time one is used.
-  llm-agents = inputs.llm-agents.overlays.shared-nixpkgs;
-
   # This one contains whatever you want to overlay
   # You can change versions, add patches, set compilation flags, anything really.
   # https://nixos.wiki/wiki/Overlays

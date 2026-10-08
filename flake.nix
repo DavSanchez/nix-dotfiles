@@ -44,10 +44,9 @@
     # Hermes Agent
     hermes-agent.url = "github:NousResearch/hermes-agent";
 
-    # AI coding agents and dev tool utilities (autolith, pi, prime-agent,
-    # opencode, claude-code, codex, ...). Consumed only through
-    # `overlays.llm-agents`, which is where they are exposed; nothing is
-    # installed and nothing is re-exported from this flake.
+    # Agent CLIs that nixpkgs does not carry. home/modules/ai/default.nix takes
+    # autolith and prime-agent from here, built against the nixpkgs revision
+    # this input pins — it is deliberately not followed.
     llm-agents.url = "github:numtide/llm-agents.nix";
   };
 
