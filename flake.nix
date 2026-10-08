@@ -31,6 +31,7 @@
 
     # Uniform colors across all apps
     catppuccin.url = "github:catppuccin/nix";
+    catppuccin.inputs.nixpkgs.follows = "nixpkgs";
 
     # Deployment
     deploy-rs.url = "github:serokell/deploy-rs";
