@@ -3,10 +3,9 @@
 # Tests that when networking.enableHosts = false, the activation script
 # still runs (cleanup) but does NOT write any Nix-managed content,
 # even if networking.hosts, extraHosts, or hostFiles are populated.
-#
-# This is the opt-in safety guarantee: content is ignored when the
-# toggle is off, but any stale Nix-managed block from a previous
-# activation is still stripped.
+# This ensures no stale Nix block is left when disabling the feature, while
+# anything else is left alone: a missing /etc/hosts is not created and a
+# symlinked one is not replaced.
 
 {
   networking.enableHosts = false;
@@ -18,31 +17,59 @@
   '';
 
   test = ''
-    echo "checking activation script is present (cleanup always runs)" >&2
-    grep "setting up /etc/hosts" ${config.out}/activate
+    set -e
+    tmpDir=$(mktemp -d)
+    hostsPath=$tmpDir/hosts
 
-    echo "checking sed stripping logic is present" >&2
-    grep -F "sed '/^# BEGIN Nix-managed\$/,/^# END Nix-managed\$/d'" ${config.out}/activate
+    sed -n '/^generateHosts() {/,/# Make this configuration the current configuration./{ /# Make this configuration/q; p; }' \
+      ${config.out}/activate | sed "s#/etc/hosts#$hostsPath#g" > "$tmpDir/hosts-activate"
 
-    echo "checking no Nix-managed markers are written despite content being set" >&2
-    if grep -F "printf '# BEGIN Nix-managed\n'" ${config.out}/activate; then
-      echo "FAIL: Nix-managed block written despite enableHosts=false" >&2
-      exit 1
-    fi
-    if grep -F "printf '# END Nix-managed\n'" ${config.out}/activate; then
-      echo "FAIL: Nix-managed END marker written despite enableHosts=false" >&2
-      exit 1
-    fi
-
-    echo "checking hosts content is NOT referenced in activation script" >&2
-    if grep "should-not-appear" ${config.out}/activate 2>/dev/null; then
-      echo "FAIL: hosts content referenced despite enableHosts=false" >&2
+    # A stale block that is the whole file leaves an empty file.
+    printf '%s\n' '# BEGIN Nix-managed' 'stale entry' '# END Nix-managed' > "$hostsPath"
+    bash "$tmpDir/hosts-activate"
+    if [[ -s "$hostsPath" ]]; then
+      printf 'FAIL: expected stale managed hosts file to be empty\n' >&2
+      printf '%s\n' 'Actual hosts file:' >&2
+      nl -ba "$hostsPath" >&2
       exit 1
     fi
 
-    echo "checking restore path writes original back (no Nix block)" >&2
-    grep "hostsOriginal.*> /etc/hosts" ${config.out}/activate
+    # Entries around a stale block survive, and the options stay ignored.
+    printf '%s\n' 'unmanaged before' '# BEGIN Nix-managed' 'stale entry' '# END Nix-managed' 'unmanaged after' > "$hostsPath"
+    bash "$tmpDir/hosts-activate"
+    printf '%s\n' 'unmanaged before' 'unmanaged after' > "$tmpDir/expected"
+    if ! cmp -s "$hostsPath" "$tmpDir/expected"; then
+      printf 'FAIL: expected only the unmanaged lines to remain\n' >&2
+      nl -ba "$hostsPath" >&2
+      exit 1
+    fi
 
-    echo "ok: enableHosts=false path verified" >&2
+    # Without /etc/hosts there is nothing to clean up, and none is created.
+    rm -f "$hostsPath"
+    bash "$tmpDir/hosts-activate"
+    if [[ -e "$hostsPath" ]]; then
+      printf 'FAIL: expected a missing /etc/hosts to stay missing\n' >&2
+      exit 1
+    fi
+    if [[ "$(ls -A "$tmpDir" | grep -c '^hosts\.nix\.')" != 0 ]]; then
+      printf 'FAIL: temporary files left behind\n' >&2
+      ls -A "$tmpDir" >&2
+      exit 1
+    fi
+
+    # A /etc/hosts provided another way, e.g. environment.etc."hosts", is a
+    # symlink into the store and must stay one.
+    printf '%s\n' '127.0.0.1 localhost' > "$tmpDir/store-hosts"
+    rm -f "$hostsPath"
+    ln -s "$tmpDir/store-hosts" "$hostsPath"
+    bash "$tmpDir/hosts-activate"
+    if [[ ! -L "$hostsPath" ]]; then
+      printf 'FAIL: expected /etc/hosts symlink to be left alone\n' >&2
+      exit 1
+    fi
+    if [[ "$(ls -A "$tmpDir" | grep -c '^hosts\.nix\.')" != 0 ]]; then
+      printf 'FAIL: temporary files left behind\n' >&2
+      exit 1
+    fi
   '';
 }

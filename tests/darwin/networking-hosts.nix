@@ -1,7 +1,4 @@
-{
-  config,
-  ...
-}:
+{ config, ... }:
 
 {
   networking.enableHosts = true;
@@ -19,24 +16,54 @@
   '';
 
   test = ''
-    echo "checking /etc/hosts activation script" >&2
-    grep "setting up /etc/hosts" ${config.out}/activate
+    set -e
+    tmpDir=$(mktemp -d)
+    hostsPath=$tmpDir/hosts
+    printf '%s\n' 'custom unmanaged entry' > "$hostsPath"
 
-    echo "checking generated hosts file content" >&2
-    hostsFile=$(grep -o '/nix/store/[^ ]*-hosts' ${config.out}/activate | head -1)
-    echo "generated hosts file: $hostsFile" >&2
+    sed -n '/^generateHosts() {/,/# Make this configuration the current configuration./{ /# Make this configuration/q; p; }' \
+      ${config.out}/activate | sed "s#/etc/hosts#$hostsPath#g" > "$tmpDir/hosts-activate"
+    if [[ ! -s "$tmpDir/hosts-activate" ]]; then
+      printf 'FAIL: generated hosts activation fragment is empty\n' >&2
+      exit 1
+    fi
+    if ! bash "$tmpDir/hosts-activate" 2>&1 | grep -q 'setting up'; then
+      printf 'FAIL: expected a message when /etc/hosts is updated\n' >&2
+      exit 1
+    fi
 
-    grep "127.0.0.1 localhost" "$hostsFile"
-    grep "::1 localhost" "$hostsFile"
-    grep "192.168.1.1 myhost.local myhost" "$hostsFile"
-    grep "10.0.0.1 gateway.local" "$hostsFile"
-    grep "172.16.0.1 docker-host" "$hostsFile"
+    assertLine() {
+      if ! grep -Fx "$1" "$hostsPath" >/dev/null; then
+        printf 'FAIL: expected hosts line: %s\n' "$1" >&2
+        printf '%s\n' 'Actual hosts file:' >&2
+        nl -ba "$hostsPath" >&2
+        exit 1
+      fi
+    }
+    assertLine 'custom unmanaged entry'
+    assertLine '127.0.0.1 localhost'
+    assertLine '::1 localhost'
+    assertLine '192.168.1.1 myhost.local myhost'
+    assertLine '10.0.0.1 gateway.local'
+    assertLine '172.16.0.1 docker-host'
 
-    echo "checking Nix-managed output markers in activation script" >&2
-    grep -F "printf '# BEGIN Nix-managed\n'" ${config.out}/activate
-    grep -F "printf '# END Nix-managed\n'" ${config.out}/activate
-
-    echo "checking original /etc/hosts preservation logic" >&2
-    grep -F "sed '/^# BEGIN Nix-managed\$/,/^# END Nix-managed\$/d'" ${config.out}/activate
+    # Re-running activation must be idempotent and must not rewrite the file.
+    cp "$hostsPath" "$tmpDir/hosts.before"
+    inodeBefore=$(ls -i "$hostsPath" | cut -d' ' -f1)
+    output=$(bash "$tmpDir/hosts-activate" 2>&1)
+    inodeAfter=$(ls -i "$hostsPath" | cut -d' ' -f1)
+    if [[ "$inodeBefore" != "$inodeAfter" ]]; then
+      printf 'FAIL: unchanged hosts file was rewritten\n' >&2
+      exit 1
+    fi
+    if [[ -n "$output" ]]; then
+      printf 'FAIL: expected no output when /etc/hosts is up to date, got: %s\n' "$output" >&2
+      exit 1
+    fi
+    if ! cmp -s "$hostsPath" "$tmpDir/hosts.before"; then
+      printf 'FAIL: activation is not idempotent\n' >&2
+      diff -u "$tmpDir/hosts.before" "$hostsPath" >&2 || true
+      exit 1
+    fi
   '';
 }
