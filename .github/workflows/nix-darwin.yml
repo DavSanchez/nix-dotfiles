@@ -169,6 +169,10 @@ jobs:
     name: 🟢 Nix-Darwin builds successes required
     if: always()
     needs:
+      # discover must be listed here: it evaluates the configs, so when it fails
+      # GitHub skips `build`, and without it in `needs` this gate would only see
+      # a skipped build and wrongly report success (masking the eval failure).
+      - discover
       - build
     runs-on: ubuntu-latest
     steps:
