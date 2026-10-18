@@ -22,11 +22,20 @@
 
     settings = {
       model = {
-        default = "deepseek/deepseek-v4.1-flash";
+        default = "deepseek/deepseek-v4.1-flash-1017";
         provider = "nous";
-        base_url = "https://inference-api.nousresearch.com/v1";
       };
 
+      fallback_providers = [
+        {
+          provider = "opencode-go";
+          model = "deepseek-v4.1-flash";
+        }
+        {
+          provider = "openrouter";
+          model = "~deepseek/deepseek-flash-latest";
+        }
+      ];
       web = {
         backend = "firecrawl";
         use_gateway = true;
