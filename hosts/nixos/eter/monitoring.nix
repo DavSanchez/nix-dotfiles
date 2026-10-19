@@ -15,7 +15,7 @@ let
     "192.168.0.0/16"
     "100.64.0.0/10"
     "127.0.0.1/8"
-    "fd7a:115c:a1e0::/48"
+    "fd00::/8"
   ];
   guardedProxy = upstream: ''
     @untrusted not remote_ip ${lib.concatStringsSep " " privateNets}
