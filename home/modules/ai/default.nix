@@ -26,7 +26,9 @@
         ui = {
           agent_panel_sort = "spaces";
           sound.enabled = true;
-          toast.delivery = "system";
+          # "terminal" emits an escape sequence that Ghostty turns into a native
+          # notification; "system" shells out to osascript/terminal-notifier instead.
+          toast.delivery = "terminal";
         };
       }
       // lib.optionalAttrs config.programs.nushell.enable {

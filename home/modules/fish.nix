@@ -33,7 +33,6 @@ in
           "grc" # grc Colourizer for some commands on Fish shell
           "forgit" # Utility tool powered by fzf for using git interactively (adds abbrvs!)
           "plugin-git" # Git plugin for fish (similar to oh-my-zsh git)
-          "done" # Automatically receive notifications when long processes finish
           "colored-man-pages" # Fish shell plugin to colorize man pages
           "bass" # Fish function making it easy to use utilities written for Bash in Fish shell
           "foreign-env" # Foreign environment interface for Fish shell

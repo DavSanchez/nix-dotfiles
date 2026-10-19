@@ -117,10 +117,6 @@
           };
         }
       ];
-      # OSC 133 for ghostty shell integration (cwd + command marks)
-      shell_integration = {
-        osc133 = true;
-      };
     };
 
     plugins =
