@@ -4,7 +4,29 @@
   pkgs,
   ...
 }:
+let
+  qbtConfigDir = "${config.services.qbittorrent.profileDir}/qBittorrent/config";
+  qbtCategories = builtins.toJSON {
+    lidarr.save_path = "/seclusium/echoes/downloads";
+    radarr.save_path = "/seclusium/imagery/downloads";
+    "tv-sonarr".save_path = "/seclusium/imagery/downloads";
+  };
+  qbtCategoriesFile = pkgs.writeText "qbittorrent-categories.json" qbtCategories;
+in
 {
+  systemd.tmpfiles.rules = [
+    "d /seclusium/imagery/downloads 2775 qbittorrent multimedia -"
+    "d /seclusium/echoes/downloads 2775 qbittorrent multimedia -"
+  ];
+
+  systemd.services.qbittorrent = {
+    restartTriggers = [ qbtCategories ];
+    preStart = ''
+      install -m 0664 ${qbtCategoriesFile} ${qbtConfigDir}/categories.json
+    '';
+    serviceConfig.UMask = "0002";
+  };
+
   services = {
     plex = {
       enable = false;
