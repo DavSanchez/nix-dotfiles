@@ -30,6 +30,7 @@ let
     lidarr = "http://127.0.0.1:${toString config.services.lidarr.settings.server.port}";
     sonarr = "http://127.0.0.1:${toString config.services.sonarr.settings.server.port}";
     prowlarr = "http://127.0.0.1:${toString config.services.prowlarr.settings.server.port}";
+    bazarr = "http://127.0.0.1:${toString config.services.bazarr.settings.general.port}";
     navidrome = "http://127.0.0.1:${toString config.services.navidrome.settings.Port}";
     jellyfin = "http://127.0.0.1:8096";
   };

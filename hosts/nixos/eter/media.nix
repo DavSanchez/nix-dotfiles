@@ -56,7 +56,26 @@ in
     # Books
     readarr.enable = false;
     # Subtitles
-    bazarr.enable = false;
+    bazarr = {
+      enable = true;
+      dataDir = "/seclusium/imagery/bazarr/.config/Bazarr";
+      settings = {
+        general = {
+          use_sonarr = true;
+          use_radarr = true;
+        };
+        sonarr = {
+          ip = "127.0.0.1";
+          port = config.services.sonarr.settings.server.port;
+          apikey._secret = config.sops.secrets.sonarr_api_key.path;
+        };
+        radarr = {
+          ip = "127.0.0.1";
+          port = config.services.radarr.settings.server.port;
+          apikey._secret = config.sops.secrets.radarr_api_key.path;
+        };
+      };
+    };
     # Indexers
     prowlarr.enable = true;
 

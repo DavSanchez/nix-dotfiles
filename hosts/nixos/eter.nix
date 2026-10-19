@@ -85,6 +85,8 @@
       zfs_mail_pass = { };
       gandi_pat = { };
       lidarr_api_key = { };
+      sonarr_api_key = { };
+      radarr_api_key = { };
     };
   };
 
