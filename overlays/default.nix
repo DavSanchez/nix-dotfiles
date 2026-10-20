@@ -35,30 +35,39 @@
     # Translate the metadata into the shape 0.12.0 expects and request only the
     # `.app` until nixpkgs fixes zed-editor.
     #
+    # Newer nixpkgs (e513db7b) migrated zed-editor itself: its installPhase
+    # rewrites the metadata and already passes `--format osx`. Applying the
+    # override there would duplicate the flag (and its `--replace-fail` would
+    # reject the already-migrated keys), so leave those packages untouched.
+    #
     # Temporary: remove this override (and this comment) once the pinned nixpkgs
     # builds zed-editor again.
-    zed-editor = prev.zed-editor.overrideAttrs (old: {
-      postPatch = (old.postPatch or "") + ''
-        # nixpkgs' installPhase renames `bundle-stable` to `bundle` (the section
-        # cargo-bundle reads), so only that section needs rewriting.
-        sed -i '/^\[package.metadata.bundle-stable\]/,/^$/{
-          /^osx_minimum_system_version =/d
-          /^osx_info_plist_exts =/d
-          /^osx_url_schemes =/d
-        }' crates/zed/Cargo.toml
-        cat >> crates/zed/Cargo.toml <<'EOF'
+    zed-editor =
+      if builtins.match ".*--format osx.*" (prev.zed-editor.installPhase or "") != null then
+        prev.zed-editor
+      else
+        prev.zed-editor.overrideAttrs (old: {
+          postPatch = (old.postPatch or "") + ''
+            # nixpkgs' installPhase renames `bundle-stable` to `bundle` (the section
+            # cargo-bundle reads), so only that section needs rewriting.
+            sed -i '/^\[package.metadata.bundle-stable\]/,/^$/{
+              /^osx_minimum_system_version =/d
+              /^osx_info_plist_exts =/d
+              /^osx_url_schemes =/d
+            }' crates/zed/Cargo.toml
+            cat >> crates/zed/Cargo.toml <<'EOF'
 
-        [package.metadata.bundle.osx]
-        minimum_system_version = "10.15.7"
-        info_plist_exts = ["resources/info/*"]
-        url_schemes = ["zed"]
-        EOF
-      '';
-      # Ask cargo-bundle for the `.app` only; without this it also tries to
-      # build a `.dmg`, which needs `hdiutil` (absent from the sandbox).
-      installPhase =
-        builtins.replaceStrings [ "cargo bundle --release" ] [ "cargo bundle --release --format osx" ]
-          old.installPhase;
-    });
+            [package.metadata.bundle.osx]
+            minimum_system_version = "10.15.7"
+            info_plist_exts = ["resources/info/*"]
+            url_schemes = ["zed"]
+            EOF
+          '';
+          # Ask cargo-bundle for the `.app` only; without this it also tries to
+          # build a `.dmg`, which needs `hdiutil` (absent from the sandbox).
+          installPhase =
+            builtins.replaceStrings [ "cargo bundle --release" ] [ "cargo bundle --release --format osx" ]
+              old.installPhase;
+        });
   };
 }
