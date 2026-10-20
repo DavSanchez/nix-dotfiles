@@ -36,6 +36,36 @@ in
     jellyfin = {
       enable = true;
       dataDir = "/seclusium/zg/jellyfin";
+
+      # The Celeron N3450's HD 500 iGPU can decode H.264, 8-bit HEVC and VP9 and
+      # encode H.264 through VAAPI. It cannot decode 10-bit HEVC or encode HEVC,
+      # so 4K HDR still needs direct play (or a faster machine).
+      hardwareAcceleration = {
+        enable = true;
+        type = "vaapi";
+        device = "/dev/dri/renderD128";
+      };
+
+      # Make Nix the source of truth for encoding.xml; with
+      # forceEncodingConfig = false the existing dashboard file would be kept
+      # and these settings silently ignored. Dashboard transcoding changes are
+      # overwritten on restart.
+      forceEncodingConfig = true;
+      transcoding = {
+        enableHardwareEncoding = true;
+        hardwareDecodingCodecs = {
+          h264 = true;
+          hevc = true;
+          mpeg2 = true;
+          vc1 = true;
+          vp9 = true;
+        };
+        # The iGPU has no usable tone mapping; software tone mapping would pin
+        # all four cores, and HDR 4K cannot be transcoded on this CPU anyway.
+        enableToneMapping = false;
+        # Pause ffmpeg once it is ahead of playback instead of pegging the CPU.
+        throttleTranscoding = true;
+      };
     };
 
     # Movies
@@ -128,6 +158,8 @@ in
   };
 
   # Shared media access: one group for every app that touches /seclusium.
+  # Jellyfin additionally needs the render/video groups for VAAPI (the module
+  # sets DeviceAllow, but the device node still needs Unix permissions).
   users.users =
     lib.genAttrs
       (builtins.filter (name: config.services.${name}.enable) [
@@ -143,7 +175,13 @@ in
         "bazarr"
         "navidrome"
       ])
-      (_: {
-        extraGroups = [ "multimedia" ];
+      (name: {
+        extraGroups = [
+          "multimedia"
+        ]
+        ++ lib.optionals (name == "jellyfin") [
+          "render"
+          "video"
+        ];
       });
 }

@@ -21,6 +21,11 @@
     gc = {
       automatic = true;
       dates = "weekly";
+      # The default (no options) runs plain `nix-collect-garbage`, which only
+      # deletes unreachable paths; old system generations are GC roots, so they
+      # are never collected and the store slowly fills the root filesystem.
+      # 14 days keeps two weeks of rollbacks while bounding store growth.
+      options = "--delete-older-than 14d";
     };
     optimise.automatic = true;
   };

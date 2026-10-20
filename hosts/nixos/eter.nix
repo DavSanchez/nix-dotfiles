@@ -73,8 +73,14 @@
 
   environment.systemPackages = with pkgs; [
     bottom
+    ethtool
     helix
   ];
+
+  # journald defaults to SystemMaxUse=10% of the filesystem (~2.6 GiB on eter's
+  # 26 GiB root), which competed with the Nix store; 500 MiB keeps ~a week of
+  # logs. Smaller values mean less history for post-mortem debugging.
+  services.journald.settings.Journal.SystemMaxUse = "500M";
 
   programs.yazi.enable = true;
 
