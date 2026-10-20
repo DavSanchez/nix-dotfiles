@@ -3,6 +3,15 @@
   # ZFS
   boot.supportedFilesystems = [ "zfs" ];
   boot.zfs.forceImportRoot = false;
+
+  # Application state lives on the pool but outside the user-owned media tree,
+  # so systemd-tmpfiles can create service-owned directories safely.
+  fileSystems."/srv/appdata" = {
+    device = "seclusium/appdata";
+    fsType = "zfs";
+  };
+
+  systemd.tmpfiles.rules = [ "d /srv/appdata 0755 root root -" ];
   services.zfs.autoScrub = {
     enable = true;
     interval = "monthly";

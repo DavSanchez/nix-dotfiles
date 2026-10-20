@@ -30,7 +30,7 @@ in
   services = {
     plex = {
       enable = false;
-      dataDir = "/seclusium/imagery/plex";
+      dataDir = "/srv/appdata/plex";
     };
 
     jellyfin = {
@@ -41,24 +41,24 @@ in
     # Movies
     radarr = {
       enable = true;
-      dataDir = "/seclusium/imagery/radarr/.config/Radarr";
+      dataDir = "/srv/appdata/radarr";
     };
     # Series
     sonarr = {
       enable = true;
-      dataDir = "/seclusium/imagery/sonarr/.config/Sonarr";
+      dataDir = "/srv/appdata/sonarr";
     };
     # Music
     lidarr = {
       enable = true;
-      dataDir = "/seclusium/echoes/lidarr/.config/Lidarr";
+      dataDir = "/srv/appdata/lidarr";
     };
     # Books
     readarr.enable = false;
     # Subtitles
     bazarr = {
       enable = true;
-      dataDir = "/seclusium/imagery/bazarr/.config/Bazarr";
+      dataDir = "/srv/appdata/bazarr";
       settings = {
         general = {
           use_sonarr = true;
@@ -77,7 +77,10 @@ in
       };
     };
     # Indexers
-    prowlarr.enable = true;
+    prowlarr = {
+      enable = true;
+      dataDir = "/srv/appdata/prowlarr";
+    };
 
     transmission = {
       enable = false;
@@ -105,7 +108,7 @@ in
       enable = true;
       settings = {
         MusicFolder = "/seclusium/echoes/music";
-        DataFolder = "/seclusium/echoes/navidrome";
+        DataFolder = "/srv/appdata/navidrome";
       };
     };
   };
@@ -115,61 +118,32 @@ in
     pkgs.ffmpeg
   ];
 
-  # User and groups setup
+  # Writers into the shared media tree need group-write (0002); readers keep
+  # their own restrictive umasks. Sonarr/Radarr set 0022 in nixpkgs, so force.
+  systemd.services = {
+    sonarr.serviceConfig.UMask = lib.mkForce "0002";
+    radarr.serviceConfig.UMask = lib.mkForce "0002";
+    lidarr.serviceConfig.UMask = "0002";
+    bazarr.serviceConfig.UMask = "0002";
+  };
+
+  # Shared media access: one group for every app that touches /seclusium.
   users.users =
-    lib.optionalAttrs config.services.jellyfin.enable {
-      jellyfin.extraGroups = [
-        "multimedia"
-      ];
-    }
-    // lib.optionalAttrs config.services.plex.enable {
-      plex.extraGroups = [
-        "multimedia"
-      ];
-    }
-    // lib.optionalAttrs config.services.transmission.enable {
-      transmission.extraGroups = [
-        "multimedia"
-      ];
-    }
-    // lib.optionalAttrs config.services.qbittorrent.enable {
-      qbittorrent.extraGroups = [
-        "multimedia"
-      ];
-    }
-    // lib.optionalAttrs config.services.rtorrent.enable {
-      rtorrent.extraGroups = [
-        "multimedia"
-      ];
-    }
-    // lib.optionalAttrs config.services.radarr.enable {
-      radarr.extraGroups = [
-        "multimedia"
-      ];
-    }
-    // lib.optionalAttrs config.services.sonarr.enable {
-      sonarr.extraGroups = [
-        "multimedia"
-      ];
-    }
-    // lib.optionalAttrs config.services.lidarr.enable {
-      lidarr.extraGroups = [
-        "multimedia"
-      ];
-    }
-    // lib.optionalAttrs config.services.readarr.enable {
-      readarr.extraGroups = [
-        "multimedia"
-      ];
-    }
-    // lib.optionalAttrs config.services.bazarr.enable {
-      bazarr.extraGroups = [
-        "multimedia"
-      ];
-    }
-    // lib.optionalAttrs config.services.navidrome.enable {
-      navidrome.extraGroups = [
-        "multimedia"
-      ];
-    };
+    lib.genAttrs
+      (builtins.filter (name: config.services.${name}.enable) [
+        "jellyfin"
+        "plex"
+        "transmission"
+        "qbittorrent"
+        "rtorrent"
+        "radarr"
+        "sonarr"
+        "lidarr"
+        "readarr"
+        "bazarr"
+        "navidrome"
+      ])
+      (_: {
+        extraGroups = [ "multimedia" ];
+      });
 }
