@@ -93,6 +93,18 @@ in
         general = {
           use_sonarr = true;
           use_radarr = true;
+          use_jellyfin = true;
+        };
+        jellyfin = {
+          url = "http://127.0.0.1:8096";
+          apikey._secret = config.sops.secrets.jellyfin_api_key.path;
+          movie_library = [ "Movies" ];
+          series_library = [ "Series" ];
+          movie_library_ids = [ "f137a2dd21bbc1b99aa5c0f6bf02a805" ];
+          series_library_ids = [ "5ddaa59a73205234890fdcfc683e14ed" ];
+          update_movie_library = true;
+          update_series_library = true;
+          refresh_method = "immediate";
         };
         sonarr = {
           ip = "127.0.0.1";
@@ -107,10 +119,7 @@ in
       };
     };
     # Indexers
-    prowlarr = {
-      enable = true;
-      dataDir = "/srv/appdata/prowlarr";
-    };
+    prowlarr.enable = true;
 
     transmission = {
       enable = false;

@@ -93,6 +93,7 @@
       lidarr_api_key = { };
       sonarr_api_key = { };
       radarr_api_key = { };
+      jellyfin_api_key = { };
     };
   };
 
