@@ -47,16 +47,33 @@ jobs:
         run: |
           set -euo pipefail
           nix eval --json '.#nixosConfigurations' \
-            --apply 'x: builtins.mapAttrs (n: v: v.pkgs.system) x' \
-          | jq -c 'to_entries | map(
+            --apply 'x: builtins.mapAttrs (n: v: v.pkgs.system) x' > systems.json
+          # Hosts with a deploy-rs node build their activatable profile instead of
+          # the bare toplevel. That profile's closure contains the toplevel (plus
+          # the `activate-rs`/activation scripts `deploy` installs), so it is a
+          # strict superset and validates the same artefact deploy's own
+          # pre-check (`nix flake check`) covers. Hosts without a node (duende)
+          # fall back to the toplevel.
+          nix eval --json '.#deploy.nodes' --apply builtins.attrNames > deploy-nodes.json
+          jq -c --slurpfile deploy deploy-nodes.json 'to_entries | map(
               .key as $host | .value as $system |
-              { host: $host, system: $system, runner: (
-                if $system == "x86_64-linux" then "ubuntu-latest"
-                elif $system == "aarch64-linux" then "ubuntu-24.04-arm"
-                elif $system == "aarch64-darwin" then "macos-latest"
-                else error("unsupported system: " + $system)
-                end
-              )})' > matrix.json
+              {
+                host: $host,
+                system: $system,
+                attr: (
+                  if ($deploy[0] | index($host)) != null
+                  then ".#deploy.nodes.\($host).profiles.system.path"
+                  else ".#nixosConfigurations.\($host).config.system.build.toplevel"
+                  end
+                ),
+                runner: (
+                  if $system == "x86_64-linux" then "ubuntu-latest"
+                  elif $system == "aarch64-linux" then "ubuntu-24.04-arm"
+                  elif $system == "aarch64-darwin" then "macos-latest"
+                  else error("unsupported system: " + $system)
+                  end
+                )
+              })' systems.json > matrix.json
           [ -s matrix.json ] || { echo "matrix is empty — nix eval failed" >&2; exit 1; }
           echo "matrix=$(cat matrix.json)" >> "$GITHUB_OUTPUT"
 
@@ -82,7 +99,7 @@ jobs:
           name: davsanchez
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
       - name: Build NixOS config (${{ matrix.host }})
-        run: nix build --keep-going ".#nixosConfigurations.${{ matrix.host }}.config.system.build.toplevel"
+        run: nix build --keep-going "${{ matrix.attr }}"
 
   check:
     name: 🟢 NixOS builds successes required
