@@ -28,6 +28,12 @@ Nix flake managing NixOS, nix-darwin, and Home Manager configs (repo `DavSanchez
 - Deploy the `deploy-rs` nodes in `flake.nix` with `deploy .#<host>`: `eter`, `mora`, `bruma` (`duende` is currently commented out in `deploy.nodes`). Nodes are addressed by **Tailscale MagicDNS name**, so `deploy` works from anywhere the tailnet is up (Tailscale running on the client, target already joined). A Pi flashed with `just sd-image <host>` already boots as `david` with the repo's keys, but until it has joined the tailnet (`tailscale up`) MagicDNS won't resolve — reach it over the LAN first with `deploy --hostname <host>.local .#<host>`. A Pi flashed some other way (e.g. Hydra's generic `nixos.sd_image.aarch64-linux`) boots as `root`/`nixos` instead, so its first rollout needs `deploy --ssh-user root --hostname <ip> .#<host>`.
 - Linux builder VM: always up with its daemon, and its memory is a ceiling the host never gets back — `just stop-linux-builder` releases it (RAM + disk), `just start-linux-builder` brings it back, `just restart-linux-builder` re-spins it after a `nix.linux-builder.*` change.
 
+## Pull requests
+
+- `master` is protected (rulesets: PR required, linear history, signed commits, and the four `🟢 ... successes required` gates). Never push to `master` directly — open a PR and let automerge squash it.
+- Update a stale branch by **rebasing**, never by merging `master` into it: `git rebase origin/master`, then `git push --force-with-lease`. Don't use `gh pr update-branch` on branches touching `.github/workflows/*` — it fails with "refusing to allow an OAuth App to create or update workflow ... without `workflow` scope"; rebase locally instead.
+- Merge with **squash** only, through automerge: `gh pr merge <n> --auto --squash` (Renovate does the same). Don't merge a PR by hand.
+
 ## Gotchas
 
 - **Raspberry Pi kernels build from source**: `nixos-hardware`'s `linux-rpi` is not in `cache.nixos.org`, nor is anything built against it, so the first CI run (native aarch64 runner) or Mac build (through the `linux-builder` VM) compiles it; later builds hit the local store or the `davsanchez` cachix cache.
