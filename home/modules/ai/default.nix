@@ -2,8 +2,14 @@
   pkgs,
   config,
   lib,
+  inputs,
   ...
 }:
+let
+  # Agent CLIs that nixpkgs does not carry. autolith builds against the nixpkgs
+  # its own flake pins; prime-agent against ours, since llm-agents follows it.
+  system = pkgs.stdenv.hostPlatform.system;
+in
 {
   services.ollama.enable = true;
 
@@ -39,11 +45,16 @@
     };
   };
 
-  home.packages = with pkgs; [
-    # llama-cpp # broken for now (nodejs)
-    llama-swap
-    python313Packages.huggingface-hub
+  home.packages =
+    (with pkgs; [
+      # llama-cpp # broken for now (nodejs)
+      llama-swap
+      python313Packages.huggingface-hub
 
-    llm
-  ];
+      llm
+    ])
+    ++ [
+      inputs.autolith.packages.${system}.default
+      inputs.llm-agents.packages.${system}.prime-agent
+    ];
 }
