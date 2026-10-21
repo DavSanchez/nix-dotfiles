@@ -166,6 +166,26 @@ in
     bazarr.serviceConfig.UMask = "0002";
   };
 
+  # switch-to-configuration restarts every unit whose file changed, and a
+  # nixpkgs bump rewrites the zfs-import/zfs-mount unit files even when the
+  # mount configuration is identical. Restarting zfs-import-seclusium.service
+  # tears down the pool (the mount units Require it), so for a moment nothing
+  # under /seclusium is mounted. Units that only reference a pool path through
+  # BindPaths/profileDir don't order themselves against those mounts and can
+  # start inside that window: navidrome dies with 226/NAMESPACE on its music
+  # bind, while qbittorrent/lidarr would silently write into the root
+  # filesystem. The nixpkgs modules only add RequiresMountsFor for the
+  # directories systemd manages (StateDirectory uses /var/lib, lidarr's dataDir
+  # gets no entry at all), so add the pool paths the services actually use.
+  systemd.services = {
+    navidrome.unitConfig.RequiresMountsFor = [
+      config.services.navidrome.settings.MusicFolder
+      config.services.navidrome.settings.DataFolder
+    ];
+    qbittorrent.unitConfig.RequiresMountsFor = [ config.services.qbittorrent.profileDir ];
+    lidarr.unitConfig.RequiresMountsFor = [ config.services.lidarr.dataDir ];
+  };
+
   # Shared media access: one group for every app that touches /seclusium.
   # Jellyfin additionally needs the render/video groups for VAAPI (the module
   # sets DeviceAllow, but the device node still needs Unix permissions).
