@@ -6,8 +6,6 @@
 {
   imports = [
     inputs.hermes-agent.homeManagerModules.default
-    # TEMPORARY: removes itself once hermes-agent#143410 is fixed — see the file.
-    ./hermes-pm-darwin.nix
   ];
 
   sops = {
