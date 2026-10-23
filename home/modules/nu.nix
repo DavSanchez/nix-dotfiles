@@ -7,6 +7,12 @@
 {
   programs.nushell = {
     enable = true;
+    # Adopt the 26.11 default (session variables from `home.sessionVariables`
+    # reach the shell) without bumping `home.stateVersion`, which stays on
+    # 25.11 until 26.11 is released. Silences the "default value ... has
+    # changed" warning; flip back to the implicit default at the next
+    # stateVersion bump.
+    loadSessionVariables = true;
     environmentVariables = {
       DOTFILES = "${config.home.homeDirectory}/.dotfiles";
       EDITOR = "${pkgs.helix}/bin/hx";
