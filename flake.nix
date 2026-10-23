@@ -49,10 +49,10 @@
     ## Quicklisp package set generated against it, so that input is not followed.
     autolith.url = "github:lambda-symbolics/autolith";
 
-    ## llm-agents carries prime-agent. Follow our nixpkgs so the CLI is built
+    ## Goose builds from its own flake. Follow our nixpkgs so it is built
     ## against the same revision as the rest of the system.
-    llm-agents.url = "github:numtide/llm-agents.nix";
-    llm-agents.inputs.nixpkgs.follows = "nixpkgs";
+    goose.url = "github:aaif-goose/goose";
+    goose.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =

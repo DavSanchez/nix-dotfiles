@@ -6,11 +6,27 @@
   ...
 }:
 let
-  # Agent CLIs that nixpkgs does not carry. autolith builds against the nixpkgs
-  # its own flake pins; prime-agent against ours, since llm-agents follows it.
+  # Agent CLIs that nixpkgs does not carry. Autolith builds against the nixpkgs
+  # its own flake pins; Goose against ours, since its flake follows it.
   system = pkgs.stdenv.hostPlatform.system;
+
+  # OpenCode 2 reads terminal settings from cli.json and ignores the tui.json
+  # that OpenCode 1 used. Catppuccin's home-manager module still targets
+  # tui.json, so pick its built-in theme names from the global flavour instead.
+  opencodeTheme =
+    if config.catppuccin.flavor == "frappe" then
+      "catppuccin-frappe"
+    else if config.catppuccin.flavor == "macchiato" then
+      "catppuccin-macchiato"
+    else
+      "catppuccin";
+  opencodeThemeMode = if config.catppuccin.flavor == "latte" then "light" else "dark";
 in
 {
+  # The catppuccin OpenCode module only sets programs.opencode.tui, which
+  # OpenCode 2 ignores; the theme is selected through cli below.
+  catppuccin.opencode.enable = false;
+
   services.ollama.enable = true;
 
   programs = {
@@ -20,6 +36,25 @@ in
     opencode = {
       enable = true;
       settings.autoupdate = false;
+      # OpenCode 2 reads terminal settings from cli.json. Home Manager owns that
+      # file here, so use Ctrl+P's settings dialog as a preview and persist any
+      # change in this attrset (the file itself is a read-only store symlink).
+      cli = {
+        theme = {
+          name = opencodeTheme;
+          mode = opencodeThemeMode;
+        };
+        animations = true;
+        diffs.wrap = "word";
+        session = {
+          sidebar = "auto";
+          scrollbar = false;
+          thinking = "hide";
+        };
+        # Herdr's integration writes this entry; keep it declarative so the
+        # agent-state/resume plugin still loads.
+        plugins = [ "./herdr-opencode" ];
+      };
     };
 
     herdr = {
@@ -55,6 +90,10 @@ in
     ])
     ++ [
       inputs.autolith.packages.${system}.default
-      inputs.llm-agents.packages.${system}.prime-agent
+      # The upstream flake's cargo tests include a review test that assumes an
+      # unsandboxed working tree; skip them for the installed CLI.
+      (inputs.goose.packages.${system}.default.overrideAttrs (_: {
+        doCheck = false;
+      }))
     ];
 }
