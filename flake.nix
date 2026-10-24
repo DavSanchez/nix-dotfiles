@@ -43,16 +43,16 @@
 
     # Hermes Agent
     ## Pinned to a stable release tag (upstream's default channel for source
-    ## installs since 2026-10). Renovate does not advance tag refs, so bump
-    ## this to the next vX.Y.Z by hand and run
+    ## installs since 2026-10). Dependabot opens a PR when a newer vX.Y.Z tag
+    ## appears; if it misses one, bump this and run
     ## `nix flake update hermes-agent`.
     hermes-agent.url = "github:NousResearch/hermes-agent/v0.22.5";
 
     # Agent CLIs that nixpkgs does not carry.
     ## Autolith pins its own nixpkgs in lockstep with the SBCL version and the
     ## Quicklisp package set generated against it, so that input is not followed.
-    ## Pinned to a release tag; Renovate does not advance tag refs, so bump it
-    ## by hand and run `nix flake update autolith`.
+    ## Pinned to a release tag; Dependabot bumps it when a newer tag appears,
+    ## otherwise bump this and run `nix flake update autolith`.
     autolith.url = "github:lambda-symbolics/autolith/v0.66.0";
   };
 
