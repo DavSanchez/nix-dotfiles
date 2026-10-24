@@ -2,20 +2,20 @@
   "nodes": {
     "autolith": {
       "inputs": {
-        "crane": "crane",
         "flake-parts": "flake-parts",
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1792611842,
-        "narHash": "sha256-wf4cEJBCstqBJMFzCt1qfn9/R0h9W+dCDc5oicwvlo8=",
+        "lastModified": 1792277191,
+        "narHash": "sha256-w1AJBiSOyMUXrguXRNs2oIkuZqa/S1zL8ap1lzRaRoU=",
         "owner": "lambda-symbolics",
         "repo": "autolith",
-        "rev": "41fd881ea5ff7f1699aa3bd810c9340d6cd032ac",
+        "rev": "68db763eaae60f5e930c195eba4c76ac029b0781",
         "type": "github"
       },
       "original": {
         "owner": "lambda-symbolics",
+        "ref": "v0.66.0",
         "repo": "autolith",
         "type": "github"
       }
@@ -37,21 +37,6 @@
       "original": {
         "owner": "catppuccin",
         "repo": "nix",
-        "type": "github"
-      }
-    },
-    "crane": {
-      "locked": {
-        "lastModified": 1791754810,
-        "narHash": "sha256-cN0Mgk+sQtCJcGWs9H4M0CnLRAuC4I8aCwiBTcBJs6E=",
-        "owner": "ipetkov",
-        "repo": "crane",
-        "rev": "bd63bf1d0a0f6dcacd7549c714a671ee63b0db6a",
-        "type": "github"
-      },
-      "original": {
-        "owner": "ipetkov",
-        "repo": "crane",
         "type": "github"
       }
     },

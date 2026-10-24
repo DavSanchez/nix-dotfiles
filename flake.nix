@@ -51,7 +51,9 @@
     # Agent CLIs that nixpkgs does not carry.
     ## Autolith pins its own nixpkgs in lockstep with the SBCL version and the
     ## Quicklisp package set generated against it, so that input is not followed.
-    autolith.url = "github:lambda-symbolics/autolith";
+    ## Pinned to a release tag; Renovate does not advance tag refs, so bump it
+    ## by hand and run `nix flake update autolith`.
+    autolith.url = "github:lambda-symbolics/autolith/v0.66.0";
   };
 
   outputs =
