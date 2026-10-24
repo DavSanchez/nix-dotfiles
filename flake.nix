@@ -42,7 +42,11 @@
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
 
     # Hermes Agent
-    hermes-agent.url = "github:NousResearch/hermes-agent";
+    ## Pinned to a stable release tag (upstream's default channel for source
+    ## installs since 2026-10). Renovate does not advance tag refs, so bump
+    ## this to the next vX.Y.Z by hand and run
+    ## `nix flake update hermes-agent`.
+    hermes-agent.url = "github:NousResearch/hermes-agent/v0.22.5";
 
     # Agent CLIs that nixpkgs does not carry.
     ## Autolith pins its own nixpkgs in lockstep with the SBCL version and the
