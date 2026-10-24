@@ -7,7 +7,7 @@
 }:
 let
   # Agent CLIs that nixpkgs does not carry. Autolith builds against the nixpkgs
-  # its own flake pins; Goose against ours, since its flake follows it.
+  # its own flake pins.
   system = pkgs.stdenv.hostPlatform.system;
 
   # OpenCode 2 reads terminal settings from cli.json and ignores the tui.json
@@ -82,6 +82,7 @@ in
 
   home.packages =
     (with pkgs; [
+      goose-cli
       # llama-cpp # broken for now (nodejs)
       llama-swap
       python313Packages.huggingface-hub
@@ -90,10 +91,5 @@ in
     ])
     ++ [
       inputs.autolith.packages.${system}.default
-      # The upstream flake's cargo tests include a review test that assumes an
-      # unsandboxed working tree; skip them for the installed CLI.
-      (inputs.goose.packages.${system}.default.overrideAttrs (_: {
-        doCheck = false;
-      }))
     ];
 }

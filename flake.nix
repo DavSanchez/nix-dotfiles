@@ -48,11 +48,6 @@
     ## Autolith pins its own nixpkgs in lockstep with the SBCL version and the
     ## Quicklisp package set generated against it, so that input is not followed.
     autolith.url = "github:lambda-symbolics/autolith";
-
-    ## Goose builds from its own flake. Follow our nixpkgs so it is built
-    ## against the same revision as the rest of the system.
-    goose.url = "github:aaif-goose/goose";
-    goose.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
