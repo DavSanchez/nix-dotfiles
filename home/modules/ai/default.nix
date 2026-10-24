@@ -83,7 +83,7 @@ in
   home.packages =
     (with pkgs; [
       goose-cli
-      # llama-cpp # broken for now (nodejs)
+      llama-cpp
       llama-swap
       python313Packages.huggingface-hub
 
