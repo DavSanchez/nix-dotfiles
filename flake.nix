@@ -46,7 +46,7 @@
     ## installs since 2026-10). Dependabot opens a PR when a newer vX.Y.Z tag
     ## appears; if it misses one, bump this and run
     ## `nix flake update hermes-agent`.
-    hermes-agent.url = "github:NousResearch/hermes-agent/v0.22.5";
+    hermes-agent.url = "github:NousResearch/hermes-agent/v2026.9.24";
 
     # Agent CLIs that nixpkgs does not carry.
     ## Autolith pins its own nixpkgs in lockstep with the SBCL version and the
