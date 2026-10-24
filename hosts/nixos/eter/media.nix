@@ -37,6 +37,13 @@ in
       enable = true;
       dataDir = "/seclusium/zg/jellyfin";
 
+      # Transcode segments (HLS) are written here while a stream is playing.
+      # The default /var/cache/jellyfin lands on the 26 GiB root eMMC, which is
+      # slow for sustained writes, shares the device with swap, and had reached
+      # 88% full with 5 GiB of leftover segments. Keep them on the pool next to
+      # the rest of Jellyfin's state; the module adds RequiresMountsFor for it.
+      cacheDir = "/seclusium/zg/jellyfin/cache";
+
       # The Celeron N3450's HD 500 iGPU can decode H.264, 8-bit HEVC and VP9 and
       # encode H.264 through VAAPI. It cannot decode 10-bit HEVC or encode HEVC,
       # so 4K HDR still needs direct play (or a faster machine).
