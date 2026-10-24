@@ -1,0 +1,18 @@
+version: 2
+updates:
+  # Flake inputs, one PR per outdated input.
+  #
+  # Renovate's nix manager cannot do this: without a rev pinned inside
+  # flake.nix it only refreshes locked inputs through lockFileMaintenance
+  # (one opaque PR for everything), and it also mis-reads flake.lock inputs
+  # whose node names got deduplicated (nixpkgs_3, home-manager_2, ...).
+  # Dependabot's nix ecosystem parses flake.lock, runs
+  # `nix flake update <input>` and opens one PR per input, including for
+  # release tags pinned in flake.nix.
+  - package-ecosystem: nix
+    directory: /
+    schedule:
+      interval: daily
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: "chore(deps)"
