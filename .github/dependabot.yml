@@ -4,9 +4,9 @@ updates:
   #
   # Renovate's nix manager cannot do this: without a rev pinned inside
   # flake.nix it only refreshes locked inputs through lockFileMaintenance
-  # (one opaque PR for everything), and it also mis-reads flake.lock inputs
-  # whose node names got deduplicated (nixpkgs_3, home-manager_2, ...).
-  # Dependabot's nix ecosystem parses flake.lock, runs
+  # (one opaque PR for everything), and it resolves inputs by flake.lock node
+  # name, so deduplicated nodes (nixpkgs_3, home-manager_2, ...) are read as
+  # the wrong input. Dependabot's nix ecosystem parses flake.lock, runs
   # `nix flake update <input>` and opens one PR per input, including for
   # release tags pinned in flake.nix.
   - package-ecosystem: nix
@@ -14,5 +14,12 @@ updates:
     schedule:
       interval: daily
     open-pull-requests-limit: 10
+    commit-message:
+      prefix: "chore(deps)"
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
     commit-message:
       prefix: "chore(deps)"

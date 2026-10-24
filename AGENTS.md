@@ -32,7 +32,7 @@ Nix flake managing NixOS, nix-darwin, and Home Manager configs (repo `DavSanchez
 
 - `master` is protected (rulesets: PR required, linear history, signed commits, and the four `🟢 ... successes required` gates). Never push to `master` directly — open a PR and let automerge squash it.
 - Update a stale branch by **rebasing**, never by merging `master` into it: `git rebase origin/master`, then `git push --force-with-lease`. Don't use `gh pr update-branch` on branches touching `.github/workflows/*` — it fails with "refusing to allow an OAuth App to create or update workflow ... without `workflow` scope"; rebase locally instead.
-- Merge with **squash** only, through automerge: `gh pr merge <n> --auto --squash` (Renovate does the same). Don't merge a PR by hand.
+- Merge with **squash** only, through automerge: `gh pr merge <n> --auto --squash` (the Dependabot workflow does the same for its PRs). Don't merge a PR by hand.
 
 ## Gotchas
 
@@ -48,6 +48,6 @@ Nix flake managing NixOS, nix-darwin, and Home Manager configs (repo `DavSanchez
 - **Tailscale ACLs are out-of-band**: the tailnet access policy lives in the Tailscale admin console, not this repo. Treat the host firewalls above as the second layer — don't rely on tailnet membership alone to gate a listener.
 - macOS builds x86_64-linux derivations via a `nix.linux-builder` (darwin-builder VM). CI activates the throwaway `linux-builder-bootstrap` darwin config first; the real darwin hosts configure their own builder.
 - The darwin `networking.enableHosts` module (`modules/darwin/networking.nix`) writes `/etc/hosts` as a regular file during activation (macOS Network framework can't resolve symlinks there). It mirrors nix-darwin PR #1831 — keep the module and the `tests/darwin/networking-hosts*.nix` behavioural tests in sync with it rather than diverging; upstreaming intent is documented in `tests/darwin/UPSTREAMING.md`. The negative test `networking-hosts-warning` intentionally sets hosts content with `enableHosts = false`, so evaluating `checks.aarch64-darwin` (e.g. `nix flake check`, and hence `deploy`, which runs it as a pre-build check) traces that config's warning. That is expected, not a misconfiguration — skip it with `deploy --skip-checks` if the noise is unwanted.
-- Dependency bumps and lockfile maintenance are automated by Renovate (automerge, conventional-commit PRs like `chore(deps): lock file maintenance`) — don't hand-bump inputs.
+- Dependency bumps are automated by Dependabot (`.github/dependabot.yml`): the `nix` ecosystem opens **one PR per flake input** (including release tags pinned in `flake.nix`), and `github-actions` covers Actions. `.github/workflows/dependabot.yml` approves and enables squash auto-merge on green. Don't hand-bump inputs.
 - Commit style is Conventional Commits (`chore:`, `fix(nix):`, `pkg: update X`).
 - CI gates each workflow on a per-workflow path PATTERN (in `.github/workflows/*.yml`); `flake-check` runs on any `.nix` or `flake.lock` change. Each workflow also matches its own file, so editing a workflow triggers it (otherwise `changed=false` would skip the job it affects).
