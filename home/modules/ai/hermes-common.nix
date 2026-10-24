@@ -6,6 +6,8 @@
 {
   imports = [
     inputs.hermes-agent.homeManagerModules.default
+    # TEMPORARY: needed while we track the v0.22.5 tag — see the file.
+    ./hermes-pm-darwin.nix
   ];
 
   sops = {
