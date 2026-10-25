@@ -16,6 +16,13 @@ updates:
     open-pull-requests-limit: 10
     commit-message:
       prefix: "chore(deps)"
+    ignore:
+      # Hermes publishes two tag schemes: date tags (v2026.9.24 = v0.21.5,
+      # 2026-09-24) and semver tags (v0.22.5, 2026-10-23). Dependabot compares
+      # them as versions, so the date tag looks like a major upgrade when it is
+      # actually an older release. Ignore the date scheme.
+      - dependency-name: hermes-agent
+        versions: [">= 2026.0.0"]
 
   - package-ecosystem: github-actions
     directory: /
