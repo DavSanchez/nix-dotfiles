@@ -2,13 +2,9 @@ version: 2
 updates:
   # Flake inputs, one PR per outdated input.
   #
-  # Renovate's nix manager cannot do this: without a rev pinned inside
-  # flake.nix it only refreshes locked inputs through lockFileMaintenance
-  # (one opaque PR for everything), and it resolves inputs by flake.lock node
-  # name, so deduplicated nodes (nixpkgs_3, home-manager_2, ...) are read as
-  # the wrong input. Dependabot's nix ecosystem parses flake.lock, runs
-  # `nix flake update <input>` and opens one PR per input, including for
-  # release tags pinned in flake.nix.
+  # Dependabot's nix ecosystem parses flake.lock, runs `nix flake update
+  # <input>` and opens one PR per input. That is reliable for branch inputs.
+  # Tag-pinned inputs are excluded (see `ignore` below).
   - package-ecosystem: nix
     directory: /
     schedule:
@@ -17,12 +13,13 @@ updates:
     commit-message:
       prefix: "chore(deps)"
     ignore:
-      # Hermes publishes two tag schemes: date tags (v2026.9.24 = v0.21.5,
-      # 2026-09-24) and semver tags (v0.22.5, 2026-10-23). Dependabot compares
-      # them as versions, so the date tag looks like a major upgrade when it is
-      # actually an older release. Ignore the date scheme.
+      # Dependabot's tag updater cannot handle a tag-pinned input whose tag is
+      # already the latest. It first proposed v0.22.5 -> v2026.9.24 (#786, an
+      # older date-tag release) and, with that filtered, v0.22.5 -> v0.22.4
+      # (#788, the tag *below* the current one) instead of reporting no update.
+      # Bump these by hand: change the tag, then `nix flake update <input>`.
       - dependency-name: hermes-agent
-        versions: [">= 2026.0.0"]
+      - dependency-name: autolith
 
   - package-ecosystem: github-actions
     directory: /
