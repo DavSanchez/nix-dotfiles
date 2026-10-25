@@ -17,7 +17,8 @@ updates:
       # already the latest. It first proposed v0.22.5 -> v2026.9.24 (#786, an
       # older date-tag release) and, with that filtered, v0.22.5 -> v0.22.4
       # (#788, the tag *below* the current one) instead of reporting no update.
-      # Bump these by hand: change the tag, then `nix flake update <input>`.
+      # .github/workflows/update-tag-inputs.yml bumps these to the latest
+      # GitHub release; manual fallback: change the tag and `nix flake update`.
       - dependency-name: hermes-agent
       - dependency-name: autolith
 

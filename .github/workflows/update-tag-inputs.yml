@@ -1,0 +1,38 @@
+name: Update tag-pinned flake inputs
+
+# Dependabot's nix tag updater picks the tag *below* the pinned one when the
+# pin is already the latest (#786, #788), so tag-pinned inputs are ignored in
+# .github/dependabot.yml and bumped here instead: latest GitHub release only,
+# no date-style tags, auto-merge on green.
+
+on:
+  schedule:
+    - cron: "0 5 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - input: hermes-agent
+            repo: NousResearch/hermes-agent
+          - input: autolith
+            repo: lambda-symbolics/autolith
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update ${{ matrix.input }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: ./scripts/update-flake-tag.sh "${{ matrix.input }}" "${{ matrix.repo }}"
