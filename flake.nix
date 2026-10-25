@@ -43,16 +43,16 @@
 
     # Hermes Agent
     ## Pinned to a stable release tag (upstream's default channel for source
-    ## installs since 2026-10). Dependabot skips tag-pinned inputs — its tag
-    ## updater proposes downgrades — so bump this and run
-    ## `nix flake update hermes-agent`.
+    ## installs since 2026-10). Dependabot updates it; the obsolete date-tag
+    ## scheme is filtered and downgrade proposals do not auto-merge. Manual
+    ## fallback: change the tag and run `nix flake update hermes-agent`.
     hermes-agent.url = "github:NousResearch/hermes-agent/v0.22.5";
 
     # Agent CLIs that nixpkgs does not carry.
     ## Autolith pins its own nixpkgs in lockstep with the SBCL version and the
     ## Quicklisp package set generated against it, so that input is not followed.
-    ## Pinned to a release tag; Dependabot skips tag-pinned inputs, so bump
-    ## this and run `nix flake update autolith`.
+    ## Pinned to a release tag; Dependabot updates it (manual fallback: change
+    ## the tag and run `nix flake update autolith`).
     autolith.url = "github:lambda-symbolics/autolith/v0.66.0";
   };
 

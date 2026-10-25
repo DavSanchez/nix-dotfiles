@@ -13,13 +13,13 @@ updates:
     commit-message:
       prefix: "chore(deps)"
     ignore:
-      # Dependabot's tag updater cannot handle a tag-pinned input whose tag is
-      # already the latest. It first proposed v0.22.5 -> v2026.9.24 (#786, an
-      # older date-tag release) and, with that filtered, v0.22.5 -> v0.22.4
-      # (#788, the tag *below* the current one) instead of reporting no update.
-      # Bump these by hand: change the tag, then `nix flake update <input>`.
+      # Hermes also publishes an obsolete date-tag scheme (v2026.9.24 =
+      # v0.21.5) whose tags sort above v0.22.x. Filter those so semver tags are
+      # considered. Dependabot may still propose the tag *below* a pin that is
+      # already the latest (#786, #788); the approve/auto-merge workflow treats
+      # downgrades as semver-major, so they stay open instead of merging.
       - dependency-name: hermes-agent
-      - dependency-name: autolith
+        versions: [">= 2026.0.0"]
 
   - package-ecosystem: github-actions
     directory: /
