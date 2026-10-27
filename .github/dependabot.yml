@@ -3,8 +3,8 @@ updates:
   # Flake inputs, one PR per outdated input.
   #
   # Dependabot's nix ecosystem parses flake.lock, runs `nix flake update
-  # <input>` and opens one PR per input. That is reliable for branch inputs.
-  # Tag-pinned inputs are excluded (see `ignore` below).
+  # <input>` and opens one PR per input, for branch and tag inputs alike.
+  # Hermes' obsolete date tags are filtered below.
   - package-ecosystem: nix
     directory: /
     schedule:
@@ -12,6 +12,11 @@ updates:
     open-pull-requests-limit: 10
     commit-message:
       prefix: "chore(deps)"
+    cooldown:
+      # Dependabot defaults to 3 days. Tag-pinned inputs are our stable channel
+      # and should move on the next run; branch inputs keep the default.
+      default-days: 3
+      exclude: ["hermes-agent", "autolith"]
     ignore:
       # Hermes also publishes an obsolete date-tag scheme (v2026.9.24 =
       # v0.21.5) whose tags sort above v0.22.x. Filter those so semver tags are
