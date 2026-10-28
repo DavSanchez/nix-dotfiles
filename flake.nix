@@ -53,7 +53,7 @@
     ## Quicklisp package set generated against it, so that input is not followed.
     ## Pinned to a release tag; Dependabot updates it (manual fallback: change
     ## the tag and run `nix flake update autolith`).
-    autolith.url = "github:lambda-symbolics/autolith/v0.66.0";
+    autolith.url = "github:lambda-symbolics/autolith/v0.67.0";
   };
 
   outputs =
