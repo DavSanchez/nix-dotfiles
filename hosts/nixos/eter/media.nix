@@ -155,7 +155,20 @@ in
       settings = {
         MusicFolder = "/seclusium/echoes/music";
         DataFolder = "/srv/appdata/navidrome";
+
+        # Apple Music is a metadata agent (DB-only, no file writes); add it to
+        # the agent chain so it is actually queried. Order is priority.
+        Agents = "apple-music,deezer,lastfm";
+
+        # Let the lyrics plugin answer lyric lookups alongside embedded tags.
+        LyricsPriority = "embedded,nd-lyrics";
       };
+
+      withPlugins = p: [
+        p.apple-music
+        p.listenbrainz-daily-playlist
+        p.lyrics-plugin
+      ];
     };
   };
 
