@@ -51,9 +51,11 @@
     # Agent CLIs that nixpkgs does not carry.
     ## Autolith pins its own nixpkgs in lockstep with the SBCL version and the
     ## Quicklisp package set generated against it, so that input is not followed.
-    ## Pinned to a release tag; Dependabot updates it (manual fallback: change
-    ## the tag and run `nix flake update autolith`).
-    autolith.url = "github:lambda-symbolics/autolith/v0.67.0";
+    ## Tracks upstream's default branch, which is its documented Nix install
+    ## channel (`nix run github:lambda-symbolics/autolith`); it cuts releases
+    ## hourly, so a tag pin is stale before CI finishes. Dependabot updates it
+    ## (manual fallback: `nix flake update autolith`).
+    autolith.url = "github:lambda-symbolics/autolith";
   };
 
   outputs =
