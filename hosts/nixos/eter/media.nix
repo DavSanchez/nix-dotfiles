@@ -162,11 +162,6 @@ in
 
         # Let the lyrics plugin answer lyric lookups alongside embedded tags.
         LyricsPriority = "embedded,nd-lyrics";
-
-        # Periodic scan fallback; the filesystem watcher handles most changes.
-        Scanner = {
-          Schedule = "@every 6h";
-        };
       };
 
       withPlugins = p: [
