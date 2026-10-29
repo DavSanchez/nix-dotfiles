@@ -163,10 +163,8 @@ in
         # Let the lyrics plugin answer lyric lookups alongside embedded tags.
         LyricsPriority = "embedded,nd-lyrics";
 
-        # Apple Music copies live in music/.apple_music so Lidarr's scanner
-        # skips the hidden folder; Navidrome still has to index it.
+        # Periodic scan fallback; the filesystem watcher handles most changes.
         Scanner = {
-          IgnoreDotFolders = false;
           Schedule = "@every 6h";
         };
       };
