@@ -1,6 +1,6 @@
 {
   agda_ls = {
-    enable = true;
+    enable = false;
     package = null;
   };
   ansiblels.enable = false;
@@ -20,6 +20,7 @@
   html.enable = true;
   idris2_lsp.enable = false;
   jsonls.enable = true;
+  leanls.enable = true;
   marksman.enable = true;
   nickel_ls.enable = true;
   nixd.enable = true;

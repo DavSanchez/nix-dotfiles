@@ -20,9 +20,11 @@ in
       "go"
       "haskell"
       "just"
+      "lean4"
       "make"
       "nix"
       "opencode"
+      "quint"
       "rust"
       "toml"
     ];
