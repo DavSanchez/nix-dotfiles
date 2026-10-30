@@ -9,7 +9,7 @@
         ## Extensions present in nixpkgs
         # anthropic.claude-code
         arrterian.nix-env-selector
-        banacorn.agda-mode
+        # banacorn.agda-mode
         # betterthantomorrow.calva
         # catppuccin.catppuccin-vsc # Delegated to catppuccin flake
         # catppuccin.catppuccin-vsc-icons # Delegated to catppuccin flake
@@ -68,6 +68,12 @@
           publisher = "gregoire";
           version = "0.1.1001";
           sha256 = "sha256-wWOlBsOJEQ8rjN3yMsegYg/8t3Jy6Gz/RyCn4/Ts7ZE=";
+        }
+        {
+          name = "quint-vscode"; # Not in nixpkgs; bundles the Quint language server
+          publisher = "informal";
+          version = "0.20.0";
+          sha256 = "sha256-eFCxm76w4eRK2GCXckiZhgbkpi0T99RN1L5dpxvQiSI=";
         }
         # {
         #   name = "nix-embedded-highlighter";
