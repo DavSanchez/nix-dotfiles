@@ -16,6 +16,7 @@ in
   programs.zed-editor = {
     enable = true;
     extensions = [
+      "clojure"
       "dockerfile"
       "go"
       "haskell"
@@ -25,6 +26,7 @@ in
       "nix"
       "opencode"
       "quint"
+      "racket"
       "rust"
       "toml"
     ];

@@ -10,7 +10,7 @@
         # anthropic.claude-code
         arrterian.nix-env-selector
         # banacorn.agda-mode
-        # betterthantomorrow.calva
+        betterthantomorrow.calva
         # catppuccin.catppuccin-vsc # Delegated to catppuccin flake
         # catppuccin.catppuccin-vsc-icons # Delegated to catppuccin flake
         christian-kohler.path-intellisense
@@ -19,6 +19,7 @@
         # dhall.dhall-lang
         # dhall.vscode-dhall-lsp-server
         editorconfig.editorconfig
+        eugleo.magic-racket
         elixir-lsp.vscode-elixir-ls
         golang.go
         gruntfuggly.todo-tree
