@@ -20,6 +20,8 @@
     clojure # FP for the JVM, lisp-like
     clojure-lsp # Langserver
 
+    racket # Scheme-family Lisp, batteries included
+
     elan # Lean theorem prover version manager, FP with dependent types
 
     flix # FP for the JVM
