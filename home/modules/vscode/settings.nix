@@ -15,6 +15,7 @@ in
 {
   programs.vscode.profiles.default.userSettings = {
     "breadcrumbs.enabled" = true;
+    "claudeCode.hideOnboarding" = true;
     "debug.allowBreakpointsEverywhere" = true;
     "diffEditor.ignoreTrimWhitespace" = false;
     "editor.accessibilitySupport" = "off";
