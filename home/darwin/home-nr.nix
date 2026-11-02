@@ -34,7 +34,6 @@
     ../modules/theme.nix
 
     # Darwin specifics
-    ./modules/cloudflare-ca.nix
     ./modules/window-management.nix
   ];
 
