@@ -7,11 +7,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1793186941,
-        "narHash": "sha256-I88pOmVdV4XadMnsjsyo9pP5fn/vf5Vi3/QTezIng/M=",
+        "lastModified": 1793278957,
+        "narHash": "sha256-Hqg7gpndMxii3++8TKuHMTINgufIIN8SpYjHyl2gX0s=",
         "owner": "lambda-symbolics",
         "repo": "autolith",
-        "rev": "36cc23cf767dbe1bf693a9628bbf8e08093f6e36",
+        "rev": "18b18784484833d863f80d89ab872fe132bacae9",
         "type": "github"
       },
       "original": {
