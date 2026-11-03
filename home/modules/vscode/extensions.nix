@@ -29,6 +29,7 @@
         justusadam.language-haskell
         leanprover.lean4
         llvm-vs-code-extensions.vscode-clangd
+        ltex-plus.vscode-ltex-plus
         # markis.code-coverage # FIXME
         mkhl.direnv
         ms-kubernetes-tools.vscode-kubernetes-tools
@@ -47,7 +48,6 @@
         timonwong.shellcheck
         usernamehw.errorlens
         vadimcn.vscode-lldb
-        valentjn.vscode-ltex
         # vscode-icons-team.vscode-icons
         ziglang.vscode-zig
       ])
