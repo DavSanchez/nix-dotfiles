@@ -15,11 +15,11 @@
     ./modules/nix.nix
     ./modules/node-exporter.nix
     ./modules/raspberry-pi.nix
+    ./modules/retro-gaming.nix
     ./modules/ssh.nix
     ./modules/user.nix
 
     ./duende/livedns.nix
-    ./duende/retro-gaming.nix
   ];
 
   networking = {
@@ -35,7 +35,8 @@
     };
   };
 
-  # 1 GB of RAM (same as bruma) — tighter here since cage + RetroArch run locally.
+  # 1 GB of RAM (same as bruma) — the gaming specialisation runs cage +
+  # RetroArch locally, so compression helps when it is active.
   zramSwap.enable = true;
 
   users.users.david = {
