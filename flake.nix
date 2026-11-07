@@ -46,7 +46,7 @@
     ## installs since 2026-10). Dependabot updates it; the obsolete date-tag
     ## scheme is filtered and downgrade proposals do not auto-merge. Manual
     ## fallback: change the tag and run `nix flake update hermes-agent`.
-    hermes-agent.url = "github:NousResearch/hermes-agent/v0.22.6";
+    hermes-agent.url = "github:NousResearch/hermes-agent/v0.22.7";
 
     # Agent CLIs that nixpkgs does not carry.
     ## Autolith pins its own nixpkgs in lockstep with the SBCL version and the
