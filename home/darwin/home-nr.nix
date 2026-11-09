@@ -63,8 +63,6 @@
     obsidian
     obsidian-export
 
-    yq-go
-
     trivy
     lazytrivy
 
