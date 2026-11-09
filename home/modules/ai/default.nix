@@ -61,6 +61,9 @@ in
           # shell-integration settings.
           font = "Iosevka Term Slab";
           font_size = 14;
+          # 0.1.10 ignores unknown settings keys; ligatures arrive in 0.1.13
+          # (nixpkgs#584646), so this takes effect after the package bump.
+          font_ligatures = true;
         };
       };
     };
