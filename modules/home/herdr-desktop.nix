@@ -27,11 +27,12 @@ let
   };
 in
 {
+  imports = [ ./herdr-core.nix ];
+
   options.programs.herdr.desktop = {
     enable = lib.mkEnableOption "the Herdr desktop app";
 
     package = lib.mkPackageOption pkgs "herdr-desktop" { };
-    corePackage = lib.mkPackageOption pkgs "herdr-core" { };
 
     mutableSettings = lib.mkOption {
       type = lib.types.bool;
@@ -69,10 +70,17 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = [
-      cfg.package
-      cfg.corePackage
-    ];
+    # The app is only a client; herdr-core runs every terminal. It lives in
+    # its own module (programs.herdr.core) so the package and config have one
+    # home, and the app's `core` setting points at that exact binary instead
+    # of whatever core it finds first on PATH/~/.local/bin.
+    programs.herdr.core.enable = lib.mkDefault true;
+
+    home.packages = [ cfg.package ];
+
+    programs.herdr.desktop.settings = lib.mkIf config.programs.herdr.core.enable {
+      core = lib.mkDefault (lib.getExe' config.programs.herdr.core.package "herdr-core");
+    };
 
     home.activation.herdrDesktopMutableSettings = lib.mkIf (
       cfg.mutableSettings && cfg.settings != { }
