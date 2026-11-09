@@ -11,6 +11,8 @@ let
   system = pkgs.stdenv.hostPlatform.system;
 in
 {
+  imports = [ inputs.self.homeModules.herdr-desktop ];
+
   services.ollama.enable = true;
 
   programs = {
@@ -45,6 +47,15 @@ in
       // lib.optionalAttrs config.programs.nushell.enable {
         terminal = {
           default_shell = "nu";
+        };
+      };
+
+      desktop = {
+        enable = true;
+        mutableSettings = true;
+        settings = {
+          telemetry = false;
+          sounds.enabled = true;
         };
       };
     };
