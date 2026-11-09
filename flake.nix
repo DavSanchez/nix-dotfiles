@@ -152,6 +152,9 @@
       # Reusable nix-darwin modules you might want to export
       # These are usually stuff you would upstream into nix-darwin
       darwinModules = import ./modules/darwin;
+      # Reusable Home Manager modules you might want to export
+      # These are usually stuff you would upstream into home-manager
+      homeModules = import ./modules/home;
 
       # templates = import ./templates;
 
