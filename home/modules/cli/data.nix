@@ -6,11 +6,11 @@
     gnused
     findutils
     fx
+    jaq
     hexyl
     jo
     fq
     dasel
-    yq-go
     graphviz
     grex
     binsider
