@@ -63,7 +63,14 @@ in
           font_size = 14;
           # 0.1.10 ignores unknown settings keys; ligatures arrive in 0.1.13
           # (nixpkgs#584646), so this takes effect after the package bump.
-          font_ligatures = true;
+          # The throw below is a reminder to drop this comment once that lands.
+          font_ligatures = lib.throwIf (lib.versionAtLeast pkgs.herdr-desktop.version "0.1.13") ''
+            herdr-desktop is now ${pkgs.herdr-desktop.version}.
+
+            font_ligatures is supported natively; remove the forward-compat
+            comment and this throw in home/modules/ai/default.nix (keep
+            font_ligatures = true).
+          '' true;
         };
       };
     };
