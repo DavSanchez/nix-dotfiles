@@ -56,6 +56,11 @@ in
         settings = {
           telemetry = false;
           sounds.enabled = true;
+          # Match the terminal font from programs.ghostty. The desktop app has
+          # no equivalent for Ghostty's opacity, blur, cursor, shaders, or
+          # shell-integration settings.
+          font = "Iosevka Term Slab";
+          font_size = 14;
         };
       };
     };
