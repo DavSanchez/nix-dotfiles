@@ -12,8 +12,7 @@ let
 
   # Prefer nushell, then fish, for both Herdr frontends: the TUI takes a shell
   # directly, and the desktop app's terminals are spawned by herdr-core, whose
-  # `shell` is the only place to pin it (the app has no setting). The core's
-  # version in nixpkgs ignores `shell` until NixOS/nixpkgs#584646 lands.
+  # `settings.shell` is the only place to pin it (the app has no setting).
   defaultShell =
     if config.programs.nushell.enable then
       config.programs.nushell.package
@@ -64,7 +63,7 @@ in
       };
 
       core = lib.mkIf (defaultShell != null) {
-        shell = [
+        settings.shell = [
           (lib.getExe defaultShell)
           "-l"
         ];
