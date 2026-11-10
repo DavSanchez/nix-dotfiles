@@ -9,9 +9,23 @@ let
   # Agent CLIs that nixpkgs does not carry. Autolith builds against the nixpkgs
   # its own flake pins.
   system = pkgs.stdenv.hostPlatform.system;
+
+  # Prefer nushell, then fish, for both Herdr frontends: the TUI takes a shell
+  # directly, and the desktop app's terminals are spawned by herdr-core, whose
+  # `settings.shell` is the only place to pin it (the app has no setting).
+  defaultShell =
+    if config.programs.nushell.enable then
+      config.programs.nushell.package
+    else if config.programs.fish.enable then
+      config.programs.fish.package
+    else
+      null;
 in
 {
-  imports = [ inputs.self.homeModules.herdr-desktop ];
+  imports = [
+    inputs.self.homeModules.herdr-core
+    inputs.self.homeModules.herdr-desktop
+  ];
 
   services.ollama.enable = true;
 
@@ -44,10 +58,15 @@ in
           toast.delivery = "terminal";
         };
       }
-      // lib.optionalAttrs config.programs.nushell.enable {
-        terminal = {
-          default_shell = "nu";
-        };
+      // lib.optionalAttrs (defaultShell != null) {
+        terminal.default_shell = lib.getExe defaultShell;
+      };
+
+      core = lib.mkIf (defaultShell != null) {
+        settings.shell = [
+          (lib.getExe defaultShell)
+          "-l"
+        ];
       };
 
       desktop = {
