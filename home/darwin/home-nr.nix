@@ -70,6 +70,9 @@
   ];
 
   programs.vscode.profiles.default.extensions = with pkgs.vscode-extensions; [
+    github.vscode-github-actions
+    github.vscode-pull-request-github
+
     redhat.java
     vscjava.vscode-java-pack
     vscjava.vscode-gradle
