@@ -30,10 +30,20 @@ _: {
   # paths to the store. `david` is already in this list (modules/user.nix).
   nix.settings.trusted-users = [ "deploy" ];
 
+  # Authenticate `sudo` with the SSH key the client's agent forwards
+  # (`sshOpts = [ "-A" ]` in flake.nix) instead of a password or a NOPASSWD
+  # rule: pam_ssh_agent_auth matches the offered key against the account's
+  # /etc/ssh/authorized_keys.d/<user> (the option's default), which nixpkgs
+  # already writes for `users.users.<name>.openssh.authorizedKeys`. Everything
+  # else keeps asking for the account's real password.
+  #
+  # nixpkgs adds `Defaults env_keep+=SSH_AUTH_SOCK` for sudo by itself, so the
+  # agent socket survives the escalation.
+  security.pam.sshAgentAuth.enable = true;
+
   # Make deployments to this machine passwordless.
   #
-  # TODO: drop this once sudo authenticates with a forwarded SSH key
-  # (`security.pam.sshAgentAuth`) on the real hosts; until then deploys still
-  # rely on it.
+  # TODO: drop this once `security.pam.sshAgentAuth` has been verified against
+  # the real hosts; until then deploys still rely on it.
   security.sudo.wheelNeedsPassword = false;
 }
