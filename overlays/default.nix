@@ -29,16 +29,6 @@
       # alexpasmantier/television#1134 is merged upstream but unreleased as of
       # 0.15.9, so any version bump needs a manual look.
       reviewedTelevision = "0.15.9";
-
-      # opencode 2.2.5 (nixpkgs 6dadaf4) carries a node_modules hash computed
-      # while nixpkgs still had bun 1.4.2. bun 1.4.4 filters optional
-      # dependencies by host libc, so that fixed-output derivation never
-      # matches on any host. Carry the per-platform rehash from
-      # https://github.com/NixOS/nixpkgs/pull/582675 (merged publicly, not in
-      # the pinned nixpkgs yet). The guard is the broken hash itself; once
-      # nixpkgs ships the fixed hash (or moves past 2.2.5) the override throws
-      # instead of lingering silently, so it gets removed on the next bump.
-      brokenOpencodeNodeModulesHash = "sha256-xfOVcw1+waLVNhFDwzOtzxrUSQEogvn88YomydOlhwc=";
     in
     {
       television =
@@ -67,27 +57,5 @@
             - If it does: delete the television override in overlays/default.nix.
             - If it doesn't: bump reviewedTelevision to "${tv.version}" and keep the patch.
           '';
-
-      opencode =
-        if (prev.opencode.node_modules.outputHash or null) == brokenOpencodeNodeModulesHash then
-          prev.opencode.overrideAttrs (old: {
-            node_modules = old.node_modules.overrideAttrs (_: {
-              outputHash =
-                if prev.stdenv.hostPlatform.isLinux then
-                  "sha256-prx9dX7kUvs/E3zopkaPk5LXh3xJAy5sZeum/W8L7cA="
-                else
-                  "sha256-dIveiaiPFGSItwLyeMuPDxTE9gpvvnlTCB/+nG24qCc=";
-            });
-          })
-        else if prev.lib.versionAtLeast prev.opencode.version "2.2.5" then
-          throw ''
-            opencode ${prev.opencode.version} no longer carries the broken
-            node_modules hash this overlay patches (NixOS/nixpkgs#582675).
-
-            Delete the `opencode` override and `brokenOpencodeNodeModulesHash`
-            from overlays/default.nix.
-          ''
-        else
-          prev.opencode;
     };
 }
