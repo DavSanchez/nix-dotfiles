@@ -49,6 +49,9 @@ in
     "github.copilot.nextEditSuggestions.enabled" = true;
     "haskell.plugin.semanticTokens.globalOn" = true;
     "haskell.manageHLS" = "PATH";
+    # LTeX+ cannot download ltex-ls-plus into the read-only Nix store extension
+    # directory, so point it at the packaged server instead.
+    "ltex.ltex-ls.path" = "${pkgs.ltex-ls-plus}";
     "nix.enableLanguageServer" = true;
     "nix.serverPath" = "${pkgs.nixd}/bin/nixd";
     "nix.serverSettings" = {
