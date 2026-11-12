@@ -38,8 +38,14 @@ in
       settings.autoupdate = false;
       # OpenCode 2 reads terminal settings from cli.json. Keep this minimal so
       # the built-in defaults apply; only Herdr's plugin entry is required.
+      # mutableSettings stays off on purpose: it keeps cli.json a managed
+      # symlink, so an edit made from the TUI shows up as an activation
+      # collision instead of silently diverging from this declaration.
       cli = {
         plugins = [ "./herdr-opencode" ];
+        # Herdr owns window/tab layout; OpenCode's own tab strip duplicates it
+        # and makes it ambiguous which layer is switching.
+        tabs.mode = "off";
       };
     };
 
