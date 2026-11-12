@@ -230,6 +230,12 @@
         };
       };
 
+      # Forward the local SSH agent so `sudo` on the target can authenticate the
+      # activation commands with a key (`security.pam.sshAgentAuth`, see
+      # hosts/nixos/modules/deploy.nix) instead of a password or NOPASSWD.
+      # These options are also passed to `nix copy` as NIX_SSHOPTS.
+      deploy.sshOpts = [ "-A" ];
+
       # Targets are addressed by Tailscale MagicDNS name, so `deploy .#<host>`
       # works from anywhere the tailnet is up (not just the home LAN). On first
       # boot, before a host has joined the tailnet, use
