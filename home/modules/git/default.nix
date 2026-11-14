@@ -22,7 +22,9 @@
         ".vscode/"
         "**/*.davs*/" # Put not-to-commit stuff in this directory
         "*.local"
+        # direnv
         ".envrc"
+        ".direnv/"
       ]
       ++ lib.optionals pkgs.stdenv.hostPlatform.isDarwin [
         ".DS_Store"
@@ -60,7 +62,10 @@
       settings = {
         git_protocol = "ssh";
       };
-      extensions = [ pkgs.gh-dash ];
+      extensions = with pkgs; [
+        gh-dash
+        gh-stack
+      ];
     };
 
     gitui.enable = false;
