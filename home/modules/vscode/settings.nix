@@ -96,15 +96,17 @@
     "acp.defaultProvider" = "hermes";
   }
   // lib.optionalAttrs (config.programs.defaultShell.command != null) {
-    "terminal.integrated.defaultProfile.linux" = "nu";
-    "terminal.integrated.defaultProfile.osx" = "nu";
+    # The profile follows `programs.defaultShell`, so it is not necessarily
+    # nushell; name it after the concept rather than the current shell.
+    "terminal.integrated.defaultProfile.linux" = "default";
+    "terminal.integrated.defaultProfile.osx" = "default";
     "terminal.integrated.profiles.linux" = {
-      "nu" = {
+      "default" = {
         path = config.programs.defaultShell.command;
       };
     };
     "terminal.integrated.profiles.osx" = {
-      "nu" = {
+      "default" = {
         path = config.programs.defaultShell.command;
       };
     };
