@@ -66,12 +66,12 @@
 
       image_gen = {
         provider = "openrouter";
-        model = "openai/gpt-image-2.5-flare";
+        model = "openai/gpt-image-2.6-flare";
         use_gateway = false;
       };
       video_gen = {
         provider = "openrouter";
-        model = "bytedance/seedance-2.0";
+        model = "bytedance/seedance-2.5-flash";
         use_gateway = false;
       };
 
