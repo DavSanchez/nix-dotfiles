@@ -275,6 +275,22 @@
           deployChecks = nixpkgs.lib.genAttrs systems (
             system: deploy-rs.lib.${system}.deployChecks self.deploy
           );
+          # One `deploy-activate-<node>` per node, exposed only under the node's own
+          # system. The aggregate `deploy-activate` above spans every node, so
+          # building it needs both Linux architectures (fine from a Mac with the
+          # linux-builder). CI instead runs each runner's own nodes, so no runner
+          # compiles the other architecture's kernel under emulation.
+          nodeActivateChecks =
+            system:
+            nixpkgs.lib.concatMapAttrs (
+              name: node:
+              nixpkgs.lib.optionalAttrs
+                (self.nixosConfigurations.${name}.pkgs.stdenv.hostPlatform.system == system)
+                {
+                  "deploy-activate-${name}" =
+                    (deploy-rs.lib.${system}.deployChecks (self.deploy // { nodes.${name} = node; })).deploy-activate;
+                }
+            ) self.deploy.nodes;
           darwinTestSuite =
             let
               darwinTests = import ./lib/darwin-tests.nix {
@@ -293,6 +309,7 @@
           perSystem = nixpkgs.lib.genAttrs systems (
             system:
             (deployChecks.${system} or { })
+            // nodeActivateChecks system
             // {
               # Building the devShell realises every package in `scriptTools`, so
               # a nixpkgs revision that breaks one fails here rather than in a
