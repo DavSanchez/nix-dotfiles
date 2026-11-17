@@ -4,7 +4,7 @@ set -euo pipefail
 if [[ -n "${JUST_TRACE:-}" ]]; then set -x; fi
 
 if [[ $# -lt 1 || $# -gt 2 ]]; then
-  echo "usage: linux-builder.sh <start|stop|restart> [ssh-port]" >&2
+  echo "usage: linux-builder.sh <start|stop|restart|logs> [ssh-port]" >&2
   exit 2
 fi
 
@@ -25,7 +25,9 @@ port_open() {
 # soon as the process starts, before the guest's sshd is up. Wait for the banner.
 ssh_ready() {
   local banner
-  banner=$(nc -w 2 localhost "$port" </dev/null 2>/dev/null || true)
+  # Keep stdin open (sleep): with `</dev/null` nc sees EOF and closes the socket
+  # before sshd's banner arrives, so the probe would never succeed.
+  banner=$( (sleep 2) | nc -w 3 localhost "$port" 2>/dev/null | head -n 1 || true)
   [[ $banner == SSH-* ]]
 }
 
@@ -36,7 +38,20 @@ wait_for_port_down() {
     sleep 1
   done
   echo "error: port $port still in use 60s after stopping linux-builder" >&2
+  lsof -nP -iTCP:"$port" -sTCP:LISTEN >&2 || true
   return 1
+}
+
+# Dump what we know so a failure is diagnosable instead of silent. The guest
+# console (vzvm "log" mode) goes to the unified log, not to a file.
+diagnose() {
+  {
+    echo "--- launchd state ---"
+    sudo launchctl print "$label" 2>&1 | grep -E 'state =|pid =|runs =|last exit' || echo "(not loaded)"
+    echo "--- guest console (last 40 lines, unified log, last 5m) ---"
+    /usr/bin/log show --last 5m --style compact \
+      --predicate 'process == "vzvm" OR subsystem == "systems.applicative.vzvm"' 2>&1 | tail -n 40
+  } >&2
 }
 
 wait_for_port() {
@@ -49,6 +64,7 @@ wait_for_port() {
     sleep 1
   done
   echo "error: linux-builder did not come up on port $port within 120s" >&2
+  diagnose
   return 1
 }
 
@@ -73,14 +89,19 @@ case "$action" in
   restart)
     # `launchctl kickstart` fails (exit 113) if the service is already down, so
     # tear down the daemon first (no-op if not loaded) and re-spin it from its plist.
-    sudo launchctl bootout "$label" 2>/dev/null || true
+    echo "linux-builder: stopping..."
+    sudo launchctl bootout "$label" || echo "linux-builder: bootout failed or not loaded (continuing)" >&2
     wait_for_port_down
+    echo "linux-builder: bootstrapping $plist"
     sudo launchctl bootstrap system "$plist"
     echo "linux-builder: restarted"
     wait_for_port
     ;;
+  logs)
+    exec /usr/bin/log stream --style compact --predicate 'process == "vzvm"'
+    ;;
   *)
-    echo "error: unknown action '$action' (expected start, stop or restart)" >&2
+    echo "error: unknown action '$action' (expected start, stop, restart or logs)" >&2
     exit 2
     ;;
 esac
