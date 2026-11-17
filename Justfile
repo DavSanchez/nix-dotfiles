@@ -12,6 +12,10 @@ restart-linux-builder port="31022":
 start-linux-builder port="31022":
     @bash "$PWD/scripts/linux-builder.sh" start {{quote(port)}}
 
+# Stream the linux-builder guest console (kernel/systemd output) from the unified log.
+linux-builder-logs:
+    @bash "$PWD/scripts/linux-builder.sh" logs
+
 # Stop the linux-builder VM to give its RAM and disk back to the host.
 # It returns on the next login/reboot with an empty store.
 stop-linux-builder:
