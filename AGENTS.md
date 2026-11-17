@@ -2,6 +2,12 @@
 
 Nix flake managing NixOS, nix-darwin, and Home Manager configs (repo `DavSanchez/nix-dotfiles`, default branch `master`).
 
+## Agent boundaries
+
+- **Never apply a configuration.** Do not run `nixos-rebuild switch`, `darwin-rebuild switch`, `home-manager switch`, any `nh` command, or `deploy` against any node unless the owner explicitly asks for it in the current conversation. Applying configs mutates live machines and can stop half-way (for example on the macOS App Management/TCC prompt), so the owner runs these themselves from their own terminal, where permission prompts are attributed correctly.
+- Disk writes are owner-only too: `just flash-image` and any `dd`/`zstd` pipeline onto a device.
+- Building and evaluating are fine — `nix build`, `home-manager build`, `nix flake check`, `nix eval`, `just build-*`, `just eval-config`. Report what you built plus what still needs applying, instead of applying it.
+
 ## Layout
 
 - `hosts/nixos/<host>.nix` / `hosts/darwin/<host>.nix` — machine entrypoints. `eter` is x86_64-linux; all darwin hosts are aarch64-darwin. `eter` also has a per-host dir `hosts/nixos/eter/` (`fs_share.nix`, `media.nix`, `monitoring.nix`, `zfs.nix`, …) imported alongside shared `hosts/nixos/modules/`.
