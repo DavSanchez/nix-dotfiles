@@ -71,7 +71,6 @@ in
       core = lib.mkIf (defaultShell != null) {
         settings.shell = [
           (lib.getExe defaultShell)
-          "-l"
         ];
       };
 
