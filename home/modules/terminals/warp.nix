@@ -1,62 +1,82 @@
-{ config, ... }:
+{ config, lib, ... }:
 let
   inherit (config.home) homeDirectory;
-  themeName = "Catppuccin Mocha";
+
+  # Warp has no catppuccin module upstream, so the theme is derived from the
+  # palette the catppuccin flake already ships (catppuccin.sources.palette)
+  # rather than hardcoding hex values. If catppuccin/nix ever grows a Warp
+  # module, drop `themes` / the `appearance.themes` block below and let it own
+  # them.
+  catppuccin = config.catppuccin;
+  palette = (lib.importJSON "${catppuccin.sources.palette}/palette.json").${catppuccin.flavor}.colors;
+  flavorName =
+    {
+      latte = "Latte";
+      frappe = "Frappé";
+      macchiato = "Macchiato";
+      mocha = "Mocha";
+    }
+    .${catppuccin.flavor};
+  themeName = "Catppuccin ${flavorName}";
+  themePath = "${homeDirectory}/.warp/themes/catppuccin_${catppuccin.flavor}.yaml";
 in
 {
   # Warp is configured from plain files under ~/.warp on macOS. The module
-  # symlinks settings.toml, keybindings.yaml and the themes/tab_configs/
-  # workflows dirs into the store, so edits made in Warp's Settings panel do
-  # not persist — declare them here instead.
+  # symlinks settings.toml, keybindings.yaml and the themes/tab_configs dirs
+  # into the store, so edits made in Warp's Settings panel do not persist —
+  # declare them here instead.
   programs.warp-terminal = {
     enable = true;
-    # Warp's schema only knows ~15 built-in themes and no catppuccin, so the
-    # official theme (catppuccin/warp) is inlined to carry a display name.
-    themes.catppuccin_mocha = {
-      name = themeName;
-      accent = "#f5e0dc";
-      cursor = "#f5e0dc";
-      background = "#1e1e2e";
-      foreground = "#cdd6f4";
-      details = "darker";
-      terminal_colors = {
-        normal = {
-          black = "#45475a";
-          red = "#f38ba8";
-          green = "#a6e3a1";
-          yellow = "#f9e2af";
-          blue = "#89b4fa";
-          magenta = "#f5c2e7";
-          cyan = "#94e2d5";
-          white = "#a6adc8";
-        };
-        bright = {
-          black = "#585b70";
-          red = "#f37799";
-          green = "#89d88b";
-          yellow = "#ebd391";
-          blue = "#74a8fc";
-          magenta = "#f2aede";
-          cyan = "#6bd7ca";
-          white = "#bac2de";
+
+    themes = lib.optionalAttrs catppuccin.enable {
+      "catppuccin_${catppuccin.flavor}" = {
+        name = themeName;
+        accent = palette.rosewater.hex;
+        cursor = palette.rosewater.hex;
+        background = palette.base.hex;
+        foreground = palette.text.hex;
+        details = "darker";
+        terminal_colors = {
+          normal = {
+            black = palette.surface1.hex;
+            red = palette.red.hex;
+            green = palette.green.hex;
+            yellow = palette.yellow.hex;
+            blue = palette.blue.hex;
+            magenta = palette.pink.hex;
+            cyan = palette.teal.hex;
+            white = palette.subtext0.hex;
+          };
+          bright = {
+            black = palette.surface2.hex;
+            red = palette.red.hex;
+            green = palette.green.hex;
+            yellow = palette.yellow.hex;
+            blue = palette.blue.hex;
+            magenta = palette.pink.hex;
+            cyan = palette.teal.hex;
+            white = palette.subtext1.hex;
+          };
         };
       };
     };
 
     settings = {
       appearance = {
+        vertical_tabs.enabled = true;
+        text = {
+          font_size = 13.0;
+          notebook_font_size = 14.0;
+        };
+      }
+      // lib.optionalAttrs catppuccin.enable {
         themes = {
           # system_theme = true would win over the custom theme below.
           system_theme = false;
           theme.custom = {
             name = themeName;
-            path = "${homeDirectory}/.warp/themes/catppuccin_mocha.yaml";
+            path = themePath;
           };
-        };
-        vertical_tabs.enabled = true;
-        text = {
-          font_size = 13.0;
-          notebook_font_size = 14.0;
         };
       };
       general.default_session_mode = "agent";
@@ -116,34 +136,6 @@ in
           directory = "${homeDirectory}/.dotfiles";
         }
       ];
-    };
-
-    workflows = {
-      home_switch = {
-        name = "Rebuild this Mac's Home Manager config";
-        command = "home-manager switch --flake ~/.dotfiles#david@sierpe";
-        tags = [
-          "nix"
-          "dotfiles"
-        ];
-        description = "Apply the sierpe Home Manager configuration.";
-      };
-      flake_update = {
-        name = "Update a flake input";
-        command = "nix flake update {{input}}";
-        tags = [
-          "nix"
-          "dotfiles"
-        ];
-        description = "Update one flake input, then review flake.lock.";
-        arguments = [
-          {
-            name = "input";
-            description = "Flake input name";
-            default_value = "nixpkgs";
-          }
-        ];
-      };
     };
   };
 }
