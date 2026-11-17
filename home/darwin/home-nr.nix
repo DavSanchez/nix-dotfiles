@@ -64,7 +64,6 @@
     obsidian-export
 
     trivy
-    lazytrivy
 
     fluxcd
   ];
