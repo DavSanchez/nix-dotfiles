@@ -4,9 +4,9 @@ Nix flake managing NixOS, nix-darwin, and Home Manager configs (repo `DavSanchez
 
 ## Agent boundaries
 
-- **Never apply a configuration.** Do not run `nixos-rebuild switch`, `darwin-rebuild switch`, `home-manager switch`, any `nh` command, or `deploy` against any node unless the owner explicitly asks for it in the current conversation. Applying configs mutates live machines and can stop half-way (for example on the macOS App Management/TCC prompt), so the owner runs these themselves from their own terminal, where permission prompts are attributed correctly.
+- **Never apply a configuration.** Do not run `nixos-rebuild switch`, `darwin-rebuild switch`, `home-manager switch`, the activating `nh` subcommands (`nh os switch`, `nh darwin switch`, `nh home switch`), or `deploy` against any node unless the owner explicitly asks for it in the current conversation. Applying configs mutates live machines and can stop half-way (for example on the macOS App Management/TCC prompt), so the owner runs these themselves from their own terminal, where permission prompts are attributed correctly.
 - Disk writes are owner-only too: `just flash-image` and any `dd`/`zstd` pipeline onto a device.
-- Building and evaluating are fine — `nix build`, `home-manager build`, `nix flake check`, `nix eval`, `just build-*`, `just eval-config`. Report what you built plus what still needs applying, instead of applying it.
+- Building and evaluating are fine — `nix build`, `home-manager build`, `nix flake check`, `nix eval`, `nh search`, `just build-*`, `just eval-config`. Report what you built plus what still needs applying, instead of applying it.
 
 ## Layout
 
