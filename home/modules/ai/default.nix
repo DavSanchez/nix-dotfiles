@@ -68,11 +68,11 @@ in
         terminal.default_shell = lib.getExe defaultShell;
       };
 
-      core = lib.mkIf (defaultShell != null) {
-        settings.shell = [
-          (lib.getExe defaultShell)
-        ];
-      };
+      # core = lib.mkIf (defaultShell != null) {
+      #   settings.shell = [
+      #     (lib.getExe defaultShell)
+      #   ];
+      # };
 
       desktop = {
         enable = true;
