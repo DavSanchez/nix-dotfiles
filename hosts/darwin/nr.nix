@@ -83,7 +83,6 @@
       "affinity"
       "claude-code"
       "keymapp"
-      "thaw"
       "virtualbox"
       "vlc"
       "wireshark-app"
