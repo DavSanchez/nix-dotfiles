@@ -1,18 +1,12 @@
 {
-  pkgs,
   lib,
   config,
+  inputs,
   ...
 }:
-let
-  # Bootstrap nushell from fish so it inherits the nix-darwin environment
-  # (nix-darwin has no nushell shell-init to source; fish loads it even as a script).
-  nu-bootstrap = pkgs.writeScriptBin "nu-bootstrap" ''
-    #!${lib.getExe config.programs.fish.package}
-    exec ${lib.getExe config.programs.nushell.package} $argv
-  '';
-in
 {
+  imports = [ inputs.self.homeModules.default-shell ];
+
   programs.zed-editor = {
     enable = true;
     extensions = [
@@ -53,9 +47,9 @@ in
         # scroll_multiplier = 3.0;
         # option_as_meta = true; # `true` prevents writing `#` on term as it applies to both sides
       }
-      // lib.optionalAttrs (config.programs.nushell.enable && config.programs.fish.enable) {
+      // lib.optionalAttrs (config.programs.defaultShell.command != null) {
         shell = {
-          program = "${nu-bootstrap}/bin/nu-bootstrap";
+          program = config.programs.defaultShell.command;
         };
       };
       git = {

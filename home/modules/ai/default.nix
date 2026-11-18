@@ -9,20 +9,10 @@ let
   # Agent CLIs that nixpkgs does not carry. Autolith builds against the nixpkgs
   # its own flake pins.
   system = pkgs.stdenv.hostPlatform.system;
-
-  # Prefer nushell, then fish, for both Herdr frontends: the TUI takes a shell
-  # directly, and the desktop app's terminals are spawned by herdr-core, whose
-  # `settings.shell` is the only place to pin it (the app has no setting).
-  defaultShell =
-    if config.programs.nushell.enable then
-      config.programs.nushell.package
-    else if config.programs.fish.enable then
-      config.programs.fish.package
-    else
-      null;
 in
 {
   imports = [
+    inputs.self.homeModules.default-shell
     inputs.self.homeModules.herdr-core
     inputs.self.homeModules.herdr-desktop
   ];
@@ -64,15 +54,16 @@ in
           toast.delivery = "terminal";
         };
       }
-      // lib.optionalAttrs (defaultShell != null) {
-        terminal.default_shell = lib.getExe defaultShell;
+      // lib.optionalAttrs (config.programs.defaultShell.command != null) {
+        terminal.default_shell = config.programs.defaultShell.command;
       };
 
-      # core = lib.mkIf (defaultShell != null) {
-      #   settings.shell = [
-      #     (lib.getExe defaultShell)
-      #   ];
-      # };
+      # Desktop-app terminals are spawned by herdr-core, whose `settings.shell`
+      # is the only place to pin the shell (the app has no setting). It reads
+      # the config at startup, so restart the core after a rebuild.
+      core = lib.mkIf (config.programs.defaultShell.command != null) {
+        settings.shell = config.programs.defaultShell.argv;
+      };
 
       desktop = {
         enable = true;

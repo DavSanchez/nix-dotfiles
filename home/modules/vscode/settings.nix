@@ -2,17 +2,12 @@
   pkgs,
   config,
   lib,
+  inputs,
   ...
 }:
-let
-  # Bootstrap nushell from fish so it inherits the nix-darwin environment
-  # (nix-darwin has no nushell shell-init to source; fish loads it even as a script).
-  nu-bootstrap = pkgs.writeScriptBin "nu-bootstrap" ''
-    #!${lib.getExe config.programs.fish.package}
-    exec ${lib.getExe config.programs.nushell.package} $argv
-  '';
-in
 {
+  imports = [ inputs.self.homeModules.default-shell ];
+
   programs.vscode.profiles.default.userSettings = {
     "breadcrumbs.enabled" = true;
     "claudeCode.hideOnboarding" = true;
@@ -100,17 +95,19 @@ in
     };
     "acp.defaultProvider" = "hermes";
   }
-  // lib.optionalAttrs (config.programs.nushell.enable && config.programs.fish.enable) {
-    "terminal.integrated.defaultProfile.linux" = "nu";
-    "terminal.integrated.defaultProfile.osx" = "nu";
+  // lib.optionalAttrs (config.programs.defaultShell.command != null) {
+    # The profile follows `programs.defaultShell`, so it is not necessarily
+    # nushell; name it after the concept rather than the current shell.
+    "terminal.integrated.defaultProfile.linux" = "default";
+    "terminal.integrated.defaultProfile.osx" = "default";
     "terminal.integrated.profiles.linux" = {
-      "nu" = {
-        path = "${nu-bootstrap}/bin/nu-bootstrap";
+      "default" = {
+        path = config.programs.defaultShell.command;
       };
     };
     "terminal.integrated.profiles.osx" = {
-      "nu" = {
-        path = "${nu-bootstrap}/bin/nu-bootstrap";
+      "default" = {
+        path = config.programs.defaultShell.command;
       };
     };
   };
