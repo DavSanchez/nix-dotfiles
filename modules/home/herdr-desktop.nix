@@ -33,36 +33,61 @@ let
   # flake owns the app's theme and the hand-written settings must go. The TUI is
   # excluded on purpose: its `theme.name` is a Herdr built-in preset, not
   # something catppuccin/nix provides.
-  catppuccinDesktopOptions =
+  catppuccinHerdrOptions =
     if !(options ? catppuccin) then
       [ ]
     else
+      builtins.filter (name: lib.hasInfix "herdr" (lib.toLower name)) (
+        builtins.attrNames options.catppuccin
+      );
+
+  # `catppuccin.herdr.desktop` names the app unambiguously even though the bare
+  # top-level name does not.
+  catppuccinNestedDesktopOptions = lib.optional (
+    catppuccinHerdrOptions != [ ]
+    && options.catppuccin ? herdr
+    && builtins.isAttrs options.catppuccin.herdr
+    && options.catppuccin.herdr ? desktop
+  ) "herdr.desktop";
+
+  catppuccinDesktopOptions =
+    builtins.filter (
+      name:
       let
-        isDesktopApp =
-          name:
-          let
-            lower = lib.toLower name;
-          in
-          lib.hasInfix "herdr" lower && (lib.hasInfix "desktop" lower || lib.hasInfix "app" lower);
-        nested = lib.optional (
-          options.catppuccin ? herdr
-          && builtins.isAttrs options.catppuccin.herdr
-          && options.catppuccin.herdr ? desktop
-        ) "herdr.desktop";
+        lower = lib.toLower name;
       in
-      builtins.filter isDesktopApp (builtins.attrNames options.catppuccin) ++ nested;
+      lib.hasInfix "desktop" lower || lib.hasInfix "app" lower
+    ) catppuccinHerdrOptions
+    ++ catppuccinNestedDesktopOptions;
+
+  # catppuccin/nix names modules after the app, so a Herdr port would most
+  # likely be the bare `catppuccin.herdr`. That is too ambiguous to assert on —
+  # it may only theme the TUI — so warn there instead of failing the build.
+  ambiguousCatppuccinOptions = lib.subtractLists catppuccinDesktopOptions (
+    if catppuccinNestedDesktopOptions != [ ] then [ ] else catppuccinHerdrOptions
+  );
 
   conflicts =
-    lib.optional (foreignDesktopOptions != [ ]) ''
-      Home Manager now declares programs.herdr.desktop.${lib.concatStringsSep ", programs.herdr.desktop." foreignDesktopOptions}.
-      Delete modules/home/herdr-desktop.nix, its export in modules/home/default.nix and its
-      import in home/modules/ai/default.nix, then use the upstream options instead.
-    ''
-    ++ lib.optional (catppuccinDesktopOptions != [ ]) ''
-      catppuccin/nix now declares ${lib.concatStringsSep ", " catppuccinDesktopOptions}, so it can
-      theme the Herdr desktop app. Drop the manual settings from
-      programs.herdr.desktop.settings in home/modules/ai/default.nix and use the upstream option.
-    '';
+    lib.warnIf (ambiguousCatppuccinOptions != [ ])
+      ''
+        catppuccin/nix now declares ${lib.concatStringsSep ", " ambiguousCatppuccinOptions}.
+        If it themes the Herdr desktop app, delete its hand-written theme in
+        home/modules/ai/default.nix: home/modules/ai/herdr-themes/, their xdg.configFile
+        entries and the `theme` setting under programs.herdr.desktop.settings. If it only
+        themes the TUI, ignore this warning.''
+      (
+        lib.optional (foreignDesktopOptions != [ ]) ''
+          Home Manager now declares programs.herdr.desktop.${lib.concatStringsSep ", programs.herdr.desktop." foreignDesktopOptions}.
+          Delete modules/home/herdr-desktop.nix, its export in modules/home/default.nix and its
+          import in home/modules/ai/default.nix, then use the upstream options instead.
+        ''
+        ++ lib.optional (catppuccinDesktopOptions != [ ]) ''
+          catppuccin/nix now declares ${lib.concatStringsSep ", " catppuccinDesktopOptions}, so it can
+          theme the Herdr desktop app. Delete its hand-written theme in home/modules/ai/default.nix
+          (home/modules/ai/herdr-themes/, their xdg.configFile entries and the `theme` setting
+          under programs.herdr.desktop.settings), then use the upstream option.
+        ''
+      );
 
   jsonFormat = pkgs.formats.json { };
   generatedSettings = jsonFormat.generate "herdr-app-settings.json" cfg.settings;
