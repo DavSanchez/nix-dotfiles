@@ -9,6 +9,18 @@ let
   # Agent CLIs that nixpkgs does not carry. Autolith builds against the nixpkgs
   # its own flake pins.
   system = pkgs.stdenv.hostPlatform.system;
+
+  # Herdr's app themes are plain files beside settings.json. These are the
+  # theme-editor exports for the light/dark pair the app uses, not something
+  # derived from the catppuccin palette: `selection`/`selected` and the bright
+  # ANSI slots are app-specific blends the palette has no direct answer for.
+  # The files, their xdg.configFile links and the `theme` setting below are
+  # scaffolding until catppuccin/nix can theme the Herdr desktop app;
+  # modules/home/herdr-desktop.nix fails the build when that lands.
+  herdrThemeFiles = {
+    latte = ./herdr-themes/catppuccin-latte.json;
+    mocha = ./herdr-themes/catppuccin-mocha.json;
+  };
 in
 {
   imports = [
@@ -18,6 +30,14 @@ in
   ];
 
   services.ollama.enable = true;
+
+  # Read-only store links: editing a theme from Herdr's UI afterwards fails
+  # instead of silently diverging from this declaration.
+  xdg.configFile = lib.optionalAttrs config.catppuccin.enable (
+    lib.mapAttrs' (
+      flavor: source: lib.nameValuePair "herdr-app/themes/catppuccin-${flavor}.json" { inherit source; }
+    ) herdrThemeFiles
+  );
 
   programs = {
     codex.enable = false;
@@ -77,6 +97,13 @@ in
           font = "Iosevka Term Slab";
           font_size = 14;
           font_ligatures = true;
+        }
+        // lib.optionalAttrs config.catppuccin.enable {
+          # Follow the system appearance, as the imperative settings did.
+          theme = {
+            light = "catppuccin-latte";
+            dark = "catppuccin-mocha";
+          };
         };
       };
     };
