@@ -36,7 +36,6 @@ _: {
       "sonic-pi"
       "steam"
       "tailscale-app"
-      "thaw"
       "virtualbox"
       "vlc"
       "whatsapp"
