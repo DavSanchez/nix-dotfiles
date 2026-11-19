@@ -134,4 +134,7 @@ jobs:
           jobs: ${{ toJSON(needs) }}
           # flake-check and deploy-schema are skipped when no .nix/flake.lock
           # changed; that's a legitimate "nothing to check" state, not a failure.
-          allowed-skips: flake-check deploy-schema
+          # alls-green parses this as a *comma*-separated list (or JSON), so a
+          # space-separated list parses as one unknown name and leaves both jobs
+          # required to succeed — which fails the gate whenever they're skipped.
+          allowed-skips: flake-check,deploy-schema
