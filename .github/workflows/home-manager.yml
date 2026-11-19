@@ -67,6 +67,10 @@ jobs:
     if: needs.discover.outputs.changed == 'true'
     name: Build Home Manager (${{ matrix.config }})
     strategy:
+      # Let every config report its own result instead of cancelling the rest:
+      # a failure here is usually one config's eval, and the others still warm
+      # the cache (re-runs then only redo the failed job).
+      fail-fast: false
       matrix:
         include: ${{ fromJSON(needs.discover.outputs.matrix) }}
     runs-on: ${{ matrix.runner }}
