@@ -116,6 +116,16 @@
           };
         };
       };
+
+      agent_servers = {
+        # ACP registry id (`zed: acp registry`), not an extension id.
+        opencode-v2 = {
+          default_config_options = {
+            model = "opencode-go/deepseek-v4.1-flash";
+          };
+          type = "registry";
+        };
+      };
     };
 
     # extraPackages = [ ];
