@@ -112,7 +112,9 @@
           };
         };
         nil = {
-          nix.flake.autoArchive = true;
+          initialization_options = {
+            nix.flake.autoArchive = true;
+          };
         };
       };
 
