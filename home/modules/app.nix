@@ -42,8 +42,8 @@ lib.mkMerge [
     home.packages = with pkgs; [
       utm
       iina
-      # ice-bar # Waiting for Tahoe compat
       stats
+      xld
     ];
     # Autostart for `stats` is handled in-app via SMAppService ("Launch at
     # login"), not by home-manager-managed launchd agents. This avoids

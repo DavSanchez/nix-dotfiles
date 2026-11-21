@@ -40,7 +40,6 @@ _: {
       "vlc"
       "whatsapp"
       "wireshark-app"
-      "xld"
       "xquartz"
       "yacreader"
     ];
