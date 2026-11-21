@@ -18,7 +18,6 @@
       "lean4"
       "make"
       "nix"
-      "opencode"
       "quint"
       "racket"
       "rust"
@@ -115,20 +114,6 @@
           initialization_options = {
             nix.flake.autoArchive = true;
           };
-        };
-      };
-
-      agent_servers = {
-        opencode = {
-          default_config_options = {
-            model = "opencode-go/deepseek-v4-flash";
-          };
-          type = "registry";
-        };
-        hermes-agent = {
-          type = "custom";
-          command = "hermes";
-          args = [ "acp" ];
         };
       };
     };
