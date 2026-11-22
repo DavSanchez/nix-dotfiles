@@ -88,7 +88,7 @@
       };
       buffer_font_family = "Iosevka Slab";
       helix_mode = true;
-      load_direnv = "shell_hook";
+      load_direnv = "direct";
       relative_line_numbers = "enabled";
       show_whitespaces = "all";
       auto_update = false;
