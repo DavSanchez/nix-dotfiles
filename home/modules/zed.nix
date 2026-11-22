@@ -59,6 +59,7 @@
       base_keymap = "VSCode"; # default
       git_panel = {
         fallback_branch_name = "master";
+        tree_view = true;
       };
       # buffer_font_size = 14.0;
       buffer_font_fallbacks = [
@@ -73,6 +74,8 @@
       };
       colorize_brackets = true;
       auto_indent_on_paste = true;
+      # Note: ignored while autosave.after_delay is in effect (see `autosave`).
+      format_on_save = "modifications_if_available";
       show_edit_predictions = true;
       semantic_tokens = "combined";
       # wrap_guides = [ ];
