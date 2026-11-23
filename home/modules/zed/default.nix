@@ -77,6 +77,9 @@
       # Note: ignored while autosave.after_delay is in effect (see `autosave`).
       format_on_save = "modifications_if_available";
       show_edit_predictions = true;
+      edit_predictions = {
+        provider = "copilot";
+      };
       semantic_tokens = "combined";
       # wrap_guides = [ ];
       soft_wrap = "editor_width";
@@ -124,6 +127,7 @@
         # ACP registry id (`zed: acp registry`), not an extension id.
         opencode-v2 = {
           default_config_options = {
+            mode = "build";
             model = "opencode-go/deepseek-v4.1-flash";
           };
           type = "registry";
