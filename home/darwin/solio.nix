@@ -19,7 +19,7 @@
     ../modules/nu.nix
     ../modules/starship.nix
     ../modules/vscode
-    ../modules/zed.nix
+    ../modules/zed
     ../modules/zellij
     ../modules/zsh
     ../modules/bash.nix
