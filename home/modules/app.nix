@@ -40,6 +40,8 @@ lib.mkMerge [
   }
   (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
     home.packages = with pkgs; [
+      # Hex, local-first dictation (prebuilt notarized .app + `hex` CLI)
+      anomaly-hex
       utm
       iina
       stats
