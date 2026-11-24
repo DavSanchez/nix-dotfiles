@@ -15,6 +15,7 @@ lib.mkMerge [
         czkawka # Multi functional app to find duplicates, empty folders, similar images etc
         obsidian-export
         rayburst # Download manager
+        anomaly-hex # Local-first dictation
       ])
       ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux (
         with pkgs;
@@ -40,8 +41,6 @@ lib.mkMerge [
   }
   (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
     home.packages = with pkgs; [
-      # Hex, local-first dictation (prebuilt notarized .app + `hex` CLI)
-      anomaly-hex
       utm
       iina
       stats
