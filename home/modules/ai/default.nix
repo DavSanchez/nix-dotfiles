@@ -111,6 +111,8 @@ in
 
   home.packages =
     (with pkgs; [
+      comfyui
+
       goose-cli
       llama-cpp
       llama-swap
