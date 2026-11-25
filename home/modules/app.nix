@@ -16,6 +16,7 @@ lib.mkMerge [
         obsidian-export
         rayburst # Download manager
         anomaly-hex # Local-first dictation
+        ladybird # Independent browser (SerenityOS LibWeb), still alpha
       ])
       ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux (
         with pkgs;
